@@ -1,0 +1,105 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+/* Override semantic styles */
+
+.ui.ordered.steps .step.completed:before, .ui.steps .step.completed>.icon:before {
+    color: #4CAF50;
+}
+
+.ui .popup .column{
+    width:220px !important;
+}
+
+/* Navigation */
+.logo{
+    width:25px !important;
+}
+
+.wrapper{
+    margin-top:70px;
+}
+
+.map-container {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    position: relative;
+    z-index: 1;
+    min-width: 0px;
+    height:100vh;
+}
+
+#map{
+    height: calc(100% - 5em);
+    position:relative;
+    z-index: -1;
+}
+
+/* General */
+
+.no-horizontal-padding{
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.no-padding{
+    padding: 0 !important;
+}
+.no-margin{
+    margin: 0 !important;
+}
+
+#steps-menu{
+    border:none !important;
+}
+.step-container .step-inner{
+   width:480px;
+    position: absolute !important;
+    top:6rem !important;
+    left:4rem!important;
+    overflow: auto;
+}
+
+.step-container .step4{
+    width:700px;
+    position: absolute !important;
+    bottom:6rem !important;
+    left:5rem!important;
+    overflow: auto;
+}
+
+.step-container .ui.card.step4{
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.feedback-wrapper{
+    padding-top:4rem;
+    padding-bottom:6rem;
+}
+
+#feedback{
+    background-color: #f6fbfd;
+}
+
+.form-box{
+    background-color: #fff;
+    box-shadow: rgba(114, 182, 234, 0.2) 1px 0 30px !important;
+    border-radius: 8px !important;
+    padding: 2em 1.5em !important;
+    border:none !important;
+}
+
+
+
+
+
+
+
+
+

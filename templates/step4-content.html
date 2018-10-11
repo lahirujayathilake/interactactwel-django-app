@@ -1,0 +1,88 @@
+<!--Step 4 - Visualize Adaptation Plans-->
+<div class="content">
+    <div class="plans-wrapper">
+        <div class="ui top attached active tab segment no-padding" data-tab="plan-1">
+            <div class="ui card fluid">
+                <div class="plan-goals">
+                    {% include "step5-content.html" %}
+                </div>
+                <div class="content">
+                    <h3 class="ui header">
+                        Alternative Plan 1
+                    </h3>
+                </div>
+                <div class="content">
+                    <img alt=""
+                         src="{% static '/static/images/plan.png' %}"
+                         class="ui image massive">
+                </div>
+            </div>
+        </div>
+        <div class="ui top attached tab segment no-padding" data-tab="plan-2">
+            <div class="ui card fluid">
+                <div class="plan-goals">
+                    {% include "step5-content.html" %}
+                </div>
+                <div class="content">
+                    <h3 class="ui header">
+                        Alternative Plan 2
+                    </h3>
+                </div>
+                <div class="content">
+                    <img alt=""
+                         src="{% static '/static/images/plan.png' %}"
+                         class="ui image massive">
+                </div>
+            </div>
+        </div>
+        <div class="ui top attached tab segment no-padding" data-tab="plan-3">
+            <div class="ui card fluid">
+                <div class="plan-goals">
+                    {% include "step5-content.html" %}
+                </div>
+                <div class="content">
+                    <h3 class="ui header">
+                        Alternative Plan 3
+                    </h3>
+                </div>
+                <div class="content">
+                    <img alt=""
+                         src="{% static '/static/images/plan.png' %}"
+                         class="ui image massive">
+                </div>
+            </div>
+        </div>
+        <div class="ui top attached tab segment no-padding" data-tab="plan-4">
+            <div class="ui card fluid">
+                <div class="plan-goals">
+                    {% include "step5-content.html" %}
+                </div>
+                <div class="content">
+                    <h3 class="ui header">
+                        Alternative Plan 4
+                    </h3>
+                </div>
+                <div class="content">
+                    <img alt=""
+                         src="{% static '/static/images/plan.png' %}"
+                         class="ui image massive">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="plans-menu" class="ui bottom fixed stackable inverted large uncover menu">
+        <div class="active item green" data-tab="plan-1">Alternate Plan 1</div>
+        <div class="item green" data-tab="plan-2">Alternate Plan 2</div>
+        <div class="item green" data-tab="plan-3">Alternate Plan 3</div>
+        <div class="item green" data-tab="plan-4">Alternate Plan 4</div>
+        <div class="right menu">
+            <div id="step4-submit" class="item">
+                <button class="ui small green button">Visualize Goals for this plan<i class="right arrow icon"></i> </button>
+            </div>
+            <div id="step5-submit" class="item">
+                <button class="ui orange button">Evaluate Plans<i class="right arrow icon"></i> </button>
+            </div>
+        </div>
+    </div>
+</div>

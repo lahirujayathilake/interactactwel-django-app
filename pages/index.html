@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="ui container fluid">
+    <div class="ui padded grid wrapper">
+        <div class="map-container no-horizontal-padding">
+            <!--steps menu on top-->
+            <div id="steps-menu" class="ui ordered steps fluid no-margin">
+                <div id="step1-menu" class="step">
+                    <div class="content">
+                        <div class="title">Goals</div>
+                        <div class="description">Choose goals</div>
+                    </div>
+                </div>
+                <div id="step2-menu" class="step">
+                    <div class="content">
+                        <div class="title">Actors</div>
+                        <div class="description">Choose actors</div>
+                    </div>
+                </div>
+                <div id="step3-menu" class="step">
+                    <div class="content">
+                        <div class="title">Actions</div>
+                        <div class="description">Choose actions</div>
+                    </div>
+                </div>
+                <div id="step4-menu" class="step">
+                    <div class="content">
+                        <div class="title">Plans</div>
+                        <div class="description">Visualize adaptation plans</div>
+                    </div>
+                </div>
+                <div id="step5-menu" class="step">
+                    <div class="content">
+                        <div class="title">Goals</div>
+                        <div class="description">Visualize adaptation goals</div>
+                    </div>
+                </div>
+                <div id="step6-menu" class="step">
+                    <div class="content">
+                        <div class="title">Evaluate</div>
+                        <div class="description">Evaluate plans</div>
+                    </div>
+                </div>
+            </div>
+            {% include "steps-popups.html" %}
+            <!--map-->
+            <div id="map">
+            </div>
+            <!--content on each step-->
+            <div class="step-container">
+                <!-- step 1 -->
+                <div class="ui card step-inner step1">
+                    {% include "step1-content.html" %}
+                </div>
+                <!-- step 2 -->
+                <div class="ui card step-inner step2">
+                    {% include "step2-content.html" %}
+                </div>
+                <!-- step 3 -->
+                <div class="ui card step-inner step3">
+                    {% include "step3-content.html" %}
+                </div>
+                <!-- step 4 -->
+                <div class="ui card step4">
+                    {% include "step4-content.html" %}
+                </div>
+                <!-- step 5 -->
+                <div class="ui card step-inner step5">
+                    {% include "step5-content.html" %}
+                </div>
+            </div>
+            <!--feedback-->
+            <div id="feedback" class="ui grid">
+                {% include "feedback.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
