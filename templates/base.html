@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
     <!--Style sheets -->
-    <link rel="stylesheet" href="{% static '/static/vendor/semantic.min4.css' %}">
+    <link rel="stylesheet" href="{% static '/static/vendor/semantic.min.css' %}">
     <link rel="stylesheet" href="{% static '/static/css/main.css' %}">
     <script src="{% static '/static/js/vendor/modernizr-2.6.2.js' %}"></script>
 </head>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="computer only tablet only row">
-        <div class="ui borderless fixed menu inverted navbar">
+        <div class="ui borderless fixed menu inverted top-fixed-nav">
             <div class="ui container fluid">
                 <a href="/" class="brand item"><img alt=""
                                                     src="{% static '/static/images/logo.png' %}"
@@ -60,8 +60,8 @@
                 <div class="right menu">
                     <a class="item">
                         <div id="start-viz-builder-button" class="mini ui green right labeled icon button">Start Viz
-                            Biulder <i class="play icon"></i></div>
-                        <div id="exit-viz-builder-button" class="mini ui red right labeled icon button">Exit Viz Biulder
+                            Builder <i class="play icon"></i></div>
+                        <div id="exit-viz-builder-button" class="mini ui red right labeled icon button">Exit Viz Builder
                             <i class="close icon"></i></div>
                     </a>
                     <a class="settings item"><i class="setting icon"></i> </a>
