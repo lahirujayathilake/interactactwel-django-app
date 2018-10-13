@@ -18,7 +18,7 @@ var mymap = L.map('map', {
 //     maxZoom: 16
 // }).addTo(mymap);
 
-var Esri_WorldGrayCanvas =L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
+var Esri_WorldGrayCanvas = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     subdomains: 'abcd',
     minZoom: 0,
@@ -71,32 +71,41 @@ for (i = 0; i < 5; i++) {
 }
 var DataCenter = null;
 // Get GeoJSON and put on it on the map when it loads
-DataCenter = L.geoJson.ajax("/static/assets/DataCenter.geojson",{
+DataCenter = L.geoJson.ajax("/static/assets/DataCenter.geojson", {
     onEachFeature: function (feature, layer) {
 
-         layer.on('click', function(e){
+        layer.on('click', function (e) {
             console.log(e);
             $('#DataCenters').show();
             $('#FarmerswSWGW1').hide();
             $('#EnergyCooperative1').hide();
             $('#FoodProcessors1').hide();
             // $("#panel2").show();
-             $("#DataCenters1").show();
+            $("#DataCenters1").show();
         });
     },
     pointToLayer: function (feature, latlng) {
+
+
         var id = 0;
-        if (feature.properties.Id == "0") { id = 0; }
-
-        else { id = 1;}
-
-        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-database  marker-color-' + (id + 1).toString() })}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
+        if (feature.properties.Id == "0") {
+            id = 0;
+        }
+        else {
+            id = 1;
+        }
+        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-database  marker-color-' + (id + 1).toString()})}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
     },
 
 
 });
 // Add DataCenter  to the map.
-DataCenter.addTo(mymap);
+$('#data-center').change(function () {
+    if (this.checked)
+        DataCenter.addTo(mymap);
+    else
+        DataCenter.remove();
+});
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -104,10 +113,10 @@ DataCenter.addTo(mymap);
 
 var FoodProcessor = null;
 // Get GeoJSON and put on it on the map when it loads
-FoodProcessor = L.geoJson.ajax("/static/assets/FoodProcessor.geojson",{
+FoodProcessor = L.geoJson.ajax("/static/assets/FoodProcessor.geojson", {
     onEachFeature: function (feature, layer) {
         // layer.bindPopup(feature.properties.CNTL_TWR);
-        layer.on('click', function(e){
+        layer.on('click', function (e) {
             console.log(e);
             $('#FoodProcessors').show();
             $('#FarmerswSWGW1').hide();
@@ -119,16 +128,25 @@ FoodProcessor = L.geoJson.ajax("/static/assets/FoodProcessor.geojson",{
     },
     pointToLayer: function (feature, latlng) {
         var id = 0;
-        if (feature.properties.CNTL_TWR == "Y") { id = 0; }
+        if (feature.properties.CNTL_TWR == "Y") {
+            id = 0;
+        }
 
-        else { id = 2;}
-        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-utensils marker-color-' + (id + 1).toString() })}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
+        else {
+            id = 2;
+        }
+        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-utensils marker-color-' + (id + 1).toString()})}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
     },
 
 
 });
 // Add FoodProcessor  to the map.
-FoodProcessor.addTo(mymap);
+$('#food-processor').change(function () {
+    if (this.checked)
+        FoodProcessor.addTo(mymap);
+    else
+        FoodProcessor.remove();
+});
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -136,10 +154,10 @@ FoodProcessor.addTo(mymap);
 
 var Energy = null;
 // Get GeoJSON and put on it on the map when it loads
-Energy = L.geoJson.ajax("static/assets/Energy.geojson",{
+Energy = L.geoJson.ajax("static/assets/Energy.geojson", {
     onEachFeature: function (feature, layer) {
         // layer.bindPopup(feature.properties.CNTL_TWR);
-        layer.on('click', function(e){
+        layer.on('click', function (e) {
             console.log(e);
             $('#EnergyCooperative').show();
             $('#FarmerswSWGW1').hide();
@@ -151,16 +169,25 @@ Energy = L.geoJson.ajax("static/assets/Energy.geojson",{
     },
     pointToLayer: function (feature, latlng) {
         var id = 0;
-        if (feature.properties.CNTL_TWR == "Y") { id = 0; }
+        if (feature.properties.CNTL_TWR == "Y") {
+            id = 0;
+        }
 
-        else { id = 3;}
-        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-bolt marker-color-' + (id + 1).toString() })}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
+        else {
+            id = 3;
+        }
+        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-bolt marker-color-' + (id + 1).toString()})}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
     },
     attribution: 'Base Map &copy; CartoDB | Majid Farahani & Hoda Tahami'
 
 });
 // Add Energy  to the map.
-Energy.addTo(mymap);
+$('#energy-provider').change(function () {
+    if (this.checked)
+        Energy.addTo(mymap);
+    else
+        Energy.remove();
+});
 
 //////////////////////////////////////////////////////////////////////////////
 // 3.4 Add Farm GeoJSON Data
@@ -168,13 +195,13 @@ Energy.addTo(mymap);
 var Farm = null;
 // Get GeoJSON and put on it on the map when it loads
 
-Farm = L.geoJson.ajax("/static/assets/basin.geojson" ,{
+Farm = L.geoJson.ajax("/static/assets/basin.geojson", {
 
 
     onEachFeature: function (feature, layer) {
 
 
-        layer.on('click', function(e){
+        layer.on('click', function (e) {
             console.log(e);
             $('#FarmerswSWGW').show();
             $('#EnergyCooperative1').hide();
@@ -186,10 +213,14 @@ Farm = L.geoJson.ajax("/static/assets/basin.geojson" ,{
     },
     pointToLayer: function (feature, latlng) {
         var id = 0;
-        if (feature.properties.CNTL_TWR == "Y") { id = 0; }
+        if (feature.properties.CNTL_TWR == "Y") {
+            id = 0;
+        }
 
-        else { id = 4;}
-        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-bolt marker-color-' + (id + 1).toString() })}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
+        else {
+            id = 4;
+        }
+        return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-bolt marker-color-' + (id + 1).toString()})}).bindPopup("<b>More Information</b><br>on this actor.").openPopup();
     },
     attribution: 'Base Map &copy; CartoDB | Majid Farahani & Hoda Tahami'
 
@@ -198,30 +229,15 @@ Farm = L.geoJson.ajax("/static/assets/basin.geojson" ,{
 Farm.addTo(mymap);
 
 
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 //  build up a set of colors from colorbrewer's "set2" category
-var col = chroma.scale(['#b30000','#08519c']).mode('lch').colors(2);
+var col = chroma.scale(['#b30000', '#08519c']).mode('lch').colors(2);
 
 // dynamically append style classes to this page. This style classes will be used for colorize the markers.
 for (i = 0; i < 2; i++) {
     $('head').append($("<style> .marker-color2-" + (i + 1).toString() + " { color: " + col[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -255,27 +271,53 @@ for (i = 0; i < 2; i++) {
 */
 
 
-
 // 6. Set function for color ramp
 colors = chroma.scale('set1').colors(13);
 
 function setColor(density) {
     var id = 0;
-    if (density == 13) { id = 12; }
-    else if (density == 12) { id = 11; }
-    else if (density == 11) { id = 10; }
-    else if (density == 10) { id = 9; }
-    else if (density == 9) { id = 8; }
-    else if (density == 8) { id = 7; }
-    else if (density == 7) { id = 6; }
-    else if (density == 6) { id = 5; }
-    else if (density == 5) { id = 4; }
-    else if (density == 4) { id = 3; }
-    else if (density == 3) { id = 2; }
-    else if (density == 2) { id = 1; }
-    else  { id = 0; }
+    if (density == 13) {
+        id = 12;
+    }
+    else if (density == 12) {
+        id = 11;
+    }
+    else if (density == 11) {
+        id = 10;
+    }
+    else if (density == 10) {
+        id = 9;
+    }
+    else if (density == 9) {
+        id = 8;
+    }
+    else if (density == 8) {
+        id = 7;
+    }
+    else if (density == 7) {
+        id = 6;
+    }
+    else if (density == 6) {
+        id = 5;
+    }
+    else if (density == 5) {
+        id = 4;
+    }
+    else if (density == 4) {
+        id = 3;
+    }
+    else if (density == 3) {
+        id = 2;
+    }
+    else if (density == 2) {
+        id = 1;
+    }
+    else {
+        id = 0;
+    }
     return colors[id];
 }
+
 // 7. Set style function that sets fill color.md property equal to cell tower density
 function style(feature) {
     return {
@@ -296,8 +338,6 @@ function style(feature) {
 
 // 12. Add a scale bar to map
 L.control.scale({position: 'bottomleft'}).addTo(mymap);
-
-
 
 
 /*
