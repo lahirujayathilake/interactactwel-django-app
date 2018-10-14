@@ -5,9 +5,20 @@ $(document).ready(function () {
         .tab()
     ;
 
+    // drop down
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+
     // Star rating
     $('.ui.rating')
         .rating()
+    ;
+
+    $('.checkbox-info-button')
+        .popup({
+            inline: true
+        })
     ;
 
     // popup menu on hover
@@ -15,7 +26,7 @@ $(document).ready(function () {
         .popup({
             inline   : true,
             popup: '.settings-menu-content.popup',
-            hoverable: true,
+            on: 'click',
             position : 'bottom right',
             delay: {
                 show: 300,
@@ -27,7 +38,7 @@ $(document).ready(function () {
         .popup({
             inline   : true,
             popup: '.account-menu-content.popup',
-            hoverable: true,
+            on: 'click',
             position : 'bottom right',
             delay: {
                 show: 300,

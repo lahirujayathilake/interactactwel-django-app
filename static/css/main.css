@@ -134,7 +134,7 @@ ui.checkbox label, .ui.checkbox + label {
 }
 
 .bottom-fixed-nav{
-    border-bottom: 3px solid #7CB342 !important;
+    /*border-bottom: 3px solid #7CB342 !important;*/
     height: 60px;
 }
 
@@ -143,6 +143,29 @@ ui.checkbox label, .ui.checkbox + label {
     height: 60px;
 }
 
+.header-content{
+    background-color: #f5f8fa !important;
+}
+.footer-content{
+    background-color: #2d3f51 !important;
+}
+
+.checkbox-info-button i:hover{
+    color: #7cb342;
+    cursor: pointer;
+}
+
+.nav-sub-header{
+    font-size: .85714286em;
+    font-weight: 700;
+    color:#FFF;
+}
+
+.nav-header{
+    font-size: 1.1em;
+    font-weight: 200;
+    letter-spacing: 0.02em;
+}
 
 
 
