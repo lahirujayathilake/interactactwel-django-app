@@ -21,6 +21,59 @@ $(document).ready(function () {
         })
     ;
 
+
+    //legend toggle
+
+    if($('#toggle-legend').prop('checked')) {
+        $('.legend').show(500);
+    }else{
+        $('.legend').hide(500);
+    }
+
+    $('#toggle-legend').change(function(){
+        $('.legend').toggle(500);
+
+    });
+
+    //legend miniglobe
+
+    if($('#toggle-miniglobe').prop('checked')) {
+        $('.leaflet-control-minimap').show(500);
+    }else{
+        $('.leaflet-control-minimap').hide(500);
+    }
+
+    $('#toggle-miniglobe').change(function(){
+        $('.leaflet-control-minimap').toggle(500);
+
+    });
+
+    //legend zoombar
+
+    if($('#toggle-zoom').prop('checked')) {
+        $('.leaflet-control-zoom').show(500);
+    }else{
+        $('.leaflet-control-zoom').hide(500);
+    }
+
+    $('#toggle-zoom').change(function(){
+        $('.leaflet-control-zoom').toggle(500);
+
+    });
+
+    //legend scale
+
+    if($('#toggle-scale').prop('checked')) {
+        $('.leaflet-control-scale').show(500);
+    }else{
+        $('.leaflet-control-scale').hide(500);
+    }
+
+    $('#toggle-scale').change(function(){
+        $('.leaflet-control-scale').toggle(500);
+
+    });
+
     // popup menu on hover
     $('.menu .settings')
         .popup({
@@ -123,6 +176,9 @@ $(document).ready(function () {
     $('.feedback-wrapper').hide();
     $('.plan-goals').hide();
     $('#step5-submit').hide();
+    $('.feedback-forum').hide();
+    $('.feasibility-forum').hide();
+
 
     // start wizard
     $('#start-viz-builder-button').click(function() {
@@ -134,7 +190,7 @@ $(document).ready(function () {
 
     });
 
-    // events on each step submissions
+    // events on step 1 submission
     $('#step1-submit').click(function() {
         $('.step1').hide(500);
         $('.step2').show(500);
@@ -142,6 +198,21 @@ $(document).ready(function () {
         $('#step1-menu').addClass('completed');
         $('#step1-menu').removeClass('active');
         $('#step1-menu .description').replaceWith("2 goals selected");
+
+        var fields = {};
+        $('.step1-checkbox').each(function(){
+
+            if($(this). prop("checked") == true){
+                fields[this.id] = true;
+            }else{
+                fields[this.id] = false;
+            }
+        });
+
+        localStorage.setItem('step1-data',JSON.stringify(fields));
+
+        console.log(localStorage.getItem('step1-data'));               // Output: {"field-01":"on","field-02":"1234"}
+        console.log(JSON.parse(localStorage.getItem('step1-data')));
 
 
     });
@@ -154,6 +225,26 @@ $(document).ready(function () {
         $('#step2-menu').removeClass('active');
         $('#step2-menu .description').replaceWith("2 actors selected");
 
+        var fields = {};
+        $('.step2-checkbox').each(function(){
+
+            if($(this). prop("checked") == true){
+                fields[this.id] = true;
+            }else{
+                fields[this.id] = false;
+            }
+        });
+
+        localStorage.setItem('step2-data',JSON.stringify(fields));
+
+        console.log(localStorage.getItem('step2-data'));               // Output: {"field-01":"on","field-02":"1234"}
+        console.log(JSON.parse(localStorage.getItem('step2-data')));
+
+    });
+
+    $('#step2-back').click(function() {
+        $('.step2').hide(500);
+        $('.step1').show(500);
     });
 
     $('#step3-submit').click(function() {
@@ -166,8 +257,12 @@ $(document).ready(function () {
 
     });
 
+    $('#step3-back').click(function() {
+        $('.step3').hide(500);
+        $('.step2').show(500);
+    });
+
     $('#step4-submit').click(function() {
-        console.log("clciked");
         $('#step4-submit').hide();
         $('.plan-goals').show(500);
         $('#step5-submit').show(500);
@@ -184,12 +279,39 @@ $(document).ready(function () {
         $('#step5-menu').addClass('completed');
         $('#step5-menu').removeClass('active');
         $('#step5-menu .description').replaceWith("Plan 1");
-        $('.feedback-wrapper').show(200);
+        $('#evaluate').show(200);
         $('html, body').animate({
             scrollTop: $(".feedback-wrapper").offset().top
         }, 2000);
 
     });
+
+
+    $('#evaluate-submit').click(function() {
+        $('#sidebar').show(200);
+        $('.feasibility-forum').hide(200);
+        $('.feedback-forum').show(200);
+
+        /*var fields = {};
+        $('.step2-checkbox').each(function(){
+
+            if($(this). prop("checked") == true){
+                fields[this.id] = true;
+            }else{
+                fields[this.id] = false;
+            }
+        });
+
+        localStorage.setItem('step2-data',JSON.stringify(fields));
+
+        console.log(localStorage.getItem('step2-data'));               // Output: {"field-01":"on","field-02":"1234"}
+        console.log(JSON.parse(localStorage.getItem('step2-data')));*/
+
+
+
+    });
+
+
 
     // End wizard
     $('#exit-viz-builder-button').click(function() {
@@ -208,6 +330,38 @@ $(document).ready(function () {
 
     $('.more-info-button').click( function(){
         $(this).next('.more-info').toggle(500);
+    });
+
+
+    //Check and uncheck All checkboxes
+    $('#step1-select-all-checkbox').change(function(){
+        if($('.step1-checkbox:checkbox').prop('checked')) {
+            $('.step1-checkbox:checkbox').prop("checked", false);
+            $("#step1-select-all-checkbox-label").html("Select All");
+        }else{
+            $('.step1-checkbox:checkbox').prop("checked", true);
+            $("#step1-select-all-checkbox-label").html("Clear All");
+        }
+    });
+
+    $('#step2-select-all-checkbox').change(function(){
+        if($('.step2-checkbox:checkbox').prop('checked')) {
+            $('.step2-checkbox:checkbox').prop("checked", false);
+            $("#step2-select-all-checkbox-label").html("Select All");
+        }else{
+            $('.step2-checkbox:checkbox').prop("checked", true);
+            $("#step2-select-all-checkbox-label").html("Clear All");
+        }
+    });
+
+    $('#step3-select-all-checkbox').change(function(){
+        if($('.step3-checkbox:checkbox').prop('checked')) {
+            $('.step3-checkbox:checkbox').prop("checked", false);
+            $("#step3-select-all-checkbox-label").html("Select All");
+        }else{
+            $('.step3-checkbox:checkbox').prop("checked", true);
+            $("#step3-select-all-checkbox-label").html("Clear All");
+        }
     });
 
 });

@@ -15,9 +15,21 @@
         </div>
     </div>
 </div>
+<div class="content action-bar">
+    <div class="ui small feed">
+        <div class="event">
+            <div class="content">
+                <div class="ui checkbox">
+                    <input id="step1-select-all-checkbox" type="checkbox" name="">
+                    <label id="step1-select-all-checkbox-label">Select All</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" name="step1-0" id="step1-1">
         <label>Improve surface water quality</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -37,7 +49,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" id="step1-2">
         <label>Increase ground water supply</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -57,7 +69,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" id="step1-3">
         <label>Minimize land use change</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -77,7 +89,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" id="step1-4">
         <label>Improve economy</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -97,7 +109,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" id="step1-5">
         <label>Increase energy production</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -117,7 +129,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" id="step1-6">
         <label>Improve ecological habitat</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -137,7 +149,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step1-checkbox" type="checkbox" id="step1-7">
         <label>Others…</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -156,5 +168,6 @@
     </div>
 </div>
 <div class="content footer-content">
-    <button id="step1-submit" class="ui small green button right floated">Next<i class="right arrow icon"></i> </button>
+    <button id="step1-submit" class="ui small green button right floated" type="button">Save<i class="right arrow icon"></i> </button>
+    <button type="reset" class="ui small green basic inverted button right floated">Clear</button>
 </div>

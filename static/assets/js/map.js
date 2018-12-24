@@ -340,29 +340,25 @@ function style(feature) {
 L.control.scale({position: 'bottomleft'}).addTo(mymap);
 
 
-/*
-    //add an miniglobe
-    new L.Control.GlobeMiniMap({
-        marker: 'red',
-        position: 'bottomright'
-    }).addTo(mymap);
 
+//add an miniglobe
+new L.Control.GlobeMiniMap({
+    marker: 'red',
+    position: 'bottomright'
+}).addTo(mymap);
 
 // Create Leaflet Control Object for Legend
-var legend = L.control({position: 'bottomleft'});
-*/
-/*
+var legend = L.control({position: 'bottomright'});
 // Function that runs when legend is added to map
 legend.onAdd = function () {
-    var div = L.DomUtil.create('div', 'legend');
+    var div = L.DomUtil.create('div', 'ui card legend');
 
-    div.innerHTML += '<i class="fa fa fa-database marker-color2-" style="color:#b30000 "></i><p > Data Center</p>';
-    div.innerHTML += '<i class="fa fa-utensils marker-color-" style="color:#000306 "></i><p> Food Processor</p>';
-    div.innerHTML += '<i class="fa fa-bolt marker-color-" style="color:#000306 "></i><p> Energy </p>';
+    div.innerHTML += '<div class="content"><i class="fa fa fa-database"></i> Data Center</div>';
+    div.innerHTML += '<div class="content"><i class="fa fa-utensils"></i> Food Processor</div>';
+    div.innerHTML += '<div class="content"><i class="fa fa-bolt"></i> Energy</div>';
     // Return the Legend div containing the HTML content
     return div;
 };
 
 // Add a legend to map
 legend.addTo(mymap);
-*/

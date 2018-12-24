@@ -31,7 +31,7 @@ ui.checkbox label, .ui.checkbox + label {
 }
 
 .ui.button, .ui.buttons .button, .ui.buttons {
-    border-radius: 20px !important;
+    /*border-radius: 20px !important;*/
 }
 .ui.steps .step, .ui.steps .step::after{
     background: #f5f8fa;
@@ -107,7 +107,7 @@ ui.checkbox label, .ui.checkbox + label {
     width:700px;
     position: absolute !important;
     bottom:6rem !important;
-    left:5rem!important;
+    left:30rem!important;
     overflow: auto;
 }
 
@@ -146,6 +146,11 @@ ui.checkbox label, .ui.checkbox + label {
 .header-content{
     background-color: #f5f8fa !important;
 }
+
+.action-bar{
+    background-color: #f5f8fa !important;
+}
+
 .footer-content{
     background-color: #2d3f51 !important;
 }
@@ -167,7 +172,24 @@ ui.checkbox label, .ui.checkbox + label {
     letter-spacing: 0.02em;
 }
 
+.legend{
+    width: 180px !important;
+    right: 20px !important;
+}
 
+.legend i{
+    padding-right:0.8rem;
+}
+
+#evaluate, #feedback-forum{
+    position: absolute;
+    top: 4.5rem !important;
+    background-color: white;
+    min-height: 600px;
+    overflow: auto;
+    width: 350px;
+    height:86%;
+}
 
 
 

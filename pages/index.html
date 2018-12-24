@@ -29,16 +29,10 @@
                         <div class="description">Visualize adaptation plans</div>
                     </div>
                 </div>
-                <div id="step5-menu" class="step">
-                    <div class="content">
-                        <div class="title">Goals</div>
-                        <div class="description">Visualize adaptation goals</div>
-                    </div>
-                </div>
                 <div id="step6-menu" class="step">
                     <div class="content">
                         <div class="title">Evaluate</div>
-                        <div class="description">Evaluate plans</div>
+                        <div class="description">Explore Performance and Rate</div>
                     </div>
                 </div>
             </div>
@@ -72,6 +66,11 @@
             <!--feedback-->
             <div id="feedback" class="ui grid">
                 {% include "feedback.html" %}
+            </div>
+            <!--evaluate-->
+            <div id="sidebar" class="ui grid">
+                {% include "evaluate.html" %}
+                {% include "feedback-forum.html" %}
             </div>
         </div>
     </div>

@@ -15,9 +15,21 @@
         </div>
     </div>
 </div>
+<div class="content action-bar">
+    <div class="ui small feed">
+        <div class="event">
+            <div class="content">
+                <div class="ui checkbox">
+                    <input id="step2-select-all-checkbox" type="checkbox" name="">
+                    <label id="step2-select-all-checkbox-label">Select All</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="farmer-w-swgw" type="checkbox" name="example">
+        <input class="step2-checkbox" id="farmer-w-swgw" type="checkbox">
         <label>Farmer with surface water and ground water right
         </label>
     </div>
@@ -38,7 +50,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="farmer-w-sw" type="checkbox" name="example">
+        <input class="step2-checkbox" id="farmer-w-sw" type="checkbox">
         <label>Farmer with surface water right
         </label>
     </div>
@@ -59,7 +71,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="farmer-w-gw" type="checkbox" name="example">
+        <input class="step2-checkbox" id="farmer-w-gw" type="checkbox">
         <label>Farmer with ground water right
         </label>
     </div>
@@ -80,7 +92,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="energy-provider" type="checkbox" name="example">
+        <input class="step2-checkbox" id="energy-provider" type="checkbox">
         <label>Energy provider (EP)
         </label>
     </div>
@@ -101,7 +113,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="data-center" type="checkbox" name="example">
+        <input class="step2-checkbox" id="data-center" type="checkbox">
         <label> Data center (DC)
         </label>
     </div>
@@ -122,7 +134,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="food-processor" type="checkbox" name="example">
+        <input class="step2-checkbox" id="food-processor" type="checkbox">
         <label>Food processor(FP)
         </label>
     </div>
@@ -143,7 +155,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="tribe" type="checkbox" name="example">
+        <input class="step2-checkbox" id="tribe" type="checkbox">
         <label>Tribe</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -163,7 +175,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input id="municipality" type="checkbox" name="example">
+        <input class="step2-checkbox" id="municipality" type="checkbox">
         <label>Municipality</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -183,7 +195,7 @@
 </div>
 <div class="content">
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input class="step2-checkbox" type="checkbox" name="example">
         <label>Other</label>
     </div>
     <span class="right floated checkbox-info-button">
@@ -202,5 +214,7 @@
     </div>
 </div>
 <div class="content footer-content">
-    <button id="step2-submit" class="ui small green button right floated">Next<i class="right arrow icon"></i> </button>
+    <button id="step2-back" class="ui small button left floated"><i class="left arrow icon"></i> Back</button>
+    <button id="step2-submit" class="ui small green button right floated">Save<i class="right arrow icon"></i> </button>
+    <button type="reset" class="ui small green basic invereted button right floated">Clear</button>
 </div>
