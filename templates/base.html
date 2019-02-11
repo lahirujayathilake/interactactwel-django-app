@@ -18,150 +18,18 @@
             crossorigin=""></script>
 
     <!--Font Awesome fonts-->
-    <link href="{% static '/static/assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
-    <!--Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-
-    <!--Style sheets -->
-    <link rel="stylesheet" href="{% static '/static/vendor/semantic.min.css' %}">
-    <link rel="stylesheet" href="{% static '/static/css/main.css' %}">
     <script src="{% static '/static/js/vendor/modernizr-2.6.2.js' %}"></script>
 </head>
 
 <body>
-<!--Top nav bar-->
-<div class="ui menu grid">
-    <div class="mobile only row">
-        <div class="ui borderless fixed menu inverted navbar grid">
-            <a href="/" class="brand item"><img alt="" src="{% static '/static/images/logo.png' %}"
-                                                class="ui image mini logo"></a>
-            <div class="right menu">
-                <a class="item">
-                    <div id="start-viz-builder-button-mobile" class="mini ui green right labeled icon button">Start Here
-                        <i class="play icon"></i></div>
-                    <div id="exit-viz-builder-button-mobile" class="mini ui red right labeled icon button">Exit<i
-                                class="close icon"></i></div>
-                </a>
-                <a class="settings item"><i class="setting icon"></i> </a>
-                <a class="account item"><i class="user icon"></i> </a>
-            </div>
-        </div>
-    </div>
-    <div class="computer only tablet only row">
-        <div class="ui borderless fixed menu inverted top-fixed-nav">
-            <div class="ui container fluid">
-                <a href="/" class="brand item"><img alt=""
-                                                    src="{% static '/static/images/logo.png' %}"
-                                                    class="ui image mini logo"></a>
-                <div class="item">
-                    <span class="nav-sub-header">PROJECT</span>
-                    <i class="right angle icon divider"></i>
-                    <span class="nav-header">Umatilla Region Adapts to New Water Allocation</span>
-                </div>
-                <div class="right menu">
-                    <a class="item">
-                        <div id="start-viz-builder-button" class="mini ui green right labeled icon button">Start Here<i class="play icon"></i></div>
-                        <div id="exit-viz-builder-button" class="mini ui red right labeled icon button">Exit
-                            <i class="close icon"></i></div>
-                    </a>
-                    <a class="settings item"><i class="setting icon"></i> </a>
-                    <a class="account item"><i class="user icon"></i> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Content on pop up menu settings-->
-    <div class="ui flowing settings-menu-content popup transition hidden">
-        <div class="ui form">
-            <div class="grouped fields">
-                <div class="field">
-                    <div class="ui slider checkbox">
-                        <input disabled id="toggle-basemap" type="checkbox" name="throughput" checked="checked">
-                        <label>Change the base map</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui slider checkbox">
-                        <input id="toggle-legend" type="checkbox" name="throughput" checked="checked">
-                        <label>Legend</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui slider checkbox">
-                        <input id="toggle-miniglobe" type="checkbox" name="throughput" checked="checked">
-                        <label>Mini Globe</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui slider checkbox checked">
-                        <input id="toggle-zoom" type="checkbox" name="throughput" checked="checked">
-                        <label>Zoom Button</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui slider checkbox checked">
-                        <input id="toggle-scale" type="checkbox" name="throughput" checked="checked">
-                        <label>Scale bar</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Content on pop up menu settings-->
-    <div class="ui flowing account-menu-content popup transition hidden">
-        <h4 class="ui icon header left aligned">
-            <div class="content">
-               John Doe
-                <div class="sub header">johndoe@gmail.com</div>
-                <div class="ui divider"></div>
-            </div>
-        </h4>
-        <button class="ui small button">Sign out</button>
-    </div>
-    <!--Content on pop up menu projects-->
-    <div class="ui flowing projects-menu-content popup transition hidden">
-        <h4 class="ui icon header left aligned">
-            <div class="content">
-                John Doe
-                <div class="sub header">johndoe@gmail.com</div>
-                <div class="ui divider"></div>
-            </div>
-        </h4>
-        <button class="ui small button">Sign out</button>
-    </div>
-    <!--Exit wizard pop up-->
-    <div class="ui basic small modal">
-        <div class="ui icon header">
-            <i class="warning circle icon"></i>
-            Exit wizard
-        </div>
-        <div class="content center aligned">
-            <p>Any data you have entered may lost. Do you wish to leave wizard anyway?</p>
-        </div>
-        <div class="actions">
-            <div class="ui red basic cancel inverted button">
-                <i class="remove icon"></i>
-                Cancel
-            </div>
-            <a href="" class="ui green ok inverted button">
-                <i class="checkmark icon"></i>
-                Save and Quit
-            </a>
-        </div>
-    </div>
-</div>
+
 {% block body %}
 {% endblock %}
 
 <script src="{% static '/static/js/vendor/jquery-1.10.1.js' %}"></script>
 <script src="{% static '/static/vendor/semantic.js' %}"></script>
 <script src="{% static '/static/js/main.js' %}"></script>
-
-
-<!--mini globle map-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="{% static '/static/assets/js/globeminimap.js' %}"></script>

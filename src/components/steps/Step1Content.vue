@@ -1,3 +1,6 @@
+<template>
+
+<div id="step-container" class="ui card">
 <!--Step 1 - Choose Goals-->
 <div class="content header-content">
     <div class="header">
@@ -158,3 +161,20 @@
 <div class="content footer-content">
     <button id="step1-submit" class="ui small green button right floated">Next<i class="right arrow icon"></i> </button>
 </div>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'Step1Content'
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+    #step-container{
+        width:500px;
+    }
+
+</style>
