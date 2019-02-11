@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block body %}
+<header>
+    <div id="steps-menu" class="ui ordered steps fluid no-margin">
+        <div id="step1-menu" class="step">
+            <div class="content">
+                <div class="title">Goals</div>
+                <div class="description">Choose goals</div>
+            </div>
+        </div>
+        <div id="step2-menu" class="step">
+            <div class="content">
+                <div class="title">Actors</div>
+                <div class="description">Choose actors</div>
+            </div>
+        </div>
+        <div id="step3-menu" class="step">
+            <div class="content">
+                <div class="title">Actions</div>
+                <div class="description">Choose actions</div>
+            </div>
+        </div>
+        <div id="step4-menu" class="step">
+            <div class="content">
+                <div class="title">Plans</div>
+                <div class="description">Visualize adaptation plans</div>
+            </div>
+        </div>
+        <div id="step6-menu" class="step">
+            <div class="content">
+                <div class="title">Evaluate</div>
+                <div class="description">Explore Performance and Rate</div>
+            </div>
+        </div>
+    </div>
+    {% include "steps-popups.html" %}
+</header>
+<div id="main">
+    <div class="map-wrapper">
+        <!--map-->
+        <div id="map">
+
+            <!-- step 1 -->
+            <div class="ui card step-inner step1">
+                {% include "step1-content.html" %}
+            </div>
+            <!-- step 2 -->
+            <div class="ui card step-inner step2">
+                {% include "step2-content.html" %}
+            </div>
+            <!-- step 3 -->
+            <div class="ui card step-inner step3">
+                {% include "step3-content.html" %}
+            </div>
+
+        </div>
+    </div>
+    <nav>
+
+
+        <div class="ui vertical menu">
+            <div class="item">
+                <div class="header">Products</div>
+                <div class="menu">
+                    <a class="item">Enterprise</a>
+                    <a class="item">Consumer</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="header">CMS Solutions</div>
+                <div class="menu">
+                    <a class="item">Rails</a>
+                    <a class="item">Python</a>
+                    <a class="item">PHP</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="header">Hosting</div>
+                <div class="menu">
+                    <a class="item">Shared</a>
+                    <a class="item">Dedicated</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="header">Support</div>
+                <div class="menu">
+                    <a class="item">E-mail Support</a>
+                    <a class="item">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>
+<footer><div class="ui borderless bottom fixed menu">
+    <div class="header item">
+        Our Company
+    </div>
+    <a class="item">
+        About Us
+    </a>
+    <a class="item">
+        Jobs
+    </a>
+    <a class="item">
+        Locations
+    </a>
+</div>
+</footer>
+{% endblock %}

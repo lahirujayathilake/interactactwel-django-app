@@ -1,0 +1,91 @@
+body {
+
+}
+
+.ui.steps {
+    margin: 0em 0;
+}
+
+.ui.card {
+
+    margin: 0em 0;
+    margin-bottom: 1em;
+
+}
+
+#app {
+    margin: auto;
+    height: 100vh;
+    width: 100%;
+}
+
+#map{
+    z-index: 0;
+}
+
+#main {
+    display: flex;
+    min-height: calc(100vh - 40vh);
+}
+
+#main>article {
+    flex: 1;
+    height: calc(80vh - 20px);
+}
+
+#main>nav{
+    flex: 0 0 auto;
+    min-width:200px;
+    height: calc(92vh - 20px);
+    overflow:auto;
+    background-color: #f2f3f5;
+}
+
+#main>nav {
+    order: -1;
+}
+
+#main>aside {
+    flex: 0 0 400px;
+    height: calc(92vh - 20px);
+    overflow:auto;
+    padding: 1rem;
+    background-color: #d6edfd;
+}
+
+header,
+footer,
+article,
+nav,
+aside {}
+
+header,
+footer {
+    background: #efefef;
+    width:100%;
+    height:auto;
+}
+
+
+/*.step-container .step-inner{
+     width:480px;
+     position: absolute !important;
+     top:11rem !important;
+     left:4rem!important;
+     overflow: auto;
+     z-index: 1000;
+ }*/
+
+.plans-wrapper{
+    position: relative;
+    top: 2rem;
+    left: 2rem;
+    width:50%;
+    z-index: 1000;
+}
+
+#feedback-step1{
+    margin-top:20px;
+    padding:20px;
+    background-color: #efefef;
+}

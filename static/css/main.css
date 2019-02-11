@@ -193,6 +193,36 @@ ui.checkbox label, .ui.checkbox + label {
 
 
 
+/* reter */
 
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+#main {
+    display: flex;
+    min-height: calc(100vh - 10vh);
+}
+#main > .map-wrapper {
+    flex: 1;
+    z-index:10;
+}
+#main > nav,
+#main > aside {
+    flex: 0 0 auto;
+    background: beige;
+}
+#main > nav {
+    order: -1;
+}
+header, footer, map-wrapper, nav, aside {
+
+}
+header, footer {
+    background: #efefef;
+
+}
 
 

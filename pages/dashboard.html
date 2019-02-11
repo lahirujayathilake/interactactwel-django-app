@@ -1,0 +1,261 @@
+{% extends "base1.html" %}
+{% block body %}
+<div id="main">
+    <nav id="sidebar-left">
+        <!--content on each step-->
+        <div class="step-container">
+            <!-- step 1 -->
+            <div class="ui card fluid step-inner step1">
+                {% include "step1-content.html" %}
+            </div>
+            <!-- step 2 -->
+            <div class="ui card fluid step-inner step2">
+                {% include "step2-content.html" %}
+            </div>
+            <!-- step 3 -->
+            <div class="ui card fluid step-inner step3">
+                {% include "step3-content.html" %}
+            </div>
+        </div>
+        <div id="adpation-plans-list" class="ui inverted accordion">
+            <div class="active title">
+                <i class="dropdown icon"></i>
+                POPSWAT_0
+            </div>
+            <div class="active content">
+                <div class="ui vertical inverted fluid menu">
+                    <a class="item" data-tab="actors">
+                        Actors
+                    </a>
+                    <a class="item" data-tab="costs">
+                        Costs
+                    </a>
+                    <a class="item" data-tab="storage">
+                        Storage
+                    </a>
+                    <a class="item" data-tab="etmm">
+                        ETmm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <article id="map">
+        <div class="plans-wrapper">
+            <div class="ui top attached active tab no-padding" data-tab="actors">
+                <div class="ui card fluid">
+                    <div class="content">
+                        <h3 class="ui header">
+                            Actors
+                        </h3>
+                    </div>
+                    <div class="content">
+                        <div class="ui top attached stackable inverted four item fluid mini menu">
+                            <div class="active item green" data-tab="goal-1">Actor 1</div>
+                            <div class="item green" data-tab="goal-2">Actor 2</div>
+                            <div class="item green" data-tab="goal-3">Actor 3</div>
+                            <div class="item green" data-tab="goal-4">Actor 4</div>
+                        </div>
+                        <div class="ui top attached active tab no-padding" data-tab="goal-1">
+                            <div class="ui card fluid">
+                                <div class="content">
+                                    <div class="meta">
+                                        Please click on actors on map to view goal visualization for that actor
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <img alt=""
+                                         src="{% static '/static/images/popswat0.png' %}"
+                                         class="ui image massive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui top attached tab no-padding" data-tab="goal-2">
+                            <div class="ui card fluid">
+                                <div class="content">
+                                    <div class="meta">
+                                        Please click on actors on map to view goal visualization for that actor
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <img alt=""
+                                         src="{% static '/static/images/popswat1.png' %}"
+                                         class="ui image massive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui top attached tab no-padding" data-tab="goal-3">
+                            <div class="ui card fluid">
+                                <div class="content">
+                                    <div class="meta">
+                                        Please click on actors on map to view goal visualization for that actor
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <img alt=""
+                                         src="{% static '/static/images/popswat2.png' %}"
+                                         class="ui image massive"></div>
+                            </div>
+                        </div>
+                        <div class="ui top attached tab no-padding" data-tab="goal-4">
+                            <div class="ui card fluid">
+                                <div class="content">
+                                    <div class="meta">
+                                        Please click on actors on map to view goal visualization for that actor
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <img alt=""
+                                         src="{% static '/static/images/popswat3.png' %}"
+                                         class="ui image massive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui top attached tab no-padding" data-tab="costs">
+                <div class="ui card fluid">
+                    <div class="content">
+                        <h3 class="ui header">
+                            Costs
+                        </h3>
+                    </div>
+                    <div class="content">
+                        <div class="meta">
+                            Please click on actors on map to view goal visualization for that actor
+                        </div>
+                    </div>
+                    <div class="content">
+                        <img alt=""
+                             src="{% static '/static/images/popswat1.png' %}"
+                             class="ui image massive">
+                    </div>
+                </div>
+            </div>
+            <div class="ui top attached tab no-padding" data-tab="storage">
+                <div class="ui card fluid">
+                    <div class="content">
+                        <h3 class="ui header">
+                            Storage
+                        </h3>
+                    </div>
+                    <div class="content">
+                        <div class="meta">
+                            Please click on actors on map to view goal visualization for that actor
+                        </div>
+                    </div>
+                    <div class="content">
+                        <img alt=""
+                             src="{% static '/static/images/popswat1.png' %}"
+                             class="ui image massive">
+                    </div>
+                </div>
+            </div>
+            <div class="ui top attached tab no-padding" data-tab="etmm">
+                <div class="ui card fluid">
+                    <div class="content">
+                        <h3 class="ui header">
+                            ETmm
+                        </h3>
+                    </div>
+                    <div class="content">
+                        <div class="meta">
+                            Please click on actors on map to view goal visualization for that actor
+                        </div>
+                    </div>
+                    <div class="content">
+                        <img alt=""
+                             src="{% static '/static/images/popswat1.png' %}"
+                             class="ui image massive">
+                    </div>
+                </div>
+            </div>
+            <div id="evaluate-plan" class="ui green right labeled icon right floated button">
+                <i class="right chevron icon"></i> Evaluate Plans</div>
+        </div>
+
+    </article>
+    <aside id="sidebar-right">
+        <div class="feedback-container">
+            <div class="ui header">
+                <div class="ui sub header">POPSWAT_0</div>
+                Evaluate Adaptation Plan
+            </div>
+            <div id="feedback-step1" class="ui form">
+                <div class="field">
+                    <label>Do you think this Alternative plan is feasible?</label>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input class="" type="radio" name="feasibility" id="feasibility-yes">
+                                <label>Yes</label>
+                            </div>
+                            <div class="ui radio checkbox">
+                                <input class="" type="radio" name="feasibility" id="feasibility-no">
+                                <label>No</label>
+                            </div>
+                            <div class="ui radio checkbox">
+                                <input class="" type="radio" name="feasibility" id="feasibility-maybe">
+                                <label>May be</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="no-feasible" class="grouped fields">
+                    <label>why is this plan not feasible? (Check all that apply)</label>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="top-posts">
+                            <label>Unlikely to be profitable / financially sustainable</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="hot-deals">
+                            <label>Infrastructure costs</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="hot-deals">
+                            <label>Permits or other regulatory approval processes and cost</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="hot-deals">
+                            <label>Reliance on other stakeholders to take action</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="hot-deals">
+                            <label>Long time period before seeing positive results</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="hot-deals">
+                            <label>Public disapproval of the actions listed in the plans</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="hot-deals">
+                            <label>Other</label>
+                        </div>
+                    </div>
+                    <div class="field wide">
+                        <label>Short Text</label>
+                        <textarea placeholder="Feel free to add additional comments about your rating here:" rows="7"></textarea>
+                    </div>
+                </div>
+                <button type="reset" class="ui small button" tabindex="0">Clear</button>
+                <button id="evaluate-submit" class="ui small green button" tabindex="0">Submit</button>
+            </div>
+
+        </div>
+    </aside>
+</div>
+{% endblock %}
