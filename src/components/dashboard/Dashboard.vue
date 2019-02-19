@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="top-fixed-nav">
-            <b-navbar toggleable="md" type="dark" variant="success">
+            <b-navbar style="background-color: #263238!important;" toggleable="md" type="dark" variant="secondary">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-                <b-navbar-brand href="#">InterActwell</b-navbar-brand>
+                <b-navbar-brand href="#">InterACTWEL</b-navbar-brand>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
-                        <b-nav-item href="#">Project</b-nav-item>
+                        <b-nav-item href="#">Project : </b-nav-item>
                         <b-nav-item href="#" disabled>Umatilla Region Adapts to New Water Allocation</b-nav-item>
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
@@ -39,15 +39,16 @@
         </div>
         <!-- <component v-bind:is="progressbarComponent"></component>-->
         <div id="main">
-            <nav v-show id="sidebar-left">
-                <component v-bind:is="component"></component>
+            <nav v-show="!sidebarLeftVisibility" id="sidebar-left">
+                <component v-bind:is="component='sidebar'"></component>
             </nav>
             <article id="map">
-                <component v-bind:is="step1Component"></component>
+                <component v-bind:is="step1Component" v-on:finish-wizard="afterWizardFinished"></component>
+                <component v-bind:is="component='charts'"></component>
                 <leaflet-map></leaflet-map>
             </article>
-            <aside v-show id="sidebar-right">
-                <component v-bind:is="component"></component>
+            <aside v-show="!sidebarRightVisibility" id="sidebar-right">
+                <component v-bind:is="component='feedback'"></component>
             </aside>
         </div>
     </div>
@@ -57,7 +58,7 @@
 
     import Sidebar from './sidebar/Sidebar.vue'
     import Feedback from './feedback/feedback.vue'
-    import Regions from './regions/Regions.vue'
+    import Charts from './charts/charts.vue'
     import ProgressBar from './progressBar/ProgressBar.vue'
     import Step1Content from '../steps/Step1Content.vue'
     import LeafletMap from './map/LeafletMap.vue'
@@ -65,8 +66,8 @@
     export default {
         components: {
             'progress-bar': ProgressBar,
-            'regions': Regions,
             'feedback': Feedback,
+            'chart': Charts,
             'sidebar': Sidebar,
             'step1content': Step1Content,
             'leafletMap' : LeafletMap,
@@ -80,8 +81,14 @@
                 step1Component: null,
                 progressbarComponent: null,
                 startButtonVisibility: false,
+                sidebarLeftVisibility: true,
+                sidebarRightVisibility: true,
                 component: null,
             }
+        },
+
+        mounted(){
+            //this.showSidebar()
         },
 
 
@@ -105,6 +112,15 @@
                     //component: 'progress-bar',
                 }
 
+            },
+
+            progressFinished(){
+                alert('finished!');
+            },
+
+            afterWizardFinished(){
+                this.sidebarLeftVisibility = false,
+                this.sidebarRightVisibility = false
             }
         }
 
@@ -114,6 +130,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+
+    .bg-secondary {
+        background-color: #263238!important;
+    }
 
 
     #main {
@@ -131,7 +151,7 @@
         min-width: 200px;
         height: calc(92vh - 20px);
         overflow: auto;
-        background-color: #f2f3f5;
+        background-color: #37474F;
     }
 
     #main > nav {
@@ -143,7 +163,10 @@
         height: calc(92vh - 20px);
         overflow: auto;
         padding: 1rem;
-        background-color: #d6edfd;
+        background-color: #FFF;
     }
 
+    #sidebar-left a{
+        color:#fff;
+    }
 </style>

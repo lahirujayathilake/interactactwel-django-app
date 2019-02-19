@@ -3,8 +3,7 @@
         <form-wizard v-show="!stepWizardVisibility" @on-complete="onComplete"
                      shape="tab"
                      color="#28a645"
-        title="Data Visualization Wizard"
-        subtitle="Umatilla Region Adapts to New Water Allocation">
+        title="" subtitle="">
             <tab-content title="Step 1"
                          icon="ti-user">
                 <b-card no-body>
@@ -131,11 +130,74 @@
 
     import {FormWizard, TabContent} from 'vue-form-wizard'
 
+
     export default {
 
         components: {
-            'form-wizard': FormWizard,
-            'tab-content': TabContent
+            'tab-content': TabContent,
+            'form-wizard': FormWizard , props: {
+                title: {
+                    type: String,
+                    default: 'Data Visualization Wizadgrttrrd'
+                },
+                subtitle: {
+                    type: String,
+                    default: 'Split a complicdgtdtated flow in multiple steps'
+                },
+                nextButtonText: {
+                    type: String,
+                    default: 'Next'
+                },
+                backButtonText: {
+                    type: String,
+                    default: 'Back'
+                },
+                finishButtonText: {
+                    type: String,
+                    default: 'Finish'
+                },
+
+                /***
+                 *  Sets validation (on/off) for back button. By default back button ignores validation
+                 */
+                validateOnBack: Boolean,
+                /***
+                 * Applies to text, border and circle
+                 */
+                color: {
+                    type: String,
+                    default: '#e74c3c' //circle, border and text color
+                },
+                /***
+                 *  Is set to current step and text when beforeChange function fails
+                 */
+                errorColor: {
+                    type: String,
+                    default: '#8b0000'
+                },
+                /**
+                 * Can take one of the following values: 'circle|square|tab`
+                 */
+                shape: {
+                    type: String,
+                    default: 'circle'
+                },
+                /**
+                 * name of the transition when transition between steps
+                 */
+                transition: {
+                    type: String,
+                    default: '' //name of the transition when transition between steps
+                },
+                /***
+                 * Index of the initial tab to display
+                 */
+                startIndex: {
+                    type: Number,
+                    default: 0
+                }
+            }
+
         },
 
 
@@ -223,11 +285,15 @@
 
             onComplete: function(){
                 alert('Yay. Done!'),
-                this.stepWizardVisibility = true
+                this.stepWizardVisibility = true,
+                this.$emit('finish-wizard')
+
             },
 
             beforeTabSwitch: function(){
                 alert("This is called before switchind tabs")
+                //this.dashboard.data().sidebarVisibility = false;
+
                 return true;
             }
         }

@@ -46,4 +46,9 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
+    b-nav-item{
+        border-bottom: 1px solid #607D8B !important;
+        background-color: #263238 !important;
+    }
+
 </style>
