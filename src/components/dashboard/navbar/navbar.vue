@@ -11,8 +11,8 @@
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
-                        <b-button v-show="!startButtonVisibility" v-on:click="start" variant="primary" class="my-2 my-sm-0" type="submit">Start Viz Builder</b-button>
-                        <b-button v-show="startButtonVisibility" v-on:click="exit" variant="primary" class="my-2 my-sm-0" type="submit">Exit</b-button>
+                        <b-button v-show="!startButtonVisibility" v-on:click="start" variant="warning" class="my-2 my-sm-0" type="submit">Start Here</b-button>
+                        <b-button v-show="startButtonVisibility" v-on:click="exit" variant="danger" class="my-2 my-sm-0" type="submit">Exit</b-button>
 
                         <b-nav-item-dropdown text="Settings" right>
                             <b-dropdown-item href="#">EN</b-dropdown-item>
@@ -46,7 +46,7 @@
         name: 'Navbar',
         components: {
             'progress-bar': ProgressBar
-        },
+        }
 
         /*data() {
             return {
@@ -75,7 +75,7 @@
                 }
 
             }
-        }*/
+        }
     }
 
 

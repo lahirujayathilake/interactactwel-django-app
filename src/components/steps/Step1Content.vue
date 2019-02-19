@@ -1,12 +1,12 @@
 <template>
     <div>
-        <form-wizard @on-complete="onComplete"
+        <form-wizard v-show="!stepWizardVisibility" @on-complete="onComplete"
                      shape="tab"
                      color="#28a645"
         title="Data Visualization Wizard"
         subtitle="Umatilla Region Adapts to New Water Allocation">
             <tab-content title="Step 1"
-                         icon="ti-user" :before-change="beforeTabSwitch">
+                         icon="ti-user">
                 <b-card no-body>
                     <h4 slot="header">Choose Goals</h4>
                     <b-card-body>
@@ -91,10 +91,10 @@
                     <b-card-body>
 
                         <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>
-                        <table class="table table-striped table-hover table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
-                                <th>Action</th>
+                                <th></th>
                                 <th v-for="actor in actors">
                                     {{actor.name}}
                                 </th>
@@ -143,6 +143,8 @@
 
         data: () => ({
 
+            stepWizardVisibility: false,
+
             selectedActions: [],
             selectAllActions: false,
 
@@ -184,8 +186,8 @@
                 { id: 2, name: "F_GW", actor: 'Farmer with ground water right (F_GW)' },
                 { id: 3, name: "EP", actor: 'Solar_Power_Plants' },
                 { id: 4, name: "DC", actor: 'Coal_Power_Plants' },
-                { id: 5, name: "TRI", actor: 'Data_Centers' },
-                { id: 6, name: "MUN", actor: 'Dairies' }
+                { id: 5, name: "TRI", actor: 'Data_Centers' }
+                /*{ id: 6, name: "MUN", actor: 'Dairies' }*/
             ],
         }),
 
@@ -220,8 +222,10 @@
             },
 
             onComplete: function(){
-                alert('Yay. Done!');
+                alert('Yay. Done!'),
+                this.stepWizardVisibility = true
             },
+
             beforeTabSwitch: function(){
                 alert("This is called before switchind tabs")
                 return true;
@@ -239,7 +243,17 @@
     .vue-form-wizard{
         width: 50%;
         max-width: 600px;
+        height: calc(100vh - 5em);
+        overflow: auto;
         background-color: #ECEFF1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    td, th{
+        font-size:14px;
     }
 
 </style>
