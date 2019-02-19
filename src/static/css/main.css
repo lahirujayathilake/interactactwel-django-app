@@ -67,7 +67,7 @@ ui.checkbox label, .ui.checkbox + label {
     flex-shrink: 1;
     flex-basis: auto;
     position: relative;
-    z-index: 1;
+    z-index: 100;
     min-width: 0px;
     height:100vh;
 }
@@ -75,7 +75,7 @@ ui.checkbox label, .ui.checkbox + label {
 #map{
     height: calc(100% - 5em);
     position:relative;
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 /* General */

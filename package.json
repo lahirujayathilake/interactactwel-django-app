@@ -10,6 +10,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",
     "vue": "^2.5.17",
+    "vue-form-wizard": "^0.8.4",
     "vue2-leaflet": "^1.2.3"
   },
   "devDependencies": {

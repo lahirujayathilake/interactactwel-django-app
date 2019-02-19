@@ -37,15 +37,15 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <component v-bind:is="progressbarComponent"></component>
+       <!-- <component v-bind:is="progressbarComponent"></component>-->
         <div id="main">
-            <nav id="sidebar-left">
+            <nav v-show id="sidebar-left">
                 <component v-bind:is="component"></component>
             </nav>
             <article id="map">
                 <component v-bind:is="step1Component"></component>
             </article>
-            <aside id="sidebar-right">
+            <aside v-show id="sidebar-right">
                 <component v-bind:is="component"></component>
             </aside>
         </div>
