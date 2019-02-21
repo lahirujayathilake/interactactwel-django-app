@@ -37,7 +37,6 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <!-- <component v-bind:is="progressbarComponent"></component>-->
         <div id="main">
             <nav v-show="!sidebarLeftVisibility" id="sidebar-left">
                 <component v-bind:is="component='sidebar'"></component>

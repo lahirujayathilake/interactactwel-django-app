@@ -1,11 +1,11 @@
 <template>
     <div>
+        <component :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>
         <form-wizard v-show="!stepWizardVisibility" @on-complete="onComplete"
                      shape="tab"
-                     color="#28a645"
-        title="" subtitle="">
+                     color="#28a645">
             <tab-content title="Step 1"
-                         icon="ti-user">
+                         icon="ti-user" :before-change="beforeTabSwitch">
                 <b-card no-body>
                     <h4 slot="header">Choose Goals</h4>
                     <b-card-body>
@@ -38,7 +38,7 @@
                 </b-card>
             </tab-content>
             <tab-content title="Step 2"
-                         icon="ti-settings">
+                         icon="ti-settings" :before-change="beforeTabSwitch">
                 <b-card no-body>
                     <h4 slot="header">Choose Actors</h4>
                     <b-card-body>
@@ -71,7 +71,7 @@
                 </b-card>
             </tab-content>
             <tab-content title="Step 3"
-                         icon="ti-check">
+                         icon="ti-check" :before-change="beforeTabSwitch">
                 <b-card no-body>
                     <h4 slot="header">Choose Actions</h4>
                     <b-card-body>
@@ -128,17 +128,22 @@
 
 <script>
 
-    import {FormWizard, TabContent} from 'vue-form-wizard'
+    //import {FormWizard, TabContent} from 'vue-form-wizard'
 
+    import FormWizard from './../formWizard/FormWizard.vue'
+    import TabContent from './../formWizard/TabContent.vue'
+    import ProgressBar from './../dashboard/progressBar/ProgressBar.vue'
 
     export default {
 
         components: {
+            'progress-bar': ProgressBar,
             'tab-content': TabContent,
             'form-wizard': FormWizard , props: {
                 title: {
                     type: String,
-                    default: 'Data Visualization Wizadgrttrrd'
+                    default: 'Data Visualization Wizadgrttrrd',
+                    return: false
                 },
                 subtitle: {
                     type: String,
@@ -204,6 +209,8 @@
         name: 'Step1Content',
 
         data: () => ({
+
+            fromparent: "",
 
             stepWizardVisibility: false,
 
@@ -292,8 +299,8 @@
 
             beforeTabSwitch: function(){
                 alert("This is called before switchind tabs")
-                //this.dashboard.data().sidebarVisibility = false;
-
+                this.fromparent = 'active'
+                this.$emit('tab-active')
                 return true;
             }
         }
@@ -307,13 +314,11 @@
     @import '../../static/css/vue-form-wizard.min.css';
 
     .vue-form-wizard{
-        width: 50%;
-        max-width: 600px;
-        height: calc(100vh - 5em);
+        /*height: calc(100vh - 5em);*/
         overflow: auto;
-        background-color: #ECEFF1;
+        /*background-color: #ECEFF1;*/
         position: absolute;
-        top: 0;
+        top:150px;
         left: 0;
         z-index: 1000;
     }
@@ -321,5 +326,10 @@
     td, th{
         font-size:14px;
     }
+
+    .vue-form-wizard .wizard-header{
+        display:none;
+    }
+
 
 </style>
