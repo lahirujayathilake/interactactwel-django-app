@@ -55,7 +55,7 @@
 
   .wizard-tab-content {
     min-height: 100px;
-    padding: 30px 20px 10px;
+    padding:0 !important;
   }
 
   .wizard-header {
@@ -100,7 +100,7 @@
     display: table;
   }
   .wizard-card-footer {
-    padding: 0 20px;
+    padding: 15px 20px 0 !important;
     .wizard-footer-left {
       float: left;
     }

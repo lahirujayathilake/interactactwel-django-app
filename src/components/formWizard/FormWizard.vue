@@ -2,7 +2,7 @@
   <div :id="id ? id : ''" class="vue-form-wizard" :class="[stepSize, {vertical: isVertical}]" @keyup.right="focusNextTab"
        @keyup.left="focusPrevTab">
     <div class="wizard-navigation">
-      <div class="wizard-progress-with-circle" v-if="!isVertical">
+      <!--<div class="wizard-progress-with-circle" v-if="!isVertical">
         <div class="wizard-progress-bar"
              :style="progressBarStyle"></div>
       </div>
@@ -21,7 +21,7 @@
                        :index="index">
           </wizard-step>
         </slot>
-      </ul>
+      </ul>-->
       <div class="wizard-tab-content">
         <slot v-bind="slotProps">
         </slot>
@@ -34,7 +34,7 @@
         <div class="wizard-footer-left">
           <span @click="prevTab" @keyup.enter="prevTab" v-if="displayPrevButton" role="button" tabindex="0">
             <slot name="prev" v-bind="slotProps">
-              <wizard-button :style="fillButtonStyle"
+              <wizard-button :style="outlineButtonStyle"
                              :disabled="loading">
                 {{backButtonText}}
               </wizard-button>
@@ -207,6 +207,13 @@
           color: 'white'
         }
       },
+        outlineButtonStyle () {
+            return {
+                //backgroundColor: this.color,
+                borderColor: this.color,
+                color: this.color
+            }
+        },
       progress () {
         let percentage = 0
         if (this.activeTabIndex > 0) {
@@ -291,14 +298,14 @@
           if (this.activeTabIndex < this.tabCount - 1) {
             this.changeTab(this.activeTabIndex, this.activeTabIndex + 1)
             this.afterTabChange(this.activeTabIndex)
-            this.$emit('next-step')
+            this.$emit('next-step', this.activeTabIndex)
           } else {
             this.$emit('on-complete')
           }
         }
         this.beforeTabChange(this.activeTabIndex, cb)
       },
-      prevTab () {
+            prevTab () {
         let cb = () => {
           if (this.activeTabIndex > 0) {
             this.setValidationError(null)
@@ -463,4 +470,7 @@
 </script>
 <style lang="scss">
   @import "./assets/wizard";
+
+  .wizard-footer-right{
+  }
 </style>

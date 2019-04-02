@@ -1,7 +1,7 @@
 <template>
     <div>
-        <component :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>
-        <form-wizard v-show="!stepWizardVisibility" @on-complete="onComplete"
+        <!--<component :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>-->
+        <form-wizard v-show="!stepWizardVisibility" v-on:next-step="nextStep" @on-complete="onComplete"
                      shape="tab"
                      color="#28a645">
             <tab-content title="Step 1"
@@ -19,21 +19,21 @@
                                 <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
                                 Select All
                             </label>
-                            <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>
+                            <!--<div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
                         </b-form-checkbox-group>
                     </b-list-group-item>
                     <b-list-group flush>
-                        <b-list-group-item>
-                            <b-form>
-                                <div v-for="goal in goals">
+                        <b-form>
+                            <div class="list-group">
+                                <li class="list-group-item" v-for="goal in goals">
                                     <label class="form-checkbox">
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals">
                                         {{goal.goal}}
                                     </label>
-                                    <b-badge pill variant="secondary">Info</b-badge>
-                                </div>
-                            </b-form>
-                        </b-list-group-item>
+                                    <b-badge class="info-button" pill variant="secondary">Info</b-badge>
+                                </li>
+                            </div>
+                        </b-form>
                     </b-list-group>
                 </b-card>
             </tab-content>
@@ -52,21 +52,21 @@
                                 <input type="checkbox" v-model="selectAllActors" @click="selectActors">
                                 Select All
                             </label>
-                            <div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>
+                            <!--<div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>-->
                         </b-form-checkbox-group>
                     </b-list-group-item>
                     <b-list-group flush>
-                        <b-list-group-item>
                             <b-form>
-                                <div v-for="actor in actors">
-                                    <label class="form-checkbox">
-                                        <input type="checkbox" :value="actor.id" v-model="selectedActors">
-                                        {{actor.actor}}
-                                    </label>
-                                    <b-badge pill variant="secondary">Info</b-badge>
+                                <div class="list-group">
+                                    <li class="list-group-item" v-for="actor in actors">
+                                        <label class="form-checkbox">
+                                            <input type="checkbox" :value="actor.id" v-model="selectedActors">
+                                            {{actor.actor}}
+                                        </label>
+                                        <b-badge class="info-button" pill variant="secondary">Info</b-badge>
+                                    </li>
                                 </div>
                             </b-form>
-                        </b-list-group-item>
                     </b-list-group>
                 </b-card>
             </tab-content>
@@ -89,8 +89,8 @@
                     </b-list-group-item>
                     <b-card-body>
 
-                        <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>
-                        <table class="table table-bordered table-striped table-hover table-responsive">
+                        <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
+                        <table style="height: 370px;" class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
                                 <th></th>
@@ -107,7 +107,8 @@
                                 </td>
                                 <td v-for="actor in actors">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="actor.id + ',' + action.id" v-model="selectedActions">
+                                        <input type="checkbox" :value="actor.id + ',' + action.id"
+                                               v-model="selectedActions">
                                         <i class="form-icon"></i>
                                     </label>
                                 </td>
@@ -139,7 +140,7 @@
         components: {
             'progress-bar': ProgressBar,
             'tab-content': TabContent,
-            'form-wizard': FormWizard , props: {
+            'form-wizard': FormWizard, props: {
                 title: {
                     type: String,
                     default: 'Data Visualization Wizadgrttrrd',
@@ -224,39 +225,39 @@
             selectAllActors: false,
 
             goals: [
-                { id: "0", goal: 'Improve surface water quality'},
-                { id: "1", goal: 'Increase ground water supply'},
-                { id: "2", goal: 'Minimize land use change'},
-                { id: "3", goal: 'Improve economy'},
-                { id: "4", goal: 'Increase energy production'},
-                { id: "5", goal: 'Improve ecological habitat'},
-                { id: "6", goal: 'Other'},
+                {id: "0", goal: 'Improve surface water quality'},
+                {id: "1", goal: 'Increase ground water supply'},
+                {id: "2", goal: 'Minimize land use change'},
+                {id: "3", goal: 'Improve economy'},
+                {id: "4", goal: 'Increase energy production'},
+                {id: "5", goal: 'Improve ecological habitat'},
+                {id: "6", goal: 'Other'},
 
             ],
 
             actions: [
-                { id: 0, name: "act1", action: 'Business as usual' },
-                { id: 1, name: "act2", action: 'Increase capacity by 20%' },
-                { id: 2, name: "act3", action: 'Decrease total capacity by 20%' },
-                { id: 3, name: "act4", action: 'Increase amount of SW' },
-                { id: 4, name: "act5", action: 'Increase amount of GW' },
-                { id: 5, name: "act6", action: 'Increase amount of RW' },
-                { id: 6, name: "act7", action: 'Decrease amount of SW' },
-                { id: 7, name: "act8", action: 'Decrease amount of GW' },
-                { id: 8, name: "act9", action: 'Invest in renewable energy sources' },
-                { id: 9, name: "act10", action: 'Pump RW to farmers/daries' },
-                { id: 10, name: "act11", action: 'Increase surface storage' },
-                { id: 11, name: "act12", action: 'Invest in infra to pump RW' }
+                {id: 0, name: "act1", action: 'Business as usual'},
+                {id: 1, name: "act2", action: 'Increase capacity by 20%'},
+                {id: 2, name: "act3", action: 'Decrease total capacity by 20%'},
+                {id: 3, name: "act4", action: 'Increase amount of SW'},
+                {id: 4, name: "act5", action: 'Increase amount of GW'},
+               {id: 5, name: "act6", action: 'Increase amount of RW'},
+                 {id: 6, name: "act7", action: 'Decrease amount of SW'},
+                {id: 7, name: "act8", action: 'Decrease amount of GW'},
+                {id: 8, name: "act9", action: 'Invest in renewable energy sources'},
+                {id: 9, name: "act10", action: 'Pump RW to farmers/daries'},
+                {id: 10, name: "act11", action: 'Increase surface storage'},
+                {id: 11, name: "act12", action: 'Invest in infra to pump RW'}
             ],
 
             actors: [
-                { id: 0, name: "F_SW_GW", actor: 'Farmer with surface water and ground water right' },
-                { id: 1, name: "F_SW", actor: 'Farmer with surface water right (F_SW)' },
-                { id: 2, name: "F_GW", actor: 'Farmer with ground water right (F_GW)' },
-                { id: 3, name: "EP", actor: 'Solar_Power_Plants' },
-                { id: 4, name: "DC", actor: 'Coal_Power_Plants' },
-                { id: 5, name: "TRI", actor: 'Data_Centers' }
-                /*{ id: 6, name: "MUN", actor: 'Dairies' }*/
+                {id: 0, name: "F_SW_GW", actor: 'Farmer with surface water and ground water right'},
+                {id: 1, name: "F_SW", actor: 'Farmer with surface water right (F_SW)'},
+                {id: 2, name: "F_GW", actor: 'Farmer with ground water right (F_GW)'},
+                {id: 3, name: "EP", actor: 'Solar_Power_Plants'},
+                {id: 4, name: "DC", actor: 'Coal_Power_Plants'},
+                {id: 5, name: "TRI", actor: 'Data_Centers'},
+                { id: 6, name: "MUN", actor: 'Dairies' }
             ],
         }),
 
@@ -290,19 +291,23 @@
                 }
             },
 
-            onComplete: function(){
-                alert('Yay. Done!'),
-                this.stepWizardVisibility = true,
-                this.$emit('finish-wizard')
+            onComplete: function () {
+                //alert('Yay. Done!'),
+                    this.stepWizardVisibility = true,
+                    this.$emit('finish-wizard')
 
             },
 
-            beforeTabSwitch: function(){
-                alert("This is called before switchind tabs")
-                this.fromparent = 'active'
-                this.$emit('tab-active')
-                return true;
-            }
+            beforeTabSwitch: function () {
+                //alert("This is called before switchind tabs")
+                //this.fromparent = 'active',
+                return true
+            },
+
+            nextStep() {
+                //alert("next tab clicked")
+                this.$emit('next-click')
+            },
         }
 
     }
@@ -313,22 +318,33 @@
 
     @import '../../static/css/vue-form-wizard.min.css';
 
-    .vue-form-wizard{
-        /*height: calc(100vh - 5em);*/
+    .vue-form-wizard {
+        max-height: 700px;
         overflow: auto;
-        /*background-color: #ECEFF1;*/
+        background-color: #ECEFF1;
         position: absolute;
-        top:150px;
-        left: 0;
+        left: 60px;
         z-index: 1000;
+        max-width: 500px;
+        top: 20px;
+        border-radius: 10px;
+        height: auto;
     }
 
-    td, th{
-        font-size:14px;
+    td, th {
+        font-size: 14px;
     }
 
-    .vue-form-wizard .wizard-header{
-        display:none;
+    .vue-form-wizard .wizard-header {
+        display: none;
+    }
+
+    b-list-group-item {
+        paddding: 0 !important;
+    }
+
+    .info-button{
+        float: right !important;
     }
 
 
