@@ -1,101 +1,150 @@
 <template>
-    <div class="chart">
-        <div class="feedback-container">
-            <div class="ui header">
-                <div class="ui sub header">POPSWAT_0</div>
-                Evaluate Adaptation Plan
+    <div class="chart-container">
+        <div class="card text-center">
+            <div class="card-body">
+                <MyChart :actions="actions" :data="data"></MyChart>
             </div>
-            <div id="feedback-step1" class="ui form">
-                <div class="field">
-                    <label>Do you think this Alternative plan is feasible?</label>
-                    <div class="inline fields">
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input class="" type="radio" name="feasibility" id="feasibility-yes">
-                                <label>Yes</label>
-                            </div>
-                            <div class="ui radio checkbox">
-                                <input class="" type="radio" name="feasibility" id="feasibility-no">
-                                <label>No</label>
-                            </div>
-                            <div class="ui radio checkbox">
-                                <input class="" type="radio" name="feasibility" id="feasibility-maybe">
-                                <label>May be</label>
-                            </div>
-                        </div>
+            <div class="card-body">
+                <div class="filter-options-container">
+                    <div v-for="actor in actors" v-bind:key="actor.key" v-bind:class="{ active: actor.active }" class="form-check form-check-inline filter-options">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               :name="actor.value"
+                               :value="actor.key"
+                               :id="actor.key"
+                               @change="inputChanged($event , actor)">
+                        <label class="form-check-label" :for="actor.key">{{actor.value}}</label>
                     </div>
                 </div>
-                <div id="no-feasible" class="grouped fields">
-                    <label>why is this plan not feasible? (Check all that apply)</label>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="top-posts">
-                            <label>Unlikely to be profitable / financially sustainable</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="hot-deals">
-                            <label>Infrastructure costs</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="hot-deals">
-                            <label>Permits or other regulatory approval processes and cost</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="hot-deals">
-                            <label>Reliance on other stakeholders to take action</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="hot-deals">
-                            <label>Long time period before seeing positive results</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="hot-deals">
-                            <label>Public disapproval of the actions listed in the plans</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="hot-deals">
-                            <label>Other</label>
-                        </div>
-                    </div>
-                    <div class="field wide">
-                        <label>Short Text</label>
-                        <textarea placeholder="Feel free to add additional comments about your rating here:" rows="7"></textarea>
-                    </div>
-                </div>
-                <button type="reset" class="ui small button" tabindex="0">Clear</button>
-                <button id="evaluate-submit" class="ui small green button" tabindex="0">Submit</button>
             </div>
-
+            <div class="card-header">
+                POPSWAT_0
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-
+    import JSONData from "../../../assets/result_action_plans.json";
+    import MyChart from "./MyChart";
     export default {
-        name: 'Charts'
+        name: 'Charts',
+
+        components: {
+            'MyChart': MyChart
+        },
+
+        data() {
+            return {
+                selectedKeyList: []
+            };
+        },
+        computed: {
+            jsonData() {
+                return JSONData;
+            },
+
+            actions() {
+                return this.jsonData["Actions_map"];
+            },
+            data() {
+                var adaptationPlan = "POPSWAT_0";
+
+                return Object.keys(this.jsonData["Adaptation_plans"][adaptationPlan])
+                    .map(key => {
+                        return {
+                            key: key,
+                            value: this.jsonData["Adaptation_plans"][adaptationPlan][key]
+                        };
+                    })
+                    .filter(d => {
+                        if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
+                            //console.log(this.selectedKeyList.findIndex(k => k === d.key) > -1);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    });
+            },
+            actors() {
+                return Object.keys(this.jsonData["Actors_map"]).map(key => {
+                    return {
+                        key: parseInt(key, 10) + 1,
+                        value: this.jsonData["Actors_map"][key]
+                    };
+                });
+            }
+        },
+        methods: {
+            inputChanged(event , item) {
+                if (event.target.checked) {
+                    this.selectedKeyList.push(event.target.value);
+                    item.active = !item.active;
+
+                } else {
+                    const index = this.selectedKeyList.findIndex(
+                        k => k === event.target.value
+                    );
+                    this.selectedKeyList.splice(index, 1);
+
+                }
+            },
+
+            /*toggleActive: function(item) {
+                item.active = !item.active;
+            }*/
+        },
+        //props: ["jsonData"]
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-    .chart{
+    .chart-container{
         position: absolute;
         top:100px;
-        left:600px;
+        left:30px;
         z-index: 1000;
+        background-color: #4cae4c;
+        height: 400px;
+        width:800px;
+    }
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #4cae4c !important;
+    }
+
+    .chart-inner{
+        position: absolute !important;
+        width: 100% !important;
+        bottom: 0 !important;
+    }
+
+    .filter-options-container{
+        text-align: left;
+    }
+
+    .filter-options{
+        padding: 10px;
+        color: #222222;
+        background-color: #EFEFEF;
+        margin:5px !important;
+        border-radius: 5px;
+    }
+
+    .active{
+        padding: 10px;
+        color: #FFF;
+        background-color: #4cae4c;
+        margin:5px !important;
+        border-radius: 5px;
+    }
+
+
+
+    .filter-options  input{
+        margin-left: 10px !important;
     }
 </style>
