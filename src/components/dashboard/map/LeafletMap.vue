@@ -36,7 +36,7 @@
                 maxZoom: 17,
                 minZoom: 3,
                 center: L.latLng(45.6735777, -118.8455003),
-                url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 marker: L.latLng(45.6735777, -118.8455003),
                 detectRetina: true,
