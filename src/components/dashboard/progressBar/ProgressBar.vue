@@ -1,6 +1,6 @@
 <template>
     <ul class="nav nav-pills nav-justified thumbnail setup-panel step-progress-bar">
-        <li v-bind:class="fromparent" v-on:tab-active="active">
+        <li v-bind:class="fromparent">
             <div href="#step-1">
             <div class="step-no">1</div>
             <h4 class="list-group-item-heading">Goals</h4>

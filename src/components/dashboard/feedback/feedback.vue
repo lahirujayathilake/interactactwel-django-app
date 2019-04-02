@@ -1,8 +1,8 @@
 <template>
     <div class="feedback-container">
-        <div class="ui header">
-            <div class="ui sub header">POPSWAT_0</div>
-            Evaluate Adaptation Plan
+        <div class="header-container">
+            <h6>POPSWAT_0</h6>
+            <h4>Evaluate Adaptation Plan</h4>
         </div>
         <div id="feedback-step1" class="ui form">
             <div class="field">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div id="no-feasible" class="grouped fields">
+            <div hidden id="no-feasible" class="grouped fields">
                 <label>why is this plan not feasible? (Check all that apply)</label>
                 <div class="field">
                     <div class="ui checkbox">
@@ -73,8 +73,7 @@
                     <textarea placeholder="Feel free to add additional comments about your rating here:" rows="7"></textarea>
                 </div>
             </div>
-            <button type="reset" class="ui small button" tabindex="0">Clear</button>
-            <button id="evaluate-submit" class="ui small green button" tabindex="0">Submit</button>
+            <b-button variant="success">Submit</b-button>
         </div>
 
     </div>
@@ -89,5 +88,16 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+
+    #feedback-step1{
+        background-color: #f5f8fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top:20px;
+    }
+
+    .header-container{
+    padding:0 10px;
+    }
 
 </style>

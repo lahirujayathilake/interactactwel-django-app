@@ -11,7 +11,7 @@
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
-                        <b-button v-show="!startButtonVisibility" v-on:click="start" variant="warning"
+                        <b-button v-show="!startButtonVisibility" v-on:click="start" variant="success"
                                   class="my-2 my-sm-0" type="submit">Start Here
                         </b-button>
                         <b-button v-show="startButtonVisibility" v-on:click="exit" variant="danger"
@@ -37,13 +37,14 @@
                 </b-collapse>
             </b-navbar>
         </div>
+        <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>
         <div id="main">
             <nav v-show="!sidebarLeftVisibility" id="sidebar-left">
                 <component v-bind:is="component='sidebar'"></component>
             </nav>
             <article id="map">
                 <component v-bind:is="step1Component" v-on:finish-wizard="afterWizardFinished"></component>
-                <component v-bind:is="component='charts'"></component>
+                <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>
                 <leaflet-map></leaflet-map>
             </article>
             <aside v-show="!sidebarRightVisibility" id="sidebar-right">
@@ -66,7 +67,7 @@
         components: {
             'progress-bar': ProgressBar,
             'feedback': Feedback,
-            'chart': Charts,
+            'charts': Charts,
             'sidebar': Sidebar,
             'step1content': Step1Content,
             'leafletMap' : LeafletMap,
@@ -80,8 +81,10 @@
                 step1Component: null,
                 progressbarComponent: null,
                 startButtonVisibility: false,
+                progressBarVisibility: true,
                 sidebarLeftVisibility: true,
                 sidebarRightVisibility: true,
+                chartsVisibility: true,
                 component: null,
             }
         },
@@ -97,10 +100,11 @@
                 this.progressbarComponent = 'progress-bar',
                     this.step1Component = 'step1content',
                     this.startButtonVisibility = true
+                    this.progressBarVisibility = false
 
             },
 
-            exit: function (event) {
+            exit() {
                 // `this` inside methods points to the Vue instance
                 alert('You are going to quit the wizard!');
                 // `event` is the native DOM event
@@ -119,7 +123,18 @@
 
             afterWizardFinished(){
                 this.sidebarLeftVisibility = false,
-                this.sidebarRightVisibility = false
+                this.sidebarRightVisibility = false,
+                this.progressBarVisibility = false
+                this.chartsVisibility = false
+            },
+
+            showChart(){
+                alert('add active class!');
+            },
+
+            addActiveClass(){
+                alert('add active class!');
+                //this.startButtonVisibility = true
             }
         }
 
