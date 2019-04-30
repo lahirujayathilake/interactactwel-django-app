@@ -6,6 +6,23 @@
                      color="#28a645">
             <tab-content title="Step 1"
                          icon="ti-user" :before-change="beforeTabSwitch">
+                <div class="help-block">
+                    <b-card
+                            title=""
+                            tag="article"
+                            style="max-width: 20rem;"
+                            class="mb-2"
+                    >
+                        <b-card-text><strong>What are adaptation Plans?</strong></b-card-text><br/>
+                        <b-card-text class="small">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.
+                            Proin feugiat semper nunc eget porta. Etiam felis velit, congue sed eros eu, hendrerit tempus urna.
+                        </b-card-text>
+                        <br/>
+                        <br/>
+                        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
+                    </b-card>
+                </div>
                 <b-card no-body>
                     <h4 slot="header">Choose Goals</h4>
                     <b-card-body>
@@ -39,6 +56,23 @@
             </tab-content>
             <tab-content title="Step 2"
                          icon="ti-settings" :before-change="beforeTabSwitch">
+                <div class="help-block">
+                    <b-card
+                            title=""
+                            tag="article"
+                            style="max-width: 20rem;"
+                            class="mb-2"
+                    >
+                        <b-card-text><strong>Who are Actors?</strong></b-card-text><br/>
+                        <b-card-text class="small">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.
+                            Proin feugiat semper nunc eget porta. Etiam felis velit, congue sed eros eu, hendrerit tempus urna.
+                        </b-card-text>
+                        <br/>
+                        <br/>
+                        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
+                    </b-card>
+                </div>
                 <b-card no-body>
                     <h4 slot="header">Choose Actors</h4>
                     <b-card-body>
@@ -72,6 +106,23 @@
             </tab-content>
             <tab-content title="Step 3"
                          icon="ti-check" :before-change="beforeTabSwitch">
+                <div class="help-block">
+                    <b-card
+                            title=""
+                            tag="article"
+                            style="max-width: 20rem;"
+                            class="mb-2"
+                    >
+                        <b-card-text><strong>Why select Actions?</strong></b-card-text><br/>
+                        <b-card-text class="small">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.
+                            Proin feugiat semper nunc eget porta. Etiam felis velit, congue sed eros eu, hendrerit tempus urna.
+                        </b-card-text>
+                        <br/>
+                        <br/>
+                        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
+                    </b-card>
+                </div>
                 <b-card no-body>
                     <h4 slot="header">Choose Actions</h4>
                     <b-card-body>
@@ -320,7 +371,7 @@
 
     .vue-form-wizard {
         max-height: 700px;
-        overflow: auto;
+        overflow: visible;
         background-color: #ECEFF1;
         position: absolute;
         left: 60px;
@@ -345,6 +396,12 @@
 
     .info-button{
         float: right !important;
+    }
+
+    .help-block{
+        position: absolute;
+        right: -350px;
+        z-index: 1000;
     }
 
 
