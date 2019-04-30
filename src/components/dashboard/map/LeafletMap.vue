@@ -71,4 +71,8 @@
 <style>
     @import '../../../static/vendor/Vue2Leaflet/leaflet.css';
 
+    .leaflet-control-zoom{
+        display:none;
+    }
+
 </style>

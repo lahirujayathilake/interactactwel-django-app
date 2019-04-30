@@ -39,9 +39,9 @@
         </div>
         <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>
         <div id="main">
-            <nav v-show="!sidebarLeftVisibility" id="sidebar-left">
+            <!--<nav v-show="!sidebarLeftVisibility" id="sidebar-left">
                 <component v-bind:is="component='sidebar'"></component>
-            </nav>
+            </nav>-->
             <article id="map">
                 <component v-bind:is="step1Component" v-on:finish-wizard="afterWizardFinished"></component>
                 <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>

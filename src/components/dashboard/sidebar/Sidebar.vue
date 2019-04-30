@@ -8,8 +8,6 @@
                     <b-nav vertical class="w-100">
                         <b-nav-item active>Actors</b-nav-item>
                         <b-nav-item>Cost</b-nav-item>
-                        <b-nav-item>Storgage</b-nav-item>
-                        <b-nav-item>ETmm</b-nav-item>
                     </b-nav>
             </b-collapse>
         </div>
@@ -33,10 +31,7 @@
         },
 
         methods: {
-            showChart: function () {
-                this.$emit('clicked')
 
-            },
         }
     }
 </script>
@@ -44,13 +39,5 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-    #sidebar .collapse .nav-item{
-        border-bottom: 1px solid #37474f !important;
-        background-color: #263238 !important;
-    }
-
-    #sidebar .p-1{
-        border-bottom: 1px solid #263238 !important;
-    }
 
 </style>

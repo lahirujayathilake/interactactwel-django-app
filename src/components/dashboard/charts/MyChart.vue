@@ -14,23 +14,43 @@ export default {
       w: 1500,
       h: 460,
       margin: {
-        top: 20,
+        top: 50,
         right: 20,
         bottom: 30,
         left: 40
       },
+        padding:{
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 40
+        },
       pathColors: [
-        "chartreuse",
-        "red",
-        "darkblue",
-        "cyan",
-        "yellow",
-        "hotpink",
-        "darkorange",
-        "purple"
+          "#0176b8",
+          "#7b549c",
+          "#c73431",
+          "#d2701b",
+          "#219b9f",
+          "#d2a02f",
+          "#dc4b8a",
+          "#6ba629",
+          "#737478"
       ],
+
+        pathColors0:[
+            "#9cdbf1",
+            "#f2e3ee",
+            "#ffe2d3",
+            "#ffebb5",
+            "#d4ebea",
+            "#f9f0b8",
+            "#",
+            "#",
+            "#",
+        ],
+
       colorIndex: 0,
-      xList: [],
+      xList: ["0", "200", "300"],
       visibleKeyList: ["1"],
       jk: ""
     };
@@ -48,8 +68,14 @@ export default {
       return d3
         .scaleBand()
         .domain(this.computedActions.map(d => d.value))
-        .rangeRound([-20, this.h]);
-    }
+        .rangeRound([0, this.h]);
+    },
+      xScale() {
+          return d3
+              .scaleLinear()
+              .domain([2000, 2018])
+              .rangeRound([0, this.w - 1000]);
+      }
   },
   methods: {
     xListComputed(v) {
@@ -118,8 +144,13 @@ export default {
       //   svg.selectAll("*").remove();
       const g = svg
         .append("g")
-        .attr("transform", "translate(" + 200 + "," + 10 + ")")
-        .call(d3.axisLeft(this.yScale));
+        .attr("transform", "translate(" + 200 + "," + 0 + ")")
+        .call(d3.axisLeft(this.yScale))
+
+        const gx = svg
+            .append("g")
+            .attr("transform", "translate(" + 200 + "," + 440 + ")")
+            .call(d3.axisBottom(this.xScale))
 
       g.selectAll("line-x")
         .data(this.data)
@@ -130,7 +161,7 @@ export default {
         .style("stroke", data => this.getPathColor(data.key))
         .style("stroke-width", 4);
 
-      g.selectAll("line-y")
+      gx.selectAll("line-y")
         .data(this.xList)
         .enter()
         .append("line")
