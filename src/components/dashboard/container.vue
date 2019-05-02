@@ -1,0 +1,125 @@
+<template>
+    <div id="main">
+        <nav v-show="!sidebarLeftVisibility" id="sidebar-left">
+            <component v-bind:is="component='sidebar'"></component>
+        </nav>
+        <article id="map">
+            <component v-show="!stepsVisibility" v-bind:is="component='step1content'" v-on:finish-wizard="afterWizardFinished"></component>
+            <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>
+            <leaflet-map></leaflet-map>
+        </article>
+        <aside v-show="!sidebarRightVisibility" id="sidebar-right">
+            <component v-bind:is="component='feedback'"></component>
+        </aside>
+    </div>
+</template>
+
+<script>
+
+    import Sidebar from './sidebar/Sidebar.vue'
+    import Feedback from './feedback/feedback.vue'
+    import Charts from './charts/charts.vue'
+    import ProgressBar from './progressBar/ProgressBar.vue'
+    import Step1Content from './../steps/Step1Content.vue'
+    import LeafletMap from './map/LeafletMap.vue'
+    import Container from './container.vue'
+
+    import EventBus from './../../event-bus';
+
+    export default {
+         components: {
+            'progress-bar': ProgressBar,
+            'feedback': Feedback,
+            'charts': Charts,
+            'sidebar': Sidebar,
+            'step1content': Step1Content,
+            'leafletMap' : LeafletMap,
+            'container' : Container
+        },
+        name: 'Container',
+
+        data() {
+            return {
+                stepComponent: null,
+                sidebarLeftVisibility: true,
+                sidebarRightVisibility: true,
+                chartsVisibility: true,
+                stepsVisibility: true,
+                component: null,
+            }
+        },
+
+        mounted(){
+
+            let $this = this;
+            EventBus.$on('START_WIZARD', function () {
+                $this.stepsVisibility = false
+            })
+        },
+
+        methods: {
+            progressFinished(){
+                alert('finished!');
+            },
+
+            afterWizardFinished(){
+                this.sidebarLeftVisibility = false,
+                    this.sidebarRightVisibility = false
+                    this.progressBarVisibility = false
+                this.chartsVisibility = false
+            },
+
+            showChart(){
+                alert('add active class!');
+            },
+
+            addActiveClass(){
+                alert('add active class!');
+                //this.startButtonVisibility = true
+            }
+        }
+    }
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+    .bg-secondary {
+        background-color: #263238!important;
+    }
+
+
+    #main {
+        display: flex;
+        min-height: calc(100vh - 40vh);
+    }
+
+    #main > article {
+        flex: 1;
+        height: calc(92vh - 20px);
+    }
+
+    #main > nav {
+        flex: 0 0 auto;
+        min-width: 200px;
+        height: calc(92vh - 20px);
+        overflow: auto;
+        background-color: #37474F;
+    }
+
+    #main > nav {
+        order: -1;
+    }
+
+    #main > aside {
+        flex: 0 0 400px;
+        height: calc(92vh - 20px);
+        overflow: auto;
+        padding: 1rem;
+        background-color: #FFF;
+    }
+
+    #sidebar-left a{
+        color:#fff;
+    }
+</style>
