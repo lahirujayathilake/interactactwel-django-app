@@ -1,7 +1,10 @@
 <template>
     <b-container class="bv-example-row chart-container">
         <b-row>
-            <component v-on:clicked="showChart" v-bind:is="component=this.currentChartComponent"></component>
+            <component v-bind:is="component=this.currentChartComponent"></component>
+        </b-row>
+        <b-row>
+            <component v-bind:is="component='actions-graph'"></component>
         </b-row>
     </b-container>
 </template>
@@ -11,6 +14,12 @@
     import MyChart from "./MyChart";
     import ActionsGraph from './actions-graph.vue'
     import StreamsflowGraph from './streamflow-graph.vue'
+    import FertilizerGraph from './fertilizer-graph.vue'
+    import CostGraph from './cost-graph.vue'
+    import CropsGraph from './crops-graph.vue'
+    import PrecipitationGraph from './precipitation-graph.vue'
+    import IrrigationGraph from './irrigation-graph.vue'
+    import GroudWaterGraph from './groudwater-graph.vue'
 
     import EventBus from './../../../event-bus';
 
@@ -21,13 +30,18 @@
             'MyChart': MyChart,
             'actions-graph': ActionsGraph,
             'streamsflow-graph': StreamsflowGraph,
-      //      'bar-graph': BarGraph,
+            'fertilizer-graph': FertilizerGraph,
+            'costs-graph': CostGraph,
+            'crops-graph': CropsGraph,
+            'precipitation-graph': PrecipitationGraph,
+            'irrigation-graph': IrrigationGraph,
+            'groundwater-graph': GroudWaterGraph,
         },
 
         data() {
             return {
 
-                currentChartComponent: 'actions-graph',
+                currentChartComponent: 'null',
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
@@ -113,6 +127,9 @@
             EventBus.$on('CLICK_ITEM_COST', function () {
                 $this.showCostGraph();
             })
+            EventBus.$on('CLICK_ITEM', function (currentChartComponent) {
+                $this.showGraph(currentChartComponent);
+            })
         },
 
         methods: {
@@ -132,6 +149,10 @@
 
             showChart: function (selectedPlan) {
                 this.planName = selectedPlan;
+            },
+
+            showGraph: function (selectedChart) {
+                this.currentChartComponent = selectedChart;
             },
 
             showCostGraph(){

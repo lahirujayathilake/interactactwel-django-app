@@ -1,11 +1,5 @@
 <template>
-    <b-container class="bv-example-row chart-container">
-        <b-row>
-
             <div id="graph" class="card">
-                <div class="card-header">
-                    <strong>{{planName}}</strong>
-                </div>
                 <div v-show="planVisibility" id="plans" class="card-body">
                     <b-card no-body>
                         <b-tabs card>
@@ -72,8 +66,6 @@
                 </div>
                 </div>
             </div>
-        </b-row>
-    </b-container>
 </template>
 
 <script>

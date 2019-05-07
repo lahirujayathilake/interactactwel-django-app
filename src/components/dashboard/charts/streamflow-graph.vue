@@ -1,17 +1,25 @@
 <template>
-    <b-container class="bv-example-row chart-container">
-        <b-row>
 
             <div id="graph" class="card">
                 <div class="card-header">
-                    <strong>Streams Flow</strong>
+                    <strong>Streams</strong>
                 </div>
                 <div class="card-body">
-                    <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    <b-tabs card>
+                        <b-tab title="Stream Flows" active>
+                            <div class="card-body">
+                                <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                            </div>
+                        </b-tab>
+                        <b-tab title="Stream Temparature">
+                            <div class="card-body">
+                                <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                            </div>
+                        </b-tab>
+                    </b-tabs>
                 </div>
             </div>
-        </b-row>
-    </b-container>
+
 </template>
 
 <script>
@@ -29,40 +37,12 @@
 
         data() {
             return {
-                colorIndex : 0,
-                isPlanGraphActive: false,
-                isCostGraphActive: false,
-                planName: "POPSWAT_0",
 
-                selectedKeyList: [],
-
-                costVisibility: true,
-                planVisibility: true,
-
-                pathColors: [
-                    "#0176b8",
-                    "#7b549c",
-                    "#c73431",
-                    "#d2701b",
-                    "#219b9f",
-                    "#d2a02f",
-                    "#dc4b8a",
-                    "#6ba629",
-                    "#737478"
-                ]
             };
         },
         computed: {
             jsonData() {
                 return JSONData;
-            },
-
-            actions() {
-                return this.jsonData["Actions_map"];
-            },
-
-            adaptationPlans() {
-                return this.jsonData["Adaptation_plans"]
             },
 
             graphData() {
@@ -85,76 +65,13 @@
                     });
 
             },
-            actors() {
-                return Object.keys(this.jsonData["Actors_map"]).map(key => {
-                    return {
-                        key: parseInt(key, 10) + 1,
-                        value: this.jsonData["Actors_map"][key]
-                    };
-                });
-            },
-
-            actions1() {
-                return Object.keys(this.jsonData["Actions_map"]).map(key => {
-                    return {
-                        key: parseInt(key, 10) + 1,
-                        value: this.jsonData["Actions_map"][key]
-                    };
-                });
-            }
         },
 
         mounted(){
-            let $this = this;
-            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                $this.showChart(planName);
-            })
-            EventBus.$on('CLICK_ITEM_PLAN', function () {
-                $this.showPlanGraph();
-            })
-            EventBus.$on('CLICK_ITEM_COST', function () {
-                $this.showCostGraph();
-            })
         },
 
         methods: {
-            inputChanged(event, item) {
-                if (event.target.checked) {
-                    this.selectedKeyList.push(event.target.value);
-                    item.active = !item.active;
 
-                } else {
-                    const index = this.selectedKeyList.findIndex(
-                        k => k === event.target.value
-                    );
-                    this.selectedKeyList.splice(index, 1);
-
-                }
-            },
-
-            showChart: function (selectedPlan) {
-                this.planName = selectedPlan;
-                this.showPlanGraph()
-            },
-
-            showCostGraph(){
-                this.isCostGraphActive = true;
-                this.isPlanGraphActive = false;
-                this.costVisibility = false;
-                this.planVisibility = false;
-            },
-
-            showPlanGraph(){
-                this.isPlanGraphActive = true;
-                this.isCostGraphActive = false;
-                this.costVisibility = true;
-                this.planVisibility = true;
-            }
-
-
-            /*toggleActive: function(item) {
-                item.active = !item.active;
-            }*/
         },
         //props: ["jsonData"]
     }

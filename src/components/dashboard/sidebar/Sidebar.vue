@@ -5,14 +5,10 @@
                 <b-nav-item v-on:click="showChart(value)" block href="#" v-b-toggle="value" variant="info">{{value}}</b-nav-item>
             </b-nav>
             <b-collapse :id="value" accordion="my-accordion" role="tabpanel">
-                <b-nav vertical class="w-100">
-                    <b-nav-item v-on:click="showPlanGraph()" v-bind:class="{active: isPlanGraphActive}">Plans</b-nav-item>
-                    <b-nav-item v-on:click="showCostGraph()" v-bind:class="{active: isCostGraphActive}">Cost</b-nav-item>
-                    <b-nav-item v-on:click="showStreamflowGraph()" v-bind:class="{active: isStreamflowGraphActive}">Stream Flow</b-nav-item>
-                    <b-nav-item v-on:click="showStreamflowGraph()" v-bind:class="{active: isStreamflowGraphActive}">Stream Temperature</b-nav-item>
-                    <b-nav-item v-on:click="showStreamflowGraph()" v-bind:class="{active: isStreamflowGraphActive}">Nitrite</b-nav-item>
-                    <b-nav-item v-on:click="showStreamflowGraph()" v-bind:class="{active: isStreamflowGraphActive}">Dissolved Oxygen</b-nav-item>
-                    <b-nav-item v-on:click="showStreamflowGraph()" v-bind:class="{active: isStreamflowGraphActive}">Ammonium</b-nav-item>
+                <b-nav vertical class="w-100" v-for="chart in chartTypes">
+                    <!--<b-nav-item v-on:click="showPlanGraph()" v-bind:class="{active: isPlanGraphActive}">Plans</b-nav-item>
+                    <b-nav-item v-on:click="showCostGraph()" v-bind:class="{active: isCostGraphActive}">Cost</b-nav-item>-->
+                    <b-nav-item v-on:click="showGraph(chart.id)" value="{'actions-graph'}">{{chart.name}}</b-nav-item>
                 </b-nav>
             </b-collapse>
         </div>
@@ -32,7 +28,22 @@
             return{
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
+
+                currentChart: null,
+
+                chartTypes: [
+                    /*{id:"actions-graph", name: "Actions"},*/
+                    {id:"costs-graph", name: "Costs"},
+                    {id:"streamsflow-graph", name: "Streams"},
+                    {id:"fertilizer-graph", name: "Fertilizer"},
+                    {id:"crops-graph", name: "Crops"},
+                    {id:"precipitation-graph", name: "Precipitation"},
+                    {id:"irrigation-graph", name: "Irrigation"},
+                    {id:"groundwater-graph", name: "Groundwater"},
+                ]
             }
+
+
         },
 
         computed: {
@@ -48,6 +59,12 @@
 
             showChart(planName){
                 this.onClickSidebarItem(planName);
+            },
+
+            showGraph(chart){
+                this.currentChart = chart;
+                EventBus.$emit('CLICK_ITEM', this.currentChart);
+
             },
 
             showPlanGraph(){
