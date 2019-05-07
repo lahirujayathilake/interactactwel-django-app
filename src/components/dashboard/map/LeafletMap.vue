@@ -1,13 +1,19 @@
 <template>
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <l-geo-json
+                v-if="show"
+                :geojson="geoJson"
+                :options="options"
+                :options-style="styleFunction"
+        />
         <l-marker :lat-lng="marker"></l-marker>
     </l-map>
 </template>
 
 <script>
 
-    import {L, LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+    import {L, LMap, LTileLayer, LMarker, LGeoJson} from 'vue2-leaflet';
     import axios from 'axios';
 
     export default {
@@ -15,7 +21,8 @@
         components: {
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
-            'l-marker': LMarker
+            'l-marker': LMarker,
+            'l-geo-json': LGeoJson
         },
 
         name: 'Map',
@@ -28,7 +35,6 @@
             shadowUrl: require('leaflet/dist/images/marker-shadow.png')
         }),
 
-
         data() {
             return {
                 geoJson: null,
@@ -40,39 +46,74 @@
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 marker: L.latLng(45.6735777, -118.8455003),
                 detectRetina: true,
+                enableTooltip: true,
+                loading: true,
+                show: true,
+                fillColor: "rgba(76, 175, 80, 0.44)"
             }
         },
 
-        mounted (){
-            this.loadJson();
+        computed: {
+            options() {
+                return {
+                    onEachFeature: this.onEachFeatureFunction
+                };
+            },
+            styleFunction() {
+                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+                return () => {
+                    return {
+                        weight: 2,
+                        color: "#ECEFF1",
+                        opacity: 1,
+                        fillColor: fillColor,
+                        fillOpacity: 1
+                    };
+                };
+            },
+
+            onEachFeatureFunction() {
+                if (!this.enableTooltip) {
+                    return () => {
+                    };
+                }
+
+                return (feature, layer) => {
+                    layer.bindTooltip(
+                        "<div>tooltip :)</div>",
+                        {permanent: false, sticky: true}
+                    );
+                    layer.on({
+                        click: this.layerClicked
+                    });
+                };
+            }
         },
 
+        created() {
+            this.loading = true;
+            axios.get("/basin.geojson")
+                .then(response => {
+                    this.geoJson = response.data;
+                    this.loading = false;
+                });
+        },
         methods: {
 
-            loadJson() {
-
-                axios.get('/basin.geojson').then(response => {
-                    this.geoJson = response.data;
-                });
-
-
-                let Farm = null;
-                //Farm = L.geoJSON().addData(this.geoJson);
-
-
+            layerClicked() {
+                alert("clicked me ;)");
             }
+
         }
-
-
-    }
+    };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
     @import '../../../static/vendor/Vue2Leaflet/leaflet.css';
 
-    .leaflet-control-zoom{
-        display:none;
+    .leaflet-control-zoom {
+        display: none;
     }
 
 </style>
