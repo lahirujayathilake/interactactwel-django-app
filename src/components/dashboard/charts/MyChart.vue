@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="chart_container"></div>
+    <div class="chart_container">
+    </div>
   </div>
 </template>
 
@@ -190,4 +191,14 @@ export default {
 
 
 <style scoped>
+
+  .y-axis-name{
+    transform-origin: 0 0;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 350px;
+    left: 30px;
+
+  }
+
 </style>

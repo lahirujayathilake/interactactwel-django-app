@@ -3,6 +3,9 @@
         <div class="top-fixed-nav">
             <b-navbar style="background-color: #263238!important;" toggleable="md" type="dark" variant="secondary">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+                <a class="navbar-brand" href="#">
+                    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
                 <b-navbar-brand href="#">InterACTWEL</b-navbar-brand>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
@@ -37,40 +40,22 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>
-        <div id="main">
-            <!--<nav v-show="!sidebarLeftVisibility" id="sidebar-left">
-                <component v-bind:is="component='sidebar'"></component>
-            </nav>-->
-            <article id="map">
-                <component v-bind:is="step1Component" v-on:finish-wizard="afterWizardFinished"></component>
-                <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>
-                <leaflet-map></leaflet-map>
-            </article>
-            <aside v-show="!sidebarRightVisibility" id="sidebar-right">
-                <component v-bind:is="component='feedback'"></component>
-            </aside>
-        </div>
+        <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent" v-bind:is="component=progressbarComponent"></component>
+        <component v-bind:is="component='container'"></component>
     </div>
 </template>
 
 <script>
-
-    import Sidebar from './sidebar/Sidebar.vue'
-    import Feedback from './feedback/feedback.vue'
-    import Charts from './charts/charts.vue'
     import ProgressBar from './progressBar/ProgressBar.vue'
-    import Step1Content from '../steps/Step1Content.vue'
-    import LeafletMap from './map/LeafletMap.vue'
+    import Container from './container.vue'
+
+    import EventBus from './../../event-bus';
 
     export default {
         components: {
             'progress-bar': ProgressBar,
-            'feedback': Feedback,
-            'charts': Charts,
-            'sidebar': Sidebar,
-            'step1content': Step1Content,
-            'leafletMap' : LeafletMap,
+            'container' : Container,
+
         },
         name: 'Dashboard',
 
@@ -78,13 +63,9 @@
 
         data() {
             return {
-                step1Component: null,
                 progressbarComponent: null,
                 startButtonVisibility: false,
                 progressBarVisibility: true,
-                sidebarLeftVisibility: true,
-                sidebarRightVisibility: true,
-                chartsVisibility: true,
                 component: null,
             }
         },
@@ -98,10 +79,14 @@
 
             start: function () {
                 this.progressbarComponent = 'progress-bar',
-                    this.step1Component = 'step1content',
                     this.startButtonVisibility = true
                     this.progressBarVisibility = false
+                this.startWizard()
 
+            },
+
+            startWizard () {
+                EventBus.$emit('START_WIZARD');
             },
 
             exit() {

@@ -1,7 +1,15 @@
 <template>
     <b-container class="bv-example-row chart-container">
         <b-row>
-            <component v-on:clicked="showChart" v-bind:is="component=this.currentChartComponent"></component>
+
+            <div id="graph" class="card">
+                <div class="card-header">
+                    <strong>Streams Flow</strong>
+                </div>
+                <div class="card-body">
+                    <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                </div>
+            </div>
         </b-row>
     </b-container>
 </template>
@@ -9,29 +17,23 @@
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import MyChart from "./MyChart";
-    import ActionsGraph from './actions-graph.vue'
-    import StreamsflowGraph from './streamflow-graph.vue'
 
     import EventBus from './../../../event-bus';
 
     export default {
-        name: 'Charts',
+        name: 'StreamsflowGraph',
 
         components: {
-            'MyChart': MyChart,
-            'actions-graph': ActionsGraph,
-            'streamsflow-graph': StreamsflowGraph,
-      //      'bar-graph': BarGraph,
+            'MyChart': MyChart
         },
 
         data() {
             return {
-
-                currentChartComponent: 'actions-graph',
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
                 planName: "POPSWAT_0",
+
                 selectedKeyList: [],
 
                 costVisibility: true,
@@ -132,6 +134,7 @@
 
             showChart: function (selectedPlan) {
                 this.planName = selectedPlan;
+                this.showPlanGraph()
             },
 
             showCostGraph(){
@@ -140,6 +143,18 @@
                 this.costVisibility = false;
                 this.planVisibility = false;
             },
+
+            showPlanGraph(){
+                this.isPlanGraphActive = true;
+                this.isCostGraphActive = false;
+                this.costVisibility = true;
+                this.planVisibility = true;
+            }
+
+
+            /*toggleActive: function(item) {
+                item.active = !item.active;
+            }*/
         },
         //props: ["jsonData"]
     }

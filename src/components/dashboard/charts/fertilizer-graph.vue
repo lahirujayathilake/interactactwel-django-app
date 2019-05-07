@@ -1,7 +1,77 @@
 <template>
     <b-container class="bv-example-row chart-container">
         <b-row>
-            <component v-on:clicked="showChart" v-bind:is="component=this.currentChartComponent"></component>
+
+            <div id="graph" class="card">
+                <div class="card-header">
+                    <strong>{{planName}}</strong>
+                </div>
+                <div v-show="planVisibility" id="plans" class="card-body">
+                    <b-card no-body>
+                        <b-tabs card>
+                            <b-tab title="Actors" active>
+                                <div class="card-body no-padding">
+                                    <div class="filter-options-container">
+                                        <div v-for="actor in actors" v-bind:key="actor.key"
+                                             class="form-check form-check-inline filter-options" :style="{ 'background-color': pathColors[actor.key]}">
+                                            <input class="form-check-input"
+                                                   type="checkbox"
+                                                   :name="actor.value"
+                                                   :value="actor.key"
+                                                   :id="actor.key"
+                                                   @change="inputChanged($event , actor)">
+                                            <label class="form-check-label small" :for="actor.key">{{actor.value}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <MyChart :actions="actions" :data="graphData"></MyChart>
+                                </div>
+                            </b-tab>
+                            <b-tab title="Actions">
+                                <div class="card-body no-padding">
+                                    <div class="filter-options-container">
+                                        <div class="form-check form-check-inline filter-options" :style="{ 'background-color': '#999999'}">
+                                            <input class="form-check-input"
+                                                   type="checkbox">
+                                            <label class="form-check-label small" for="">Business as Usual</label>
+                                        </div>
+                                        <div class="form-check form-check-inline filter-options" :style="{ 'background-color': '#999999'}">
+                                            <input class="form-check-input"
+                                                   type="checkbox">
+                                            <label class="form-check-label small" for="">Increase capacity by 20%</label>
+                                        </div>
+                                        <div class="form-check form-check-inline filter-options" :style="{ 'background-color': '#999999'}">
+                                            <input class="form-check-input"
+                                                   type="checkbox">
+                                            <label class="form-check-label small" for="">Decrease total capacity by 20%</label>
+                                        </div>
+                                        <div class="form-check form-check-inline filter-options" :style="{ 'background-color': '#999999'}">
+                                            <input class="form-check-input"
+                                                   type="checkbox">
+                                            <label class="form-check-label small" for="">Increase amount of SW</label>
+                                        </div>
+                                        <div class="form-check form-check-inline filter-options" :style="{ 'background-color': '#999999'}">
+                                            <input class="form-check-input"
+                                                   type="checkbox">
+                                            <label class="form-check-label small" for="">Increase amount of GW</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <MyChart :actions="actions" :data="graphData"></MyChart>
+                                </div>
+                            </b-tab>
+                        </b-tabs>
+                    </b-card>
+
+                </div>
+                <div v-show="!costVisibility" id="costs" class="card-body">Cost
+                <div class="card-body">
+                    <img class="img-fluid" src="../../../assets/cost-graph.png"/>
+                </div>
+                </div>
+            </div>
         </b-row>
     </b-container>
 </template>
@@ -9,29 +79,23 @@
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import MyChart from "./MyChart";
-    import ActionsGraph from './actions-graph.vue'
-    import StreamsflowGraph from './streamflow-graph.vue'
 
     import EventBus from './../../../event-bus';
 
     export default {
-        name: 'Charts',
+        name: 'FertilizerGraph',
 
         components: {
-            'MyChart': MyChart,
-            'actions-graph': ActionsGraph,
-            'streamsflow-graph': StreamsflowGraph,
-      //      'bar-graph': BarGraph,
+            'MyChart': MyChart
         },
 
         data() {
             return {
-
-                currentChartComponent: 'actions-graph',
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
                 planName: "POPSWAT_0",
+
                 selectedKeyList: [],
 
                 costVisibility: true,
@@ -132,6 +196,7 @@
 
             showChart: function (selectedPlan) {
                 this.planName = selectedPlan;
+                this.showPlanGraph()
             },
 
             showCostGraph(){
@@ -140,6 +205,18 @@
                 this.costVisibility = false;
                 this.planVisibility = false;
             },
+
+            showPlanGraph(){
+                this.isPlanGraphActive = true;
+                this.isCostGraphActive = false;
+                this.costVisibility = true;
+                this.planVisibility = true;
+            }
+
+
+            /*toggleActive: function(item) {
+                item.active = !item.active;
+            }*/
         },
         //props: ["jsonData"]
     }

@@ -19,6 +19,7 @@
     import Sidebar from './sidebar/Sidebar.vue'
     import Feedback from './feedback/feedback.vue'
     import Charts from './charts/charts.vue'
+    import ActionsGraph from './charts/actions-graph.vue'
     import ProgressBar from './progressBar/ProgressBar.vue'
     import Step1Content from './../steps/Step1Content.vue'
     import LeafletMap from './map/LeafletMap.vue'
@@ -31,6 +32,7 @@
             'progress-bar': ProgressBar,
             'feedback': Feedback,
             'charts': Charts,
+           'actions-graph': ActionsGraph,
             'sidebar': Sidebar,
             'step1content': Step1Content,
             'leafletMap' : LeafletMap,
