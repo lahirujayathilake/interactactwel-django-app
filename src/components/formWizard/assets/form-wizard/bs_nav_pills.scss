@@ -1,11 +1,13 @@
 @import "bs_variables";
 
-.vue-form-wizard *{
+.vue-form-wizard * {
   box-sizing: border-box;
 }
-.vue-form-wizard a{
+
+.vue-form-wizard a {
   text-decoration: none;
 }
+
 .vue-form-wizard .wizard-nav {
   margin-bottom: 0;
   padding-left: 0; // Override default ul/ol

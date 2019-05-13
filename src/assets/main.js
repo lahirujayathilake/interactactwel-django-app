@@ -24,10 +24,10 @@ $(document).ready(function () {
     // popup menu on hover
     $('.menu .settings')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.settings-menu-content.popup',
             on: 'click',
-            position : 'bottom right',
+            position: 'bottom right',
             delay: {
                 show: 300,
                 hide: 300
@@ -36,10 +36,10 @@ $(document).ready(function () {
 
     $('.menu .account')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.account-menu-content.popup',
             on: 'click',
-            position : 'bottom right',
+            position: 'bottom right',
             delay: {
                 show: 300,
                 hide: 300
@@ -48,10 +48,10 @@ $(document).ready(function () {
 
     $('#step1-menu')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.step1-menu-content.popup',
             hoverable: true,
-            position : 'bottom left',
+            position: 'bottom left',
             variation: 'inverted small',
             delay: {
                 show: 300,
@@ -61,10 +61,10 @@ $(document).ready(function () {
 
     $('#step2-menu')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.step2-menu-content.popup',
             hoverable: true,
-            position : 'bottom left',
+            position: 'bottom left',
             variation: 'inverted small',
             delay: {
                 show: 300,
@@ -74,10 +74,10 @@ $(document).ready(function () {
 
     $('#step3-menu')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.step3-menu-content.popup',
             hoverable: true,
-            position : 'bottom left',
+            position: 'bottom left',
             variation: 'inverted small',
             delay: {
                 show: 300,
@@ -87,10 +87,10 @@ $(document).ready(function () {
 
     $('#step4-menu')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.step4-menu-content.popup',
             hoverable: true,
-            position : 'bottom left',
+            position: 'bottom left',
             variation: 'inverted small',
             delay: {
                 show: 300,
@@ -100,10 +100,10 @@ $(document).ready(function () {
 
     $('#step5-menu')
         .popup({
-            inline   : true,
+            inline: true,
             popup: '.step5-menu-content.popup',
             hoverable: true,
-            position : 'bottom left',
+            position: 'bottom left',
             variation: 'inverted small',
             delay: {
                 show: 300,
@@ -124,7 +124,7 @@ $(document).ready(function () {
     $('#step5-submit').hide();
 
     // start wizard
-    $('#start-viz-builder-button').click(function() {
+    $('#start-viz-builder-button').click(function () {
         $('#steps-menu').show(300);
         $('#step1-menu').addClass('active');
         $('#start-viz-builder-button').hide();
@@ -134,7 +134,7 @@ $(document).ready(function () {
     });
 
     // events on each step submissions
-    $('#step1-submit').click(function() {
+    $('#step1-submit').click(function () {
         $('.step1').hide(500);
         $('.step2').show(500);
         $('#step2-menu').addClass('active');
@@ -145,7 +145,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step2-submit').click(function() {
+    $('#step2-submit').click(function () {
         $('.step2').hide(500);
         $('.step3').show(500);
         $('#step3-menu').addClass('active');
@@ -155,7 +155,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step3-submit').click(function() {
+    $('#step3-submit').click(function () {
         $('.step3').hide(500);
         $('.step4').show(500);
         $('#step4-menu').addClass('active');
@@ -165,7 +165,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step4-submit').click(function() {
+    $('#step4-submit').click(function () {
         console.log("clciked");
         $('#step4-submit').hide();
         $('.plan-goals').show(500);
@@ -177,7 +177,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step5-submit').click(function() {
+    $('#step5-submit').click(function () {
         $('#step5-submit').hide();
         $('#step6-menu').addClass('active');
         $('#step5-menu').addClass('completed');
@@ -191,7 +191,7 @@ $(document).ready(function () {
     });
 
     // End wizard
-    $('#exit-viz-builder-button').click(function() {
+    $('#exit-viz-builder-button').click(function () {
         $('.ui.basic.modal')
             .modal('show')
         ;
@@ -201,11 +201,11 @@ $(document).ready(function () {
     $('.checkbox-info').hide();
     $('.more-info').hide();
 
-    $('.checkbox-info-button').click( function(){
+    $('.checkbox-info-button').click(function () {
         $(this).next('.checkbox-info').toggle(500);
     });
 
-    $('.more-info-button').click( function(){
+    $('.more-info-button').click(function () {
         $(this).next('.more-info').toggle(500);
     });
 

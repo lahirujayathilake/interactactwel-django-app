@@ -70,7 +70,8 @@
                 </div>
                 <div class="field wide">
                     <label>Short Text</label>
-                    <textarea placeholder="Feel free to add additional comments about your rating here:" rows="7"></textarea>
+                    <textarea placeholder="Feel free to add additional comments about your rating here:"
+                              rows="7"></textarea>
                 </div>
             </div>
             <b-button variant="success">Submit</b-button>
@@ -89,15 +90,15 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-    #feedback-step1{
+    #feedback-step1 {
         background-color: #f5f8fa;
         padding: 20px;
         border-radius: 10px;
-        margin-top:20px;
+        margin-top: 20px;
     }
 
-    .header-container{
-    padding:0 10px;
+    .header-container {
+        padding: 0 10px;
     }
 
 </style>

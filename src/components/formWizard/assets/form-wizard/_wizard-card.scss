@@ -55,7 +55,7 @@
 
   .wizard-tab-content {
     min-height: 100px;
-    padding:0 !important;
+    padding: 0 !important;
   }
 
   .wizard-header {
@@ -110,18 +110,18 @@
   }
   @media screen and (max-width: 350px) {
     .wizard-card-footer {
-      display:flex;
+      display: flex;
       justify-content: center;
       flex-direction: column;
       .wizard-footer-left,
       .wizard-footer-right {
         float: none;
-        flex:1;
+        flex: 1;
         display: flex;
-        justify-content:center;
+        justify-content: center;
       }
-      .wizard-footer-right button{
-        margin-top:10px;
+      .wizard-footer-right button {
+        margin-top: 10px;
       }
     }
   }

@@ -20,7 +20,6 @@
     import PrecipitationGraph from './precipitation-graph.vue'
     import IrrigationGraph from './irrigation-graph.vue'
     import GroudWaterGraph from './groudwater-graph.vue'
-
     import EventBus from './../../../event-bus';
 
     export default {

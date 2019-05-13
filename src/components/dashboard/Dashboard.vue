@@ -40,7 +40,8 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent" v-bind:is="component=progressbarComponent"></component>
+        <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent"
+                   v-bind:is="component=progressbarComponent"></component>
         <component v-bind:is="component='container'"></component>
     </div>
 </template>
@@ -54,11 +55,10 @@
     export default {
         components: {
             'progress-bar': ProgressBar,
-            'container' : Container,
+            'container': Container,
 
         },
         name: 'Dashboard',
-
 
 
         data() {
@@ -70,7 +70,7 @@
             }
         },
 
-        mounted(){
+        mounted() {
             //this.showSidebar()
         },
 
@@ -80,12 +80,12 @@
             start: function () {
                 this.progressbarComponent = 'progress-bar',
                     this.startButtonVisibility = true
-                    this.progressBarVisibility = false
+                this.progressBarVisibility = false
                 this.startWizard()
 
             },
 
-            startWizard () {
+            startWizard() {
                 EventBus.$emit('START_WIZARD');
             },
 
@@ -102,22 +102,22 @@
 
             },
 
-            progressFinished(){
+            progressFinished() {
                 alert('finished!');
             },
 
-            afterWizardFinished(){
+            afterWizardFinished() {
                 this.sidebarLeftVisibility = false,
-                this.sidebarRightVisibility = false,
-                this.progressBarVisibility = false
+                    this.sidebarRightVisibility = false,
+                    this.progressBarVisibility = false
                 this.chartsVisibility = false
             },
 
-            showChart(){
+            showChart() {
                 alert('add active class!');
             },
 
-            addActiveClass(){
+            addActiveClass() {
                 alert('add active class!');
                 //this.startButtonVisibility = true
             }
@@ -131,9 +131,8 @@
 <style>
 
     .bg-secondary {
-        background-color: #263238!important;
+        background-color: #263238 !important;
     }
-
 
     #main {
         display: flex;
@@ -165,7 +164,7 @@
         background-color: #FFF;
     }
 
-    #sidebar-left a{
-        color:#fff;
+    #sidebar-left a {
+        color: #fff;
     }
 </style>

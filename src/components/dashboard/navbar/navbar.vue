@@ -11,8 +11,12 @@
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
-                        <b-button v-show="!startButtonVisibility" v-on:click="start" variant="warning" class="my-2 my-sm-0" type="submit">Start Here</b-button>
-                        <b-button v-show="startButtonVisibility" v-on:click="exit" variant="danger" class="my-2 my-sm-0" type="submit">Exit</b-button>
+                        <b-button v-show="!startButtonVisibility" v-on:click="start" variant="warning"
+                                  class="my-2 my-sm-0" type="submit">Start Here
+                        </b-button>
+                        <b-button v-show="startButtonVisibility" v-on:click="exit" variant="danger" class="my-2 my-sm-0"
+                                  type="submit">Exit
+                        </b-button>
 
                         <b-nav-item-dropdown text="Settings" right>
                             <b-dropdown-item href="#">EN</b-dropdown-item>
@@ -41,42 +45,42 @@
 <script>
     import ProgressBar from '../progressBar/ProgressBar.vue'
 
-    export default{
+    export default {
 
         name: 'Navbar',
         components: {
             'progress-bar': ProgressBar
         }
 
-        /*data() {
-            return {
-                startButtonVisibility: true,
-                component: null
-            }
+    /*data() {
+        return {
+            startButtonVisibility: true,
+            component: null
+        }
+    },
+
+    methods: {
+
+        start: function () {
+            this.progressbarComponent = 'progress-bar'
+            this.startButtonVisibility = false
+
         },
 
-        methods: {
-
-            start: function () {
-                this.progressbarComponent = 'progress-bar'
-                this.startButtonVisibility = false
-
-            },
-
-            exit: function (event) {
-                // `this` inside methods points to the Vue instance
-                alert('Hello ' + this.name + '!');
-                // `event` is the native DOM event
-                // if (event) {
-                //    alert(event.target.tagName)
-                //}
-                return {
-                    component: 'progress-bar',
-                }
-
+        exit: function (event) {
+            // `this` inside methods points to the Vue instance
+            alert('Hello ' + this.name + '!');
+            // `event` is the native DOM event
+            // if (event) {
+            //    alert(event.target.tagName)
+            //}
+            return {
+                component: 'progress-bar',
             }
+
         }
     }
+}
 
 
 </script>

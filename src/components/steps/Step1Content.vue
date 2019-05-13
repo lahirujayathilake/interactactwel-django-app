@@ -90,17 +90,17 @@
                         </b-form-checkbox-group>
                     </b-list-group-item>
                     <b-list-group flush>
-                            <b-form>
-                                <div class="list-group">
-                                    <li class="list-group-item" v-for="actor in actors">
-                                        <label class="form-checkbox">
-                                            <input type="checkbox" :value="actor.id" v-model="selectedActors">
-                                            {{actor.actor}}
-                                        </label>
-                                        <b-badge class="info-button" pill variant="secondary">Info</b-badge>
-                                    </li>
-                                </div>
-                            </b-form>
+                        <b-form>
+                            <div class="list-group">
+                                <li class="list-group-item" v-for="actor in actors">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" :value="actor.id" v-model="selectedActors">
+                                        {{actor.actor}}
+                                    </label>
+                                    <b-badge class="info-button" pill variant="secondary">Info</b-badge>
+                                </li>
+                            </div>
+                        </b-form>
                     </b-list-group>
                 </b-card>
             </tab-content>
@@ -292,8 +292,8 @@
                 {id: 2, name: "act3", action: 'Decrease total capacity by 20%'},
                 {id: 3, name: "act4", action: 'Increase amount of SW'},
                 {id: 4, name: "act5", action: 'Increase amount of GW'},
-               {id: 5, name: "act6", action: 'Increase amount of RW'},
-                 {id: 6, name: "act7", action: 'Decrease amount of SW'},
+                {id: 5, name: "act6", action: 'Increase amount of RW'},
+                {id: 6, name: "act7", action: 'Decrease amount of SW'},
                 {id: 7, name: "act8", action: 'Decrease amount of GW'},
                 {id: 8, name: "act9", action: 'Invest in renewable energy sources'},
                 {id: 9, name: "act10", action: 'Pump RW to farmers/daries'},
@@ -344,7 +344,7 @@
 
             onComplete: function () {
                 //alert('Yay. Done!'),
-                    this.stepWizardVisibility = true,
+                this.stepWizardVisibility = true,
                     this.$emit('finish-wizard')
 
             },

@@ -4,7 +4,8 @@
             <component v-bind:is="component='sidebar'"></component>
         </nav>
         <article id="map">
-            <component v-show="!stepsVisibility" v-bind:is="component='step1content'" v-on:finish-wizard="afterWizardFinished"></component>
+            <component v-show="!stepsVisibility" v-bind:is="component='step1content'"
+                       v-on:finish-wizard="afterWizardFinished"></component>
             <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>
             <leaflet-map></leaflet-map>
         </article>
@@ -28,15 +29,15 @@
     import EventBus from './../../event-bus';
 
     export default {
-         components: {
+        components: {
             'progress-bar': ProgressBar,
             'feedback': Feedback,
             'charts': Charts,
-           'actions-graph': ActionsGraph,
+            'actions-graph': ActionsGraph,
             'sidebar': Sidebar,
             'step1content': Step1Content,
-            'leafletMap' : LeafletMap,
-            'container' : Container
+            'leafletMap': LeafletMap,
+            'container': Container
         },
         name: 'Container',
 
@@ -51,7 +52,7 @@
             }
         },
 
-        mounted(){
+        mounted() {
 
             let $this = this;
             EventBus.$on('START_WIZARD', function () {
@@ -60,22 +61,22 @@
         },
 
         methods: {
-            progressFinished(){
+            progressFinished() {
                 alert('finished!');
             },
 
-            afterWizardFinished(){
+            afterWizardFinished() {
                 this.sidebarLeftVisibility = false,
                     this.sidebarRightVisibility = false
-                    this.progressBarVisibility = false
+                this.progressBarVisibility = false
                 this.chartsVisibility = false
             },
 
-            showChart(){
+            showChart() {
                 alert('add active class!');
             },
 
-            addActiveClass(){
+            addActiveClass() {
                 alert('add active class!');
                 //this.startButtonVisibility = true
             }
@@ -87,9 +88,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
     .bg-secondary {
-        background-color: #263238!important;
+        background-color: #263238 !important;
     }
-
 
     #main {
         display: flex;
@@ -121,7 +121,7 @@
         background-color: #FFF;
     }
 
-    #sidebar-left a{
-        color:#fff;
+    #sidebar-left a {
+        color: #fff;
     }
 </style>

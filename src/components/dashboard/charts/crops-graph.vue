@@ -1,44 +1,38 @@
 <template>
 
-            <div id="graph" class="card">
-                <div class="card-header">
-                    <strong>Crops</strong>
-                </div>
-                <div class="card-body">
-                    <b-tabs card>
-                        <b-tab title="Total Area of Planted Crops" active>
-                            <div class="card-body">
-                                <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
-                            </div>
-                        </b-tab>
-                        <b-tab title="Total Yield of Planted Crops">
-                            <div class="card-body">
-                                <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
-                            </div>
-                        </b-tab>
-                    </b-tabs>
-                </div>
-            </div>
+    <div id="graph" class="card">
+        <div class="card-header">
+            <strong>Crops</strong>
+        </div>
+        <div class="card-body">
+            <b-tabs card>
+                <b-tab title="Total Area of Planted Crops" active>
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Total Yield of Planted Crops">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+            </b-tabs>
+        </div>
+    </div>
 
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
-    import MyChart from "./MyChart";
-
-    import EventBus from './../../../event-bus';
 
     export default {
         name: 'CropsGraph',
 
         components: {
-            'MyChart': MyChart
         },
 
         data() {
-            return {
-
-            };
+            return {};
         },
         computed: {
             jsonData() {
@@ -67,12 +61,10 @@
             },
         },
 
-        mounted(){
+        mounted() {
         },
 
-        methods: {
-
-        },
+        methods: {},
         //props: ["jsonData"]
     }
 </script>
@@ -120,11 +112,12 @@
         margin: 5px !important;
         border-radius: 5px;
     }
-    .active a{
-        color: rgba(255,255,255,0.8);
+
+    .active a {
+        color: rgba(255, 255, 255, 0.8);
     }
 
-    .active a:hover{
+    .active a:hover {
         color: #fff
     }
 
