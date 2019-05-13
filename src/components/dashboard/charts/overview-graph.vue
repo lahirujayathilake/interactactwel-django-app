@@ -1,16 +1,31 @@
 <template>
     <div id="graph" class="card">
         <div class="card-header">
-            <strong>Crops</strong>
+            <strong>Overview</strong>
         </div>
         <div class="card-body no-padding">
             <b-tabs card>
-                <b-tab title="Total Area of Planted Crops" active>
+                <b-tab title="N fertilizer" active>
                     <div class="card-body">
                         <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
                     </div>
                 </b-tab>
-                <b-tab title="Total Yield of Planted Crops">
+                <b-tab title="P fertilizer">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Irrigation">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Planted crops">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Crop yield">
                     <div class="card-body">
                         <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
                     </div>
@@ -24,7 +39,7 @@
     import JSONData from "../../../assets/result_action_plans.json";
 
     export default {
-        name: 'CropsGraph',
+        name: 'StreamsflowGraph',
 
         components: {
         },

@@ -20,6 +20,7 @@
     import PrecipitationGraph from './precipitation-graph.vue'
     import IrrigationGraph from './irrigation-graph.vue'
     import GroudWaterGraph from './groudwater-graph.vue'
+    import OverviewGraph from './overview-graph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -35,6 +36,7 @@
             'precipitation-graph': PrecipitationGraph,
             'irrigation-graph': IrrigationGraph,
             'groundwater-graph': GroudWaterGraph,
+            'overview-graph': OverviewGraph,
         },
 
         data() {
@@ -221,7 +223,7 @@
     }
 
     #graph .card {
-        width: 800px;
-        max-width: 830px !important;
+        width: 850px;
+        max-width: 850px !important;
     }
 </style>

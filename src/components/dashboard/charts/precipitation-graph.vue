@@ -1,10 +1,9 @@
 <template>
-
     <div id="graph" class="card">
         <div class="card-header">
             <strong>Precipitation</strong>
         </div>
-        <div class="card-body">
+        <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="Total Precipitation" active>
                     <div class="card-body">
@@ -19,7 +18,6 @@
             </b-tabs>
         </div>
     </div>
-
 </template>
 
 <script>

@@ -34,6 +34,7 @@
 
                 chartTypes: [
                     /*{id:"actions-graph", name: "Actions"},*/
+                    {id: "overview-graph", name: "Overview"},
                     {id: "costs-graph", name: "Costs"},
                     {id: "streamsflow-graph", name: "Streams"},
                     {id: "fertilizer-graph", name: "Fertilizer"},

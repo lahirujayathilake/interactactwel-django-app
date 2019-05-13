@@ -3,7 +3,7 @@
         <div class="card-header">
             <strong>Streams</strong>
         </div>
-        <div class="card-body">
+        <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="Stream Flows" active>
                     <div class="card-body">

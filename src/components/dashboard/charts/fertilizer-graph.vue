@@ -1,10 +1,9 @@
 <template>
-
     <div id="graph" class="card">
         <div class="card-header">
             <strong>Fertilizer</strong>
         </div>
-        <div class="card-body">
+        <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="P Fertilizer" active>
                     <div class="card-body">
@@ -19,20 +18,15 @@
             </b-tabs>
         </div>
     </div>
-
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
-    import MyChart from "./MyChart";
-
-    import EventBus from './../../../event-bus';
 
     export default {
         name: 'FertilizerGraph',
 
         components: {
-            'MyChart': MyChart
         },
 
         data() {

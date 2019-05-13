@@ -1,83 +1,34 @@
 <template>
     <div id="graph" class="card">
-        <div v-show="planVisibility" id="plans" class="card-body">
-            <b-card no-body>
-                <b-tabs card>
-                    <b-tab title="Actors" active>
-                        <div class="card-body no-padding">
-                            <div class="filter-options-container">
-                                <div v-for="actor in actors" v-bind:key="actor.key"
-                                     class="form-check form-check-inline filter-options"
-                                     :style="{ 'background-color': pathColors[actor.key]}">
-                                    <input class="form-check-input"
-                                           type="checkbox"
-                                           :name="actor.value"
-                                           :value="actor.key"
-                                           :id="actor.key"
-                                           @change="inputChanged($event , actor)">
-                                    <label class="form-check-label small" :for="actor.key">{{actor.value}}</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <MyChart :actions="actions" :data="graphData"></MyChart>
-                        </div>
-                    </b-tab>
-                    <b-tab title="Actions">
-                        <div class="card-body no-padding">
-                            <div class="filter-options-container">
-                                <div class="form-check form-check-inline filter-options"
-                                     :style="{ 'background-color': '#999999'}">
-                                    <input class="form-check-input"
-                                           type="checkbox">
-                                    <label class="form-check-label small" for="">Business as Usual</label>
-                                </div>
-                                <div class="form-check form-check-inline filter-options"
-                                     :style="{ 'background-color': '#999999'}">
-                                    <input class="form-check-input"
-                                           type="checkbox">
-                                    <label class="form-check-label small" for="">Increase capacity by 20%</label>
-                                </div>
-                                <div class="form-check form-check-inline filter-options"
-                                     :style="{ 'background-color': '#999999'}">
-                                    <input class="form-check-input"
-                                           type="checkbox">
-                                    <label class="form-check-label small" for="">Decrease total capacity by 20%</label>
-                                </div>
-                                <div class="form-check form-check-inline filter-options"
-                                     :style="{ 'background-color': '#999999'}">
-                                    <input class="form-check-input"
-                                           type="checkbox">
-                                    <label class="form-check-label small" for="">Increase amount of SW</label>
-                                </div>
-                                <div class="form-check form-check-inline filter-options"
-                                     :style="{ 'background-color': '#999999'}">
-                                    <input class="form-check-input"
-                                           type="checkbox">
-                                    <label class="form-check-label small" for="">Increase amount of GW</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <MyChart :actions="actions" :data="graphData"></MyChart>
-                        </div>
-                    </b-tab>
-                </b-tabs>
-            </b-card>
-
-        </div>
-        <div v-show="!costVisibility" id="costs" class="card-body">Cost
-            <div class="card-body">
-                <img class="img-fluid" src="../../../assets/cost-graph.png"/>
+        <b-card no-body>
+            <div class="card-header">
+                <strong>Actions</strong>
             </div>
-        </div>
+            <div class="card-body">
+                <div class="filter-options-container">
+                    <div v-for="actor in actors" v-bind:key="actor.key"
+                         class="form-check form-check-inline filter-options"
+                         :style="{ 'background-color': pathColors[actor.key]}">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               :name="actor.value"
+                               :value="actor.key"
+                               :id="actor.key"
+                               @change="inputChanged($event , actor)">
+                        <label class="form-check-label small" :for="actor.key">{{actor.value}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <MyChart :actions="actions" :data="graphData"></MyChart>
+            </div>
+        </b-card>
     </div>
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import MyChart from "./MyChart";
-
     import EventBus from './../../../event-bus';
 
     export default {
@@ -230,7 +181,7 @@
         z-index: 1000;
         background-color: #4cae4c;
         height: auto;
-        width: 800px;
+        width: 850px;
         max-width: 830px !important;
     }
 
@@ -277,7 +228,7 @@
     }
 
     #graph .card {
-        width: 800px;
-        max-width: 830px !important;
+        width: 850px;
+        max-width: 850px !important;
     }
 </style>
