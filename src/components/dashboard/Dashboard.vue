@@ -4,13 +4,12 @@
             <b-navbar style="background-color: #263238!important;" toggleable="md" type="dark" variant="secondary">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 <a class="navbar-brand" href="#">
-                    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="../../assets/InterACTWEL_logo.svg" width="140" height="35" class="d-inline-block align-top" alt="">
                 </a>
-                <b-navbar-brand href="#">InterACTWEL</b-navbar-brand>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
-                        <b-nav-item href="#">Project : </b-nav-item>
-                        <b-nav-item href="#" disabled>Umatilla Region Adapts to New Water Allocation</b-nav-item>
+                        <b-nav-item class="project-title" href="#">Project : </b-nav-item>
+                        <b-nav-item class="project-title" href="#" disabled>Umatilla Region Adapts to New Water Allocation</b-nav-item>
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
@@ -167,4 +166,10 @@
     #sidebar-left a {
         color: #fff;
     }
+
+    .project-title a{
+        color: rgba(255, 255, 255, 0.78) !important;
+    }
+
 </style>
+
