@@ -92,7 +92,7 @@
 
         created() {
             this.loading = true;
-            axios.get("/basin.geojson")
+            axios.get("/subbasins.geojson")
                 .then(response => {
                     this.geoJson = response.data;
                     this.loading = false;
