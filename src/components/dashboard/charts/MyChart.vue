@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div class="chart_container">
-        </div>
+        <div class="chart_container"></div>
     </div>
 </template>
 
@@ -12,15 +11,10 @@
         name: "MyChart",
         data() {
             return {
-                w: 1500,
-                h: 460,
+                w: 800,
+                h: 350,
+                pathid: 0,
                 margin: {
-                    top: 50,
-                    right: 20,
-                    bottom: 30,
-                    left: 40
-                },
-                padding: {
                     top: 20,
                     right: 20,
                     bottom: 30,
@@ -37,21 +31,8 @@
                     "#6ba629",
                     "#737478"
                 ],
-
-                pathColors0: [
-                    "#9cdbf1",
-                    "#f2e3ee",
-                    "#ffe2d3",
-                    "#ffebb5",
-                    "#d4ebea",
-                    "#f9f0b8",
-                    "#",
-                    "#",
-                    "#",
-                ],
-
                 colorIndex: 0,
-                xList: ["0", "200", "300"],
+                xList: [],
                 visibleKeyList: ["1"],
                 jk: ""
             };
@@ -69,16 +50,22 @@
                 return d3
                     .scaleBand()
                     .domain(this.computedActions.map(d => d.value))
-                    .rangeRound([0, this.h]);
+                    .rangeRound([-20, this.h]);
             },
+
             xScale() {
                 return d3
                     .scaleLinear()
                     .domain([2000, 2018])
-                    .rangeRound([0, this.w - 1000]);
+                    .rangeRound([0, this.w - 800]);
             }
         },
         methods: {
+            nextPathId() {
+                this.pathid++;
+                console.log(this.pathid);
+                return "path" + this.pathid;
+            },
             xListComputed(v) {
                 return this.xList.push(v);
             },
@@ -87,7 +74,7 @@
                 let previousY;
                 this.xListComputed(nextX);
                 const pathPointsArray = [];
-                const a = pathY_points.map(element => parseInt(element) * 40);
+                const a = pathY_points.map(element => parseInt(element) * 30);
                 a.forEach((y, i) => {
                     if (i === 0) {
                         previousY = y;
@@ -135,7 +122,7 @@
             },
 
             drawChart() {
-                //console.log(this.data);
+                console.log(this.data);
                 d3.select("svg").remove();
                 const svg = d3
                     .select(".chart_container")
@@ -145,29 +132,65 @@
                 //   svg.selectAll("*").remove();
                 const g = svg
                     .append("g")
-                    .attr("transform", "translate(" + 200 + "," + 0 + ")")
-                    .call(d3.axisLeft(this.yScale))
+                    .attr("transform", "translate(" + 200 + "," + 10 + ")")
+                    .call(d3.axisLeft(this.yScale));
 
-                const gx = svg
+                /*const gx = svg
                     .append("g")
-                    .attr("transform", "translate(" + 200 + "," + 440 + ")")
-                    .call(d3.axisBottom(this.xScale))
+                    .attr("transform", "translate(" + 200 + "," + 140 + ")")
+                    .call(d3.axisBottom(this.xScale))*/
+
+                g.selectAll('line-x').on('mouseenter', function() {
+                    if (this !== d3.select('line-x:last-child').node()) {
+                        this.parentElement.appendChild(this);
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .attr('r', 55)
+                            .transition()
+                            .ease('elastic')
+                            .attr('r', 50);
+                    }
+                });
 
                 g.selectAll("line-x")
                     .data(this.data)
                     .enter()
                     .append("path")
+                    .attr("id", data => this.nextPathId())
                     .attr("d", data => this.generatePath(data.value))
+                    .on("mouseover", (d, i, n) => {
+
+                        d3.select("#" + n[i].id).style("stroke-width", 8);
+                        d3.select("#" + n[i].id).raise();
+
+                        svg.selectAll("path").sort(function(a, b) {
+                            // select the parent and sort the path's
+                            if (a !== null && a.id != n[i].id) return -1;
+                            // a is not the hovered element, send "a" to the back
+                            else if (a != null) return 1; // a is the hovered element, bring "a" to the front
+                        });
+
+                        const pathsArray = [...svg.selectAll("path")._groups[0]];
+                        console.log(pathsArray);
+
+                        const index = pathsArray.findIndex(p => {
+                            return p.id === n[i].id;
+                        });
+                    })
+                    .on("mouseout", (d, i, n) => {
+                        d3.select("#" + n[i].id).style("stroke-width", 4);
+                    })
                     .style("fill", "none")
                     .style("stroke", data => this.getPathColor(data.key))
                     .style("stroke-width", 4);
 
-                gx.selectAll("line-y")
+                g.selectAll("line-y")
                     .data(this.xList)
                     .enter()
                     .append("line")
                     .attr("stroke-dasharray", "5,5")
-                    .style("stroke", "#f1f1f1")
+                    .style("stroke", "#d3d3d326")
                     .attr("x1", d => d)
                     .attr("y1", -10)
                     .attr("x2", d => d)
@@ -191,14 +214,6 @@
 
 
 <style scoped>
-
-    .y-axis-name {
-        transform-origin: 0 0;
-        transform: rotate(-90deg);
-        position: absolute;
-        top: 350px;
-        left: 30px;
-
+    .dummy {
     }
-
 </style>

@@ -1,61 +1,47 @@
 <template>
-    <div id="graph" class="card">
-        <div class="card-header">
-            <strong>Crops</strong>
-        </div>
-        <div class="card-body no-padding">
-            <b-tabs card>
-                <b-tab title="Total Area of Planted Crops" active>
-                    <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>
-                <b-tab title="Total Yield of Planted Crops">
-                    <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>
-            </b-tabs>
-        </div>
-    </div>
+    <GChart :resizeDebounce="500"
+            type="BarChart"
+            :data="chartData"
+            :options="chartOptions"
+    />
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
+    import { GChart } from 'vue-google-charts'
 
     export default {
         name: 'CropsGraph',
 
         components: {
+            GChart,
         },
 
         data() {
-            return {};
+            return {
+                    chartData: [
+                            ['Crested Wheatgrass', 'Potato', 'Oak', 'Garden or Canning Peas', 'Grain Sorghum', 'Agricultural Land-Generic', 'Spring Canola-Polish', 'Spring Barley', 'Winter Wheat', 'Onion', 'Celery', 'Slender Wheatgrass', 'Wetlands-Non-Forested', 'Orchard', 'Bell Pepper', 'Eastern Gamagrass', 'Alfalfa','Western Wheatgrass', 'Corn', 'Sorghum Hay', 'Sweetpotato', 'Spring Wheat', 'Hay', 'Head Lettuce','Sweet Corn',{ role: 'annotation' } ],
+                        ['2008', 82573.95, 61873.27, 1539608.51, 95688.8, 144604.26, 2694706.07, 843445.87, 14850424.78, 134840.35, 2780199.76, 24792.54, 222207.72,715169.67, 0, 49907.47, 190787120.12, 34302225.1, 15355557.62, 5499.29,68822.49,36447.29,2180468.22, 10208509.11,461105.45,''],
+                        ['2009', 58765.5, 37596.97, 2088141.41, 54869.65, 55776.33, 2779259.8, 609319.26, 14681356.24, 28604.78, 2002433.5,25023.61, 217204.51, 96585.23, 4.1, 96136.4, 140139535.96, 27650419.33, 23060147.560000002, 	4925.93,171859.84,	133370.06,1259651.02,6337729.99,648344.14, ''],
+                        ['2010', 62972.19, 420562.1, 1073763.05, 18350.12, 111001.2, 538192.26, 138652.8, 11421278.53, 0, 1409647.42, 24954.51, 119372.18, 704879.92,1.64, 13053.75, 199777453.9, 21984849.56, 	6493385.22,11195.85,27921.54, 15147.97,2904656.63,8295234.46,128238.04,'']
+
+                    ],
+                    chartOptions: {
+                        chart: {
+                            title: "Total Irrigation",
+                            subtitle: "Irrigation: 2008-2010",
+                        },
+                        width:700,
+                        chartArea: {  width: "80%", height: "80%" },
+                        legend: { position: 'top', maxLines: 3 },
+                        bar: { groupWidth: '55%' },
+                        isStacked: true
+                    }
+                };
         },
         computed: {
             jsonData() {
                 return JSONData;
-            },
-
-            graphData() {
-                var adaptationPlan = this.planName;
-
-                return Object.keys(this.jsonData["Adaptation_plans"][adaptationPlan])
-                    .map(key => {
-                        return {
-                            key: key,
-                            value: this.jsonData["Adaptation_plans"][adaptationPlan][key]
-                        };
-                    })
-                    .filter(d => {
-                        if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
-                            //console.log(this.selectedKeyList.findIndex(k => k === d.key) > -1);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
-
             },
         },
 

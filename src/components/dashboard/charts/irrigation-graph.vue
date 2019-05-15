@@ -1,51 +1,46 @@
 <template>
-    <div id="graph" class="card">
-        <div class="card-header">
-            <strong>Irrigation</strong>
-        </div>
-        <div class="card-body">
-            <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
-        </div>
-    </div>
+            <GChart :resizeDebounce="500"
+                    type="ColumnChart"
+                    :data="chartData"
+                    :options="chartOptions"
+            />
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
+    import { GChart } from 'vue-google-charts'
 
     export default {
         name: 'IrrigationGraph',
 
         components: {
+            GChart,
+
         },
 
         data() {
-            return {};
+            return {
+                chartData: [
+                    ["Year", "Surface water", "Groundwater", "Columbia River"],
+                    ["2008", 1664.97, 5427.46, 2412.1],
+                    ["2009", 1687.5, 5353.44, 2328.64],
+                    ["2010", 1653.23, 5868.54, 2327.24]
+                ],
+                chartOptions: {
+                    chart: {
+                        title: "Total Irrigation",
+                        subtitle: "Irrigation: 2008-2010",
+                    },
+                    //legend: { position: 'top', maxLines: 3 },
+                    width:700,
+                    chartArea: {  width: "65%", height: "80%" }
+                }
+            };
         },
         computed: {
             jsonData() {
                 return JSONData;
-            },
-
-            graphData() {
-                var adaptationPlan = this.planName;
-
-                return Object.keys(this.jsonData["Adaptation_plans"][adaptationPlan])
-                    .map(key => {
-                        return {
-                            key: key,
-                            value: this.jsonData["Adaptation_plans"][adaptationPlan][key]
-                        };
-                    })
-                    .filter(d => {
-                        if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
-                            //console.log(this.selectedKeyList.findIndex(k => k === d.key) > -1);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
-
-            },
+            }
         },
 
         mounted() {

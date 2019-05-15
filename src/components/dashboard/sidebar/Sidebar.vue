@@ -35,12 +35,12 @@
                 chartTypes: [
                     /*{id:"actions-graph", name: "Actions"},*/
                     {id: "overview-graph", name: "Overview"},
+                    {id: "fertilizer-graph", name: "Detailed"},
                     {id: "costs-graph", name: "Costs"},
                     {id: "streamsflow-graph", name: "Streams"},
-                    {id: "fertilizer-graph", name: "Fertilizer"},
-                    {id: "crops-graph", name: "Crops"},
+                   /* {id: "crops-graph", name: "Crops"},*/
                     {id: "precipitation-graph", name: "Precipitation"},
-                    {id: "irrigation-graph", name: "Irrigation"},
+                    /*{id: "irrigation-graph", name: "Irrigation"},*/
                     {id: "groundwater-graph", name: "Groundwater"},
                 ]
             }

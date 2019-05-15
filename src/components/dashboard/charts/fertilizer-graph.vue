@@ -15,6 +15,21 @@
                         <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
                     </div>
                 </b-tab>
+                <b-tab title="Irrigation">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Crop Area">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Crop Yield">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                    </div>
+                </b-tab>
             </b-tabs>
         </div>
     </div>
