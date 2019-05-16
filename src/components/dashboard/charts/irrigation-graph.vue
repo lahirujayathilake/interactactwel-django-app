@@ -31,9 +31,8 @@
                         title: "Total Irrigation",
                         subtitle: "Irrigation: 2008-2010",
                     },
-                    //legend: { position: 'top', maxLines: 3 },
                     width:700,
-                    chartArea: {  width: "65%", height: "80%" }
+                    chartArea: {  width: "400", height: "80%" }
                 }
             };
         },

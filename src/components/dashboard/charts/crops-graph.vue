@@ -28,13 +28,13 @@
                     ],
                     chartOptions: {
                         chart: {
-                            title: "Total Irrigation",
-                            subtitle: "Irrigation: 2008-2010",
+                            title: "Total yield of planted crops in watershed (kg)",
+                            subtitle: "Total yield of planted crops in watershed (kg): 2008-2010",
                         },
                         width:700,
-                        chartArea: {  width: "80%", height: "80%" },
-                        legend: { position: 'top', maxLines: 3 },
-                        bar: { groupWidth: '55%' },
+                        chartArea: {  width: "65%", height: "80%" },
+                        legend: { position: 'right', maxLines: 3 },
+                        bar: { groupWidth: '70%' },
                         isStacked: true
                     }
                 };

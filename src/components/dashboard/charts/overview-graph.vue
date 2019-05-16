@@ -20,9 +20,9 @@
                         <irridation-graph></irridation-graph>
                     </div>
                 </b-tab>
-                <b-tab title="Planted crops">
+                <b-tab title="Crop Area">
                     <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                        <crop-area-graph></crop-area-graph>
                     </div>
                 </b-tab>
                 <b-tab title="Crop yield">
@@ -39,14 +39,15 @@
     import JSONData from "../../../assets/result_action_plans.json";
     import IrrigationGraph from './irrigation-graph.vue'
     import CropsGraph from './crops-graph.vue'
+    import CropAreaGraph from './crop-area-graph.vue'
 
     export default {
         name: 'StreamsflowGraph',
 
         components: {
             'irridationGraph' : IrrigationGraph,
-            'cropsYieldGraph' :CropsGraph
-
+            'cropsYieldGraph' :CropsGraph,
+            'cropAreaGraph' :CropAreaGraph,
         },
 
         data() {

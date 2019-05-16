@@ -42,7 +42,7 @@
                     <b-list-group flush>
                         <b-form>
                             <div class="list-group">
-                                <li class="list-group-item" v-for="goal in goals">
+                                <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
                                     <label class="form-checkbox">
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals">
                                         {{goal.goal}}
@@ -92,7 +92,7 @@
                     <b-list-group flush>
                         <b-form>
                             <div class="list-group">
-                                <li class="list-group-item" v-for="actor in actors">
+                                <li class="list-group-item" v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
                                         <input type="checkbox" :value="actor.id" v-model="selectedActors">
                                         {{actor.actor}}
@@ -145,18 +145,18 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th v-for="actor in actors">
+                                <th v-for="actor in actors" v-bind:key="actor.id">
                                     {{actor.name}}
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr v-for="action in actions">
+                            <tr v-for="action in actions" v-bind:key="action.id">
                                 <td>
                                     {{action.action}}
                                 </td>
-                                <td v-for="actor in actors">
+                                <td v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
                                         <input type="checkbox" :value="actor.id + ',' + action.id"
                                                v-model="selectedActions">
@@ -184,76 +184,75 @@
 
     import FormWizard from './../formWizard/FormWizard.vue'
     import TabContent from './../formWizard/TabContent.vue'
-    import ProgressBar from './../dashboard/progressBar/ProgressBar.vue'
 
     export default {
 
         components: {
-            'progress-bar': ProgressBar,
             'tab-content': TabContent,
-            'form-wizard': FormWizard, props: {
-                title: {
-                    type: String,
-                    default: 'Data Visualization Wizadgrttrrd',
-                    return: false
-                },
-                subtitle: {
-                    type: String,
-                    default: 'Split a complicdgtdtated flow in multiple steps'
-                },
-                nextButtonText: {
-                    type: String,
-                    default: 'Next'
-                },
-                backButtonText: {
-                    type: String,
-                    default: 'Back'
-                },
-                finishButtonText: {
-                    type: String,
-                    default: 'Finish'
-                },
+            'form-wizard': FormWizard,
+            /* 'form-wizard': FormWizard, props: {
+                 title: {
+                     type: String,
+                     default: 'Data Visualization Wizadgrttrrd',
+                     return: false
+                 },
+                 subtitle: {
+                     type: String,
+                     default: 'Split a complicdgtdtated flow in multiple steps'
+                 },
+                 nextButtonText: {
+                     type: String,
+                     default: 'Next'
+                 },
+                 backButtonText: {
+                     type: String,
+                     default: 'Back'
+                 },
+                 finishButtonText: {
+                     type: String,
+                     default: 'Finish'
+                 },
 
-                /***
-                 *  Sets validation (on/off) for back button. By default back button ignores validation
-                 */
-                validateOnBack: Boolean,
-                /***
-                 * Applies to text, border and circle
-                 */
-                color: {
-                    type: String,
-                    default: '#e74c3c' //circle, border and text color
-                },
-                /***
-                 *  Is set to current step and text when beforeChange function fails
-                 */
-                errorColor: {
-                    type: String,
-                    default: '#8b0000'
-                },
-                /**
-                 * Can take one of the following values: 'circle|square|tab`
-                 */
-                shape: {
-                    type: String,
-                    default: 'circle'
-                },
-                /**
-                 * name of the transition when transition between steps
-                 */
-                transition: {
-                    type: String,
-                    default: '' //name of the transition when transition between steps
-                },
-                /***
-                 * Index of the initial tab to display
-                 */
-                startIndex: {
-                    type: Number,
-                    default: 0
-                }
-            }
+                 /!***
+                  *  Sets validation (on/off) for back button. By default back button ignores validation
+                  *!/
+                 validateOnBack: Boolean,
+                 /!***
+                  * Applies to text, border and circle
+                  *!/
+                 color: {
+                     type: String,
+                     default: '#e74c3c' //circle, border and text color
+                 },
+                 /!***
+                  *  Is set to current step and text when beforeChange function fails
+                  *!/
+                 errorColor: {
+                     type: String,
+                     default: '#8b0000'
+                 },
+                 /!**
+                  * Can take one of the following values: 'circle|square|tab`
+                  *!/
+                 shape: {
+                     type: String,
+                     default: 'circle'
+                 },
+                 /!**
+                  * name of the transition when transition between steps
+                  *!/
+                 transition: {
+                     type: String,
+                     default: '' //name of the transition when transition between steps
+                 },
+                 /!***
+                  * Index of the initial tab to display
+                  *!/
+                 startIndex: {
+                     type: Number,
+                     default: 0
+                 }
+             }*/
 
         },
 
@@ -284,6 +283,17 @@
                 {id: "5", goal: 'Improve ecological habitat'},
                 {id: "6", goal: 'Other'},
 
+            ],
+
+            irrigation:[
+                {
+                    DataType: "",
+                    DataLabels: ["2008","2009","2010"],
+                    Description: "",
+                    Data: [
+                        {2008:149882388.87, 2009:158883146.12, 2009:153828365.33}
+                    ]
+                }
             ],
 
             actions: [
