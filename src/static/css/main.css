@@ -169,6 +169,16 @@ ui.checkbox label, .ui.checkbox + label {
 }
 
 
+.list-group-item {
+    padding: .5rem 1rem !important;
+}
+
+.list-group-item label{
+    font-size: 85% !important;
+    margin-bottom: 0 !important;
+}
+
+
 
 
 

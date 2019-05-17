@@ -5,7 +5,7 @@
                      shape="tab"
                      color="#28a645">
             <tab-content title="Step 1"
-                         icon="ti-user" :before-change="beforeTabSwitch">
+                         icon="ti-user" :before-change="beforeTabSwitchStep1">
                 <div class="help-block">
                     <b-card
                             title=""
@@ -24,7 +24,7 @@
                     </b-card>
                 </div>
                 <b-card no-body>
-                    <h4 slot="header">Choose Goals</h4>
+                    <div class="step-header" slot="header">Choose Goals</div>
                     <b-card-body>
                         <p class="card-text">
                             Choose the adaptation goals that are important to you
@@ -55,7 +55,7 @@
                 </b-card>
             </tab-content>
             <tab-content title="Step 2"
-                         icon="ti-settings" :before-change="beforeTabSwitch">
+                         icon="ti-settings" :before-change="beforeTabSwitchStep2">
                 <div class="help-block">
                     <b-card
                             title=""
@@ -74,7 +74,7 @@
                     </b-card>
                 </div>
                 <b-card no-body>
-                    <h4 slot="header">Choose Actors</h4>
+                    <div class="step-header" slot="header">Choose Actors</div>
                     <b-card-body>
                         <p class="card-text">
                             Choose the actors whose adaptation actions you want to visualize
@@ -105,7 +105,7 @@
                 </b-card>
             </tab-content>
             <tab-content title="Step 3"
-                         icon="ti-check" :before-change="beforeTabSwitch">
+                         icon="ti-check" :before-change="beforeTabSwitchStep3">
                 <div class="help-block">
                     <b-card
                             title=""
@@ -124,7 +124,7 @@
                     </b-card>
                 </div>
                 <b-card no-body>
-                    <h4 slot="header">Choose Actions</h4>
+                    <div class="step-header" slot="header">Choose Actions</div>
                     <b-card-body>
                         <p class="card-text">
                             Choose the actors whose adaptation actions you want to visualize
@@ -184,75 +184,13 @@
 
     import FormWizard from './../formWizard/FormWizard.vue'
     import TabContent from './../formWizard/TabContent.vue'
+    import EventBus from './../../event-bus';
 
     export default {
 
         components: {
             'tab-content': TabContent,
             'form-wizard': FormWizard,
-            /* 'form-wizard': FormWizard, props: {
-                 title: {
-                     type: String,
-                     default: 'Data Visualization Wizadgrttrrd',
-                     return: false
-                 },
-                 subtitle: {
-                     type: String,
-                     default: 'Split a complicdgtdtated flow in multiple steps'
-                 },
-                 nextButtonText: {
-                     type: String,
-                     default: 'Next'
-                 },
-                 backButtonText: {
-                     type: String,
-                     default: 'Back'
-                 },
-                 finishButtonText: {
-                     type: String,
-                     default: 'Finish'
-                 },
-
-                 /!***
-                  *  Sets validation (on/off) for back button. By default back button ignores validation
-                  *!/
-                 validateOnBack: Boolean,
-                 /!***
-                  * Applies to text, border and circle
-                  *!/
-                 color: {
-                     type: String,
-                     default: '#e74c3c' //circle, border and text color
-                 },
-                 /!***
-                  *  Is set to current step and text when beforeChange function fails
-                  *!/
-                 errorColor: {
-                     type: String,
-                     default: '#8b0000'
-                 },
-                 /!**
-                  * Can take one of the following values: 'circle|square|tab`
-                  *!/
-                 shape: {
-                     type: String,
-                     default: 'circle'
-                 },
-                 /!**
-                  * name of the transition when transition between steps
-                  *!/
-                 transition: {
-                     type: String,
-                     default: '' //name of the transition when transition between steps
-                 },
-                 /!***
-                  * Index of the initial tab to display
-                  *!/
-                 startIndex: {
-                     type: Number,
-                     default: 0
-                 }
-             }*/
 
         },
 
@@ -283,17 +221,6 @@
                 {id: "5", goal: 'Improve ecological habitat'},
                 {id: "6", goal: 'Other'},
 
-            ],
-
-            irrigation:[
-                {
-                    DataType: "",
-                    DataLabels: ["2008","2009","2010"],
-                    Description: "",
-                    Data: [
-                        {2008:149882388.87, 2009:158883146.12, 2009:153828365.33}
-                    ]
-                }
             ],
 
             actions: [
@@ -355,19 +282,38 @@
             onComplete: function () {
                 //alert('Yay. Done!'),
                 this.stepWizardVisibility = true,
-                    this.$emit('finish-wizard')
+                    this.$emit('finish-wizard');
+                //EventBus.$emit('MOVE_TO_STEP4');
 
             },
 
-            beforeTabSwitch: function () {
+            beforeTabSwitchStep1: function () {
+                EventBus.$emit('MOVE_TO_STEP2');
                 //alert("This is called before switchind tabs")
-                //this.fromparent = 'active',
+                return true
+            },
+
+            beforeTabSwitchStep2: function () {
+                EventBus.$emit('MOVE_TO_STEP3');
+                //alert("This is called before switchind tabs")
+                return true
+            },
+
+            beforeTabSwitchStep3: function () {
+                EventBus.$emit('MOVE_TO_STEP4');
+                //alert("This is called before switchind tabs")
+                return true
+            },
+
+            beforeTabSwitch: function () {
+                //EventBus.$emit('CLICK_NEXT_STEP');
+                //alert("This is called before switchind tabs")
                 return true
             },
 
             nextStep() {
                 //alert("next tab clicked")
-                this.$emit('next-click')
+                //this.$emit('next-click')
             },
         }
 
@@ -393,7 +339,8 @@
     }
 
     td, th {
-        font-size: 14px;
+        font-size: 12px;
+        padding: .5rem;
     }
 
     .vue-form-wizard .wizard-header {
@@ -412,6 +359,15 @@
         position: absolute;
         right: -350px;
         z-index: 1000;
+    }
+
+    .step-header{
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .card-text{
+        font-size:12px;
     }
 
 
