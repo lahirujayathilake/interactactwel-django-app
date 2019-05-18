@@ -41,7 +41,7 @@
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
-                center: L.latLng(45.6735777, -118.8455003),
+                center: L.latLng(45.4435777, -119.9455003),
                 url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 marker: L.latLng(45.6735777, -118.8455003),
@@ -64,7 +64,7 @@
                 return () => {
                     return {
                         weight: 2,
-                        color: "#ECEFF1",
+                        color: "#3386ff",
                         opacity: 1,
                         fillColor: fillColor,
                         fillOpacity: 1
@@ -92,11 +92,12 @@
 
         created() {
             this.loading = true;
-            axios.get("/subbasins.geojson")
+            axios.get("/reaches.geojson")
                 .then(response => {
                     this.geoJson = response.data;
-                    this.loading = false;
+                    this.loading = true;
                 });
+
         },
         methods: {
 
