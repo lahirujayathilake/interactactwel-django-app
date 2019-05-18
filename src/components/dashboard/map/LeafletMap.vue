@@ -3,6 +3,12 @@
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-geo-json
                 v-if="show"
+                :geojson="geoJson2"
+                :options="options"
+                :options-style="styleFunction"
+        />
+        <l-geo-json
+                v-if="show"
                 :geojson="geoJson"
                 :options="options"
                 :options-style="styleFunction"
@@ -38,6 +44,7 @@
         data() {
             return {
                 geoJson: null,
+                geoJson2: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
@@ -95,6 +102,12 @@
             axios.get("/reaches.geojson")
                 .then(response => {
                     this.geoJson = response.data;
+                    this.loading = true;
+                    })
+
+            axios.get("/subbasins.geojson")
+                .then(response => {
+                    this.geoJson2 = response.data;
                     this.loading = true;
                 });
 
