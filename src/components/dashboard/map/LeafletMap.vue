@@ -3,15 +3,15 @@
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-geo-json
                 v-if="show"
-                :geojson="geoJson2"
+                :geojson="geoJson_subbasin"
                 :options="options"
-                :options-style="styleFunction"
+                :options-style="styleFunction_subbasin"
         />
         <l-geo-json
                 v-if="show"
-                :geojson="geoJson"
+                :geojson="geoJson_reach"
                 :options="options"
-                :options-style="styleFunction"
+                :options-style="styleFunction_reach"
         />
         <l-marker :lat-lng="marker"></l-marker>
     </l-map>
@@ -43,8 +43,8 @@
 
         data() {
             return {
-                geoJson: null,
-                geoJson2: null,
+                geoJson_reach: null,
+                geoJson_subbasin: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
@@ -66,15 +66,27 @@
                     onEachFeature: this.onEachFeatureFunction
                 };
             },
-            styleFunction() {
+            styleFunction_reach() {
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
                 return () => {
                     return {
-                        weight: 2,
+                        weight: 2.5,
                         color: "#3386ff",
                         opacity: 1,
                         fillColor: fillColor,
                         fillOpacity: 1
+                    };
+                };
+            },
+            styleFunction_subbasin() {
+                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+                return () => {
+                    return {
+                        weight: 1.5,
+                        color: "#7c7c7c",
+                        opacity: 1,
+                        fillColor: "#e3dddd",
+                        fillOpacity: 0.5
                     };
                 };
             },
@@ -101,13 +113,13 @@
             this.loading = true;
             axios.get("/reaches.geojson")
                 .then(response => {
-                    this.geoJson = response.data;
+                    this.geoJson_reach = response.data;
                     this.loading = true;
                     })
 
             axios.get("/subbasins.geojson")
                 .then(response => {
-                    this.geoJson2 = response.data;
+                    this.geoJson_subbasin = response.data;
                     this.loading = true;
                 });
 
