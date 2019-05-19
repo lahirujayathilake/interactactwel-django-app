@@ -106,7 +106,7 @@
             </tab-content>
             <tab-content title="Step 3"
                          icon="ti-check" :before-change="beforeTabSwitchStep3">
-                <div class="help-block">
+                <div class="help-block-actions">
                     <b-card
                             title=""
                             tag="article"
@@ -123,7 +123,7 @@
                         <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
                     </b-card>
                 </div>
-                <b-card no-body>
+                <b-card style="height: 570px; width: 610px" no-body>
                     <div class="step-header" slot="header">Choose Actions</div>
                     <b-card-body>
                         <p class="card-text">
@@ -141,12 +141,12 @@
                     <b-card-body>
 
                         <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
-                        <table style="height: 370px;" class="table table-bordered table-striped table-hover table-responsive">
+                        <table style="height: 370px; width: 580px" class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
                                 <th></th>
                                 <th v-for="actor in actors" v-bind:key="actor.id">
-                                    {{actor.name}}
+                                    {{actor.actor}}
                                 </th>
                             </tr>
                             </thead>
@@ -158,8 +158,7 @@
                                 </td>
                                 <td v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="actor.id + ',' + action.id"
-                                               v-model="selectedActions">
+                                        <input type="checkbox" :value="actor.id + ',' + action.id" v-model="selectedActions" :disabled="action.readonly || actor.readonly">
                                         <i class="form-icon"></i>
                                     </label>
                                 </td>
@@ -224,18 +223,18 @@
             ],
 
             actions: [
-                {id: 0, name: "act1", action: 'Business as usual'},
-                {id: 1, name: "act2", action: 'Increase capacity by 20%'},
-                {id: 2, name: "act3", action: 'Decrease total capacity by 20%'},
-                {id: 3, name: "act4", action: 'Increase amount of SW'},
-                {id: 4, name: "act5", action: 'Increase amount of GW'},
-                {id: 5, name: "act6", action: 'Increase amount of RW'},
-                {id: 6, name: "act7", action: 'Decrease amount of SW'},
-                {id: 7, name: "act8", action: 'Decrease amount of GW'},
-                {id: 8, name: "act9", action: 'Invest in renewable energy sources'},
-                {id: 9, name: "act10", action: 'Pump RW to farmers/daries'},
-                {id: 10, name: "act11", action: 'Increase surface storage'},
-                {id: 11, name: "act12", action: 'Invest in infra to pump RW'}
+                {id: 0, name: "act1", action: 'Business as usual', readonly: false},
+                //{id: 1, name: "act2", action: 'Increase water right volume by 20%', readonly: false},
+                //{id: 2, name: "act3", action: 'Decrease water right volume by 20%', readonly: false},
+                {id: 1, name: "act2", action: 'Increase volume of SW water rights', readonly: false},
+                {id: 2, name: "act3", action: 'Increase volume of GW water rights', readonly: false},
+                //{id: 5, name: "act6", action: 'Increase amount of RW', readonly: true},
+                {id: 3, name: "act4", action: 'Decrease volume of SW water rights', readonly: false},
+                {id: 4, name: "act5", action: 'Decrease volume of GW water rights', readonly: false},
+                {id: 5, name: "act6", action: 'Invest in renewable energy sources', readonly: true},
+                {id: 6, name: "act7", action: 'Pump RW to farmers/daries', readonly: true},
+                {id: 7, name: "act8", action: 'Increase surface storage', readonly: true},
+                //{id: 11, name: "act12", action: 'Invest in infra to pump RW', readonly: false}
             ],
 
             actors: [
@@ -277,7 +276,9 @@
                 if (!this.selectAllActions) {
                     for (let action in this.actions) {
                         for (let actor in this.actors) {
+                            if (this.actors[actor].readonly == false && this.actions[action].readonly == false){
                             this.selectedActions.push(this.actors[actor].id + ',' + this.actions[action].id);
+                            }
                         }
                     }
                 }
@@ -336,10 +337,11 @@
         position: absolute;
         left: 60px;
         z-index: 1000;
-        max-width: 500px;
+        max-width: 800px;
         top: 20px;
         border-radius: 10px;
         height: auto;
+        width: auto;
     }
 
     td, th {
@@ -362,6 +364,12 @@
     .help-block{
         position: absolute;
         right: -350px;
+        z-index: 1000;
+    }
+    
+    .help-block-actions{
+        position: absolute;
+        right: -450px;
         z-index: 1000;
     }
 
