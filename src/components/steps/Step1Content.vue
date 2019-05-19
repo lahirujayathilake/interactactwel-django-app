@@ -44,10 +44,10 @@
                             <div class="list-group">
                                 <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="goal.id" v-model="selectedGoals">
+                                        <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"></input>
                                         {{goal.goal}}
                                     </label>
-                                    <b-badge class="info-button" pill variant="secondary">Info</b-badge>
+                                    <b-badge class="info-button" pill variant="secondary">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
@@ -213,13 +213,13 @@
             selectAllActors: false,
 
             goals: [
-                {id: "0", goal: 'Improve surface water quality'},
-                {id: "1", goal: 'Increase ground water supply'},
-                {id: "2", goal: 'Minimize land use change'},
-                {id: "3", goal: 'Improve economy'},
-                {id: "4", goal: 'Increase energy production'},
-                {id: "5", goal: 'Improve ecological habitat'},
-                {id: "6", goal: 'Other'},
+                {id: "0", goal: 'Improve surface water quality', readonly: false},
+                {id: "1", goal: 'Increase ground water supply', readonly: false},
+                {id: "2", goal: 'Minimize land use change', readonly: false},
+                {id: "3", goal: 'Improve economy', readonly: false},
+                {id: "4", goal: 'Increase energy production', readonly: false},
+                {id: "5", goal: 'Improve ecological habitat', readonly: true},
+                {id: "6", goal: 'Other', readonly: true},
 
             ],
 
@@ -254,7 +254,7 @@
                 this.selectedGoals = [];
                 if (!this.selectAllGoals) {
                     for (let goal in this.goals) {
-                        this.selectedGoals.push(this.goals[goal].id);
+                        this.selectedGoals.push(this.goals[goal].id, this.goals[goal].readonly);
                     }
                 }
             },
