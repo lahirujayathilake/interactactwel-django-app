@@ -94,10 +94,10 @@
                             <div class="list-group">
                                 <li class="list-group-item" v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="actor.id" v-model="selectedActors">
+                                        <input type="checkbox" :value="actor.id" v-model="selectedActors" :disabled="actor.readonly">
                                         {{actor.actor}}
                                     </label>
-                                    <b-badge class="info-button" pill variant="secondary">Info</b-badge>
+                                    <b-badge class="info-button" pill variant="secondary">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
@@ -215,10 +215,10 @@
             goals: [
                 {id: "0", goal: 'Improve surface water quality', readonly: false},
                 {id: "1", goal: 'Increase ground water supply', readonly: false},
-                {id: "2", goal: 'Minimize land use change', readonly: false},
-                {id: "3", goal: 'Improve economy', readonly: false},
-                {id: "4", goal: 'Increase energy production', readonly: false},
-                {id: "5", goal: 'Improve ecological habitat', readonly: true},
+                {id: "2", goal: 'Minimize land use change', readonly: true},
+                {id: "3", goal: 'Improve regional economy', readonly: false},
+                {id: "4", goal: 'Increase energy production', readonly: true},
+                {id: "5", goal: 'Improve ecological habitat', readonly: false},
                 {id: "6", goal: 'Other', readonly: true},
 
             ],
@@ -239,13 +239,13 @@
             ],
 
             actors: [
-                {id: 0, name: "F_SW_GW", actor: 'Farmer with surface water and ground water right'},
-                {id: 1, name: "F_SW", actor: 'Farmer with surface water right (F_SW)'},
-                {id: 2, name: "F_GW", actor: 'Farmer with ground water right (F_GW)'},
-                {id: 3, name: "EP", actor: 'Solar_Power_Plants'},
-                {id: 4, name: "DC", actor: 'Coal_Power_Plants'},
-                {id: 5, name: "TRI", actor: 'Data_Centers'},
-                { id: 6, name: "MUN", actor: 'Dairies' }
+                {id: 0, name: "F_SW_GW", actor: 'Farmer with surface water and ground water rights', readonly: false},
+                {id: 1, name: "F_SW", actor: 'Farmer with surface water rights', readonly: false},
+                {id: 2, name: "F_GW", actor: 'Farmer with ground water rights', readonly: false},
+                {id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
+                {id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
+                {id: 5, name: "TRI", actor: 'Data Centers', readonly: true},
+                { id: 6, name: "MUN", actor: 'Dairies' , readonly: true}
             ],
         }),
 
@@ -254,7 +254,9 @@
                 this.selectedGoals = [];
                 if (!this.selectAllGoals) {
                     for (let goal in this.goals) {
+                        if (this.goals[goal].readonly == false){
                         this.selectedGoals.push(this.goals[goal].id, this.goals[goal].readonly);
+                        }
                     }
                 }
             },
@@ -263,7 +265,9 @@
                 this.selectedActors = [];
                 if (!this.selectAllActors) {
                     for (let actor in this.actors) {
-                        this.selectedActors.push(this.actors[actor].id);
+                        if (this.actors[actor].readonly == false){
+                        this.selectedActors.push(this.actors[actor].id, this.actors[actor].readonly);
+                        }
                     }
                 }
             },
