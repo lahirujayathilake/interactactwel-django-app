@@ -86,6 +86,8 @@
                         color: "#7c7c7c",
                         opacity: 1,
                         fillColor: "#e3dddd",
+                        dashArray: '5, 5',
+                        dashOffset: '10',
                         fillOpacity: 0.5
                     };
                 };
@@ -99,7 +101,7 @@
 
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        "<div>tooltip :)</div>",
+                        "<div>Subbasin: "+ feature.Name + "</div>",
                         {permanent: false, sticky: true}
                     );
                     layer.on({
