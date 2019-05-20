@@ -7,13 +7,13 @@
             <tab-content title="Step 1"
                          icon="ti-user" :before-change="beforeTabSwitchStep1">
                 <div class="help-block">
-                    <b-card
-                            title=""
+                    <b-card class="mb-2"
+                            title="What are Goals?"
                             tag="article"
                             style="max-width: 25rem;"
-                            class="mb-2"
+                            
                     >
-                        <b-card title><strong>What are Goals?</strong></b-card title>
+                        <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
                         <b-card-text>
                             <p align="justify">A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p> 
 
@@ -386,7 +386,12 @@
     }
 
     .card-text{
-        font-size:12px;
+        font-size:13.5px;
+    }
+
+    .card-title {
+    font-size: 25px;
+    font-weight: bold;
     }
 
 
