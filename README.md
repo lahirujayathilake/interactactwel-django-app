@@ -1,10 +1,24 @@
-# interactactwel-django-app
-This is a vue js application
+## Run Vue js app in development mode
 
-To install dependencies run:
-npm install
+Go to interactwel/dashboard directory
 
-To run the dev server run:
-npm run serve
+Run ```npm run serve``` to locally run the vue app
 
-To deploy this static app to github pages, run ./deploy.sh and the page will be updated to https://interactwel.github.io/interactactwel-django-app/
+## Build Vue js app for production use
+
+Run ```npm run build``` 
+
+## To start the Django app
+
+Go to interactwel directory
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+```
+python manage.py migrate
+python manage.py runserver
+```
