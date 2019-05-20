@@ -26,25 +26,25 @@ python manage.py runserver
 
 ## REST API
 
-Rest API is exposed in http://localhost/api
+Rest API is exposed in http://localhost:8000/api
 
 #### Resources 
 
-##### Subbasin: http://localhost/api/subbasins
+##### Subbasin: http://localhost:8000/api/subbasins
 
 Get All
 ```
-GET http://localhost/api/subbasins/
+GET http://localhost:8000/api/subbasins/
 ```
 
 Get one
 ```
-GET http://localhost/api/subbasins/1
+GET http://localhost:8000/api/subbasins/1
 ```
 
 Create 
 ```
-POST http://localhost/api/subbasins/
+POST http://localhost:8000/api/subbasins/
 
 {
     "detail_json": <JSON COntent>
