@@ -1,7 +1,7 @@
 <template>
     <div class="feedback-container">
         <div class="header-container">
-            <h6>POPSWAT_0</h6>
+            <!-- <h6>POPSWAT_0</h6> -->
             <h4>Evaluate Adaptation Plan</h4>
         </div>
         <div id="feedback-step1" class="ui form">

@@ -7,7 +7,9 @@
             </b-nav>
             <b-collapse :id="value" accordion="my-accordion" role="tabpanel">
                 <b-nav vertical class="w-100" v-for="chart in chartTypes">
-                    <b-nav-item class="collapse-item" v-on:click="showGraph(chart.id)">{{chart.name}}</b-nav-item>
+                    <!--<b-nav-item v-on:click="showPlanGraph()" v-bind:class="{active: isPlanGraphActive}">Plans</b-nav-item>
+                    <b-nav-item v-on:click="showCostGraph()" v-bind:class="{active: isCostGraphActive}">Cost</b-nav-item>-->
+                    <b-nav-item v-on:click="showGraph(chart.id)">{{chart.name}}</b-nav-item>
                 </b-nav>
             </b-collapse>
         </div>
@@ -118,8 +120,7 @@
     }
 
     #sidebar .p-1 {
-        border-bottom: 1px solid #37474f !important;
-        font-size: 14px;
+        border-bottom: 1px solid #263238 !important;
     }
 
     #sidebar .p-1:hover {
@@ -131,17 +132,8 @@
         color: #fff;
     }
 
-    #sidebar .collapse-item a{
-        font-size: 12px;
-        text-indent: 15px;
-    }
-
-    #sidebar .collapsing-section{
-        background-color: #000;
-    }
-
-    #sidebar .nav-link:hover{
-        background-color: #000 ;
+    .accordion-header {
+        border-bottom: 1px solid #ffffff4d;
     }
 
 </style>
