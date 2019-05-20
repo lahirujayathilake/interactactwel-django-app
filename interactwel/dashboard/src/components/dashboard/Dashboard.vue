@@ -8,16 +8,16 @@
                 </a>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
-                        <b-nav-item class="project-title" href="#">Project : </b-nav-item>
-                        <b-nav-item class="project-title" href="#" disabled>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</b-nav-item>
+                        <b-nav-item class="project-title" href="#"><strong>Project:</strong></b-nav-item>
+                        <b-nav-item class="project-title" href="#" disabled><strong>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</strong></b-nav-item>
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
                         <b-button v-show="!startButtonVisibility" v-on:click="start" variant="success"
-                                  class="my-2 my-sm-0" type="submit">Start Here
+                                  class="my-2 my-sm-0" type="submit"><strong>Start Here</strong>
                         </b-button>
                         <b-button v-show="startButtonVisibility" v-on:click="exit" variant="danger"
-                                  class="my-2 my-sm-0" type="submit">Exit
+                                  class="my-2 my-sm-0" type="submit"><strong> Exit </strong>
                         </b-button>
 
                         <b-nav-item-dropdown text="Settings" right>
@@ -168,6 +168,7 @@
     }
 
     .project-title a{
+        font-size: 18px;
         color: rgba(255, 255, 255, 0.78) !important;
     }
 

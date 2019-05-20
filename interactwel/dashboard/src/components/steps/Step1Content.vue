@@ -4,15 +4,13 @@
         <form-wizard v-show="!stepWizardVisibility" v-on:next-step="nextStep" @on-complete="onComplete"
                      shape="tab"
                      color="#28a645">
-            <tab-content title="Step 1"
-                         icon="ti-user" :before-change="beforeTabSwitchStep1">
+            <tab-content title="Step 1" icon="ti-user" :before-change="beforeTabSwitchStep1">
                 <div class="help-block">
                     <b-card class="mb-2"
                             title="What are Goals?"
                             tag="article"
-                            style="max-width: 25rem;"
-                            
-                    >
+                            style="max-width: 28.5rem;"
+                        >
                         <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
                         <b-card-text>
                             <p align="justify">A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p> 
@@ -60,8 +58,7 @@
                     </b-list-group>
                 </b-card>
             </tab-content>
-            <tab-content title="Step 2"
-                         icon="ti-settings" :before-change="beforeTabSwitchStep2">
+            <tab-content title="Step 2" icon="ti-settings" :before-change="beforeTabSwitchStep2">
                 <div class="help-block-actors">
                     <b-card
                             title="Who are Actors?"
@@ -134,7 +131,7 @@
                         <!--<b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>-->
                     </b-card>
                 </div>
-                <b-card style="height: 570px; width: 680px" no-body>
+                <b-card style="height: 570px; width: 690px" no-body>
                     <div class="step-header" slot="header">Choose Actions</div>
                     <b-card-body>
                         <p class="card-text">
@@ -152,7 +149,7 @@
                     <b-card-body>
 
                         <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
-                        <table style="height: 370px; width: 630px" class="table table-bordered table-striped table-hover table-responsive">
+                        <table style="height: 370px; width: 660px" class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
                                 <th></th>
@@ -380,7 +377,7 @@
     .help-block{
         position: absolute;
         border: none;
-        right: -440px;
+        right: -490px;
         z-index: 1000;
     }
 
@@ -393,6 +390,7 @@
     
     .help-block-actions{
         position: absolute;
+        border: none;
         right: -450px;
         z-index: 1000;
     }
@@ -403,7 +401,7 @@
     }
 
     .card-text{
-        font-size:14px;
+        font-size:15px;
     }
 
     .card-title {
