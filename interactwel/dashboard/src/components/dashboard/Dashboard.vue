@@ -9,7 +9,7 @@
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
                         <b-nav-item class="project-title" href="#">Project : </b-nav-item>
-                        <b-nav-item class="project-title" href="#" disabled>Umatilla Region Adapts to New Water Allocation</b-nav-item>
+                        <b-nav-item class="project-title" href="#" disabled>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</b-nav-item>
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
