@@ -1,25 +1,21 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     // tab menu
     $('.menu .item')
-        .tab()
-    ;
+        .tab();
 
     // drop down
     $('.ui.dropdown')
-        .dropdown()
-    ;
+        .dropdown();
 
     // Star rating
     $('.ui.rating')
-        .rating()
-    ;
+        .rating();
 
     $('.checkbox-info-button')
         .popup({
             inline: true
-        })
-    ;
+        });
 
     // popup menu on hover
     $('.menu .settings')
@@ -124,7 +120,7 @@ $(document).ready(function () {
     $('#step5-submit').hide();
 
     // start wizard
-    $('#start-viz-builder-button').click(function () {
+    $('#start-viz-builder-button').click(function() {
         $('#steps-menu').show(300);
         $('#step1-menu').addClass('active');
         $('#start-viz-builder-button').hide();
@@ -134,7 +130,7 @@ $(document).ready(function () {
     });
 
     // events on each step submissions
-    $('#step1-submit').click(function () {
+    $('#step1-submit').click(function() {
         $('.step1').hide(500);
         $('.step2').show(500);
         $('#step2-menu').addClass('active');
@@ -145,7 +141,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step2-submit').click(function () {
+    $('#step2-submit').click(function() {
         $('.step2').hide(500);
         $('.step3').show(500);
         $('#step3-menu').addClass('active');
@@ -155,7 +151,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step3-submit').click(function () {
+    $('#step3-submit').click(function() {
         $('.step3').hide(500);
         $('.step4').show(500);
         $('#step4-menu').addClass('active');
@@ -165,7 +161,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step4-submit').click(function () {
+    $('#step4-submit').click(function() {
         console.log("clciked");
         $('#step4-submit').hide();
         $('.plan-goals').show(500);
@@ -177,7 +173,7 @@ $(document).ready(function () {
 
     });
 
-    $('#step5-submit').click(function () {
+    $('#step5-submit').click(function() {
         $('#step5-submit').hide();
         $('#step6-menu').addClass('active');
         $('#step5-menu').addClass('completed');
@@ -191,24 +187,21 @@ $(document).ready(function () {
     });
 
     // End wizard
-    $('#exit-viz-builder-button').click(function () {
+    $('#exit-viz-builder-button').click(function() {
         $('.ui.basic.modal')
-            .modal('show')
-        ;
+            .modal('show');
     });
 
     // more info expands
     $('.checkbox-info').hide();
     $('.more-info').hide();
 
-    $('.checkbox-info-button').click(function () {
+    $('.checkbox-info-button').click(function() {
         $(this).next('.checkbox-info').toggle(500);
     });
 
-    $('.more-info-button').click(function () {
+    $('.more-info-button').click(function() {
         $(this).next('.more-info').toggle(500);
     });
 
 });
-
-

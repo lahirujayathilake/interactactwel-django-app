@@ -3,17 +3,44 @@
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-geo-json
                 v-if="show"
-                :geojson="geoJson"
+                :geojson="geoJson_subbasin"
                 :options="options"
-                :options-style="styleFunction"
+                :options-style="styleFunction_subbasin"
         />
+        <l-geo-json
+                v-if="show"
+                :geojson="geoJson_reach"
+                :options="options"
+                :options-style="styleFunction_reach"
+        />
+        <l-choropleth-layer 
+        :data="pyDepartmentsData" 
+        title-key="department_name" 
+        id-key="department_id" 
+        :value="value" 
+        :extra-values="extraValues" 
+        geojson-id-key="Name" 
+        :geojson="geoJson_subbasin"
+        :color-scale="colorScale">
+
         <l-marker :lat-lng="marker"></l-marker>
+        <!--<template slot-scope="props"> -->
+            <l-info-control
+                item="props.currentItem" 
+                unit="props.unit"
+                title="Department" 
+                placeholder="Hover over sub-basins"
+                position="topright"
+            />
+            </l-choropleth-layer>
+       <!-- </template> -->
     </l-map>
 </template>
 
 <script>
 
     import {L, LMap, LTileLayer, LMarker, LGeoJson} from 'vue2-leaflet';
+    import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
 
     export default {
@@ -21,27 +48,31 @@
         components: {
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
-            'l-marker': LMarker,
-            'l-geo-json': LGeoJson
+            //'l-marker': LMarker,
+            'l-geo-json': LGeoJson,
+            'l-info-control': InfoControl, 
+            'l-reference-chart': ReferenceChart, 
+            'l-choropleth-layer': ChoroplethLayer
         },
 
         name: 'Map',
 
-        delete: L.Icon.Default.prototype._getIconUrl,
+        //delete: L.Icon.Default.prototype._getIconUrl,
 
-        L: L.Icon.Default.mergeOptions({
-            iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-            iconUrl: require('leaflet/dist/images/marker-icon.png'),
-            shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-        }),
+        //L: L.Icon.Default.mergeOptions({
+        //    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+        //    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+        //    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+        //}),
 
         data() {
             return {
-                geoJson: null,
+                geoJson_reach: null,
+                geoJson_subbasin: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
-                center: L.latLng(45.6735777, -118.8455003),
+                center: L.latLng(45.4435777, -119.9455003),
                 url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 marker: L.latLng(45.6735777, -118.8455003),
@@ -59,15 +90,29 @@
                     onEachFeature: this.onEachFeatureFunction
                 };
             },
-            styleFunction() {
+            styleFunction_reach() {
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
                 return () => {
                     return {
-                        weight: 2,
-                        color: "#ECEFF1",
+                        weight: 2.5,
+                        color: "#3386ff",
                         opacity: 1,
                         fillColor: fillColor,
                         fillOpacity: 1
+                    };
+                };
+            },
+            styleFunction_subbasin() {
+                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+                return () => {
+                    return {
+                        weight: 1.5,
+                        color: "#7c7c7c",
+                        opacity: 1,
+                        fillColor: "#e3dddd",
+                        dashArray: '5, 5',
+                        dashOffset: '10',
+                        fillOpacity: 0.5
                     };
                 };
             },
@@ -77,10 +122,9 @@
                     return () => {
                     };
                 }
-
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        "<div>tooltip :)</div>",
+                        "<div>Subbasin: "+ feature.properties.Name + "</div>",
                         {permanent: false, sticky: true}
                     );
                     layer.on({
@@ -92,11 +136,18 @@
 
         created() {
             this.loading = true;
+            axios.get("/reaches.geojson")
+                .then(response => {
+                    this.geoJson_reach = response.data;
+                    this.loading = true;
+                    })
+
             axios.get("/subbasins.geojson")
                 .then(response => {
-                    this.geoJson = response.data;
-                    this.loading = false;
+                    this.geoJson_subbasin = response.data;
+                    this.loading = true;
                 });
+
         },
         methods: {
 

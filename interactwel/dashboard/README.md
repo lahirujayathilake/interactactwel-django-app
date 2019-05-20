@@ -1,29 +1,10 @@
-# frontend
+# interactactwel-django-app
+This is a vue js application
 
-## Project setup
-```
+To install dependencies run:
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+To run the dev server run:
 npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+To deploy this static app to github pages, run ./deploy.sh and the page will be updated to https://interactwel.github.io/interactactwel-django-app/

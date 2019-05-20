@@ -1,34 +1,34 @@
 <template>
     <ul class="nav nav-pills nav-justified thumbnail setup-panel step-progress-bar">
-        <li v-bind:class="fromparent">
+        <li class="active arrow_box">
             <div href="#step-1">
                 <div class="step-no">1</div>
                 <h4 class="list-group-item-heading">Goals</h4>
                 <p class="list-group-item-text">2 golas selected</p>
             </div>
         </li>
-        <li v-bind:class="fromparent">
+        <li v-bind:class="{active: isStep2Active}" class="arrow_box">
             <div href="#step-2">
                 <div class="step-no">2</div>
                 <h4 class="list-group-item-heading">Actors</h4>
                 <p class="list-group-item-text">Choose actors</p>
             </div>
         </li>
-        <li class="">
+        <li v-bind:class="{active: isStep3Active}" class="arrow_box">
             <div href="#step-3">
                 <div class="step-no">3</div>
                 <h4 class="list-group-item-heading">Actions</h4>
                 <p class="list-group-item-text">Choose Actions</p>
             </div>
         </li>
-        <li class="">
+        <li v-bind:class="{active: isStep4Active}" class="arrow_box">
             <div href="#step-4">
                 <div class="step-no">4</div>
                 <h4 class="list-group-item-heading">Plans</h4>
                 <p class="list-group-item-text">Visualize adaptation plans</p>
             </div>
         </li>
-        <li class="">
+        <li v-bind:class="{active: isStep5Active}" class="arrow_box">
             <div href="#step-5">
                 <div class="step-no">5</div>
                 <h4 class="list-group-item-heading">Evaluate</h4>
@@ -72,10 +72,38 @@
 
 <script>
 
+    import EventBus from './../../../event-bus';
+
     export default {
         name: 'ProgressBar',
 
         props: ['fromparent'],
+
+        data() {
+            return {
+                isStep1Active: false,
+                isStep2Active: false,
+                isStep3Active: false,
+                isStep4Active: false,
+                isStep5Active: false,
+            }
+        },
+
+        mounted(){
+            let $this = this;
+            EventBus.$on('MOVE_TO_STEP2', function () {
+                $this.isStep2Active = true;
+                //alert($this.isActive);
+            })
+            EventBus.$on('MOVE_TO_STEP3', function () {
+                $this.isStep3Active = true;
+                //alert($this.isActive);
+            })
+            EventBus.$on('MOVE_TO_STEP4', function () {
+                $this.isStep4Active = true;
+                //alert($this.isActive);
+            })
+        },
 
         methods: {
 
@@ -92,49 +120,15 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    .step-progress-bar li::after {
-        display: none;
-        position: absolute;
-        z-index: 2;
-        content: '';
-        top: 50%;
-        right: 0;
-        border: medium none;
-        border-top-color: currentcolor;
-        border-top-style: none;
-        border-top-width: medium;
-        border-right-color: currentcolor;
-        border-right-style: none;
-        border-right-width: medium;
-        border-bottom-color: currentcolor;
-        border-bottom-style: none;
-        border-bottom-width: medium;
-        border-left-color: currentcolor;
-        border-left-style: none;
-        border-left-width: medium;
-        background-color: #fff;
-        width: 1.14285714em;
-        height: 1.14285714em;
-        border-style: solid;
-        border-color: rgba(34, 36, 38, .15);
-        border-width: 0 1px 1px 0;
-        -webkit-transition: background-color .1s ease, opacity .1s ease, color .1s ease, -webkit-box-shadow .1s ease;
-        transition: background-color .1s ease, opacity .1s ease, color .1s ease, -webkit-box-shadow .1s ease;
-        transition: background-color .1s ease, opacity .1s ease, color .1s ease, box-shadow .1s ease;
-        transition: background-color .1s ease, opacity .1s ease, color .1s ease, box-shadow .1s ease, -webkit-box-shadow .1s ease;
-        -webkit-transform: translateY(-50%) translateX(50%) rotate(-45deg);
-        transform: translateY(-50%) translateX(50%) rotate(-45deg);
-    }
 
     .step-progress-bar li {
-        padding: 1rem 1rem 1rem 2rem;
+        padding: 10px 5rem 10px 30px;
         width: 20%;
         background-color: #f5f8fa;
-        border-right: 1px solid #B0BEC5;
     }
 
     .step-progress-bar h4 {
-        font-size: 1.14285714em;
+        font-size: 1em;
         font-weight: 700;
         color: #5f6c73;
         margin-bottom: .05rem;
@@ -142,20 +136,51 @@
 
     .step-progress-bar p {
         font-weight: 400;
-        font-size: .82857143em;
+        font-size: .72857143em;
         color: #5f6c73;
         margin-bottom: 0;
     }
 
     .step-progress-bar .step-no {
         float: left;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 700;
-        color: #5f6c73;
+        color: #28a745;
         width: 30px;
     }
 
     .step-progress-bar .active {
         background: #DCEDC8;
+    }
+
+    .arrow_box {
+        position: relative;
+        background: #DCEDC8;
+        border-right: 2px solid #28a745;
+        border-left: none;
+    }
+    .arrow_box:after, .arrow_box:before {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .arrow_box:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-left-color: #28a745;
+        border-width: 11px;
+        margin-top: -11px;
+    }
+    .arrow_box:before {
+        border-color: rgba(95, 108, 115, 0);
+        border-left-color: #28a745;
+        border-width: 10px;
+        margin-top: -10px;
+        z-index: 1 !important;
     }
 </style>
