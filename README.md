@@ -19,6 +19,34 @@ pip install -r requirements.txt
 ```
 
 ```
+python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
+```
+
+## REST API
+
+Rest API is exposed in http://localhost/api
+
+#### Resources 
+
+##### Subbasin: http://localhost/api/subbasins
+
+Get All
+```
+GET http://localhost/api/subbasins/
+```
+
+Get one
+```
+GET http://localhost/api/subbasins/1
+```
+
+Create 
+```
+POST http://localhost/api/subbasins/
+
+{
+    "detail_json": <JSON COntent>
+}
 ```

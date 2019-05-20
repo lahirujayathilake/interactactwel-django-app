@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'webpack_loader',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -128,4 +130,9 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': '/bundle/',  # must end with slash
         'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
