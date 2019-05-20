@@ -27,19 +27,19 @@
         components: {
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
-            'l-marker': LMarker,
+            //'l-marker': LMarker,
             'l-geo-json': LGeoJson
         },
 
         name: 'Map',
 
-        delete: L.Icon.Default.prototype._getIconUrl,
+        //delete: L.Icon.Default.prototype._getIconUrl,
 
-        L: L.Icon.Default.mergeOptions({
-            iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-            iconUrl: require('leaflet/dist/images/marker-icon.png'),
-            shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-        }),
+        //L: L.Icon.Default.mergeOptions({
+        //    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+        //    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+        //    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+        //}),
 
         data() {
             return {
@@ -98,7 +98,6 @@
                     return () => {
                     };
                 }
-
                 return (feature, layer) => {
                     layer.bindTooltip(
                         "<div>Subbasin: "+ feature.Name + "</div>",

@@ -10,17 +10,23 @@
                     <b-card
                             title=""
                             tag="article"
-                            style="max-width: 20rem;"
+                            style="max-width: 25rem;"
                             class="mb-2"
                     >
-                        <b-card-text><strong>What are adaptation Plans?</strong></b-card-text><br/>
-                        <b-card-text class="small">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.
-                            Proin feugiat semper nunc eget porta. Etiam felis velit, congue sed eros eu, hendrerit tempus urna.
+                        <b-card title><strong>What are Goals?</strong></b-card title>
+                        <b-card-text>
+                            <p align="justify">A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p> 
+
+                            <p align="justify"> Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve. 
+                            <ul><li>These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community in whole.</li> 
+                            <li>Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.</li></ul></p>
+
+                            <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests. </p>
+
                         </b-card-text>
-                        <br/>
-                        <br/>
-                        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
+                        <!-- <br/> -->
+                        <!-- <br/> -->
+                        <!-- <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text> -->
                     </b-card>
                 </div>
                 <b-card no-body>
@@ -363,7 +369,8 @@
 
     .help-block{
         position: absolute;
-        right: -350px;
+        border: none;
+        right: -440px;
         z-index: 1000;
     }
     
