@@ -100,7 +100,7 @@
                 }
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        "<div>Subbasin: "+ feature.Name + "</div>",
+                        "<div>Subbasin: "+ feature.properties.Name + "</div>",
                         {permanent: false, sticky: true}
                     );
                     layer.on({
