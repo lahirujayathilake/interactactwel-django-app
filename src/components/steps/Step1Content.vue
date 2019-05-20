@@ -33,7 +33,7 @@
                     <div class="step-header" slot="header">Choose Goals</div>
                     <b-card-body>
                         <p class="card-text">
-                            Choose the adaptation goals that are important to you
+                            Choose adaptation goals that are important to you
                         </p>
                     </b-card-body>
                     <b-list-group-item>
@@ -62,21 +62,24 @@
             </tab-content>
             <tab-content title="Step 2"
                          icon="ti-settings" :before-change="beforeTabSwitchStep2">
-                <div class="help-block">
+                <div class="help-block-actors">
                     <b-card
-                            title=""
+                            title="Who are Actors?"
                             tag="article"
-                            style="max-width: 20rem;"
+                            style="max-width: 25rem;"
                             class="mb-2"
                     >
-                        <b-card-text><strong>Who are Actors?</strong></b-card-text><br/>
-                        <b-card-text class="small">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.
-                            Proin feugiat semper nunc eget porta. Etiam felis velit, congue sed eros eu, hendrerit tempus urna.
+                        <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
+                        <b-card-text>
+                            <p align="justify"><b>Actors</b> are groups of individuals, institutions, and organizations in a community who are most impacted, directly and/or indirectly, by the changes and stresses in the water, energy, and land resources they depend on.</p>
+
+                            <p align="justify">In <b>Step 2</b>, think about which group of actors would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the options that reflect your group’s interest. Note that even though you choose only a few actors, 
+                            your adaptation plans (in Step 4) may include additional actors who would need to also take actions in conjunction with you. But more on that when you reach Step 4!</p>
+
                         </b-card-text>
-                        <br/>
-                        <br/>
-                        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
+                        <!--<br/> -->
+                        <!--<br/> -->
+                        <!--<b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text> -->
                     </b-card>
                 </div>
                 <b-card no-body>
@@ -114,19 +117,21 @@
                          icon="ti-check" :before-change="beforeTabSwitchStep3">
                 <div class="help-block-actions">
                     <b-card
-                            title=""
+                            title="What are Actions?"
                             tag="article"
-                            style="max-width: 20rem;"
+                            style="max-width: 25rem;"
                             class="mb-2"
                     >
-                        <b-card-text><strong>Why select Actions?</strong></b-card-text><br/>
-                        <b-card-text class="small">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.
-                            Proin feugiat semper nunc eget porta. Etiam felis velit, congue sed eros eu, hendrerit tempus urna.
+                        <!-- <b-card-text><strong>Why select Actions?</strong></b-card-text><br/> -->
+                        <b-card-text>
+                        <p align="justify"><b>Adaptation Actions</b> are management actions that adjust the allocation of resources, operations, and assets.  These management actions are formulated to adapt to changing basin conditions that effect quality, quantity, and accessibility of water, energy, and land resources. These actions include a variety of approaches – from infrastructure building, adopting new technologies to raising awareness.</p>
+
+                        <p align="justify">In <b>Step 3</b>, think about types of actions would be of interest to the actors you selected in Step 2 and select from the options available on the list. Please note that your adaptation plans (in Step 4) may include additional actions. But more on that when you reach Step 4!</p>
+
                         </b-card-text>
-                        <br/>
-                        <br/>
-                        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>-->
                     </b-card>
                 </div>
                 <b-card style="height: 570px; width: 610px" no-body>
@@ -373,6 +378,13 @@
         right: -440px;
         z-index: 1000;
     }
+
+    .help-block-actors{
+        position: absolute;
+        border: none;
+        right: -440px;
+        z-index: 1000;
+    }
     
     .help-block-actions{
         position: absolute;
@@ -386,7 +398,7 @@
     }
 
     .card-text{
-        font-size:13.5px;
+        font-size:14px;
     }
 
     .card-title {
