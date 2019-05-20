@@ -134,7 +134,7 @@
                         <!--<b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>-->
                     </b-card>
                 </div>
-                <b-card style="height: 570px; width: 610px" no-body>
+                <b-card style="height: 570px; width: 680px" no-body>
                     <div class="step-header" slot="header">Choose Actions</div>
                     <b-card-body>
                         <p class="card-text">
@@ -152,7 +152,7 @@
                     <b-card-body>
 
                         <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
-                        <table style="height: 370px; width: 580px" class="table table-bordered table-striped table-hover table-responsive">
+                        <table style="height: 370px; width: 630px" class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
                                 <th></th>
@@ -357,7 +357,12 @@
 
     td, th {
         font-size: 12px;
+        text-align: left;
         padding: .5rem;
+    }
+
+    th {
+        width: auto;
     }
 
     .vue-form-wizard .wizard-header {
@@ -393,7 +398,7 @@
     }
 
     .step-header{
-        font-size: 16px;
+        font-size: 18px;
         font-weight: bold;
     }
 
