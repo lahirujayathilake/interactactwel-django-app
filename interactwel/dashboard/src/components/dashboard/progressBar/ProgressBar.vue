@@ -128,7 +128,7 @@
     }
 
     .step-progress-bar h4 {
-        font-size: 1em;
+        font-size: 1.3em;
         font-weight: 700;
         color: #5f6c73;
         margin-bottom: .05rem;
@@ -136,7 +136,7 @@
 
     .step-progress-bar p {
         font-weight: 400;
-        font-size: .72857143em;
+        font-size: 1em;
         color: #5f6c73;
         margin-bottom: 0;
     }
