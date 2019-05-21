@@ -45,12 +45,6 @@
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
-.rotate {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
+
 
 </style>
