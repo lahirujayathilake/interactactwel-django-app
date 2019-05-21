@@ -1,4 +1,5 @@
 <template>
+
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
@@ -40,9 +41,10 @@
             />
 
        </template> -->
-    <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
+     <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
     </l-map>
-    
+
+
     
 </template>
 
@@ -238,77 +240,14 @@
         font-weight: bold;
     }
 
-    .modal-backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal {
-    background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
-    max-height: 450px;
-    overflow: visible;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-    max-width: 800px;
-    /*overflow-x: auto;*/
-    display: flex;
-    flex-direction: column;
-  }
-
-  .modal-header,
-  .modal-footer {
-    padding: 15px;
-    display: flex;
-  }
-
-  .modal-header {
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .modal-footer {
-    
-    justify-content: flex-end;
-  }
-
-  .modal-body {
-    position: relative;
-    padding: 30px 40px;
-    font-size: 18px;
-
-  }
-
-  .btn-close {
-    border: none;
-    font-size: 20px;
-    padding: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
-
-  .btn-green {
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
-
+    .chart-container {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        z-index: 1000;
+        background-color: #4cae4c;
+        height: auto;
+        width: 800px;
+        max-width: 830px !important;
+    }
 </style>

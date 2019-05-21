@@ -29,6 +29,9 @@
   
   export default {
     name: 'modal',
+
+    
+
     methods: {
       close() {
         this.$emit('close');

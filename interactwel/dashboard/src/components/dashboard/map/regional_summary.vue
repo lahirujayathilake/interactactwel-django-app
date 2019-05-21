@@ -4,7 +4,6 @@
             :data="chartData"
             :options="chartOptions"
     />
-
 </template>
 
 <script>
@@ -16,6 +15,7 @@
     components: {
             GChart,
         },
+        
     methods: {
       close() {
         this.$emit('close');

@@ -1,14 +1,20 @@
 <template>
 <div id="app">
     <modal v-show="isModalVisible" @close="closeModal"/>
+    <tutorStep1 v-bind:class="{active: isStep1Active}" v-show="istutor1Visible" @continue="continuetutor" @close="closeTutor"/>
+    <tutorStep2 v-bind:class="{active: isStep2Active}" v-show="istutor2Visible" @close="closeTutor"/>
     <dashboard></dashboard>   
 </div>
 </template>
 
 <script>
     import modal from './dashboard/intro/modal.vue';
+    import tutorStep1 from './dashboard/intro/tutorStep1.vue';
+    import tutorStep2 from './dashboard/intro/tutorStep2.vue';
     import Dashboard from './dashboard/Dashboard.vue'
     import ProgressBar from './dashboard/progressBar/ProgressBar.vue'
+    import EventBus from '../event-bus';
+
 
     export default {
 
@@ -16,20 +22,40 @@
         components: {
             'Dashboard': Dashboard, 
             'modal': modal,
+            'tutorStep1': tutorStep1,
+            'tutorStep2': tutorStep2,
         },
     
         data () {
             return {
             isModalVisible: true,
+            isStep1Active: false,
+            isStep2Active: false,
+            istutor1Visible: false,
+            istutor2Visible: false,
             };
         },
         methods: {
-            showModal() {
-                this.isModalVisible = true;
-            },
             closeModal() {
                 this.isModalVisible = false;
+                this.isStep1Active = true;
+                this.istutor1Visible = true;
+                
             },
+
+            closeTutor() {
+                this.istutor1Visible = false;
+                this.istutor2Visible = false;
+                this.isStep1Active = false;
+                this.isStep2Active = false;
+            },
+
+            continuetutor(){
+                this.isStep2Active = true;
+                this.istutor1Visible = false;
+                this.isStep1Active = false;
+                this.istutor2Visible = true;
+            }
         },
     }
 </script>
@@ -82,7 +108,6 @@
   }
 
   .modal-footer {
-    
     justify-content: flex-end;
   }
 
@@ -112,5 +137,25 @@
     background: transparent;
   }
  
+   .tutor {
+    background: #FFFFFF;
+    box-shadow: 2px 2px 20px 1px;
+    max-height: 450px;
+    overflow: visible;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+    /*overflow-x: auto;*/
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tutor-footer {
+      display: flex;
+    justify-content: flex-end;
+  }
 
 </style>
