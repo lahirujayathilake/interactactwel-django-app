@@ -1,7 +1,8 @@
 <template>
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-control-layers position="topleft" ref="layersControl"></l-control-layers>
+        <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
+        </l-control-layers>
         <l-layer-group layer-type="overlay" name="Sub-basins">
         <l-geo-json
                 v-if="show"
@@ -39,12 +40,13 @@
             />
 
        </template> -->
+    <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
     </l-map>
 </template>
 
 <script>
 
-    import {L, LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LLayerGroup} from 'vue2-leaflet';
+    import {L, LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup} from 'vue2-leaflet';
     import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
 
@@ -59,7 +61,8 @@
             'l-reference-chart': ReferenceChart, 
             'l-choropleth-layer': ChoroplethLayer,
             'l-control-layers': LControlLayers,
-            'l-layer-group': LLayerGroup
+            'l-layer-group': LLayerGroup,
+            'l-control-scale': LControlScale
         },
 
         name: 'Map',
@@ -99,7 +102,7 @@
                     {
                         name: "Satellite",
                         visible: false,
-                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
                         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     },
                     {
