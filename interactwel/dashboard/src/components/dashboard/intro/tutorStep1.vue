@@ -14,7 +14,7 @@
         </section>
         <footer class="tutor-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="close">Continue</button>
+            <button type="button" class="btn-green" @click="nextstep">Continue</button>
             <button type="button" class="btn-close" @click="close">Exit tutorial</button>
           </slot>
         </footer>
@@ -33,6 +33,9 @@
     methods: {
       close() {
         this.$emit('close');
+      },
+      nextstep() {
+        this.$emit('continue');
       },
     },
   };

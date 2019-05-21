@@ -1,7 +1,7 @@
 <template>
 <div id="app">
     <modal v-show="isModalVisible" @close="closeModal"/>
-    <tutorStep1 v-bind:class="{active: isStep1Active}" v-show="istutor1Visible" @close="continuetutor"/>
+    <tutorStep1 v-bind:class="{active: isStep1Active}" v-show="istutor1Visible" @continue="continuetutor" @close="closeTutor"/>
     <tutorStep2 v-bind:class="{active: isStep2Active}" v-show="istutor2Visible" @close="closeTutor"/>
     <dashboard></dashboard>   
 </div>
@@ -46,6 +46,8 @@
             closeTutor() {
                 this.istutor1Visible = false;
                 this.istutor2Visible = false;
+                this.isStep1Active = false;
+                this.isStep2Active = false;
             },
 
             continuetutor(){
