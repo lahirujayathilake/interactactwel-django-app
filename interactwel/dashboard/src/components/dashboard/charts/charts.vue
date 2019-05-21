@@ -172,8 +172,8 @@
 
     .chart-container {
         position: absolute;
-        top: 30px;
-        left: 30px;
+        top: 15px;
+        left: 90px;
         z-index: 1000;
         background-color: #4cae4c;
         height: auto;
