@@ -1,7 +1,7 @@
 <template>
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-control-layers ref="layersControl"></l-control-layers>
+        <l-control-layers position="topleft" ref="layersControl"></l-control-layers>
         <l-layer-group layer-type="overlay" name="Sub-basins">
         <l-geo-json
                 v-if="show"
@@ -20,27 +20,14 @@
         </l-layer-group>
         
         <l-tile-layer
-          layer-type="base"
-          key="3"
-          name="Street Map"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
-        </l-tile-layer>
-
-        <l-tile-layer
-          layer-type="base"
-          key="2"
-          name="Satellite"
-          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png">
-        </l-tile-layer>
-
-        <l-tile-layer
-          layer-type="base"
-          key="1"
-          name="Terrain Map"
-          url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png">
-        </l-tile-layer>
-        
-        
+        v-for="tileProvider in tileProviders"
+        :key="tileProvider.name"
+        :name="tileProvider.name"
+        :visible="tileProvider.visible"
+        :url="tileProvider.url"
+        :attribution="tileProvider.attribution"
+        :token="token"
+        layer-type="base"/>
 
         <!--<template slot-scope="props"> 
             <l-info-control
@@ -100,7 +87,30 @@
                 enableTooltip: true,
                 loading: true,
                 show: true,
-                fillColor: "rgba(76, 175, 80, 0.44)"
+                fillColor: "rgba(76, 175, 80, 0.44)",
+
+                tileProviders: [
+                    {
+                        name: "Street Map",
+                        visible: false,
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    },
+                    {
+                        name: "Satellite",
+                        visible: false,
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+                    },
+                    {
+                        name: "Terrain Map",
+                        visible: true,
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
+                    }
+                ]
+
+
             }
         },
 
