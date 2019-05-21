@@ -167,9 +167,11 @@
                     );
                     
                     layer.on('click', function(e){ 
-                        console.log(feature.properties.Name);
+    
+                        var layer = e.target;
+                        console.log(prevLayerClicked);
                         console.log(e.target)
-                        if (prevLayerClicked !== null) {
+                        if (prevLayerClicked !== null || prevLayerClicked == layer) {
                             prevLayerClicked.setStyle({weight: 1.5,
                             color: "#7c7c7c",
                             opacity: 1,
@@ -178,12 +180,13 @@
                             dashOffset: '10',
                             fillOpacity: 0.5});
                         }
-                        var layer = e.target;
-                        layer.setStyle({fillColor :'blue'});
-                        prevLayerClicked = layer;
+                        if (prevLayerClicked !== layer) {
+                            layer.setStyle({fillColor :'blue'});
+                            prevLayerClicked = layer;
+                        }else{
+                           prevLayerClicked = null; 
+                        }
 
-                        
-       
                         //{click: this.layerClicked
                     });
                     
