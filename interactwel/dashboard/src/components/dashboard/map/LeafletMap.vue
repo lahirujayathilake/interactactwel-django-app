@@ -58,7 +58,7 @@
     export default {
         name: 'Map',
         components: {
-            'overview_graph': regional_summary,
+            'regional-summary': regional_summary,
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
             //'l-marker': LMarker,
@@ -95,6 +95,8 @@
                 loading: true,
                 show: true,
                 fillColor: "rgba(76, 175, 80, 0.44)",
+
+                subbasinID: null,
                 
 
                 tileProviders: [
@@ -116,8 +118,21 @@
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
                     }
-                ]
+                ],
 
+                customPopup : "<div class=\"region_summary_popup\">" +
+                    "<div>\n" +
+                "        <div>\n" +
+                "            <h5>SubBasin</h5>\n" +
+                "        </div>\n" +
+                "        <div>Test Data</div>" +
+                "</div>",
+                customOptions: [
+                    {
+                        'maxWidth': '400',
+                        'className' : 'custom'
+                    }
+                    ]
 
             }
         },
@@ -154,7 +169,7 @@
                     };
                 };
             },
-            
+
             onEachFeatureFunction() {
                 var prevLayerClicked = null;
                 if (!this.enableTooltip) {
@@ -163,13 +178,15 @@
                 }
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        //"<div>Subbasin: "+ feature.properties.Name + "</div>",
-                        "<div><strong>Click and explore!</strong></div>",
+                        "<div>Subbasin: "+ feature.properties.Name + "</div>",
+                        //"<div><strong>Click and explore!</strong>" +
                         {permanent: false, sticky: true}
                     );
-                    
-                    layer.on('click', function(e){ 
-    
+
+                    layer.bindPopup(this.customPopup,this.customOptions);
+
+                    layer.on('click', function(e){
+
                         var layer = e.target;
                         console.log(prevLayerClicked);
                         console.log(e.target)
@@ -185,14 +202,14 @@
                         if (prevLayerClicked !== layer) {
                             layer.setStyle({fillColor :'blue'});
                             prevLayerClicked = layer;
-                            
+
                         }else{
-                           prevLayerClicked = null; 
+                           prevLayerClicked = null;
                         }
 
                         //{click: this.layerClicked
                     });
-                    
+
                 };
             }
         },
@@ -213,6 +230,9 @@
 
         },
         methods: {
+
+
+
             layerClicked() {
                 alert("clicked me");
                 
@@ -240,14 +260,10 @@
         font-weight: bold;
     }
 
-    .chart-container {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        z-index: 1000;
-        background-color: #4cae4c;
-        height: auto;
-        width: 800px;
-        max-width: 830px !important;
+    .region_summary_popup{
+        width: 300px;
+        height: 300px;
     }
+
+
 </style>
