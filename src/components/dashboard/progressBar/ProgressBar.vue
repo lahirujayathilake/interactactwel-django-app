@@ -98,17 +98,17 @@
 
         mounted(){
             let $this = this;
-            EventBus.$on('MOVE_TO_STEP2', function () {
+            EventBus.$on('MOVE_TO_STEP2', function (selectedGoalsCount) {
                 $this.isStep2Active = true;
-                $this.step1_desc = "2 GOALS SELECTED";
+                $this.step1_desc = selectedGoalsCount + " GOALS SELECTED";
             })
-            EventBus.$on('MOVE_TO_STEP3', function () {
+            EventBus.$on('MOVE_TO_STEP3', function (selectedActorsCount) {
                 $this.isStep3Active = true;
-                $this.step2_desc = "2 Actors SELECTED";
+                $this.step2_desc = selectedActorsCount + " ACTORS SELECTED";
             })
-            EventBus.$on('MOVE_TO_STEP4', function () {
+            EventBus.$on('MOVE_TO_STEP4', function (selectedActionsCount) {
                 $this.isStep4Active = true;
-                $this.step3_desc = "2 Actions SELECTED";
+                $this.step3_desc = selectedActionsCount + " ACTIONS SELECTED";
             })
         },
 

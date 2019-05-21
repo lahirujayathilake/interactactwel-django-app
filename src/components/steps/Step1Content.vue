@@ -265,7 +265,7 @@
                 if (!this.selectAllGoals) {
                     for (let goal in this.goals) {
                         if (this.goals[goal].readonly == false){
-                        this.selectedGoals.push(this.goals[goal].id, this.goals[goal].readonly);
+                        this.selectedGoals.push(this.goals[goal].id);
                         }
                     }
                 }
@@ -276,7 +276,7 @@
                 if (!this.selectAllActors) {
                     for (let actor in this.actors) {
                         if (this.actors[actor].readonly == false){
-                        this.selectedActors.push(this.actors[actor].id, this.actors[actor].readonly);
+                        this.selectedActors.push(this.actors[actor].id);
                         }
                     }
                 }
@@ -296,40 +296,27 @@
             },
 
             onComplete: function () {
-                //alert('Yay. Done!'),
                 this.stepWizardVisibility = true,
-                    this.$emit('finish-wizard');
-                //EventBus.$emit('MOVE_TO_STEP4');
+                this.$emit('finish-wizard');
 
             },
 
-            beforeTabSwitchStep1: function () {
-                EventBus.$emit('MOVE_TO_STEP2');
-                //alert("This is called before switchind tabs")
+            beforeTabSwitchStep1: function (selectedGoalsCount) {
+                selectedGoalsCount = this.selectedGoals.length;
+                EventBus.$emit('MOVE_TO_STEP2', selectedGoalsCount);
                 return true
             },
 
-            beforeTabSwitchStep2: function () {
-                EventBus.$emit('MOVE_TO_STEP3');
-                //alert("This is called before switchind tabs")
+            beforeTabSwitchStep2: function (selectedActorsCount) {
+                selectedActorsCount = this.selectedActors.length;
+                EventBus.$emit('MOVE_TO_STEP3', selectedActorsCount);
                 return true
             },
 
-            beforeTabSwitchStep3: function () {
-                EventBus.$emit('MOVE_TO_STEP4');
-                //alert("This is called before switchind tabs")
+            beforeTabSwitchStep3: function (selectedActionsCount) {
+                selectedActionsCount = this.selectedActions.length;
+                EventBus.$emit('MOVE_TO_STEP4', selectedActionsCount);
                 return true
-            },
-
-            beforeTabSwitch: function () {
-                //EventBus.$emit('CLICK_NEXT_STEP');
-                //alert("This is called before switchind tabs")
-                return true
-            },
-
-            nextStep() {
-                //alert("next tab clicked")
-                //this.$emit('next-click')
             },
         }
 
