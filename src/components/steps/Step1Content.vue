@@ -49,7 +49,7 @@
                         <b-form>
                             <div class="list-group">
                                 <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
-                                    <label class="form-checkbox">
+                                    <label class="form-checkbox" :disabled="goal.readonly">
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"></input>
                                         {{goal.goal}}
                                     </label>
