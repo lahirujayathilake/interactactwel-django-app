@@ -13,13 +13,14 @@
                 :options="options"
                 :options-style="styleFunction_reach"
         />
-        <l-marker :lat-lng="marker"></l-marker>
+
     </l-map>
 </template>
 
 <script>
 
     import {L, LMap, LTileLayer, LMarker, LGeoJson} from 'vue2-leaflet';
+    import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
 
     export default {
@@ -28,7 +29,10 @@
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
             //'l-marker': LMarker,
-            'l-geo-json': LGeoJson
+            'l-geo-json': LGeoJson,
+            'l-info-control': InfoControl, 
+            'l-reference-chart': ReferenceChart, 
+            'l-choropleth-layer': ChoroplethLayer
         },
 
         name: 'Map',
@@ -100,7 +104,7 @@
                 }
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        "<div>Subbasin: "+ feature.Name + "</div>",
+                        "<div>Subbasin: "+ feature.properties.Name + "</div>",
                         {permanent: false, sticky: true}
                     );
                     layer.on({
