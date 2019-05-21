@@ -11,8 +11,8 @@
         name: "MyChart",
         data() {
             return {
-                w: 800,
-                h: 350,
+                w: 700,
+                h: 260,
                 pathid: 0,
                 margin: {
                     top: 20,
@@ -50,7 +50,7 @@
                 return d3
                     .scaleBand()
                     .domain(this.computedActions.map(d => d.value))
-                    .rangeRound([-20, this.h]);
+                    .rangeRound([-14, this.h]);
             },
 
             xScale() {
@@ -74,7 +74,7 @@
                 let previousY;
                 this.xListComputed(nextX);
                 const pathPointsArray = [];
-                const a = pathY_points.map(element => parseInt(element) * 30);
+                const a = pathY_points.map(element => parseInt(element) * 22);
                 a.forEach((y, i) => {
                     if (i === 0) {
                         previousY = y;

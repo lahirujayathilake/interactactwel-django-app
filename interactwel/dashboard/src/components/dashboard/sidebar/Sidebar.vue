@@ -5,12 +5,8 @@
                 <b-nav-item v-on:click="showChart(value)" block href="#" v-b-toggle="value" variant="info">{{value}}
                 </b-nav-item>
             </b-nav>
-            <b-collapse :id="value" accordion="my-accordion" role="tabpanel">
-                <b-nav vertical class="w-100" v-for="chart in chartTypes">
-                    <!--<b-nav-item v-on:click="showPlanGraph()" v-bind:class="{active: isPlanGraphActive}">Plans</b-nav-item>
-                    <b-nav-item v-on:click="showCostGraph()" v-bind:class="{active: isCostGraphActive}">Cost</b-nav-item>-->
-                    <b-nav-item v-on:click="showGraph(chart.id)">{{chart.name}}</b-nav-item>
-                </b-nav>
+            <b-collapse class :id="value" accordion="my-accordion" role="tabpanel" v-for="chart in chartTypes" v-bind:key="chart">
+                <b-nav-item class="collapse-item" v-on:click="showGraph(chart.id)" v-bind:class="{active: isPlanGraphActive}">{{chart.name}}</b-nav-item>
             </b-collapse>
         </div>
     </div>
@@ -38,7 +34,7 @@
                     {id: "fertilizer-graph", name: "Detailed"},
                     {id: "costs-graph", name: "Costs"},
                     {id: "streamsflow-graph", name: "Streams"},
-                   /* {id: "crops-graph", name: "Crops"},*/
+                    /* {id: "crops-graph", name: "Crops"},*/
                     {id: "precipitation-graph", name: "Precipitation"},
                     /*{id: "irrigation-graph", name: "Irrigation"},*/
                     {id: "groundwater-graph", name: "Groundwater"},
@@ -68,14 +64,6 @@
                 this.currentChart = chart;
                 EventBus.$emit('CLICK_ITEM', this.currentChart);
 
-            },
-
-            showPlanGraph() {
-                EventBus.$emit('CLICK_ITEM_PLAN');
-            },
-
-            showCostGraph() {
-                EventBus.$emit('CLICK_ITEM_COST');
             },
 
             onClickSidebarItem(planName) {
@@ -111,16 +99,22 @@
         background-color: #263238;
     }
 
+    #sidebar .nav-item{
+        list-style: none;
+    }
+
     #sidebar .collapse .nav-item {
         border-bottom: 1px solid #37474f !important;
+        list-style: none;
     }
 
     #sidebar .collapse .nav-item a {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.7);
     }
 
     #sidebar .p-1 {
-        border-bottom: 1px solid #263238 !important;
+        border-bottom: 1px solid #37474f !important;
+        font-size: 14px;
     }
 
     #sidebar .p-1:hover {
@@ -132,8 +126,17 @@
         color: #fff;
     }
 
-    .accordion-header {
-        border-bottom: 1px solid #ffffff4d;
+    #sidebar .collapse-item a{
+        font-size: 12px;
+        text-indent: 15px;
+    }
+
+    #sidebar .collapsing-section{
+        background-color: #000;
+    }
+
+    #sidebar .nav-link:hover{
+        background-color: #000 ;
     }
 
 </style>

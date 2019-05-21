@@ -20,17 +20,17 @@
                                   class="my-2 my-sm-0" type="submit"><strong> Exit </strong>
                         </b-button>
 
-                        <b-nav-item-dropdown text="Settings" right>
+                       <!-- <b-nav-item-dropdown text="Settings" right>
                             <b-dropdown-item href="#">EN</b-dropdown-item>
                             <b-dropdown-item href="#">ES</b-dropdown-item>
                             <b-dropdown-item href="#">RU</b-dropdown-item>
                             <b-dropdown-item href="#">FA</b-dropdown-item>
-                        </b-nav-item-dropdown>
+                        </b-nav-item-dropdown>-->
 
                         <b-nav-item-dropdown right>
                             <!-- Using button-content slot -->
                             <template slot="button-content">
-                                <em>User</em>
+                                <em>Nick</em>
                             </template>
                             <b-dropdown-item href="#">Profile</b-dropdown-item>
                             <b-dropdown-item href="#">Signout</b-dropdown-item>
