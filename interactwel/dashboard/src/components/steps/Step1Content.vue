@@ -4,27 +4,32 @@
         <form-wizard v-show="!stepWizardVisibility" v-on:next-step="nextStep" @on-complete="onComplete"
                      shape="tab"
                      color="#28a645">
-            <tab-content title="Step 1" icon="ti-user" :before-change="beforeTabSwitchStep1">
+            <tab-content title="Step 1"
+                         icon="ti-user" :before-change="beforeTabSwitchStep1">
                 <div class="help-block">
                     <b-card class="mb-2"
                             title="What are Goals?"
                             tag="article"
-                            style="max-width: 28.5rem;"
-                        >
+                            style="max-width: 25rem;"
+
+                    >
                         <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
                         <b-card-text>
-                            <p align="justify">A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p> 
-
-                            <p align="justify"> Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve. 
-                            <ul><li>These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community in whole.</li> 
-                            <li>Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.</li></ul></p>
-
-                            <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests. </p>
+                            <p align="justify">
+                                A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>
+                            <p align="justify">Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve.
+                            </p>
+                            <ul>
+                                <li>These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community in whole.
+                                </li>
+                                <li>
+                                    Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.
+                                </li>
+                            </ul>
+                            <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests.
+                            </p>
 
                         </b-card-text>
-                        <!-- <br/> -->
-                        <!-- <br/> -->
-                        <!-- <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text> -->
                     </b-card>
                 </div>
                 <b-card no-body>
@@ -47,8 +52,9 @@
                         <b-form>
                             <div class="list-group">
                                 <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
-                                    <label class="form-checkbox">
-                                        <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"></input>
+                                    <label class="form-checkbox" :disabled="goal.readonly">
+                                        <input type="checkbox" :value="goal.id" v-model="selectedGoals"
+                                               :disabled="goal.readonly"></input>
                                         {{goal.goal}}
                                     </label>
                                     <b-badge class="info-button" pill variant="secondary">i</b-badge>
@@ -58,7 +64,8 @@
                     </b-list-group>
                 </b-card>
             </tab-content>
-            <tab-content title="Step 2" icon="ti-settings" :before-change="beforeTabSwitchStep2">
+            <tab-content title="Step 2"
+                         icon="ti-settings" :before-change="beforeTabSwitchStep2">
                 <div class="help-block-actors">
                     <b-card
                             title="Who are Actors?"
@@ -68,15 +75,15 @@
                     >
                         <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
                         <b-card-text>
-                            <p align="justify"><b>Actors</b> are groups of individuals, institutions, and organizations in a community who are most impacted, directly and/or indirectly, by the changes and stresses in the water, energy, and land resources they depend on.</p>
+                            <p align="justify"><b>Actors</b>
+                                are groups of individuals, institutions, and organizations in a community who are most impacted, directly and/or indirectly, by the changes and stresses in the water, energy, and land resources they depend on.
+                            </p>
 
-                            <p align="justify">In <b>Step 2</b>, think about which group of actors would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the options that reflect your group’s interest. Note that even though you choose only a few actors, 
-                            your adaptation plans (in Step 4) may include additional actors who would need to also take actions in conjunction with you. But more on that when you reach Step 4!</p>
+                            <p align="justify">In <b>Step 2</b>, think about which group of actors would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the options that reflect your group’s interest. Note that even though you choose only a few actors,
+                                your adaptation plans (in Step 4) may include additional actors who would need to also take actions in conjunction with you. But more on that when you reach Step 4!
+                            </p>
 
                         </b-card-text>
-                        <!--<br/> -->
-                        <!--<br/> -->
-                        <!--<b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text> -->
                     </b-card>
                 </div>
                 <b-card no-body>
@@ -100,7 +107,8 @@
                             <div class="list-group">
                                 <li class="list-group-item" v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="actor.id" v-model="selectedActors" :disabled="actor.readonly">
+                                        <input type="checkbox" :value="actor.id" v-model="selectedActors"
+                                               :disabled="actor.readonly">
                                         {{actor.actor}}
                                     </label>
                                     <b-badge class="info-button" pill variant="secondary">i</b-badge>
@@ -121,17 +129,17 @@
                     >
                         <!-- <b-card-text><strong>Why select Actions?</strong></b-card-text><br/> -->
                         <b-card-text>
-                        <p align="justify"><b>Adaptation Actions</b> are management actions that adjust the allocation of resources, operations, and assets.  These management actions are formulated to adapt to changing basin conditions that effect quality, quantity, and accessibility of water, energy, and land resources. These actions include a variety of approaches – from infrastructure building, adopting new technologies to raising awareness.</p>
+                            <p align="justify"><b>Adaptation Actions</b>
+                                are management actions that adjust the allocation of resources, operations, and assets.  These management actions are formulated to adapt to changing basin conditions that effect quality, quantity, and accessibility of water, energy, and land resources. These actions include a variety of approaches – from infrastructure building, adopting new technologies to raising awareness.
+                            </p>
 
-                        <p align="justify">In <b>Step 3</b>, think about types of actions would be of interest to the actors you selected in Step 2 and select from the options available on the list. Please note that your adaptation plans (in Step 4) may include additional actions. But more on that when you reach Step 4!</p>
+                            <p align="justify">In <b>Step 3</b>, think about types of actions would be of interest to the actors you selected in Step 2 and select from the options available on the list. Please note that your adaptation plans (in Step 4) may include additional actions. But more on that when you reach Step 4!
+                            </p>
 
                         </b-card-text>
-                        <!--<br/>-->
-                        <!--<br/>-->
-                        <!--<b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus urna id turpis faucibus fermentum.</b-card-text>-->
-                    </b-card>
+                        </b-card>
                 </div>
-                <b-card style="height: 570px; width: 690px" no-body>
+                <b-card style="height: 570px; width: 680px" no-body>
                     <div class="step-header" slot="header">Choose Actions</div>
                     <b-card-body>
                         <p class="card-text">
@@ -149,7 +157,8 @@
                     <b-card-body>
 
                         <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
-                        <table style="height: 370px; width: 660px" class="table table-bordered table-striped table-hover table-responsive">
+                        <table style="height: 370px; width: 630px"
+                               class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
                                 <th></th>
@@ -166,7 +175,8 @@
                                 </td>
                                 <td v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="actor.id + ',' + action.id" v-model="selectedActions" :disabled="action.readonly || actor.readonly">
+                                        <input type="checkbox" :value="actor.id + ',' + action.id"
+                                               v-model="selectedActions" :disabled="action.readonly || actor.readonly">
                                         <i class="form-icon"></i>
                                     </label>
                                 </td>
@@ -252,7 +262,7 @@
                 {id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
                 {id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
                 {id: 5, name: "TRI", actor: 'Data Centers', readonly: true},
-                { id: 6, name: "MUN", actor: 'Dairies' , readonly: true}
+                {id: 6, name: "MUN", actor: 'Dairies', readonly: true}
             ],
         }),
 
@@ -261,8 +271,8 @@
                 this.selectedGoals = [];
                 if (!this.selectAllGoals) {
                     for (let goal in this.goals) {
-                        if (this.goals[goal].readonly == false){
-                        this.selectedGoals.push(this.goals[goal].id, this.goals[goal].readonly);
+                        if (this.goals[goal].readonly == false) {
+                            this.selectedGoals.push(this.goals[goal].id);
                         }
                     }
                 }
@@ -272,8 +282,8 @@
                 this.selectedActors = [];
                 if (!this.selectAllActors) {
                     for (let actor in this.actors) {
-                        if (this.actors[actor].readonly == false){
-                        this.selectedActors.push(this.actors[actor].id, this.actors[actor].readonly);
+                        if (this.actors[actor].readonly == false) {
+                            this.selectedActors.push(this.actors[actor].id);
                         }
                     }
                 }
@@ -284,8 +294,8 @@
                 if (!this.selectAllActions) {
                     for (let action in this.actions) {
                         for (let actor in this.actors) {
-                            if (this.actors[actor].readonly == false && this.actions[action].readonly == false){
-                            this.selectedActions.push(this.actors[actor].id + ',' + this.actions[action].id);
+                            if (this.actors[actor].readonly == false && this.actions[action].readonly == false) {
+                                this.selectedActions.push(this.actors[actor].id + ',' + this.actions[action].id);
                             }
                         }
                     }
@@ -293,40 +303,27 @@
             },
 
             onComplete: function () {
-                //alert('Yay. Done!'),
                 this.stepWizardVisibility = true,
                     this.$emit('finish-wizard');
-                //EventBus.$emit('MOVE_TO_STEP4');
 
             },
 
-            beforeTabSwitchStep1: function () {
-                EventBus.$emit('MOVE_TO_STEP2');
-                //alert("This is called before switchind tabs")
+            beforeTabSwitchStep1: function (selectedGoalsCount) {
+                selectedGoalsCount = this.selectedGoals.length;
+                EventBus.$emit('MOVE_TO_STEP2', selectedGoalsCount);
                 return true
             },
 
-            beforeTabSwitchStep2: function () {
-                EventBus.$emit('MOVE_TO_STEP3');
-                //alert("This is called before switchind tabs")
+            beforeTabSwitchStep2: function (selectedActorsCount) {
+                selectedActorsCount = this.selectedActors.length;
+                EventBus.$emit('MOVE_TO_STEP3', selectedActorsCount);
                 return true
             },
 
-            beforeTabSwitchStep3: function () {
-                EventBus.$emit('MOVE_TO_STEP4');
-                //alert("This is called before switchind tabs")
+            beforeTabSwitchStep3: function (selectedActionsCount) {
+                selectedActionsCount = this.selectedActions.length;
+                EventBus.$emit('MOVE_TO_STEP4', selectedActionsCount);
                 return true
-            },
-
-            beforeTabSwitch: function () {
-                //EventBus.$emit('CLICK_NEXT_STEP');
-                //alert("This is called before switchind tabs")
-                return true
-            },
-
-            nextStep() {
-                //alert("next tab clicked")
-                //this.$emit('next-click')
             },
         }
 
@@ -370,43 +367,50 @@
         paddding: 0 !important;
     }
 
-    .info-button{
+    .info-button {
         float: right !important;
     }
 
-    .help-block{
-        position: absolute;
-        border: none;
-        right: -490px;
-        z-index: 1000;
-    }
-
-    .help-block-actors{
+    .help-block {
         position: absolute;
         border: none;
         right: -440px;
         z-index: 1000;
     }
-    
-    .help-block-actions{
+
+    .help-block-actors {
         position: absolute;
         border: none;
+        right: -440px;
+        z-index: 1000;
+    }
+
+    .help-block-actions {
+        position: absolute;
         right: -450px;
         z-index: 1000;
     }
 
-    .step-header{
+    .help-block .card-body, .help-block-actors .card-body, .help-block-actions .card-body {
+        padding: 1.5rem;
+    }
+
+    .step-header {
         font-size: 18px;
         font-weight: bold;
     }
 
-    .card-text{
-        font-size:15px;
+    .card-text {
+        font-size: 13px;
+        color: #5e6b7e;
     }
 
     .card-title {
-    font-size: 25px;
-    font-weight: bold;
+        font-size: 25px;
+        font-weight: bold;
+        color: #5e6b7e;
+        border-bottom: 2px solid #28a645;
+        padding-bottom: 5px;
     }
 
 

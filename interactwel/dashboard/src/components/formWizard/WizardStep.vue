@@ -18,9 +18,9 @@
               :class="{active:tab.active, has_error:tab.validationError}"
               :style="tab.active ? stepTitleStyle : {}">
               {{tab.title}}
-            <h4 class="list-group-item-heading">Goals</h4>
-            <p class="list-group-item-text">Choose goals</p>
+
         </span>
+                        <span><small>Sub title</small></span>
                     </slot>
                     <div v-if="tab.active" class="wizard-icon-container"
                          :class="{square_shape:isStepSquare, tab_shape:isTabShape}"
@@ -92,5 +92,9 @@
     }
 </script>
 <style>
+
+    .stepTitle{
+        font-size: 16px;
+    }
 
 </style>

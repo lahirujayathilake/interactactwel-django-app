@@ -4,70 +4,38 @@
             <div href="#step-1">
                 <div class="step-no">1</div>
                 <h4 class="list-group-item-heading">Goals</h4>
-                <p class="list-group-item-text">2 golas selected</p>
+                <p class="list-group-item-text">{{step1_desc}}</p>
             </div>
         </li>
         <li v-bind:class="{active: isStep2Active}" class="arrow_box">
             <div href="#step-2">
                 <div class="step-no">2</div>
                 <h4 class="list-group-item-heading">Actors</h4>
-                <p class="list-group-item-text">Choose actors</p>
+                <p class="list-group-item-text">{{step2_desc}}</p>
             </div>
         </li>
         <li v-bind:class="{active: isStep3Active}" class="arrow_box">
             <div href="#step-3">
                 <div class="step-no">3</div>
                 <h4 class="list-group-item-heading">Actions</h4>
-                <p class="list-group-item-text">Choose Actions</p>
+                <p class="list-group-item-text">{{step3_desc}}</p>
             </div>
         </li>
         <li v-bind:class="{active: isStep4Active}" class="arrow_box">
             <div href="#step-4">
                 <div class="step-no">4</div>
                 <h4 class="list-group-item-heading">Plans</h4>
-                <p class="list-group-item-text">Visualize adaptation plans</p>
+                <p class="list-group-item-text">{{step4_desc}}</p>
             </div>
         </li>
         <li v-bind:class="{active: isStep5Active}" class="arrow_box">
             <div href="#step-5">
                 <div class="step-no">5</div>
                 <h4 class="list-group-item-heading">Evaluate</h4>
-                <p class="list-group-item-text">Give Feedback</p>
+                <p class="list-group-item-text">{{step5_desc}}</p>
             </div>
         </li>
     </ul>
-    <!--<div id="steps-menu" class="ui ordered steps fluid no-margin">
-        <div id="step1-menu" class="step">
-            <div class="content">
-                <div class="title">Goals</div>
-                <div class="description">Choose goals</div>
-            </div>
-        </div>
-        <div id="step2-menu" class="step">
-            <div class="content">
-                <div class="title">Actors</div>
-                <div class="description">Choose actors</div>
-            </div>
-        </div>
-        <div id="step3-menu" class="step">
-            <div class="content">
-                <div class="title">Actions</div>
-                <div class="description">Choose actions</div>
-            </div>
-        </div>
-        <div id="step4-menu" class="step">
-            <div class="content">
-                <div class="title">Plans</div>
-                <div class="description">Visualize adaptation plans</div>
-            </div>
-        </div>
-        <div id="step6-menu" class="step">
-            <div class="content">
-                <div class="title">Evaluate</div>
-                <div class="description">Explore Performance and Rate</div>
-            </div>
-        </div>
-    </div>-->
 </template>
 
 <script>
@@ -81,6 +49,13 @@
 
         data() {
             return {
+
+                step1_desc: "Choose Goals",
+                step2_desc: "Choose Actors",
+                step3_desc: "Choose Actions",
+                step4_desc: "Visualize Adaptation plans",
+                step5_desc: "Give Feedback",
+
                 isStep1Active: false,
                 isStep2Active: false,
                 isStep3Active: false,
@@ -91,17 +66,17 @@
 
         mounted(){
             let $this = this;
-            EventBus.$on('MOVE_TO_STEP2', function () {
+            EventBus.$on('MOVE_TO_STEP2', function (selectedGoalsCount) {
                 $this.isStep2Active = true;
-                //alert($this.isActive);
+                $this.step1_desc = selectedGoalsCount + " GOALS SELECTED";
             })
-            EventBus.$on('MOVE_TO_STEP3', function () {
+            EventBus.$on('MOVE_TO_STEP3', function (selectedActorsCount) {
                 $this.isStep3Active = true;
-                //alert($this.isActive);
+                $this.step2_desc = selectedActorsCount + " ACTORS SELECTED";
             })
-            EventBus.$on('MOVE_TO_STEP4', function () {
+            EventBus.$on('MOVE_TO_STEP4', function (selectedActionsCount) {
                 $this.isStep4Active = true;
-                //alert($this.isActive);
+                $this.step3_desc = selectedActionsCount + " ACTIONS SELECTED";
             })
         },
 
@@ -128,7 +103,7 @@
     }
 
     .step-progress-bar h4 {
-        font-size: 1.3em;
+        font-size: 1em;
         font-weight: 700;
         color: #5f6c73;
         margin-bottom: .05rem;
@@ -136,7 +111,7 @@
 
     .step-progress-bar p {
         font-weight: 400;
-        font-size: 1em;
+        font-size: .72857143em;
         color: #5f6c73;
         margin-bottom: 0;
     }
