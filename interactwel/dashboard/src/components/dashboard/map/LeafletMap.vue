@@ -1,30 +1,48 @@
 <template>
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <l-control-layers ref="layersControl"></l-control-layers>
+        <l-layer-group layer-type="overlay" name="Sub-basins">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_subbasin"
                 :options="options"
                 :options-style="styleFunction_subbasin"
         />
+        </l-layer-group>
+        <l-layer-group layer-type="overlay" name="Streams">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_reach"
                 :options="options"
                 :options-style="styleFunction_reach"
         />
-        <l-choropleth-layer 
-        :data="pyDepartmentsData" 
-        title-key="department_name" 
-        id-key="department_id" 
-        :value="value" 
-        :extra-values="extraValues" 
-        geojson-id-key="Name" 
-        :geojson="geoJson_subbasin"
-        :color-scale="colorScale">
+        </l-layer-group>
+        
+        <l-tile-layer
+          layer-type="base"
+          key="3"
+          name="Street Map"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
+        </l-tile-layer>
 
-        <l-marker :lat-lng="marker"></l-marker>
-        <!--<template slot-scope="props"> -->
+        <l-tile-layer
+          layer-type="base"
+          key="2"
+          name="Satellite"
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png">
+        </l-tile-layer>
+
+        <l-tile-layer
+          layer-type="base"
+          key="1"
+          name="Terrain Map"
+          url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png">
+        </l-tile-layer>
+        
+        
+
+        <!--<template slot-scope="props"> 
             <l-info-control
                 item="props.currentItem" 
                 unit="props.unit"
@@ -32,14 +50,14 @@
                 placeholder="Hover over sub-basins"
                 position="topright"
             />
-            </l-choropleth-layer>
-       <!-- </template> -->
+
+       </template> -->
     </l-map>
 </template>
 
 <script>
 
-    import {L, LMap, LTileLayer, LMarker, LGeoJson} from 'vue2-leaflet';
+    import {L, LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LLayerGroup} from 'vue2-leaflet';
     import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
 
@@ -52,7 +70,9 @@
             'l-geo-json': LGeoJson,
             'l-info-control': InfoControl, 
             'l-reference-chart': ReferenceChart, 
-            'l-choropleth-layer': ChoroplethLayer
+            'l-choropleth-layer': ChoroplethLayer,
+            'l-control-layers': LControlLayers,
+            'l-layer-group': LLayerGroup
         },
 
         name: 'Map',
