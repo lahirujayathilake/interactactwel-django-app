@@ -340,7 +340,7 @@
         overflow: visible;
         background-color: #ECEFF1;
         position: absolute;
-        left: 60px;
+        left: 90px;
         z-index: 1000;
         max-width: 800px;
         top: 20px;
