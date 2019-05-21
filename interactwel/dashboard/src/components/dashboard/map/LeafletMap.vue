@@ -42,6 +42,8 @@
        </template> -->
     <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
     </l-map>
+    
+    
 </template>
 
 <script>
@@ -49,10 +51,12 @@
     import {L, LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup} from 'vue2-leaflet';
     import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
+    import regional_summary from './regional_summary.vue';
 
     export default {
-
+        name: 'Map',
         components: {
+            'overview_graph': regional_summary,
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
             //'l-marker': LMarker,
@@ -64,8 +68,6 @@
             'l-layer-group': LLayerGroup,
             'l-control-scale': LControlScale
         },
-
-        name: 'Map',
 
         //delete: L.Icon.Default.prototype._getIconUrl,
 
@@ -91,6 +93,7 @@
                 loading: true,
                 show: true,
                 fillColor: "rgba(76, 175, 80, 0.44)",
+                
 
                 tileProviders: [
                     {
@@ -149,20 +152,41 @@
                     };
                 };
             },
-
+            
             onEachFeatureFunction() {
+                var prevLayerClicked = null;
                 if (!this.enableTooltip) {
                     return () => {
                     };
                 }
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        "<div>Subbasin: "+ feature.properties.Name + "</div>",
+                        //"<div>Subbasin: "+ feature.properties.Name + "</div>",
+                        "<div><strong>Click and explore!</strong></div>",
                         {permanent: false, sticky: true}
                     );
-                    layer.on({
-                        click: this.layerClicked
+                    
+                    layer.on('click', function(e){ 
+                        console.log(feature.properties.Name);
+                        console.log(e.target)
+                        if (prevLayerClicked !== null) {
+                            prevLayerClicked.setStyle({weight: 1.5,
+                            color: "#7c7c7c",
+                            opacity: 1,
+                            fillColor: "#e3dddd",
+                            dashArray: '5, 5',
+                            dashOffset: '10',
+                            fillOpacity: 0.5});
+                        }
+                        var layer = e.target;
+                        layer.setStyle({fillColor :'blue'});
+                        prevLayerClicked = layer;
+
+                        
+       
+                        //{click: this.layerClicked
                     });
+                    
                 };
             }
         },
@@ -183,9 +207,9 @@
 
         },
         methods: {
-
             layerClicked() {
-                alert("clicked me ;)");
+                alert("clicked me");
+                
             }
 
         }
@@ -199,5 +223,88 @@
     .leaflet-control-zoom {
         display: none;
     }
+
+    .leaflet-touch .leaflet-control-layers-toggle {
+    width: 60px;
+    height: 60px;
+    }
+
+    .leaflet-control-scale-line{
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .modal-backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal {
+    background: #FFFFFF;
+    box-shadow: 2px 2px 20px 1px;
+    max-height: 450px;
+    overflow: visible;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+    /*overflow-x: auto;*/
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header,
+  .modal-footer {
+    padding: 15px;
+    display: flex;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #eeeeee;
+    color: #4AAE9B;
+    justify-content: space-between;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .modal-footer {
+    
+    justify-content: flex-end;
+  }
+
+  .modal-body {
+    position: relative;
+    padding: 30px 40px;
+    font-size: 18px;
+
+  }
+
+  .btn-close {
+    border: none;
+    font-size: 20px;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4AAE9B;
+    background: transparent;
+  }
+
+  .btn-green {
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4AAE9B;
+    background: transparent;
+  }
 
 </style>
