@@ -26,8 +26,7 @@ SECRET_KEY = '3^)lj)os!l7uac0q*s)pzu$r%*4*14aa2)z4@7dm#oqvr^fy))'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["localhost", "beta.interactwell.scigap.org"]
 
 # Application definition
 
