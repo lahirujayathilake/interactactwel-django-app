@@ -183,6 +183,7 @@
                         if (prevLayerClicked !== layer) {
                             layer.setStyle({fillColor :'blue'});
                             prevLayerClicked = layer;
+                            
                         }else{
                            prevLayerClicked = null; 
                         }
