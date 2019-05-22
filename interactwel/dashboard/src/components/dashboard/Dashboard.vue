@@ -43,7 +43,6 @@
                    v-bind:is="component=progressbarComponent"></component>
         <component v-bind:is="component='container'"></component>
     </div>
-    
 </template>
 
 <script>
@@ -56,7 +55,6 @@
         components: {
             'progress-bar': ProgressBar,
             'container': Container,
-
         },
         name: 'Dashboard',
 
@@ -71,15 +69,14 @@
         },
 
         mounted() {
-            //this.showSidebar()
-        },
 
+        },
 
         methods: {
 
             start: function () {
                 this.progressbarComponent = 'progress-bar',
-                    this.startButtonVisibility = true
+                this.startButtonVisibility = true
                 this.progressBarVisibility = false
                 this.startWizard()
 
@@ -101,26 +98,6 @@
                 }
 
             },
-
-            progressFinished() {
-                alert('finished!');
-            },
-
-            afterWizardFinished() {
-                this.sidebarLeftVisibility = false,
-                    this.sidebarRightVisibility = false,
-                    this.progressBarVisibility = false
-                this.chartsVisibility = false
-            },
-
-            showChart() {
-                alert('add active class!');
-            },
-
-            addActiveClass() {
-                alert('add active class!');
-                //this.startButtonVisibility = true
-            }
         }
 
     }
