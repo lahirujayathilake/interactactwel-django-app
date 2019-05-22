@@ -1,10 +1,12 @@
 <template>
 
+
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
         </l-control-layers>
-        <l-layer-group layer-type="overlay" name="Sub-basins">
+        <ul>
+        <li><l-layer-group layer-type="overlay" name="Sub-basins">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_subbasin"
@@ -12,6 +14,8 @@
                 :options-style="styleFunction_subbasin"
         />
         </l-layer-group>
+        </li>
+        </ul>
         <l-layer-group layer-type="overlay" name="Streams">
         <l-geo-json
                 v-if="show"
@@ -20,7 +24,26 @@
                 :options-style="styleFunction_reach"
         />
         </l-layer-group>
+
+        <l-layer-group layer-type="overlay" name="Reservoirs">
+        <!--<l-geo-json
+                v-if="show"
+                :geojson="geoJson_reservoir"
+                :options="options"
+                :options-style="styleFunction_reservoir"
+        />
+        </l-layer-group>-->
+
+     <l-marker :lat-lng="[45.346896, -119.544586]" :icon="reservoirIcon" v-on:l-click="layerClicked"></l-marker>
+        </l-layer-group>
+
+        <l-layer-group layer-type="overlay" name="Weather stations">
+        <l-marker :lat-lng="[45.4, -120]" :icon="wstationIcon"></l-marker>
+        <l-marker :lat-lng="[45.3, -120]" :icon="wstationIcon"></l-marker>
+        </l-layer-group>
         
+
+
         <l-tile-layer
         v-for="tileProvider in tileProviders"
         :key="tileProvider.name"
@@ -44,16 +67,37 @@
      <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
     </l-map>
 
-
-    
 </template>
 
 <script>
 
-    import {L, LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup} from 'vue2-leaflet';
-    import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
+    import {LMap, LTileLayer, LMarker, LCircle, LGeoJson, LIcon, LControlLayers, LControlScale, LLayerGroup, LClick} from 'vue2-leaflet';
+    import {InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
+    import L from 'leaflet';
     import regional_summary from './regional_summary.vue';
+
+
+    delete L.Icon.Default.prototype._getIconUrl;
+
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+        //iconUrl: require('../../../assets/reservoir_trans.png'),
+        iconUrl: require('leaflet/dist/images/marker-icon.png'),
+        //iconSize: [37, 37],
+        //iconAnchor: [0, 0],
+        //shadowSize: [0, 0],
+        //shadowAnchor: [0, 0]
+        shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+        });
+    
+
+
+    //let DefaultIcon = L.icon({
+    //iconUrl: 'reservoir_trans.jpg',
+    //});
+
+    //L.Marker.prototype.options.icon = DefaultIcon;
 
     export default {
         name: 'Map',
@@ -61,15 +105,19 @@
             'regional-summary': regional_summary,
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
-            //'l-marker': LMarker,
+            'l-marker': LMarker,
+            'l-circle': LCircle,
+            'l-click': LClick,
             'l-geo-json': LGeoJson,
             'l-info-control': InfoControl, 
             'l-reference-chart': ReferenceChart, 
             'l-choropleth-layer': ChoroplethLayer,
             'l-control-layers': LControlLayers,
             'l-layer-group': LLayerGroup,
+            'l-icon': LIcon,
             'l-control-scale': LControlScale
         },
+
 
         //delete: L.Icon.Default.prototype._getIconUrl,
 
@@ -83,6 +131,7 @@
             return {
                 geoJson_reach: null,
                 geoJson_subbasin: null,
+                geoJson_reservoir: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
@@ -95,7 +144,20 @@
                 loading: true,
                 show: true,
                 fillColor: "rgba(76, 175, 80, 0.44)",
-
+                reservoirIcon: L.icon({
+                        iconUrl: require('../../../assets/reservoir_trans.png'),
+                        iconSize:     [37, 37], // size of the icon
+                        shadowSize:   [0, 0], // size of the shadow
+                        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [0, 0]  // the same for the shadow
+                    }),
+                wstationIcon: L.icon({
+                        iconUrl: require('../../../assets/OSU_icon_rain_01.png'),
+                        iconSize:     [37, 37], // size of the icon
+                        shadowSize:   [0, 0], // size of the shadow
+                        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [0, 0]  // the same for the shadow
+                    }),
                 subbasinID: null,
                 
 
@@ -143,6 +205,12 @@
                     onEachFeature: this.onEachFeatureFunction
                 };
             },
+            dynamicSize () {
+                return [this.iconSize, this.iconSize * 1.15];
+            },
+            dynamicAnchor () {
+                return [this.iconSize / 2, this.iconSize * 1.15];
+            },
             styleFunction_reach() {
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
                 return () => {
@@ -178,12 +246,12 @@
                 }
                 return (feature, layer) => {
                     layer.bindTooltip(
-                        "<div>Subbasin: "+ feature.properties.Name + "</div>",
-                        //"<div><strong>Click and explore!</strong>" +
-                        {permanent: false, sticky: true}
+                        //"<div>Subbasin: "+ feature.properties.Name + "</div>",
+                        "<div><strong>Click and explore!</strong>",
+                        //{permanent: false, sticky: true}
                     );
 
-                    layer.bindPopup(this.customPopup,this.customOptions);
+                    //layer.bindPopup(this.customPopup,this.customOptions);
 
                     layer.on('click', function(e){
 
@@ -219,6 +287,11 @@
             axios.get("/reaches.geojson")
                 .then(response => {
                     this.geoJson_reach = response.data;
+                    this.loading = true;
+                    })
+            axios.get("/reservoir.geojson")
+                .then(response => {
+                    this.geoJson_reservoir = response.data;
                     this.loading = true;
                     })
 
@@ -263,6 +336,24 @@
     .region_summary_popup{
         width: 300px;
         height: 300px;
+    }
+
+    #img, a {
+        border:0px transparent;
+        outline: none;
+    }
+
+    .count-icon {
+  background:#ff8888;
+  border:5px solid rgba(255,255,255,0.5);
+  color:#fff;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  line-height:30px;
+  }
+  .count-icon:hover {
+    background:#bbb;
     }
 
 

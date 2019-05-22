@@ -43,6 +43,7 @@
                    v-bind:is="component=progressbarComponent"></component>
         <component v-bind:is="component='container'"></component>
     </div>
+    
 </template>
 
 <script>
