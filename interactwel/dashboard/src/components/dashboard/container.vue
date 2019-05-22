@@ -8,7 +8,6 @@
                        v-on:finish-wizard="afterWizardFinished"></component>
             <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>
             <leaflet-map></leaflet-map>
-            <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
         </article>
         <aside v-show="!sidebarRightVisibility" id="sidebar-right">
             <component v-bind:is="component='feedback'"></component>
@@ -25,7 +24,6 @@
     import ProgressBar from './progressBar/ProgressBar.vue'
     import Step1Content from './../steps/Step1Content.vue'
     import LeafletMap from './map/LeafletMap.vue'
-    import RegionalSummary from './map/regional_summary.vue'
     import Container from './container.vue'
 
     import EventBus from './../../event-bus';
@@ -39,7 +37,6 @@
             'sidebar': Sidebar,
             'step1content': Step1Content,
             'leafletMap': LeafletMap,
-            'regionalSummary': RegionalSummary,
             'container': Container
         },
         name: 'Container',
@@ -50,7 +47,6 @@
                 sidebarLeftVisibility: true,
                 sidebarRightVisibility: true,
                 chartsVisibility: true,
-                regionalSummaryVisibility: true,
                 stepsVisibility: true,
                 component: null,
             }
@@ -61,28 +57,29 @@
             let $this = this;
             EventBus.$on('START_WIZARD', function () {
                 $this.stepsVisibility = false
-            }),
-            EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
-                $this.createRegionSummary(selectedBasinID)
-                $this.regionalSummaryVisibility = false
-            }),
-            EventBus.$on('CLOSE', function () {
-                $this.regionalSummaryVisibility = true
             })
         },
 
         methods: {
+            progressFinished() {
+                alert('finished!');
+            },
 
             afterWizardFinished() {
                 this.sidebarLeftVisibility = false,
-                this.sidebarRightVisibility = false
+                    this.sidebarRightVisibility = false
                 this.progressBarVisibility = false
                 this.chartsVisibility = false
             },
 
-            createRegionSummary(subbasinID){
-                EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
+            showChart() {
+                alert('add active class!');
             },
+
+            addActiveClass() {
+                alert('add active class!');
+                //this.startButtonVisibility = true
+            }
         }
     }
 
@@ -101,7 +98,7 @@
 
     #main > article {
         flex: 1;
-        height: calc(60vh - 20px);
+        height: calc(92vh - 20px);
     }
 
     #main > nav {

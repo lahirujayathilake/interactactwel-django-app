@@ -2,13 +2,7 @@ import Vue from 'vue'
 import App from './components/App.vue'
 import BootstrapVue from 'bootstrap-vue'
 import VueGoogleCharts from 'vue-google-charts'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faTimesCircle)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+//import L from 'vue2-leaflet'
 
 
 Vue.config.productionTip = false
