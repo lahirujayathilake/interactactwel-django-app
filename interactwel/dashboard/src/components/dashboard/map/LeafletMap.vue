@@ -1,5 +1,4 @@
 <template>
-
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
@@ -44,8 +43,6 @@
      <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
     </l-map>
 
-
-    
 </template>
 
 <script>
@@ -54,6 +51,7 @@
     import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
     import axios from 'axios';
     import regional_summary from './regional_summary.vue';
+    import EventBus from './../../../event-bus';
 
     export default {
         name: 'Map',
@@ -183,9 +181,11 @@
                         {permanent: false, sticky: true}
                     );
 
-                    layer.bindPopup(this.customPopup,this.customOptions);
+                    //layer.bindPopup(this.customPopup,this.customOptions);
 
                     layer.on('click', function(e){
+
+                        EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
 
                         var layer = e.target;
                         console.log(prevLayerClicked);
