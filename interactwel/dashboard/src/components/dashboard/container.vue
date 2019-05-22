@@ -65,6 +65,9 @@
             EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
                 $this.createRegionSummary(selectedBasinID)
                 $this.regionalSummaryVisibility = false
+            }),
+            EventBus.$on('CLOSE', function () {
+                $this.regionalSummaryVisibility = true
             })
         },
 

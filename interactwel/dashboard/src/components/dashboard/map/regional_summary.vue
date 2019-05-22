@@ -1,7 +1,7 @@
 <template>
     <div id="regionalSummary" class="card">
 
-        <div class="card-header">Subbasin ID : {{subbasinID}}</div>
+        <div class="card-header">Subbasin ID : {{subbasinID}}<span v-on:click="dismiss" class="close"><font-awesome-icon icon="times-circle"/>Close</span></div>
         <div class="card-body">
             <GChart :resizeDebounce="400"
                     type="BarChart"
@@ -14,6 +14,8 @@
 <script>
     import {GChart} from 'vue-google-charts'
     import EventBus from './../../../event-bus';
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
     export default {
         name: 'regional_summary',
@@ -52,8 +54,8 @@
         },
 
         methods: {
-            close() {
-                this.$emit('close');
+            dismiss() {
+                EventBus.$emit('CLOSE');
             },
         },
     };
@@ -65,5 +67,9 @@
         top: 20px;
         right:30px;
         z-index: 1000;
+    }
+
+    .close{
+        font-size: 10px !important;
     }
 </style>
