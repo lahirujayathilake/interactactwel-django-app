@@ -1,12 +1,10 @@
 <template>
-
-
     <l-map ref="myMap" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
         </l-control-layers>
         <ul>
-        <li><l-layer-group layer-type="overlay" name="Sub-basins">
+        <li><l-layer-group layer-type="overlay" name="<font size=4><strong>Sub-basins</strong></font>">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_subbasin"
@@ -16,7 +14,7 @@
         </l-layer-group>
         </li>
         </ul>
-        <l-layer-group layer-type="overlay" name="Streams">
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Streams</strong></font>">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_reach"
@@ -25,7 +23,7 @@
         />
         </l-layer-group>
 
-        <l-layer-group layer-type="overlay" name="Reservoirs">
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
         <!--<l-geo-json
                 v-if="show"
                 :geojson="geoJson_reservoir"
@@ -37,7 +35,7 @@
      <l-marker :lat-lng="[45.346896, -119.544586]" :icon="reservoirIcon" v-on:l-click="layerClicked"></l-marker>
         </l-layer-group>
 
-        <l-layer-group layer-type="overlay" name="Weather stations">
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Weather stations</strong></font>">
         <l-marker :lat-lng="[45.4, -120]" :icon="wstationIcon"></l-marker>
         <l-marker :lat-lng="[45.3, -120]" :icon="wstationIcon"></l-marker>
         </l-layer-group>
@@ -76,6 +74,7 @@
     import axios from 'axios';
     import L from 'leaflet';
     import regional_summary from './regional_summary.vue';
+    import EventBus from './../../../event-bus';
 
 
     delete L.Icon.Default.prototype._getIconUrl;
@@ -163,19 +162,19 @@
 
                 tileProviders: [
                     {
-                        name: "Street Map",
+                        name: "<font size=4><strong>Street Map</strong></font>",
                         visible: false,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     },
                     {
-                        name: "Satellite",
+                        name: "<font size=4><strong>Satellite</strong></font>",
                         visible: false,
                         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
                         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     },
                     {
-                        name: "Terrain Map",
+                        name: "<font size=4><strong>Terrain Map</strong></font>",
                         visible: true,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
@@ -254,6 +253,8 @@
                     //layer.bindPopup(this.customPopup,this.customOptions);
 
                     layer.on('click', function(e){
+
+                        EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
 
                         var layer = e.target;
                         console.log(prevLayerClicked);
