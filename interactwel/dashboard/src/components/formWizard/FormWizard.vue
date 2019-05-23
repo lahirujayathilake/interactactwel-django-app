@@ -1,28 +1,8 @@
 <template>
-    <div :id="id ? id : ''" class="vue-form-wizard" :class="[stepSize, {vertical: isVertical}]"
+    <div class="vue-form-wizard" :class="[stepSize, {vertical: isVertical}]"
          @keyup.right="focusNextTab"
          @keyup.left="focusPrevTab">
         <div class="wizard-navigation">
-            <!--<div class="wizard-progress-with-circle" v-if="!isVertical">
-              <div class="wizard-progress-bar"
-                   :style="progressBarStyle"></div>
-            </div>
-            <ul class="wizard-nav wizard-nav-pills" role="tablist" :class="stepsClasses">
-              <slot name="step" v-for="(tab, index) in tabs"
-                    :tab="tab"
-                    :index="index"
-                    :navigate-to-tab="navigateToTab"
-                    :step-size="stepSize"
-                    :transition="transition">
-                <wizard-step :tab="tab"
-                             :step-size="stepSize"
-                             @click.native="navigateToTab(index)"
-                             @keyup.enter.native="navigateToTab(index)"
-                             :transition="transition"
-                             :index="index">
-                </wizard-step>
-              </slot>
-            </ul>-->
             <div class="wizard-tab-content">
                 <slot v-bind="slotProps">
                 </slot>
@@ -69,14 +49,12 @@
 </template>
 <script>
     import WizardButton from './WizardButton.vue'
-    import WizardStep from './WizardStep.vue'
     import {isPromise, findElementAndFocus, getFocusedTabIndex} from './helpers'
 
     export default {
         name: 'form-wizard',
         components: {
-            WizardButton,
-            WizardStep
+            WizardButton
         },
         props: {
             title: {

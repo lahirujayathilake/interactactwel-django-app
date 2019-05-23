@@ -3,7 +3,7 @@
     <modal v-show="isModalVisible" @close="closeModal"/>
     <tutorStep1 v-bind:class="{active: isStep1Active}" v-show="istutor1Visible" @continue="continuetutor" @close="closeTutor"/>
     <tutorStep2 v-bind:class="{active: isStep2Active}" v-show="istutor2Visible" @close="closeTutor"/>
-    <dashboard></dashboard>   
+    <dashboard></dashboard>
 </div>
 </template>
 
@@ -12,9 +12,6 @@
     import tutorStep1 from './dashboard/intro/tutorStep1.vue';
     import tutorStep2 from './dashboard/intro/tutorStep2.vue';
     import Dashboard from './dashboard/Dashboard.vue'
-    import ProgressBar from './dashboard/progressBar/ProgressBar.vue'
-    import EventBus from '../event-bus';
-
 
     export default {
 

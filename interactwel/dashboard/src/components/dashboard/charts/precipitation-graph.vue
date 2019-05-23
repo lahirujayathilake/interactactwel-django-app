@@ -22,7 +22,7 @@
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
-    import MyChart from "./MyChart";
+    import MyChart from "./pathways-graph";
 
     import EventBus from './../../../event-bus';
 

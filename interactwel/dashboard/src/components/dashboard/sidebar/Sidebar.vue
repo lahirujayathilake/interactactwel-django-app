@@ -1,11 +1,11 @@
 <template>
     <div id="sidebar" role="tablist">
-        <div v-for="(key, value) in adaptationPlans" v-bind:key="key">
+        <div v-for="(key, value, index) in adaptationPlans" v-bind:key="index">
             <b-nav header-tag="header" class="p-1" role="tab">
                 <b-nav-item v-on:click="showChart(value)" block href="#" v-b-toggle="value" variant="info">{{value}}
                 </b-nav-item>
             </b-nav>
-            <b-collapse class :id="value" accordion="my-accordion" role="tabpanel" v-for="chart in chartTypes" v-bind:key="chart">
+            <b-collapse class :id="value" accordion="my-accordion" role="tabpanel" v-for="chart in chartTypes" v-bind:key="chart.id">
                 <b-nav-item class="collapse-item" v-on:click="showGraph(chart.id)" v-bind:class="{active: isPlanGraphActive}">{{chart.name}}</b-nav-item>
             </b-collapse>
         </div>

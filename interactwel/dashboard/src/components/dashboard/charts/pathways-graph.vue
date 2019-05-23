@@ -8,7 +8,7 @@
     import * as d3 from "d3";
 
     export default {
-        name: "MyChart",
+        name: "pathways-graph",
         data() {
             return {
                 w: 700,
@@ -63,7 +63,6 @@
         methods: {
             nextPathId() {
                 this.pathid++;
-                console.log(this.pathid);
                 return "path" + this.pathid;
             },
             xListComputed(v) {
@@ -122,7 +121,6 @@
             },
 
             drawChart() {
-                console.log(this.data);
                 d3.select("svg").remove();
                 const svg = d3
                     .select(".chart_container")
@@ -172,8 +170,6 @@
                         });
 
                         const pathsArray = [...svg.selectAll("path")._groups[0]];
-                        console.log(pathsArray);
-
                         const index = pathsArray.findIndex(p => {
                             return p.id === n[i].id;
                         });
