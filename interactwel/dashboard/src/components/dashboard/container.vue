@@ -6,7 +6,7 @@
         <article id="map">
             <component v-show="!stepsVisibility" v-bind:is="component='step1content'"
                        v-on:finish-wizard="afterWizardFinished"></component>
-            <component v-show="!chartsVisibility" v-on:clicked="showChart" v-bind:is="component='charts'"></component>
+            <component v-show="!chartsVisibility" v-bind:is="component='charts'"></component>
             <leaflet-map></leaflet-map>
             <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
         </article>

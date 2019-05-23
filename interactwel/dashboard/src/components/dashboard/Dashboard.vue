@@ -19,14 +19,6 @@
                         <b-button v-show="startButtonVisibility" v-on:click="exit" variant="danger"
                                   class="my-2 my-sm-0" type="submit"><strong> Exit </strong>
                         </b-button>
-
-                       <!-- <b-nav-item-dropdown text="Settings" right>
-                            <b-dropdown-item href="#">EN</b-dropdown-item>
-                            <b-dropdown-item href="#">ES</b-dropdown-item>
-                            <b-dropdown-item href="#">RU</b-dropdown-item>
-                            <b-dropdown-item href="#">FA</b-dropdown-item>
-                        </b-nav-item-dropdown>-->
-
                         <b-nav-item-dropdown right>
                             <!-- Using button-content slot -->
                             <template slot="button-content">
@@ -39,8 +31,7 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <component v-show="!progressBarVisibility" v-on:next-click="addActiveClass" :fromparent="fromparent"
-                   v-bind:is="component=progressbarComponent"></component>
+        <component v-show="!progressBarVisibility" v-bind:is="component=progressbarComponent"></component>
         <component v-bind:is="component='container'"></component>
     </div>
     
@@ -60,7 +51,6 @@
         },
         name: 'Dashboard',
 
-
         data() {
             return {
                 progressbarComponent: null,
@@ -71,7 +61,6 @@
         },
 
         mounted() {
-            //this.showSidebar()
         },
 
 
@@ -92,18 +81,10 @@
             exit() {
                 // `this` inside methods points to the Vue instance
                 alert('You are going to quit the wizard!');
-                // `event` is the native DOM event
-                // if (event) {
-                //    alert(event.target.tagName)
-                //}
                 return {
                     //component: 'progress-bar',
                 }
 
-            },
-
-            progressFinished() {
-                alert('finished!');
             },
 
             afterWizardFinished() {
@@ -111,15 +92,6 @@
                     this.sidebarRightVisibility = false,
                     this.progressBarVisibility = false
                 this.chartsVisibility = false
-            },
-
-            showChart() {
-                alert('add active class!');
-            },
-
-            addActiveClass() {
-                alert('add active class!');
-                //this.startButtonVisibility = true
             }
         }
 
