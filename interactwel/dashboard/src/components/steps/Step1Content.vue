@@ -258,11 +258,11 @@
             actors: [
                 {id: 0, name: "F_SW_GW", actor: 'Farmer with surface water and ground water rights', readonly: false},
                 {id: 1, name: "F_SW", actor: 'Farmer with surface water rights', readonly: false},
-                {id: 2, name: "F_GW", actor: 'Farmer with ground water rights', readonly: false},
-                {id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
-                {id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
-                {id: 5, name: "TRI", actor: 'Data Centers', readonly: true},
-                {id: 6, name: "MUN", actor: 'Dairies', readonly: true}
+                {id: 2, name: "F_GW", actor: 'Farmer with ground water rights', readonly: false}
+                //{id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
+                //{id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
+                //{id: 5, name: "TRI", actor: 'Data Centers', readonly: true},
+                //{id: 6, name: "MUN", actor: 'Dairies', readonly: true}
             ],
         }),
 

@@ -1,7 +1,7 @@
 <template>
   
     <div class="modal-backdrop">
-      <div class="tutor" style="top: 26%; left: 25%; height: 250px; width: 420px;">
+      <div class="tutor" style="top: 24%; left: 18%; height: 250px; width: 420px;">
         <header class="modal-header">
           <slot name="header">
             Explore the model data

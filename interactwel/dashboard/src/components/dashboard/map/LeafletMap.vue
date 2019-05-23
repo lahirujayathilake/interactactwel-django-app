@@ -3,8 +3,7 @@
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
         </l-control-layers>
-        <ul>
-        <li><l-layer-group layer-type="overlay" name="<font size=4><strong>Sub-basins</strong></font>">
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Sub-basins</strong></font>">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_subbasin"
@@ -12,8 +11,7 @@
                 :options-style="styleFunction_subbasin"
         />
         </l-layer-group>
-        </li>
-        </ul>
+
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Streams</strong></font>">
         <l-geo-json
                 v-if="show"
@@ -36,8 +34,8 @@
         </l-layer-group>
 
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Weather stations</strong></font>">
-        <l-marker :lat-lng="[45.4, -120]" :icon="wstationIcon"></l-marker>
-        <l-marker :lat-lng="[45.3, -120]" :icon="wstationIcon"></l-marker>
+        <l-marker :lat-lng="[45.365, -119.584]" :icon="wstationIcon" @click="layerClicked"></l-marker>
+        <l-marker :lat-lng="[45.317,-119.881]" :icon="wstationIcon"></l-marker>
         </l-layer-group>
         
 
@@ -68,6 +66,9 @@
 </template>
 
 <script>
+
+   
+    //import "../../../src/plugins/styledLayerControl.js";
 
     import {LMap, LTileLayer, LMarker, LCircle, LGeoJson, LIcon, LControlLayers, LControlScale, LLayerGroup, LClick} from 'vue2-leaflet';
     import {InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth';
@@ -134,7 +135,7 @@
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
-                center: L.latLng(45.4435777, -119.9455003),
+                center: L.latLng(45.4435777, -119.4455003),
                 url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 marker: L.latLng(45.6735777, -118.8455003),
@@ -174,7 +175,7 @@
                         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     },
                     {
-                        name: "<font size=4><strong>Terrain Map</strong></font>",
+                        name: "<font size=4><strong>Terrain Map",
                         visible: true,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
@@ -257,8 +258,8 @@
                         EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
 
                         var layer = e.target;
-                        console.log(prevLayerClicked);
-                        console.log(e.target)
+                        //console.log(prevLayerClicked);
+                        //console.log(e.target)
                         if (prevLayerClicked !== null || prevLayerClicked == layer) {
                             prevLayerClicked.setStyle({weight: 1.5,
                             color: "#7c7c7c",
@@ -304,11 +305,12 @@
 
         },
         methods: {
-
-
-
             layerClicked() {
-                alert("clicked me");
+                //alert("clicked me");
+                return (feature, layer) => {
+
+                    layer.bindPopup(this.customPopup,this.customOptions);
+                    };
                 
             }
 
@@ -319,6 +321,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
     @import '../../../static/vendor/Vue2Leaflet/leaflet.css';
+   /*@import "https://davicustodio.github.io/Leaflet.StyledLayerControl/css/styledLayerControl.css";*/
 
     .leaflet-control-zoom {
         /*display: none;*/

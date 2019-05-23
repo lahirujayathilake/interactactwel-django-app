@@ -1,7 +1,7 @@
 <template>
   
     <div class="modal-backdrop">
-      <div class="tutor" style="top: 30%; left: 68%; height: 250px; width: 420px;">
+      <div class="tutor" style="top: 20%; left: 82%; height: 250px; width: 420px;">
         <header class="modal-header">
           <slot name="header">
             Explore Adaptation Plans

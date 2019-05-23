@@ -31,13 +31,13 @@
                 chartTypes: [
                     /*{id:"actions-graph", name: "Actions"},*/
                     {id: "overview-graph", name: "Overview"},
-                    {id: "fertilizer-graph", name: "Detailed"},
-                    {id: "costs-graph", name: "Costs"},
-                    {id: "streamsflow-graph", name: "Streams"},
+                    {id: "fertilizer-graph", name: "Region"},
+                    {id: "costs-graph", name: "Catchments"},
+                    {id: "streamsflow-graph", name: "Streams"}
                     /* {id: "crops-graph", name: "Crops"},*/
-                    {id: "precipitation-graph", name: "Precipitation"},
+                    /*{id: "precipitation-graph", name: "Precipitation"},*/
                     /*{id: "irrigation-graph", name: "Irrigation"},*/
-                    {id: "groundwater-graph", name: "Groundwater"},
+                    /*{id: "groundwater-graph", name: "Groundwater"},*/
                 ]
             }
 
@@ -115,6 +115,7 @@
     #sidebar .p-1 {
         border-bottom: 1px solid #37474f !important;
         font-size: 14px;
+        font-weight: bold;
     }
 
     #sidebar .p-1:hover {
