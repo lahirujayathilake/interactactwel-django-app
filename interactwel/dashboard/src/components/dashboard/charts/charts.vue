@@ -42,7 +42,7 @@
         data() {
             return {
 
-                currentChartComponent: 'actions-graph',
+                currentChartComponent: 'overview-graph',
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
