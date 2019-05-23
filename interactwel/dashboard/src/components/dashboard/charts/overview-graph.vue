@@ -7,7 +7,7 @@
             <b-tabs card>
                 <b-tab title="N fertilizer" active>
                     <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                        <n-fertilizer-graph></n-fertilizer-graph>
                     </div>
                 </b-tab>
                 <b-tab title="P fertilizer">
@@ -40,6 +40,7 @@
     import IrrigationGraph from './irrigation-graph.vue'
     import CropsGraph from './crops-graph.vue'
     import CropAreaGraph from './crop-area-graph.vue'
+    import NFertilizerGraph from './n-fertilizer-graph.vue'
 
     export default {
         name: 'StreamsflowGraph',
@@ -48,6 +49,7 @@
             'irridationGraph' : IrrigationGraph,
             'cropsYieldGraph' :CropsGraph,
             'cropAreaGraph' :CropAreaGraph,
+            'nFertilizerGraph' :NFertilizerGraph,
         },
 
         data() {

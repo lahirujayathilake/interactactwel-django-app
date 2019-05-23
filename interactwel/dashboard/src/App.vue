@@ -8,6 +8,7 @@
 
     import Dashboard from './components/dashboard/Dashboard.vue'
     import ProgressBar from './components/dashboard/progressBar/ProgressBar.vue'
+    import Chart from './chart'
 
     export default {
 
