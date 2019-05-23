@@ -1,37 +1,38 @@
 <template>
     <div id="regionalSummary" class="card">
 
-        <div class="card-header">Subbasin ID : {{subbasinID}}<span v-on:click="dismiss" class="close"><font-awesome-icon icon="times-circle"/>Close</span></div>
+        <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon icon="times-circle"/>Close</span></div>
         <div class="card-body no-padding">
             <b-tabs card>
-                <b-tab title="N fertilizer" active>
-                <div class="card-body">
-                <div id="chart_div">
-<d3-pie
-    :data="d3WaterRigthData"
-    :options="d3WaterRigthOptions"
-    width="100%"
-    height="300px">
-</d3-pie>
+                <b-tab title="Overview" active>
+                    <div class="card-body">
+                        <GChart :resizeDebounce="500" type="BarChart" :data="chartData" :options="chartOptions"/>
                     </div>
-                    <div id="chart_div2">
-                <GChart :resizeDebounce="500"
-                    type="PieChart"
-                    :data="jsonData"
-                    :options="chartOptions2"/>
-                    </div>
+                </b-tab>
+                <b-tab title="N fertilizer">
+                    <div class="card-body">
+                        <div id="chart_div1">
+                            <GChart :resizeDebounce="500" type="PieChart" :data="jsonData" :options="chartOptions2"/>
+                        </div>
+    <!--<d3-pie
+        :data="d3WaterRigthData"
+        :options="d3WaterRigthOptions"
+        width="100%"
+        height="300px">
+    </d3-pie>-->
+                        
+                        <div id="chart_div2">
+                            <GChart :resizeDebounce="500" type="PieChart" :data="jsonData" :options="chartOptions2"/>
+                        </div>
                     </div>
                 </b-tab>
                 
-                <b-tab title="N fertilizer" active>
+                <b-tab title="N fertilizer">
                     <div class="card-body">
-            <GChart :resizeDebounce="500"
-                    type="BarChart"
-                    :data="chartData"
-                    :options="chartOptions"/>
+                        <GChart :resizeDebounce="500" type="BarChart" :data="chartData" :options="chartOptions"/>
                     </div>
                 </b-tab>
-                </b-tabs>
+            </b-tabs>
         </div>
         </div>
     </div>
@@ -164,7 +165,11 @@
         font-size: 15px !important;
     }
 
-    #chart_div{
+    .card-header{
+        font-size: 17px;
+    }
+
+    #chart_div1{
     width:350px;
     float:left;
     } 
