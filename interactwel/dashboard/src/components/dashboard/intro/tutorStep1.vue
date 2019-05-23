@@ -1,7 +1,7 @@
 <template>
   
     <div class="modal-backdrop">
-      <div class="tutor" style="top: 24%; left: 18%; height: 250px; width: 420px;">
+      <div class="tutor" style="top: 35%; left: 18%; max-width: 20%; max-height: 50%;">
         <header class="modal-header">
           <slot name="header">
             Explore the model data
@@ -18,9 +18,9 @@
             <button type="button" class="btn-close" @click="close">Exit tutorial</button>
           </slot>
         </footer>
-        <img src="../../../assets/tutor_arrow.png" class="rotate"
-        style = "position: relative; top: -250px; right: 250px; width: 300px; height: 300px;">
       </div>
+           <img src="../../../assets/tutor_arrow.png" class="rotate"
+        style = "position: relative; top: -22%; left: -45%; max-width: 15%; max-height: 15%;">
     </div>
 
 </template>
