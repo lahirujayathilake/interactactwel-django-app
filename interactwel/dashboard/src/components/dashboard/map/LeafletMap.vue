@@ -25,7 +25,7 @@
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_WaterRigths"
-                :options="options_noclick"
+                :options="options_wrrights"
                 :options-style="styleFunction_waterrigths"
         />
         </l-layer-group>
@@ -218,6 +218,11 @@
                 return {
                 };
             },
+            options_wrrights() {
+                return {
+                    onEachFeature: this.GetWRcolor
+                };
+            },
             dynamicSize () {
                 return [this.iconSize, this.iconSize * 1.15];
             },
@@ -254,15 +259,41 @@
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
                 return () => {
                     return {
-                        weight: 1.5,
+                        weight: 1,
                         color: "#7c7c7c",
-                        opacity: 1,
-                        fillColor: "#e3dddd",
-                        dashArray: '5, 5',
-                        dashOffset: '10',
+                        opacity: 0,
+                        fillColor: "#3386ff",
                         fillOpacity: 0.5
                     };
                 };
+            },
+
+            GetWRcolor(){
+                return (feature, layer) => {
+                    console.log(feature.properties.WRSC)
+                    if (feature.properties.WRSC == 'GW'){
+                        layer.setStyle({fillColor :'red'});
+                    }else{
+                        layer.setStyle({fillColor :'green'});
+                    }
+                }
+            },
+
+            onEachWaterRigthsFunction() {
+                var prevLayerClicked = null;
+                if (!this.enableTooltip) {
+                    return () => {
+                    };
+                }
+                return (feature, layer) => {
+                    layer.bindTooltip(
+                        //"<div>Subbasin: "+ feature.properties.Name + "</div>",
+                        "<div><strong>Click and explore!</strong>",
+                        //{permanent: false, sticky: true}
+                    );
+                };
+
+                    //layer.bindPopup(this.customPopup,this.customOptions);
             },
 
             onEachFeatureFunction() {
@@ -313,6 +344,11 @@
 
         created() {
             this.loading = true;
+            axios.get("/subbasins.geojson")
+                .then(response => {
+                    this.geoJson_subbasin = response.data;
+                    this.loading = true;
+                })
             axios.get("/reaches.geojson")
                 .then(response => {
                     this.geoJson_reach = response.data;
@@ -327,13 +363,7 @@
                 .then(response => {
                     this.geoJson_WaterRigths = response.data;
                     this.loading = true;
-                    })
-
-            axios.get("/subbasins.geojson")
-                .then(response => {
-                    this.geoJson_subbasin = response.data;
-                    this.loading = true;
-                });
+                    });
 
         },
         methods: {
