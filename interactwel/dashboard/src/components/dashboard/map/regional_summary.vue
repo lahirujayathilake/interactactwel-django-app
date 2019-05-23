@@ -7,11 +7,11 @@
                 <b-tab title="N fertilizer" active>
                 <div class="card-body">
                 <div id="chart_div">
-            <GChart :resizeDebounce="500"
-                    type="PieChart"
-                    :data="jsonData"
-                    :options="chartOptions1"
-                    />
+<d3-pie
+    :data="d3WaterRigthData"
+    width="100%"
+    height="300px">
+</d3-pie>
                     </div>
                     <div id="chart_div2">
                 <GChart :resizeDebounce="500"
@@ -42,7 +42,7 @@
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
     import JSONData from "../../../assets/BASIN_Water_Rights.json";
-    import {Vs,d3Pie,d3Metric} from 'd3-vs';
+    import {Vs, d3Pie, d3Metric} from 'd3-vs';
 
     //console.log(JSONData['cols'])
 
@@ -70,6 +70,9 @@
         { "c": [{ "v": "Columbia River", "f": null }, { "v": 2368, "f": null }] }
     ]
 },
+
+                d3WaterRigthData: [{"name":"<5","value":19912018},{"name":"5-9","value":20501982},{"name":"10-14","value":20679786}],
+
                 chartData: [
                     ["Year", "Surface water", "Groundwater", "Columbia River"],
                     ["2008", 1664.97, 5427.46, 2412.1],
