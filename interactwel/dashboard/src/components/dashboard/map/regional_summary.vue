@@ -9,6 +9,7 @@
                 <div id="chart_div">
 <d3-pie
     :data="d3WaterRigthData"
+    :options="d3WaterRigthOptions"
     width="100%"
     height="300px">
 </d3-pie>
@@ -16,7 +17,7 @@
                     <div id="chart_div2">
                 <GChart :resizeDebounce="500"
                     type="PieChart"
-                    :data="WaterRigthData"
+                    :data="jsonData"
                     :options="chartOptions2"/>
                     </div>
                     </div>
@@ -71,7 +72,10 @@
     ]
 },
 
-                d3WaterRigthData: [{"name":"<5","value":19912018},{"name":"5-9","value":20501982},{"name":"10-14","value":20679786}],
+                d3WaterRigthData: [{"key":"Surface water","value":14466},{"key":"Groundwater","value":2368},{"key":"Columbia River","value":21664}],
+                d3WaterRigthOptions: {
+                    axisXLabel: "string",
+                },
 
                 chartData: [
                     ["Year", "Surface water", "Groundwater", "Columbia River"],
@@ -106,6 +110,7 @@
                     },
                     width: 350,
                     height: 300,
+                    pieHole: 0.3,
                     legend: {position: 'rigth', maxLines: 3},
                     chartArea: {width: "80%", height: "70%"}
                 }
@@ -120,7 +125,9 @@
         },
         computed:{
             jsonData() {
-                return JSONData;
+                var data = JSONData[this.subbasinID];
+
+                return data;
             },
         },
         methods: {
