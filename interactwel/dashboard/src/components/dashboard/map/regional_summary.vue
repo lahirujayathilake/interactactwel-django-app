@@ -9,14 +9,14 @@
                 <div id="chart_div">
             <GChart :resizeDebounce="500"
                     type="PieChart"
-                    :data="pieData"
+                    :data="jsonData"
                     :options="chartOptions1"
-                    @readay="onChartReady"/>
+                    />
                     </div>
                     <div id="chart_div2">
                 <GChart :resizeDebounce="500"
                     type="PieChart"
-                    :data="pieData"
+                    :data="WaterRigthData"
                     :options="chartOptions2"/>
                     </div>
                     </div>
@@ -44,6 +44,8 @@
     import JSONData from "../../../assets/BASIN_Water_Rights.json";
     import {Vs,d3Pie,d3Metric} from 'd3-vs';
 
+    //console.log(JSONData['cols'])
+
     export default {
         name: 'regional_summary',
 
@@ -57,13 +59,17 @@
             return {
                 subbasinID : null,
                 wrdata: null,
-                pieData: [['Task', 'Hours per Day'],
-                         ['Work', 11],
-                         ['Eat',  2],
-                         ['Commute',  2],
-                         ['Watch TV', 2],
-                         ['Sleep',    7]
-                ],
+                WaterRigthData: {
+    "cols": [
+        { "id": "", "label": "Water Source", "pattern": "", "type": "string" },
+        { "id": "", "label": "Total Volume (acre-ft)", "pattern": "", "type": "number" }
+    ],
+    "rows": [
+        { "c": [{ "v": "Water Source", "f": null }, { "v": 21664, "f": null }] },
+        { "c": [{ "v": "Surface water", "f": null }, { "v": 14466, "f": null }] },
+        { "c": [{ "v": "Columbia River", "f": null }, { "v": 2368, "f": null }] }
+    ]
+},
                 chartData: [
                     ["Year", "Surface water", "Groundwater", "Columbia River"],
                     ["2008", 1664.97, 5427.46, 2412.1],
@@ -111,14 +117,7 @@
         },
         computed:{
             jsonData() {
-                const myObjStr = JSON.stringify(JSONData);
-                console.log(myObjStr)
-                return JSON.parse(JSONData);
-            },
-            adaptationPlans() {
-                console.log(this.jsonData)
-                var tempdata = this.jsonData
-                return new google.visualization.DataTable(JSON.parse(JSONData));
+                return JSONData;
             },
         },
         methods: {
@@ -126,15 +125,16 @@
                 EventBus.$emit('CLOSE');
             },
             onChartReady(chart, google) {
-                //this.wrdata = new google.visualization.DataTable(JSON.parse(JSONData));
-                //console.log(wrdata)
-                const data = google.visualization.arrayToDataTable([['Task', 'Hours per Day'],
-                         ['Work', 11],
-                         ['Eat',  2],
-                         ['Commute',  2],
-                         ['Watch TV', 2],
-                         ['Sleep',    7]
-                ]);
+                const data = JSONData;
+                //const data = new google.visualization.DataTable(this.WaterRigthData);
+                console.log(data['cols'])
+                // const data = google.visualization.arrayToDataTable([['Task', 'Hours per Day'],
+                //          ['Work', 11],
+                //          ['Eat',  2],
+                //          ['Commute',  2],
+                //          ['Watch TV', 2],
+                //          ['Sleep',    7]
+                // ]);
                 console.log(data)
                 chart.draw(data, options);
         },
