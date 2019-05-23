@@ -6,7 +6,7 @@
 
 <script>
     import axios from 'axios';
-    import Chart from "./lib/chart";
+    import Chart from "../../../chart";
 
     export default {
         name: 'IrrigationGraph',
