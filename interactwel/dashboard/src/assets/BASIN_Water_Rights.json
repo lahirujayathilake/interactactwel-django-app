@@ -1,7 +1,11 @@
 {
     "1": {
-        "cols": [{ "id": "", "label": "Water Source", "pattern": "", "type": "string" }, { "id": "", "label": "Total Volume (acre-ft)", "pattern": "", "type": "number" }],
-        "rows": [{ "c": [{ "v": "Water Source", "f": null }, { "v": 21664, "f": null }] },
+        "cols": [
+            { "id": "", "label": "Water Source", "pattern": "", "type": "string" },
+            { "id": "", "label": "Total Volume (acre-ft)", "pattern": "", "type": "number" }
+        ],
+        "rows": [
+            { "c": [{ "v": "Water Source", "f": null }, { "v": 21664, "f": null }] },
             { "c": [{ "v": "Surface water", "f": null }, { "v": 14466, "f": null }] },
             { "c": [{ "v": "Columbia River", "f": null }, { "v": 2368, "f": null }] }
         ]
