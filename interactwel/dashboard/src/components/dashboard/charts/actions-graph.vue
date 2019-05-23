@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <MyChart :actions="actions" :data="graphData"></MyChart>
+                <pathways-graph :actions="actions" :data="graphData"></pathways-graph>
             </div>
         </b-card>
     </div>
@@ -28,14 +28,14 @@
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
-    import MyChart from "./MyChart";
+    import pathwaysGraph from "./pathways-graph";
     import EventBus from './../../../event-bus';
 
     export default {
         name: 'ActionsGraph',
 
         components: {
-            'MyChart': MyChart
+            'pathways-graph': pathwaysGraph
         },
 
         data() {
@@ -43,7 +43,7 @@
                 colorIndex: 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
-                planName: "POPSWAT_0",
+                planName: "Action Plan 1",
 
                 selectedKeyList: [],
 

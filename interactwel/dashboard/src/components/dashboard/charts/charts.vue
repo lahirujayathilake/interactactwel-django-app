@@ -11,7 +11,7 @@
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
-    import MyChart from "./MyChart";
+    import MyChart from "./pathways-graph";
     import ActionsGraph from './actions-graph.vue'
     import StreamsflowGraph from './streamflow-graph.vue'
     import FertilizerGraph from './fertilizer-graph.vue'
@@ -42,7 +42,7 @@
         data() {
             return {
 
-                currentChartComponent: 'null',
+                currentChartComponent: 'actions-graph',
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,

@@ -42,14 +42,12 @@
                 :key="weatherStation.id"
                 :lat-lng.sync="weatherStation.position"
                 :icon="wstationIcon"
-                :visible="true"
-                @click="onMarkerClicked(weatherStation)"
-                />
-        <!--l-marker :lat-lng="[45.365, -119.584]" :icon="wstationIcon" @click="layerClicked"></l-marker>
-        <l-marker :lat-lng="[45.317,-119.881]" :icon="wstationIcon" ></l-marker-->
+                :visible="true" >
+                <l-popup>
+                    <popup-content :data="weatherStation"/>
+                </l-popup>
+            </l-marker>
         </l-layer-group>
-        
-
 
         <l-tile-layer
         v-for="tileProvider in tileProviders"
@@ -58,7 +56,6 @@
         :visible="tileProvider.visible"
         :url="tileProvider.url"
         :attribution="tileProvider.attribution"
-        :token="token"
         layer-type="base"/>
 
      <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
@@ -69,10 +66,11 @@
 
 <script>
 
-    import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup} from 'vue2-leaflet';
+    import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup} from 'vue2-leaflet';
     import axios from 'axios';
     import L from 'leaflet';
     import EventBus from './../../../event-bus';
+    import PopupContent from "./popup/PopupContent";
 
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -91,7 +89,9 @@
             'l-geo-json': LGeoJson,
             'l-control-layers': LControlLayers,
             'l-layer-group': LLayerGroup,
-            'l-control-scale': LControlScale
+            'l-control-scale': LControlScale,
+            'l-popup': LPopup,
+            'popup-content': PopupContent
         },
 
         data() {
@@ -129,8 +129,8 @@
                 subbasinID: null,
 
                 weatherStationList: [
-                    {id: "1", position: {lat: 45.365, lng: -119.584}},
-                    {id: "2", position: {lat: 45.317, lng: -119.881}}
+                    {id: "1", name:'station 1', position: {lat: 45.365, lng: -119.584}},
+                    {id: "2", name: 'station 2', position: {lat: 45.317, lng: -119.881}}
                 ],
 
                 tileProviders: [
@@ -272,10 +272,6 @@
                     });
 
                 };
-            },
-
-            onMarkerClicked(marker){
-                alert("clicked on marker: " + marker.id)
             }
         },
 
@@ -291,11 +287,11 @@
                     this.geoJson_reach = response.data;
                     this.loading = true;
                     })
-            axios.get("/reservoir.geojson")
+            /*axios.get("/reservoir.geojson")
                 .then(response => {
                     this.geoJson_reservoir = response.data;
                     this.loading = true;
-                    })
+                    })*/
             axios.get("/water_rigths.geojson")
                 .then(response => {
                     this.geoJson_WaterRigths = response.data;
@@ -312,7 +308,6 @@
                     };
                 
             }
-
         }
     };
 </script>

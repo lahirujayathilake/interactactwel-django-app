@@ -1,7 +1,6 @@
 <template>
     <div>
-        <!--<component :fromparent="fromparent" v-bind:is="component='progress-bar'"></component>-->
-        <form-wizard v-show="!stepWizardVisibility" v-on:next-step="nextStep" @on-complete="onComplete"
+        <form-wizard v-show="!stepWizardVisibility" @on-complete="onComplete"
                      shape="tab"
                      color="#28a645">
             <tab-content title="Step 1"
@@ -53,8 +52,7 @@
                             <div class="list-group">
                                 <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
                                     <label class="form-checkbox" :disabled="goal.readonly">
-                                        <input type="checkbox" :value="goal.id" v-model="selectedGoals"
-                                               :disabled="goal.readonly"></input>
+                                        <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"/>
                                         {{goal.goal}}
                                     </label>
                                     <b-badge class="info-button" pill variant="secondary">i</b-badge>
