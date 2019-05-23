@@ -16,8 +16,17 @@
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_reach"
-                :options="options"
+                :options="options_noclick"
                 :options-style="styleFunction_reach"
+        />
+        </l-layer-group>
+
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Water Rights</strong></font>">
+        <l-geo-json
+                v-if="show"
+                :geojson="geoJson_WaterRigths"
+                :options="options_noclick"
+                :options-style="styleFunction_waterrigths"
         />
         </l-layer-group>
 
@@ -132,6 +141,7 @@
                 geoJson_reach: null,
                 geoJson_subbasin: null,
                 geoJson_reservoir: null,
+                geoJson_WaterRigths: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
@@ -195,7 +205,6 @@
                         'className' : 'custom'
                     }
                     ]
-
             }
         },
 
@@ -203,6 +212,10 @@
             options() {
                 return {
                     onEachFeature: this.onEachFeatureFunction
+                };
+            },
+            options_noclick() {
+                return {
                 };
             },
             dynamicSize () {
@@ -224,6 +237,20 @@
                 };
             },
             styleFunction_subbasin() {
+                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+                return () => {
+                    return {
+                        weight: 1.5,
+                        color: "#7c7c7c",
+                        opacity: 1,
+                        fillColor: "#e3dddd",
+                        dashArray: '5, 5',
+                        dashOffset: '10',
+                        fillOpacity: 0.5
+                    };
+                };
+            },
+            styleFunction_waterrigths() {
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
                 return () => {
                     return {
@@ -294,6 +321,11 @@
             axios.get("/reservoir.geojson")
                 .then(response => {
                     this.geoJson_reservoir = response.data;
+                    this.loading = true;
+                    })
+            axios.get("/water_rigths.geojson")
+                .then(response => {
+                    this.geoJson_WaterRigths = response.data;
                     this.loading = true;
                     })
 
