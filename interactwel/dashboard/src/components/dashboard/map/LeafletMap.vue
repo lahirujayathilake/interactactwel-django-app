@@ -270,11 +270,22 @@
 
             GetWRcolor(){
                 return (feature, layer) => {
-                    console.log(feature.properties.WRSC)
-                    if (feature.properties.WRSC == 'GW'){
+                    //console.log(feature.properties.WRSC)
+                    //if (feature.properties.WRSC == 'GW'){
+                    //    layer.setStyle({fillColor :'red'});
+                    //}else{
+                    //    layer.setStyle({fillColor :'green'});
+                    //}
+                                    
+                    if (feature.properties.WRSCI == '3'){
                         layer.setStyle({fillColor :'red'});
-                    }else{
+                    }else if (feature.properties.WRSCI == '1'){
+                        layer.setStyle({fillColor :'blue'});
+                    }else if (feature.properties.WRSCI == '5'){
                         layer.setStyle({fillColor :'green'});
+                    }else{
+                        layer.setStyle({fillColor :'black'});
+                        layer.setStyle({fillOpacity: "0"});
                     }
                 }
             },
