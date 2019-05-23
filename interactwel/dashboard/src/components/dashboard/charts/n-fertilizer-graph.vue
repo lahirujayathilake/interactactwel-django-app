@@ -1,6 +1,6 @@
 <template>
     <div>
-        <chart :chart-data="datacollection" :width="5" :height="2"></chart>
+        <chart :chart-data='datacollection' :width="5" :height="2"></chart>
     </div>
 </template>
 <script>
@@ -16,27 +16,47 @@
             return {
                 datacollection: null,
                 xLabels: [],
-                BASIN_N_Fertilizer_Data: [],
             };
         },
         mounted() {
-            var $this = this;
-            axios.get("/BASIN_N_fertilizer_(kg_N)_data.json").then(function (response) {
-                $this.BASIN_N_Fertilizer_Data = response.data;
-                for (var i = 0; i < 10; i++) {
-                    $this.xLabelsComputed($this.BASIN_N_Fertilizer_Data["Data Labels"][i]);
-                }
-
-            }).catch(function (error) {
-                console.log(error);
-            });
-
             this.fillData();
         },
 
+        created(){
+            axios.get("/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
+                this.buildDataCollection(response.data);
+                });
+        },
+
         methods: {
-            xLabelsComputed(v) {
-                return this.xLabels.push(v);
+            buildDataCollection(data){
+                this.datacollection = {};
+                this.datacollection.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollection.labels.push(data.Legend[legend]);
+                }
+
+                this.datacollection.datasets = [];
+                for (let dataIndex in data.Data){
+                    let dataPoint = data.Data[dataIndex];
+                    let dataset = {};
+                    dataset.label = dataIndex;
+                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.data = [];
+                    for(let dataValue in dataPoint.Data) {
+                        dataset.data.push(dataPoint.Data[dataValue]);
+                    }
+                    this.datacollection.datasets.push(dataset);
+                }
+            },
+
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
             },
 
             fillData() {
