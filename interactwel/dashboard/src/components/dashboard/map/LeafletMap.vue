@@ -44,7 +44,7 @@
                 :icon="wstationIcon"
                 :visible="true" >
                 <l-popup>
-                    <popup-content :data="weatherStation"/>
+                    <popup-content :data="weatherStation" :pcpdata="PrecipData"/>
                 </l-popup>
             </l-marker>
         </l-layer-group>
@@ -128,6 +128,19 @@
                     }),
                 subbasinID: null,
 
+                PrecipData: {
+                            "1": {
+                            "cols": [
+                                { "id": "", "label": "Water Source", "pattern": "", "type": "string" },
+                                { "id": "", "label": "Total Volume (acre-ft)", "pattern": "", "type": "number" }
+                            ],
+                            "rows": [
+                                { "c": [{ "v": "Water Source", "f": null }, { "v": 21664, "f": null }] },
+                                { "c": [{ "v": "Surface water", "f": null }, { "v": 14466, "f": null }] },
+                                { "c": [{ "v": "Columbia River", "f": null }, { "v": 2368, "f": null }] }
+                            ]
+                        }},
+
                 weatherStationList: [
                     {id: "1", name:'USC00353827 (Hempner, OR)', position: {lat: 45.365, lng: -119.584}, data_Range: '1/1/1940 – 12/31/2010', obs_type: 'Daily', num_Pobs: '25,840', num_Tobs: '25,832'},
                     {id: "2", name: 'USC00354161  (Ione 18 S, OR US)', position: {lat: 45.317, lng: -119.881}, data_Range: '1/1/1940 – 5/31/2010', obs_type: 'Daily', num_Pobs: '23,208', num_Tobs: '0'}
@@ -164,7 +177,8 @@
                 customOptions: [
                     {
                         'font-size': '15px',
-                        'maxWidth': '500',
+                        'maxWidth': '1000px',
+                        'width': '500px',
                         'className' : 'custom'
                     }
                     ]
