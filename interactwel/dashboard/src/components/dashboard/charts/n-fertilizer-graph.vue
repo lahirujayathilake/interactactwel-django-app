@@ -19,7 +19,7 @@
             };
         },
         mounted() {
-            this.fillData();
+
         },
 
         created(){
@@ -40,7 +40,7 @@
                 for (let dataIndex in data.Data){
                     let dataPoint = data.Data[dataIndex];
                     let dataset = {};
-                    dataset.label = dataIndex;
+                    dataset.label = dataPoint.Name;
                     dataset.backgroundColor = this.getRandomColor();
                     dataset.data = [];
                     for(let dataValue in dataPoint.Data) {
@@ -57,49 +57,7 @@
                     color += letters[Math.floor(Math.random() * 16)];
                 }
                 return color;
-            },
-
-            fillData() {
-                this.datacollection = {
-                    labels: [
-                        "2008",
-                        "2009",
-                        "2010"
-                    ],
-                    datasets: [
-                        {
-                            label: "CWGR",
-                            backgroundColor: "#f87979",
-                            data: [7.35, 48.18, 0]
-                        },
-                        {
-                            label: "POTA",
-                            backgroundColor: "#A5CC82",
-                            data: [182, 134.1, 1691.96]
-                        },
-                        {
-                            label: "OAK",
-                            backgroundColor: "#7266ba",
-                            data: [0, 0, 0]
-                        },
-                        {
-                            label: "PEAS",
-                            backgroundColor: "#ccb949",
-                            data: [0, 0, 0]
-                        },
-                        {
-                            label: "GRSG",
-                            backgroundColor: "#2470cc",
-                            data: [40.95, 191.58, 685.35]
-                        },
-                        {
-                            label: "AGRL",
-                            backgroundColor: "#12cc6c",
-                            data: [11148.51, 38010.32, 8793.48]
-                        },
-                    ]
-                };
-            },
+            }
         }
     };
 </script>

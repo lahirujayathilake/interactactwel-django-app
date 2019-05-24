@@ -22,33 +22,44 @@
         },
 
         mounted() {
-            this.fillData()
+
+        },
+
+        created(){
+            axios.get("/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
+                this.buildDataCollection(response.data);
+            });
         },
 
         methods: {
+            buildDataCollection(data){
+                this.datacollection = {};
+                this.datacollection.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollection.labels.push(data.Legend[legend]);
+                }
 
-            fillData() {
-                this.datacollection = {
-                    labels: [ "2008", "2009", "2010"],
-                    datasets: [
-                        {
-                            label: "Surface Water",
-                            backgroundColor: "#ff8c1c",
-                            data: [1664.97, 1687.5, 1653.23]
-                        },
-                        {
-                            label: "Groundwater",
-                            backgroundColor: "#ccbf23",
-                            data: [5427.46, 5353.44, 5868.54]
-                        },
+                this.datacollection.datasets = [];
+                for (let dataIndex in data.Data){
+                    let dataPoint = data.Data[dataIndex];
+                    let dataset = {};
+                    dataset.label = dataPoint.Name;
+                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.data = [];
+                    for(let dataValue in dataPoint.Data) {
+                        dataset.data.push(dataPoint.Data[dataValue]);
+                    }
+                    this.datacollection.datasets.push(dataset);
+                }
+            },
 
-                        {
-                            label: "Columbia River",
-                            backgroundColor: "#4d45b0",
-                            data: [2412.1, 2328.64, 2327.24]
-                        }
-                    ]
-                };
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
             },
         }
     }
