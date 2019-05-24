@@ -14,7 +14,9 @@
         </b-tab>
         <b-tab title="Overview">
         <div class="card-body">
-                    <GChart :resizeDebounce="500" type="BarChart" :data="jsonData" :options="chartOptions"/>
+        <div class="card-body">
+                    <GChart :resizeDebounce="5" type="ColumnChart" :data="jsonData" :options="chartOptions"/>
+                    </div>
                     </div>
         </b-tab>
     </b-tabs>
@@ -39,15 +41,16 @@
 
             }
         },
+        
     chartOptions: {
                 chart: {
-                    title: "Total Irrigation",
-                    subtitle: "Irrigation: 2008-2010",
+                    title: "Aveage monthly precipitation depth (mm)",
+                    subtitle: "Aveage monthly precipitation depth (mm)",
                 },
-                width: 700,
-                height: 300,
+                width: 500,
+                height: 250,
                 legend: {position: 'top', maxLines: 3},
-                chartArea: {width: "80%", height: "80%"}
+                chartArea: {width: "90%", height: "90%"}
                 },
     computed:{
         jsonData() {
@@ -60,11 +63,16 @@
 </script>
 
 <style>
-    #PopupContent {
-        width: 450px;
-        z-index: 1000;
-    }
-.leaflet-popup-content-wrapper{
+#PopupContent {
     width: 500px;
+    height: 300px;
+    z-index: 1000;
+}
+
+.leaflet-popup-content{
+    width: 500px;
+}
+.leaflet-popup-content-wrapper{
+    width: 550px;
 }
 </style>
