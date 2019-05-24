@@ -31,10 +31,10 @@
         />
         </l-layer-group>
 
-        <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
+        <!-- <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
 
         <l-marker :lat-lng="[45.346896, -119.544586]" :icon="reservoirIcon" @click="layerClicked"></l-marker>
-        </l-layer-group>
+        </l-layer-group> -->
 
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
             <l-marker
@@ -44,7 +44,7 @@
                 :icon="reservoirIcon"
                 :visible="true" >
                 <l-popup>
-                    <popup-content :data="reservoirStation" :pcpdata="PrecipData"/>
+                    <popup-content-rs :data="reservoirStation" :pcpdata="ReservoirData"/>
                 </l-popup>
             </l-marker>
         </l-layer-group>
@@ -57,7 +57,7 @@
                 :icon="wstationIcon"
                 :visible="true" >
                 <l-popup>
-                    <popup-content :data="weatherStation" :pcpdata="PrecipData"/>
+                    <popup-content-ws :data="weatherStation" :pcpdata="PrecipData"/>
                 </l-popup>
             </l-marker>
         </l-layer-group>
@@ -84,9 +84,10 @@
     import L from 'leaflet';
     import EventBus from './../../../event-bus';
     import PopupContentWStations from "./popup/PopupContent_WStations";
+    import PopupContentReservoirs from "./popup/PopupContent_Reservoirs";
     import PrecipDataJson from "../../../assets/weather_station_data.json";
+    import ReservoirDataJson from "../../../assets/reservoirs_data.json";
 
-    console.log(PrecipDataJson)
     delete L.Icon.Default.prototype._getIconUrl;
 
     L.Icon.Default.mergeOptions({
@@ -106,7 +107,8 @@
             'l-layer-group': LLayerGroup,
             'l-control-scale': LControlScale,
             'l-popup': LPopup,
-            'popup-content': PopupContentWStations
+            'popup-content-ws': PopupContentWStations,
+            'popup-content-rs': PopupContentReservoirs
         },
 
         data() {
@@ -144,6 +146,7 @@
                 subbasinID: null,
 
                 PrecipData: PrecipDataJson,
+                ReservoirData: ReservoirDataJson,
 
                 weatherStationList: [
                     {id: "1", name:'USC00353827 (Hempner, OR)', position: {lat: 45.365, lng: -119.584}, data_Range: '1/1/1940 – 12/31/2010', obs_type: 'Daily', num_Pobs: '25,840', num_Tobs: '25,832'},
@@ -151,7 +154,8 @@
                 ],
 
                 reservoirStationList: [
-                    {id: "1", name:'USC00353827 (Hempner, OR)', position: {lat: 45.346896, lng: -119.544586}, data_Range: '1/1/1940 – 12/31/2010', obs_type: 'Daily', num_Pobs: '25,840', num_Tobs: '25,832'}
+                    {id: "1", name:'Willow Creek Reservoir', position: {lat: 45.346896, lng: -119.544586}, spillway_vol: '4142 ac-ft', spillway_sfarea: '125 ac', espillway_vol: '6048 ac-ft', espillway_sfarea: '158 ac',
+                    release_schd0:'Jan. – Jun.: 0, 0, 0, 50, 375, 450', release_schd1:'Jul. – Dec.: 625, 550, 400, 50, 0, 0'}
                 ],
 
                 tileProviders: [

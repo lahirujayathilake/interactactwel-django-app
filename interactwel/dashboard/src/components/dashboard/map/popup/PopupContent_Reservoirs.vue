@@ -1,15 +1,18 @@
 <template>
-<div id="PopupContentWStations" class="card">
-<div class="card-header"><strong>Weather station</strong></div>
+<div id="PopupContentReservoirs" class="card">
+<div class="card-header"><strong>{{ data.name }}</strong></div>
     <div class="card-body no-padding">
     <b-tabs card>
         <b-tab title="Info" active>
         <div class="card-body">
-            <strong>Name: </strong>{{ data.name }}<br>
-            <strong>Data Availability: </strong> {{ data.data_Range}}<br>
-            <strong>Observation Type: </strong>{{ data.obs_type}}<br>
-            <strong>Num. of Precipitation Obs.: </strong>{{ data.num_Pobs}}<br>
-            <strong>Num. of Temperature Obs.: </strong>{{ data.num_Tobs}}
+            <strong><u>Principal Spillway: </u></strong><br>
+            <strong>Volume: </strong>{{ data.spillway_vol}}<br>
+            <strong>Surface Area: </strong>{{ data.spillway_sfarea}}<br>
+            <br>
+            <strong><u>Emergency Principal Spillway: </u></strong><br>
+            <strong>Volume: </strong>{{ data.espillway_vol}}<br>
+            <strong>Surface Area: </strong>{{ data.espillway_sfarea}}<br>
+            
             </div>
         </b-tab>
         <b-tab title="Overview">
@@ -29,7 +32,7 @@
     import {GChart} from 'vue-google-charts';
 
     export default {
-        name: "PopupContentWStations",
+        name: "PopupContentReservoirs",
         components: {
             GChart
         },
@@ -63,7 +66,7 @@
 </script>
 
 <style>
-#PopupContentWStations {
+#PopupContentReservoirs {
     width: 500px;
     height: 300px;
     z-index: 1000;
