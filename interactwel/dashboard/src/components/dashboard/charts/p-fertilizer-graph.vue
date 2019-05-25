@@ -22,10 +22,10 @@
                         text: 'Amount of P fertilizer applied automatically in watershed'
                     },
                     legend: {
-                        position: 'right',
+                        position: 'top',
                     },
                     tooltips: {
-                        mode: 'index',
+                        mode: 'point',
                         intersect: false,
                     },
                     hover: {
