@@ -22,7 +22,7 @@
         },
 
         created(){
-            axios.get("/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
+            axios.get("/static/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
                 this.buildDataCollection(response.data);
                 });
         },

@@ -1,0 +1,18 @@
+{
+    "1": {
+        "cols": [{ "id": "", "label": "Month", "pattern": "", "type": "string" }, { "id": "", "label": "Avg. Irrigation Release (ac-ft)", "pattern": "", "type": "number" }],
+        "rows": [{ "c": [{ "v": "Jan", "f": null }, { "v": "0.0", "f": null }] },
+            { "c": [{ "v": "Feb", "f": null }, { "v": "0.0", "f": null }] },
+            { "c": [{ "v": "Mar", "f": null }, { "v": "0.0", "f": null }] },
+            { "c": [{ "v": "Apr", "f": null }, { "v": "50.0", "f": null }] },
+            { "c": [{ "v": "May", "f": null }, { "v": "375.0", "f": null }] },
+            { "c": [{ "v": "Jun", "f": null }, { "v": "450.0", "f": null }] },
+            { "c": [{ "v": "Jul", "f": null }, { "v": "625.0", "f": null }] },
+            { "c": [{ "v": "Aug", "f": null }, { "v": "550.0", "f": null }] },
+            { "c": [{ "v": "Sep", "f": null }, { "v": "400.0", "f": null }] },
+            { "c": [{ "v": "Oct", "f": null }, { "v": "50.0", "f": null }] },
+            { "c": [{ "v": "Nov", "f": null }, { "v": "0.0", "f": null }] },
+            { "c": [{ "v": "Dec", "f": null }, { "v": "0.0", "f": null }] }
+        ]
+    }
+}

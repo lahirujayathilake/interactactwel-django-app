@@ -31,9 +31,31 @@
         />
         </l-layer-group>
 
-        <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Irrigated Land</strong></font>">
+        <l-geo-json
+                v-if="show"
+                :geojson="geoJson_irrland"
+                :options="options_noclick"
+                :options-style="styleFunction_irrland"
+        />
+        </l-layer-group>
+
+        <!-- <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
 
         <l-marker :lat-lng="[45.346896, -119.544586]" :icon="reservoirIcon" @click="layerClicked"></l-marker>
+        </l-layer-group> -->
+
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
+            <l-marker
+                v-for="reservoirStation in reservoirStationList"
+                :key="reservoirStation.id"
+                :lat-lng.sync="reservoirStation.position"
+                :icon="reservoirIcon"
+                :visible="true" >
+                <l-popup>
+                    <popup-content-rs :data="reservoirStation" :pcpdata="ReservoirData"/>
+                </l-popup>
+            </l-marker>
         </l-layer-group>
 
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Weather stations</strong></font>">
@@ -44,7 +66,7 @@
                 :icon="wstationIcon"
                 :visible="true" >
                 <l-popup>
-                    <popup-content :data="weatherStation"/>
+                    <popup-content-ws :data="weatherStation" :pcpdata="PrecipData"/>
                 </l-popup>
             </l-marker>
         </l-layer-group>
@@ -70,7 +92,10 @@
     import axios from 'axios';
     import L from 'leaflet';
     import EventBus from './../../../event-bus';
-    import PopupContent from "./popup/PopupContent";
+    import PopupContentWStations from "./popup/PopupContent_WStations";
+    import PopupContentReservoirs from "./popup/PopupContent_Reservoirs";
+    import PrecipDataJson from "../../../assets/weather_station_data.json";
+    import ReservoirDataJson from "../../../assets/reservoirs_data.json";
 
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -91,7 +116,8 @@
             'l-layer-group': LLayerGroup,
             'l-control-scale': LControlScale,
             'l-popup': LPopup,
-            'popup-content': PopupContent
+            'popup-content-ws': PopupContentWStations,
+            'popup-content-rs': PopupContentReservoirs
         },
 
         data() {
@@ -100,6 +126,7 @@
                 geoJson_subbasin: null,
                 geoJson_reservoir: null,
                 geoJson_WaterRigths: null,
+                geoJson_irrland: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
@@ -128,9 +155,17 @@
                     }),
                 subbasinID: null,
 
+                PrecipData: PrecipDataJson,
+                ReservoirData: ReservoirDataJson,
+
                 weatherStationList: [
                     {id: "1", name:'USC00353827 (Hempner, OR)', position: {lat: 45.365, lng: -119.584}, data_Range: '1/1/1940 – 12/31/2010', obs_type: 'Daily', num_Pobs: '25,840', num_Tobs: '25,832'},
                     {id: "2", name: 'USC00354161  (Ione 18 S, OR US)', position: {lat: 45.317, lng: -119.881}, data_Range: '1/1/1940 – 5/31/2010', obs_type: 'Daily', num_Pobs: '23,208', num_Tobs: '0'}
+                ],
+
+                reservoirStationList: [
+                    {id: "1", name:'Willow Creek Reservoir', position: {lat: 45.346896, lng: -119.544586}, spillway_vol: '4142 ac-ft', spillway_sfarea: '125 ac', espillway_vol: '6048 ac-ft', espillway_sfarea: '158 ac',
+                    release_schd0:'Jan. – Jun.: 0, 0, 0, 50, 375, 450', release_schd1:'Jul. – Dec.: 625, 550, 400, 50, 0, 0'}
                 ],
 
                 tileProviders: [
@@ -164,7 +199,8 @@
                 customOptions: [
                     {
                         'font-size': '15px',
-                        'maxWidth': '500',
+                        'maxWidth': '1000px',
+                        'width': '500px',
                         'className' : 'custom'
                     }
                     ]
@@ -198,6 +234,7 @@
                     };
                 };
             },
+
             styleFunction_subbasin() {
                 return () => {
                     return {
@@ -211,6 +248,7 @@
                     };
                 };
             },
+
             styleFunction_waterrigths() {
                 return () => {
                     return {
@@ -218,7 +256,19 @@
                         color: "#7c7c7c",
                         opacity: 0,
                         fillColor: "#3386ff",
-                        fillOpacity: 0.5
+                        fillOpacity: 1
+                    };
+                };
+            },
+
+            styleFunction_irrland() {
+                return () => {
+                    return {
+                        weight: 0.5,
+                        color: "#7c7c7c",
+                        opacity: 0.4,
+                        fillColor: "#eb984e",
+                        fillOpacity: 0.6
                     };
                 };
             },
@@ -278,22 +328,22 @@
 
         created() {
             this.loading = true;
-            axios.get("/subbasins.geojson")
+            axios.get("/static/subbasins.geojson")
                 .then(response => {
                     this.geoJson_subbasin = response.data;
                     this.loading = true;
                 })
-            axios.get("/reaches.geojson")
+            axios.get("/static/reaches.geojson")
                 .then(response => {
                     this.geoJson_reach = response.data;
                     this.loading = true;
                     })
-            /*axios.get("/reservoir.geojson")
+            axios.get("/static/irrigated_land.geojson")
                 .then(response => {
-                    this.geoJson_reservoir = response.data;
+                    this.geoJson_irrland = response.data;
                     this.loading = true;
-                    })*/
-            axios.get("/water_rigths.geojson")
+                    })
+            axios.get("/static/water_rigths.geojson")
                 .then(response => {
                     this.geoJson_WaterRigths = response.data;
                     this.loading = true;
@@ -302,7 +352,7 @@
         },
         methods: {
             layerClicked() {
-                alert("clicked me");
+                //alert("clicked me");
                 return (feature, layer) => {
 
                     layer.bindPopup(this.customPopup,this.customOptions);

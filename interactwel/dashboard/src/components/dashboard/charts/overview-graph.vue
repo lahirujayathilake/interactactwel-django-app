@@ -43,7 +43,7 @@
     import CropAreaGraph from './crop-area-graph.vue'
     import CropYieldGraph from './crop-yield-graph.vue'
     import NFertilizerGraph from './n-fertilizer-graph.vue'
-    import PFertilizerGraph from './p-fertilizer-graph.vue'
+    //import PFertilizerGraph from './p-fertilizer-graph.vue'
 
     export default {
         name: 'StreamsflowGraph',
@@ -54,7 +54,7 @@
             'cropAreaGraph' :CropAreaGraph,
             'cropYieldGraph' :CropYieldGraph,
             'nFertilizerGraph' :NFertilizerGraph,
-            'pFertilizerGraph' :PFertilizerGraph,
+            //'pFertilizerGraph' :PFertilizerGraph,
         },
 
         data() {
