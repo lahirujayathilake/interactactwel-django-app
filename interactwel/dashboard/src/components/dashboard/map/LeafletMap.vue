@@ -328,22 +328,22 @@
 
         created() {
             this.loading = true;
-            axios.get("/subbasins.geojson")
+            axios.get("/static/subbasins.geojson")
                 .then(response => {
                     this.geoJson_subbasin = response.data;
                     this.loading = true;
                 })
-            axios.get("/reaches.geojson")
+            axios.get("/static/reaches.geojson")
                 .then(response => {
                     this.geoJson_reach = response.data;
                     this.loading = true;
                     })
-            axios.get("/irrigated_land.geojson")
+            axios.get("/static/irrigated_land.geojson")
                 .then(response => {
                     this.geoJson_irrland = response.data;
                     this.loading = true;
                     })
-            axios.get("/water_rigths.geojson")
+            axios.get("/static/water_rigths.geojson")
                 .then(response => {
                     this.geoJson_WaterRigths = response.data;
                     this.loading = true;
