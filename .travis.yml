@@ -9,4 +9,4 @@ notifications:
 
 before_script: cd interactwel/dashboard
 
-script: npm run buid
+script: npm run build
