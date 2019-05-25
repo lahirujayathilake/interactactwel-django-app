@@ -31,6 +31,15 @@
         />
         </l-layer-group>
 
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Irrigated Land</strong></font>">
+        <l-geo-json
+                v-if="show"
+                :geojson="geoJson_irrland"
+                :options="options_noclick"
+                :options-style="styleFunction_irrland"
+        />
+        </l-layer-group>
+
         <!-- <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
 
         <l-marker :lat-lng="[45.346896, -119.544586]" :icon="reservoirIcon" @click="layerClicked"></l-marker>
@@ -117,6 +126,7 @@
                 geoJson_subbasin: null,
                 geoJson_reservoir: null,
                 geoJson_WaterRigths: null,
+                geoJson_irrland: null,
                 zoom: 10,
                 maxZoom: 17,
                 minZoom: 3,
@@ -224,6 +234,7 @@
                     };
                 };
             },
+
             styleFunction_subbasin() {
                 return () => {
                     return {
@@ -237,6 +248,7 @@
                     };
                 };
             },
+
             styleFunction_waterrigths() {
                 return () => {
                     return {
@@ -244,7 +256,19 @@
                         color: "#7c7c7c",
                         opacity: 0,
                         fillColor: "#3386ff",
-                        fillOpacity: 0.5
+                        fillOpacity: 1
+                    };
+                };
+            },
+
+            styleFunction_irrland() {
+                return () => {
+                    return {
+                        weight: 0.5,
+                        color: "#7c7c7c",
+                        opacity: 0.4,
+                        fillColor: "#eb984e",
+                        fillOpacity: 0.6
                     };
                 };
             },
@@ -314,11 +338,11 @@
                     this.geoJson_reach = response.data;
                     this.loading = true;
                     })
-            /*axios.get("/reservoir.geojson")
+            axios.get("/irrigated_land.geojson")
                 .then(response => {
-                    this.geoJson_reservoir = response.data;
+                    this.geoJson_irrland = response.data;
                     this.loading = true;
-                    })*/
+                    })
             axios.get("/water_rigths.geojson")
                 .then(response => {
                     this.geoJson_WaterRigths = response.data;
