@@ -14,6 +14,7 @@
             <b-tab title="Data">
                 <div class="card-body">
                     <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
+                    <!--<line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>-->
                 </div>
             </b-tab>
         </b-tabs>
@@ -23,6 +24,7 @@
 <script>
     import axios from 'axios';
     import Chart from "../../../../chart";
+    //import LineChart from '../../../../chartLine'
 
     export default {
         name: "PopupContentWStations",

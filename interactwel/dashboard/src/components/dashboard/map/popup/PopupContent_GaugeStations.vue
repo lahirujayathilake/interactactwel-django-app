@@ -1,11 +1,11 @@
 <template>
     <div id="PopupContentGaugeStations" class="card">
-        <div class="card-header"><strong>Gauge Station</strong></div>
-        <div class="card-body no-padding">
+        <div class="card-header"><strong>Gauge Station: {{ data.name }}</strong></div>
             <b-tabs card>
                 <b-tab title="Info" active>
                     <div class="card-body">
                         <strong>Name: </strong>{{ data.name }}<br>
+                        <strong>USGS ID: </strong>{{ data.id }}<br>
                         <strong>Data Availability: </strong> {{ data.data_Range}}<br>
                         <strong>Observation Type: </strong>{{ data.obs_type}}<br>
                         <strong>Num. of Precipitation Obs.: </strong>{{ data.num_flowobs}}<br>
@@ -13,9 +13,7 @@
                 </b-tab>
                 <b-tab title="Data">
                     <div class="card-body">
-                        <div class="card-body">
-                            <GChart :resizeDebounce="5" type="ColumnChart" :data="jsonData" :options="chartOptions"/>
-                        </div>
+                        <line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>
                     </div>
                 </b-tab>
             </b-tabs>
@@ -25,42 +23,107 @@
 </template>
 
 <script>
-    import {GChart} from 'vue-google-charts';
+    import axios from 'axios';
+    import LineChart from '../../../../chartLine';
 
     export default {
         name: "PopupContentGaugeStations",
         components: {
-            GChart
+            LineChart
         },
         props: {
-            data: {
-                name: String
-            },
+            data: {},
             pcpdata: {}
         },
 
         data() {
             return {
-                chartOptions: {
-                    chart: {
-                        title: "Aveage monthly streamflow (cfs)",
-                        subtitle: "Aveage monthly streamflow (cfs)",
+                datacollection: null,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Aveage monthly streamflow (cfs)'
                     },
-                    width: 500,
-                    height: 250,
-                    legend: {position: 'top', maxLines: 3},
-                    chartArea: {width: "90%", height: "90%"}
-                },
-            }
+                    legend: {
+                        display: false,
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Months'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Streamflow (cfs)'
+                            }
+                        }]
+                    }
+                }
+            };
         },
 
-        computed: {
-            jsonData() {
-                var data = this.pcpdata[this.data.id];
-                //console.log(data)
-                return data;
-            },
+        mounted() {
+
         },
+
+        created() {
+            axios.get("/static/streamflow_station_data.json").then(response => {
+                this.buildDataCollection(response.data);
+            });
+        },
+
+        methods: {
+            buildDataCollection(jsonData) { //todo: need to move this method to an upper layer since it is getting called for each weather station
+                this.datacollection = {};
+                this.datacollection.labels = [];
+                for (let legend in jsonData.Legend) {
+                    this.datacollection.labels.push(jsonData.Legend[legend]);
+                }
+                this.datacollection.title = jsonData["Data type"];
+                this.datacollection.datasets = [];
+                for (let dataIndex in jsonData.Data) {
+                    let dataPoint = jsonData.Data[dataIndex];
+                    if (dataPoint.Name != this.data.id) {
+                        continue;
+                    }
+                    let dataset = {};
+                    dataset.label = dataPoint.Name;
+                    //dataset.backgroundColor = this.getRandomColor();
+                    dataset.backgroundColor ='#4e85eb';
+                    dataset.data = [];
+                    for (let dataValue in dataPoint.Data) {
+                        dataset.data.push(dataPoint.Data[dataValue]);
+                    }
+                    this.datacollection.datasets.push(dataset);
+                }
+            },
+
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            },
+        }
+
     };
 </script>
 

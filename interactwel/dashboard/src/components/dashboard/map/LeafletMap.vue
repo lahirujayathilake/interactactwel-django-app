@@ -192,7 +192,7 @@
                     release_schd0:'Jan. – Jun.: 0, 0, 0, 50, 375, 450', release_schd1:'Jul. – Dec.: 625, 550, 400, 50, 0, 0'}
                 ],
                 gaugingStationList: [
-                    {id: "1", name:'USGS 14036000 WILLOW CREEK NR ARLINGTON, OREG.', position: {lat: 45.752977, lng: -120.011102}, data_Range: '1960-10 – 1979-09', obs_type: 'Daily', num_flowobs: '6938'}
+                    {id: "14036000", name:'WILLOW CREEK NR ARLINGTON, OREG.', position: {lat: 45.752977, lng: -120.011102}, data_Range: '1960-10 – 1979-09', obs_type: 'Daily', num_flowobs: '6938'}
                 ],
 
                 tileProviders: [
