@@ -1,0 +1,12 @@
+language: node_js
+
+sudo: false
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+
+before_script: cd interactwel/dashboard
+
+script: npm install && npm run build
