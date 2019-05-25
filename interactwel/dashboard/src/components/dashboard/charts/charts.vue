@@ -18,7 +18,7 @@
     import IrrigationGraph from './irrigation-graph.vue'
     import GroudWaterGraph from './groudwater-graph.vue'
     import OverviewGraph from './overview-graph.vue'
-    import RegionGraph from './region-graph.vue'
+    //import RegionGraph from './region-graph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -35,7 +35,7 @@
             'irrigation-graph': IrrigationGraph,
             'groundwater-graph': GroudWaterGraph,
             'overview-graph': OverviewGraph,
-            'region-graph': RegionGraph,
+            //'region-graph': RegionGraph,
         },
 
         data() {

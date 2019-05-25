@@ -22,7 +22,7 @@
         />
         </l-layer-group>
 
-        <l-layer-group layer-type="overlay" name="<font size=4><strong>Water Rights</strong></font>">
+        <l-layer-group id="wtrights" layer-type="overlay" name="<font size=4><strong>Water Rights</strong></font>">
         <l-geo-json
                 v-if="show"
                 :geojson="geoJson_WaterRigths"
@@ -89,6 +89,7 @@
         layer-type="base"/>
 
      <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
+     <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
      <img src="../../../assets/water_rights_legend.png" class="map-legend">
     </l-map>
     
@@ -386,6 +387,18 @@
                     };
                 
             }
+            
+            //Layerselector(){
+                //alert('something');
+                // var x = document.getElementById("WRlegend").__vue__;
+                // console.log(x);
+                // if (x.src == "../../../assets/water_rights_legend.png") {
+                //     x.src = "none";
+                // } else {
+                //     x.src = "../../../assets/water_rights_legend.png";
+                // }
+                
+            //}
         }
     };
 </script>
