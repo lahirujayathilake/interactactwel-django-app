@@ -33,9 +33,7 @@
             GChart, Chart
         },
         props: {
-            data: {
-                name: String
-            },
+            data: {},
             pcpdata: {}
         },
 
@@ -108,16 +106,20 @@
         },
 
         methods: {
-            buildDataCollection(data) {
+            buildDataCollection(jsonData) { //todo: need to move this method to an upper layer since it is getting called for each weather station
                 this.datacollection = {};
                 this.datacollection.labels = [];
-                for (let legend in data.Legend) {
-                    this.datacollection.labels.push(data.Legend[legend]);
+                for (let legend in jsonData.Legend) {
+                    this.datacollection.labels.push(jsonData.Legend[legend]);
                 }
 
                 this.datacollection.datasets = [];
-                for (let dataIndex in data.Data) {
-                    let dataPoint = data.Data[dataIndex];
+                for (let dataIndex in jsonData.Data) {
+                    let dataPoint = jsonData.Data[dataIndex];
+                    debugger;
+                    if (dataPoint.Name != this.data.name) {
+                        continue;
+                    }
                     let dataset = {};
                     dataset.label = dataPoint.Name;
                     dataset.backgroundColor = this.getRandomColor();
