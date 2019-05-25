@@ -116,7 +116,6 @@
                 this.datacollection.datasets = [];
                 for (let dataIndex in jsonData.Data) {
                     let dataPoint = jsonData.Data[dataIndex];
-                    debugger;
                     if (dataPoint.Name != this.data.name) {
                         continue;
                     }
