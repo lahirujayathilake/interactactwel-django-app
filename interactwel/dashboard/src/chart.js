@@ -11,10 +11,6 @@ export default {
             required: false
         },
         options: {
-            scales: {
-                xAxes: [{}],
-                yAxes: [{}]
-            }
         }
     },
 
