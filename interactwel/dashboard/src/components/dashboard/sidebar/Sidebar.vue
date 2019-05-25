@@ -29,9 +29,9 @@
                 currentChart: null,
 
                 chartTypes: [
-                    /*{id:"actions-graph", name: "Actions"},*/
                     {id: "overview-graph", name: "Overview"},
-                    {id: "fertilizer-graph", name: "Region"},
+                    {id: "region-graph", name: "Region"},
+                    {id:"actions-graph", name: "Actions"},
                     {id: "costs-graph", name: "Catchments"},
                     {id: "streamsflow-graph", name: "Streams"}
                     /* {id: "crops-graph", name: "Crops"},*/
