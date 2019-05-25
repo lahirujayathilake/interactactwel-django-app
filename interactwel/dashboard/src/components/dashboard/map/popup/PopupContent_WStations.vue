@@ -1,7 +1,7 @@
 <template>
     <div id="PopupContentWStations" class="card">
-        <div class="card-header"><strong>Weather station</strong></div>
-        <b-tabs>
+        <div class="card-header"><strong>Weather station : {{ data.name }}</strong></div>
+        <b-tabs card>
             <b-tab title="Info" active>
                 <div class="card-body">
                     <strong>Name: </strong>{{ data.name }}<br>
@@ -13,9 +13,7 @@
             </b-tab>
             <b-tab title="Data">
                 <div class="card-body">
-                    <div class="card-body">
-                        <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
-                    </div>
+                    <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
                 </div>
             </b-tab>
         </b-tabs>
