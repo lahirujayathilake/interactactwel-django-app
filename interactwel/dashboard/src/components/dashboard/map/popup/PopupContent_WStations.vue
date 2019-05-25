@@ -1,78 +1,160 @@
 <template>
-<div id="PopupContentWStations" class="card">
-<div class="card-header"><strong>Weather station</strong></div>
-    <div class="card-body no-padding">
-    <b-tabs card>
-        <b-tab title="Info" active>
-        <div class="card-body">
-            <strong>Name: </strong>{{ data.name }}<br>
-            <strong>Data Availability: </strong> {{ data.data_Range}}<br>
-            <strong>Observation Type: </strong>{{ data.obs_type}}<br>
-            <strong>Num. of Precipitation Obs.: </strong>{{ data.num_Pobs}}<br>
-            <strong>Num. of Temperature Obs.: </strong>{{ data.num_Tobs}}
-            </div>
-        </b-tab>
-        <b-tab title="Data">
-        <div class="card-body">
-        <div class="card-body">
-                    <GChart :resizeDebounce="5" type="ColumnChart" :data="jsonData" :options="chartOptions"/>
+    <div id="PopupContentWStations" class="card">
+        <div class="card-header"><strong>Weather station</strong></div>
+        <b-tabs>
+            <b-tab title="Info" active>
+                <div class="card-body">
+                    <strong>Name: </strong>{{ data.name }}<br>
+                    <strong>Data Availability: </strong> {{ data.data_Range}}<br>
+                    <strong>Observation Type: </strong>{{ data.obs_type}}<br>
+                    <strong>Num. of Precipitation Obs.: </strong>{{ data.num_Pobs}}<br>
+                    <strong>Num. of Temperature Obs.: </strong>{{ data.num_Tobs}}
+                </div>
+            </b-tab>
+            <b-tab title="Data">
+                <div class="card-body">
+                    <div class="card-body">
+                        <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
                     </div>
-                    </div>
-        </b-tab>
-    </b-tabs>
-        </div>
-        </div>
-
+                </div>
+            </b-tab>
+        </b-tabs>
+    </div>
 </template>
 
 <script>
+    import axios from 'axios';
     import {GChart} from 'vue-google-charts';
+    import Chart from "../../../../chart";
 
     export default {
         name: "PopupContentWStations",
         components: {
-            GChart
+            GChart, Chart
         },
         props: {
             data: {
                 name: String
             },
-            pcpdata: {
-
-            }
+            pcpdata: {}
         },
-        
-    chartOptions: {
-                chart: {
-                    title: "Aveage monthly precipitation depth (mm)",
-                    subtitle: "Aveage monthly precipitation depth (mm)",
-                },
-                width: 500,
-                height: 250,
-                legend: {position: 'top', maxLines: 3},
-                chartArea: {width: "90%", height: "90%"}
-                },
-    computed:{
-        jsonData() {
-            var data = this.pcpdata[this.data.id];
-            console.log(data)
-            return data;
+
+        chartOptions: {
+            chart: {
+                title: "Aveage monthly precipitation depth (mm)",
+                subtitle: "Aveage monthly precipitation depth (mm)",
+            },
+            width: 500,
+            height: 250,
+            legend: {position: 'top', maxLines: 3},
+            chartArea: {width: "90%", height: "90%"}
+        },
+
+        computed: {
+            jsonData() {
+                var data = this.pcpdata[this.data.id];
+                console.log(data)
+                return data;
             },
         },
+
+        data() {
+            return {
+                datacollection: null,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Average Precipitation Depth'
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Months'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'mm'
+                            }
+                        }]
+                    }
+                }
+            };
+        },
+
+        mounted() {
+
+        },
+
+        created() {
+            axios.get("/static/SUB_Irrigation_data.json").then(response => {
+                this.buildDataCollection(response.data);
+            });
+        },
+
+        methods: {
+            buildDataCollection(data) {
+                this.datacollection = {};
+                this.datacollection.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollection.labels.push(data.Legend[legend]);
+                }
+
+                this.datacollection.datasets = [];
+                for (let dataIndex in data.Data) {
+                    let dataPoint = data.Data[dataIndex];
+                    let dataset = {};
+                    dataset.label = dataPoint.Name;
+                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.data = [];
+                    for (let dataValue in dataPoint.Data) {
+                        dataset.data.push(dataPoint.Data[dataValue]);
+                    }
+                    this.datacollection.datasets.push(dataset);
+                }
+            },
+
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            },
+        }
+
+
     };
 </script>
 
 <style>
-#PopupContentWStations {
-    width: 500px;
-    height: 300px;
-    z-index: 1000;
-}
+    #PopupContentWStations {
+        width: 500px;
+        height: auto;
+        z-index: 1000;
+    }
 
-.leaflet-popup-content{
-    width: 500px;
-}
-.leaflet-popup-content-wrapper{
-    width: 550px;
-}
+    .leaflet-popup-content {
+        width: 500px;
+    }
+
+    .leaflet-popup-content-wrapper {
+        width: 550px;
+    }
 </style>

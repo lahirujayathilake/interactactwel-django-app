@@ -1,9 +1,37 @@
 <template>
     <div id="regionalSummary" class="card">
-
-        <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon icon="times-circle"/>Close</span></div>
+        <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/>Close</span></div>
         <div class="card-body no-padding">
             <b-tabs card>
+                <b-tab title="N fertilizer" active>
+                    <div class="card-body">
+                        <n-fertilizer-graph></n-fertilizer-graph>
+                    </div>
+                </b-tab>
+                <b-tab title="P fertilizer">
+                    <div class="card-body">
+                        <p-fertilizer-graph></p-fertilizer-graph>
+                    </div>
+                </b-tab>
+                <b-tab title="Irrigation">
+                    <div class="card-body">
+                        <irridation-graph></irridation-graph>
+                    </div>
+                </b-tab>
+                <b-tab title="Crop Area">
+                    <div class="card-body">
+                        <crop-area-graph></crop-area-graph>
+                    </div>
+                </b-tab>
+                <b-tab title="Crop yield">
+                    <div class="card-body">
+                        <crop-yield-graph></crop-yield-graph>
+                        <!--<crops-yield-graph></crops-yield-graph>-->
+                    </div>
+                </b-tab>
+            </b-tabs>
+           <!-- <b-tabs card>
                 <b-tab title="Overview" active>
                     <div class="card-body">
                         <GChart :resizeDebounce="500" type="BarChart" :data="chartData" :options="chartOptions"/>
@@ -14,26 +42,25 @@
                         <div id="chart_div1">
                             <GChart :resizeDebounce="500" type="PieChart" :data="jsonData" :options="chartOptions2"/>
                         </div>
-    <!--<d3-pie
-        :data="d3WaterRigthData"
-        :options="d3WaterRigthOptions"
-        width="100%"
-        height="300px">
-    </d3-pie>-->
-                        
+                        &lt;!&ndash;<d3-pie
+                            :data="d3WaterRigthData"
+                            :options="d3WaterRigthOptions"
+                            width="100%"
+                            height="300px">
+                        </d3-pie>&ndash;&gt;
+
                         <div id="chart_div2">
                             <GChart :resizeDebounce="500" type="PieChart" :data="jsonData" :options="chartOptions2"/>
                         </div>
                     </div>
                 </b-tab>
-                
+
                 <b-tab title="N fertilizer">
                     <div class="card-body">
                         <GChart :resizeDebounce="500" type="BarChart" :data="chartData" :options="chartOptions"/>
                     </div>
                 </b-tab>
-            </b-tabs>
-        </div>
+            </b-tabs>-->
         </div>
     </div>
 </template>
@@ -41,10 +68,16 @@
 <script>
     import {GChart} from 'vue-google-charts';
     import EventBus from './../../../event-bus';
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
     import JSONData from "../../../assets/BASIN_Water_Rights.json";
     import {Vs, d3Pie, d3Metric} from 'd3-vs';
+
+    import IrrigationGraph from './../charts/irrigation-graph.vue'
+    import CropAreaGraph from './../charts/crop-area-graph.vue'
+    import CropYieldGraph from './../charts/crop-yield-graph.vue'
+    import NFertilizerGraph from './../charts/n-fertilizer-graph.vue'
+    import PFertilizerGraph from './../charts/p-fertilizer-graph.vue'
 
     //console.log(JSONData['cols'])
 
@@ -55,25 +88,33 @@
             GChart,
             'd3-metric': d3Metric,
             'd3-pie': d3Pie,
+            'irridationGraph' : IrrigationGraph,
+            'cropAreaGraph' :CropAreaGraph,
+            'cropYieldGraph' :CropYieldGraph,
+            'nFertilizerGraph' :NFertilizerGraph,
+            'pFertilizerGraph' :PFertilizerGraph,
         },
 
         data() {
             return {
-                subbasinID : null,
+                subbasinID: null,
                 wrdata: null,
                 WaterRigthData: {
-    "cols": [
-        { "id": "", "label": "Water Source", "pattern": "", "type": "string" },
-        { "id": "", "label": "Total Volume (acre-ft)", "pattern": "", "type": "number" }
-    ],
-    "rows": [
-        { "c": [{ "v": "Water Source", "f": null }, { "v": 21664, "f": null }] },
-        { "c": [{ "v": "Surface water", "f": null }, { "v": 14466, "f": null }] },
-        { "c": [{ "v": "Columbia River", "f": null }, { "v": 2368, "f": null }] }
-    ]
-},
+                    "cols": [
+                        {"id": "", "label": "Water Source", "pattern": "", "type": "string"},
+                        {"id": "", "label": "Total Volume (acre-ft)", "pattern": "", "type": "number"}
+                    ],
+                    "rows": [
+                        {"c": [{"v": "Water Source", "f": null}, {"v": 21664, "f": null}]},
+                        {"c": [{"v": "Surface water", "f": null}, {"v": 14466, "f": null}]},
+                        {"c": [{"v": "Columbia River", "f": null}, {"v": 2368, "f": null}]}
+                    ]
+                },
 
-                d3WaterRigthData: [{"key":"Surface water","value":14466},{"key":"Groundwater","value":2368},{"key":"Columbia River","value":21664}],
+                d3WaterRigthData: [{"key": "Surface water", "value": 14466}, {
+                    "key": "Groundwater",
+                    "value": 2368
+                }, {"key": "Columbia River", "value": 21664}],
                 d3WaterRigthOptions: {
                     axisXLabel: "string",
                 },
@@ -124,7 +165,7 @@
                 $this.subbasinID = selectedBasinID;
             })
         },
-        computed:{
+        computed: {
             jsonData() {
                 var data = JSONData[this.subbasinID];
 
@@ -148,7 +189,7 @@
                 // ]);
                 console.log(data)
                 chart.draw(data, options);
-        },
+            },
         },
     };
 </script>
@@ -161,21 +202,22 @@
         z-index: 1000;
     }
 
-    .close{
+    .close {
         font-size: 15px !important;
     }
 
-    .card-header{
+    .card-header {
         font-size: 17px;
     }
 
-    #chart_div1{
-    width:350px;
-    float:left;
-    } 
-    #chart_div2{
-    width:350px;
-    float:right;
-   
-    } 
+    #chart_div1 {
+        width: 350px;
+        float: left;
+    }
+
+    #chart_div2 {
+        width: 350px;
+        float: right;
+
+    }
 </style>
