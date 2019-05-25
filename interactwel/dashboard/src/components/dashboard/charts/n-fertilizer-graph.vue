@@ -1,6 +1,6 @@
 <template>
     <div>
-        <chart :chart-data='datacollection' :width="5" :height="3"></chart>
+        <chart :chart-data='datacollection' :options="options" :width="5" :height="3"></chart>
     </div>
 </template>
 <script>
@@ -14,7 +14,43 @@
         },
         data() {
             return {
-                datacollection: null
+                datacollection: null,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Amount of N fertilizer applied automatically in watershed'
+                    },
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: false
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            stacked: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Years'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            stacked: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'kg_N'
+                            }
+                        }]
+                    }
+                }
             };
         },
         mounted() {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <chart :chart-data='datacollection' :width="5" :height="3"></chart>
+        <chart :chart-data='datacollection' :options="options" :width="5" :height="3"></chart>
     </div>
 </template>
 <script>
@@ -17,10 +17,38 @@
                 datacollection: null,
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    title: {
+                        display: true,
+                        text: 'Total area of planted crops in watershed'
+                    },
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: false
+                    },
                     scales: {
-                        xAxes: [{ stacked: true }],
-                        yAxes: [{ stacked: true }]
+                        xAxes: [{
+                            display: true,
+                            stacked: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Years'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            stacked: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'km2'
+                            }
+                        }]
                     }
                 }
             };
