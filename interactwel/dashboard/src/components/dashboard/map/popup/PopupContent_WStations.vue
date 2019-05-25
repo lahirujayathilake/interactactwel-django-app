@@ -22,13 +22,12 @@
 
 <script>
     import axios from 'axios';
-    import {GChart} from 'vue-google-charts';
     import Chart from "../../../../chart";
 
     export default {
         name: "PopupContentWStations",
         components: {
-            GChart, Chart
+            Chart
         },
         props: {
             data: {},
@@ -45,14 +44,6 @@
             legend: {position: 'top', maxLines: 3},
             chartArea: {width: "90%", height: "90%"}
         },
-
-        /*computed: {
-            jsonData() {
-                var data = this.pcpdata[this.data.id];
-                console.log(data)
-                return data;
-            },
-        },*/
 
         data() {
             return {

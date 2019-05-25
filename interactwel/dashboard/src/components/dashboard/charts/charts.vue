@@ -3,9 +3,6 @@
         <b-row>
             <component v-bind:is="component=this.currentChartComponent"></component>
         </b-row>
-        <b-row>
-            <component v-bind:is="component='actions-graph'"></component>
-        </b-row>
     </b-container>
 </template>
 
@@ -21,6 +18,7 @@
     import IrrigationGraph from './irrigation-graph.vue'
     import GroudWaterGraph from './groudwater-graph.vue'
     import OverviewGraph from './overview-graph.vue'
+    import RegionGraph from './region-graph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -37,6 +35,7 @@
             'irrigation-graph': IrrigationGraph,
             'groundwater-graph': GroudWaterGraph,
             'overview-graph': OverviewGraph,
+            'region-graph': RegionGraph,
         },
 
         data() {

@@ -17,7 +17,6 @@
             <b-tab title="Data">
                 <div class="card-body">
                     <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
-                    <!--<GChart :resizeDebounce="5" type="ColumnChart" :data="jsonData" :options="chartOptions"/>-->
                 </div>
             </b-tab>
         </b-tabs>
@@ -25,14 +24,12 @@
 </template>
 
 <script>
-    import axios from 'axios';
-    import {GChart} from 'vue-google-charts';
     import Chart from "../../../../chart";
 
     export default {
         name: "PopupContentReservoirs",
         components: {
-            GChart, Chart
+            Chart
         },
         props: {
             data: {
@@ -41,21 +38,6 @@
             pcpdata: {}
         },
 
-        /*data(){
-            return{
-                chartOptions: {
-                    chart: {
-                        title: "Aveage monthly releases volume (ac-ft)",
-                        subtitle: "Aveage monthly release volume (ac-ft)",
-                    },
-                    width: 500,
-                    height: 250,
-                    legend: {position: 'top', maxLines: 3},
-                    chartArea: {width: "90%", height: "90%"}
-                },
-            }
-        },*/
-
         data() {
             return {
                 datacollection: null,
@@ -63,7 +45,7 @@
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Aveage monthly releases volume (ac-ft)'
+                        text: 'Average monthly releases volume (ac-ft)'
                     },
                     tooltips: {
                         mode: 'point',
@@ -95,14 +77,6 @@
             };
         },
 
-        /*computed: {
-            jsonData() {
-                var data = this.pcpdata[this.data.id];
-                console.log(data)
-                return data;
-            },
-        },
-*/
         mounted() {
             this.fillData();
         },
@@ -125,7 +99,7 @@
                         "Dec"],
                     datasets: [
                         {
-                            label: 'Low',
+                            label: 'Willow Creek Reservoir',
                             data: [0.0, 0.0, 0.0, 50.0, 375.0, 450.0, 625.0, 550.0, 400.0, 50.0, 0.0, 0.0],
                             backgroundColor: '#D6E9C6',
                         }

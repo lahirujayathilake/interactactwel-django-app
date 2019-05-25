@@ -1,7 +1,5 @@
 <template>
-    <div>
         <chart :chart-data='datacollection' :options="options" :width="5" :height="3"></chart>
-    </div>
 </template>
 <script>
     import axios from 'axios';

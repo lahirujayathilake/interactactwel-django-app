@@ -89,7 +89,7 @@
         layer-type="base"/>
 
      <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
-     <img src="../../../assets/water_rights_legend.png" style = "position: relative; top: 75%; z-index: 1000; width: 200px; height: 100px;">
+     <img src="../../../assets/water_rights_legend.png" class="map-legend">
     </l-map>
     
 </template>
@@ -395,37 +395,47 @@
     @import '../../../static/vendor/Vue2Leaflet/leaflet.css';
 
     .leaflet-touch .leaflet-control-layers-toggle {
-    width: 60px;
-    height: 60px;
+        width: 60px;
+        height: 60px;
     }
 
-    .leaflet-control-scale-line{
+    .leaflet-control-scale-line {
         font-size: 14px;
         font-weight: bold;
     }
 
-    .region_summary_popup{
+    .region_summary_popup {
         width: 300px;
         height: 300px;
     }
 
     #img, a {
-        border:0px transparent;
+        border: 0px transparent;
         outline: none;
     }
 
     .count-icon {
-        background:#ff8888;
-        border:5px solid rgba(255,255,255,0.5);
-        color:#fff;
-        font-weight:bold;
-        text-align:center;
-        border-radius:50%;
-        line-height:30px;
+        background: #ff8888;
+        border: 5px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 50%;
+        line-height: 30px;
     }
-  .count-icon:hover {
-      background:#bbb;
-  }
+
+    .count-icon:hover {
+        background: #bbb;
+    }
+
+    .map-legend {
+        position: absolute;
+        bottom: 85px;
+        left: 25px;
+        z-index: 1000;
+        width: 200px;
+        height: 100px;
+    }
 
 
 </style>

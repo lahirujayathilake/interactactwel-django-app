@@ -1,7 +1,7 @@
 <template>
     <div id="regionalSummary" class="card">
         <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
-                icon="times-circle"/>Close</span></div>
+                icon="times-circle"/> Close</span></div>
         <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="N fertilizer" active>
@@ -31,47 +31,16 @@
                     </div>
                 </b-tab>
             </b-tabs>
-           <!-- <b-tabs card>
-                <b-tab title="Overview" active>
-                    <div class="card-body">
-                        <GChart :resizeDebounce="500" type="BarChart" :data="chartData" :options="chartOptions"/>
-                    </div>
-                </b-tab>
-                <b-tab title="N fertilizer">
-                    <div class="card-body">
-                        <div id="chart_div1">
-                            <GChart :resizeDebounce="500" type="PieChart" :data="jsonData" :options="chartOptions2"/>
-                        </div>
-                        &lt;!&ndash;<d3-pie
-                            :data="d3WaterRigthData"
-                            :options="d3WaterRigthOptions"
-                            width="100%"
-                            height="300px">
-                        </d3-pie>&ndash;&gt;
-
-                        <div id="chart_div2">
-                            <GChart :resizeDebounce="500" type="PieChart" :data="jsonData" :options="chartOptions2"/>
-                        </div>
-                    </div>
-                </b-tab>
-
-                <b-tab title="N fertilizer">
-                    <div class="card-body">
-                        <GChart :resizeDebounce="500" type="BarChart" :data="chartData" :options="chartOptions"/>
-                    </div>
-                </b-tab>
-            </b-tabs>-->
         </div>
     </div>
 </template>
 
 <script>
-    import {GChart} from 'vue-google-charts';
     import EventBus from './../../../event-bus';
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
     import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
     import JSONData from "../../../assets/BASIN_Water_Rights.json";
-    import {Vs, d3Pie, d3Metric} from 'd3-vs';
+    //import {Vs, d3Pie, d3Metric} from 'd3-vs';
 
     import IrrigationGraph from './../charts/irrigation-graph.vue'
     import CropAreaGraph from './../charts/crop-area-graph.vue'
@@ -79,15 +48,11 @@
     import NFertilizerGraph from './../charts/n-fertilizer-graph.vue'
     import PFertilizerGraph from './../charts/p-fertilizer-graph.vue'
 
-    //console.log(JSONData['cols'])
 
     export default {
         name: 'regional_summary',
 
         components: {
-            GChart,
-            'd3-metric': d3Metric,
-            'd3-pie': d3Pie,
             'irridationGraph' : IrrigationGraph,
             'cropAreaGraph' :CropAreaGraph,
             'cropYieldGraph' :CropYieldGraph,
@@ -99,6 +64,7 @@
             return {
                 subbasinID: null,
                 wrdata: null,
+
                 WaterRigthData: {
                     "cols": [
                         {"id": "", "label": "Water Source", "pattern": "", "type": "string"},
@@ -115,47 +81,11 @@
                     "key": "Groundwater",
                     "value": 2368
                 }, {"key": "Columbia River", "value": 21664}],
+
                 d3WaterRigthOptions: {
                     axisXLabel: "string",
                 },
 
-                chartData: [
-                    ["Year", "Surface water", "Groundwater", "Columbia River"],
-                    ["2008", 1664.97, 5427.46, 2412.1],
-                    ["2009", 1687.5, 5353.44, 2328.64],
-                    ["2010", 1653.23, 5868.54, 2327.24]
-                ],
-                chartOptions: {
-                    chart: {
-                        title: "Total Irrigation",
-                        subtitle: "Irrigation: 2008-2010",
-                    },
-                    width: 700,
-                    height: 300,
-                    legend: {position: 'top', maxLines: 3},
-                    chartArea: {width: "80%", height: "80%"}
-                },
-                chartOptions1: {
-                    chart: {
-                        title: "Total Irrigation",
-                        subtitle: "Irrigation: 2008-2010",
-                    },
-                    width: 350,
-                    height: 300,
-                    legend: {position: 'left', maxLines: 3},
-                    chartArea: {width: "80%", height: "70%"}
-                },
-                chartOptions2: {
-                    chart: {
-                        title: "Total Irrigation",
-                        subtitle: "Irrigation: 2008-2010",
-                    },
-                    width: 350,
-                    height: 300,
-                    pieHole: 0.3,
-                    legend: {position: 'rigth', maxLines: 3},
-                    chartArea: {width: "80%", height: "70%"}
-                }
             };
         },
 
@@ -176,10 +106,10 @@
             dismiss() {
                 EventBus.$emit('CLOSE');
             },
-            onChartReady(chart, google) {
-                const data = JSONData;
+            //onChartReady(chart, google) {
+                //const data = JSONData;
                 //const data = new google.visualization.DataTable(this.WaterRigthData);
-                console.log(data['cols'])
+                //console.log(data['cols'])
                 // const data = google.visualization.arrayToDataTable([['Task', 'Hours per Day'],
                 //          ['Work', 11],
                 //          ['Eat',  2],
@@ -187,9 +117,9 @@
                 //          ['Watch TV', 2],
                 //          ['Sleep',    7]
                 // ]);
-                console.log(data)
-                chart.draw(data, options);
-            },
+                //console.log(data)
+               // chart.draw(data, options);
+            //},
         },
     };
 </script>
@@ -197,7 +127,7 @@
 <style>
     #regionalSummary {
         position: absolute !important;
-        top: 80px;
+        top: 40px;
         right: 50px;
         z-index: 1000;
     }
