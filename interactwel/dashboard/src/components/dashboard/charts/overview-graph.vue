@@ -39,22 +39,22 @@
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import IrrigationGraph from './irrigation-graph.vue'
-    import CropsGraph from './crops-graph.vue'
+    //import CropsGraph from './crops-graph.vue'
     import CropAreaGraph from './crop-area-graph.vue'
     import CropYieldGraph from './crop-yield-graph.vue'
     import NFertilizerGraph from './n-fertilizer-graph.vue'
-    //import PFertilizerGraph from './p-fertilizer-graph.vue'
+    import PFertilizerGraph from './p-fertilizer-graph.vue'
 
     export default {
         name: 'StreamsflowGraph',
 
         components: {
             'irridationGraph' : IrrigationGraph,
-            'cropsYieldGraph' :CropsGraph,
+            //'cropsYieldGraph' :CropsGraph,
             'cropAreaGraph' :CropAreaGraph,
             'cropYieldGraph' :CropYieldGraph,
             'nFertilizerGraph' :NFertilizerGraph,
-            //'pFertilizerGraph' :PFertilizerGraph,
+            'pFertilizerGraph' :PFertilizerGraph,
         },
 
         data() {

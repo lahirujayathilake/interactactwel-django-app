@@ -30,7 +30,7 @@
         },
 
         created(){
-            axios.get("/BASIN_Crop_yield_(kg)_data.json").then(response => {
+            axios.get("/static/BASIN_Crop_yield_(kg)_data.json").then(response => {
                 this.buildDataCollection(response.data);
                 });
         },

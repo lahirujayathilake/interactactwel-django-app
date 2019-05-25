@@ -30,7 +30,7 @@
         },
 
         created(){
-            axios.get("/BASIN_Planted_crops_(ha)_data.json").then(response => {
+            axios.get("/static/BASIN_Planted_crops_(ha)_data.json").then(response => {
                 this.buildDataCollection(response.data);
             });
         },
