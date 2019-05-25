@@ -61,7 +61,10 @@
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Average Precipitation Depth'
+                        text: 'Average Monthly Precipitation'
+                    },
+                    legend: {
+                        display: false,
                     },
                     tooltips: {
                         mode: 'point',
@@ -85,7 +88,7 @@
                             stacked: false,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'mm'
+                                labelString: 'Precipitation depth (mm)'
                             }
                         }]
                     }
@@ -98,7 +101,7 @@
         },
 
         created() {
-            axios.get("/static/SUB_Irrigation_data.json").then(response => {
+            axios.get("/static/weather_station_data.json").then(response => {
                 this.buildDataCollection(response.data);
             });
         },
@@ -110,7 +113,7 @@
                 for (let legend in jsonData.Legend) {
                     this.datacollection.labels.push(jsonData.Legend[legend]);
                 }
-
+                this.datacollection.title = jsonData["Data type"];
                 this.datacollection.datasets = [];
                 for (let dataIndex in jsonData.Data) {
                     let dataPoint = jsonData.Data[dataIndex];
@@ -119,7 +122,8 @@
                     }
                     let dataset = {};
                     dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = this.getRandomColor();
+                    //dataset.backgroundColor = this.getRandomColor();
+                    dataset.backgroundColor ='#4e85eb';
                     dataset.data = [];
                     for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
@@ -151,6 +155,7 @@
 
     #PopupContentWStations .card-body{
         padding:0.5em;
+        font-size: 14px;
     }
 
     .leaflet-popup-content {
