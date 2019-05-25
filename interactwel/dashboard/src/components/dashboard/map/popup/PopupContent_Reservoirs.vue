@@ -138,16 +138,20 @@
 
 <style>
     #PopupContentReservoirs {
-        width: 500px;
+        width: 450px;
         height: auto;
         z-index: 1000;
     }
 
+    #PopupContentReservoirs .card-body{
+        padding:0.5em;
+    }
+
     .leaflet-popup-content {
-        width: 500px;
+        width: 450px;
     }
 
     .leaflet-popup-content-wrapper {
-        width: 550px;
+        width: 490px;
     }
 </style>

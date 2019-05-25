@@ -64,15 +64,15 @@
 
 <style>
 #PopupContent {
-    width: 500px;
+    width: 450px;
     height: 300px;
     z-index: 1000;
 }
 
 .leaflet-popup-content{
-    width: 500px;
+    width: 450px;
 }
 .leaflet-popup-content-wrapper{
-    width: 550px;
+    width: 490px;
 }
 </style>

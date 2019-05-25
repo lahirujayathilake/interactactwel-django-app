@@ -57,7 +57,7 @@
         computed: {
             jsonData() {
                 var data = this.pcpdata[this.data.id];
-                console.log(data)
+                //console.log(data)
                 return data;
             },
         },
@@ -66,16 +66,20 @@
 
 <style>
     #PopupContentGaugeStations {
-        width: 500px;
-        height: 300px;
+        width: 450px;
+        height: auto;
         z-index: 1000;
     }
 
+    #PopupContentWStations .card-body{
+        padding:0.5em;
+    }
+
     .leaflet-popup-content {
-        width: 500px;
+        width: 450px;
     }
 
     .leaflet-popup-content-wrapper {
-        width: 550px;
+        width: 490px;
     }
 </style>
