@@ -25,6 +25,7 @@
 
 <script>
     import Chart from "../../../../chart";
+    import axios from 'axios';
 
     export default {
         name: "PopupContentReservoirs",
