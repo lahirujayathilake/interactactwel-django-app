@@ -1,6 +1,6 @@
 <template>
 <div id="PopupContentGaugeStations" class="card">
-<div class="card-header"><strong>Weather station</strong></div>
+<div class="card-header"><strong>Gauge Station</strong></div>
     <div class="card-body no-padding">
     <b-tabs card>
         <b-tab title="Info" active>
@@ -11,7 +11,7 @@
             <strong>Num. of Precipitation Obs.: </strong>{{ data.num_flowobs}}<br>
             </div>
         </b-tab>
-        <b-tab title="Overview">
+        <b-tab title="Data">
         <div class="card-body">
         <div class="card-body">
                     <GChart :resizeDebounce="5" type="ColumnChart" :data="jsonData" :options="chartOptions"/>

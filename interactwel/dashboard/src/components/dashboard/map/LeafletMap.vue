@@ -40,11 +40,6 @@
         />
         </l-layer-group>
 
-        <!-- <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
-
-        <l-marker :lat-lng="[45.346896, -119.544586]" :icon="reservoirIcon" @click="layerClicked"></l-marker>
-        </l-layer-group> -->
-
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
             <l-marker
                 v-for="reservoirStation in reservoirStationList"
