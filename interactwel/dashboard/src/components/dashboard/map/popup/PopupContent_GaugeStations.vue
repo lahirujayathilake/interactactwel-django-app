@@ -1,18 +1,14 @@
 <template>
-<div id="PopupContentReservoirs" class="card">
-<div class="card-header"><strong>{{ data.name }}</strong></div>
+<div id="PopupContentGaugeStations" class="card">
+<div class="card-header"><strong>Gauge Station</strong></div>
     <div class="card-body no-padding">
     <b-tabs card>
         <b-tab title="Info" active>
         <div class="card-body">
-            <strong><u>Principal Spillway: </u></strong><br>
-            <strong>Volume: </strong>{{ data.spillway_vol}}<br>
-            <strong>Surface Area: </strong>{{ data.spillway_sfarea}}<br>
-            <br>
-            <strong><u>Emergency Principal Spillway: </u></strong><br>
-            <strong>Volume: </strong>{{ data.espillway_vol}}<br>
-            <strong>Surface Area: </strong>{{ data.espillway_sfarea}}<br>
-            
+            <strong>Name: </strong>{{ data.name }}<br>
+            <strong>Data Availability: </strong> {{ data.data_Range}}<br>
+            <strong>Observation Type: </strong>{{ data.obs_type}}<br>
+            <strong>Num. of Precipitation Obs.: </strong>{{ data.num_flowobs}}<br>
             </div>
         </b-tab>
         <b-tab title="Data">
@@ -32,7 +28,7 @@
     import {GChart} from 'vue-google-charts';
 
     export default {
-        name: "PopupContentReservoirs",
+        name: "PopupContentGaugeStations",
         components: {
             GChart
         },
@@ -47,8 +43,8 @@
         
     chartOptions: {
                 chart: {
-                    title: "Aveage monthly releases volume (ac-ft)",
-                    subtitle: "Aveage monthly release volume (ac-ft)",
+                    title: "Aveage monthly streamflow (cfs)",
+                    subtitle: "Aveage monthly streamflow (cfs)",
                 },
                 width: 500,
                 height: 250,
@@ -66,7 +62,7 @@
 </script>
 
 <style>
-#PopupContentReservoirs {
+#PopupContentGaugeStations {
     width: 500px;
     height: 300px;
     z-index: 1000;

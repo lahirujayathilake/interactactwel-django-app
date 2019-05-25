@@ -12,7 +12,7 @@
             <strong>Num. of Temperature Obs.: </strong>{{ data.num_Tobs}}
             </div>
         </b-tab>
-        <b-tab title="Overview">
+        <b-tab title="Data">
         <div class="card-body">
         <div class="card-body">
                     <GChart :resizeDebounce="5" type="ColumnChart" :data="jsonData" :options="chartOptions"/>
