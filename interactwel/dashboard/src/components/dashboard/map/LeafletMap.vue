@@ -89,7 +89,9 @@
         layer-type="base"/>
 
      <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
+     <img src="../../../assets/water_rights_legend.png" style = "position: relative; top: 75%; z-index: 1000; width: 200px; height: 100px;">
     </l-map>
+    
 </template>
 
 
