@@ -1,132 +1,70 @@
 <template>
-    <GChart :resizeDebounce="500"
-            type="BarChart"
-            :data="chartData"
-            :options="chartOptions"
-    />
+    <div>
+        <chart :chart-data='datacollection' :width="5" :height="3"></chart>
+    </div>
 </template>
-
 <script>
-    import JSONData from "../../../assets/result_action_plans.json";
-    import { GChart } from 'vue-google-charts'
+    import axios from 'axios';
+    import Chart from "../../../chart";
 
     export default {
         name: 'CropAreaGraph',
-
         components: {
-            GChart,
+            Chart
         },
-
         data() {
             return {
-                    chartData1: [
-                            ['Crested Wheatgrass', 'Potato', 'Oak', 'Garden or Canning Peas', 'Grain Sorghum', 'Agricultural Land-Generic', 'Spring Canola-Polish', 'Spring Barley', 'Winter Wheat', 'Onion', 'Celery', 'Slender Wheatgrass', 'Wetlands-Non-Forested', 'Orchard', 'Bell Pepper', 'Eastern Gamagrass', 'Alfalfa','Western Wheatgrass', 'Corn', 'Sorghum Hay', 'Sweetpotato', 'Spring Wheat', 'Hay', 'Head Lettuce','Sweet Corn',{ role: 'annotation' } ],
-                        ['2008', 106.92000000000026, 5046.839999999998, 10986.960000000168, 13584.509999999998, 496.0800000000004, 158530.4399999985, 1056.5700000000002, 5698.95, 275676.2999999995, 979.3800000000003,    16739.130000000085,        320.64000000000027, 1793.280000000002, 10883.939999999988, 125.2800000000001, 1457924.1600000171, 149381.5199999997, 328419.33000000037, 24.839999999999986, 124486.79999999805,3620.250000000003,32574.51000000004, 66866.51999999964,461105.45,''],
-                        ['2009', 106.92000000000026, 3538.2000000000003, 10986.960000000168, 4633.680000000005, 496.0800000000004, 158530.4399999985, 305.54999999999995, 4361.07, 263660.1299999979, 1517.069999999999,    17180.760000000046,        140.04000000000005, 1793.280000000002, 5777.760000000008, 125.2800000000001, 1460513.7900000152, 149381.5199999997, 	322717.5899999993,24.839999999999986,	124486.79999999805,17061.299999999977,51162.98999999982,66866.51999999964, ''],
-                        ['2010', 89.1000000000002, 2790.2599999999998, 9155.800000000092, 1471.0000000000005, 413.4000000000004, 132108.6999999998, 0, 11421278.53, 0, 5274.729999999992,190151.7299999991, 183.65000000000006   , 13547.159999999969, 582.2300000000001, 1494.4000000000017, 20849.739999999998, 104.4000000000001, 1215408.3399999859,124484.59999999926,281587.68000000046, 20.699999999999996, 103738.99999999837,2744.2300000000023,59236.450000000055,'']
-
-                    ],
-
-                chartData2: [
-                    ['Crested Wheatgrass', 'Potato', 'Oak', 'Garden or Canning Peas',{ role: 'annotation' } ],
-                    ['2008', 82573.95, 61873.27, 1539608.51, 95688.8, ''],
-                    ['2009', 58765.5, 37596.97, 2088141.41, 54869.65, ''],
-                    ['2010', 62972.19, 420562.1, 1073763.05, 18350.12,'']
-
-                ],
-
-                chartData: [
-                    ['Crested Wheatgrass', 'Potato', 'Oak', 'Garden or Canning Peas', 'Grain Sorghum', 'Agricultural Land-Generic', 'Spring Canola-Polish', 'Spring Barley', 'Winter Wheat', 'Onion', 'Celery', 'Slender Wheatgrass', 'Wetlands-Non-Forested', 'Orchard', 'Bell Pepper', 'Eastern Gamagrass', 'Alfalfa','Western Wheatgrass', 'Corn', 'Sorghum Hay', 'Sweetpotato', 'Spring Wheat', 'Hay', 'Head Lettuce','Sweet Corn',{ role: 'annotation' } ],
-                    ['2008', 82573.95, 61873.27, 1539608.51, 95688.8, 144604.26, 2694706.07, 843445.87, 14850424.78, 134840.35, 2780199.76, 24792.54, 222207.72,715169.67, 0, 49907.47, 190787120.12, 34302225.1, 15355557.62, 5499.29,68822.49,36447.29,2180468.22, 10208509.11,461105.45,''],
-                    ['2009', 58765.5, 37596.97, 2088141.41, 54869.65, 55776.33, 2779259.8, 609319.26, 14681356.24, 28604.78, 2002433.5,25023.61, 217204.51, 96585.23, 4.1, 96136.4, 140139535.96, 27650419.33, 23060147.560000002, 	4925.93,171859.84,	133370.06,1259651.02,6337729.99,648344.14, ''],
-                    ['2010', 62972.19, 420562.1, 1073763.05, 18350.12, 111001.2, 538192.26, 138652.8, 11421278.53, 0, 1409647.42, 24954.51, 119372.18, 704879.92,1.64, 13053.75, 199777453.9, 21984849.56, 	6493385.22,11195.85,27921.54, 15147.97,2904656.63,8295234.46,128238.04,'']
-
-                ],
-                    chartOptions: {
-                        chart: {
-                            title: "Total yield of planted crops in watershed (kg)",
-                            subtitle: "Total yield of planted crops in watershed (kg): 2008-2010",
-                        },
-                        width:700,
-                        chartArea: {  width: "60%", height: "80%" },
-                        legend: { position: 'right', maxLines: 3 },
-                        bar: { groupWidth: '70%' },
-                        isStacked: true
+                datacollection: null,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{ stacked: true }],
+                        yAxes: [{ stacked: true }]
                     }
-                };
+                }
+            };
         },
-        computed: {
-            jsonData() {
-                return JSONData;
-            },
-        },
-
         mounted() {
+
         },
 
-        methods: {},
-        //props: ["jsonData"]
-    }
+        created(){
+            axios.get("/BASIN_Planted_crops_(ha)_data.json").then(response => {
+                this.buildDataCollection(response.data);
+            });
+        },
+
+        methods: {
+            buildDataCollection(data){
+                this.datacollection = {};
+                this.datacollection.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollection.labels.push(data.Legend[legend]);
+                }
+
+                this.datacollection.datasets = [];
+                for (let dataIndex in data.Data){
+                    let dataPoint = data.Data[dataIndex];
+                    let dataset = {};
+                    dataset.label = dataPoint.Name;
+                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.data = [];
+                    for(let dataValue in dataPoint.Data) {
+                        dataset.data.push(dataPoint.Data[dataValue]);
+                    }
+                    this.datacollection.datasets.push(dataset);
+                }
+            },
+
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+        }
+    };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
-    .chart-container {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        z-index: 1000;
-        background-color: #4cae4c;
-        height: auto;
-        width: 800px;
-        max-width: 830px !important;
-    }
-
-    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-        color: #fff;
-        background-color: #4cae4c !important;
-    }
-
-    .chart-inner {
-        position: absolute !important;
-        width: 100% !important;
-        bottom: 0 !important;
-    }
-
-    .filter-options-container {
-        text-align: left;
-    }
-
-    .filter-options {
-        padding: 10px;
-        color: #FFFFFF;
-        background-color: #EFEFEF;
-        margin: 5px !important;
-        border-radius: 5px;
-    }
-
-    #sidebar .active {
-        color: #FFF !important;
-        background-color: #4cae4c;
-        margin: 5px !important;
-        border-radius: 5px;
-    }
-
-    .active a {
-        color: rgba(255, 255, 255, 0.8);
-    }
-
-    .active a:hover {
-        color: #fff
-    }
-
-    .filter-options input {
-        margin-left: 10px !important;
-    }
-
-    #graph .card {
-        width: 800px;
-        max-width: 830px !important;
-    }
-</style>

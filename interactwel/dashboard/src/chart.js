@@ -4,12 +4,17 @@ const { reactiveProp } = mixins
 export default {
     extends: Bar,
     mixins: [reactiveProp],
-    // props: ['options'],
 
     props: {
         chartData: {
             type: Array | Object,
             required: false
+        },
+        options: {
+            scales: {
+                xAxes: [{}],
+                yAxes: [{}]
+            }
         }
     },
 

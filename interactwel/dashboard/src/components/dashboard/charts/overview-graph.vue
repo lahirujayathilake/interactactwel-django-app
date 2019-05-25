@@ -27,7 +27,8 @@
                 </b-tab>
                 <b-tab title="Crop yield">
                     <div class="card-body">
-                        <crops-yield-graph></crops-yield-graph>
+                        <crop-yield-graph></crop-yield-graph>
+                        <!--<crops-yield-graph></crops-yield-graph>-->
                     </div>
                 </b-tab>
             </b-tabs>
@@ -40,6 +41,7 @@
     import IrrigationGraph from './irrigation-graph.vue'
     import CropsGraph from './crops-graph.vue'
     import CropAreaGraph from './crop-area-graph.vue'
+    import CropYieldGraph from './crop-yield-graph.vue'
     import NFertilizerGraph from './n-fertilizer-graph.vue'
     import PFertilizerGraph from './p-fertilizer-graph.vue'
 
@@ -50,6 +52,7 @@
             'irridationGraph' : IrrigationGraph,
             'cropsYieldGraph' :CropsGraph,
             'cropAreaGraph' :CropAreaGraph,
+            'cropYieldGraph' :CropYieldGraph,
             'nFertilizerGraph' :NFertilizerGraph,
             'pFertilizerGraph' :PFertilizerGraph,
         },

@@ -8,13 +8,21 @@
     import Chart from "../../../chart";
 
     export default {
-        name: 'NFertilizerGraph',
+        name: 'CropYieldGraph',
         components: {
             Chart
         },
         data() {
             return {
-                datacollection: null
+                datacollection: null,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{ stacked: true }],
+                        yAxes: [{ stacked: true }]
+                    }
+                }
             };
         },
         mounted() {
@@ -22,7 +30,7 @@
         },
 
         created(){
-            axios.get("/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
+            axios.get("/BASIN_Crop_yield_(kg)_data.json").then(response => {
                 this.buildDataCollection(response.data);
                 });
         },

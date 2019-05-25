@@ -8,7 +8,7 @@
     import Chart from "../../../chart";
 
     export default {
-        name: 'NFertilizerGraph',
+        name: 'PFertilizerGraph',
         components: {
             Chart
         },
@@ -22,9 +22,9 @@
         },
 
         created(){
-            axios.get("/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
+            axios.get("/BASIN_P_fertilizer_(kg_N)_data.json").then(response => {
                 this.buildDataCollection(response.data);
-                });
+            });
         },
 
         methods: {
@@ -56,7 +56,7 @@
                     color += letters[Math.floor(Math.random() * 16)];
                 }
                 return color;
-            }
+            },
         }
     };
 </script>
