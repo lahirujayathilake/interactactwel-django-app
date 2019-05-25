@@ -65,6 +65,9 @@
                         display: true,
                         text: 'Aveage monthly releases volume (ac-ft)'
                     },
+                    legend: {
+                        display: false,
+                    },
                     tooltips: {
                         mode: 'point',
                         intersect: false,
@@ -87,7 +90,7 @@
                             stacked: false,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'ac-ft'
+                                labelString: 'Volume (ac-ft)'
                             }
                         }]
                     }
@@ -104,34 +107,63 @@
         },
 */
         mounted() {
-            this.fillData();
+            //this.fillData();
+        },
+        created() {
+            axios.get("/static/reservoirs_data.json").then(response => {
+                this.buildDataCollection(response.data);
+            });
         },
 
         methods: {
-            fillData() {
-                this.datacollection = {
-                    labels: [
-                        "Jan",
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Aug",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dec"],
-                    datasets: [
-                        {
-                            label: 'Low',
-                            data: [0.0, 0.0, 0.0, 50.0, 375.0, 450.0, 625.0, 550.0, 400.0, 50.0, 0.0, 0.0],
-                            backgroundColor: '#D6E9C6',
-                        }
-                    ]
+            buildDataCollection(jsonData) { //todo: need to move this method to an upper layer since it is getting called for each weather station
+                this.datacollection = {};
+                this.datacollection.labels = [];
+                for (let legend in jsonData.Legend) {
+                    this.datacollection.labels.push(jsonData.Legend[legend]);
+                }
+                this.datacollection.title = jsonData["Data type"];
+                this.datacollection.datasets = [];
+                for (let dataIndex in jsonData.Data) {
+                    let dataPoint = jsonData.Data[dataIndex];
+                    if (dataPoint.Name != this.data.name) {
+                        continue;
+                    }
+                    let dataset = {};
+                    dataset.label = dataPoint.Name;
+                    //dataset.backgroundColor = this.getRandomColor();
+                    dataset.backgroundColor ='#4e85eb';
+                    dataset.data = [];
+                    for (let dataValue in dataPoint.Data) {
+                        dataset.data.push(dataPoint.Data[dataValue]);
+                    }
+                    this.datacollection.datasets.push(dataset);
                 }
             },
+            // fillData() {
+            //     this.datacollection = {
+            //         labels: [
+            //             "Jan",
+            //             "Feb",
+            //             "Mar",
+            //             "Apr",
+            //             "May",
+            //             "Jun",
+            //             "Jul",
+            //             "Aug",
+            //             "Sep",
+            //             "Oct",
+            //             "Nov",
+            //             "Dec"],
+            //         datasets: [
+            //             {
+            //                 label: 'Low',
+            //                 data: [0.0, 0.0, 0.0, 50.0, 375.0, 450.0, 625.0, 550.0, 400.0, 50.0, 0.0, 0.0],
+            //                 backgroundColor: '#D6E9C6',
+            //             }
+            //         ]
+            //     }
+            // },
         }
     };
 </script>
