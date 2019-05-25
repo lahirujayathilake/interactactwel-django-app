@@ -26,7 +26,7 @@
         },
 
         created(){
-            axios.get("/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
+            axios.get("/static/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
                 this.buildDataCollection(response.data);
             });
         },

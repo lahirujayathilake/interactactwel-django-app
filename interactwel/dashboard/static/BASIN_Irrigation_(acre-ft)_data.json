@@ -1,0 +1,36 @@
+{
+  "Data type": "Yearly totals per water source",
+  "Legend": [
+    "2008",
+    "2009",
+    "2010"
+  ],
+  "Data": {
+    "1": {
+      "Data": {
+        "1": 1664.97,
+        "2": 1687.5,
+        "3": 1653.23
+      },
+      "Name": "Surface water"
+    },
+    "3": {
+      "Data": {
+        "1": 5427.46,
+        "2": 5353.44,
+        "3": 5868.54
+      },
+      "Name": "Groundwater"
+    },
+    "5": {
+      "Data": {
+        "1": 2412.1,
+        "2": 2328.64,
+        "3": 2327.24
+      },
+      "Name": "Columbia River"
+    }
+  },
+  "Description": "Total irrigation volume applied automatically in watershed (acre-ft)",
+  "Graph type": "Group bar chart"
+}
