@@ -11,20 +11,20 @@
                     <strong><u>General Info.: </u></strong><br>
                     <strong>Basin area (acres): </strong>{{ subbasinInfo[subbasinID].area}}<br>
                     <strong>Agricultural land (acres): </strong>{{ subbasinInfo[subbasinID].agrland}}<br>
-                    <strong>Total num. of hydrologic response units (HRUs): </strong>{{ subbasinInfo[subbasinID].numHRUs}}<br>
+                    <strong>Hydrologic response units (HRUs): </strong>{{ subbasinInfo[subbasinID].numHRUs}}<br>
 
 
                     </div>
                         <!--<regional-waterrights-graph :subbasinID ="this.subbasinID"></regional-waterrights-graph>-->
                     <div id="chart_div2">
-                        <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart>
+                        <chart-bar :chart-data="datacollectionlnd" :options="optionslnd" :width="5" :height="4"></chart-bar>
                     </div>
                     </div>
                 </b-tab>
                 <b-tab title="Water Rights">
                     <div class="card-body">
                         <div id="chart_div1">
-                            <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart>
+                            <chart-pie :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart-pie>
                         </div>
 
                         <div id="chart_div2">
@@ -49,14 +49,16 @@
     import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
     //import RegionalWRGraph from './../charts/regional-waterrights-graph.vue'
     import axios from 'axios';
-    import Chart from "../../../chartPie";
+    import ChartPie from "../../../chartPie";
+    import ChartBar from "../../../chartBarH";
   //  import 'chartjs-plugin-labels';
 
     export default {
         name: 'regional_summary',
 
         components: {
-            Chart,
+            'chart-pie': ChartPie,
+            'chart-bar': ChartBar,
             //'regional-waterrights-graph': RegionalWRGraph,
         },
 
@@ -74,6 +76,7 @@
                 ],
 
                 datacollectionwr: null,
+                datacollectionlnd: null,
                 optionswr: {
                     responsive: true,
                     title: {
@@ -101,6 +104,44 @@
                             display: false,
                         }]
                     }
+                },
+                optionslnd: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Distribution of land use area (acre)',
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    labels: {
+                        render: 'percentage',
+                        precision: 2
+                    },
+
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                    xAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Area (acres)'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            stacked: false,
+                            
+                        }]
+                    }
                 }
             };
         },
@@ -113,6 +154,10 @@
                 //console.log(this.subbasinID);
                 axios.get("/static/BASIN_Water_Rights.json").then(response => {
                     $this.buildDataCollectionwr(response.data, $this.subbasinID);
+                });
+                
+                axios.get("/static/BASIN_LandUse_chartjs.json").then(response => {
+                    $this.buildDataCollectionlnd(response.data, $this.subbasinID);
                 });
 
             })
@@ -160,6 +205,40 @@
                 this.datacollectionwr.datasets.push(dataset);
                 //}
             },
+
+            buildDataCollectionlnd(data, subbasinID) {
+                let $this = this
+                this.datacollectionlnd = {};
+                this.datacollectionlnd.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollectionlnd.labels.push(data.Legend[legend]);
+                }
+                this.datacollectionlnd.datasets = [];
+                let dataIndex = subbasinID;
+                //for (let dataIndex in data.Data){
+                let dataPoint = data.Data[dataIndex];
+
+                let dataset = {};
+                dataset.label = dataPoint.Name;
+                dataset.backgroundColor = ["#073b4c","#ef476f","#3f7cff","#ccd7c5","#06d6a0","#415a77","#fca650","#368bd3"];
+                dataset.data = [];
+                for (let dataValue in dataPoint.Data) {
+                    dataset.data.push(dataPoint.Data[dataValue]);
+                }
+                //console.log(dataset);
+                this.datacollectionlnd.datasets.push(dataset);
+                //}
+            },
+
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            },
+            
         }
     };
 </script>
