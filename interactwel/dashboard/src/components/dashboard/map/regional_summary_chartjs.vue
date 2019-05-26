@@ -7,9 +7,16 @@
                 <b-tab title="Overview" active>
                     <div class="card-body">
                     <div id="chart_div1">
+                    <strong><u>General Info.: </u></strong><br>
+                    <strong>Basin area (acres): </strong>{{ subbasinInfo[subbasinID].area}}<br>
+                    <strong>Agricultural land (acres): </strong>{{ subbasinInfo[subbasinID].agrland}}<br>
+                    <strong>Total num. of hydrologic response units (HRUs): </strong>{{ subbasinInfo[subbasinID].numHRUs}}<br>
+
+
                     </div>
                         <!--<regional-waterrights-graph :subbasinID ="this.subbasinID"></regional-waterrights-graph>-->
                     <div id="chart_div2">
+                        <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart>
                     </div>
                     </div>
                 </b-tab>
@@ -58,6 +65,14 @@
                 subbasinID : null,
                 wrdata: null,
                 
+                subbasinInfo: [
+                    {id: "1", area:'94,090', numHRUs: '501', agrland: '1,022' },
+                    {id: "2", area:'81,975', numHRUs: '582', agrland: '1,022' },
+                    {id: "3", area:'146,020', numHRUs: '768', agrland: '1,022' },
+                    {id: "4", area:'162,546', numHRUs: '821', agrland: '1,022' },
+                    {id: "5", area:'70,672', numHRUs: '794', agrland: '1,022' }
+                ],
+
                 datacollectionwr: null,
                 optionswr: {
                     responsive: true,

@@ -11,6 +11,9 @@
                 :options="options"
                 :options-style="styleFunction_subbasin"
         />
+            <l-popup>
+                    <popup-content-rs :data="reservoirStation" :pcpdata="ReservoirData"/>
+            </l-popup>
         </l-layer-group>
 
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Streams</strong></font>">
