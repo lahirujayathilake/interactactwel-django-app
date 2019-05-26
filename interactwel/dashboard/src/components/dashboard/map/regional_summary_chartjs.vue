@@ -18,15 +18,15 @@
                                     <tbody>
                                     <tr>
                                         <td>Basin area (acres)</td>
-                                        <td><span class="badge badge-secondary">{{ subbasinInfo[subbasinID].area}}</span></td>
+                                        <td><span class="badge badge-secondary">{{ selectedSubBasinInfo.area}}</span></td>
                                     </tr>
                                     <tr>
                                         <td>Agricultural land (acres)</td>
-                                        <td><span class="badge badge-secondary">{{ subbasinInfo[subbasinID].agrland}}</span></td>
+                                        <td><span class="badge badge-secondary">{{ selectedSubBasinInfo.agrland}}</span></td>
                                     </tr>
                                     <tr>
                                         <td>Hydrologic response units (HRUs)</td>
-                                        <td><span class="badge badge-secondary">{{ subbasinInfo[subbasinID].numHRUs}}</span></td>
+                                        <td><span class="badge badge-secondary">{{ selectedSubBasinInfo.numHRUs}}</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -81,8 +81,9 @@
 
         data() {
             return {
-                subbasinID: null,
+                subbasinID: "1", //initially set the id to 1
                 wrdata: null,
+                selectedSubBasinInfo: null,
 
                 subbasinInfo: [
                     {id: "1", area: '94,090', numHRUs: '501', agrland: '1,022'},
@@ -197,7 +198,6 @@
             EventBus.$on('CREATE_REGION_SUMMARY', function (selectedBasinID) {
                 $this.subbasinID = selectedBasinID;
                 this.subbasinID = selectedBasinID;
-                //console.log(this.subbasinID);
                 axios.get("/static/BASIN_Water_Rights.json").then(response => {
                     $this.buildDataCollectionwr(response.data, $this.subbasinID);
                 });
@@ -209,26 +209,30 @@
                 axios.get("/static/BASIN_IrrLand_chartjs.json").then(response => {
                     $this.buildDataCollectionirr(response.data, $this.subbasinID);
                 });
+                $this.buildSelectedSubBasinInfoElement();
 
             })
         },
 
         created() {
-            // axios.get("/static/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
-            //     this.buildDataCollectionwr(response.data);
-            // });
+            this.buildSelectedSubBasinInfoElement();
         },
 
         computed: {
-            jsonData() {
-                var data = JSONData[this.subbasinID];
 
-                return data;
-            },
         },
         methods: {
             dismiss() {
                 EventBus.$emit('CLOSE');
+            },
+
+            buildSelectedSubBasinInfoElement() {
+                for (const subbasinInfoElement of this.subbasinInfo) {
+                    if (subbasinInfoElement.id == this.subbasinID) {
+                        this.selectedSubBasinInfo = subbasinInfoElement;
+                        return;
+                    }
+                }
             },
 
             buildDataCollectionwr(data, subbasinID) {
