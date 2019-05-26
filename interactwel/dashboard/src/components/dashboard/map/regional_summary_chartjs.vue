@@ -2,37 +2,54 @@
     <div id="regionalSummary" class="card">
 
         <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
-                icon="times-circle"/>Close</span></div>
+                icon="times-circle"/> Close</span></div>
         <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="Overview" active>
-                    <div class="card-body">
-                    <div id="chart_div1">
-                    <strong><u>General Info.: </u></strong><br>
-                    <strong>Basin area (acres): </strong>{{ subbasinInfo[subbasinID].area}}<br>
-                    <strong>Agricultural land (acres): </strong>{{ subbasinInfo[subbasinID].agrland}}<br>
-                    <strong>Hydrologic response units (HRUs): </strong>{{ subbasinInfo[subbasinID].numHRUs}}<br>
-
-
-                    </div>
+                        <b-row>
+                            <b-col>
+                                <table class="table table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>General Info</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Basin area (acres)</td>
+                                        <td><span class="badge badge-secondary">{{ subbasinInfo[subbasinID].area}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agricultural land (acres)</td>
+                                        <td><span class="badge badge-secondary">{{ subbasinInfo[subbasinID].agrland}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hydrologic response units (HRUs)</td>
+                                        <td><span class="badge badge-secondary">{{ subbasinInfo[subbasinID].numHRUs}}</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </b-col>
+                            <b-col cols="7">
+                                <chart-bar :chart-data="datacollectionlnd" :options="optionslnd" :width="5"
+                                           :height="4"></chart-bar>
+                            </b-col>
+                        </b-row>
                         <!--<regional-waterrights-graph :subbasinID ="this.subbasinID"></regional-waterrights-graph>-->
-                    <div id="chart_div2">
-                        <chart-bar :chart-data="datacollectionlnd" :options="optionslnd" :width="5" :height="4"></chart-bar>
-                    </div>
-                    </div>
                 </b-tab>
                 <b-tab title="Water Rights">
-                    <div class="card-body">
-                        <div id="chart_div1">
-                            <chart-pie :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart-pie>
-                        </div>
-
-                        <div id="chart_div2">
-                            <chart-pie :chart-data="datacollectionirr" :options="optionsirr" :width="5" :height="4"></chart-pie>
-                        </div>
-                    </div>
+                        <b-row>
+                            <b-col>
+                                <chart-pie :chart-data="datacollectionwr" :options="optionswr" :width="5"
+                                           :height="4"></chart-pie>
+                            </b-col>
+                            <b-col>
+                                <chart-pie :chart-data="datacollectionirr" :options="optionsirr" :width="5"
+                                           :height="4"></chart-pie>
+                            </b-col>
+                        </b-row>
                 </b-tab>
-
                 <b-tab title="Precipitation">
                     <div class="card-body">
 
@@ -51,7 +68,7 @@
     import axios from 'axios';
     import ChartPie from "../../../chartPie";
     import ChartBar from "../../../chartBarH";
-    import 'chartjs-plugin-labels';
+    //import 'chartjs-plugin-labels';
 
     export default {
         name: 'regional_summary',
@@ -66,13 +83,13 @@
             return {
                 subbasinID: null,
                 wrdata: null,
-                
+
                 subbasinInfo: [
-                    {id: "1", area:'94,090', numHRUs: '501', agrland: '1,022' },
-                    {id: "2", area:'81,975', numHRUs: '582', agrland: '1,022' },
-                    {id: "3", area:'146,020', numHRUs: '768', agrland: '1,022' },
-                    {id: "4", area:'162,546', numHRUs: '821', agrland: '1,022' },
-                    {id: "5", area:'70,672', numHRUs: '794', agrland: '1,022' }
+                    {id: "1", area: '94,090', numHRUs: '501', agrland: '1,022'},
+                    {id: "2", area: '81,975', numHRUs: '582', agrland: '1,022'},
+                    {id: "3", area: '146,020', numHRUs: '768', agrland: '1,022'},
+                    {id: "4", area: '162,546', numHRUs: '821', agrland: '1,022'},
+                    {id: "5", area: '70,672', numHRUs: '794', agrland: '1,022'}
                 ],
 
                 datacollectionwr: null,
@@ -157,7 +174,7 @@
                         intersect: true
                     },
                     scales: {
-                    xAxes: [{
+                        xAxes: [{
                             display: true,
                             stacked: false,
                             scaleLabel: {
@@ -168,7 +185,7 @@
                         yAxes: [{
                             display: true,
                             stacked: false,
-                            
+
                         }]
                     }
                 }
@@ -184,11 +201,11 @@
                 axios.get("/static/BASIN_Water_Rights.json").then(response => {
                     $this.buildDataCollectionwr(response.data, $this.subbasinID);
                 });
-                
+
                 axios.get("/static/BASIN_LandUse_chartjs.json").then(response => {
                     $this.buildDataCollectionlnd(response.data, $this.subbasinID);
                 });
-                
+
                 axios.get("/static/BASIN_IrrLand_chartjs.json").then(response => {
                     $this.buildDataCollectionirr(response.data, $this.subbasinID);
                 });
@@ -253,7 +270,7 @@
 
                 let dataset = {};
                 dataset.label = dataPoint.Name;
-                dataset.backgroundColor = ["#fca650","#4e85eb", "#eb4e4e", "#186a3b"];
+                dataset.backgroundColor = ["#fca650", "#4e85eb", "#eb4e4e", "#186a3b"];
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
                     //dataset.data.label = $this.getColorwr(dataValue);
@@ -278,7 +295,7 @@
 
                 let dataset = {};
                 dataset.label = dataPoint.Name;
-                dataset.backgroundColor = ["#073b4c","#ef476f","#3f7cff","#ccd7c5","#06d6a0","#415a77","#fca650","#368bd3"];
+                dataset.backgroundColor = ["#073b4c", "#ef476f", "#3f7cff", "#ccd7c5", "#06d6a0", "#415a77", "#fca650", "#368bd3"];
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
                     dataset.data.push(dataPoint.Data[dataValue]);
@@ -296,7 +313,7 @@
                 }
                 return color;
             },
-            
+
         }
     };
 </script>
@@ -307,6 +324,7 @@
         top: 40px;
         right: 50px;
         z-index: 1000;
+        width: 700px;
     }
 
     #canvas {
@@ -322,14 +340,34 @@
         font-size: 17px;
     }
 
-    #chart_div1 {
+    .chart_div1 {
         width: 350px;
         float: left;
     }
 
-    #chart_div2 {
+    .chart_div2 {
         width: 350px;
         float: right;
 
+    }
+
+    #regionalSummary .nav-item a {
+        color: #28a645;
+        text-decoration: none;
+        font-weight: 500;
+        background-color: transparent;
+        font-size: 14px;
+    }
+
+    #regionalSummary .nav-item .nav-link.active {
+        color: #5e6b7e;
+        font-weight: 500;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        border-top: 2px solid #28a645;
+    }
+
+    #regionalSummary table{
+        font-size:12px;
     }
 </style>
