@@ -28,12 +28,12 @@
                         </div>
 
                         <div id="chart_div2">
-
+                            <chart-pie :chart-data="datacollectionirr" :options="optionsirr" :width="5" :height="4"></chart-pie>
                         </div>
                     </div>
                 </b-tab>
 
-                <b-tab title="N fertilizer">
+                <b-tab title="Precipitation">
                     <div class="card-body">
 
                     </div>
@@ -51,7 +51,7 @@
     import axios from 'axios';
     import ChartPie from "../../../chartPie";
     import ChartBar from "../../../chartBarH";
-  //  import 'chartjs-plugin-labels';
+    import 'chartjs-plugin-labels';
 
     export default {
         name: 'regional_summary',
@@ -76,12 +76,41 @@
                 ],
 
                 datacollectionwr: null,
+                datacollectionirr: null,
                 datacollectionlnd: null,
                 optionswr: {
                     responsive: true,
                     title: {
                         display: true,
                         text: 'Total water rights volume (ac-ft) by water source',
+                    },
+                    labels: {
+                        render: 'percentage',
+                        precision: 2
+                    },
+
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: false,
+                        }],
+                        yAxes: [{
+                            display: false,
+                        }]
+                    }
+                },
+                optionsirr: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Total area of irrigated land (acres) by water source',
                     },
                     labels: {
                         render: 'percentage',
@@ -159,6 +188,10 @@
                 axios.get("/static/BASIN_LandUse_chartjs.json").then(response => {
                     $this.buildDataCollectionlnd(response.data, $this.subbasinID);
                 });
+                
+                axios.get("/static/BASIN_IrrLand_chartjs.json").then(response => {
+                    $this.buildDataCollectionirr(response.data, $this.subbasinID);
+                });
 
             })
         },
@@ -203,6 +236,31 @@
                 }
                 //console.log(dataset);
                 this.datacollectionwr.datasets.push(dataset);
+                //}
+            },
+
+            buildDataCollectionirr(data, subbasinID) {
+                let $this = this
+                this.datacollectionirr = {};
+                this.datacollectionirr.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollectionirr.labels.push(data.Legend[legend]);
+                }
+                this.datacollectionirr.datasets = [];
+                let dataIndex = subbasinID;
+                //for (let dataIndex in data.Data){
+                let dataPoint = data.Data[dataIndex];
+
+                let dataset = {};
+                dataset.label = dataPoint.Name;
+                dataset.backgroundColor = ["#fca650","#4e85eb", "#eb4e4e", "#186a3b"];
+                dataset.data = [];
+                for (let dataValue in dataPoint.Data) {
+                    //dataset.data.label = $this.getColorwr(dataValue);
+                    dataset.data.push(dataPoint.Data[dataValue]);
+                }
+                //console.log(dataset);
+                this.datacollectionirr.datasets.push(dataset);
                 //}
             },
 
