@@ -1,7 +1,7 @@
 <template>
     <div id="graph" class="card">
         <div class="card-header">
-            <strong>Fertilizer</strong>
+            <strong>Region</strong>
         </div>
         <div class="card-body no-padding">
             <b-tabs card>
@@ -39,7 +39,7 @@
     import JSONData from "../../../assets/result_action_plans.json";
 
     export default {
-        name: 'FertilizerGraph',
+        name: 'RegionGraph',
 
         components: {
         },
@@ -82,6 +82,7 @@
     }
 </script>
 
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
@@ -92,8 +93,8 @@
         z-index: 1000;
         background-color: #4cae4c;
         height: auto;
-        width: 800px;
-        max-width: 830px !important;
+        width: 750px;
+        max-width: 750px !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -138,8 +139,8 @@
         margin-left: 10px !important;
     }
 
-    #graph .card {
-        width: 800px;
-        max-width: 830px !important;
+    #graph{
+        width: 750px;
+        max-width: 750px !important;
     }
 </style>
