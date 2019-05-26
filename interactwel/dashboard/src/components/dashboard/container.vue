@@ -78,7 +78,6 @@
                 this.sidebarRightVisibility = false
                 this.progressBarVisibility = false
                 this.chartsVisibility = false
-                this.regionalSummaryVisibility = false
             },
 
             createRegionSummary(subbasinID){
