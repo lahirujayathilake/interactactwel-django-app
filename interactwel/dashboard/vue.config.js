@@ -7,6 +7,10 @@ module.exports = {
     baseUrl: "http://0.0.0.0:8080/",
     outputDir: './static/dashboard/dist',
 
+    devServer: {
+        disableHostCheck: true
+    },
+
     chainWebpack: config => {
 
         config.optimization

@@ -222,7 +222,23 @@
     }
 
     #graph .card {
-        width: 850px;
-        max-width: 850px !important;
+        width: 700px;
+        max-width: 750px !important;
+    }
+
+    #graph .nav-item a{
+        color: #28a645;
+        text-decoration: none;
+        font-weight: 500;
+        background-color: transparent;
+        font-size: 14px;
+    }
+
+    #graph .nav-item .nav-link.active{
+        color: #5e6b7e;
+        font-weight: 500;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        border-top:2px solid #28a645;
     }
 </style>

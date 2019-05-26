@@ -1,6 +1,6 @@
 <template>
     <div id="PopupContentReservoirs" class="card">
-        <div class="card-header"><strong>Reservoir : {{ data.name }}</strong></div>
+        <div class="card-header"><strong>Reservoir : <small>{{ data.name }}</small></strong></div>
         <b-tabs card>
             <b-tab title="Info" active>
                 <div class="card-body">
@@ -160,5 +160,21 @@
 
     .leaflet-popup-content-wrapper {
         width: 490px;
+    }
+
+    #PopupContentReservoirs .nav-item a{
+        color: #28a645;
+        text-decoration: none;
+        font-weight: 500;
+        background-color: transparent;
+        font-size: 14px;
+    }
+
+    #PopupContentReservoirs .nav-item .nav-link.active{
+        color: #5e6b7e;
+        font-weight: 500;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        border-top:2px solid #28a645;
     }
 </style>
