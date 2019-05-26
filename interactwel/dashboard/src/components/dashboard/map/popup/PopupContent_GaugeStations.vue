@@ -1,6 +1,6 @@
 <template>
     <div id="PopupContentGaugeStations" class="card">
-        <div class="card-header"><strong>Gauge Station: {{ data.name }}</strong></div>
+        <div class="card-header"><strong>Gauge Station: <small>{{ data.name }}</small></strong></div>
             <b-tabs card>
                 <b-tab title="Info" active>
                     <div class="card-body">
@@ -12,14 +12,10 @@
                     </div>
                 </b-tab>
                 <b-tab title="Data">
-                    <div class="card-body">
                         <line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>
-                    </div>
                 </b-tab>
             </b-tabs>
         </div>
-    </div>
-
 </template>
 
 <script>
@@ -134,7 +130,7 @@
         z-index: 1000;
     }
 
-    #PopupContentWStations .card-body{
+    #PopupContentGaugeStations .card-body{
         padding:0.5em;
     }
 
@@ -144,5 +140,21 @@
 
     .leaflet-popup-content-wrapper {
         width: 490px;
+    }
+
+    #PopupContentGaugeStations .nav-item a{
+        color: #28a645;
+        text-decoration: none;
+        font-weight: 500;
+        background-color: transparent;
+        font-size: 14px;
+    }
+
+    #PopupContentGaugeStations .nav-item .nav-link.active{
+        color: #5e6b7e;
+        font-weight: 500;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        border-top:2px solid #28a645;
     }
 </style>

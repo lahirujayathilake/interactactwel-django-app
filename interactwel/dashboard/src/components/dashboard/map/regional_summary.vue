@@ -5,30 +5,20 @@
         <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="N fertilizer" active>
-                    <div class="card-body">
-                        <n-fertilizer-graph></n-fertilizer-graph>
-                    </div>
+                    <n-fertilizer-graph></n-fertilizer-graph>
                 </b-tab>
                 <b-tab title="P fertilizer">
-                    <div class="card-body">
-                        <p-fertilizer-graph></p-fertilizer-graph>
-                    </div>
+                    <p-fertilizer-graph></p-fertilizer-graph>
                 </b-tab>
                 <b-tab title="Irrigation">
-                    <div class="card-body">
-                        <irridation-graph></irridation-graph>
-                    </div>
+                    <irridation-graph></irridation-graph>
                 </b-tab>
                 <b-tab title="Crop Area">
-                    <div class="card-body">
-                        <crop-area-graph></crop-area-graph>
-                    </div>
+                    <crop-area-graph></crop-area-graph>
                 </b-tab>
                 <b-tab title="Crop yield">
-                    <div class="card-body">
-                        <crop-yield-graph></crop-yield-graph>
-                        <!--<crops-yield-graph></crops-yield-graph>-->
-                    </div>
+                    <crop-yield-graph></crop-yield-graph>
+                    <!--<crops-yield-graph></crops-yield-graph>-->
                 </b-tab>
             </b-tabs>
         </div>
@@ -53,11 +43,11 @@
         name: 'regional_summary',
 
         components: {
-            'irridationGraph' : IrrigationGraph,
-            'cropAreaGraph' :CropAreaGraph,
-            'cropYieldGraph' :CropYieldGraph,
-            'nFertilizerGraph' :NFertilizerGraph,
-            'pFertilizerGraph' :PFertilizerGraph,
+            'irridationGraph': IrrigationGraph,
+            'cropAreaGraph': CropAreaGraph,
+            'cropYieldGraph': CropYieldGraph,
+            'nFertilizerGraph': NFertilizerGraph,
+            'pFertilizerGraph': PFertilizerGraph,
         },
 
         data() {
@@ -107,18 +97,18 @@
                 EventBus.$emit('CLOSE');
             },
             //onChartReady(chart, google) {
-                //const data = JSONData;
-                //const data = new google.visualization.DataTable(this.WaterRigthData);
-                //console.log(data['cols'])
-                // const data = google.visualization.arrayToDataTable([['Task', 'Hours per Day'],
-                //          ['Work', 11],
-                //          ['Eat',  2],
-                //          ['Commute',  2],
-                //          ['Watch TV', 2],
-                //          ['Sleep',    7]
-                // ]);
-                //console.log(data)
-               // chart.draw(data, options);
+            //const data = JSONData;
+            //const data = new google.visualization.DataTable(this.WaterRigthData);
+            //console.log(data['cols'])
+            // const data = google.visualization.arrayToDataTable([['Task', 'Hours per Day'],
+            //          ['Work', 11],
+            //          ['Eat',  2],
+            //          ['Commute',  2],
+            //          ['Watch TV', 2],
+            //          ['Sleep',    7]
+            // ]);
+            //console.log(data)
+            // chart.draw(data, options);
             //},
         },
     };
@@ -149,5 +139,26 @@
         width: 350px;
         float: right;
 
+    }
+
+    #regionalSummary .card {
+        width: 700px;
+        max-width: 750px !important;
+    }
+
+    #regionalSummary .nav-item a{
+        color: #28a645;
+        text-decoration: none;
+        font-weight: 500;
+        background-color: transparent;
+        font-size: 14px;
+    }
+
+    #regionalSummary .nav-item .nav-link.active{
+        color: #5e6b7e;
+        font-weight: 500;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        border-top:2px solid #28a645;
     }
 </style>

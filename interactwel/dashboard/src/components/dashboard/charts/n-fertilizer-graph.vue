@@ -1,5 +1,5 @@
 <template>
-        <chart :chart-data='datacollection' :options="options" :width="5" :height="3"></chart>
+        <chart :chart-data='datacollection' :options="options" :width="600" :height="500"></chart>
 </template>
 <script>
     import axios from 'axios';
@@ -14,13 +14,12 @@
             return {
                 datacollection: null,
                 options: {
-                    responsive: true,
+                    responsive: false,
                     title: {
                         display: true,
                         text: 'Amount of N fertilizer applied automatically in watershed'
                     },
                     legend: {
-                        display: false,
                         position: 'top',
                     },
                     tooltips: {
