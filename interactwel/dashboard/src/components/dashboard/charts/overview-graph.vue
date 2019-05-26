@@ -39,7 +39,6 @@
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import IrrigationGraph from './irrigation-graph.vue'
-    //import CropsGraph from './crops-graph.vue'
     import CropAreaGraph from './crop-area-graph.vue'
     import CropYieldGraph from './crop-yield-graph.vue'
     import NFertilizerGraph from './n-fertilizer-graph.vue'
@@ -50,7 +49,6 @@
 
         components: {
             'irridationGraph' : IrrigationGraph,
-            //'cropsYieldGraph' :CropsGraph,
             'cropAreaGraph' :CropAreaGraph,
             'cropYieldGraph' :CropYieldGraph,
             'nFertilizerGraph' :NFertilizerGraph,
@@ -95,6 +93,7 @@
     }
 </script>
 
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
@@ -105,8 +104,8 @@
         z-index: 1000;
         background-color: #4cae4c;
         height: auto;
-        width: 800px;
-        max-width: 830px !important;
+        width: 750px;
+        max-width: 750px !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -151,8 +150,8 @@
         margin-left: 10px !important;
     }
 
-    #graph{
-        width: 900px;
-        max-width: 830px !important;
+    #graph {
+        width: 750px;
+        max-width: 750px !important;
     }
 </style>

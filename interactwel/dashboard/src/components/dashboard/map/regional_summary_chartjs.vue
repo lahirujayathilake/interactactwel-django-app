@@ -1,7 +1,8 @@
 <template>
     <div id="regionalSummary" class="card">
 
-        <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon icon="times-circle"/>Close</span></div>
+        <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/>Close</span></div>
         <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="Overview" active>
@@ -23,34 +24,33 @@
                 <b-tab title="Water Rights">
                     <div class="card-body">
                         <div id="chart_div1">
-                             <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart>
+                            <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart>
                         </div>
-                        
+
                         <div id="chart_div2">
-                            
+
                         </div>
                     </div>
                 </b-tab>
-                
+
                 <b-tab title="N fertilizer">
                     <div class="card-body">
-                        
+
                     </div>
                 </b-tab>
             </b-tabs>
-        </div>
         </div>
     </div>
 </template>
 
 <script>
     import EventBus from './../../../event-bus';
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
     //import RegionalWRGraph from './../charts/regional-waterrights-graph.vue'
     import axios from 'axios';
     import Chart from "../../../chartPie";
-    import 'chartjs-plugin-labels';
+  //  import 'chartjs-plugin-labels';
 
     export default {
         name: 'regional_summary',
@@ -62,7 +62,7 @@
 
         data() {
             return {
-                subbasinID : null,
+                subbasinID: null,
                 wrdata: null,
                 
                 subbasinInfo: [
@@ -84,7 +84,7 @@
                         render: 'percentage',
                         precision: 2
                     },
-                                            
+
                     tooltips: {
                         mode: 'point',
                         intersect: false,
@@ -112,19 +112,19 @@
                 this.subbasinID = selectedBasinID;
                 //console.log(this.subbasinID);
                 axios.get("/static/BASIN_Water_Rights.json").then(response => {
-                $this.buildDataCollectionwr(response.data,$this.subbasinID);
-            });
-                
+                    $this.buildDataCollectionwr(response.data, $this.subbasinID);
+                });
+
             })
         },
 
-        created(){
+        created() {
             // axios.get("/static/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
             //     this.buildDataCollectionwr(response.data);
             // });
         },
 
-        computed:{
+        computed: {
             jsonData() {
                 var data = JSONData[this.subbasinID];
 
@@ -135,8 +135,8 @@
             dismiss() {
                 EventBus.$emit('CLOSE');
             },
-            
-            buildDataCollectionwr(data, subbasinID){
+
+            buildDataCollectionwr(data, subbasinID) {
                 let $this = this
                 this.datacollectionwr = {};
                 this.datacollectionwr.labels = [];
@@ -146,18 +146,18 @@
                 this.datacollectionwr.datasets = [];
                 let dataIndex = subbasinID;
                 //for (let dataIndex in data.Data){
-                    let dataPoint = data.Data[dataIndex];
-                    
-                    let dataset = {};
-                    dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = ["#4e85eb","#eb4e4e","#186a3b"];
-                    dataset.data = [];
-                    for(let dataValue in dataPoint.Data) {
-                        //dataset.data.label = $this.getColorwr(dataValue);
-                        dataset.data.push(dataPoint.Data[dataValue]);
-                    }
-                    //console.log(dataset);
-                    this.datacollectionwr.datasets.push(dataset);
+                let dataPoint = data.Data[dataIndex];
+
+                let dataset = {};
+                dataset.label = dataPoint.Name;
+                dataset.backgroundColor = ["#4e85eb", "#eb4e4e", "#186a3b"];
+                dataset.data = [];
+                for (let dataValue in dataPoint.Data) {
+                    //dataset.data.label = $this.getColorwr(dataValue);
+                    dataset.data.push(dataPoint.Data[dataValue]);
+                }
+                //console.log(dataset);
+                this.datacollectionwr.datasets.push(dataset);
                 //}
             },
         }
@@ -172,27 +172,27 @@
         z-index: 1000;
     }
 
-    #canvas{
+    #canvas {
         font-size: 15px;
         font-weight: bold;
     }
 
-    .close{
+    .close {
         font-size: 15px !important;
     }
 
-    .card-header{
+    .card-header {
         font-size: 17px;
     }
 
-    #chart_div1{
-    width: 350px;
-    float: left;
-    } 
+    #chart_div1 {
+        width: 350px;
+        float: left;
+    }
 
-    #chart_div2{
-    width: 350px;
-    float: right;
-   
-    } 
+    #chart_div2 {
+        width: 350px;
+        float: right;
+
+    }
 </style>

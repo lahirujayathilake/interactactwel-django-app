@@ -11,14 +11,11 @@
     import MyChart from "./pathways-graph";
     import ActionsGraph from './actions-graph.vue'
     import StreamsflowGraph from './streamflow-graph.vue'
-    import FertilizerGraph from './fertilizer-graph.vue'
     import CostGraph from './cost-graph.vue'
-    import CropsGraph from './crops-graph.vue'
     import PrecipitationGraph from './precipitation-graph.vue'
     import IrrigationGraph from './irrigation-graph.vue'
-    import GroudWaterGraph from './groudwater-graph.vue'
     import OverviewGraph from './overview-graph.vue'
-    //import RegionGraph from './region-graph.vue'
+    import RegionGraph from './region-graph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -28,14 +25,11 @@
             'MyChart': MyChart,
             'actions-graph': ActionsGraph,
             'streamsflow-graph': StreamsflowGraph,
-            'fertilizer-graph': FertilizerGraph,
             'costs-graph': CostGraph,
-            'crops-graph': CropsGraph,
             'precipitation-graph': PrecipitationGraph,
             'irrigation-graph': IrrigationGraph,
-            'groundwater-graph': GroudWaterGraph,
             'overview-graph': OverviewGraph,
-            //'region-graph': RegionGraph,
+            'region-graph': RegionGraph,
         },
 
         data() {
@@ -174,10 +168,11 @@
         top: 15px;
         left: 90px;
         z-index: 1000;
-        background-color: #4cae4c;
+        background-color: #4d45b0;
         height: auto;
-        width: 800px;
-        max-width: 830px !important;
+        width: 700px;
+        max-width: 750px;
+        max-width: 750px !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -221,8 +216,8 @@
         margin-left: 10px !important;
     }
 
-    #graph .card {
-        width: 700px;
+    #graph {
+        width: 750px;
         max-width: 750px !important;
     }
 

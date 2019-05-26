@@ -174,6 +174,17 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
+    .chart-container {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        z-index: 1000;
+        background-color: #4cae4c;
+        height: auto;
+        width: 750px;
+        max-width: 750px !important;
+    }
+
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #4cae4c !important;
@@ -190,12 +201,11 @@
     }
 
     .filter-options {
-        padding: 8px;
-        font-size: 12px;
+        padding: 10px;
         color: #FFFFFF;
         background-color: #EFEFEF;
         margin: 5px !important;
-        border-radius: 2px;
+        border-radius: 5px;
     }
 
     #sidebar .active {
@@ -217,4 +227,8 @@
         margin-left: 10px !important;
     }
 
+    #graph {
+        width: 750px;
+        max-width: 750px !important;
+    }
 </style>

@@ -66,8 +66,8 @@
         z-index: 1000;
         background-color: #4cae4c;
         height: auto;
-        width: 800px;
-        max-width: 830px !important;
+        width: 750px;
+        max-width: 750px !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -112,8 +112,8 @@
         margin-left: 10px !important;
     }
 
-    #graph .card {
-        width: 800px;
-        max-width: 830px !important;
+    #graph {
+        width: 750px;
+        max-width: 750px !important;
     }
 </style>
