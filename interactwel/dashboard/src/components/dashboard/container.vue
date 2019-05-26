@@ -25,7 +25,7 @@
     import ProgressBar from './progressBar/ProgressBar.vue'
     import Step1Content from './../steps/Step1Content.vue'
     import LeafletMap from './map/LeafletMap.vue'
-    import RegionalSummary from './map/regional_summary.vue'
+    import RegionalSummary from './map/regional_summary_chartjs.vue'
     import Container from './container.vue'
 
     import EventBus from './../../event-bus';

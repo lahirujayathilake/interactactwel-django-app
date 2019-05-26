@@ -1,5 +1,5 @@
 {
-    "Data type": "Aveage monthly releases volume (ac-ft)",
+    "Data type": "Average monthly releases volume (ac-ft)",
     "Legend": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     "Data": {
         "1": {
@@ -7,6 +7,6 @@
             "Name": "Willow Creek Reservoir"
         }
     },
-    "Description": "Aveage monthly releases volume (ac-ft)",
+    "Description": "Average monthly releases volume (ac-ft)",
     "Graph type": "Column bar chart"
 }

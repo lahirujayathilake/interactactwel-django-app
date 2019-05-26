@@ -6,13 +6,17 @@
             <b-tabs card>
                 <b-tab title="Overview" active>
                     <div class="card-body">
+                    <div id="chart_div1">
+                    </div>
                         <!--<regional-waterrights-graph :subbasinID ="this.subbasinID"></regional-waterrights-graph>-->
+                    <div id="chart_div2">
+                    </div>
                     </div>
                 </b-tab>
-                <b-tab title="N fertilizer">
+                <b-tab title="Water Rights">
                     <div class="card-body">
                         <div id="chart_div1">
-                             <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="3"></chart>
+                             <chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></chart>
                         </div>
                         
                         <div id="chart_div2">
@@ -39,6 +43,7 @@
     //import RegionalWRGraph from './../charts/regional-waterrights-graph.vue'
     import axios from 'axios';
     import Chart from "../../../chartPie";
+    import 'chartjs-plugin-labels';
 
     export default {
         name: 'regional_summary',
@@ -60,6 +65,11 @@
                         display: true,
                         text: 'Total water rights volume (ac-ft) by water source',
                     },
+                    labels: {
+                        render: 'percentage',
+                        precision: 2
+                    },
+                                            
                     tooltips: {
                         mode: 'point',
                         intersect: false,
@@ -145,6 +155,11 @@
         top: 40px;
         right: 50px;
         z-index: 1000;
+    }
+
+    #canvas{
+        font-size: 15px;
+        font-weight: bold;
     }
 
     .close{
