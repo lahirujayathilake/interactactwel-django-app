@@ -9,7 +9,7 @@
         </header>
         <section class="modal-body">
           <slot name="body"> 
-         <p align="justify"> You can explore map data used in your community adaptation plans. </p>
+         <p align="left"> You can explore map data used in your community adaptation plans. </p>
           </slot>
         </section>
         <footer class="tutor-footer">

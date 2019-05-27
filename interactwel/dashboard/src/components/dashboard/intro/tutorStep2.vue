@@ -1,7 +1,7 @@
 <template>
   
     <div class="modal-backdrop">
-      <div class="tutor" style="top: 30%; left: 82%; height: 250px; width: 420px;">
+      <div class="tutor" style="top: 30%; left: 82%; height: 280px; width: 420px;">
         <header class="modal-header">
           <slot name="header">
             Explore Adaptation Plans
@@ -11,13 +11,14 @@
           <slot name="body"> 
          <p align="justify"> Click on <strong>Start Here</strong> to begin viewing and exploring adaptation plans created for your community.</p>
           </slot>
-        
-    
+        </section>
+        <footer class="tutor-footer">
           <slot name="footer">
             <button type="button" class="btn-green" @click="nextstep">Continue</button>
             <button type="button" class="btn-close" @click="close">Exit tutorial</button>
           </slot>
-       </section>
+        </footer>
+      
         <img src="../../../assets/tutor_arrow.png" class="hover"
         style = "position: relative; top: -315px; right: -300px; width: 30%; height: 30%;">
       </div>
