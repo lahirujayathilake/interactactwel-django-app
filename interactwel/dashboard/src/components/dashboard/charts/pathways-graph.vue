@@ -12,7 +12,7 @@
         data() {
             return {
                 w: 700,
-                h: 260,
+                h: 300,
                 pathid: 0,
                 margin: {
                     top: 20,
@@ -31,8 +31,20 @@
                     "#6ba629",
                     "#737478"
                 ],
+                Times_map: {
+                    "0": "2001",
+                    "1": "2002",
+                    "2": "2003",
+                    "3": "2004",
+                    "4": "2005",
+                    "5": "2006",
+                    "6": "2007",
+                    "7": "2008",
+                    "8": "2009",
+                    "9": "2010"
+                },
                 colorIndex: 0,
-                xList: ['1999','2000','2001','2002','2003'],
+                xList: [],
                 visibleKeyList: ["1"],
                 jk: ""
             };
@@ -46,18 +58,28 @@
                     };
                 });
             },
+            computedTimes() {
+                return Object.keys(this.Times_map).map(key => {
+                    return {
+                        key: key,
+                        value: this.Times_map[key]
+                    };
+                });
+            },
+
             yScale() {
                 return d3
                     .scaleBand()
                     .domain(this.computedActions.map(d => d.value))
-                    .rangeRound([-14, this.h]);
+                    .rangeRound([-14, this.h-45]);
             },
 
             xScale() {
                 return d3
-                    .scaleLinear()
-                    .domain([2010, 2000])
-                    .rangeRound([0, this.w - 1150]);
+                    .scaleBand()
+                    //.domain([1993, 2018])
+                    .domain(this.computedTimes.map(d =>d.value))
+                    .rangeRound([0, this.w - 200]);
             }
         },
         methods: {
@@ -135,9 +157,8 @@
 
                 const gx = svg
                     .append("g")
-                    .attr("transform", "translate(" + 650 + "," + 157 + ")")
+                    .attr("transform", "translate(" + 200 + "," + 265 + ")")
                     .call(d3.axisBottom(this.xScale).tickFormat(d3.format("d")))
-                    
 
                 g.selectAll('line-x').on('mouseenter', function() {
                     if (this !== d3.select('line-x:last-child').node()) {
@@ -191,7 +212,7 @@
                     .attr("x1", d => d)
                     .attr("y1", -10)
                     .attr("x2", d => d)
-                    .attr("y2", this.h);
+                    .attr("y2", this.h - 30);
             }
         },
         mounted() {
