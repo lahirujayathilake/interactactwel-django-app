@@ -1,7 +1,8 @@
 <template>
     <div id="graph" class="card">
         <div class="card-header">
-            <strong>Catchments</strong>
+            <strong>Catchments</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/> Close</span>
         </div>
         <div class="card-body">
             <img class="img-fluid" src="../../../assets/cost-graph.png"/>
@@ -11,6 +12,7 @@
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
+    import EventBus from './../../../event-bus';
 
     export default {
         name: 'CostGraph',
@@ -134,7 +136,11 @@
         mounted() {
         },
 
-        methods: {},
+        methods: {
+            dismiss() {
+                EventBus.$emit('CLOSE');
+            },
+        },
 
     }
 </script>

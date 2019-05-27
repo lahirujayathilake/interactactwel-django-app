@@ -1,6 +1,7 @@
 <template>
     <div id="graph" class="card">
-        <div class="card-header">
+        <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/> Close</span>
             <strong>Overview</strong>
         </div>
         <div class="card-body no-padding">
@@ -43,7 +44,8 @@
     import CropYieldGraph from './crop-yield-graph.vue'
     import NFertilizerGraph from './n-fertilizer-graph.vue'
     import PFertilizerGraph from './p-fertilizer-graph.vue'
-
+    import EventBus from './../../../event-bus';
+    
     export default {
         name: 'StreamsflowGraph',
 
@@ -88,8 +90,13 @@
         mounted() {
         },
 
-        methods: {},
+        methods: {
+            dismiss() {
+                EventBus.$emit('CLOSE');
+            },
+        },
         //props: ["jsonData"]
+        
     }
 </script>
 

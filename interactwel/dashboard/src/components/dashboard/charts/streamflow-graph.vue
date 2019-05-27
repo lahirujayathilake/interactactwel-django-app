@@ -1,7 +1,8 @@
 <template>
     <div id="graph" class="card">
         <div class="card-header">
-            <strong>Streams</strong>
+            <strong>Streams</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/> Close</span>
         </div>
         <div class="card-body no-padding">
             <b-tabs card>
@@ -22,6 +23,7 @@
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
+    import EventBus from './../../../event-bus';
 
     export default {
         name: 'StreamsflowGraph',
@@ -62,7 +64,11 @@
         mounted() {
         },
 
-        methods: {},
+        methods: {
+            dismiss() {
+                EventBus.$emit('CLOSE');
+            },
+        },
         //props: ["jsonData"]
     }
 </script>

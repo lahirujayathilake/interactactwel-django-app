@@ -1,6 +1,7 @@
 <template>
     <div id="graph" class="card">
-        <div class="card-header">
+        <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/> Close</span>
             <strong>Region</strong>
         </div>
         <div class="card-body no-padding">
@@ -37,6 +38,7 @@
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
+    import EventBus from './../../../event-bus';
 
     export default {
         name: 'RegionGraph',
@@ -77,7 +79,11 @@
         mounted() {
         },
 
-        methods: {},
+        methods: {
+            dismiss() {
+                EventBus.$emit('CLOSE');
+            },
+        },
         //props: ["jsonData"]
     }
 </script>

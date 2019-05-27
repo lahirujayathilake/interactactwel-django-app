@@ -1,7 +1,8 @@
 <template>
     <div id="graph" class="card">
         <b-card no-body>
-            <div class="card-header">
+            <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
+                icon="times-circle"/> Close</span>
                 <strong>Actions</strong>
             </div>
             <div class="card-body">
@@ -129,6 +130,9 @@
         },
 
         methods: {
+            dismiss() {
+                EventBus.$emit('CLOSE');
+            },
             inputChanged(event, item) {
                 if (event.target.checked) {
                     this.selectedKeyList.push(event.target.value);

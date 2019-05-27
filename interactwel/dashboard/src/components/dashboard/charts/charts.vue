@@ -1,7 +1,7 @@
 <template>
     <b-container class="bv-example-row chart-container">
         <b-row>
-            <component v-bind:is="component=this.currentChartComponent"></component>
+            <component v-show="currentChartVisibility" v-bind:is="component=this.currentChartComponent"></component>
         </b-row>
     </b-container>
 </template>
@@ -38,6 +38,7 @@
             return {
 
                 currentChartComponent: 'tutor-graph',
+                currentChartVisibility: true,
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
@@ -115,16 +116,23 @@
         mounted(){
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
+                $this.currentChartVisibility = true,
                 $this.showChart(planName);
             })
             EventBus.$on('CLICK_ITEM_PLAN', function () {
+                $this.currentChartVisibility = true,
                 $this.showPlanGraph();
             })
             EventBus.$on('CLICK_ITEM_COST', function () {
+                $this.currentChartVisibility = true,
                 $this.showCostGraph();
             })
             EventBus.$on('CLICK_ITEM', function (currentChartComponent) {
+                $this.currentChartVisibility = true,
                 $this.showGraph(currentChartComponent);
+            })
+            EventBus.$on('CLOSE', function () {
+                $this.currentChartVisibility = false
             })
         },
 
