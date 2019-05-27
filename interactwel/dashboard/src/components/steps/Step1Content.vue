@@ -26,7 +26,7 @@
                                 </li>
                             </ul>
                             <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests.</p>
-                            <p aling="justify"> You will be able to visualize and compare how each adaptation plans meets the goals you select now for individual catchments and the region in <strong>Step 4</strong>. </p>
+                            <p aling="justify"> You will be able to visualize how each adaptation plan meets the goals in <strong>Step 4</strong>. </p>
                             
 
                         </b-card-text>
@@ -230,10 +230,10 @@
 
             goals: [
                 {id: "0", goal: 'Improve surface water quality', readonly: false},
-                {id: "1", goal: 'Increase ground water supply', readonly: false},
-                {id: "2", goal: 'Minimize land use change', readonly: true},
-                {id: "3", goal: 'Improve regional economy', readonly: false},
-                {id: "4", goal: 'Increase energy production', readonly: true},
+                {id: "1", goal: 'Increase recharge to shallow aquifer', readonly: false},
+                //{id: "2", goal: 'Minimize land use change', readonly: true},
+                {id: "3", goal: 'Increase agriculture productivity', readonly: false},
+                //{id: "4", goal: 'Increase energy production', readonly: true},
                 {id: "5", goal: 'Improve ecological habitat', readonly: false},
                 {id: "6", goal: 'Other', readonly: true},
 
