@@ -77,10 +77,10 @@
   .modal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
-    max-height: 550px;
+    max-height: 570px;
     overflow: visible;
     position: fixed;
-    top: 50%;
+    top: 52%;
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);

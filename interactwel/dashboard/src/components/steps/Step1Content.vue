@@ -14,8 +14,8 @@
                     >
                         <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
                         <b-card-text>
-                            <p align="justify">
-                                A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>
+                            <!--<p align="justify">
+                                A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>-->
                             <p align="justify">Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve.
                             </p>
                             <ul>
