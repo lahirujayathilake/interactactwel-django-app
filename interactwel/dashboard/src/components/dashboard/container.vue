@@ -53,6 +53,7 @@
                 regionalSummaryVisibility: true,
                 stepsVisibility: true,
                 component: null,
+                prevLayerClicked: null,
             }
         },
 
@@ -60,14 +61,30 @@
 
             let $this = this;
             EventBus.$on('START_WIZARD', function () {
-                $this.stepsVisibility = false
+                $this.stepsVisibility = false;
+                $this.regionalSummaryVisibility = true;
             }),
             EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
-                $this.createRegionSummary(selectedBasinID)
-                $this.regionalSummaryVisibility = false
+                console.log(selectedBasinID)
+                console.log($this.prevLayerClicked)
+                if ($this.prevLayerClicked !== null || $this.prevLayerClicked == selectedBasinID) {
+                    $this.regionalSummaryVisibility = true;
+                }
+                if ($this.prevLayerClicked !== selectedBasinID) {
+                    $this.createRegionSummary(selectedBasinID)
+                    $this.regionalSummaryVisibility = false;
+                    $this.prevLayerClicked = selectedBasinID;
+                    }else{
+                        $this.regionalSummaryVisibility = true;
+                        $this.prevLayerClicked = null;
+                    }
+
+                //$this.createRegionSummary(selectedBasinID)
+                //$this.regionalSummaryVisibility = false
             }),
             EventBus.$on('CLOSE', function () {
                 $this.regionalSummaryVisibility = true
+                
             })
         },
 
@@ -75,10 +92,10 @@
 
             afterWizardFinished() {
                 this.sidebarLeftVisibility = false,
-                this.sidebarRightVisibility = false
-                this.progressBarVisibility = false
-                this.chartsVisibility = false
-                this.regionalSummaryVisibility = false
+                this.sidebarRightVisibility = false,
+                this.progressBarVisibility = false,
+                this.chartsVisibility = false,
+                this.regionalSummaryVisibility = true
             },
 
             createRegionSummary(subbasinID){

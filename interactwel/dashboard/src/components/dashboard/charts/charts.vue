@@ -16,6 +16,7 @@
     import IrrigationGraph from './irrigation-graph.vue'
     import OverviewGraph from './overview-graph.vue'
     import RegionGraph from './region-graph.vue'
+    import TutorGraph from './tutor-graph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -30,12 +31,13 @@
             'irrigation-graph': IrrigationGraph,
             'overview-graph': OverviewGraph,
             'region-graph': RegionGraph,
+            'tutor-graph': TutorGraph,
         },
 
         data() {
             return {
 
-                currentChartComponent: 'overview-graph',
+                currentChartComponent: 'tutor-graph',
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,

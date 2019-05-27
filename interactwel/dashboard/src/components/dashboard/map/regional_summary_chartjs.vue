@@ -32,8 +32,8 @@
                                 </table>
                             </b-col>
                             <b-col cols="7">
-                                <chart-bar :chart-data="datacollectionlnd" :options="optionslnd" :width="5"
-                                           :height="4"></chart-bar>
+                                <chart-barh :chart-data="datacollectionlnd" :options="optionslnd" :width="5"
+                                           :height="4"></chart-barh>
                             </b-col>
                         </b-row>
                         <!--<regional-waterrights-graph :subbasinID ="this.subbasinID"></regional-waterrights-graph>-->
@@ -50,10 +50,12 @@
                             </b-col>
                         </b-row>
                 </b-tab>
-                <b-tab title="Precipitation">
-                    <div class="card-body">
-
-                    </div>
+                <b-tab title="Crops">
+                    <b-row>
+                        <b-col>
+                            <chart-barv :chart-data="datacollectioncrop" :options="optionscrop" :width="5":height="3"></chart-barv>
+                        </b-col>
+                    </b-row>
                 </b-tab>
             </b-tabs>
         </div>
@@ -67,7 +69,8 @@
     //import RegionalWRGraph from './../charts/regional-waterrights-graph.vue'
     import axios from 'axios';
     import ChartPie from "../../../chartPie";
-    import ChartBar from "../../../chartBarH";
+    import ChartBarH from "../../../chartBarH";
+    import ChartBarV from "../../../chart";
     //import 'chartjs-plugin-labels';
 
     export default {
@@ -75,7 +78,8 @@
 
         components: {
             'chart-pie': ChartPie,
-            'chart-bar': ChartBar,
+            'chart-barh': ChartBarH,
+            'chart-barv': ChartBarV,
             //'regional-waterrights-graph': RegionalWRGraph,
         },
 
@@ -96,6 +100,7 @@
                 datacollectionwr: null,
                 datacollectionirr: null,
                 datacollectionlnd: null,
+                datacollectioncrop: null,
                 optionswr: {
                     responsive: true,
                     title: {
@@ -189,6 +194,46 @@
 
                         }]
                     }
+                },
+                optionscrop: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Planted crop area (acre) USDA CDL 2017',
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    labels: {
+                        render: false,
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            //stacked: false,
+                            //scaleLabel: {
+                            //    display: false,
+                                //labelString: 'Area (acres)'
+                            //}
+                        }],
+                        yAxes: [{
+                            //display: true,
+                            //stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Area (acres)'
+                            }
+
+                        }]
+                    }
                 }
             };
         },
@@ -208,6 +253,9 @@
 
                 axios.get("/static/BASIN_IrrLand_chartjs.json").then(response => {
                     $this.buildDataCollectionirr(response.data, $this.subbasinID);
+                });
+                axios.get("/static/BASIN_CropArea_chartjs.json").then(response => {
+                    $this.buildDataCollectionCrop(response.data, $this.subbasinID);
                 });
                 $this.buildSelectedSubBasinInfoElement();
 
@@ -308,6 +356,32 @@
                 this.datacollectionlnd.datasets.push(dataset);
                 //}
             },
+            
+            buildDataCollectionCrop(data, subbasinID) {
+                let $this = this
+                this.datacollectioncrop = {};
+                this.datacollectioncrop.labels = [];
+                for (let legend in data.Legend) {
+                    this.datacollectioncrop.labels.push(data.Legend[legend]);
+                }
+                this.datacollectioncrop.datasets = [];
+                let dataIndex = subbasinID;
+                //for (let dataIndex in data.Data){
+                let dataPoint = data.Data[dataIndex];
+
+                let dataset = {};
+                dataset.label = dataPoint.Name;
+                dataset.backgroundColor = [];
+                
+                dataset.data = [];
+                for (let dataValue in dataPoint.Data) {
+                    dataset.backgroundColor.push(this.getRandomColor())
+                    dataset.data.push(dataPoint.Data[dataValue]);
+                }
+                //console.log(dataset);
+                this.datacollectioncrop.datasets.push(dataset);
+                //}
+            },
 
             getRandomColor() {
                 let letters = '0123456789ABCDEF';
@@ -372,6 +446,6 @@
     }
 
     #regionalSummary table{
-        font-size:12px;
+        font-size:14px;
     }
 </style>
