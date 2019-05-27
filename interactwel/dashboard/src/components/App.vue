@@ -77,7 +77,7 @@
   .modal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
-    max-height: 450px;
+    max-height: 550px;
     overflow: visible;
     position: fixed;
     top: 50%;
@@ -111,7 +111,7 @@
   .modal-body {
     position: relative;
     padding: 30px 40px;
-    font-size: 18px;
+    font-size: 16px;
 
   }
 

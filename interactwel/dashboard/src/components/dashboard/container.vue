@@ -65,8 +65,7 @@
                 $this.regionalSummaryVisibility = true;
             }),
             EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
-                console.log(selectedBasinID)
-                console.log($this.prevLayerClicked)
+
                 if ($this.prevLayerClicked !== null || $this.prevLayerClicked == selectedBasinID) {
                     $this.regionalSummaryVisibility = true;
                 }

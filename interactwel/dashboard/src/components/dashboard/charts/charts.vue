@@ -116,7 +116,7 @@
         mounted(){
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                $this.currentChartVisibility = true,
+                
                 $this.showChart(planName);
             })
             EventBus.$on('CLICK_ITEM_PLAN', function () {

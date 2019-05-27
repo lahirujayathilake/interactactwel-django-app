@@ -4,12 +4,12 @@
       <div class="tutor" style="top: 35%; left: 18%; max-width: 20%; max-height: 50%;">
         <header class="modal-header">
           <slot name="header">
-            Explore the model data
+            Explore Datasets
           </slot>
         </header>
         <section class="modal-body">
           <slot name="body"> 
-         <p align="justify"> You can explore the spatial data used to create the models. </p>
+         <p align="justify"> You can explore map data used in your community adaptation plans. </p>
           </slot>
         </section>
         <footer class="tutor-footer">

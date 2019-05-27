@@ -19,7 +19,7 @@
                             <p align="justify">Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve.
                             </p>
                             <ul>
-                                <li>These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community in whole.
+                                <li>These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community at large.
                                 </li>
                                 <li>
                                     Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.
@@ -137,7 +137,7 @@
                         </b-card-text>
                         </b-card>
                 </div>
-                <b-card style="height: 570px; width: 680px" no-body>
+                <b-card style="height: 470px; width: 580px" no-body>
                     <div class="step-header" slot="header">Choose Actions</div>
                     <b-card-body>
                         <p class="card-text">
@@ -155,7 +155,7 @@
                     <b-card-body>
 
                         <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
-                        <table style="height: 370px; width: 630px"
+                        <table style="height:270px; width: 550px"
                                class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                             <tr>
@@ -254,9 +254,9 @@
             ],
 
             actors: [
-                {id: 0, name: "F_SW_GW", actor: 'Farmer with surface water and ground water rights', readonly: false},
-                {id: 1, name: "F_SW", actor: 'Farmer with surface water rights', readonly: false},
-                {id: 2, name: "F_GW", actor: 'Farmer with ground water rights', readonly: false}
+                {id: 0, name: "F_SW_GW", actor: 'Farmer with Columbia River water rights', readonly: false},
+                {id: 1, name: "F_SW", actor: 'Farmer with Surface water rights', readonly: false},
+                {id: 2, name: "F_GW", actor: 'Farmer with Groundwater rights', readonly: false}
                 //{id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
                 //{id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
                 //{id: 5, name: "TRI", actor: 'Data Centers', readonly: true},
