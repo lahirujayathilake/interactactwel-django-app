@@ -25,8 +25,9 @@
                                     Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.
                                 </li>
                             </ul>
-                            <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests.
-                            </p>
+                            <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests.</p>
+                            <p aling="justify"> You will be able to visualize and compare how each adaptation plans meets the goals you select now for individual catchments and the region in <strong>Step 4</strong>. </p>
+                            
 
                         </b-card-text>
                     </b-card>
