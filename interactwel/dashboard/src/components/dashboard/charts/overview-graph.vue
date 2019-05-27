@@ -2,7 +2,7 @@
     <div id="graph" class="card">
         <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span>
-            <strong>Overview</strong>
+            <strong>Region</strong>
         </div>
         <div class="card-body no-padding">
             <b-tabs card>
@@ -45,7 +45,7 @@
     import NFertilizerGraph from './n-fertilizer-graph.vue'
     import PFertilizerGraph from './p-fertilizer-graph.vue'
     import EventBus from './../../../event-bus';
-    
+
     export default {
         name: 'StreamsflowGraph',
 

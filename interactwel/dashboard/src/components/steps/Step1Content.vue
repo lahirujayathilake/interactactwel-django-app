@@ -56,7 +56,7 @@
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"/>
                                         {{goal.goal}}
                                     </label>
-                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover title="Tooltip content">i</b-badge>
+                                    <b-badge v-show:!goal.tooltip class="info-button" pill variant="secondary" title="Tooltip content">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
@@ -229,35 +229,35 @@
             selectAllActors: false,
 
             goals: [
-                {id: "0", goal: 'Improve surface water quality', readonly: false},
-                {id: "1", goal: 'Increase recharge to shallow aquifer', readonly: false},
+                {id: "0", goal: 'Improve surface water quality', readonly: false, tooltip: true},
+                {id: "1", goal: 'Increase recharge to shallow aquifer', readonly: false, tooltip: false},
                 //{id: "2", goal: 'Minimize land use change', readonly: true},
-                {id: "3", goal: 'Increase agriculture productivity', readonly: false},
+                {id: "3", goal: 'Increase agriculture productivity', readonly: false, tooltip: true},
                 //{id: "4", goal: 'Increase energy production', readonly: true},
-                {id: "5", goal: 'Improve ecological habitat', readonly: false},
-                {id: "6", goal: 'Other', readonly: true},
+                {id: "5", goal: 'Improve ecological habitat', readonly: false, tooltip: true},
+                {id: "6", goal: 'Other', readonly: true, tooltip: true},
 
             ],
 
             actions: [
-                {id: 0, name: "act1", action: 'Business as usual', readonly: false},
+                {id: 0, name: "act1", action: 'No changes to current water right allocations', readonly: false},
                 //{id: 1, name: "act2", action: 'Increase water right volume by 20%', readonly: false},
                 //{id: 2, name: "act3", action: 'Decrease water right volume by 20%', readonly: false},
-                {id: 1, name: "act2", action: 'Increase volume of SW water rights', readonly: false},
-                {id: 2, name: "act3", action: 'Increase volume of GW water rights', readonly: false},
+                {id: 1, name: "act2", action: 'Increase the volume of non-Columbia surface water', readonly: false},
+                {id: 2, name: "act3", action: 'Decrease the volume of non-Columbia surface water', readonly: false},
                 //{id: 5, name: "act6", action: 'Increase amount of RW', readonly: true},
-                {id: 3, name: "act4", action: 'Decrease volume of SW water rights', readonly: false},
-                {id: 4, name: "act5", action: 'Decrease volume of GW water rights', readonly: false},
+                {id: 3, name: "act4", action: 'Increase the volume of groundwater', readonly: false},
+                {id: 4, name: "act5", action: 'Decrease the volume of groundwater', readonly: false},
                 {id: 5, name: "act6", action: 'Invest in renewable energy sources', readonly: true},
-                {id: 6, name: "act7", action: 'Pump RW to farmers/daries', readonly: true},
-                {id: 7, name: "act8", action: 'Increase surface storage', readonly: true},
+                {id: 6, name: "act7", action: 'Increase the volume of Columbia surface water', readonly: true},
+                {id: 7, name: "act8", action: 'Decrease the volume of Columbia surface water', readonly: true},
                 //{id: 11, name: "act12", action: 'Invest in infra to pump RW', readonly: false}
             ],
 
             actors: [
-                {id: 0, name: "F_SW_GW", actor: 'Farmer with Columbia River water rights', readonly: false},
-                {id: 1, name: "F_SW", actor: 'Farmer with Surface water rights', readonly: false},
-                {id: 2, name: "F_GW", actor: 'Farmer with Groundwater rights', readonly: false}
+                {id: 0, name: "F_SW_GW", actor: 'Farmer with Columbia river water rights', readonly: false},
+                {id: 1, name: "F_SW", actor: 'Farmer with non-Columbia surface water rights', readonly: false},
+                {id: 2, name: "F_GW", actor: 'Farmer with groundwater rights', readonly: false}
                 //{id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
                 //{id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
                 //{id: 5, name: "TRI", actor: 'Data Centers', readonly: true},

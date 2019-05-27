@@ -3,7 +3,13 @@
         <b-card no-body>
             <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span>
-                <strong>Actions</strong>
+                <strong>Actions </strong>
+                <b-badge id="tooltip-button-1" class="info-button" pill variant="secondary" v-b-tooltip.hover>How to read this chart?</b-badge>
+                 <b-tooltip :show.sync="show" target="tooltip-button-1" placement="bottom">
+                    
+                    <p aling="justify">This chart shows the actions that different actors will take for this adaptation plan.</p>
+                    <p aling="justify">Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
+                </b-tooltip>
             </div>
             <div class="card-body">
                 <div class="filter-options-container">
