@@ -55,7 +55,7 @@
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"/>
                                         {{goal.goal}}
                                     </label>
-                                    <b-badge class="info-button" pill variant="secondary">i</b-badge>
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover title="Tooltip content">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
