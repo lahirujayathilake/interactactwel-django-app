@@ -12,7 +12,7 @@
         data() {
             return {
                 w: 700,
-                h: 260,
+                h: 300,
                 pathid: 0,
                 margin: {
                     top: 20,
@@ -31,6 +31,32 @@
                     "#6ba629",
                     "#737478"
                 ],
+                Times_map: {
+                    "0": "1/17",
+                    "1": "2/17",
+                    "2": "3/17",
+                    "3": "4/17",
+                    "4": "5/17",
+                    "5": "6/17",
+                    "6": "7/17",
+                    "7": "8/17",
+                    "8": "9/17",
+                    "9": "10/17",
+                    "10": "11/17",
+                    "11": "12/17",
+                    "12": "1/18",
+                    "13": "2/18",
+                    "14": "3/18",
+                    "15": "4/18",
+                    "16": "5/18",
+                    "17": "6/18",
+                    "18": "7/18",
+                    "19": "8/18",
+                    "20": "9/18",
+                    "21": "10/18",
+                    "22": "11/18",
+                    "23": "12/18"
+                },
                 colorIndex: 0,
                 xList: [],
                 visibleKeyList: ["1"],
@@ -46,18 +72,28 @@
                     };
                 });
             },
+            computedTimes() {
+                return Object.keys(this.Times_map).map(key => {
+                    return {
+                        key: key,
+                        value: this.Times_map[key]
+                    };
+                });
+            },
+
             yScale() {
                 return d3
                     .scaleBand()
                     .domain(this.computedActions.map(d => d.value))
-                    .rangeRound([-14, this.h]);
+                    .rangeRound([-14, this.h-45]);
             },
 
             xScale() {
                 return d3
-                    .scaleLinear()
-                    .domain([2000, 2018])
-                    .rangeRound([0, this.w - 800]);
+                    .scaleBand()
+                    //.domain([1993, 2018])
+                    .domain(this.computedTimes.map(d =>d.value))
+                    .rangeRound([0, this.w - 200]);
             }
         },
         methods: {
@@ -133,10 +169,10 @@
                     .attr("transform", "translate(" + 200 + "," + 10 + ")")
                     .call(d3.axisLeft(this.yScale));
 
-                /*const gx = svg
+                const gx = svg
                     .append("g")
-                    .attr("transform", "translate(" + 200 + "," + 140 + ")")
-                    .call(d3.axisBottom(this.xScale))*/
+                    .attr("transform", "translate(" + 200 + "," + 265 + ")")
+                    .call(d3.axisBottom(this.xScale))
 
                 g.selectAll('line-x').on('mouseenter', function() {
                     if (this !== d3.select('line-x:last-child').node()) {
@@ -190,7 +226,7 @@
                     .attr("x1", d => d)
                     .attr("y1", -10)
                     .attr("x2", d => d)
-                    .attr("y2", this.h);
+                    .attr("y2", this.h - 30);
             }
         },
         mounted() {

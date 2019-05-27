@@ -21,7 +21,10 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="graph-title"> Actions taken by Actors</div>
                 <pathways-graph :actions="actions" :data="graphData"></pathways-graph>
+                <div class="x-label">Time</div>
+                <div class="y-label">Actions</div>
             </div>
         </b-card>
     </div>
@@ -234,5 +237,30 @@
     #graph {
         width: 750px;
         max-width: 750px !important;
+    }
+
+    .y-label{
+        position: absolute;
+        top: 60%;
+        left:0;
+        font-size: 12px;
+        -ms-transform: rotate(-90deg); /* IE 9 */
+        -webkit-transform: rotate(-90deg); /* Safari */
+        transform: rotate(-90deg); /* Standard syntax */
+    }
+    .x-label{
+        position: relative;
+
+        left:60%;
+        font-size: 12px;
+    }
+
+    .graph-title{
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+        left: 50%;
+        margin-bottom: 20px;
+
     }
 </style>
