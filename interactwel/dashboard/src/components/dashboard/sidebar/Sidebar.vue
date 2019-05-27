@@ -15,7 +15,6 @@
 <script>
 
     import JSONData from "../../../assets/result_action_plans.json";
-
     import EventBus from './../../../event-bus';
 
     export default {
@@ -33,7 +32,8 @@
                     {id: "region-graph", name: "Region"},
                     {id:"actions-graph", name: "Actions"},
                     {id: "costs-graph", name: "Catchments"},
-                    {id: "streamsflow-graph", name: "Streams"}
+                    {id: "streamsflow-graph", name: "Streams"},
+                    {id: "feedback", name: "Evaluate"}
                     /* {id: "crops-graph", name: "Crops"},*/
                     /*{id: "precipitation-graph", name: "Precipitation"},*/
                     /*{id: "irrigation-graph", name: "Irrigation"},*/
@@ -61,8 +61,16 @@
             },
 
             showGraph(chart) {
-                this.currentChart = chart;
-                EventBus.$emit('CLICK_ITEM', this.currentChart);
+                
+                if (chart !== "feedback"){
+                    this.currentChart = chart;
+                    EventBus.$emit('CLICK_ITEM', this.currentChart);
+                    EventBus.$emit('HIDE_FEEDBACK');
+                }else{    
+                    //console.log(chart)   
+                    EventBus.$emit('SHOW_FEEDBACK');
+                    EventBus.$emit('CLOSE'); 
+                }
 
             },
 
@@ -139,5 +147,11 @@
     #sidebar .nav-link:hover{
         background-color: #000 ;
     }
-
+    #main > aside {
+        flex: 0 0 400px;
+        height: calc(92vh - 20px);
+        overflow: auto;
+        padding: 1rem;
+        background-color: #FFF;
+    }
 </style>

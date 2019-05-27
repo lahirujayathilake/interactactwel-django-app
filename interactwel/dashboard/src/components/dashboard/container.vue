@@ -84,7 +84,13 @@
             }),
             EventBus.$on('CLOSE', function () {
                 $this.regionalSummaryVisibility = true
+            }),
+            EventBus.$on('SHOW_FEEDBACK', function() {
+                   $this.sidebarRightVisibility = false; 
                 
+            }),
+            EventBus.$on('HIDE_FEEDBACK', function() {
+                $this.sidebarRightVisibility = true; 
             })
         },
 
@@ -92,7 +98,7 @@
 
             afterWizardFinished() {
                 this.sidebarLeftVisibility = false,
-                this.sidebarRightVisibility = false,
+                this.sidebarRightVisibility = true,
                 this.progressBarVisibility = false,
                 this.chartsVisibility = false,
                 this.regionalSummaryVisibility = true
@@ -101,6 +107,7 @@
             createRegionSummary(subbasinID){
                 EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
             },
+
         }
     }
 
