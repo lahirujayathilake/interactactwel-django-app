@@ -6,17 +6,21 @@
         <div id="feedback-block" class="ui form">
             <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group label="Do you think this Alternative plan is feasible?">
-                    <b-form-radio v-model="checked" name="some-radios" value="A">Yes</b-form-radio>
-                    <b-form-radio v-model="checked" name="some-radios" value="B">No</b-form-radio>
-                    <b-form-radio v-model="checked" name="some-radios" value="C">May Be</b-form-radio>
+                    <b-form-radio v-model="feasibility" name="some-radios" value="1">Yes</b-form-radio>
+                    <b-form-radio v-model="feasibility" name="some-radios" value="2">No</b-form-radio>
+                    <b-form-radio v-model="feasibility" name="some-radios" value="3">May Be</b-form-radio>
                 </b-form-group>
                 <b-form-group id="input-group-4" label="Why is this plan not feasible? (Check all that apply)">
-                    <b-form-checkbox v-model="selected" value="1">Unlikely to be profitable / financially sustainable</b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="2">Infrastructure costs</b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="3">Permits or other regulatory approval processes and cost
+                    <b-form-checkbox v-model="selected" value="1">Unlikely to be profitable / financially sustainable
                     </b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="4">Reliance on other stakeholders to take action</b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="5">Long time period before seeing positive results</b-form-checkbox>
+                    <b-form-checkbox v-model="selected" value="2">Infrastructure costs</b-form-checkbox>
+                    <b-form-checkbox v-model="selected" value="3">
+                        Permits or other regulatory approval processes and cost
+                    </b-form-checkbox>
+                    <b-form-checkbox v-model="selected" value="4">Reliance on other stakeholders to take action
+                    </b-form-checkbox>
+                    <b-form-checkbox v-model="selected" value="5">Long time period before seeing positive results
+                    </b-form-checkbox>
                     <b-form-checkbox v-model="selected" value="6">Public disapproval of the actions listed in the plans
                     </b-form-checkbox>
                     <b-form-checkbox v-model="selected" value="7">Other</b-form-checkbox>
@@ -41,19 +45,22 @@
 
         data() {
             return {
+                feasibility: [],
+                selected: [],
+                comment: null
             }
         },
         methods: {
             onSubmit(evt) {
                 evt.preventDefault()
-                alert(JSON.stringify(this.form))
+                alert(JSON.stringify(this))
             },
             onReset(evt) {
                 evt.preventDefault()
                 // Reset our form values
-                this.form.comment = null
-                this.form.checked = []
-                this.form.selected = []
+                this.comment = null
+                this.feasibility = []
+                this.selected = []
                 // Trick to reset/clear native browser form validation state
                 this.show = false
                 this.$nextTick(() => {
@@ -76,7 +83,7 @@
 
     }
 
-    #feedback-block legend{
+    #feedback-block legend {
         font-weight: bold;
         font-size: 14px;
     }
@@ -85,8 +92,8 @@
         padding: 0 10px;
     }
 
-    #submit-btn{
-        margin-top:10px;
+    #submit-btn {
+        margin-top: 10px;
     }
 
 </style>
