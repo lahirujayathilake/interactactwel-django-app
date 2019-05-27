@@ -182,7 +182,7 @@
         height: auto;
         width: 700px;
         max-width: 750px;
-        max-width: 750px !important;
+        max-height: 800px !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

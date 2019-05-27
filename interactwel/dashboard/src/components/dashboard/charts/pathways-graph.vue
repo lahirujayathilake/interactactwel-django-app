@@ -32,7 +32,7 @@
                     "#737478"
                 ],
                 colorIndex: 0,
-                xList: [],
+                xList: ['1999','2000','2001','2002','2003'],
                 visibleKeyList: ["1"],
                 jk: ""
             };
@@ -56,8 +56,8 @@
             xScale() {
                 return d3
                     .scaleLinear()
-                    .domain([2000, 2018])
-                    .rangeRound([0, this.w - 800]);
+                    .domain([2010, 2000])
+                    .rangeRound([0, this.w - 1150]);
             }
         },
         methods: {
@@ -133,10 +133,11 @@
                     .attr("transform", "translate(" + 200 + "," + 10 + ")")
                     .call(d3.axisLeft(this.yScale));
 
-                /*const gx = svg
+                const gx = svg
                     .append("g")
-                    .attr("transform", "translate(" + 200 + "," + 140 + ")")
-                    .call(d3.axisBottom(this.xScale))*/
+                    .attr("transform", "translate(" + 650 + "," + 157 + ")")
+                    .call(d3.axisBottom(this.xScale).tickFormat(d3.format("d")))
+                    
 
                 g.selectAll('line-x').on('mouseenter', function() {
                     if (this !== d3.select('line-x:last-child').node()) {
