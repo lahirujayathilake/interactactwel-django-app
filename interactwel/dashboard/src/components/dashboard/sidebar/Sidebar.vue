@@ -28,9 +28,9 @@
                 currentChart: null,
 
                 chartTypes: [
-                    {id: "overview-graph", name: "Overview"},
-                    {id: "region-graph", name: "Region"},
+                    /*{id: "overview-graph", name: "Overview"},*/
                     {id:"actions-graph", name: "Actions"},
+                    {id: "region-graph", name: "Region"},
                     {id: "costs-graph", name: "Catchments"},
                     {id: "streamsflow-graph", name: "Streams"},
                     {id: "feedback", name: "Evaluate"}

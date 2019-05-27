@@ -445,7 +445,7 @@
         position: absolute;
         bottom: 85px;
         left: 25px;
-        z-index: 1000;
+        z-index: 500;
         width: 200px;
         height: 100px;
     }

@@ -3,7 +3,7 @@
         <b-card no-body>
             <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span>
-                <strong>What are Actions Plans?</strong>
+                <strong>What are Adaptation Plans?</strong>
             </div>
             <div class="card-body">
 

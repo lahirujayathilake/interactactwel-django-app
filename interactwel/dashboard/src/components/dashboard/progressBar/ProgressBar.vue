@@ -31,7 +31,7 @@
         <li v-bind:class="{active: isStep5Active}" class="arrow_box">
             <div href="#step-5">
                 <div class="step-no">5</div>
-                <h4 class="list-group-item-heading">Evaluate</h4>
+                <h4 class="list-group-item-heading">Compare</h4>
                 <p class="list-group-item-text">{{step5_desc}}</p>
             </div>
         </li>
@@ -54,7 +54,7 @@
                 step2_desc: "Choose Actors",
                 step3_desc: "Choose Actions",
                 step4_desc: "Visualize Adaptation plans",
-                step5_desc: "Give Feedback",
+                step5_desc: "Rate Adaptation plans",
 
                 isStep1Active: false,
                 isStep2Active: false,
