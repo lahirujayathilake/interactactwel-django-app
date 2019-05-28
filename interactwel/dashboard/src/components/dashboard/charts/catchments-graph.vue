@@ -65,15 +65,13 @@
             'chart-barv': ChartBarV,
         },
         
-        selectedBasinID: '1',
-        planName: 'Adaptation Plan 1',
-
         data() {
             return {
                 selected: '1',
                 selectedBasinID: '1',
+                planName: 'Adaptation Plan 1',
+                JSONData: null,
 
-                
             options: [
                 { text: 'Sub-basin: 1', value: '1' },
                 { text: 'Sub-basin: 2', value: '2' },
@@ -81,6 +79,7 @@
                 { text: 'Sub-basin: 4', value: '4' },
                 { text: 'Sub-basin: 5', value: '5' }
                 ],
+
             datacollectionirr:null,
             optionsirr: {
                     responsive: true,
@@ -146,23 +145,25 @@
 
         mounted() {
             let $this = this;
-
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                this.planName = planName;
-            
+                $this.planName = planName;
+                $this.buildDataCollectionirr($this.JSONData, $this.planName)
+            });
+
+        },
+
+        created(){
             axios.get("/static/BASIN_Irrigation_basins_data.json").then(response => {
                 //this.jsonData["Adaptation_plans"][adaptationPlan]
                 var adaptationPlan = this.planName
                 var selectedBasinID = this.selected
-                
+                this.JSONData = response.data;
                 //console.log(selectedBasinID);
                 //console.log(response.data.Adaptation_plans.adaptationPlan);
                 //console.log(this.planName);
                 //debugger;
-                $this.buildDataCollectionirr(response.data,adaptationPlan,selectedBasinID);
+                $this.buildDataCollectionirr(this.JSONData,adaptationPlan,this.selectedBasinID);
                 })
-            });
-
         },
 
         methods: {
@@ -170,8 +171,8 @@
                 EventBus.$emit('CLOSE');
             },
 
-            buildDataCollectionirr(data,adaptationPlan,selectedBasinID){
-                //debugger;
+            buildDataCollectionirr(data, adaptationPlan, selectedBasinID){
+                debugger;
                 this.datacollectionirr = {};
                 this.datacollectionirr.labels = [];
                 for (let legend in data.Legend) {
