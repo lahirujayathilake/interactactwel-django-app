@@ -32,9 +32,9 @@
                         <irridation-graph></irridation-graph>
                     </div>
                 </b-tab>
-                <b-tab title="Crop Area">
+                <b-tab title="Groundwater Recharge">
                     <div class="card-body">
-                        <crop-area-graph></crop-area-graph>
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                     </div>
                 </b-tab>
 
