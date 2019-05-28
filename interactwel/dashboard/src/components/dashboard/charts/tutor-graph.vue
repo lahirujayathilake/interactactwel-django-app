@@ -97,4 +97,15 @@
         width: 750px;
         max-width: 750px !important;
     }
+
+    #graph .card-body p {
+        color: #3f4558;
+    }
+
+    #graph .card-title {
+        font-size: 25px;
+        font-weight: bold;
+        padding-bottom: 5px;
+    }
+
 </style>

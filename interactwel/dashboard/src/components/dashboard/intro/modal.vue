@@ -43,3 +43,15 @@
         },
     };
 </script>
+
+<style>
+    #welcome-modal .modal-body {
+        color: #3f4558;
+    }
+
+    #welcome-modal .card-title {
+        font-size: 25px;
+        font-weight: bold;
+        padding-bottom: 5px;
+    }
+</style>
