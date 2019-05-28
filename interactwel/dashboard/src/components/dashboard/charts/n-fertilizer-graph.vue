@@ -7,6 +7,7 @@
 
     export default {
         name: 'NFertilizerGraph',
+        planName: "Adaptation Plan 1",
         components: {
             Chart
         },
@@ -52,6 +53,22 @@
             };
         },
         mounted() {
+            let $this = this;
+            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
+                this.planName = planName;
+                console.log(this.planName);
+                //$this.showChart(planName);
+            
+            axios.get("/static/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
+                //this.jsonData["Adaptation_plans"][adaptationPlan]
+                var adaptationPlan = this.planName
+                //console.log(response.data);
+                console.log(response.data.Adaptation_plans.adaptationPlan);
+                console.log(this.planName);
+                //debugger;
+                $this.buildDataCollection(response.data,adaptationPlan);
+            })
+            });
 
         },
 

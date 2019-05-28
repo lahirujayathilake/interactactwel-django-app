@@ -98,7 +98,7 @@
                 let previousY;
                 this.xListComputed(nextX);
                 const pathPointsArray = [];
-                const a = pathY_points.map(element => parseInt(element) * 22);
+                const a = pathY_points.map(element => parseInt(element) * 39);
                 a.forEach((y, i) => {
                     if (i === 0) {
                         previousY = y;
