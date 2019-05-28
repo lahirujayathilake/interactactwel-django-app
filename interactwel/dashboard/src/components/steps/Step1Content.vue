@@ -56,11 +56,7 @@
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"/>
                                         {{goal.goal}}
                                     </label>
-
-                                  <b-badge id="tooltip-button-goal" class="info-button" pill variant="secondary" v-b-tooltip.hover>i</b-badge>
-                                <!--<b-tooltip v-show:!goal.tooltip :show.sync="show" target="tooltip-button-goal" placement="bottom">
-                                    {{goal.info}}
-                                </b-tooltip>-->
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover :title="goal.info">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
@@ -113,7 +109,6 @@
                                                :disabled="actor.readonly">
                                         {{actor.actor}}
                                     </label>
-                                    <b-badge class="info-button" pill variant="secondary">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
