@@ -19,6 +19,7 @@
     import TutorGraph from './tutor-graph.vue'
     import EventBus from './../../../event-bus';
     import CatchmentGraph from './catchments-graph.vue'
+    import OverWRGraph from './overview-waterrights-graph.vue'
 
     export default {
         name: 'Charts',
@@ -33,6 +34,7 @@
             'overview-graph': OverviewGraph,
             'region-graph': RegionGraph,
             'tutor-graph': TutorGraph,
+            'overwright': OverWRGraph,
         },
 
         data() {

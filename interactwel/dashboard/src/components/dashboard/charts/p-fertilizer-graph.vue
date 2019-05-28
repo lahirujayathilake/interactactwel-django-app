@@ -4,15 +4,17 @@
 <script>
     import axios from 'axios';
     import Chart from "../../../chart";
+       import EventBus from './../../../event-bus';
 
     export default {
         name: 'PFertilizerGraph',
-        planName: "Adaptation Plan 1",
         components: {
             Chart
         },
         data() {
             return {
+                planName: "Adaptation Plan 1",
+                JSONData: null,
                 datacollection: null,
                 options: {
                     responsive: false,
@@ -55,31 +57,21 @@
         mounted() {
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                this.planName = planName;
-                console.log(this.planName);
-                //$this.showChart(planName);
-            
-            axios.get("/static/BASIN_P_fertilizer_(kg_N)_data.json").then(response => {
-                //this.jsonData["Adaptation_plans"][adaptationPlan]
-                var adaptationPlan = this.planName
-                //console.log(response.data);
-                console.log(response.data.Adaptation_plans.adaptationPlan);
-                console.log(this.planName);
-                //debugger;
-                $this.buildDataCollection(response.data,adaptationPlan);
-            })
+                $this.planName = planName;
+                $this.buildDataCollection($this.JSONData, $this.planName);
             });
 
         },
 
         created(){
             axios.get("/static/BASIN_P_fertilizer_(kg_N)_data.json").then(response => {
-                this.buildDataCollection(response.data);
+                this.JSONData = response.data;
+                this.buildDataCollection(this.JSONData, this.planName);
             });
         },
 
         methods: {
-            buildDataCollection(data){
+            buildDataCollection(data, adaptationPlan){
                 this.datacollection = {};
                 this.datacollection.labels = [];
                 for (let legend in data.Legend) {
@@ -87,17 +79,21 @@
                 }
 
                 this.datacollection.datasets = [];
-                for (let dataIndex in data.Data){
-                    let dataPoint = data.Data[dataIndex];
+                for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
+                    let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
                     dataset.backgroundColor = this.getRandomColor();
                     dataset.data = [];
-                    for(let dataValue in dataPoint.Data) {
+                    for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
                     this.datacollection.datasets.push(dataset);
                 }
+            },
+
+            showChart: function (selectedPlan) {
+                this.planName = selectedPlan;
             },
 
             getRandomColor() {

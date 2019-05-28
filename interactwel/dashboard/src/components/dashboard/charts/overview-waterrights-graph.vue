@@ -5,9 +5,9 @@
     import axios from 'axios';
     import Chart from "../../../chart";
     import EventBus from './../../../event-bus';
-
+    
     export default {
-        name: 'CropYieldGraph',
+        name: 'OverviewWRGraph',
         components: {
             Chart
         },
@@ -20,7 +20,7 @@
                     responsive: false,
                     title: {
                         display: true,
-                        text: 'Total yield (kg) of planted crops in watershed'
+                        text: 'Total water rights volume (ac-ft)'
                     },
                     legend: {
                         position: 'top',
@@ -31,12 +31,12 @@
                     },
                     hover: {
                         mode: 'nearest',
-                        intersect: false
+                        intersect: true
                     },
                     scales: {
                         xAxes: [{
                             display: true,
-                            stacked: true,
+                            stacked: false,
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Years'
@@ -44,10 +44,10 @@
                         }],
                         yAxes: [{
                             display: true,
-                            stacked: true,
+                            stacked: false,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'kg'
+                                labelString: '(ac-ft)'
                             }
                         }]
                     }
@@ -60,13 +60,14 @@
                 $this.planName = planName;
                 $this.buildDataCollection($this.JSONData, $this.planName);
             });
+
         },
 
         created(){
-            axios.get("/static/BASIN_Crop_yield_basin_data.json").then(response => {
+            axios.get("/static/BASIN_Water_Rights_plans.json").then(response => {
                 this.JSONData = response.data;
                 this.buildDataCollection(this.JSONData, this.planName);
-                });
+            });
         },
 
         methods: {
@@ -78,19 +79,19 @@
                 }
 
                 this.datacollection.datasets = [];
-                for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]){
+                for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
                     dataset.backgroundColor = this.getRandomColor();
                     dataset.data = [];
-                    for(let dataValue in dataPoint.Data) {
+                    for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
                     this.datacollection.datasets.push(dataset);
                 }
             },
-            
+
             showChart: function (selectedPlan) {
                 this.planName = selectedPlan;
             },
@@ -102,7 +103,7 @@
                     color += letters[Math.floor(Math.random() * 16)];
                 }
                 return color;
-            }
+            },
         }
     };
 </script>

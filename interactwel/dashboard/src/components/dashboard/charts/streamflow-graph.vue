@@ -8,12 +8,12 @@
             <b-tabs card>
                 <b-tab title="Stream Flows" active>
                     <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                     </div>
                 </b-tab>
                 <b-tab title="Stream Temparature">
                     <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder.png"/>
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                     </div>
                 </b-tab>
             </b-tabs>

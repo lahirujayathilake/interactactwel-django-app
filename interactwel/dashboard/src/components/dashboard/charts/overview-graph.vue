@@ -6,7 +6,18 @@
         </div>
         <div class="card-body no-padding">
             <b-tabs card>
-                <b-tab title="N fertilizer" active>
+                <b-tab title="Water Rights" active>
+                    <div class="card-body">
+                        <overwright-graph></overwright-graph>
+                    </div>
+                </b-tab>
+                <b-tab title="Crop yield">
+                    <div class="card-body">
+                        <crop-yield-graph></crop-yield-graph>
+                        <!--<crops-yield-graph></crops-yield-graph>-->
+                    </div>
+                </b-tab>
+                <b-tab title="N fertilizer">
                     <div class="card-body">
                         <n-fertilizer-graph></n-fertilizer-graph>
                     </div>
@@ -26,12 +37,7 @@
                         <crop-area-graph></crop-area-graph>
                     </div>
                 </b-tab>
-                <b-tab title="Crop yield">
-                    <div class="card-body">
-                        <crop-yield-graph></crop-yield-graph>
-                        <!--<crops-yield-graph></crops-yield-graph>-->
-                    </div>
-                </b-tab>
+
             </b-tabs>
         </div>
     </div>
@@ -44,6 +50,7 @@
     import CropYieldGraph from './crop-yield-graph.vue'
     import NFertilizerGraph from './n-fertilizer-graph.vue'
     import PFertilizerGraph from './p-fertilizer-graph.vue'
+    import OverWRGraph from './overview-waterrights-graph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -55,6 +62,7 @@
             'cropYieldGraph' :CropYieldGraph,
             'nFertilizerGraph' :NFertilizerGraph,
             'pFertilizerGraph' :PFertilizerGraph,
+            'overwright-graph' :OverWRGraph,
         },
 
         data() {

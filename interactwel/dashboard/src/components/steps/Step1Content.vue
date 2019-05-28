@@ -109,6 +109,7 @@
                                                :disabled="actor.readonly">
                                         {{actor.actor}}
                                     </label>
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover :title="actor.info">i</b-badge>
                                 </li>
                             </div>
                         </b-form>
@@ -169,7 +170,9 @@
                             <tr v-for="action in actions" v-bind:key="action.id">
                                 <td>
                                     {{action.action}}
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover :title="action.info">i</b-badge>
                                 </td>
+                                
                                 <td v-for="actor in actors" v-bind:key="actor.id">
                                     <label class="form-checkbox">
                                         <input type="checkbox" :value="actor.id + ',' + action.id"
@@ -238,24 +241,24 @@
             ],
 
             actions: [
-                {id: 0, name: "act1", action: 'No changes to current water right allocations', readonly: false},
+                {id: 0, name: "act1", action: 'No changes to current water right allocations', readonly: false, info:""},
                 //{id: 1, name: "act2", action: 'Increase water right volume by 20%', readonly: false},
                 //{id: 2, name: "act3", action: 'Decrease water right volume by 20%', readonly: false},
-                {id: 1, name: "act2", action: 'Increase the volume of non-Columbia surface water', readonly: false},
-                {id: 2, name: "act3", action: 'Decrease the volume of non-Columbia surface water', readonly: false},
+                {id: 1, name: "act2", action: 'Increase the volume of non-Columbia surface water', readonly: false, info:'Increase the volume of non-Columbia surface water, while reducing the same total volume of ground water and/or Columbia  water.'},
+                {id: 2, name: "act3", action: 'Decrease the volume of non-Columbia surface water', readonly: false, info: 'Decrease the volume of non-Columbia surface water, while increasing the same total volume of ground water and/or Columbia water.'},
                 //{id: 5, name: "act6", action: 'Increase amount of RW', readonly: true},
-                {id: 3, name: "act4", action: 'Increase the volume of groundwater', readonly: false},
-                {id: 4, name: "act5", action: 'Decrease the volume of groundwater', readonly: false},
-                {id: 5, name: "act6", action: 'Invest in renewable energy sources', readonly: true},
-                {id: 6, name: "act7", action: 'Increase the volume of Columbia surface water', readonly: true},
-                {id: 7, name: "act8", action: 'Decrease the volume of Columbia surface water', readonly: true},
+                {id: 3, name: "act4", action: 'Increase the volume of groundwater', readonly: false, info:"Increase the volume of ground water, while reducing the same total volume of non-Columbia surface water and/or Columbia  water."},
+                {id: 4, name: "act5", action: 'Decrease the volume of groundwater', readonly: false, info:"Decrease the volume of ground water, while increasing the same total volume of non-Columbia surface water and/or Columbia water."},
+                //{id: 5, name: "act6", action: 'Invest in renewable energy sources', readonly: true, info:""},
+                {id: 5, name: "act7", action: 'Increase the volume of Columbia surface water', readonly: true, info:"Increase the volume of Columbia surface water, while reducing the same total volume of ground water and/or non-Columbia water."},
+                {id: 6, name: "act8", action: 'Decrease the volume of Columbia surface water', readonly: true, info: "Decrease the volume of Columbia surface water, while increasing the same total volume of ground water and/or non-Columbia water."},
                 //{id: 11, name: "act12", action: 'Invest in infra to pump RW', readonly: false}
             ],
 
             actors: [
-                {id: 0, name: "F_SW_GW", actor: 'Farmer with Columbia river water rights', readonly: false},
-                {id: 1, name: "F_SW", actor: 'Farmer with other surface water rights', readonly: false},
-                {id: 2, name: "F_GW", actor: 'Farmer with groundwater rights', readonly: false}
+                {id: 0, name: "F_SW_GW", actor: 'Farmer with Columbia river water rights', readonly: false, info: "Actors that currently produce agricultural products and have the right to use Columbia River water."},
+                {id: 1, name: "F_SW", actor: 'Farmer with other surface water rights', readonly: false, info: 'Actors that currently produce agricultural products and have the right to use surface water (excluding Columbia River).'},
+                {id: 2, name: "F_GW", actor: 'Farmer with groundwater rights', readonly: false, info:'Actors that currently produce agricultural products and have the right to use ground water.'}
                 //{id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
                 //{id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
                 //{id: 5, name: "TRI", actor: 'Data Centers', readonly: true},

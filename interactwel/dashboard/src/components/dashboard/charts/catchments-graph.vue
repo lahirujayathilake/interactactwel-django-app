@@ -11,29 +11,30 @@
             <!--<span>Sub-basin: {{ selected }}</span>-->
 
             <b-tabs card>
-                <b-tab title="N fertilizer" active>
+                <b-tab title="Water Rights" active>
                     <div class="card-body">
-                        <n-fertilizer-graph></n-fertilizer-graph>
-                    </div>
-                </b-tab>
-                <b-tab title="P fertilizer">
-                    <div class="card-body">
-                        <p-fertilizer-graph></p-fertilizer-graph>
-                    </div>
-                </b-tab>
-                <b-tab title="Irrigation">
-                    <div class="card-body">
-                        <chart-barv :chart-data="datacollectionirr" :options="optionsirr" :width="5" :height="3"></chart-barv>
-                    </div>
-                </b-tab>
-                <b-tab title="Crop Area">
-                    <div class="card-body">
-                        <crop-area-graph></crop-area-graph>
+                        <!--<n-fertilizer-graph></n-fertilizer-graph>-->
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                     </div>
                 </b-tab>
                 <b-tab title="Crop yield">
                     <div class="card-body">
-                        <crop-yield-graph></crop-yield-graph>
+                    <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Irrigation">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="Groundwater Recharge">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
+                    </div>
+                </b-tab>
+                <b-tab title="N fertilizer">
+                    <div class="card-body">
+                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                         <!--<crops-yield-graph></crops-yield-graph>-->
                     </div>
                 </b-tab>
