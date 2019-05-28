@@ -5,14 +5,9 @@
 <script>
     import axios from 'axios';
     import Chart from "../../../chart";
-    import JSONData from "../../../assets/result_action_plans.json";
-    //import JSONData from "../../../../public/static/BASIN_Irrigation_plans_data.json";
-
-    import EventBus from './../../../event-bus';
 
     export default {
         name: 'IrrigationGraph',
-        planName: "Adaptation Plan 1",
 
         components: {
             Chart
@@ -44,44 +39,40 @@
                                 labelString: 'Years'
                             }
                         }],
-                        yAxes: [{
-                            display: true,
+                              yAxes: [{
+                                id: 'A',
+                                type: 'linear',
+                                position: 'left',
+                                display: true,
                             stacked: false,
                             scaleLabel: {
                                 display: true,
                                 labelString: 'acre-ft'
                             }
-                        }]
+                            }, {
+                                id: 'B',
+                                type: 'linear',
+                                position: 'right',
+                                gridLines:{display: false},
+                                ticks: {
+                                max: 10,
+                                min: 0
+                                }
+                            }]
+
                     }
                 }
             };
         },
 
         mounted() {
-            let $this = this;
-            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                console.log(planName);
-                $this.showChart(planName);
-            })
-            axios.get("/static/BASIN_Irrigation_plans_data.json").then(response => {
-                //this.jsonData["Adaptation_plans"][adaptationPlan]
-                var adaptationPlan = $this.planName
-                //console.log(response.data);
-                console.log(response.data.Adaptation_plans.adaptationPlan);
-                console.log($this.planName);
-                this.buildDataCollection(response.data.Adaptation_plans[adaptationPlan]);
-            });
 
         },
 
         created(){
-
-        },
-
-        computed: {
-            jsonData() {
-                return JSONData;
-            },
+            axios.get("/static/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
+                this.buildDataCollection(response.data);
+            });
         },
 
         methods: {
@@ -97,6 +88,7 @@
                     let dataPoint = data.Data[dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
+                    dataset.yAxisID = 'A';
                     dataset.backgroundColor = this.getRandomColor();
                     dataset.data = [];
                     for(let dataValue in dataPoint.Data) {
@@ -104,10 +96,14 @@
                     }
                     this.datacollection.datasets.push(dataset);
                 }
-            },
-            
-            showChart: function (selectedPlan) {
-                this.planName = selectedPlan;
+
+                    let dataset = {};
+                    dataset.label = 'TEST';
+                    dataset.yAxisID = 'B';
+                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.data = [1, 6, 3]
+                    this.datacollection.datasets.push(dataset);
+
             },
 
             getRandomColor() {

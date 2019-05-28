@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import JSONData from "../../../assets/result_action_plans.json";
+    import JSONData from "../../../../public/static/result_action_plans.json";
     import pathwaysGraph from "./pathways-graph";
     import EventBus from './../../../event-bus';
 
@@ -62,6 +62,9 @@
 
                 pathColors: [
                     "#0176b8",
+                    "#186a3b",
+                    "#4e85eb", 
+                    "#eb4e4e", 
                     "#7b549c",
                     "#c73431",
                     "#d2701b",
