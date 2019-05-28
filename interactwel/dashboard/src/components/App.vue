@@ -62,7 +62,7 @@
     @import "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css";
     @import "https://cdn.jsdelivr.net/npm/bootstrap-vue@2.0.0-rc.11/dist/bootstrap-vue.css";
 
-  .modal-backdrop {
+    .modal-backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -74,7 +74,7 @@
     align-items: center;
   }
 
-  .modal {
+    #welcome-modal .modal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     max-height: 570px;
@@ -90,25 +90,25 @@
     flex-direction: column;
   }
 
-  .modal-header,
-  .modal-footer {
+    #welcome-modal .modal-header,
+    #welcome-modal .modal-footer {
     padding: 15px;
     display: flex;
   }
 
-  .modal-header {
+    #welcome-modal .modal-header {
     border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
+    color: #4cae4c;
     justify-content: space-between;
     font-size: 25px;
     font-weight: bold;
   }
 
-  .modal-footer {
+    #welcome-modal .modal-footer {
     justify-content: flex-end;
   }
 
-  .modal-body {
+    #welcome-modal .modal-body {
     position: relative;
     padding: 30px 40px;
     font-size: 16px;
@@ -121,7 +121,7 @@
     padding: 20px;
     cursor: pointer;
     font-weight: bold;
-    color: #4AAE9B;
+    color: #4cae4c;
     background: transparent;
   }
 
@@ -130,7 +130,7 @@
     font-size: 20px;
     cursor: pointer;
     font-weight: bold;
-    color: #4AAE9B;
+    color: #4cae4c;
     background: transparent;
   }
  
