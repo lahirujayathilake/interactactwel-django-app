@@ -60,16 +60,19 @@
         mounted() {
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                console.log(planName);
-                $this.showChart(planName);
-            })
+                this.planName = planName;
+                console.log(this.planName);
+                //$this.showChart(planName);
+            
             axios.get("/static/BASIN_Irrigation_plans_data.json").then(response => {
                 //this.jsonData["Adaptation_plans"][adaptationPlan]
-                var adaptationPlan = $this.planName
+                var adaptationPlan = this.planName
                 //console.log(response.data);
                 console.log(response.data.Adaptation_plans.adaptationPlan);
-                console.log($this.planName);
-                this.buildDataCollection(response.data.Adaptation_plans[adaptationPlan]);
+                console.log(this.planName);
+                //debugger;
+                $this.buildDataCollection(response.data,adaptationPlan);
+            })
             });
 
         },
@@ -85,7 +88,8 @@
         },
 
         methods: {
-            buildDataCollection(data){
+            buildDataCollection(data,adaptationPlan){
+                debugger;
                 this.datacollection = {};
                 this.datacollection.labels = [];
                 for (let legend in data.Legend) {
@@ -93,8 +97,8 @@
                 }
 
                 this.datacollection.datasets = [];
-                for (let dataIndex in data.Data){
-                    let dataPoint = data.Data[dataIndex];
+                for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]){
+                    let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
                     dataset.backgroundColor = this.getRandomColor();
