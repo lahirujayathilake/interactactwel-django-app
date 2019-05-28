@@ -66,7 +66,7 @@
             axios.get("/static/BASIN_Crop_yield_basin_data.json").then(response => {
                 this.JSONData = response.data;
                 this.buildDataCollection(this.JSONData, this.planName);
-                });
+            });
         },
 
         methods: {

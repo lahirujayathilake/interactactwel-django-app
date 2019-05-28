@@ -184,8 +184,8 @@
         background-color: #4d45b0;
         height: auto;
         width: 700px;
-        max-width: 750px;
-        max-height: 800px !important;
+        width: 750px;
+        max-width: 750px !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

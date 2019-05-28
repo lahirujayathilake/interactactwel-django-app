@@ -13,13 +13,13 @@
         </div>
         <div class="card-body no-padding">
             <b-tabs card>
-                <b-tab title="Irrigation">
+                <b-tab title="Irrigation" active>
                     <div class="card-body">
                         <chart-barv :chart-data="datacollection" :options="optionsirr" :width="5"
                                     :height="3"></chart-barv>
                     </div>
                 </b-tab>
-                <b-tab title="Water Rights" active>
+                <b-tab title="Water Rights">
                     <div class="card-body">
                         <!--<n-fertilizer-graph></n-fertilizer-graph>-->
                         <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>

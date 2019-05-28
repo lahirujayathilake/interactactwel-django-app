@@ -36,7 +36,7 @@
                     scales: {
                         xAxes: [{
                             display: true,
-                            stacked: false,
+                            stacked: true,
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Years'
@@ -44,7 +44,7 @@
                         }],
                         yAxes: [{
                             display: true,
-                            stacked: false,
+                            stacked: true,
                             scaleLabel: {
                                 display: true,
                                 labelString: 'kg_N'
