@@ -7,7 +7,7 @@
             </div>
             <div class="card-body">
             <p align="justify" style="font-size: 17px;">In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong> and actions <strong>(Step 3)</strong> that you selected.  You can compare how each adaptation plan meets the goals you selected in <strong>Step 1</strong> for the entire basin, sub-basins, and individual streams.  You can also compare the actions and their timeframes included within each plan.</p>
-            <p aling="justify">TTTTTTTTTTTTTTTTTTTTTTTTTTTTT You can click the map below </p>
+            <p aling="justify">Remember that you can click the map to visualize the data. </p>
             </div>
         
             <footer class="tutor-footer">
