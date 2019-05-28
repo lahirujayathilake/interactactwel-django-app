@@ -5,9 +5,14 @@
 <script>
     import axios from 'axios';
     import Chart from "../../../chart";
+    import JSONData from "../../../assets/result_action_plans.json";
+    //import JSONData from "../../../../public/static/BASIN_Irrigation_plans_data.json";
+
+    import EventBus from './../../../event-bus';
 
     export default {
         name: 'IrrigationGraph',
+        planName: "Adaptation Plan 1",
 
         components: {
             Chart
@@ -53,13 +58,30 @@
         },
 
         mounted() {
+            let $this = this;
+            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
+                console.log(planName);
+                $this.showChart(planName);
+            })
+            axios.get("/static/BASIN_Irrigation_plans_data.json").then(response => {
+                //this.jsonData["Adaptation_plans"][adaptationPlan]
+                var adaptationPlan = $this.planName
+                //console.log(response.data);
+                console.log(response.data.Adaptation_plans.adaptationPlan);
+                console.log($this.planName);
+                this.buildDataCollection(response.data.Adaptation_plans[adaptationPlan]);
+            });
 
         },
 
         created(){
-            axios.get("/static/BASIN_Irrigation_(acre-ft)_data.json").then(response => {
-                this.buildDataCollection(response.data);
-            });
+
+        },
+
+        computed: {
+            jsonData() {
+                return JSONData;
+            },
         },
 
         methods: {
@@ -82,6 +104,10 @@
                     }
                     this.datacollection.datasets.push(dataset);
                 }
+            },
+            
+            showChart: function (selectedPlan) {
+                this.planName = selectedPlan;
             },
 
             getRandomColor() {
