@@ -1,5 +1,5 @@
 <template>
-        <chart :chart-data='datacollection' :options="options" :width="600" :height="500"></chart>
+    <chart :chart-data='datacollection' :options="options" :width="600" :height="500"></chart>
 </template>
 <script>
     import axios from 'axios';
@@ -8,7 +8,6 @@
 
     export default {
         name: 'NFertilizerGraph',
-        planName: "Adaptation Plan 1",
         components: {
             Chart
         },
@@ -61,10 +60,9 @@
                 $this.planName = planName;
                 $this.buildDataCollection($this.JSONData, $this.planName);
             });
-
         },
 
-        created(){
+        created() {
             axios.get("/static/BASIN_N_fertilizer_(kg_N)_data.json").then(response => {
                 this.JSONData = response.data;
                 this.buildDataCollection(this.JSONData, this.planName);
@@ -72,7 +70,7 @@
         },
 
         methods: {
-            buildDataCollection(data, adaptationPlan){
+            buildDataCollection(data, adaptationPlan) {
                 this.datacollection = {};
                 this.datacollection.labels = [];
                 for (let legend in data.Legend) {
