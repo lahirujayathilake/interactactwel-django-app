@@ -1,16 +1,24 @@
 <template>
     <div id="graph" class="card">
-        <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
-                icon="times-circle"/> Close</span>
-            <strong>Sub-basins</strong>
+        <div class="card-header">
+            <span v-on:click="dismiss" class="close"><font-awesome-icon icon="times-circle"/> Close</span>
+            <div class="row">
+                <div class="col-8"><strong>Sub-basins</strong></div>
+                <div class="col-4"><div class="form-group">
+                    <select class="form-control form-control-sm" v-model="selected" @change="changeBasin">
+                        <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
+                    </select>
+                </div></div>
+            </div>
         </div>
         <div class="card-body no-padding">
-            <select v-model="selected" @click="selectCatchment">
-                <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
-            </select>
-            <!--<span>Sub-basin: {{ selected }}</span>-->
-
             <b-tabs card>
+                <b-tab title="Irrigation">
+                    <div class="card-body">
+                        <chart-barv :chart-data="datacollection" :options="optionsirr" :width="5"
+                                    :height="3"></chart-barv>
+                    </div>
+                </b-tab>
                 <b-tab title="Water Rights" active>
                     <div class="card-body">
                         <!--<n-fertilizer-graph></n-fertilizer-graph>-->
@@ -20,11 +28,6 @@
                 <b-tab title="Crop yield">
                     <div class="card-body">
                     <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
-                    </div>
-                </b-tab>
-                <b-tab title="Irrigation">
-                    <div class="card-body">
-                        <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                     </div>
                 </b-tab>
                 <b-tab title="Groundwater Recharge">
@@ -43,6 +46,7 @@
     </div>
 </template>
 
+
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import IrrigationGraph from './irrigation-graph.vue'
@@ -58,14 +62,14 @@
         name: 'CatchmentsGraph',
 
         components: {
-            'irridationGraph' : IrrigationGraph,
-            'cropAreaGraph' :CropAreaGraph,
-            'cropYieldGraph' :CropYieldGraph,
-            'nFertilizerGraph' :NFertilizerGraph,
-            'pFertilizerGraph' :PFertilizerGraph,
+            'irridationGraph': IrrigationGraph,
+            'cropAreaGraph': CropAreaGraph,
+            'cropYieldGraph': CropYieldGraph,
+            'nFertilizerGraph': NFertilizerGraph,
+            'pFertilizerGraph': PFertilizerGraph,
             'chart-barv': ChartBarV,
         },
-        
+
         data() {
             return {
                 selected: '1',
@@ -73,16 +77,16 @@
                 planName: 'Adaptation Plan 1',
                 JSONData: null,
 
-            options: [
-                { text: 'Sub-basin: 1', value: '1' },
-                { text: 'Sub-basin: 2', value: '2' },
-                { text: 'Sub-basin: 3', value: '3' },
-                { text: 'Sub-basin: 4', value: '4' },
-                { text: 'Sub-basin: 5', value: '5' }
+                options: [
+                    {text: 'Sub-basin: 1', value: '1'},
+                    {text: 'Sub-basin: 2', value: '2'},
+                    {text: 'Sub-basin: 3', value: '3'},
+                    {text: 'Sub-basin: 4', value: '4'},
+                    {text: 'Sub-basin: 5', value: '5'}
                 ],
 
-            datacollectionirr:null,
-            optionsirr: {
+                datacollection: null,
+                optionsirr: {
                     responsive: true,
                     title: {
                         display: true,
@@ -117,54 +121,22 @@
                 }
             };
         },
-        computed: {
-            jsonData() {
-                return JSONData;
-            },
-
-            graphData() {
-                var adaptationPlan = this.planName;
-
-                return Object.keys(this.jsonData["Adaptation_plans"][adaptationPlan])
-                    .map(key => {
-                        return {
-                            key: key,
-                            value: this.jsonData["Adaptation_plans"][adaptationPlan][key]
-                        };
-                    })
-                    .filter(d => {
-                        if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
-                            //console.log(this.selectedKeyList.findIndex(k => k === d.key) > -1);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
-
-            },
-        },
+        computed: {},
 
         mounted() {
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
                 $this.planName = planName;
-                $this.buildDataCollectionirr($this.JSONData, $this.planName)
+                $this.buildDataCollection($this.JSONData, $this.planName, $this.selectedBasinID)
             });
 
         },
 
-        created(){
+        created() {
             axios.get("/static/BASIN_Irrigation_basins_data.json").then(response => {
-                //this.jsonData["Adaptation_plans"][adaptationPlan]
-                var adaptationPlan = this.planName
-                var selectedBasinID = this.selected
                 this.JSONData = response.data;
-                //console.log(selectedBasinID);
-                //console.log(response.data.Adaptation_plans.adaptationPlan);
-                //console.log(this.planName);
-                //debugger;
-                $this.buildDataCollectionirr(this.JSONData,adaptationPlan,this.selectedBasinID);
-                })
+                this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID);
+            })
         },
 
         methods: {
@@ -172,39 +144,45 @@
                 EventBus.$emit('CLOSE');
             },
 
-            buildDataCollectionirr(data, adaptationPlan, selectedBasinID){
-                debugger;
-                this.datacollectionirr = {};
-                this.datacollectionirr.labels = [];
+            buildDataCollection(data, adaptationPlan, basinID) {
+                this.datacollection = {};
+                this.datacollection.labels = [];
                 for (let legend in data.Legend) {
-                    this.datacollectionirr.labels.push(data.Legend[legend]);
+                    this.datacollection.labels.push(data.Legend[legend]);
                 }
-
-                this.datacollectionirr.datasets = [];
-                for (let dataIndex in data.Adaptation_plans[adaptationPlan][selectedBasinID]["Data"]){
-                    let dataPoint = data.Adaptation_plans[adaptationPlan][selectedBasinID]["Data"][dataIndex];
+                this.datacollection.datasets = [];
+                for (let dataIndex in data.Adaptation_plans[adaptationPlan][basinID]["Data"]) {
+                    let dataPoint = data.Adaptation_plans[adaptationPlan][basinID]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
                     dataset.backgroundColor = this.getRandomColor();
                     dataset.data = [];
-                    for(let dataValue in dataPoint.Data) {
+                    for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
-                    this.datacollectionirr.datasets.push(dataset);
+                    this.datacollection.datasets.push(dataset);
                 }
             },
 
-            
-            selectCatchment() {
-                this.selectedBasinID = this.selected
-                console.log(this.selected)
+            getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            },
+
+
+            changeBasin() {
+                this.selectedBasinID = this.selected;
+                this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID)
             },
         },
         //props: ["jsonData"]
-        
+
     }
 </script>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
@@ -265,5 +243,9 @@
     #graph {
         width: 750px;
         max-width: 750px !important;
+    }
+
+    #graph .form-group{
+        margin-bottom:0;
     }
 </style>
