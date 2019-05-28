@@ -31,7 +31,7 @@
                     /*{id: "overview-graph", name: "Overview"},*/
                     {id:"actions-graph", name: "Actions"},
                     {id: "overview-graph", name: "Region"},
-                    {id: "costs-graph", name: "Catchments"},
+                    {id: "catchments-graph", name: "Sub-basins"},
                     {id: "streamsflow-graph", name: "Streams"},
                     {id: "feedback", name: "Evaluate"}
                     /* {id: "crops-graph", name: "Crops"},*/

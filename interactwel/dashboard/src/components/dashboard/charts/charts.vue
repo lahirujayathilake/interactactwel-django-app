@@ -18,6 +18,7 @@
     import RegionGraph from './region-graph.vue'
     import TutorGraph from './tutor-graph.vue'
     import EventBus from './../../../event-bus';
+    import CatchmentGraph from './catchments-graph.vue'
 
     export default {
         name: 'Charts',
@@ -26,7 +27,7 @@
             'MyChart': MyChart,
             'actions-graph': ActionsGraph,
             'streamsflow-graph': StreamsflowGraph,
-            'costs-graph': CostGraph,
+            'catchments-graph': CatchmentGraph,
             'precipitation-graph': PrecipitationGraph,
             'irrigation-graph': IrrigationGraph,
             'overview-graph': OverviewGraph,

@@ -1,7 +1,7 @@
 <template>
     <div id="regionalSummary" class="card">
 
-        <div class="card-header"><strong>Subbasin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
+        <div class="card-header"><strong>Sub-basin ID : {{subbasinID}}</strong><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span></div>
         <div class="card-body no-padding">
             <b-tabs card>
@@ -17,7 +17,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>Basin area (acres)</td>
+                                        <td>Sub-basin area (acres)</td>
                                         <td><span class="badge badge-secondary">{{ selectedSubBasinInfo.area}}</span></td>
                                     </tr>
                                     <tr>
