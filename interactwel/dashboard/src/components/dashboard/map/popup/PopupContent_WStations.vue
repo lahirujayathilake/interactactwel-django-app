@@ -4,17 +4,35 @@
         <b-tabs card>
             <b-tab title="Info" active>
                 <div class="card-body">
-                    <strong>Name: </strong>{{ data.name }}<br>
-                    <strong>Data Availability: </strong> {{ data.data_Range}}<br>
-                    <strong>Observation Type: </strong>{{ data.obs_type}}<br>
-                    <strong>Num. of Precipitation Obs.: </strong>{{ data.num_Pobs}}<br>
-                    <strong>Num. of Temperature Obs.: </strong>{{ data.num_Tobs}}
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{ data.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Data Availability</th>
+                            <td><span class="badge badge-secondary">{{ data.data_Range}}</span></td>
+                        </tr>
+                        <tr>
+                            <th>Observation Type</th>
+                            <td><span class="badge badge-secondary">{{ data.obs_type}}</span></td>
+                        </tr>
+                        <tr>
+                            <th>Num. of Precipitation Obs.</th>
+                            <td><span class="badge badge-secondary">{{ data.num_Pobs}}</span></td>
+                        </tr>
+                        <tr>
+                            <th>Num. of Temperature Obs.</th>
+                            <td><span class="badge badge-secondary">{{ data.num_Tobs}}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </b-tab>
             <b-tab title="Data">
                 <div class="card-body">
                     <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
-                    <!--<line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>-->
                 </div>
             </b-tab>
         </b-tabs>
@@ -173,5 +191,9 @@
         background-color: #FFFFFF;
         font-size: 14px;
         border-top:2px solid #28a645;
+    }
+
+    #PopupContentWStations table{
+        font-size:14px;
     }
 </style>
