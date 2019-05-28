@@ -42,7 +42,7 @@
                 colorIndex : 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
-                planName: "POPSWAT_0",
+                planName: "Adaptation Plan 1",
                 selectedKeyList: [],
 
                 costVisibility: true,

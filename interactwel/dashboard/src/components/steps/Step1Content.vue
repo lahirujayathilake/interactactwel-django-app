@@ -56,7 +56,11 @@
                                         <input type="checkbox" :value="goal.id" v-model="selectedGoals" :disabled="goal.readonly"/>
                                         {{goal.goal}}
                                     </label>
-                                    <b-badge v-show:!goal.tooltip class="info-button" pill variant="secondary" title="Tooltip content">i</b-badge>
+
+                                  <b-badge id="tooltip-button-goal" class="info-button" pill variant="secondary" v-b-tooltip.hover>i</b-badge>
+                                <!--<b-tooltip v-show:!goal.tooltip :show.sync="show" target="tooltip-button-goal" placement="bottom">
+                                    {{goal.info}}
+                                </b-tooltip>-->
                                 </li>
                             </div>
                         </b-form>
@@ -78,8 +82,7 @@
                                 are groups of individuals, institutions, and organizations in a community who are most impacted, directly and/or indirectly, by the changes and stresses in the water, energy, and land resources they depend on.
                             </p>
 
-                            <p align="justify">In <b>Step 2</b>, think about which group of actors would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the options that reflect your group’s interest. Note that even though you choose only a few actors,
-                                your adaptation plans (in Step 4) may include additional actors who would need to also take actions in conjunction with you. But more on that when you reach Step 4!
+                            <p align="justify">In <b>Step 2</b>, think about which group of actors would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the options that reflect your group’s interest. Note that even though you may decide to choose only a few actors, your adaptation plans (in Step 4) may include additional actors who would need to also take actions in conjunction with you. But more on that when you reach Step 4!
                             </p>
 
                         </b-card-text>
@@ -229,13 +232,13 @@
             selectAllActors: false,
 
             goals: [
-                {id: "0", goal: 'Improve surface water quality', readonly: false, tooltip: true},
-                {id: "1", goal: 'Increase recharge to shallow aquifer', readonly: false, tooltip: false},
+                {id: "0", goal: 'Improve surface water quality', readonly: false, tooltip: true, info: "Surface water quality is assessed for each stream, based on total nitrogen loading, temperature, and dissolved oxygen."},
+                {id: "1", goal: 'Increase recharge to shallow aquifer', readonly: false, tooltip: true, info: "Shallow aquifer recharge is assessed for each sub-basin, based on millimeters of water infiltrated."},
                 //{id: "2", goal: 'Minimize land use change', readonly: true},
-                {id: "3", goal: 'Increase agriculture productivity', readonly: false, tooltip: true},
-                //{id: "4", goal: 'Increase energy production', readonly: true},
-                {id: "5", goal: 'Improve ecological habitat', readonly: false, tooltip: true},
-                {id: "6", goal: 'Other', readonly: true, tooltip: true},
+                {id: "2", goal: 'Increase agriculture productivity', readonly: false, tooltip: true, info: "Agriculture productivity is assessed for each sub-basin based on area planted, crop yields, and net income."},
+                {id: "3", goal: 'Increase energy production', readonly: true, tooltip: false, info:""},
+                {id: "4", goal: 'Improve ecological habitat', readonly: false, tooltip: true, info:"Ecological habitat is assessed in each stream based on stream flow, temperature and dissolved oxygen."},
+                {id: "5", goal: 'Other', readonly: true, tooltip: false, info:""},
 
             ],
 
@@ -256,7 +259,7 @@
 
             actors: [
                 {id: 0, name: "F_SW_GW", actor: 'Farmer with Columbia river water rights', readonly: false},
-                {id: 1, name: "F_SW", actor: 'Farmer with non-Columbia surface water rights', readonly: false},
+                {id: 1, name: "F_SW", actor: 'Farmer with other surface water rights', readonly: false},
                 {id: 2, name: "F_GW", actor: 'Farmer with groundwater rights', readonly: false}
                 //{id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
                 //{id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},

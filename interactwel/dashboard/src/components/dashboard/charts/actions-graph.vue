@@ -53,7 +53,7 @@
                 colorIndex: 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
-                planName: "Action Plan 1",
+                planName: "Adaptation Plan 1",
 
                 selectedKeyList: [],
 
