@@ -39,7 +39,7 @@
 
 <script>
     import axios from 'axios';
-    import LineChart from '../../../../chartLine';
+    import LineChart from "./../../charts/lib/LineChart";
 
     export default {
         name: "PopupContentGaugeStations",

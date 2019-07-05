@@ -1,7 +1,7 @@
 <template>
   
     <div class="modal-backdrop">
-      <div class="tutor" style="top: 35%; left: 18%; max-width: 20%; max-height: 50%;">
+      <div id="tutor-step1" class="tutor">
         <header class="modal-header">
           <slot name="header">
             Explore Datasets
@@ -19,8 +19,7 @@
           </slot>
         </footer>
       </div>
-           <img src="../../../assets/tutor_arrow.png" class="rotate"
-        style = "position: relative; top: -22%; left: -45%; max-width: 15%; max-height: 15%;">
+           <img src="../../../assets/tutor_arrow.png" id="tutor-step1-arrow" class="rotate">
     </div>
 
 </template>
@@ -28,7 +27,7 @@
 <script>
   
   export default {
-    name: 'tutorStep1',
+    name: 'TutorStep1',
 
     methods: {
       close() {
@@ -41,6 +40,18 @@
   };
 </script>
 <style>
+    #tutor-step1{
+        top: 200px;
+        left: 200px;
+        width: 300px;
+        position: absolute;
+    }
+    #tutor-step1-arrow{
+        position: absolute;
+        top: 200px;
+        left:30px;
+        height: 100px;
+    }
 .rotate {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);

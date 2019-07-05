@@ -36,7 +36,7 @@
             </b-tab>
             <b-tab title="Data">
                 <div class="card-body">
-                    <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
+                    <vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>
                 </div>
             </b-tab>
         </b-tabs>
@@ -44,13 +44,13 @@
 </template>
 
 <script>
-    import Chart from "../../../../chart";
+    import VerticalBarChart from "./../../charts/lib/VerticalBarChart";
     import axios from 'axios';
 
     export default {
         name: "PopupContentReservoirs",
         components: {
-            Chart
+            VerticalBarChart
         },
         props: {
             data: {

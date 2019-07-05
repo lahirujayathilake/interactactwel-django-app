@@ -32,7 +32,7 @@
             </b-tab>
             <b-tab title="Data">
                 <div class="card-body">
-                    <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
+                    <vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>
                 </div>
             </b-tab>
         </b-tabs>
@@ -41,13 +41,12 @@
 
 <script>
     import axios from 'axios';
-    import Chart from "../../../../chart";
-    //import LineChart from '../../../../chartLine'
+    import VerticalBarChart from "./../../charts/lib/VerticalBarChart";
 
     export default {
         name: "PopupContentWStations",
         components: {
-            Chart
+            VerticalBarChart
         },
         props: {
             data: {},

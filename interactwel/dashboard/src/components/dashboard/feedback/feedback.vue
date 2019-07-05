@@ -4,12 +4,14 @@
             <h5>Evaluate Adaptation Plan</h5>
         </div>
         <div id="feedback-block" class="ui form">
-            <b-form @submit="onSubmit" @reset="onReset">
+            <b-form v-show="feedbackStep1" @submit="onSubmit" @reset="onReset">
                 <b-form-group label="Do you think this Adaptation Plan is feasible?">
-                    <b-form-radio v-model="feasibility" name="some-radios" value="1">Yes</b-form-radio>
-                    <b-form-radio v-model="feasibility" name="some-radios" value="2">No</b-form-radio>
-                    
+                    <b-form-radio v-model="feasibility" name="some-radios" value="Yes">Yes</b-form-radio>
+                    <b-form-radio v-model="feasibility" name="some-radios" value="No">No</b-form-radio>
                 </b-form-group>
+            </b-form>
+            <b-button id="submit-btn" type="submit" variant="success" disabled="readonly">Submit</b-button>
+            <b-form v-show="feedbackStep2">
                 <b-form-group id="input-group-4" label="Why is this plan NOT feasible? (Check all that apply)">
                     <b-form-checkbox v-model="selected" value="1">Unlikely to be profitable or financially sustainable
                     </b-form-checkbox>
@@ -32,7 +34,6 @@
                         rows="3"
                         max-rows="6"
                 ></b-form-textarea>
-                <b-button id="submit-btn" type="submit" variant="success" disabled="readonly">Submit</b-button>
             </b-form>
         </div>
     </div>
@@ -45,6 +46,8 @@
 
         data() {
             return {
+                feedbackStep1: true,
+                feedbackStep2: false,
                 feasibility: [],
                 selected: [],
                 comment: null

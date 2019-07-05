@@ -28,16 +28,11 @@
                 currentChart: null,
 
                 chartTypes: [
-                    /*{id: "overview-graph", name: "Overview"},*/
-                    {id:"actions-graph", name: "Actions"},
-                    {id: "overview-graph", name: "Region"},
-                    {id: "catchments-graph", name: "Sub-basins"},
-                    {id: "streamsflow-graph", name: "Streams"},
-                    {id: "feedback", name: "Evaluate"}
-                    /* {id: "crops-graph", name: "Crops"},*/
-                    /*{id: "precipitation-graph", name: "Precipitation"},*/
-                    /*{id: "irrigation-graph", name: "Irrigation"},*/
-                    /*{id: "groundwater-graph", name: "Groundwater"},*/
+                    {id: "overview", name: "Overview"},
+                    {id:"actions", name: "Actions"},
+                    {id: "region", name: "Region"},
+                    {id: "subBasins", name: "Sub-basins"},
+                    {id: "streams", name: "Streams"}
                 ]
             }
 
@@ -78,6 +73,11 @@
                 EventBus.$emit('CLICK_ITEM_SIDEBAR', planName);
             },
 
+            hideSidebar(){
+                EventBus.$emit('SIDEBAR_INVISIBLE')
+            }
+
+
         }
     }
 </script>
@@ -90,13 +90,12 @@
         margin: 5px !important;
         border-radius: 5px;
     }
-
-    .active a {
-        color: rgba(255, 255, 255, 0.8);
+    #sidebar > div > ul > li > a{
+        color: rgba(255, 255, 255, 0.8) !important;
     }
 
-    .active a:hover {
-        color: #fff
+    #sidebar > div > ul > li > a:hover {
+        color: #fff !important;
     }
 
     .filter-options input {
@@ -105,6 +104,7 @@
 
     #sidebar {
         background-color: #263238;
+        width:200px;
     }
 
     #sidebar .nav-item{
@@ -147,6 +147,7 @@
     #sidebar .nav-link:hover{
         background-color: #000 ;
     }
+
     #main > aside {
         flex: 0 0 400px;
         height: calc(92vh - 20px);

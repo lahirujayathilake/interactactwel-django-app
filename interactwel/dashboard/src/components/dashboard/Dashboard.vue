@@ -33,7 +33,6 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <component v-show="!progressBarVisibility" v-bind:is="component=progressbarComponent"></component>
         <component v-bind:is="component='container'"></component>
         <b-modal id="exit-modal">
             <template slot="modal-header">
@@ -47,7 +46,7 @@
                 <b-button size="sm" @click="cancel()">
                     Cancel
                 </b-button>
-                <b-button size="sm" variant="success" @click="ok()">
+                <b-button size="sm" variant="success" @click="exitWizard()">
                     Save and Continue
                 </b-button>
             </template>
@@ -56,14 +55,11 @@
 </template>
 
 <script>
-    import ProgressBar from './progressBar/ProgressBar.vue'
-    import Container from './container.vue'
-
+    import Container from './Container.vue'
     import EventBus from './../../event-bus';
 
     export default {
         components: {
-            'progress-bar': ProgressBar,
             'container': Container,
 
         },
@@ -71,10 +67,7 @@
 
         data() {
             return {
-                progressbarComponent: null,
                 startButtonVisibility: false,
-                progressBarVisibility: true,
-                component: null,
             }
         },
 
@@ -85,9 +78,7 @@
         methods: {
 
             start: function () {
-                this.progressbarComponent = 'progress-bar'
                 this.startButtonVisibility = true
-                this.progressBarVisibility = false
                 this.startWizard()
 
             },
@@ -96,10 +87,16 @@
                 EventBus.$emit('START_WIZARD');
             },
 
+            exitWizard(){
+                /*Save Visualization Data*/
+                EventBus.$emit('EXIT_WIZARD');
+                this.startButtonVisibility = false
+
+            },
+
             afterWizardFinished() {
                 this.sidebarLeftVisibility = false,
                     this.sidebarRightVisibility = false,
-                    this.progressBarVisibility = false
                 this.chartsVisibility = false
             },
 
@@ -173,6 +170,10 @@
     .project-title a {
         font-size: 18px;
         color: rgba(255, 255, 255, 0.78) !important;
+    }
+
+    .btn{
+        margin-right:20px;
     }
 
 </style>

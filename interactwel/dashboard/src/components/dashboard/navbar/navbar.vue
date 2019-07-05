@@ -37,13 +37,11 @@
                 </b-collapse>
             </b-navbar>
         </div>
-        <component v-bind:is="progressbarComponent"></component>
     </div>
 
 </template>
 
 <script>
-    import ProgressBar from '../progressBar/ProgressBar.vue'
 
     export default {
 
@@ -51,6 +49,7 @@
         components: {
             'progress-bar': ProgressBar
         }
+    }
 
     /*data() {
         return {
@@ -81,7 +80,6 @@
         }
     }
 }
-
 
 </script>
 
