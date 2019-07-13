@@ -25,7 +25,7 @@ python manage.py runserver
 ```
 
 ##Wagtail CMS
-Afer running above commands, to create a superuser run,
+After running above commands, to create a superuser run,
 ```
 ./manage.py createsuperuser
 ```
