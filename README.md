@@ -24,6 +24,26 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+##Wagtail CMS
+Afer running above commands, to create a superuser run,
+```
+./manage.py createsuperuser
+```
+
+Browse the admin panel using
+
+```
+localhost:8000/cms
+```
+
+Browse the web site using
+
+```
+localhost:8000/home
+```
+
+
+
 ## REST API
 
 Rest API is exposed in http://localhost:8000/api

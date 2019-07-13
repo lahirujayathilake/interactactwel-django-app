@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.views.generic import TemplateView
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 from api import views
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.core import urls as wagtail_urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +32,7 @@ urlpatterns = [
          name="app",
          ),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
+    re_path(r'^cms/', include(wagtailadmin_urls)), #wagtail admin url
+    re_path(r'^documents/', include(wagtaildocs_urls)), #wagtail docs url
+    re_path(r'^home/', include(wagtail_urls)), #wagtail site url
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
