@@ -91,6 +91,13 @@ ui.checkbox label, .ui.checkbox + label {
     margin: 0 !important;
 }
 
+.no-left-padding {
+    padding-left: 0 !important;
+}
+.no-right-padding {
+    padding-right: 0 !important;
+}
+
 #steps-menu {
     border: none !important;
 }

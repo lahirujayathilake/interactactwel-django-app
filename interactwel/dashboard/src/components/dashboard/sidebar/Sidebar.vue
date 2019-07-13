@@ -15,7 +15,6 @@
 <script>
 
     import JSONData from "../../../assets/result_action_plans.json";
-
     import EventBus from './../../../event-bus';
 
     export default {
@@ -29,15 +28,11 @@
                 currentChart: null,
 
                 chartTypes: [
-                    {id: "overview-graph", name: "Overview"},
-                    {id: "region-graph", name: "Region"},
-                    {id:"actions-graph", name: "Actions"},
-                    {id: "costs-graph", name: "Catchments"},
-                    {id: "streamsflow-graph", name: "Streams"}
-                    /* {id: "crops-graph", name: "Crops"},*/
-                    /*{id: "precipitation-graph", name: "Precipitation"},*/
-                    /*{id: "irrigation-graph", name: "Irrigation"},*/
-                    /*{id: "groundwater-graph", name: "Groundwater"},*/
+                    {id: "overview", name: "Overview"},
+                    {id:"actions", name: "Actions"},
+                    {id: "region", name: "Region"},
+                    {id: "subBasins", name: "Sub-basins"},
+                    {id: "streams", name: "Streams"}
                 ]
             }
 
@@ -61,14 +56,27 @@
             },
 
             showGraph(chart) {
-                this.currentChart = chart;
-                EventBus.$emit('CLICK_ITEM', this.currentChart);
+                
+                if (chart !== "feedback"){
+                    this.currentChart = chart;
+                    EventBus.$emit('CLICK_ITEM', this.currentChart);
+                    EventBus.$emit('HIDE_FEEDBACK');
+                }else{    
+                    //console.log(chart)   
+                    EventBus.$emit('SHOW_FEEDBACK');
+                    EventBus.$emit('CLOSE'); 
+                }
 
             },
 
             onClickSidebarItem(planName) {
                 EventBus.$emit('CLICK_ITEM_SIDEBAR', planName);
             },
+
+            hideSidebar(){
+                EventBus.$emit('SIDEBAR_INVISIBLE')
+            }
+
 
         }
     }
@@ -82,13 +90,12 @@
         margin: 5px !important;
         border-radius: 5px;
     }
-
-    .active a {
-        color: rgba(255, 255, 255, 0.8);
+    #sidebar > div > ul > li > a{
+        color: rgba(255, 255, 255, 0.8) !important;
     }
 
-    .active a:hover {
-        color: #fff
+    #sidebar > div > ul > li > a:hover {
+        color: #fff !important;
     }
 
     .filter-options input {
@@ -97,6 +104,7 @@
 
     #sidebar {
         background-color: #263238;
+        width:200px;
     }
 
     #sidebar .nav-item{
@@ -140,4 +148,11 @@
         background-color: #000 ;
     }
 
+    #main > aside {
+        flex: 0 0 400px;
+        height: calc(92vh - 20px);
+        overflow: auto;
+        padding: 1rem;
+        background-color: #FFF;
+    }
 </style>

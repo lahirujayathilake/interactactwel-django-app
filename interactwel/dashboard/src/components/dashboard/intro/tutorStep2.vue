@@ -1,7 +1,7 @@
 <template>
   
     <div class="modal-backdrop">
-      <div class="tutor" style="top: 20%; left: 82%; height: 250px; width: 420px;">
+      <div id="tutor-step2" class="tutor">
         <header class="modal-header">
           <slot name="header">
             Explore Adaptation Plans
@@ -9,7 +9,7 @@
         </header>
         <section class="modal-body">
           <slot name="body"> 
-         <p align="justify"> Click on Start to begin exploring adaptation plans. </p>
+         <p align="justify"> Click on <strong>Start Here</strong> to begin viewing and exploring adaptation plans created for your community.</p>
           </slot>
         </section>
         <footer class="tutor-footer">
@@ -18,8 +18,8 @@
             <button type="button" class="btn-close" @click="close">Exit tutorial</button>
           </slot>
         </footer>
-        <img src="../../../assets/tutor_arrow.png" class="hover"
-        style = "position: relative; top: -315px; right: -350px; width: 300px; height: 300px;">
+      
+        <img src="../../../assets/tutor_arrow.png" id="tutor-step2-arrow" class="hover">
       </div>
     </div>
 
@@ -28,7 +28,7 @@
 <script>
   
   export default {
-    name: 'tutorStep2',
+    name: 'TutorStep2',
 
     methods: {
       close() {
@@ -41,6 +41,18 @@
   };
 </script>
 <style>
+  #tutor-step2{
+    top: 100px;
+    right: 200px;
+    width: 300px;
+    position: absolute;
+  }
+  #tutor-step2-arrow{
+    position: absolute;
+    top: -30px;
+    left: 260px;
+    height: 100px;
+  }
 .hover {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);

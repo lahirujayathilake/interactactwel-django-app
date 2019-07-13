@@ -4,19 +4,39 @@
         <b-tabs card>
             <b-tab title="Info" active>
                 <div class="card-body">
-                    <strong><u>Principal Spillway: </u></strong><br>
-                    <strong>Volume: </strong>{{ data.spillway_vol}}<br>
-                    <strong>Surface Area: </strong>{{ data.spillway_sfarea}}<br>
-                    <br>
-                    <strong><u>Emergency Principal Spillway: </u></strong><br>
-                    <strong>Volume: </strong>{{ data.espillway_vol}}<br>
-                    <strong>Surface Area: </strong>{{ data.espillway_sfarea}}<br>
-
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                        <tr>
+                            <th>Principal Spillway</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td><span class="badge badge-secondary">{{ data.spillway_vol}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Surface Area</td>
+                            <td><span class="badge badge-secondary">{{ data.spillway_sfarea}}</span></td>
+                        </tr>
+                        <tr>
+                            <th>Emergency Principal Spillway</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td><span class="badge badge-secondary">{{ data.espillway_vol}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Surface Area</td>
+                            <td><span class="badge badge-secondary">{{ data.espillway_sfarea}}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </b-tab>
             <b-tab title="Data">
                 <div class="card-body">
-                    <chart :chart-data="datacollection" :options="options" :width="5" :height="3"></chart>
+                    <vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>
                 </div>
             </b-tab>
         </b-tabs>
@@ -24,13 +44,13 @@
 </template>
 
 <script>
-    import Chart from "../../../../chart";
+    import VerticalBarChart from "./../../charts/lib/VerticalBarChart";
     import axios from 'axios';
 
     export default {
         name: "PopupContentReservoirs",
         components: {
-            Chart
+            VerticalBarChart
         },
         props: {
             data: {
@@ -176,5 +196,9 @@
         background-color: #FFFFFF;
         font-size: 14px;
         border-top:2px solid #28a645;
+    }
+
+    #PopupContentReservoirs table{
+        font-size:14px;
     }
 </style>

@@ -4,11 +4,30 @@
             <b-tabs card>
                 <b-tab title="Info" active>
                     <div class="card-body">
-                        <strong>Name: </strong>{{ data.name }}<br>
-                        <strong>USGS ID: </strong>{{ data.id }}<br>
-                        <strong>Data Availability: </strong> {{ data.data_Range}}<br>
-                        <strong>Observation Type: </strong>{{ data.obs_type}}<br>
-                        <strong>Num. of Precipitation Obs.: </strong>{{ data.num_flowobs}}<br>
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ data.name}}</td>
+                            </tr>
+                            <tr>
+                                <th>USGS ID</th>
+                                <td><span class="badge badge-secondary">{{ data.id}}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Data Availability</th>
+                                <td><span class="badge badge-secondary">{{ data.data_Range}}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Observation Type</th>
+                                <td><span class="badge badge-secondary">{{ data.obs_type}}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Num. of Precipitation Obs.</th>
+                                <td><span class="badge badge-secondary">{{ data.num_flowobs}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </b-tab>
                 <b-tab title="Data">
@@ -20,7 +39,7 @@
 
 <script>
     import axios from 'axios';
-    import LineChart from '../../../../chartLine';
+    import LineChart from "./../../charts/lib/LineChart";
 
     export default {
         name: "PopupContentGaugeStations",
