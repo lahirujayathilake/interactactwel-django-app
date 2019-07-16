@@ -48,7 +48,7 @@
                                     <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
                                     Select All
                                 </label>
-                                <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>
+                                <!-- <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-list-group flush>
@@ -116,7 +116,7 @@
                                     <input type="checkbox" v-model="selectAllActors" @click="selectActors">
                                     Select All
                                 </label>
-                                <div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>
+                                <!--<div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>-->
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-list-group flush>
@@ -183,50 +183,18 @@
                                     <input type="checkbox" v-model="selectAllActions" @click="selectActions">
                                     Select All
                                 </label>
-                                <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>
+                                <!-- <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
 
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-card-body>
-
-                            <!--<div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
-                            <!--<table style="height:270px; width: 550px"
-                                   class="table table-bordered table-striped table-hover table-responsive">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th v-for="actor in actors" v-bind:key="actor.id">
-                                        {{actor.actor}}
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr v-for="action in actions" v-bind:key="action.id">
-                                    <td>
-                                        {{action.action}}
-                                        <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover :title="action.info">i</b-badge>
-                                    </td>
-
-                                    <td v-for="actor in actors" v-bind:key="actor.id">
-                                        <label class="form-checkbox">
-                                            <input type="checkbox" :value="actor.id + ',' + action.id"
-                                                   v-model="selectedActions" :disabled="action.readonly || actor.readonly">
-                                            <i class="form-icon"></i>
-                                        </label>
-                                    </td>
-
-                                </tr>
-
-                                </tbody>
-                            </table>
-    -->
                             <b-tabs content-class="mt-3">
-                                <b-tab :title="actor.name" v-for="actor in selectedActors" v-bind:key="actor.id">
+                                <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                                     <div class="list-group">
                                         <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
                                             <label class="form-checkbox" :disabled="action.readonly">
-                                                <input type="checkbox" :value="actor.id + ',' + action.id" v-model="selectedActions"
+                                                <input type="checkbox" :value="actor.id + ',' + action.id"
+                                                       v-model="selectedActions"
                                                        :disabled="action.readonly"/>
                                                 {{action.action}}
                                             </label>
@@ -586,7 +554,7 @@
         z-index: 1000;
         left: 100px;
         top: 100px;
-        min-width:350px;
+        min-width: 350px;
     }
 
     #step2 {
@@ -594,7 +562,7 @@
         z-index: 1000;
         left: 100px;
         top: 100px;
-        min-width:350px;
+        min-width: 350px;
     }
 
     #step3 {
@@ -638,7 +606,7 @@
     .step-progress-bar p {
         font-weight: 400;
         font-size: .72857143em;
-         color: #5f6c73;
+        color: #5f6c73;
         margin-bottom: 0;
         text-align: left;
     }
@@ -767,7 +735,7 @@
         background-color: #4cae4c !important;
     }
 
-    #step3 .nav-item a{
+    #step3 .nav-item a {
         color: #28a645;
         text-decoration: none;
         font-weight: 500;
@@ -775,12 +743,12 @@
         font-size: 14px;
     }
 
-    #step3 .nav-item .nav-link.active{
+    #step3 .nav-item .nav-link.active {
         color: #5e6b7e;
         font-weight: 500;
         background-color: #FFFFFF;
         font-size: 14px;
-        border-top:2px solid #28a645;
+        border-top: 2px solid #28a645;
     }
 
 

@@ -19,7 +19,7 @@
 
             <b-card header="Actions taken by each selected Actor">
             <b-tabs content-class="mt-3">
-                <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.name" active>
+                <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
                         <b-list-group v-for="item in getActions(actor)">
                             <b-list-group-item>{{item.action}}</b-list-group-item>
                         </b-list-group>
@@ -42,15 +42,32 @@
         },
 
         props: {
-            goals:[],
-            actors:[],
-            actions:[],
-            selectedGoals:[],
-            selectedActors:[],
-            selectedActions:[]
+            goals:{
+                type: Array,
+                default: []
+            },
+            actors:{
+                type: Array,
+                default: []
+            },
+            actions:{
+                type: Array,
+                default: []
+            },
+            selectedGoals:{
+                type: Array,
+                default: []
+            },
+            selectedActors:{
+                type: Array,
+                default: []
+            },
+            selectedActions:{
+                type: Array,
+                default: []
 
+            }
         },
-
         data() {
             return {
 

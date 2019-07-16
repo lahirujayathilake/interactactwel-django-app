@@ -1,8 +1,7 @@
 <template>
     <div id="main">
         <article id="map">
-            <component v-show="!chartsVisibility" v-bind:is="component='charts'"></component>
-            <component v-show="!wizardVisibility" v-bind:is="component='wizard'"></component>
+            <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>
             <leaflet-map></leaflet-map>
             <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
         </article>
@@ -11,7 +10,6 @@
 
 <script>
 
-    import ChartContainer from './charts/ChartContainer.vue'
     import Wizard from './wizard/Wizard.vue'
     import LeafletMap from './map/LeafletMap.vue'
     import RegionalSummary from './map/RegionalSummary.vue'
@@ -21,7 +19,7 @@
         name: 'Container',
 
         components: {
-            ChartContainer, Wizard, LeafletMap, RegionalSummary,
+            Wizard, LeafletMap, RegionalSummary,
         },
 
         props: {

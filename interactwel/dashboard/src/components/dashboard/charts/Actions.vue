@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div id="graph" class="card">
         <b-card no-body>
             <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                     icon="times-circle"/> Close</span>
@@ -7,7 +7,7 @@
                 <b-badge id="tooltip-button-1" class="info-button" pill variant="secondary" v-b-tooltip.hover>
                     How to read this chart?
                 </b-badge>
-                <b-tooltip :show.sync="show" target="tooltip-button-1" placement="bottom">
+                <b-tooltip target="tooltip-button-1" placement="bottom">
 
                     <p aling="justify">
                         This chart shows the actions that different actors will take for this adaptation plan.</p>
@@ -17,16 +17,16 @@
             </div>
             <div class="card-body">
                 <div class="filter-options-container">
-                    <div v-for="actor in actors" v-bind:key="actor.key"
+                    <div v-for="actor in selectedActors" v-bind:key="actor.id"
                          class="form-check form-check-inline filter-options"
-                         :style="{ 'background-color': pathColors[actor.key]}">
+                         :style="{ 'background-color': pathColors[actor.id]}">
                         <input class="form-check-input"
                                type="checkbox"
-                               :name="actor.value"
-                               :value="actor.key"
-                               :id="actor.key"
+                               :name="actor.actor"
+                               :value="actor.id"
+                               :id="actor.id"
                                @change="inputChanged($event , actor)">
-                        <label class="form-check-label small" :for="actor.key">{{actor.value}}</label>
+                        <label class="form-check-label small" :for="actor.id">{{actor.actor}}</label>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,34 @@
 
         components: {
             'pathways-graph': pathwaysGraph
+        },
+
+        props: {
+            goals:{
+                type: Array,
+                default: []
+            },
+            actors:{
+                type: Array,
+                default: []
+            },
+            actions:{
+                type: Array,
+                default: []
+            },
+            selectedGoals:{
+                type: Array,
+                default: []
+            },
+            selectedActors:{
+                type: Array,
+                default: []
+            },
+            selectedActions:{
+                type: Array,
+                default: []
+
+            }
         },
 
         data() {

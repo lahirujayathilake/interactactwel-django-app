@@ -10,7 +10,7 @@
                     <b-form-radio v-model="feasibility" name="some-radios" value="No">No</b-form-radio>
                 </b-form-group>
             </b-form>
-            <b-button id="submit-btn" type="submit" variant="success" disabled="readonly">Submit</b-button>
+            <b-button id="submit-btn" type="submit" variant="success">Submit</b-button>
             <b-form v-show="feedbackStep2">
                 <b-form-group id="input-group-4" label="Why is this plan NOT feasible? (Check all that apply)">
                     <b-form-checkbox v-model="selected" value="1">Unlikely to be profitable or financially sustainable

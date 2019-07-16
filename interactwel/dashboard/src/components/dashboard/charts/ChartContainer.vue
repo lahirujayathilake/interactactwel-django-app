@@ -32,13 +32,31 @@
 
 
         props: {
-            goals:[],
-            actors:[],
-            actions:[],
-            selectedGoals:[],
-            selectedActors:[],
-            selectedActions:[]
+            goals:{
+                type: Array,
+                default: []
+            },
+            actors:{
+                type: Array,
+                default: []
+            },
+            actions:{
+                type: Array,
+                default: []
+            },
+            selectedGoals:{
+                type: Array,
+                default: []
+            },
+            selectedActors:{
+                type: Array,
+                default: []
+            },
+            selectedActions:{
+                type: Array,
+                default: []
 
+            }
         },
 
         data() {
@@ -123,7 +141,7 @@
         mounted(){
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                
+
                 $this.showChart(planName);
             })
             EventBus.$on('CLICK_ITEM_PLAN', function () {
