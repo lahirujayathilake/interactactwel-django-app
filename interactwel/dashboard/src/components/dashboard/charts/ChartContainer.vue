@@ -192,6 +192,10 @@
         border-radius: 5px;
     }
 
+    #graph{
+        width: 750px;
+    }
+
     #graph .nav-item a{
         color: #28a645;
         text-decoration: none;

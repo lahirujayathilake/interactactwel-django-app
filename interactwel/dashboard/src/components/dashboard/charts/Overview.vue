@@ -5,15 +5,28 @@
             <strong>Overview</strong>
         </div>
         <div class="card-body">
-            <b-table bordered hover small :items="selectedGoals"></b-table>
-            <b-table bordered hover small :items="selectedActors"></b-table>
+            <b-card header="Selected Goals">
+                <b-list-group class="no-padding" v-for="item in selectedGoals">
+                    <b-list-group-item>{{item.goal}}</b-list-group-item>
+                </b-list-group>
+            </b-card>
 
+            <b-card header="Selected Actors">
+                <b-list-group v-for="item in selectedActors">
+                    <b-list-group-item>{{item.actor}}</b-list-group-item>
+                </b-list-group>
+            </b-card>
+
+            <b-card header="Actions taken by each selected Actor">
             <b-tabs content-class="mt-3">
                 <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.name" active>
-                    <b-table bordered hover small :items="getActions(actor)"></b-table>
+                        <b-list-group v-for="item in getActions(actor)">
+                            <b-list-group-item>{{item.action}}</b-list-group-item>
+                        </b-list-group>
                 </b-tab>
 
             </b-tabs>
+            </b-card>
         </div>
     </div>
 </template>

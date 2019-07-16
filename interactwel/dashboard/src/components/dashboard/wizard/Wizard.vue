@@ -357,7 +357,7 @@
 
     import Charts from '../charts/ChartContainer.vue'
     import Sidebar from '../sidebar/Sidebar.vue'
-    import Feedback from '../feedback/feedback.vue'
+    import Feedback from '../feedback/Feedback.vue'
 
     export default {
 

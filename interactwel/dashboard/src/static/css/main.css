@@ -2,55 +2,6 @@
    Author's custom styles
    ========================================================================== */
 
-/* Override semantic styles */
-.ui.card > .content > .header, .ui.cards > .card > .content > .header {
-    color: rgb(50, 71, 92);
-}
-
-.ui.ordered.steps .step.completed:before, .ui.steps .step.completed > .icon:before {
-    color: #4CAF50;
-}
-
-.hi .header {
-    color: #32475c;
-}
-
-ui.checkbox label, .ui.checkbox + label {
-    color: #516f90 !important;
-}
-
-.ui .popup .column {
-    width: 220px !important;
-}
-
-.ui.inverted.menu {
-    background: #2d3f51 !important;
-}
-
-.ui.button, .ui.buttons .button, .ui.buttons {
-    border-radius: 20px !important;
-}
-
-.ui.steps .step, .ui.steps .step::after {
-    background: #f5f8fa;
-}
-
-.ui.steps .step.active, .ui.steps .step.active:after {
-    background: #DCEDC8;
-}
-
-.ui.steps .step.active .title {
-    color: #4caf50 !important;
-}
-
-.ui.ordered.steps .step.active::before, .ui.steps .active.step .icon {
-    color: rgb(45, 63, 81);
-}
-
-.ui .button {
-    font-weight: 400;
-}
-
 /* Navigation */
 .logo {
     width: 25px !important;
@@ -181,10 +132,13 @@ ui.checkbox label, .ui.checkbox + label {
 }
 
 .list-group-item label{
-    font-size: 85% !important;
+    font-size: 14px !important;
     margin-bottom: 0 !important;
 }
 
+.card-header {
+    font-size: 14px;
+}
 
 
 
