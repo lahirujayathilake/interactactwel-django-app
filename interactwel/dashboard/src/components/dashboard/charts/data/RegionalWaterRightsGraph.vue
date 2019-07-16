@@ -1,5 +1,5 @@
 <template>
-    <pie-chart :chart-data="datacollection" :options="options" :width="10" :height="10"></pie-chart>
+    <pie-chart :chart-data="datacollection" :options="options" :width="600" :height="400"></pie-chart>
 </template>
 
 <script>
@@ -22,7 +22,7 @@
                 datacollection: null,
                 subbasinIDu: this.subbasinID,
                 options: {
-                    responsive: true,
+                    responsive: false,
                     title: {
                         display: true,
                         text: 'Total water rights volume (ac-ft) by water source',

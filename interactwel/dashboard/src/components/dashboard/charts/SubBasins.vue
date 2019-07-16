@@ -143,7 +143,7 @@
                     let dataPoint = data.Adaptation_plans[adaptationPlan][basinID]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.backgroundColor = "#e67517";
                     dataset.data = [];
                     for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);

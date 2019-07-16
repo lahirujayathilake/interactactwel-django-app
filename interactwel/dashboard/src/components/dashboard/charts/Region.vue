@@ -7,32 +7,32 @@
         <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="Water Rights" active>
-                    <div class="card-body">
+                    <div class="card-body no-padding">
                         <overview-water-rights-graph></overview-water-rights-graph>
                     </div>
                 </b-tab>
                 <b-tab title="Crop yield">
-                    <div class="card-body">
+                    <div class="card-body no-padding">
                         <crop-yield-graph></crop-yield-graph>
                     </div>
                 </b-tab>
                 <b-tab title="N fertilizer">
-                    <div class="card-body">
+                    <div class="card-body no-padding">
                         <n-fertilizer-graph></n-fertilizer-graph>
                     </div>
                 </b-tab>
                 <b-tab title="P fertilizer">
-                    <div class="card-body">
+                    <div class="card-body no-padding">
                         <p-fertilizer-graph></p-fertilizer-graph>
                     </div>
                 </b-tab>
                 <b-tab title="Irrigation">
-                    <div class="card-body">
+                    <div class="card-body no-padding">
                         <irrigation-graph></irrigation-graph>
                     </div>
                 </b-tab>
                 <b-tab title="Groundwater Recharge">
-                    <div class="card-body">
+                    <div class="card-body no-padding">
                         <img class="img-fluid" src="../../../assets/graph-placeholder2.png"/>
                     </div>
                 </b-tab>

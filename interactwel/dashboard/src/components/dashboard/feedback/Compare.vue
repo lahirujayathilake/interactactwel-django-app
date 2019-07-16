@@ -1,7 +1,6 @@
 <template>
     <div id="graph" class="card">
-        <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
-                icon="times-circle"/> Close</span>
+        <div class="card-header">
             <strong>Compare</strong>
         </div>
         <div class="card-body">

@@ -1,5 +1,5 @@
 <template>
-    <vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>
+    <vertical-bar-chart :chart-data="datacollection" :options="options" :width="600" :height="400"></vertical-bar-chart>
 </template>
 
 <script>
@@ -25,7 +25,7 @@
                 JSONData: null,
                 datacollection: null,
                 options: {
-                    responsive: true,
+                    responsive: false,
                     title: {
                         display: true,
                         text: 'Irrigation - Yearly totals per water source'

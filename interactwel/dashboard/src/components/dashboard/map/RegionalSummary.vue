@@ -400,7 +400,7 @@
 <style>
     #regionalSummary {
         position: absolute !important;
-        top: 40px;
+        top: 80px;
         right: 50px;
         z-index: 1000;
         width: 700px;
