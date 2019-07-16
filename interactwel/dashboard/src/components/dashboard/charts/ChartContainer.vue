@@ -1,5 +1,7 @@
 <template>
-    <component v-show="currentChartVisibility" v-bind:is="component=this.currentChartComponent"></component>
+    <component v-show="currentChartVisibility" v-bind:is="component=this.currentChartComponent" :goals="goals" :actors="actors" :actions="actions"
+               :selectedGoals="selectedGoals" :selectedActors="selectedActors"
+               :selectedActions="selectedActions"></component>
 </template>
 
 <script>
@@ -26,6 +28,17 @@
             'region': Region,
             'subBasins': SubBasins,
             'streams': Streams
+        },
+
+
+        props: {
+            goals:[],
+            actors:[],
+            actions:[],
+            selectedGoals:[],
+            selectedActors:[],
+            selectedActions:[]
+
         },
 
         data() {
@@ -60,10 +73,10 @@
                 return JSONData;
             },
 
-            actions() {
+            /*actions() {
                 return this.jsonData["Actions_map"];
             },
-
+*/
             adaptationPlans() {
                 return this.jsonData["Adaptation_plans"]
             },
@@ -88,14 +101,14 @@
                     });
 
             },
-            actors() {
-                return Object.keys(this.jsonData["Actors_map"]).map(key => {
-                    return {
-                        key: parseInt(key, 10) + 1,
-                        value: this.jsonData["Actors_map"][key]
-                    };
-                });
-            },
+            // actors() {
+            //     return Object.keys(this.jsonData["Actors_map"]).map(key => {
+            //         return {
+            //             key: parseInt(key, 10) + 1,
+            //             value: this.jsonData["Actors_map"][key]
+            //         };
+            //     });
+            // },
 
             actions1() {
                 return Object.keys(this.jsonData["Actions_map"]).map(key => {
