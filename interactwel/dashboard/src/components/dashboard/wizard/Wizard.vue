@@ -48,7 +48,7 @@
                                     <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
                                     Select All
                                 </label>
-                                <!--<div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
+                                <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-list-group flush>
@@ -56,7 +56,7 @@
                                 <div class="list-group">
                                     <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
                                         <label class="form-checkbox" :disabled="goal.readonly">
-                                            <input type="checkbox" :value="goal.id" v-model="selectedGoals"
+                                            <input type="checkbox" :value="goal" v-model="selectedGoals"
                                                    :disabled="goal.readonly"/>
                                             {{goal.goal}}
                                             <p v-show="itemInfoVisibility" class="item-info">
@@ -73,8 +73,7 @@
                             </b-form>
                         </b-list-group>
                         <em slot="footer">
-                            <b-button id="step1-next-btn" @click="tabIndex++" variant="success" size="sm">Next
-                            </b-button>
+                            <b-button @click="tabIndex++" variant="success" size="sm">Next</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -117,7 +116,7 @@
                                     <input type="checkbox" v-model="selectAllActors" @click="selectActors">
                                     Select All
                                 </label>
-                                <!--<div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>-->
+                                <div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-list-group flush>
@@ -125,7 +124,7 @@
                                 <div class="list-group">
                                     <li class="list-group-item" v-for="actor in actors" v-bind:key="actor.id">
                                         <label class="form-checkbox">
-                                            <input type="checkbox" :value="actor.id" v-model="selectedActors"
+                                            <input type="checkbox" :value="actor" v-model="selectedActors"
                                                    :disabled="actor.readonly">
                                             {{actor.actor}}
                                         </label>
@@ -184,6 +183,8 @@
                                     <input type="checkbox" v-model="selectAllActions" @click="selectActions">
                                     Select All
                                 </label>
+                                <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>
+
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-card-body>
@@ -221,16 +222,16 @@
                             </table>
     -->
                             <b-tabs content-class="mt-3">
-                                <b-tab :title="actor.name" v-for="actor in actors" v-bind:key="actor.id">
+                                <b-tab :title="actor.name" v-for="actor in selectedActors" v-bind:key="actor.id">
                                     <div class="list-group">
                                         <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
                                             <label class="form-checkbox" :disabled="action.readonly">
-                                                <input type="checkbox" :value="action.id" v-model="selectedActions"
+                                                <input type="checkbox" :value="actor.id + ',' + action.id" v-model="selectedActions"
                                                        :disabled="action.readonly"/>
                                                 {{action.action}}
                                             </label>
                                             <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
-                                                     :title="action.info">i
+                                                     :title="action.info">
                                             </b-badge>
                                         </li>
                                     </div>
@@ -270,7 +271,9 @@
                                         <sidebar></sidebar>
                                     </nav>
                                     <article>
-                                        <charts></charts>
+                                        <charts :goals="goals" :actors="actors" :actions="actions"
+                                                :selectedGoals="selectedGoals" :selectedActors="selectedActors"
+                                                :selectedActions="selectedActions"></charts>
                                     </article>
                                 </b-row>
                             </b-container>
@@ -354,8 +357,7 @@
 
     import Charts from '../charts/ChartContainer.vue'
     import Sidebar from '../sidebar/Sidebar.vue'
-    import Feedback from '../feedback/Feedback.vue'
-    import Compare from '../feedback/Compare.vue'
+    import Feedback from '../feedback/feedback.vue'
 
     export default {
 
@@ -520,22 +522,22 @@
             selectGoals() {
                 this.selectedGoals = [];
                 if (!this.selectAllGoals) {
-                    for (let goal in this.goals) {
-                        if (this.goals[goal].readonly == false) {
-                            this.selectedGoals.push(this.goals[goal].id);
+                    this.goals.forEach(element => {
+                        if (element.readonly == false) {
+                            this.selectedGoals.push(element);
                         }
-                    }
+                    });
                 }
             },
 
             selectActors() {
                 this.selectedActors = [];
                 if (!this.selectAllActors) {
-                    for (let actor in this.actors) {
-                        if (this.actors[actor].readonly == false) {
-                            this.selectedActors.push(this.actors[actor].id);
+                    this.actors.forEach(element => {
+                        if (element.readonly == false) {
+                            this.selectedActors.push(element);
                         }
-                    }
+                    });
                 }
             },
 
@@ -551,7 +553,6 @@
                     }
                 }
             },
-
             GenerateAdaptationPlans: function () {
                 //EventBus.$emit('SIDEBAR_VISIBLE');
                 this.tabIndex++
