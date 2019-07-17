@@ -73,7 +73,7 @@
                             </b-form>
                         </b-list-group>
                         <em slot="footer">
-                            <b-button @click="tabIndex++" variant="success" size="sm">Next</b-button>
+                            <b-button @click="step1NextClicked" variant="success" size="sm">Next</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -140,7 +140,7 @@
                                 <b-button id="step2-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
-                                <b-button id="step2-next-btn" @click="tabIndex++" variant="success" size="sm">Next
+                                <b-button id="step2-next-btn" @click="step2NextClicked" variant="success" size="sm">Next
                                 </b-button>
                             </b-button-group>
                         </em>
@@ -212,7 +212,7 @@
                                 <b-button id="step3-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
-                                <b-button id="step3-next-btn" @click="GenerateAdaptationPlans" variant="success"
+                                <b-button id="step3-next-btn" @click="step3NextClicked" variant="success"
                                           size="sm">Next
                                 </b-button>
                             </b-button-group>
@@ -269,9 +269,18 @@
                 </template>
                 <div id="step5" title="Step 5"
                      icon="ti-check">
-                    <b-card style="height: 470px; width: 580px" no-body footer-tag="footer">
-                        <b-card-body>
-                            <feedback></feedback>
+                    <b-card no-body footer-tag="footer">
+                        <b-card-body class="no-padding">
+                            <b-container>
+                                <b-row>
+                                    <nav>
+                                        <compare></compare>
+                                    </nav>
+                                    <article>
+                                        <feedback></feedback>
+                                    </article>
+                                </b-row>
+                            </b-container>
                         </b-card-body>
                         <em slot="footer">
                             <b-button-group>
@@ -318,6 +327,15 @@
                 </div>
             </b-tab>
         </b-tabs>
+        <b-modal v-model="showInfoModal" ok-only>
+            <template slot="modal-title">
+                Empty fields detected!
+            </template>
+            No worries! We filled it for you.
+            <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
+                <b-button size="sm" variant="success" @click="ok()">Ok</b-button>
+            </template>
+        </b-modal>
     </div>
 </template>
 
@@ -326,11 +344,13 @@
     import Charts from '../charts/ChartContainer.vue'
     import Sidebar from '../sidebar/Sidebar.vue'
     import Feedback from '../feedback/Feedback.vue'
+    import Compare from '../feedback/Compare.vue'
 
     export default {
 
         name: 'wizard',
         components: {
+            Compare,
             Feedback,
             Sidebar,
             Charts
@@ -342,6 +362,7 @@
                 itemInfoVisibility: false,
 
                 show: true,
+                showInfoModal: false,
 
                 step1_desc: "Choose Goals",
                 step2_desc: "Choose Actors",
@@ -521,10 +542,47 @@
                     }
                 }
             },
-            GenerateAdaptationPlans: function () {
-                //EventBus.$emit('SIDEBAR_VISIBLE');
-                this.tabIndex++
-                return true
+
+            step1NextClicked() {
+                if (this.selectedGoals.length == 0) {
+                    this.selectGoals()
+                    this.selectAllGoals = true
+                    this.showInfoModal = true
+                    this.tabIndex++
+                }
+                else {
+                    this.tabIndex++
+                    return true
+                }
+
+            },
+
+            step2NextClicked() {
+                if (this.selectedActors.length == 0) {
+                    this.selectActors()
+                    this.selectAllActors = true
+                    this.showInfoModal = true
+                    this.tabIndex++
+                }
+                else {
+                    this.tabIndex++
+                    return true
+                }
+
+            },
+
+            step3NextClicked() {
+                if (this.selectedActions.length == 0) {
+                    this.selectActions()
+                    this.selectAllActions = true
+                    this.showInfoModal = true
+                    this.tabIndex++
+                }
+                else {
+                    this.tabIndex++
+                    return true
+                }
+
             },
 
             showItemInfo() {
