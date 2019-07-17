@@ -64,7 +64,6 @@
                 selectedBasinID: '1',
                 planName: 'Adaptation Plan 1',
                 JSONData: null,
-
                 options: [
                     {text: 'Sub-basin: 1', value: '1'},
                     {text: 'Sub-basin: 2', value: '2'},
@@ -72,8 +71,12 @@
                     {text: 'Sub-basin: 4', value: '4'},
                     {text: 'Sub-basin: 5', value: '5'}
                 ],
-
                 datacollection: null,
+                graphColors: [
+                    "#3d71ff",
+                    "#00b3eb",
+                    "#61cf94"
+                ],
                 optionsirr: {
                     responsive: true,
                     title: {
@@ -139,28 +142,26 @@
                     this.datacollection.labels.push(data.Legend[legend]);
                 }
                 this.datacollection.datasets = [];
+                let i= 0;
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan][basinID]["Data"]) {
                     let dataPoint = data.Adaptation_plans[adaptationPlan][basinID]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = "#e67517";
+                    dataset.backgroundColor = this.getColor(i++);
                     dataset.data = [];
                     for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
                     this.datacollection.datasets.push(dataset);
                 }
+                i++;
             },
 
-            getRandomColor() {
-                let letters = '0123456789ABCDEF';
-                let color = '#';
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
+            getColor(i) {
+                let color;
+                color = this.graphColors[i];
                 return color;
             },
-
 
             changeBasin() {
                 this.selectedBasinID = this.selected;

@@ -24,6 +24,11 @@
                 planName: "Adaptation Plan 1",
                 JSONData: null,
                 datacollection: null,
+                graphColors: [
+                    "#3d71ff",
+                    "#00b3eb",
+                    "#61cf94"
+                ],
                 options: {
                     responsive: false,
                     title: {
@@ -84,29 +89,28 @@
                 }
 
                 this.datacollection.datasets = [];
+                let i= 0;
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
                     let dataset = {};
                     dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = this.getRandomColor();
+                    dataset.backgroundColor = this.getColor(i++);
                     dataset.data = [];
                     for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
                     this.datacollection.datasets.push(dataset);
                 }
+                i++;
             },
 
             showChart: function (selectedPlan) {
                 this.planName = selectedPlan;
             },
 
-            getRandomColor() {
-                let letters = '0123456789ABCDEF';
-                let color = '#';
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
+            getColor(i) {
+                let color;
+                color = this.graphColors[i];
                 return color;
             },
         }
