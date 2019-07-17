@@ -3,38 +3,43 @@
         <div class="header-container">
             <h5>Evaluate Adaptation Plan</h5>
         </div>
-        <div id="feedback-block" class="ui form">
-            <b-form v-show="feedbackStep1" @submit="onSubmit" @reset="onReset">
+        <div v-show="feedbackBlock" id="feedback-block">
+            <b-form v-show="initialFeedback" @submit="onSubmit" @reset="onReset">
                 <b-form-group label="Do you think this Adaptation Plan is feasible?">
-                    <b-form-radio v-model="feasibility" name="some-radios" value="Yes">Yes</b-form-radio>
-                    <b-form-radio v-model="feasibility" name="some-radios" value="No">No</b-form-radio>
+                    <b-form-radio v-model="feasibility" name="some-radios" value="1">Yes</b-form-radio>
+                    <b-form-radio v-model="feasibility" name="some-radios" value="0">No</b-form-radio>
                 </b-form-group>
             </b-form>
-            <b-button id="submit-btn" type="submit" variant="success">Submit</b-button>
-            <b-form v-show="feedbackStep2">
-                <b-form-group id="input-group-4" label="Why is this plan NOT feasible? (Check all that apply)">
-                    <b-form-checkbox v-model="selected" value="1">Unlikely to be profitable or financially sustainable
+            <b-form v-if="feasibility === '0'">
+                <b-form-group label="Why is this plan NOT feasible? (Check all that apply)">
+                    <b-form-checkbox v-for="question in ifFeasibleQuestions" v-model="ifFeasible" :value="question.id">{{question.question}}
                     </b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="2">Infrastructure costs</b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="3">
-                        Challenging permit or other regulatory approval processes
-                    </b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="4">Reliance on other actors to make this plan work
-                    </b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="5">Positive impacts take a long time to accrue
-                    </b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="6">Potential public disapproval of actions listed in the plan
-                    </b-form-checkbox>
-                    <b-form-checkbox v-model="selected" value="7">Other</b-form-checkbox>
                 </b-form-group>
                 <b-form-textarea
                         id="textarea"
-                        v-model="comment"
+                        v-model="ifFeasiblecomment"
                         placeholder="Please provide feedback (positive or negative)"
                         rows="3"
                         max-rows="6"
                 ></b-form-textarea>
             </b-form>
+            <b-form v-if="feasibility === '1'">
+                <b-form-group id="input-group-4" label="Oh great!. We would love to hear your feedback.">
+                    <b-form-checkbox v-for="question in ifNotFeasibleQuestions" v-model="ifNotFeasible" :value="question.id">{{question.question}}
+                    </b-form-checkbox>
+                </b-form-group>
+                <b-form-textarea
+                        id="textarea"
+                        v-model="ifNotFeasiblecomment"
+                        placeholder="Please provide feedback (positive or negative)"
+                        rows="3"
+                        max-rows="6"
+                ></b-form-textarea>
+            </b-form>
+            <b-button @click="submitFeedback">Submit</b-button>
+        </div>
+        <div id="thankyou-block" v-show="thankyouBlock">
+            Thank you
         </div>
     </div>
 </template>
@@ -46,14 +51,42 @@
 
         data() {
             return {
-                feedbackStep1: true,
-                feedbackStep2: false,
-                feasibility: [],
-                selected: [],
-                comment: null
+                feedbackBlock: true,
+                thankyouBlock: false,
+                feasibility: false,
+                initialFeedback: true,
+                ifFeasible: [],
+                ifNotFeasible: [],
+                ifFeasiblecomment: null,
+                ifNotFeasiblecomment: null,
+
+                ifFeasibleQuestions:[
+                    { id: 0, question: "Unlikely to be profitable or financially sustainable" },
+                    { id: 1, question: "Infrastructure costs" },
+                    { id: 2, question: "Challenging permit or other regulatory approval processes" },
+                    { id: 3, question: "Reliance on other actors to make this plan work" },
+                    { id: 4, question: "Positive impacts take a long time to accrue" },
+                    { id: 4, question: "Potential public disapproval of actions listed in the plan" },
+                    { id: 4, question: "Other" },
+                ],
+
+                ifNotFeasibleQuestions:[
+                    { id: 0, question: "blah blah blah" },
+                    { id: 1, question: "Infrastructure costs" },
+                    { id: 2, question: "Challenging permit or other regulatory approval processes" },
+                    { id: 3, question: "Reliance on other actors to make this plan work" },
+                    { id: 4, question: "Positive impacts take a long time to accrue" },
+                    { id: 4, question: "Potential public disapproval of actions listed in the plan" },
+                    { id: 4, question: "Other" },
+                ],
+
             }
         },
         methods: {
+            submitFeedback(){
+                this.thankyouBlock = true
+                this.feedbackBlock = false
+            },
             onSubmit(evt) {
                 evt.preventDefault()
                 alert(JSON.stringify(this))
@@ -84,8 +117,17 @@
         margin-top: 20px;
         font-size: 12px;
         width: 100%;
-
     }
+
+    #thankyou-block {
+        background-color: #f5f8fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        font-size: 12px;
+        width: 100%;
+    }
+
 
     #feedback-block legend {
         font-weight: bold;
