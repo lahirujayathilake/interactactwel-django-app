@@ -1,39 +1,40 @@
 <template>
-    <div id="graph" class="card">
+    <div class="card">
         <div class="card-header">
             <strong>Compare</strong>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-8"><strong>Sub-basins</strong></div>
-                <div class="col-4"><div class="form-group">
-                    <select class="form-control form-control-sm" v-model="selected" @change="changeBasin">
-                        <option v-for="option in options" v-bind:key="option.value" v-bind:value="option.value">{{ option.text }}</option>
-                    </select>
-                </div></div>
-            </div>
-            <div class="row">
-            <div class="col-6">
-                <b-tabs card>
-                    <b-tab title="Irrigation" active>
-                        <div class="card-body">
-                            <chart-barv :chart-data="datacollection" :options="optionsirr" :width="5"
-                                        :height="3"></chart-barv>
+                <div class="col-6">
+                    <div class="card-body">
+                        Base line chart goes here
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4"><strong>Plan</strong></div>
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <select class="form-control form-control-sm" v-model="selected"
+                                            @change="changeBasin">
+                                        <option v-for="option in options" v-bind:key="option.value"
+                                                v-bind:value="option.value">{{ option.text }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </b-tab>
-                </b-tabs>
-            </div>
-            <div class="col-6">
-                <b-tabs card>
-                    <b-tab title="Irrigation" active>
-                        <div class="card-body">
-                            chart goes here
-                        </div>
-                    </b-tab>
-                </b-tabs>
-            </div>
+                        <b-row>
+                            <b-col lg="12">
+                                chart goes here
+                            </b-col>
+                        </b-row>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -42,18 +43,16 @@
     export default {
         name: 'Compare',
 
-        components: {
-
-        },
+        components: {},
 
         data() {
             return {
                 options: [
-                    {text: 'Sub-basin: 1', value: '1'},
-                    {text: 'Sub-basin: 2', value: '2'},
-                    {text: 'Sub-basin: 3', value: '3'},
-                    {text: 'Sub-basin: 4', value: '4'},
-                    {text: 'Sub-basin: 5', value: '5'}
+                    {text: 'Adaptaion Plan 1', value: '1'},
+                    {text: 'Adaptaion Plan: 2', value: '2'},
+                    {text: 'Adaptaion Plan: 3', value: '3'},
+                    {text: 'Adaptaion Plan: 4', value: '4'},
+                    {text: 'Adaptaion Plan: 5', value: '5'}
                 ],
                 datacollection: null,
                 optionsirr: {
@@ -121,9 +120,8 @@
         mounted() {
         },
 
-        methods: {
-        }
-        
+        methods: {}
+
     }
 </script>
 
