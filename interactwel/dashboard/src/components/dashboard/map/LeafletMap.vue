@@ -29,6 +29,7 @@
                 :options="options_wrrights"
                 :options-style="styleFunction_waterrigths"
         />
+
         </l-layer-group>
 
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Irrigated Land</strong></font>">
@@ -110,6 +111,7 @@
     import PrecipDataJson from "../../../assets/weather_station_data.json";
     import ReservoirDataJson from "../../../assets/reservoirs_data.json";
     import GaugeDataJson from "../../../assets/streamflow_station_data.json";
+    import PopupContent_WaterRights from "./popup/PopupContent_WaterRights";
 
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -132,7 +134,8 @@
             'l-popup': LPopup,
             'popup-content-ws': PopupContentWStations,
             'popup-content-rs': PopupContentReservoirs,
-            'popup-content-gs': PopupContentGaugeStations
+            'popup-content-gs': PopupContentGaugeStations,
+            'popup-content-wr': PopupContent_WaterRights
         },
 
         data() {
@@ -313,6 +316,11 @@
                         layer.setStyle({fillColor :'black'});
                         layer.setStyle({fillOpacity: "0"});
                     }
+
+                    layer.on('click', function (e) {
+                    });
+
+
                 }
             },
 
