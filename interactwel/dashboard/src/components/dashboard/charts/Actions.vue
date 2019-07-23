@@ -15,41 +15,53 @@
                         Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
                 </b-tooltip>
             </div>
-            <div class="card-body">
-                <div class="filter-options-container">
-                    <div v-for="actor in selectedActors" v-bind:key="actor.id"
-                         class="form-check form-check-inline filter-options"
-                         :style="{ 'background-color': pathColors[actor.id]}">
-                        <input class="form-check-input"
-                               type="checkbox"
-                               :name="actor.actor"
-                               :value="actor.id"
-                               :id="actor.id"
-                               @change="inputChanged($event , actor)">
-                        <label class="form-check-label small" :for="actor.id">{{actor.actor}}</label>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="graph-title"> Actions taken by Actors</div>
-                <pathways-graph :actions="actions" :data="graphData"></pathways-graph>
-                <div class="x-label">Time</div>
-                <div class="y-label">Actions</div>
-            </div>
         </b-card>
+        <div class="card-body no-padding">
+            <b-tabs card>
+                <b-tab title="Pathways" active>
+                    <div class="card-body no-padding">
+                        <div class="filter-options-container">
+                            <div v-for="actor in selectedActors" v-bind:key="actor.id"
+                                 class="form-check form-check-inline filter-options"
+                                 :style="{ 'background-color': pathColors[actor.id]}">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       :name="actor.actor"
+                                       :value="actor.id"
+                                       :id="actor.id"
+                                       @change="inputChanged($event , actor)">
+                                <label class="form-check-label small" :for="actor.id">{{actor.actor}}</label>
+                            </div>
+                        </div>
+                        <div class="graph-title"> Actions taken by Actors</div>
+                        <pathways-graph :actions="actions" :data="graphData"></pathways-graph>
+                        <div class="x-label">Time</div>
+                        <div class="y-label">Actions</div>
+                    </div>
+                </b-tab>
+                <b-tab title="Gannt Chart">
+                    <div class="card-body no-padding">
+                        <gannt-chart></gannt-chart>
+                    </div>
+                </b-tab>
+            </b-tabs>
+        </div>
     </div>
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import pathwaysGraph from "./data/PathwaysGraph.vue";
+    import GanntChart from "./data/GanntChart.vue";
     import EventBus from './../../../event-bus';
 
     export default {
         name: 'Actions',
 
         components: {
-            'pathways-graph': pathwaysGraph
+            GanntChart,
+            'pathways-graph': pathwaysGraph,
+            'gannt-chart': GanntChart
         },
 
         props: {
