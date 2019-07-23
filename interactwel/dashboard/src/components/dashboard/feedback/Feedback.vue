@@ -110,6 +110,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
+    .feedback-container{
+        padding: 1rem;
+    }
+
     #feedback-block {
         background-color: #f5f8fa;
         padding: 20px;
