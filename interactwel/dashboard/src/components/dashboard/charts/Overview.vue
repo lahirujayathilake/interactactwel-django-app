@@ -5,28 +5,33 @@
             <strong>Overview</strong>
         </div>
         <div class="card-body">
-            <b-card header="Selected Goals">
-                <b-list-group class="no-padding" v-for="item in selectedGoals">
-                    <b-list-group-item>{{item.goal}}</b-list-group-item>
-                </b-list-group>
-            </b-card>
+            <b-row>
+                <b-col lg="6">
+                    <h6>Selected Goals</h6>
+                    <b-list-group class="no-padding" v-for="item in selectedGoals">
+                        <b-list-group-item><small>{{item.goal}}</small></b-list-group-item>
+                    </b-list-group>
+                </b-col>
+                <b-col lg="6">
+                    <h6>Selected Actors</h6>
+                    <b-list-group class="no-padding" v-for="item in selectedGoals">
+                        <b-list-group-item><small>{{item.goal}}</small></b-list-group-item>
+                    </b-list-group>
+                </b-col>
+            </b-row>
+            <b-row style="margin-top:20px;">
+                <b-col lg="12">
+                    <h6>Selected Actions by each actor</h6>
+                    <b-tabs>
+                        <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.name" active>
+                            <b-list-group v-for="item in getActions(actor)">
+                                <b-list-group-item><small>{{item.action}}</small></b-list-group-item>
+                            </b-list-group>
+                        </b-tab>
 
-            <b-card header="Selected Actors">
-                <b-list-group v-for="item in selectedActors">
-                    <b-list-group-item>{{item.actor}}</b-list-group-item>
-                </b-list-group>
-            </b-card>
-
-            <b-card header="Actions taken by each selected Actor">
-            <b-tabs content-class="mt-3">
-                <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
-                        <b-list-group v-for="item in getActions(actor)">
-                            <b-list-group-item>{{item.action}}</b-list-group-item>
-                        </b-list-group>
-                </b-tab>
-
-            </b-tabs>
-            </b-card>
+                    </b-tabs>
+                </b-col>
+            </b-row>
         </div>
     </div>
 </template>
