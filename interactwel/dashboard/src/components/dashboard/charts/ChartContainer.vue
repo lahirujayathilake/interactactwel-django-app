@@ -4,7 +4,7 @@
                    :actors="actors" :actions="actions"
                    :selectedGoals="selectedGoals" :selectedActors="selectedActors"
                    :selectedActions="selectedActions"></component>
-        <div class="feedback-bottom-pane">
+        <!--<div class="feedback-bottom-pane">
             <b-row>
                 <b-col lg="9">
                     <small>Please provide any feedback you have on generated adaptation plans.</small>
@@ -13,7 +13,7 @@
                     <button @click="showAside" class="btn btn-success">Feedback</button>
                 </b-col>
             </b-row>
-        </div>
+        </div>-->
     </div>
 </template>
 
