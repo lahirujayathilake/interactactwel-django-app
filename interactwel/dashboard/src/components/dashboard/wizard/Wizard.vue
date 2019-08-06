@@ -7,7 +7,7 @@
                     <div class="step-progress-bar">
                         <div class="step-no">1</div>
                         <h4 class="list-group-item-heading">Goals</h4>
-                        <h4-right class="list-group-item-heading">&#10003;</h4-right>
+                        <h4r class="list-group-item-heading">&#10003;</h4r>
                         <p class="list-group-item-text">{{step1_desc}}</p>
                         
                     </div>
@@ -675,7 +675,7 @@
         text-align: left;
     }
 
-    .step-progress-bar h4-right {
+    .step-progress-bar h4r {
         float: right;
         font-size: 1em;
         font-weight: 700;
