@@ -8,27 +8,62 @@
             <b-tabs card>
                 <b-tab title="Water Rights" active>
                     <div class="card-body no-padding">
-                        <overview-water-rights-graph></overview-water-rights-graph>
+                        <b-row>
+                            <b-col lg="6">
+                                <overview-water-rights-graph></overview-water-rights-graph>
+                            </b-col>
+                            <b-col lg="6" class="baseline-graph-container">
+                                <overview-water-rights-graph></overview-water-rights-graph>
+                            </b-col>
+                        </b-row>
                     </div>
                 </b-tab>
                 <b-tab title="Crop yield">
                     <div class="card-body no-padding">
-                        <crop-yield-graph></crop-yield-graph>
+                        <b-row>
+                            <b-col lg="6">
+                                <crop-yield-graph></crop-yield-graph>
+                            </b-col>
+                            <b-col lg="6" class="baseline-graph-container">
+                                <crop-yield-graph></crop-yield-graph>
+                            </b-col>
+                        </b-row>
                     </div>
                 </b-tab>
                 <b-tab title="N fertilizer">
                     <div class="card-body no-padding">
+                        <b-row>
+                            <b-col lg="6">
                         <n-fertilizer-graph></n-fertilizer-graph>
+                            </b-col>
+                            <b-col lg="6" class="baseline-graph-container">
+                                <n-fertilizer-graph></n-fertilizer-graph>
+                            </b-col>
+                        </b-row>
                     </div>
                 </b-tab>
                 <b-tab title="P fertilizer">
                     <div class="card-body no-padding">
-                        <p-fertilizer-graph></p-fertilizer-graph>
+                        <b-row>
+                            <b-col lg="6">
+                                <p-fertilizer-graph></p-fertilizer-graph>
+                            </b-col>
+                            <b-col lg="6" class="baseline-graph-container">
+                                <p-fertilizer-graph></p-fertilizer-graph>
+                            </b-col>
+                        </b-row>
                     </div>
                 </b-tab>
                 <b-tab title="Irrigation">
                     <div class="card-body no-padding">
-                        <irrigation-graph></irrigation-graph>
+                        <b-row>
+                            <b-col lg="6">
+                                <irrigation-graph></irrigation-graph>
+                            </b-col>
+                            <b-col lg="6" class="baseline-graph-container">
+                                <irrigation-graph></irrigation-graph>
+                            </b-col>
+                        </b-row>
                     </div>
                 </b-tab>
                 <b-tab title="Groundwater Recharge">
@@ -55,11 +90,11 @@
         name: 'Region',
 
         components: {
-            'irrigationGraph' : IrrigationGraph,
-            'cropYieldGraph' :CropYieldGraph,
-            'nFertilizerGraph' :NFertilizerGraph,
-            'pFertilizerGraph' :PFertilizerGraph,
-            'overviewWaterRightsGraph' :OverviewWaterRightsGraph,
+            'irrigationGraph': IrrigationGraph,
+            'cropYieldGraph': CropYieldGraph,
+            'nFertilizerGraph': NFertilizerGraph,
+            'pFertilizerGraph': PFertilizerGraph,
+            'overviewWaterRightsGraph': OverviewWaterRightsGraph,
         },
 
         data() {

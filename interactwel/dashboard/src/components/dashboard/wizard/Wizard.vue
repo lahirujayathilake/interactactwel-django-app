@@ -248,10 +248,10 @@
                         </b-card-body>
                         <em slot="footer">
                             <b-button-group>
-                                <b-button id="step2-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
+                                <b-button id="step2-back-btn" @click="step4BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
-                                <b-button id="step2-next-btn" @click="tabIndex++" variant="success" size="sm">Next
+                                <b-button id="step2-next-btn" @click="step4NextClicked" variant="success" size="sm">Next
                                 </b-button>
                             </b-button-group>
                         </em>
@@ -259,7 +259,7 @@
                 </div>
             </b-tab>
             <!-- Step 5 -->
-            <b-tab>
+            <!--<b-tab>
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">5</div>
@@ -284,7 +284,7 @@
                         </b-card-body>
                         <em slot="footer">
                             <b-button-group>
-                                <b-button id="step3-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
+                                <b-button id="step3-back-btn" @click="tabIndex&#45;&#45;" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step3-next-btn" @click="tabIndex++" variant="success" size="sm">Next
@@ -293,7 +293,7 @@
                         </em>
                     </b-card>
                 </div>
-            </b-tab>
+            </b-tab>-->
             <!-- Step 6 -->
             <b-tab>
                 <template slot="title">
@@ -345,6 +345,7 @@
     import Sidebar from '../sidebar/Sidebar.vue'
     import Feedback from '../feedback/Feedback.vue'
     import Compare from '../feedback/Compare.vue'
+    import EventBus from './../../../event-bus';
 
     export default {
 
@@ -585,6 +586,16 @@
 
             },
 
+            step4NextClicked() {
+                EventBus.$emit('HIDE_ASIDE');
+                this.tabIndex++
+            },
+
+            step4BackClicked() {
+                EventBus.$emit('HIDE_ASIDE');
+                this.tabIndex--
+            },
+
             showItemInfo() {
                 if (this.itemInfoVisibility == true) {
                     this.itemInfoVisibility = false
@@ -635,7 +646,7 @@
         position: absolute;
         z-index: 1000;
         left: 100px;
-        top: 100px;
+        top: 60px;
         width: 1000px;
     }
 

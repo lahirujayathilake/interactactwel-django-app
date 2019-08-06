@@ -14,8 +14,8 @@
                 </b-col>
                 <b-col lg="6">
                     <h6>Selected Actors</h6>
-                    <b-list-group class="no-padding" v-for="item in selectedGoals">
-                        <b-list-group-item><small>{{item.goal}}</small></b-list-group-item>
+                    <b-list-group class="no-padding" v-for="item in selectedActors">
+                        <b-list-group-item><small>{{item.actor}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
             </b-row>

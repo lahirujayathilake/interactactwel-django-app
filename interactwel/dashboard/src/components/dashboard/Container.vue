@@ -5,12 +5,14 @@
             <leaflet-map></leaflet-map>
             <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
         </article>
+        <aside v-show="asideVisibility"><feedback></feedback></aside>
     </div>
 </template>
 
 <script>
 
     import Wizard from './wizard/Wizard.vue'
+    import Feedback from './feedback/Feedback.vue'
     import LeafletMap from './map/LeafletMap.vue'
     import RegionalSummary from './map/RegionalSummary.vue'
     import EventBus from './../../event-bus';
@@ -19,6 +21,7 @@
         name: 'Container',
 
         components: {
+            Feedback,
             Wizard, LeafletMap, RegionalSummary,
         },
 
@@ -33,6 +36,7 @@
             return {
                 chartsVisibility: true,
                 wizardVisibility: true,
+                asideVisibility: false,
                 regionalSummaryVisibility: true,
 
                 prevLayerClicked: null,
@@ -47,6 +51,12 @@
             }),
                 EventBus.$on('EXIT_WIZARD', function () {
                     $this.wizardVisibility = true;
+                }),
+                EventBus.$on('SHOW_ASIDE', function () {
+                    $this.asideVisibility = true;
+                }),
+                EventBus.$on('HIDE_ASIDE', function () {
+                    $this.asideVisibility = false;
                 }),
             EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
 
@@ -112,7 +122,6 @@
         flex: 0 0 400px;
         height: calc(92vh - 20px);
         overflow: auto;
-        padding: 1rem;
-        background-color: #FFF;
+        background-color: #ededed;
     }
 </style>
