@@ -103,7 +103,7 @@
 
     #main > article {
         flex: 1;
-        height: calc(60vh - 20px);
+        height: calc(94vh - 20px);
     }
 
     #main > nav {
