@@ -259,7 +259,7 @@
                 </div>
             </b-tab>
             <!-- Step 5 -->
-            <!--<b-tab>
+            <b-tab>
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">5</div>
@@ -274,26 +274,28 @@
                             <b-container>
                                 <b-row>
                                     <nav>
-                                        <compare></compare>
+                                        <sidebar></sidebar>
                                     </nav>
                                     <article>
-                                        <feedback></feedback>
+                                        <charts :goals="goals" :actors="actors" :actions="actions"
+                                                :selectedGoals="selectedGoals" :selectedActors="selectedActors"
+                                                :selectedActions="selectedActions"></charts>
                                     </article>
                                 </b-row>
                             </b-container>
                         </b-card-body>
                         <em slot="footer">
                             <b-button-group>
-                                <b-button id="step3-back-btn" @click="tabIndex&#45;&#45;" variant="outline-success" size="sm">
+                                <b-button id="step3-back-btn" @click="step5BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
-                                <b-button id="step3-next-btn" @click="tabIndex++" variant="success" size="sm">Next
+                                <b-button id="step3-next-btn" @click="step5NextClicked" variant="success" size="sm">Next
                                 </b-button>
                             </b-button-group>
                         </em>
                     </b-card>
                 </div>
-            </b-tab>-->
+            </b-tab>
             <!-- Step 6 -->
             <b-tab>
                 <template slot="title">
@@ -316,7 +318,7 @@
                         </b-card-body>
                         <em slot="footer">
                             <b-button-group>
-                                <b-button id="step6-next-btn" @click="tabIndex--" variant="outline-success" size="sm">
+                                <b-button id="step6-next-btn" @click="step6BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step6-next-btn" @click="tabIndex++" variant="success" size="sm">Finish
@@ -587,12 +589,27 @@
             },
 
             step4NextClicked() {
+                EventBus.$emit('SHOW_ASIDE');
+                this.tabIndex++
+            },
+
+            step5NextClicked() {
                 EventBus.$emit('HIDE_ASIDE');
                 this.tabIndex++
             },
 
+            step5BackClicked() {
+                EventBus.$emit('HIDE_ASIDE');
+                this.tabIndex--
+            },
+
             step4BackClicked() {
                 EventBus.$emit('HIDE_ASIDE');
+                this.tabIndex--
+            },
+
+            step6BackClicked() {
+                EventBus.$emit('SHOW_ASIDE');
                 this.tabIndex--
             },
 
