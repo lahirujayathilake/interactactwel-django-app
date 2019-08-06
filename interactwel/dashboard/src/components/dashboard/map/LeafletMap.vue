@@ -364,7 +364,7 @@
 
         created() {
             this.loading = true;
-            axios.get("/static/subbasins.geojson")
+            axios.get("/static/umatilla_subbasins.geojson")
                 .then(response => {
                     this.geoJson_subbasin = response.data;
                     this.loading = true;
