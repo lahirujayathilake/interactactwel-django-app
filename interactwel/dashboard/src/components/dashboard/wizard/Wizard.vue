@@ -7,8 +7,11 @@
                     <div class="step-progress-bar">
                         <div class="step-no">1</div>
                         <h4 class="list-group-item-heading">Goals</h4>
+                        <h4-right class="list-group-item-heading">&#10003;</h4-right>
                         <p class="list-group-item-text">{{step1_desc}}</p>
+                        
                     </div>
+                    
                 </template>
                 <div id="step1" title="Step 1"
                      icon="ti-user">
@@ -331,9 +334,9 @@
         </b-tabs>
         <b-modal v-model="showInfoModal" ok-only>
             <template slot="modal-title">
-                Empty fields detected!
+                No selections were made.
             </template>
-            No worries! We filled it for you.
+            Please be advised that all available choices are being considered.
             <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
                 <b-button size="sm" variant="success" @click="ok()">Ok</b-button>
             </template>
@@ -687,6 +690,15 @@
         color: #5f6c73;
         margin-bottom: .05rem;
         text-align: left;
+    }
+
+    .step-progress-bar h4-right {
+        float: right;
+        font-size: 1em;
+        font-weight: 700;
+        color: #5f6c73;
+        margin-bottom: .05rem;
+        text-align: right;
     }
 
     .step-progress-bar p {
