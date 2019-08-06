@@ -251,6 +251,19 @@
         position: relative;
         left: 50%;
         margin-bottom: 20px;
-
     }
+
+    .filter-options-container {
+        text-align: left;
+    }
+
+    .filter-options {
+        padding: 5px;
+        color: #FFFFFF;
+        background-color: #EFEFEF;
+        margin: 5px !important;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
 </style>

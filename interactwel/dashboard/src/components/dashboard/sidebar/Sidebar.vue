@@ -147,12 +147,4 @@
     #sidebar .nav-link:hover{
         background-color: #000 ;
     }
-
-    #main > aside {
-        flex: 0 0 400px;
-        height: calc(92vh - 20px);
-        overflow: auto;
-        padding: 1rem;
-        background-color: #FFF;
-    }
 </style>

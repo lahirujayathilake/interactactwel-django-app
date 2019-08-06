@@ -1,7 +1,20 @@
 <template>
-    <component v-show="currentChartVisibility" v-bind:is="component=this.currentChartComponent" :goals="goals" :actors="actors" :actions="actions"
-               :selectedGoals="selectedGoals" :selectedActors="selectedActors"
-               :selectedActions="selectedActions"></component>
+    <div>
+        <component v-show="currentChartVisibility" v-bind:is="component=this.currentChartComponent" :goals="goals"
+                   :actors="actors" :actions="actions"
+                   :selectedGoals="selectedGoals" :selectedActors="selectedActors"
+                   :selectedActions="selectedActions"></component>
+        <div class="feedback-bottom-pane">
+            <b-row>
+                <b-col lg="9">
+                    <small>Please provide any feedback you have on generated adaptation plans.</small>
+                </b-col>
+                <b-col lg="3">
+                    <button @click="showAside" class="btn btn-success">Feedback</button>
+                </b-col>
+            </b-row>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -32,27 +45,27 @@
 
 
         props: {
-            goals:{
+            goals: {
                 type: Array,
                 default: []
             },
-            actors:{
+            actors: {
                 type: Array,
                 default: []
             },
-            actions:{
+            actions: {
                 type: Array,
                 default: []
             },
-            selectedGoals:{
+            selectedGoals: {
                 type: Array,
                 default: []
             },
-            selectedActors:{
+            selectedActors: {
                 type: Array,
                 default: []
             },
-            selectedActions:{
+            selectedActions: {
                 type: Array,
                 default: []
 
@@ -64,7 +77,7 @@
 
                 currentChartComponent: 'overview',
                 currentChartVisibility: true,
-                colorIndex : 0,
+                colorIndex: 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
                 planName: "Adaptation Plan 1",
@@ -138,7 +151,7 @@
             }
         },
 
-        mounted(){
+        mounted() {
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
 
@@ -146,15 +159,11 @@
             })
             EventBus.$on('CLICK_ITEM_PLAN', function () {
                 $this.currentChartVisibility = true,
-                $this.showPlanGraph();
-            })
-            EventBus.$on('CLICK_ITEM_COST', function () {
-                $this.currentChartVisibility = true,
-                $this.showCostGraph();
+                    $this.showPlanGraph();
             })
             EventBus.$on('CLICK_ITEM', function (currentChartComponent) {
                 $this.currentChartVisibility = true,
-                $this.showGraph(currentChartComponent);
+                    $this.showGraph(currentChartComponent);
             })
             EventBus.$on('CLOSE', function () {
                 $this.currentChartVisibility = false
@@ -184,12 +193,9 @@
                 this.currentChartComponent = selectedChart;
             },
 
-            showCostGraph(){
-                this.isCostGraphActive = true;
-                this.isPlanGraphActive = false;
-                this.costVisibility = false;
-                this.planVisibility = false;
-            },
+            showAside() {
+                EventBus.$emit('SHOW_ASIDE');
+            }
         },
         //props: ["jsonData"]
     }
@@ -210,11 +216,16 @@
         border-radius: 5px;
     }
 
-    #graph{
+    .baseline-graph-container{
+        background-color: #f7f7f7;
+        padding: 0.5rem;
+    }
+
+    #graph {
         width: 750px;
     }
 
-    #graph .nav-item a{
+    #graph .nav-item a {
         color: #28a645;
         text-decoration: none;
         font-weight: 500;
@@ -222,11 +233,16 @@
         font-size: 14px;
     }
 
-    #graph .nav-item .nav-link.active{
+    #graph .nav-item .nav-link.active {
         color: #5e6b7e;
         font-weight: 500;
         background-color: #FFFFFF;
         font-size: 14px;
-        border-top:2px solid #28a645;
+        border-top: 2px solid #28a645;
+    }
+
+    .feedback-bottom-pane {
+        background-color: #ededed;
+        padding: 1rem;
     }
 </style>

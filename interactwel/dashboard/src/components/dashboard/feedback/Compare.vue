@@ -145,24 +145,6 @@
         background-color: #4cae4c !important;
     }
 
-    .chart-inner {
-        position: absolute !important;
-        width: 100% !important;
-        bottom: 0 !important;
-    }
-
-    .filter-options-container {
-        text-align: left;
-    }
-
-    .filter-options {
-        padding: 10px;
-        color: #FFFFFF;
-        background-color: #EFEFEF;
-        margin: 5px !important;
-        border-radius: 5px;
-    }
-
     #sidebar .active {
         color: #FFF !important;
         background-color: #4cae4c;

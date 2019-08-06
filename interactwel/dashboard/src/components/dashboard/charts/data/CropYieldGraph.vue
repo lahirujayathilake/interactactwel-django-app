@@ -1,5 +1,5 @@
 <template>
-        <vertical-bar-chart :chart-data='datacollection' :options="options" :width="600" :height="400"></vertical-bar-chart>
+        <vertical-bar-chart :chart-data='datacollection' :options="options" :width="300" :height="400"></vertical-bar-chart>
 </template>
 <script>
     import axios from 'axios';
@@ -42,7 +42,12 @@
                         text: 'Total yield (kg) of planted crops in watershed'
                     },
                     legend: {
-                        position: 'left',
+                        position: 'top',
+                        labels: {
+                            fontSize: 10,
+                            boxWidth: 10
+
+                        }
                     },
                     tooltips: {
                         mode: 'point',

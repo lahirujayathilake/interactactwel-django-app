@@ -1,5 +1,5 @@
 <template>
-        <vertical-bar-chart :chart-data='datacollection' :options="options" :width="600" :height="400"></vertical-bar-chart>
+        <vertical-bar-chart :chart-data='datacollection' :options="options" :width="320" :height="400"></vertical-bar-chart>
 </template>
 <script>
     import axios from 'axios';

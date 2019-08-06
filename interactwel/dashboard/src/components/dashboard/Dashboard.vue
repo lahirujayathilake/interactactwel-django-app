@@ -133,36 +133,6 @@
         background-color: #263238 !important;
     }
 
-    #main {
-        display: flex;
-        min-height: calc(100vh - 40vh);
-    }
-
-    #main > article {
-        flex: 1;
-        height: calc(92vh - 20px);
-    }
-
-    #main > nav {
-        flex: 0 0 auto;
-        min-width: 200px;
-        height: calc(92vh - 20px);
-        overflow: auto;
-        background-color: #37474F;
-    }
-
-    #main > nav {
-        order: -1;
-    }
-
-    #main > aside {
-        flex: 0 0 400px;
-        height: calc(92vh - 20px);
-        overflow: auto;
-        padding: 1rem;
-        background-color: #FFF;
-    }
-
     #sidebar-left a {
         color: #fff;
     }
