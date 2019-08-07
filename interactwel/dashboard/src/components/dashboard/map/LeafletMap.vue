@@ -145,7 +145,7 @@
                 geoJson_reservoir: null,
                 geoJson_WaterRigths: null,
                 geoJson_irrland: null,
-                zoom: 10,
+                zoom: 9,
                 maxZoom: 17,
                 minZoom: 3,
                 center: L.latLng(45.4435777, -119.4455003),
@@ -196,7 +196,10 @@
                     release_schd0:'Jan. – Jun.: 0, 0, 0, 50, 375, 450', release_schd1:'Jul. – Dec.: 625, 550, 400, 50, 0, 0'},
                 ],
                 gaugingStationList: [
-                    {id: "14036000", name:'WILLOW CREEK NR ARLINGTON, OREG.', position: {lat: 45.752977, lng: -120.011102}, data_Range: '1960-10 – 1979-09', obs_type: 'Daily', num_flowobs: '6938'}
+                    {id: "14036000", name:'WILLOW CREEK NR ARLINGTON, OREG.', position: {lat: 45.752977, lng: -120.011102}, data_Range: '1960-10 – 1979-09', obs_type: 'Daily', num_flowobs: '6938'},
+                    {id: "14020850", name:'UMATILLA R AT W RESERV BOUNDARY NR PENDLETON, OR', position: {lat: 45.67235332, lng: -118.7355371}, data_Range: '1995-10 – 2018-06', obs_type: 'Daily', num_flowobs: 'TBD'},
+                    {id: "14020990", name:'WILDHORSE CR AT PENDLETON, OR', position: {lat: 45.685701, lng: -118.747183}, data_Range: '1998-12 – 2014-09', obs_type: 'Daily', num_flowobs: 'TBD'},
+                    {id: "14020990", name:'WILDHORSE CR AT PENDLETON, OR', position: {lat: 45.685701, lng: -118.747183}, data_Range: '1998-12 – 2014-09', obs_type: 'Daily', num_flowobs: 'TBD'}
                 ],
 
                 tileProviders: [
@@ -364,7 +367,7 @@
 
         created() {
             this.loading = true;
-            axios.get("/static/umatilla_subbasins.geojson")
+            axios.get("/static/subbasins.geojson")
                 .then(response => {
                     this.geoJson_subbasin = response.data;
                     this.loading = true;

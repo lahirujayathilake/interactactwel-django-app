@@ -93,7 +93,8 @@
                     {id: "2", area: '81,975', numHRUs: '582', agrland: '15,020', stream: "Middle Willow Creek"},
                     {id: "3", area: '146,020', numHRUs: '768', agrland: '63,345', stream: "Rhea Creek"},
                     {id: "4", area: '162,546', numHRUs: '821', agrland: '54,076', stream: "Eightmile Canyon"},
-                    {id: "5", area: '70,672', numHRUs: '794', agrland: '71,920', stream:"Lower Willow Creek"}
+                    {id: "5", area: '70,672', numHRUs: '794', agrland: '71,920', stream:"Lower Willow Creek"},
+                    {id: "6", area: '86,795', numHRUs: 'TBD', agrland: '71,920', stream:"Lower Willow Creek"}
                 ],
 
                 datacollectionwr: null,

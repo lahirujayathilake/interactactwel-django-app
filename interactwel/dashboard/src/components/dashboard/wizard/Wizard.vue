@@ -345,12 +345,17 @@
 </template>
 
 <script>
+    import axios from 'axios';
 
-    import Charts from '../charts/ChartContainer.vue'
-    import Sidebar from '../sidebar/Sidebar.vue'
-    import Feedback from '../feedback/Feedback.vue'
-    import Compare from '../feedback/Compare.vue'
+    import Charts from '../charts/ChartContainer.vue';
+    import Sidebar from '../sidebar/Sidebar.vue';
+    import Feedback from '../feedback/Feedback.vue';
+    import Compare from '../feedback/Compare.vue';
     import EventBus from './../../../event-bus';
+
+    import ActionsOpts from './../../../../public/static/actions.json';
+    import GoalsOpts from './../../../../public/static/goals.json';
+    import ActorsOpts from './../../../../public/static/actors.json';
 
     export default {
 
@@ -392,127 +397,14 @@
                 selectedActors: [],
                 selectAllActors: false,
 
-                goals: [
-                    {
-                        id: "0",
-                        goal: 'Improve surface water quality',
-                        readonly: false,
-                        tooltip: true,
-                        info: "Surface water quality is assessed for each stream, based on total nitrogen loading, temperature, and dissolved oxygen."
-                    },
-                    {
-                        id: "1",
-                        goal: 'Increase recharge to shallow aquifer',
-                        readonly: false,
-                        tooltip: true,
-                        info: "Shallow aquifer recharge is assessed for each sub-basin, based on millimeters of water infiltrated."
-                    },
-                    //{id: "2", goal: 'Minimize land use change', readonly: true},
-                    {
-                        id: "2",
-                        goal: 'Increase agriculture productivity',
-                        readonly: false,
-                        tooltip: true,
-                        info: "Agriculture productivity is assessed for each sub-basin based on area planted, crop yields, and net income."
-                    },
-                    {id: "3", goal: 'Increase energy production', readonly: true, tooltip: false, info: ""},
-                    {
-                        id: "4",
-                        goal: 'Improve ecological habitat',
-                        readonly: false,
-                        tooltip: true,
-                        info: "Ecological habitat is assessed in each stream based on stream flow, temperature and dissolved oxygen."
-                    },
-                    {id: "5", goal: 'Other', readonly: true, tooltip: false, info: ""},
+                goals: GoalsOpts,
 
-                ],
+                actions: ActionsOpts,
 
-                actions: [
-                    {
-                        id: 0,
-                        name: "act1",
-                        action: 'No changes to current water right allocations',
-                        readonly: false,
-                        info: ""
-                    },
-                    //{id: 1, name: "act2", action: 'Increase water right volume by 20%', readonly: false},
-                    //{id: 2, name: "act3", action: 'Decrease water right volume by 20%', readonly: false},
-                    {
-                        id: 1,
-                        name: "act2",
-                        action: 'Increase the volume of non-Columbia surface water',
-                        readonly: false,
-                        info: 'Increase the volume of non-Columbia surface water, while reducing the same total volume of ground water and/or Columbia  water.'
-                    },
-                    {
-                        id: 2,
-                        name: "act3",
-                        action: 'Decrease the volume of non-Columbia surface water',
-                        readonly: false,
-                        info: 'Decrease the volume of non-Columbia surface water, while increasing the same total volume of ground water and/or Columbia water.'
-                    },
-                    //{id: 5, name: "act6", action: 'Increase amount of RW', readonly: true},
-                    {
-                        id: 3,
-                        name: "act4",
-                        action: 'Increase the volume of groundwater',
-                        readonly: false,
-                        info: "Increase the volume of ground water, while reducing the same total volume of non-Columbia surface water and/or Columbia  water."
-                    },
-                    {
-                        id: 4,
-                        name: "act5",
-                        action: 'Decrease the volume of groundwater',
-                        readonly: false,
-                        info: "Decrease the volume of ground water, while increasing the same total volume of non-Columbia surface water and/or Columbia water."
-                    },
-                    //{id: 5, name: "act6", action: 'Invest in renewable energy sources', readonly: true, info:""},
-                    {
-                        id: 5,
-                        name: "act7",
-                        action: 'Increase the volume of Columbia surface water',
-                        readonly: true,
-                        info: "Increase the volume of Columbia surface water, while reducing the same total volume of ground water and/or non-Columbia water."
-                    },
-                    {
-                        id: 6,
-                        name: "act8",
-                        action: 'Decrease the volume of Columbia surface water',
-                        readonly: true,
-                        info: "Decrease the volume of Columbia surface water, while increasing the same total volume of ground water and/or non-Columbia water."
-                    },
-                    //{id: 11, name: "act12", action: 'Invest in infra to pump RW', readonly: false}
-                ],
-
-                actors: [
-                    {
-                        id: 0,
-                        name: "F_SW_GW",
-                        actor: 'Farmer with Columbia river water rights',
-                        readonly: false,
-                        info: "Actors that currently produce agricultural products and have the right to use Columbia River water."
-                    },
-                    {
-                        id: 1,
-                        name: "F_SW",
-                        actor: 'Farmer with other surface water rights',
-                        readonly: false,
-                        info: 'Actors that currently produce agricultural products and have the right to use surface water (excluding Columbia River).'
-                    },
-                    {
-                        id: 2,
-                        name: "F_GW",
-                        actor: 'Farmer with groundwater rights',
-                        readonly: false,
-                        info: 'Actors that currently produce agricultural products and have the right to use ground water.'
-                    }
-                    //{id: 3, name: "EP", actor: 'Solar Power Plants', readonly: true},
-                    //{id: 4, name: "DC", actor: 'Coal Power Plants', readonly: true},
-                    //{id: 5, name: "TRI", actor: 'Data Centers', readonly: true},
-                    //{id: 6, name: "MUN", actor: 'Dairies', readonly: true}
-                ],
+                actors: ActorsOpts,
             }
         },
+
         methods: {
             selectGoals() {
                 this.selectedGoals = [];
