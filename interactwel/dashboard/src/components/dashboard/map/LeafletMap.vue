@@ -106,12 +106,16 @@
     import EventBus from './../../../event-bus';
     import PopupContentWStations from "./popup/PopupContent_WStations";
     import PopupContentReservoirs from "./popup/PopupContent_Reservoirs";
-    import PopupContentGaugeStations from "./popup/PopupContent_GaugeStations.vue"
+    import PopupContentGaugeStations from "./popup/PopupContent_GaugeStations.vue";
 
     import PrecipDataJson from "../../../assets/weather_station_data.json";
     import ReservoirDataJson from "../../../assets/reservoirs_data.json";
     import GaugeDataJson from "../../../assets/streamflow_station_data.json";
     import PopupContent_WaterRights from "./popup/PopupContent_WaterRights";
+
+    import GaugingStations from './../../../../public/static/gauging_stations.json';
+    import ReservoirList from './../../../../public/static/reservoirs_list.json';
+    import WeatherStations from './../../../../public/static/weather_stations.json';
 
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -186,21 +190,9 @@
                 ReservoirData: ReservoirDataJson,
                 GaugeData: GaugeDataJson,
 
-                weatherStationList: [
-                    {id: "1", name:'USC00353827 (Hempner, OR)', position: {lat: 45.365, lng: -119.584}, data_Range: '1/1/1940 – 12/31/2010', obs_type: 'Daily', num_Pobs: '25,840', num_Tobs: '25,832'},
-                    {id: "2", name: 'USC00354161 (Ione 18 S, OR US)', position: {lat: 45.317, lng: -119.881}, data_Range: '1/1/1940 – 5/31/2010', obs_type: 'Daily', num_Pobs: '23,208', num_Tobs: '0'}
-                ],
-
-                reservoirStationList: [
-                    {id: "1", name:'Willow Creek Reservoir', position: {lat: 45.346896, lng: -119.544586}, spillway_vol: '4142 ac-ft', spillway_sfarea: '125 ac', espillway_vol: '6048 ac-ft', espillway_sfarea: '158 ac',
-                    release_schd0:'Jan. – Jun.: 0, 0, 0, 50, 375, 450', release_schd1:'Jul. – Dec.: 625, 550, 400, 50, 0, 0'},
-                ],
-                gaugingStationList: [
-                    {id: "14036000", name:'WILLOW CREEK NR ARLINGTON, OREG.', position: {lat: 45.752977, lng: -120.011102}, data_Range: '1960-10 – 1979-09', obs_type: 'Daily', num_flowobs: '6938'},
-                    {id: "14020850", name:'UMATILLA R AT W RESERV BOUNDARY NR PENDLETON, OR', position: {lat: 45.67235332, lng: -118.7355371}, data_Range: '1995-10 – 2018-06', obs_type: 'Daily', num_flowobs: 'TBD'},
-                    {id: "14020990", name:'WILDHORSE CR AT PENDLETON, OR', position: {lat: 45.685701, lng: -118.747183}, data_Range: '1998-12 – 2014-09', obs_type: 'Daily', num_flowobs: 'TBD'},
-                    {id: "14020990", name:'WILDHORSE CR AT PENDLETON, OR', position: {lat: 45.685701, lng: -118.747183}, data_Range: '1998-12 – 2014-09', obs_type: 'Daily', num_flowobs: 'TBD'}
-                ],
+                weatherStationList: WeatherStations,
+                reservoirStationList: ReservoirList,
+                gaugingStationList: GaugingStations,
 
                 tileProviders: [
                     {

@@ -1,0 +1,6 @@
+[
+    { "id": "14036000", "name": "WILLOW CREEK NR ARLINGTON, OREG.", "position": { "lat": 45.752977, "lng": -120.011102 }, "data_Range": "1960-10 – 1979-09", "obs_type": "Daily", "num_flowobs": "6938" },
+    { "id": "14020850", "name": "UMATILLA R AT W RESERV BOUNDARY NR PENDLETON, OR", "position": { "lat": 45.67235332, "lng": -118.7355371 }, "data_Range": "1995-10 – 2018-06", "obs_type": "Daily", "num_flowobs": "TBD" },
+    { "id": "14020990", "name": "WILDHORSE CR AT PENDLETON, OR", "position": { "lat": 45.685701, "lng": -118.747183 }, "data_Range": "1998-12 – 2014-09", "obs_type": "Daily", "num_flowobs": "TBD" },
+    { "id": "14020990", "name": "WILDHORSE CR AT PENDLETON, OR", "position": { "lat": 45.685701, "lng": -118.747183 }, "data_Range": "1998-12 – 2014-09", "obs_type": "Daily", "num_flowobs": "TBD" }
+]
