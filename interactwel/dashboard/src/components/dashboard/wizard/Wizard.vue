@@ -2,7 +2,7 @@
     <div class="wizard-container">
         <b-tabs v-model="tabIndex" fill>
             <!-- Step 1-->
-            <b-tab active>
+            <b-tab v-bind:class="{active: isStep1Active}">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">1</div>
