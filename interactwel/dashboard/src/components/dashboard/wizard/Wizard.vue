@@ -78,7 +78,7 @@
                 </div>
             </b-tab>
             <!-- Step 2 -->
-            <b-tab>
+            <b-tab :disabled="isStep1Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">2</div>
@@ -148,7 +148,7 @@
                 </div>
             </b-tab>
             <!-- Step 3 -->
-            <b-tab>
+            <b-tab :disabled="isStep2Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">3</div>
@@ -222,7 +222,7 @@
                 </div>
             </b-tab>
             <!-- Step 4 -->
-            <b-tab>
+            <b-tab :disabled="isStep3Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">4</div>
@@ -261,7 +261,7 @@
                 </div>
             </b-tab>
             <!-- Step 5 -->
-            <b-tab>
+            <b-tab :disabled="isStep3Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">5</div>
@@ -299,7 +299,7 @@
                 </div>
             </b-tab>
             <!-- Step 6 -->
-            <b-tab>
+            <b-tab :disabled="isStep3Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">6</div>
