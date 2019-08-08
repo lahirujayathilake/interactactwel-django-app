@@ -163,14 +163,14 @@
                 fillColor: "rgba(76, 175, 80, 0.44)",
                 reservoirIcon: L.icon({
                         iconUrl: require('../../../assets/reservoir_trans.png'),
-                        iconSize:     [37, 37], // size of the icon
+                        iconSize:     [27, 27], // size of the icon
                         shadowSize:   [0, 0], // size of the shadow
                         iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
                         shadowAnchor: [0, 0]  // the same for the shadow
                     }),
                 wstationIcon: L.icon({
                         iconUrl: require('../../../assets/OSU_icon_rain_01.png'),
-                        iconSize:     [37, 37], // size of the icon
+                        iconSize:     [27, 27], // size of the icon
                         shadowSize:   [0, 0], // size of the shadow
                         iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
                         shadowAnchor: [0, 0]  // the same for the shadow
@@ -178,7 +178,7 @@
 
                 gaugingIcon: L.icon({
                         iconUrl: require('../../../assets/OSU_icon_water.png'),
-                        iconSize:     [37, 37], // size of the icon
+                        iconSize:     [27, 27], // size of the icon
                         shadowSize:   [0, 0], // size of the shadow
                         iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
                         shadowAnchor: [0, 0]  // the same for the shadow

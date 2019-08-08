@@ -1,4 +1,9 @@
 [
     { "id": "1", "name": "USC00353827 (Hempner, OR)", "position": { "lat": 45.365, "lng": -119.584 }, "data_Range": "1/1/1940 – 12/31/2010", "obs_type": "Daily", "num_Pobs": "25,840", "num_Tobs": "25,832" },
-    { "id": "2", "name": "USC00354161 (Ione 18 S, OR US)", "position": { "lat": 45.317, "lng": -119.881 }, "data_Range": "1/1/1940 – 5/31/2010", "obs_type": "Daily", "num_Pobs": "23,208", "num_Tobs": "0" }
+    { "id": "2", "name": "USC00354161 (Ione 18 S, OR US)", "position": { "lat": 45.317, "lng": -119.881 }, "data_Range": "1/1/1940 – 5/31/2010", "obs_type": "Daily", "num_Pobs": "23,208", "num_Tobs": "0" },
+
+    { "id": "3", "name": "USW00024152 (Meacham, OR US)", "position": { "lat": 45.51139, "lng": -118.42472 }, "data_Range": "1/1/1973 – 8/5/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" },
+    { "id": "4", "name": "USW00024155 (Pendleton E OR Regional Airport, OR US)", "position": { "lat": 45.6983, "lng": -118.8547 }, "data_Range": "1/1/1928 – 8/5/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" },
+    { "id": "5", "name": "USC00355593 (Milton Freewater, OR US)", "position": { "lat": 45.9428, "lng": -118.4089 }, "data_Range": "1/1/1928 – 5/31/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" },
+    { "id": "6", "name": "USC00358726 (Ukiah, OR US)", "position": { "lat": 45.1358, "lng": -118.9389 }, "data_Range": "5/1/1922 – 1/28/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" }
 ]
