@@ -7,20 +7,16 @@
                     <div class="step-progress-bar">
                         <div class="step-no">1</div>
                         <h4 class="list-group-item-heading">Goals</h4>
-                        <h4r class="list-group-item-heading">&#10003;</h4r>
+                        <h4r v-if="isStep1Active" class="list-group-item-heading">&#10003;</h4r>
                         <p class="list-group-item-text">{{step1_desc}}</p>
-                        
                     </div>
-                    
                 </template>
-                <div id="step1" title="Step 1"
-                     icon="ti-user">
+                <div id="step1" title="Step 1" icon="ti-user">
                     <div class="help-block">
                         <b-card class="mb-2"
                                 title="What are Goals?"
                                 tag="article"
                                 style="max-width: 25rem;"
-
                         >
                             <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
                             <b-card-text>
@@ -87,6 +83,7 @@
                     <div class="step-progress-bar">
                         <div class="step-no">2</div>
                         <h4 class="list-group-item-heading">Actors</h4>
+                        <h4r v-if="isStep2Active" class="list-group-item-heading">&#10003;</h4r>
                         <p class="list-group-item-text">{{step2_desc}}</p>
                     </div>
                 </template>
@@ -156,6 +153,7 @@
                     <div class="step-progress-bar">
                         <div class="step-no">3</div>
                         <h4 class="list-group-item-heading">Actions</h4>
+                        <h4r v-if="isStep3Active" class="list-group-item-heading">&#10003;</h4r>
                         <p class="list-group-item-text">{{step3_desc}}</p>
                     </div>
                 </template>
@@ -229,6 +227,7 @@
                     <div class="step-progress-bar">
                         <div class="step-no">4</div>
                         <h4 class="list-group-item-heading">Visualization</h4>
+                        <!--<h4r v-if="isStep4Active" class="list-group-item-heading">&#10003;</h4r>-->
                         <p class="list-group-item-text">{{step4_desc}}</p>
                     </div>
                 </template>
@@ -398,9 +397,7 @@
                 selectAllActors: false,
 
                 goals: GoalsOpts,
-
                 actions: ActionsOpts,
-
                 actors: ActorsOpts,
             }
         },
@@ -447,9 +444,11 @@
                     this.selectAllGoals = true
                     this.showInfoModal = true
                     this.tabIndex++
+                    this.isStep1Active = true
                 }
                 else {
                     this.tabIndex++
+                    this.isStep1Active = true
                     return true
                 }
 
@@ -461,9 +460,11 @@
                     this.selectAllActors = true
                     this.showInfoModal = true
                     this.tabIndex++
+                    this.isStep2Active = true
                 }
                 else {
                     this.tabIndex++
+                    this.isStep2Active = true
                     return true
                 }
 
@@ -475,9 +476,11 @@
                     this.selectAllActions = true
                     this.showInfoModal = true
                     this.tabIndex++
+                    this.isStep3Active = true
                 }
                 else {
                     this.tabIndex++
+                    this.isStep3Active = true
                     return true
                 }
 

@@ -1,7 +1,8 @@
 <template>
-    <l-map ref="myMap" :zoom="zoom" :center="center">
+    <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
+        <l-control-zoom position="topright"></l-control-zoom>
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-control-layers position="topleft" ref="layersControl" :sort-layers="true">
+        <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
         </l-control-layers>
 
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Sub-basins</strong></font>">
@@ -89,18 +90,16 @@
         :attribution="tileProvider.attribution"
         layer-type="base"/>
 
-     <l-control-scale position="bottomleft" :maxWidth="200" imperial="imperial"/>
+     <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
      <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
      <img src="../../../assets/water_rights_legend.png" class="map-legend">
     </l-map>
     
 </template>
 
-
-
 <script>
 
-    import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup} from 'vue2-leaflet';
+    import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup, LControlZoom} from 'vue2-leaflet';
     import axios from 'axios';
     import L from 'leaflet';
     import EventBus from './../../../event-bus';
@@ -139,7 +138,8 @@
             'popup-content-ws': PopupContentWStations,
             'popup-content-rs': PopupContentReservoirs,
             'popup-content-gs': PopupContentGaugeStations,
-            'popup-content-wr': PopupContent_WaterRights
+            'popup-content-wr': PopupContent_WaterRights,
+            'l-control-zoom': LControlZoom
         },
 
         data() {
