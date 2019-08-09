@@ -2,18 +2,18 @@
     <div id="graph" class="card">
         <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span>
-            <strong>Overview</strong>
+            <strong style="font-size:18px">Overview</strong>
         </div>
         <div class="card-body">
             <b-row>
                 <b-col lg="6">
-                    <h6>Selected Goals</h6>
+                    <h6><strong>Selected Goals</strong></h6>
                     <b-list-group class="no-padding" v-for="item in selectedGoals">
                         <b-list-group-item><small>{{item.goal}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
-                    <h6>Selected Actors</h6>
+                    <h6><strong>Selected Actors</strong></h6>
                     <b-list-group class="no-padding" v-for="item in selectedActors">
                         <b-list-group-item><small>{{item.actor}}</small></b-list-group-item>
                     </b-list-group>
@@ -21,9 +21,9 @@
             </b-row>
             <b-row style="margin-top:20px;">
                 <b-col lg="12">
-                    <h6>Selected Actions by each actor</h6>
-                    <b-tabs>
-                        <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.name" active>
+                    <h6><strong>Selected Actions for each actor</strong></h6>
+                    <b-tabs card vertical>
+                        <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
                             <b-list-group v-for="item in getActions(actor)">
                                 <b-list-group-item><small>{{item.action}}</small></b-list-group-item>
                             </b-list-group>

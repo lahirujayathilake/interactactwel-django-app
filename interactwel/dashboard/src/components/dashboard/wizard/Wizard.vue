@@ -207,7 +207,7 @@
                         </b-card>
                         </b-collapse>
                     </div>
-                    <b-card style="width: 580px" no-body footer-tag="footer">
+                    <b-card style="width: 780px" no-body footer-tag="footer">
                         <div class="step-header" slot="header">Choose Actions
                             <em slot="header">
                                 <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Instructions </b-button>
@@ -224,7 +224,8 @@
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-card-body>
-                            <!--<b-tabs content-class="mt-3">
+                        <p class="card-text"><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
+                            <b-tabs card vertical content-class="mt-3">
                                 <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                                     <div class="list-group">
                                         <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
@@ -240,9 +241,9 @@
                                         </li>
                                     </div>
                                 </b-tab>
-                            </b-tabs>-->
-                            <p class="card-text"><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
-                            <b-form-select v-model="selected">
+                            </b-tabs>
+                            
+                            <!--<b-form-select v-model="selected">
                                 <option :value="null"disabled>-- Please select an actor --</option>
                                 <option :value="actor.id" v-for="actor in selectedActors" v-bind:key="actor.id">{{actor.actor}}</option>
                             </b-form-select>
@@ -258,7 +259,7 @@
                                                 :title="action.info">
                                     </b-badge>
                                 </li>
-                            </div>
+                            </div>-->
 
                         </b-card-body>
                         <em slot="footer">
