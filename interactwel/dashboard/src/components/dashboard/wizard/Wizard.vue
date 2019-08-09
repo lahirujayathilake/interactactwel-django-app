@@ -229,24 +229,23 @@
                                     </div>
                                 </b-tab>
                             </b-tabs>-->
-                        <p><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
-                        <b-form-select v-model="selected">
-                        <option :value="actor.id" v-for="actor in selectedActors" v-bind:key="actor.id">{{actor.actor}}</option>
-                        </b-form-select>
-                                    <div class="list-group">
-                                        <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
-                                            <label class="form-checkbox" :disabled="action.readonly">
-                                                <input type="checkbox" :value="actor.id + ',' + action.id"
-                                                       v-model="selectedActions"
-                                                       :disabled="action.readonly"/>
-                                                {{action.action}}
-                                            </label>
-                                            <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
-                                                     :title="action.info">
-                                            </b-badge>
-                                        </li>
-                                    </div>
-
+                            <p><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
+                            <b-form-select v-model="selected">
+                                <option :value="actor.id" v-for="actor in selectedActors" v-bind:key="actor.id">{{actor.actor}}</option>
+                            </b-form-select>
+                            <div class="list-group">
+                                <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
+                                    <label class="form-checkbox" :disabled="action.readonly">
+                                        <input type="checkbox" :value="selected + ',' + action.id"
+                                                v-model="selectedActions"
+                                                :disabled="action.readonly"/>
+                                        {{action.action}}
+                                    </label>
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
+                                                :title="action.info">
+                                    </b-badge>
+                                </li>
+                            </div>
 
                         </b-card-body>
                         <em slot="footer">
@@ -443,6 +442,7 @@
                 actions: ActionsOpts,
                 actors: ActorsOpts,
                 actor: [],
+                selected: [],
             }
         },
 
