@@ -81,7 +81,7 @@
                             </b-form>
                         </b-list-group>
                         <em slot="footer">
-                            <b-button @click="step1NextClicked" variant="success" size="sm">Next</b-button>
+                            <b-button @click="step1NextClicked" variant="next" size="sm">Next</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -153,13 +153,15 @@
                             </b-form>
                         </b-list-group>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step2-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step2-next-btn" @click="step2NextClicked" variant="success" size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                                <b-button id="step2-next-btn" @click="step2NextClicked" variant="next" size="sm">Next</b-button>
+                                <b-button id="step2-back-btn" @click="tabIndex--" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -249,14 +251,16 @@
 
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
-                                <b-button id="step3-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
+                            <!--<b-button-group>
+                                <b-button id="step3-back-btn" @click="tabIndex--" variant="back" size="sm">
                                     Back
                                 </b-button>
-                                <b-button id="step3-next-btn" @click="step3NextClicked" variant="success"
+                                <b-button id="step3-next-btn" @click="step3NextClicked" variant="next"
                                           size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step3-next-btn" @click="step3NextClicked" variant="next" size="sm">Next</b-button>
+                            <b-button id="step3-back-btn" @click="tabIndex--" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -289,13 +293,16 @@
                             </b-container>
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step2-back-btn" @click="step4BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step2-next-btn" @click="step4NextClicked" variant="success" size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step2-next-btn" @click="step4NextClicked" variant="next" size="sm">Next</b-button>
+                            <b-button id="step2-back-btn" @click="step4BackClicked" variant="back" size="sm">Back</b-button>
+                            
                         </em>
                     </b-card>
                 </div>
@@ -327,13 +334,15 @@
                             </b-container>
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step3-back-btn" @click="step5BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step3-next-btn" @click="step5NextClicked" variant="success" size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step3-next-btn" @click="step5NextClicked" variant="next" size="sm">Next</b-button>
+                            <b-button id="step3-back-btn" @click="step5BackClicked" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -359,13 +368,15 @@
                             <b-button variant="success">Save Report</b-button>
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step6-next-btn" @click="step6BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step6-next-btn" @click="tabIndex++" variant="success" size="sm">Finish
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step6-next-btn" @click="tabIndex++" variant="next" size="sm">Next</b-button>
+                            <b-button id="step6-next-btn" @click="step6BackClicked" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
@@ -795,6 +806,24 @@
 
     .btn.m-1{
         margin: -0.05rem !important;
+    }
+
+    .btn-next{
+        color: #fff !important;
+        background-color: #28a745 !important;
+        border-color: #28a745 !important;
+        padding: .25rem 3rem !important;
+        float: right !important;
+        margin-right: 0px !important;
+    }
+
+    .btn-back{
+        color: #28a745 !important;
+        background-color: transparent !important;
+        border-color: #28a745 !important;
+        padding: .25rem 3rem !important;
+        float: left !important;
+        margin-left: 0px !important;
     }
 
     .btn-outline-info{
