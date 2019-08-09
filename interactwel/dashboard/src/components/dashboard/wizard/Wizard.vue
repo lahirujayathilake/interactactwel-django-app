@@ -50,6 +50,11 @@
                                 <b-button v-b-toggle.collapse-1 class="m-1" size="sm"> Instructions </b-button>
                             </em>
                             </div>
+                            <b-card-body>
+                                <p class="card-text"><i>
+                                    Choose adaptation goals that are important to you.
+                                </i></p>
+                            </b-card-body>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -127,6 +132,11 @@
                                 <b-button v-b-toggle.collapse-2 class="m-1" size="sm"> Instructions </b-button>
                         </em>
                         </div>
+                        <b-card-body>
+                            <p class="card-text"><i>
+                                Choose the actors whose adaptation actions you want to visualize.
+                            </i></p>
+                        </b-card-body>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -231,8 +241,9 @@
                                     </div>
                                 </b-tab>
                             </b-tabs>-->
-                            <p><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
+                            <p class="card-text"><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
                             <b-form-select v-model="selected">
+                                <option :value="null"disabled>-- Please select an actor --</option>
                                 <option :value="actor.id" v-for="actor in selectedActors" v-bind:key="actor.id">{{actor.actor}}</option>
                             </b-form-select>
                             <div class="list-group">
@@ -453,7 +464,7 @@
                 actions: ActionsOpts,
                 actors: ActorsOpts,
                 actor: [],
-                selected: [],
+                selected: null,
             }
         },
 
