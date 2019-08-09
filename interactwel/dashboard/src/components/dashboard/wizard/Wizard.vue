@@ -164,6 +164,7 @@
                     </b-card>
                 </div>
             </b-tab>
+
             <!-- Step 3 -->
             <b-tab :disabled="isStep2Active === false">
                 <template slot="title">
@@ -181,9 +182,8 @@
                         <b-card
                                 tag="article"
                                 style="max-width: 25rem;"
-                                class="mb-2"
-                        >
-                        <h4 class="card-title">"What are Actions?"<b-button v-b-toggle.collapse-3 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
+                                class="mb-2">
+                                <h4 class="card-title">"What are Actions?"<b-button v-b-toggle.collapse-3 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
                             <!-- <b-card-text><strong>Why select Actions?</strong></b-card-text><br/> -->
                             <b-card-text>
                                 <p align="justify"><b>Adaptation Actions</b>
@@ -212,7 +212,7 @@
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-card-body>
-                            <b-tabs content-class="mt-3">
+                            <!--<b-tabs content-class="mt-3">
                                 <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                                     <div class="list-group">
                                         <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
@@ -228,7 +228,25 @@
                                         </li>
                                     </div>
                                 </b-tab>
-                            </b-tabs>
+                            </b-tabs>-->
+                        <p><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
+                        <b-form-select v-model="selected">
+                        <option :value="actor.id" v-for="actor in selectedActors" v-bind:key="actor.id">{{actor.actor}}</option>
+                        </b-form-select>
+                                    <div class="list-group">
+                                        <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
+                                            <label class="form-checkbox" :disabled="action.readonly">
+                                                <input type="checkbox" :value="actor.id + ',' + action.id"
+                                                       v-model="selectedActions"
+                                                       :disabled="action.readonly"/>
+                                                {{action.action}}
+                                            </label>
+                                            <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
+                                                     :title="action.info">
+                                            </b-badge>
+                                        </li>
+                                    </div>
+
 
                         </b-card-body>
                         <em slot="footer">
@@ -424,6 +442,7 @@
                 goals: GoalsOpts,
                 actions: ActionsOpts,
                 actors: ActorsOpts,
+                actor: [],
             }
         },
 
@@ -569,16 +588,16 @@
     #step2 {
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 100px;
+        left: 30px;
+        top: 80px;
         min-width: 350px;
     }
 
     #step3 {
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 100px;
+        left: 30px;
+        top: 80px;
     }
 
     #step4 {
@@ -782,6 +801,14 @@
         margin: .05rem !important;
         background-color: #FFFFFF;
         border-color: #FFF !important;
+    }
+
+    .custom-select{
+        background-color: #DCEDC8 !important;
+        border: 2px solid #28a645 !important;
+        border-bottom: 0px solid #28a645 !important;
+        border-right: 0px solid #28a645 !important;
+        border-left: 0px solid #28a645 !important;
     }
 
 </style>
