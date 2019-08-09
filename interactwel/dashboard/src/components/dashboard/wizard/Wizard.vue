@@ -2,7 +2,7 @@
     <div class="wizard-container">
         <b-tabs v-model="tabIndex" fill>
             <!-- Step 1-->
-            <b-tab v-bind:class="{active: isStep1Active}">
+            <b-tab active>
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">1</div>
@@ -13,12 +13,15 @@
                 </template>
                 <div id="step1" title="Step 1" icon="ti-user">
                     <div class="help-block">
+                    <b-collapse visible id="collapse-1">
                         <b-card class="mb-2"
-                                title="What are Goals?"
                                 tag="article"
                                 style="max-width: 25rem;"
                         >
+                        <h4 class="card-title"> "What are Goals?"<b-button v-b-toggle.collapse-1 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
+                        
                             <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
+                            <!--<b-card-text v-if="isHelpStep1Active">-->
                             <b-card-text>
                                 <!--<p align="justify">
                                     A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>-->
@@ -37,10 +40,16 @@
                                     You will be able to visualize how each adaptation plan meets the goals in <strong>Step 4</strong>.
                                 </p>
                             </b-card-text>
+                            
                         </b-card>
+                    </b-collapse>
                     </div>
                     <b-card no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Choose Goals</div>
+                        <div class="step-header" slot="header">Choose Goals
+                            <em slot="header">
+                                <b-button v-b-toggle.collapse-1 class="m-1" size="sm"> Instructions </b-button>
+                            </em>
+                            </div>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -90,12 +99,14 @@
                 <div id="step2" title="Step 2"
                      icon="ti-settings">
                     <div class="help-block-actors">
+                    <b-collapse visible id="collapse-2">
                         <b-card
-                                title="Who are Actors?"
+                                
                                 tag="article"
                                 style="max-width: 25rem;"
                                 class="mb-2"
                         >
+                        <h4 class="card-title">"Who are Actors?"<b-button v-b-toggle.collapse-2 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
                             <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
                             <b-card-text>
                                 <p align="justify"><b>Actors</b>
@@ -106,10 +117,16 @@
                                 </p>
 
                             </b-card-text>
+                            
                         </b-card>
+                        </b-collapse>
                     </div>
                     <b-card no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Choose Actors</div>
+                        <div class="step-header" slot="header">Choose Actors
+                        <em slot="header">
+                                <b-button v-b-toggle.collapse-2 class="m-1" size="sm"> Instructions </b-button>
+                        </em>
+                        </div>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -160,12 +177,13 @@
                 <div id="step3" title="Step 3"
                      icon="ti-check">
                     <div class="help-block-actions">
+                    <b-collapse visible id="collapse-3">
                         <b-card
-                                title="What are Actions?"
                                 tag="article"
                                 style="max-width: 25rem;"
                                 class="mb-2"
                         >
+                        <h4 class="card-title">"What are Actions?"<b-button v-b-toggle.collapse-3 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
                             <!-- <b-card-text><strong>Why select Actions?</strong></b-card-text><br/> -->
                             <b-card-text>
                                 <p align="justify"><b>Adaptation Actions</b>
@@ -175,9 +193,14 @@
                                 </p>
                             </b-card-text>
                         </b-card>
+                        </b-collapse>
                     </div>
                     <b-card style="width: 580px" no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Choose Actions</div>
+                        <div class="step-header" slot="header">Choose Actions
+                            <em slot="header">
+                                <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Instructions </b-button>
+                            </em>
+                        </div>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -387,6 +410,8 @@
                 isStep4Active: false,
                 isStep5Active: false,
 
+                isHelpStep1Active: true,
+
                 selectedActions: [],
                 selectAllActions: false,
 
@@ -536,8 +561,8 @@
     #step1 {
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 100px;
+        left: 30px;
+        top: 80px;
         min-width: 350px;
     }
 
@@ -744,5 +769,19 @@
         border-top: 2px solid #28a645;
     }
 
+    .btn{
+        float: right;
+        margin-right: 0px;
+    }
+
+    .btn.m-1{
+        margin: -0.05rem !important;
+    }
+
+    .btn-outline-info{
+        margin: .05rem !important;
+        background-color: #FFFFFF;
+        border-color: #FFF !important;
+    }
 
 </style>
