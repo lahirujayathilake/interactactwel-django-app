@@ -47,7 +47,7 @@
                     <b-card no-body footer-tag="footer">
                         <div class="step-header" slot="header">Choose Goals
                             <em slot="header">
-                                <b-button v-b-toggle.collapse-1 class="m-1" size="sm"> Instructions </b-button>
+                                <b-button v-b-toggle.collapse-1 class="m-1" size="sm"> Show instructions </b-button>
                             </em>
                             </div>
                             <b-card-body>
@@ -106,7 +106,6 @@
                     <div class="help-block-actors">
                     <b-collapse visible id="collapse-2">
                         <b-card
-                                
                                 tag="article"
                                 style="max-width: 25rem;"
                                 class="mb-2"
@@ -129,7 +128,7 @@
                     <b-card no-body footer-tag="footer">
                         <div class="step-header" slot="header">Choose Actors
                         <em slot="header">
-                                <b-button v-b-toggle.collapse-2 class="m-1" size="sm"> Instructions </b-button>
+                                <b-button v-b-toggle.collapse-2 class="m-1" size="sm"> Show instructions </b-button>
                         </em>
                         </div>
                         <b-card-body>
@@ -207,10 +206,10 @@
                         </b-card>
                         </b-collapse>
                     </div>
-                    <b-card style="width: 780px" no-body footer-tag="footer">
+                    <b-card style="width: 700px" no-body footer-tag="footer">
                         <div class="step-header" slot="header">Choose Actions
                             <em slot="header">
-                                <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Instructions </b-button>
+                                <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Show instructions </b-button>
                             </em>
                         </div>
                         <b-list-group-item>
@@ -225,7 +224,8 @@
                         </b-list-group-item>
                         <b-card-body>
                         <p class="card-text"><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
-                            <b-tabs card vertical content-class="mt-3">
+                        <h4>Selected actors         Available actions</h4>
+                            <b-tabs card vertical content-class="mt-3" style="margin-top: 0px">
                                 <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                                     <div class="list-group">
                                         <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
@@ -394,15 +394,34 @@
                 </div>
             </b-tab>
         </b-tabs>
+
         <b-modal v-model="showInfoModal" ok-only>
             <template slot="modal-title">
-                No selections were made.
+                <strong>No selections were made</strong>
             </template>
-            Please be advised that all available choices are being considered.
+            Please be advised that all available choices will be selected.
             <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
-                <b-button size="sm" variant="success" @click="ok()">Ok</b-button>
+                <b-button size="sm" variant="next" @click="ok()">Ok</b-button>
             </template>
         </b-modal>
+
+        <b-modal v-model="showInfoModalActions" ok-only>
+            <template slot="modal-title">
+                <strong>No selections were made</strong>
+            </template>
+            
+            <ul id="example-1">
+                <li v-for="i in missingActionsActors">
+                   Please be advised that all available choices will be selected for actor: {{ actors[i].actor }}
+                </li>
+            </ul>
+
+            <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
+                <b-button size="sm" variant="next" @click="ok()">Ok</b-button>
+            </template>
+        </b-modal>
+
+
     </div>
 </template>
 
@@ -436,6 +455,7 @@
 
                 show: true,
                 showInfoModal: false,
+                showInfoModalActions: false,
 
                 step1_desc: "Choose Goals",
                 step2_desc: "Choose Actors",
@@ -453,6 +473,8 @@
                 isHelpStep1Active: true,
 
                 selectedActions: [],
+                selectedActionsActors: [],
+                missingActionsActors: [],
                 selectAllActions: false,
 
                 selectedGoals: [],
@@ -492,13 +514,44 @@
                 }
             },
 
-            selectActions() {
-                this.selectedActions = [];
+            CheckActorsACtions(){
+                this.selectedActionsActors = [];
+                this.missingActionsActors = [];
                 if (!this.selectAllActions) {
-                    for (let action in this.actions) {
-                        for (let actor in this.actors) {
+                    for (var i = 0; i < this.selectedActions.length; i++) {
+                        if(this.selectedActionsActors.includes(this.selectedActions[i][0]) == false){
+                            this.selectedActionsActors.push(this.selectedActions[i][0]);
+                            //console.log(this.selectedActions[i][0]);
+                        }
+                    }
+                    for (let actor in this.selectedActors) {
+                        if(this.selectedActionsActors.includes(actor) == false){
+                            this.missingActionsActors.push(actor);
+                            //console.log(actor);
+                        } 
+                    }
+                }
+            },
+
+            selectActions() {
+                if (this.selectAllActions) {
+                    this.selectedActions = [];
+                    for (let actor in this.actors) {
+                        for (let action in this.actions) {
                             if (this.actors[actor].readonly == false && this.actions[action].readonly == false) {
                                 this.selectedActions.push(this.actors[actor].id + ',' + this.actions[action].id);
+                            }
+                        }
+                    }
+                }
+                
+                if (this.missingActionsActors.length !== 0) {
+                    for (var i = 0; i < this.missingActionsActors.length; i++) {
+                        //console.log(this.missingActionsActors[i])
+                        for (let action in this.actions) {
+                            if (this.actors[this.missingActionsActors[i]].readonly == false && this.actions[action].readonly == false) {
+                                //console.log(this.actors[this.missingActionsActors[i]].id + ',' + this.actions[action].id)
+                                this.selectedActions.push(this.actors[this.missingActionsActors[i]].id + ',' + this.actions[action].id);
                             }
                         }
                     }
@@ -538,12 +591,21 @@
             },
 
             step3NextClicked() {
+                this.CheckActorsACtions()
+                
                 if (this.selectedActions.length == 0) {
                     this.selectActions()
                     this.selectAllActions = true
-                    this.showInfoModal = true
+                    this.showInfoModalActions = true
                     this.tabIndex++
                     this.isStep3Active = true
+
+                }else if(this.missingActionsActors.length !== 0) {
+                    this.selectActions()
+                    this.showInfoModalActions = true
+                    this.tabIndex++
+                    this.isStep3Active = true
+                    return true
                 }
                 else {
                     this.tabIndex++
