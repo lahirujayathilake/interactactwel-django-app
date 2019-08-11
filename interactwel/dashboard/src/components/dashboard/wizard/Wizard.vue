@@ -689,8 +689,8 @@
         display: flex;
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 60px;
+        left: 30px;
+        top: 80px;
         width: 1000px;
     }
 

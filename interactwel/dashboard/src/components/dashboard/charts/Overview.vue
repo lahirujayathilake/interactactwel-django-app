@@ -7,13 +7,13 @@
         <div class="card-body">
             <b-row>
                 <b-col lg="6">
-                    <h6><strong>Selected Goals</strong></h6>
+                    <h6 class="chart-title"><strong>Selected Goals</strong></h6>
                     <b-list-group class="no-padding" v-for="item in selectedGoals">
                         <b-list-group-item><small>{{item.goal}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
-                    <h6><strong>Selected Actors</strong></h6>
+                    <h6 class="chart-title"><strong>Selected Actors</strong></h6>
                     <b-list-group class="no-padding" v-for="item in selectedActors">
                         <b-list-group-item><small>{{item.actor}}</small></b-list-group-item>
                     </b-list-group>
@@ -21,7 +21,7 @@
             </b-row>
             <b-row style="margin-top:20px;">
                 <b-col lg="12">
-                    <h6><strong>Selected Actions for each actor</strong></h6>
+                    <h6 class="chart-title"><strong>Selected Actions for Actors</strong></h6>
                     <b-tabs card vertical>
                         <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
                             <b-list-group v-for="item in getActions(actor)">
@@ -112,5 +112,13 @@
     }
 </script>
 
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+    .chart-title {
+        font-size: 18px;
+        /*font-weight: bold;*/
+        color: #5e6b7e;
+        border-bottom: 2px solid #28a645 !important;
+        padding-bottom: 5px;
+    }
+</style>
