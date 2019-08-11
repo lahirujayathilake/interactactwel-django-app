@@ -288,8 +288,30 @@
                     </div>
                 </template>
                 <div id="step4" title="Step 4">
+                <div class="help-block-viz">
+                    <b-collapse visible id="collapse-4">
+                        <b-card
+                                tag="article"
+                                style="max-width: 33rem;"
+                                class="mb-2"
+                        >
+                        <h4 class="card-title">"What are Adaptation Plans?"<b-button v-b-toggle.collapse-4 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
+                            <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
+                            <b-card-text>
+                                <p align="justify" style="font-size: 17px;">In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong> and actions <strong>(Step 3)</strong> that you selected.  You can compare how each adaptation plan meets the goals you selected in <strong>Step 1</strong> for the entire basin, sub-basins, and individual streams.  You can also compare the actions and their timeframes included within each plan.</p>
+                                <p aling="justify" style="font-size: 17px;">Remember that you can click the map to visualize the data. </p>
+                            </b-card-text>
+                            
+                        </b-card>
+                        </b-collapse>
+                    </div>
+
                     <b-card no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Visualization</div>
+                        <div class="step-header" slot="header">Visualization
+                            <em slot="header">
+                                <b-button v-b-toggle.collapse-4 class="m-1" size="sm"> Show instructions </b-button>
+                            </em>
+                        </div>
                         <b-card-body class="no-padding">
                             <b-container>
                                 <b-row>
@@ -317,6 +339,7 @@
                             
                         </em>
                     </b-card>
+                    
                 </div>
             </b-tab>
             <!-- Step 5 -->
@@ -433,6 +456,7 @@
     import Feedback from '../feedback/Feedback.vue';
     import Compare from '../feedback/Compare.vue';
     import EventBus from './../../../event-bus';
+    
 
     import ActionsOpts from './../../../../public/static/actions.json';
     import GoalsOpts from './../../../../public/static/goals.json';
@@ -445,7 +469,8 @@
             Compare,
             Feedback,
             Sidebar,
-            Charts
+            Charts,
+            
         },
 
         data() {
@@ -803,6 +828,13 @@
         position: absolute;
         border: none;
         right: -440px;
+        z-index: 1000;
+    }
+
+    .help-block-viz {
+        position: absolute;
+        border: none;
+        right: -530px;
         z-index: 1000;
     }
 

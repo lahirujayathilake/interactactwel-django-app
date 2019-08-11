@@ -3,7 +3,7 @@
         
             <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/>Close</span>
-                <strong style="font-size:18px">Actions </strong>
+                <strong style="font-size:18px">Adaptation Plans</strong>
             </div>
             <b-badge id="tooltip-button-1" class="info-button-path" pill variant="secondary" v-b-tooltip.hover>
                     How to read this chart?

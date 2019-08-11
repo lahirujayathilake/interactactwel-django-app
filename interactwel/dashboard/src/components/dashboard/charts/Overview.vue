@@ -9,13 +9,13 @@
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Goals</strong></h6>
                     <b-list-group class="no-padding" v-for="item in selectedGoals">
-                        <b-list-group-item><small> &#10003;&nbsp;{{item.goal}}</small></b-list-group-item>
+                        <b-list-group-item class="no-border"><small> &#10003;&nbsp;{{item.goal}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Actors</strong></h6>
                     <b-list-group class="no-padding" v-for="item in selectedActors">
-                        <b-list-group-item><small>&#10003;&nbsp;{{item.actor}}</small></b-list-group-item>
+                        <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.actor}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
             </b-row>
@@ -25,7 +25,7 @@
                     <b-tabs card vertical>
                         <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
                             <b-list-group v-for="item in getActions(actor)">
-                                <b-list-group-item><small>&#10003;&nbsp;{{item.action}}</small></b-list-group-item>
+                                <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.action}}</small></b-list-group-item>
                             </b-list-group>
                         </b-tab>
 
@@ -122,7 +122,7 @@
         padding-bottom: 5px;
     }
 
-    .list-group-item{
+    .no-border{
         border: 0px solid rgba(0,0,0,.125) !important;
     }
 
