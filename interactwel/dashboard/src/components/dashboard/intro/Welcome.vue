@@ -43,8 +43,12 @@
 </script>
 
 <style>
+    #welcome-modal .modal{
+        overflow: hidden !important;
+    }
     #welcome-modal .modal-body {
         color: #3f4558;
+        max-height: 500px !important;
     }
 
     #welcome-modal .card-title {

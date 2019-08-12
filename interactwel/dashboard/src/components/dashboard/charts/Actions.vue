@@ -1,12 +1,13 @@
 <template>
     <div id="graph" class="card">
-        <b-card no-body>
+        
             <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
-                    icon="times-circle"/> Close</span>
-                <strong>Actions </strong>
-                <b-badge id="tooltip-button-1" class="info-button" pill variant="secondary" v-b-tooltip.hover>
+                icon="times-circle"/>Close</span>
+                <strong style="font-size:18px">Adaptation Plans</strong>
+            </div>
+            <b-badge id="tooltip-button-1" class="info-button-path" pill variant="secondary" v-b-tooltip.hover>
                     How to read this chart?
-                </b-badge>
+            </b-badge>
                 <b-tooltip target="tooltip-button-1" placement="bottom">
 
                     <p aling="justify">
@@ -14,8 +15,8 @@
                     <p aling="justify">
                         Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
                 </b-tooltip>
-            </div>
-        </b-card>
+        
+
         <div class="card-body no-padding">
             <b-tabs card>
                 <b-tab title="Pathways" active>
@@ -265,5 +266,11 @@
         border-radius: 5px;
         font-size: 12px;
     }
+
+    .info-button-path{
+        padding: .5em .5em !important;
+        margin-left: 100px !important;
+    }
+
 
 </style>

@@ -2,7 +2,7 @@
     <div class="wizard-container">
         <b-tabs v-model="tabIndex" fill>
             <!-- Step 1-->
-            <b-tab v-bind:class="{active: isStep1Active}">
+            <b-tab active>
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">1</div>
@@ -13,12 +13,15 @@
                 </template>
                 <div id="step1" title="Step 1" icon="ti-user">
                     <div class="help-block">
+                    <b-collapse visible id="collapse-1">
                         <b-card class="mb-2"
-                                title="What are Goals?"
                                 tag="article"
                                 style="max-width: 25rem;"
                         >
+                        <h4 class="card-title"> "What are Goals?"<b-button v-b-toggle.collapse-1 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
+                        
                             <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
+                            <!--<b-card-text v-if="isHelpStep1Active">-->
                             <b-card-text>
                                 <!--<p align="justify">
                                     A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>-->
@@ -37,10 +40,21 @@
                                     You will be able to visualize how each adaptation plan meets the goals in <strong>Step 4</strong>.
                                 </p>
                             </b-card-text>
+                            
                         </b-card>
+                    </b-collapse>
                     </div>
                     <b-card no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Choose Goals</div>
+                        <div class="step-header" slot="header">Choose Goals
+                            <em slot="header">
+                                <b-button v-b-toggle.collapse-1 class="m-1" size="sm"> Show instructions </b-button>
+                            </em>
+                            </div>
+                            <b-card-body>
+                                <p class="card-text"><i>
+                                    Choose adaptation goals that are important to you.
+                                </i></p>
+                            </b-card-body>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -72,13 +86,13 @@
                             </b-form>
                         </b-list-group>
                         <em slot="footer">
-                            <b-button @click="step1NextClicked" variant="success" size="sm">Next</b-button>
+                            <b-button @click="step1NextClicked" variant="next" size="sm">Next</b-button>
                         </em>
                     </b-card>
                 </div>
             </b-tab>
             <!-- Step 2 -->
-            <b-tab>
+            <b-tab :disabled="isStep1Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">2</div>
@@ -90,12 +104,13 @@
                 <div id="step2" title="Step 2"
                      icon="ti-settings">
                     <div class="help-block-actors">
+                    <b-collapse visible id="collapse-2">
                         <b-card
-                                title="Who are Actors?"
                                 tag="article"
                                 style="max-width: 25rem;"
                                 class="mb-2"
                         >
+                        <h4 class="card-title">"Who are Actors?"<b-button v-b-toggle.collapse-2 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
                             <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
                             <b-card-text>
                                 <p align="justify"><b>Actors</b>
@@ -106,10 +121,21 @@
                                 </p>
 
                             </b-card-text>
+                            
                         </b-card>
+                        </b-collapse>
                     </div>
                     <b-card no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Choose Actors</div>
+                        <div class="step-header" slot="header">Choose Actors
+                        <em slot="header">
+                                <b-button v-b-toggle.collapse-2 class="m-1" size="sm"> Show instructions </b-button>
+                        </em>
+                        </div>
+                        <b-card-body>
+                            <p class="card-text"><i>
+                                Choose the actors whose adaptation actions you want to visualize.
+                            </i></p>
+                        </b-card-body>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -136,19 +162,22 @@
                             </b-form>
                         </b-list-group>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step2-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step2-next-btn" @click="step2NextClicked" variant="success" size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                                <b-button id="step2-next-btn" @click="step2NextClicked" variant="next" size="sm">Next</b-button>
+                                <b-button id="step2-back-btn" @click="tabIndex--" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
             </b-tab>
+
             <!-- Step 3 -->
-            <b-tab>
+            <b-tab :disabled="isStep2Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">3</div>
@@ -160,12 +189,12 @@
                 <div id="step3" title="Step 3"
                      icon="ti-check">
                     <div class="help-block-actions">
+                    <b-collapse visible id="collapse-3">
                         <b-card
-                                title="What are Actions?"
                                 tag="article"
                                 style="max-width: 25rem;"
-                                class="mb-2"
-                        >
+                                class="mb-2">
+                                <h4 class="card-title">"What are Actions?"<b-button v-b-toggle.collapse-3 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
                             <!-- <b-card-text><strong>Why select Actions?</strong></b-card-text><br/> -->
                             <b-card-text>
                                 <p align="justify"><b>Adaptation Actions</b>
@@ -175,9 +204,14 @@
                                 </p>
                             </b-card-text>
                         </b-card>
+                        </b-collapse>
                     </div>
-                    <b-card style="width: 580px" no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Choose Actions</div>
+                    <b-card style="width: 700px" no-body footer-tag="footer">
+                        <div class="step-header" slot="header">Choose Actions
+                            <em slot="header">
+                                <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Show instructions </b-button>
+                            </em>
+                        </div>
                         <b-list-group-item>
                             <b-form-checkbox-group>
                                 <label class="form-checkbox">
@@ -189,7 +223,9 @@
                             </b-form-checkbox-group>
                         </b-list-group-item>
                         <b-card-body>
-                            <b-tabs content-class="mt-3">
+                        <p class="card-text"><i> Please choose from the drop-down menu the actor for which you want to define the possible actions.</i></p>
+                        <h4>Selected actors         Available actions</h4>
+                            <b-tabs card vertical content-class="mt-3" style="margin-top: 0px">
                                 <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                                     <div class="list-group">
                                         <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
@@ -206,23 +242,43 @@
                                     </div>
                                 </b-tab>
                             </b-tabs>
+                            
+                            <!--<b-form-select v-model="selected">
+                                <option :value="null"disabled>-- Please select an actor --</option>
+                                <option :value="actor.id" v-for="actor in selectedActors" v-bind:key="actor.id">{{actor.actor}}</option>
+                            </b-form-select>
+                            <div class="list-group">
+                                <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
+                                    <label class="form-checkbox" :disabled="action.readonly">
+                                        <input type="checkbox" :value="selected + ',' + action.id"
+                                                v-model="selectedActions"
+                                                :disabled="action.readonly"/>
+                                        {{action.action}}
+                                    </label>
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
+                                                :title="action.info">
+                                    </b-badge>
+                                </li>
+                            </div>-->
 
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
-                                <b-button id="step3-back-btn" @click="tabIndex--" variant="outline-success" size="sm">
+                            <!--<b-button-group>
+                                <b-button id="step3-back-btn" @click="tabIndex--" variant="back" size="sm">
                                     Back
                                 </b-button>
-                                <b-button id="step3-next-btn" @click="step3NextClicked" variant="success"
+                                <b-button id="step3-next-btn" @click="step3NextClicked" variant="next"
                                           size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step3-next-btn" @click="step3NextClicked" variant="next" size="sm">Next</b-button>
+                            <b-button id="step3-back-btn" @click="tabIndex--" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
             </b-tab>
             <!-- Step 4 -->
-            <b-tab>
+            <b-tab :disabled="isStep3Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">4</div>
@@ -232,8 +288,30 @@
                     </div>
                 </template>
                 <div id="step4" title="Step 4">
+                <div class="help-block-viz">
+                    <b-collapse visible id="collapse-4">
+                        <b-card
+                                tag="article"
+                                style="max-width: 33rem;"
+                                class="mb-2"
+                        >
+                        <h4 class="card-title">"What are Adaptation Plans?"<b-button v-b-toggle.collapse-4 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
+                            <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
+                            <b-card-text>
+                                <p align="justify" style="font-size: 17px;">In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong> and actions <strong>(Step 3)</strong> that you selected.  You can compare how each adaptation plan meets the goals you selected in <strong>Step 1</strong> for the entire basin, sub-basins, and individual streams.  You can also compare the actions and their timeframes included within each plan.</p>
+                                <p aling="justify" style="font-size: 17px;">Remember that you can click the map to visualize the data. </p>
+                            </b-card-text>
+                            
+                        </b-card>
+                        </b-collapse>
+                    </div>
+
                     <b-card no-body footer-tag="footer">
-                        <div class="step-header" slot="header">Visualization</div>
+                        <div class="step-header" slot="header">Visualization
+                            <em slot="header">
+                                <b-button v-b-toggle.collapse-4 class="m-1" size="sm"> Show instructions </b-button>
+                            </em>
+                        </div>
                         <b-card-body class="no-padding">
                             <b-container>
                                 <b-row>
@@ -249,19 +327,23 @@
                             </b-container>
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step2-back-btn" @click="step4BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step2-next-btn" @click="step4NextClicked" variant="success" size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step2-next-btn" @click="step4NextClicked" variant="next" size="sm">Next</b-button>
+                            <b-button id="step2-back-btn" @click="step4BackClicked" variant="back" size="sm">Back</b-button>
+                            
                         </em>
                     </b-card>
+                    
                 </div>
             </b-tab>
             <!-- Step 5 -->
-            <b-tab>
+            <b-tab :disabled="isStep3Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">5</div>
@@ -287,19 +369,21 @@
                             </b-container>
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step3-back-btn" @click="step5BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step3-next-btn" @click="step5NextClicked" variant="success" size="sm">Next
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step3-next-btn" @click="step5NextClicked" variant="next" size="sm">Next</b-button>
+                            <b-button id="step3-back-btn" @click="step5BackClicked" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
             </b-tab>
             <!-- Step 6 -->
-            <b-tab>
+            <b-tab :disabled="isStep3Active === false">
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">6</div>
@@ -319,27 +403,48 @@
                             <b-button variant="success">Save Report</b-button>
                         </b-card-body>
                         <em slot="footer">
-                            <b-button-group>
+                            <!--<b-button-group>
                                 <b-button id="step6-next-btn" @click="step6BackClicked" variant="outline-success" size="sm">
                                     Back
                                 </b-button>
                                 <b-button id="step6-next-btn" @click="tabIndex++" variant="success" size="sm">Finish
                                 </b-button>
-                            </b-button-group>
+                            </b-button-group>-->
+                            <b-button id="step6-next-btn" @click="tabIndex++" variant="next" size="sm">Next</b-button>
+                            <b-button id="step6-next-btn" @click="step6BackClicked" variant="back" size="sm">Back</b-button>
                         </em>
                     </b-card>
                 </div>
             </b-tab>
         </b-tabs>
+
         <b-modal v-model="showInfoModal" ok-only>
             <template slot="modal-title">
-                No selections were made.
+                <strong>No selections were made</strong>
             </template>
-            Please be advised that all available choices are being considered.
+            Please be advised that all available choices will be selected.
             <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
-                <b-button size="sm" variant="success" @click="ok()">Ok</b-button>
+                <b-button size="sm" variant="next" @click="ok()">Ok</b-button>
             </template>
         </b-modal>
+
+        <b-modal v-model="showInfoModalActions" ok-only>
+            <template slot="modal-title">
+                <strong>No selections were made</strong>
+            </template>
+            
+            <ul id="example-1">
+                <li v-for="i in missingActionsActors">
+                   Please be advised that all available choices will be selected for actor: {{ actors[i].actor }}
+                </li>
+            </ul>
+
+            <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
+                <b-button size="sm" variant="next" @click="ok()">Ok</b-button>
+            </template>
+        </b-modal>
+
+
     </div>
 </template>
 
@@ -351,6 +456,7 @@
     import Feedback from '../feedback/Feedback.vue';
     import Compare from '../feedback/Compare.vue';
     import EventBus from './../../../event-bus';
+    
 
     import ActionsOpts from './../../../../public/static/actions.json';
     import GoalsOpts from './../../../../public/static/goals.json';
@@ -363,7 +469,8 @@
             Compare,
             Feedback,
             Sidebar,
-            Charts
+            Charts,
+            
         },
 
         data() {
@@ -373,6 +480,7 @@
 
                 show: true,
                 showInfoModal: false,
+                showInfoModalActions: false,
 
                 step1_desc: "Choose Goals",
                 step2_desc: "Choose Actors",
@@ -387,7 +495,11 @@
                 isStep4Active: false,
                 isStep5Active: false,
 
+                isHelpStep1Active: true,
+
                 selectedActions: [],
+                selectedActionsActors: [],
+                missingActionsActors: [],
                 selectAllActions: false,
 
                 selectedGoals: [],
@@ -399,6 +511,8 @@
                 goals: GoalsOpts,
                 actions: ActionsOpts,
                 actors: ActorsOpts,
+                actor: [],
+                selected: null,
             }
         },
 
@@ -425,13 +539,44 @@
                 }
             },
 
-            selectActions() {
-                this.selectedActions = [];
+            CheckActorsACtions(){
+                this.selectedActionsActors = [];
+                this.missingActionsActors = [];
                 if (!this.selectAllActions) {
-                    for (let action in this.actions) {
-                        for (let actor in this.actors) {
+                    for (var i = 0; i < this.selectedActions.length; i++) {
+                        if(this.selectedActionsActors.includes(this.selectedActions[i][0]) == false){
+                            this.selectedActionsActors.push(this.selectedActions[i][0]);
+                            //console.log(this.selectedActions[i][0]);
+                        }
+                    }
+                    for (let actor in this.selectedActors) {
+                        if(this.selectedActionsActors.includes(actor) == false){
+                            this.missingActionsActors.push(actor);
+                            //console.log(actor);
+                        } 
+                    }
+                }
+            },
+
+            selectActions() {
+                if (this.selectAllActions) {
+                    this.selectedActions = [];
+                    for (let actor in this.actors) {
+                        for (let action in this.actions) {
                             if (this.actors[actor].readonly == false && this.actions[action].readonly == false) {
                                 this.selectedActions.push(this.actors[actor].id + ',' + this.actions[action].id);
+                            }
+                        }
+                    }
+                }
+                
+                if (this.missingActionsActors.length !== 0) {
+                    for (var i = 0; i < this.missingActionsActors.length; i++) {
+                        //console.log(this.missingActionsActors[i])
+                        for (let action in this.actions) {
+                            if (this.actors[this.missingActionsActors[i]].readonly == false && this.actions[action].readonly == false) {
+                                //console.log(this.actors[this.missingActionsActors[i]].id + ',' + this.actions[action].id)
+                                this.selectedActions.push(this.actors[this.missingActionsActors[i]].id + ',' + this.actions[action].id);
                             }
                         }
                     }
@@ -471,12 +616,21 @@
             },
 
             step3NextClicked() {
+                this.CheckActorsACtions()
+                
                 if (this.selectedActions.length == 0) {
                     this.selectActions()
                     this.selectAllActions = true
-                    this.showInfoModal = true
+                    this.showInfoModalActions = true
                     this.tabIndex++
                     this.isStep3Active = true
+
+                }else if(this.missingActionsActors.length !== 0) {
+                    this.selectActions()
+                    this.showInfoModalActions = true
+                    this.tabIndex++
+                    this.isStep3Active = true
+                    return true
                 }
                 else {
                     this.tabIndex++
@@ -536,32 +690,32 @@
     #step1 {
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 100px;
+        left: 30px;
+        top: 80px;
         min-width: 350px;
     }
 
     #step2 {
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 100px;
+        left: 30px;
+        top: 80px;
         min-width: 350px;
     }
 
     #step3 {
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 100px;
+        left: 30px;
+        top: 80px;
     }
 
     #step4 {
         display: flex;
         position: absolute;
         z-index: 1000;
-        left: 100px;
-        top: 60px;
+        left: 30px;
+        top: 80px;
         width: 1000px;
     }
 
@@ -677,6 +831,13 @@
         z-index: 1000;
     }
 
+    .help-block-viz {
+        position: absolute;
+        border: none;
+        right: -530px;
+        z-index: 1000;
+    }
+
     .help-block-actions {
         position: absolute;
         right: -450px;
@@ -744,5 +905,45 @@
         border-top: 2px solid #28a645;
     }
 
+    .btn{
+        float: right;
+        margin-right: 0px;
+    }
+
+    .btn.m-1{
+        margin: -0.05rem !important;
+    }
+
+    .btn-next{
+        color: #fff !important;
+        background-color: #28a745 !important;
+        border-color: #28a745 !important;
+        padding: .25rem 3rem !important;
+        float: right !important;
+        margin-right: 0px !important;
+    }
+
+    .btn-back{
+        color: #28a745 !important;
+        background-color: transparent !important;
+        border-color: #28a745 !important;
+        padding: .25rem 3rem !important;
+        float: left !important;
+        margin-left: 0px !important;
+    }
+
+    .btn-outline-info{
+        margin: .05rem !important;
+        background-color: #FFFFFF;
+        border-color: #FFF !important;
+    }
+
+    .custom-select{
+        background-color: #DCEDC8 !important;
+        border: 2px solid #28a645 !important;
+        border-bottom: 0px solid #28a645 !important;
+        border-right: 0px solid #28a645 !important;
+        border-left: 0px solid #28a645 !important;
+    }
 
 </style>

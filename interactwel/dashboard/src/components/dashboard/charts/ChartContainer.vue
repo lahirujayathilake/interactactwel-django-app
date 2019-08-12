@@ -19,7 +19,7 @@
 
 <script>
     import Sidebar from '../sidebar/Sidebar.vue'
-    import TutorCharts from './TutorCharts.vue'
+    
 
     import Overview from './Overview.vue'
     import Actions from './Actions.vue'
@@ -35,7 +35,6 @@
 
         components: {
             Sidebar,
-            TutorCharts,
             'overview': Overview,
             'actions': Actions,
             'region': Region,
