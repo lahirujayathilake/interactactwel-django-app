@@ -26,7 +26,6 @@
                         borderColor: "#286bde",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        pointRadius: 0,
                         data: [
                             'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW' ],
                         steppedLine: true,
@@ -38,7 +37,6 @@
                         borderColor: "#dd434e",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        pointRadius: 0,
                         data: [
                             'Increase amount of CR', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW'
                         ],

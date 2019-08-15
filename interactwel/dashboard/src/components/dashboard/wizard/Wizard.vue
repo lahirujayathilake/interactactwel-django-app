@@ -564,10 +564,10 @@
                     {key: 'save', label: ''},
                 ],
                 items: [
-                    { isActive: true, plan: 1, q1: 'yes', q2: 'Macdonald', q3: 'yes', q4: 'yes'},
-                    { isActive: false, plan: 2, q1: 'yes', q2: 'Shaw' , q3: 'yes', q4: 'yes'},
-                    { isActive: false, plan: 3, q1: 'yes', q2: 'Wilson' , q3: 'yes', q4: 'yes'},
-                    { isActive: true, plan: 4, q1: 'yes', q2: 'Carney', q3: 'yes', q4: 'yes' }
+                    { isActive: true, plan: 1, q1: 'yes', q2: 'Satisfactory', q3: 'yes', q4: 'yes'},
+                    { isActive: false, plan: 2, q1: 'yes', q2: 'Well' , q3: 'yes', q4: 'yes'},
+                    { isActive: false, plan: 3, q1: 'yes', q2: 'Very well' , q3: 'yes', q4: 'yes'},
+                    { isActive: true, plan: 4, q1: 'yes', q2: 'Neutral', q3: 'yes', q4: 'yes' }
                 ],
 
 
