@@ -396,11 +396,21 @@
                     <b-card no-body footer-tag="footer">
                         <div class="step-header" slot="header">Share</div>
                         <b-card-body>
-                            <p class="card-text">
-                                Print and Save
-                            </p>
-                            <b-button variant="info">Print Report</b-button>
-                            <b-button variant="success">Save Report</b-button>
+                            <b-table class="card-text" bordered small hover :items="items" :fields="fields">
+                                <template slot="rating" slot-scope="data">
+                                    <star-rating star-size="20  "></star-rating>
+                                </template>
+                                <template slot="download" slot-scope="data">
+                                    <b-button pill size="sm"
+                                              variant="primary">Download
+                                    </b-button>
+                                </template>
+                                <template slot="save" slot-scope="data">
+                                    <b-button pill size="sm"
+                                              variant="secondary">Save
+                                    </b-button>
+                                </template>
+                            </b-table>
                         </b-card-body>
                         <em slot="footer">
                             <!--<b-button-group>
@@ -462,6 +472,8 @@
     import GoalsOpts from './../../../../public/static/goals.json';
     import ActorsOpts from './../../../../public/static/actors.json';
 
+    import StarRating from 'vue-star-rating'
+
     export default {
 
         name: 'wizard',
@@ -470,6 +482,7 @@
             Feedback,
             Sidebar,
             Charts,
+            StarRating
             
         },
 
@@ -513,6 +526,64 @@
                 actors: ActorsOpts,
                 actor: [],
                 selected: null,
+
+
+
+                fields: [
+                    {
+                        key: 'plan',
+                        label: 'Plan',
+                        sortable: true
+                    },
+                    {
+                        key: 'q1',
+                        label: 'Meet Management Goals?',
+                        sortable: false
+                    },
+                    {
+                        key: 'q2',
+                        label: 'Expectations of projected impacts',
+                        sortable: false
+                    },
+                    {
+                        key: 'q3',
+                        label: 'Likely to implement recommended actions',
+                        sortable: false
+                    },
+                    {
+                        key: 'q4',
+                        label: 'Likely to collaborate with others to implement plan',
+                        sortable: false
+                    },
+                    {
+                        key: 'rating',
+                        label: 'Overall rating',
+                        sortable: true
+                    },
+                    {key: 'download', label: ''},
+                    {key: 'save', label: ''},
+                ],
+                items: [
+                    { isActive: true, plan: 1, q1: 'yes', q2: 'Macdonald', q3: 'yes', q4: 'yes'},
+                    { isActive: false, plan: 2, q1: 'yes', q2: 'Shaw' , q3: 'yes', q4: 'yes'},
+                    { isActive: false, plan: 3, q1: 'yes', q2: 'Wilson' , q3: 'yes', q4: 'yes'},
+                    { isActive: true, plan: 4, q1: 'yes', q2: 'Carney', q3: 'yes', q4: 'yes' }
+                ],
+
+
+                itemsX: [
+                    { 'plan': 1, 'Meet Management Goals?' : 'yes', 'Expectations of projected impacts' : 'Dickerson', 'Likely to implement recommended actions': 'Macdonald' },
+                ],
+                fieldX: [
+                    {key: 'plan', label: 'Plan'},
+                    {key: 'Meet Management Goals?', label: 'Meet Management Goals?'},
+                    {key: 'Expectations of projected impacts', label: 'Expectations of projected impacts'},
+                    {key: 'Likely to implement recommended actions', label: 'Likely to implement recommended actions'},
+                    {key: 'Likely to collaborate with others to implement plan', label: 'Likely to collaborate with others to implement plan'},
+                    {key: 'Overall rating', label: 'Overall rating'},
+                    {key: 'download', label: ''},
+                    {key: 'save', label: ''},
+                ]
             }
         },
 
@@ -731,6 +802,7 @@
         z-index: 1000;
         left: 100px;
         top: 100px;
+        width:900px;
     }
 
     .step-progress-bar h4 {
