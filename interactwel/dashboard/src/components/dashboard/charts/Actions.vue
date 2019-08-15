@@ -82,14 +82,14 @@
                 type: Array,
                 default: []
             },
-            actors: {
+            /*actors: {
                 type: Array,
                 default: []
             },
-            actions: {
+           actions: {
                 type: Array,
                 default: []
-            },
+            },*/
             selectedGoals: {
                 type: Array,
                 default: []
