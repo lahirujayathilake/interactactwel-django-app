@@ -7,38 +7,94 @@
         </div>
         <div v-show="feedbackBlock" id="feedback-block">
             <b-form v-show="initialFeedback" @submit="onSubmit" @reset="onReset">
-                <b-form-group label="Do you think this Adaptation Plan is feasible?">
+                <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
                     <b-form-radio v-model="feasibility" name="some-radios" value="1">Yes</b-form-radio>
                     <b-form-radio v-model="feasibility" name="some-radios" value="0">No</b-form-radio>
                 </b-form-group>
             </b-form>
             <b-form v-if="feasibility === '0'">
-                <b-form-group label="Why is this plan NOT feasible? (Check all that apply)">
-                    <b-form-checkbox v-for="question in ifFeasibleQuestions" v-model="ifFeasible" :value="question.id">
-                        {{question.question}}
-                    </b-form-checkbox>
+                <b-form-group label="Please state why this plan is infeasible">
+                    <b-form-textarea
+                            id="textarea"
+                            v-model="ifNotFeasiblecomment"
+                            rows="3"
+                            max-rows="6"
+                    ></b-form-textarea>
                 </b-form-group>
-                <b-form-textarea
-                        id="textarea"
-                        v-model="ifFeasiblecomment"
-                        placeholder="Please provide feedback (positive or negative)"
-                        rows="3"
-                        max-rows="6"
-                ></b-form-textarea>
             </b-form>
             <b-form v-if="feasibility === '1'">
-                <b-form-group id="input-group-4" label="Oh great!. We would love to hear your feedback.">
-                    <b-form-checkbox v-for="question in ifNotFeasibleQuestions" v-model="ifNotFeasible"
-                                     :value="question.id">{{question.question}}
-                    </b-form-checkbox>
+
+                <b-form-group
+                        label="How well does this plan (alternative plan 1, 2, etc.) meet the management goals you identified in Step 1?">
+                    <b-form-radio-group
+                            id="radio-group-1"
+                            v-model="q1Selected"
+                            :options="options"
+                            name="q1"
+                    ></b-form-radio-group>
                 </b-form-group>
-                <b-form-textarea
-                        id="textarea"
-                        v-model="ifNotFeasiblecomment"
-                        placeholder="Please provide feedback (positive or negative)"
-                        rows="3"
-                        max-rows="6"
-                ></b-form-textarea>
+
+                <b-form-group
+                        label="Do you think that the projected results/impacts from this plan will occur if the proposed actions are implemented?">
+                    <b-form-radio-group
+                            id="radio-group-2"
+                            v-model="q2Selected"
+                            :options="options"
+                            name="q2"
+                    ></b-form-radio-group>
+                </b-form-group>
+
+                <b-form-group label="What factors might prevent you from taking the recommended actions listed in this plan? (check all that apply)">
+                    <b-form-checkbox-group
+                            id="checkbox-group-1"
+                            v-model="SelectedFactors"
+                            :options="factors"
+                            name="q3"
+                    ></b-form-checkbox-group>
+                </b-form-group>
+
+                <b-form-group
+                        label="What factors might prevent you from taking the recommended actions listed in this plan? (check all that apply)">
+                    <b-form-radio-group
+                            id="radio-group-3"
+                            v-model="q3Selected"
+                            :options="options"
+                            name="q4"
+                    ></b-form-radio-group>
+                </b-form-group>
+
+                <b-form-group
+                        label="How likely are you to implement the actions recommended in this plan?">
+                    <b-form-radio-group
+                            id="radio-group-4"
+                            v-model="q4Selected"
+                            :options="options"
+                            name="q5"
+                    ></b-form-radio-group>
+                </b-form-group>
+
+                <b-form-group
+                        label="How likely are you to work with other stakeholder groups to implement this plan?">
+                    <b-form-radio-group
+                            id="radio-group-5"
+                            v-model="q5Selected"
+                            :options="options"
+                            name="q6"
+                    ></b-form-radio-group>
+                </b-form-group>
+                <b-form-group label="Rate this plan">
+                    <star-rating star-size="30  "></star-rating>
+                </b-form-group>
+
+                <b-form-group label="Please share any additional thoughts about the alternative plans or the plan builder tool">
+                    <b-form-textarea
+                            id="textarea"
+                            v-model="ifNotFeasiblecomment"
+                            rows="3"
+                            max-rows="6"
+                    ></b-form-textarea>
+                </b-form-group>
+
             </b-form>
             <b-button @click="submitFeedback">Submit</b-button>
         </div>
@@ -51,9 +107,14 @@
 <script>
 
     import EventBus from './../../../event-bus';
+    import StarRating from 'vue-star-rating'
 
     export default {
         name: 'Feedback',
+
+        components: {
+            StarRating
+        },
 
         data() {
             return {
@@ -66,26 +127,21 @@
                 ifFeasiblecomment: null,
                 ifNotFeasiblecomment: null,
 
-                ifFeasibleQuestions: [
-                    {id: 0, question: "Unlikely to be profitable or financially sustainable"},
-                    {id: 1, question: "Infrastructure costs"},
-                    {id: 2, question: "Challenging permit or other regulatory approval processes"},
-                    {id: 3, question: "Reliance on other actors to make this plan work"},
-                    {id: 4, question: "Positive impacts take a long time to accrue"},
-                    {id: 4, question: "Potential public disapproval of actions listed in the plan"},
-                    {id: 4, question: "Other"},
+                options: [
+                    {text: 'Not at all', value: 1},
+                    {text: 'Satisfactory', value: 2},
+                    {text: 'Neutral', value: 3},
+                    {text: 'Well', value: 4},
+                    {text: 'Very Well', value: 5},
                 ],
 
-                ifNotFeasibleQuestions: [
-                    {id: 0, question: "blah blah blah"},
-                    {id: 1, question: "Infrastructure costs"},
-                    {id: 2, question: "Challenging permit or other regulatory approval processes"},
-                    {id: 3, question: "Reliance on other actors to make this plan work"},
-                    {id: 4, question: "Positive impacts take a long time to accrue"},
-                    {id: 4, question: "Potential public disapproval of actions listed in the plan"},
-                    {id: 4, question: "Other"},
+                factors: [
+                    {text: 'Infrastructure costs', value: 'Infrastructure costs'},
+                    {text: 'Permits or other regulatory approval processes and cost', value: 'Permits or other regulatory approval processes and cost'},
+                    {text: 'Reliance on other stakeholders to take action', value: 'Reliance on other stakeholders to take action'},
+                    {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
+                    {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
                 ],
-
             }
         },
         methods: {
@@ -132,6 +188,8 @@
         margin-top: 20px;
         font-size: 12px;
         width: 100%;
+        height: 81vh;
+        overflow: auto;
     }
 
     #thankyou-block {

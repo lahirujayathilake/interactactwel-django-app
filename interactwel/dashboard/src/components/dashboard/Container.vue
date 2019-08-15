@@ -120,7 +120,7 @@
 
     #main > aside {
         flex: 0 0 400px;
-        height: calc(92vh - 20px);
+        height: 92vh;
         overflow: auto;
         background-color: #ededed;
     }
