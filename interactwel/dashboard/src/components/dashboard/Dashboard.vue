@@ -143,7 +143,7 @@
     }
 
     .btn{
-        margin-right:20px;
+
     }
 
 </style>

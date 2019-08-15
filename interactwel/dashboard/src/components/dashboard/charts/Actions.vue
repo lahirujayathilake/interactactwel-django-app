@@ -1,24 +1,33 @@
 <template>
     <div id="graph" class="card">
-        
-            <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
+
+        <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/>Close</span>
-                <strong style="font-size:18px">Adaptation Plans</strong>
-            </div>
-            <b-badge id="tooltip-button-1" class="info-button-path" pill variant="secondary" v-b-tooltip.hover>
-                    How to read this chart?
-            </b-badge>
-                <b-tooltip target="tooltip-button-1" placement="bottom">
-
-                    <p aling="justify">
-                        This chart shows the actions that different actors will take for this adaptation plan.</p>
-                    <p aling="justify">
-                        Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
-                </b-tooltip>
-        
-
-        <div class="card-body no-padding">
-            <b-tabs card>
+            <strong style="font-size:18px">Adaptation Plans</strong>
+        </div>
+        <div class="card-body">
+            <b-row>
+                <b-col lg="6">
+                    <b-badge id="tooltip-button-1" class="info-button-path" pill variant="secondary" v-b-tooltip.hover>
+                        How to read this chart?
+                    </b-badge>
+                    <b-tooltip target="tooltip-button-1" placement="bottom">
+                        <p aling="justify">
+                            This chart shows the actions that different actors will take for this adaptation plan.</p>
+                        <p aling="justify">
+                            Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
+                    </b-tooltip>
+                </b-col>
+                <b-col lg="2">
+                    <b-button-group size="sm">
+                        <b-button v-on:click="ganntChartVisibility = !ganntChartVisibility" variant="primary">Gannt</b-button>
+                        <b-button v-on:click="ActionsGraphSteppedLinesVisibility = !ActionsGraphSteppedLinesVisibility" variant="primary">Pathways</b-button>
+                    </b-button-group>
+                </b-col>
+            </b-row>
+            <gannt-chart v-if="ganntChartVisibility"></gannt-chart>
+            <actions-graph-stepped-lines v-if="ActionsGraphSteppedLinesVisibility"></actions-graph-stepped-lines>
+            <!--<b-tabs card>
                 <b-tab title="Pathways" active>
                     <div class="card-body no-padding">
                         <div class="filter-options-container">
@@ -45,7 +54,7 @@
                         <gannt-chart></gannt-chart>
                     </div>
                 </b-tab>
-            </b-tabs>
+            </b-tabs>-->
         </div>
     </div>
 </template>
@@ -53,6 +62,7 @@
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
     import pathwaysGraph from "./data/PathwaysGraph.vue";
+    import ActionsGraphSteppedLines from "./data/ActionsGraphSteppedLines.vue";
     import GanntChart from "./data/GanntChart.vue";
     import EventBus from './../../../event-bus';
 
@@ -60,33 +70,35 @@
         name: 'Actions',
 
         components: {
+            ActionsGraphSteppedLines,
             GanntChart,
             'pathways-graph': pathwaysGraph,
-            'gannt-chart': GanntChart
+            'gannt-chart': GanntChart,
+            'actions-graph-stepped-lines': ActionsGraphSteppedLines
         },
 
         props: {
-            goals:{
+            goals: {
                 type: Array,
                 default: []
             },
-            actors:{
+            actors: {
                 type: Array,
                 default: []
             },
-            actions:{
+            actions: {
                 type: Array,
                 default: []
             },
-            selectedGoals:{
+            selectedGoals: {
                 type: Array,
                 default: []
             },
-            selectedActors:{
+            selectedActors: {
                 type: Array,
                 default: []
             },
-            selectedActions:{
+            selectedActions: {
                 type: Array,
                 default: []
 
@@ -95,6 +107,8 @@
 
         data() {
             return {
+                ganntChartVisibility: true,
+                ActionsGraphSteppedLinesVisibility: false,
                 colorIndex: 0,
                 isPlanGraphActive: false,
                 isCostGraphActive: false,
@@ -267,9 +281,8 @@
         font-size: 12px;
     }
 
-    .info-button-path{
+    .info-button-path {
         padding: .5em .5em !important;
-        margin-left: 100px !important;
     }
 
 

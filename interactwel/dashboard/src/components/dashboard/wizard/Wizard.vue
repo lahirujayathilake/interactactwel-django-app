@@ -871,7 +871,7 @@
         height: calc(60vh - 20px);
     }
 
-    #step4 nav {
+    #step4 nav,#step5 nav {
         flex: 0 0 auto;
         min-width: 200px;
         overflow: auto;

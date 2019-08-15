@@ -1,120 +1,159 @@
 <template>
     <div>
-   <!-- <horizontal-bar-chart :chart-data="datacollectionH" :options="optionsH"></horizontal-bar-chart>-->
-    <line-chart :chart-data="datacollection" :options="options" :width="600" :height="400"></line-chart>
+        <!--<line-chart :chart-data="data2" :options="options2" :width="600" :height="400"></line-chart>-->
+        <horizontal-bar-chart :chart-data="data" :options="optionsdata" :width="5"
+                              :height="3"></horizontal-bar-chart>
     </div>
 </template>
 
 <script>
     import HorizontalBarChart from "./../lib/HorizontalBarChart";
     import LineChart from "./../lib/LineChart";
+    import chartjsPluginAnnotation from "chartjs-plugin-annotation";
 
     export default {
         name: 'gannt-chart',
 
         components: {
-            HorizontalBarChart,LineChart
+            HorizontalBarChart, LineChart
         },
 
         data() {
             return {
-                datacollection: {
+                data: {
+                    labels: ["Farmer with Columbia river water rights", "Farmer with other surface water rights", "Farmer with groundwater rights"],
                     datasets: [
                         {
-
-                            label: 'Action 0',
-                            backgroundColor: "#dd434e",
-                            borderColor: "#de3131",
-                            fill: false,
-                            borderWidth : 40,
-                            pointRadius : 0,
-                            data: [
-                                {
-                                    x: "Jan",
-                                    y: "Increase amount of SW"
-                                }, {
-                                    x: "Feb",
-                                    y: "Increase amount of SW"
-                                }
-                            ]
+                            label: 'Business as usual',
+                            data: [10, 30, 10],
+                            backgroundColor: "#0f39de",
+                            hoverBackgroundColor: "#286bde",
+                            hoverBorderWidth: 0
                         },
                         {
-
-                            label: 'Action 1',
-                            backgroundColor: "#0f9c31",
-                            borderColor: "#0f9c31",
-                            fill: false,
-                            borderWidth : 40,
-                            pointRadius : 0,
+                            label: 'Increase amount of SW',
                             data: [
                                 {
-                                    x: "Jan",
-                                    y: "Increase amount of SW"
+                                    x: 23,
+                                    y: "Farmer with other surface water rights"
                                 }, {
-                                    x: "Apr",
-                                    y: "Increase amount of SW"
-                                }
-                            ]
+                                    x: 35,
+                                    y: "Farmer with other surface water rights"
+                                },
+                                {x: 25},
+                            ],
+                            backgroundColor: "#FFA000",
+                            hoverBackgroundColor: "#FFCA28",
+                            hoverBorderWidth: 0
                         },
                         {
-                            label: 'Action 2',
-                            backgroundColor: "#0f9c31",
-                            borderColor: "#0f9c31",
-                            fill: false,
-                            borderWidth : 40,
-                            pointRadius : 0,
+                            label: 'Decrease amount of SW',
                             data: [
                                 {
-                                    x: "Apr",
-                                    y: "Increase amount of GW"
+                                    x: 35,
+                                    y: "Farmer with other surface water rights"
                                 }, {
-                                    x: "Jul",
-                                    y: "Increase amount of GW"
+                                    x: 50,
+                                    y: "Farmer with other surface water rights"
+                                }, {
+                                    x: 25
                                 }
-                            ]
+                            ],
+                            backgroundColor: "#D32F2F",
+                            hoverBackgroundColor: "#EF5350",
+                            hoverBorderWidth: 0
                         },
-                        {
-
-                            label: 'Action 3',
-                            backgroundColor: "#0f9c31",
-                            borderColor: "#0f9c31",
-                            fill: false,
-                            borderWidth : 40,
-                            pointRadius : 0,
-                            data: [
-                                {
-                                    x: "Jul",
-                                    y: "Decrease amount of SW"
-                                }, {
-                                    x: "Sep",
-                                    y: "Decrease amount of SW"
-                                }
-                            ]
-                        },
-                        {
-                            label: 'Action 4',
-                            backgroundColor: "#0f9c31",
-                            borderColor: "#0f9c31",
-                            fill: false,
-                            borderWidth : 40,
-                            pointRadius : 0,
-                            data: [
-                                {
-                                    x: "Sep",
-                                    y: "Decrease amount of SW"
-                                }, {
-                                    x: "Dec",
-                                    y: "Decrease amount of SW"
-                                }
-                            ]
-                        }
-                    ],
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    ]
                 },
-                options: {
-                    responsive: false,
-                    legend : {
-                        display : false
+                optionsdata: {
+                    animation: {
+                        duration: 10,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Actions taken by each actor through time'
+                    },
+                    scales: {
+                        xAxes: [{
+                            stacked: true,
+                            gridLines: {display: false},
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time'
+                            },
+                        }],
+                        yAxes: [{
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Actors'
+                            },
+                        }],
+                    }, // scales
+                    legend: {display: true},
+                    annotation: {
+                        drawTime: 'afterDraw',
+                        events: ['dblclick'],
+                        /*annotations: [
+                            {
+                                type: 'box',
+                                xScaleID: 'x-axis-0',
+                                yScaleID: 'y-axis-0',
+                                yMin: "Farmer with Columbia river water rights",
+                                yMax: "Farmer with other surface water rights",
+                                backgroundColor: 'rgba(96, 125, 139, 0.1)',
+                                borderWidth: 0,
+                                onDblclick: function (e) {
+                                    console.log('Box', e.type, this);
+                                }
+                            },
+                            {
+                                type: 'box',
+                                xScaleID: 'x-axis-0',
+                                yScaleID: 'y-axis-0',
+                                yMin: "Farmer with other surface water rights",
+                                yMax: "Farmer with groundwater rights",
+                                backgroundColor: 'rgba(96, 125, 139, 0.3)',
+                                borderWidth: 0,
+                                onDblclick: function (e) {
+                                    console.log('Box', e.type, this);
+                                }
+                            }
+                        ]*/
+                    }
+                },
+
+                /*data2: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: "Farmer with Columbia river water rights",
+                        backgroundColor: "#286bde",
+                        borderColor: "#286bde",
+                        borderJoinStyle: 'round',
+                        borderWidth: 6,
+                        pointRadius: 0,
+                        data: [
+                            'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW' ],
+                        steppedLine: true,
+                        fill: false,
+                    }, {
+                        label: "Farmer with other surface water rights",
+                        fill: false,
+                        backgroundColor: "#dd434e",
+                        borderColor: "#dd434e",
+                        borderJoinStyle: 'round',
+                        borderWidth: 6,
+                        pointRadius: 0,
+                        data: [
+                            'Increase amount of CR', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW'
+                        ],
+                        steppedLine: true,
+                    }]
+                },
+                options2: {
+                    responsive: true,
+                    legend: {
+                        display: true
                     },
                     title: {
                         display: true,
@@ -128,80 +167,26 @@
                                 display: true,
                                 labelString: 'Time'
                             },
-                            ticks : {
-                                beginAtzero :true,
-                                stepSize : 1
+                            ticks: {
+                                beginAtzero: false,
+                                stepSize: 1
                             }
                         }],
-                        yAxes : [{
+                        yAxes: [{
                             type: 'category',
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Actions'
                             },
-                            ticks : {
-                                beginAtZero :true,
-                                max : 7
+                            ticks: {
+                                beginAtZero: false,
+                                max: 7
                             },
                             labels: ["Business as usual", "Increase amount of SW", "Decrease amount of SW", "Increase amount of GW", "Decrease amount of GW", "Increase amount of CR", "Decrease amount of CR"],
                         }]
                     }
-                },
-
-               /* datacollectionH: {
-                    labels: ["1", "2", "3", "4"],
-
-                    datasets: [
-                        {
-                            data: [50, 150, 300, 400, 500],
-                            backgroundColor: "rgba(63,103,126,0)",
-                            hoverBackgroundColor: "rgba(50,90,100,0)"
-                        },
-                        {
-                            data: [100, 100, 200, 200, 100],
-                            backgroundColor: ['red', 'green', 'blue', 'yellow'],
-                        }
-                    ]
-                },
-                optionsH: {
-                    hover: {
-                        animationDuration: 10
-                    },
-                    scales: {
-                        xAxes: [
-                            {
-                                label: "Duration",
-                                ticks: {
-                                    beginAtZero: true,
-                                    fontFamily: "'Open Sans Bold', sans-serif",
-                                    fontSize: 11
-                                },
-                                scaleLabel: {
-                                    display: false
-                                },
-                                gridLines: {},
-                                stacked: true
-                            }],
-                        yAxes: [{
-                            gridLines: {
-                                display: false,
-                                color: "#fff",
-                                zeroLineColor: "#fff",
-                                zeroLineWidth: 0
-                            },
-                            ticks: {
-                                fontFamily: "'Open Sans Bold', sans-serif",
-                                fontSize: 11
-                            },
-                            stacked: true
-                        }]
-                    },
-                    legend: {
-                        display: false
-                    }
-                }*/
+                },*/
             }
         }
-
     }
 </script>
