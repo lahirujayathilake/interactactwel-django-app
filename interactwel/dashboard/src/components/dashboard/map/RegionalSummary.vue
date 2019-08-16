@@ -43,14 +43,12 @@
                         <!--<regional-waterrights-graph :subbasinID ="this.subbasinID"></regional-waterrights-graph>-->
                 </b-tab>
                 <b-tab title="Water Rights">
-                        <b-row>
-                            <b-col>
-                               <pie-chart :chart-data="datacollectionwr" :options="optionswr" :width="5"
-                                           :height="4"></pie-chart>
+                        <b-row class="text-center">
+                            <b-col col lg="6">
+                               <pie-chart :chart-data="datacollectionwr" :options="optionswr" :width="5" :height="4"></pie-chart>
                             </b-col>
-                            <b-col>
-                                <pie-chart :chart-data="datacollectionirr" :options="optionsirr" :width="5"
-                                           :height="4"></pie-chart>
+                            <b-col col lg="6">
+                                <pie-chart :chart-data="datacollectionirr" :options="optionsirr" :width="5" :height="4"></pie-chart>
                             </b-col>
                         </b-row>
                 </b-tab>
