@@ -30,7 +30,19 @@
                             'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW' ],
                         steppedLine: true,
                         fill: false,
-                    }, {
+                    },
+                        {
+                            label: "Farmer with Columbia river water rights",
+                            backgroundColor: "#286bde",
+                            borderColor: "#286bde",
+                            borderJoinStyle: 'round',
+                            borderWidth: 6,
+                            data: [
+                                '', '', '', '', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW' ],
+                            steppedLine: true,
+                            fill: false,
+                        },
+                        {
                         label: "Farmer with other surface water rights",
                         fill: false,
                         backgroundColor: "#dd434e",
