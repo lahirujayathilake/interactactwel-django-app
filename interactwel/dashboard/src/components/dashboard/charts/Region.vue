@@ -14,7 +14,7 @@
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
                                 <h6 class="baseline-graph-title">Baseline Graph</h6>
-                                <overview-water-rights-graph></overview-water-rights-graph>
+                                <overview-base-water-rights-graph></overview-base-water-rights-graph>
                             </b-col>
                         </b-row>
                     </div>
@@ -89,6 +89,7 @@
     import NFertilizerGraph from './data/NFertilizerGraph.vue'
     import PFertilizerGraph from './data/PFertilizerGraph.vue'
     import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue'
+    import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue'
     import EventBus from './../../../event-bus';
 
     export default {
@@ -100,6 +101,7 @@
             'nFertilizerGraph': NFertilizerGraph,
             'pFertilizerGraph': PFertilizerGraph,
             'overviewWaterRightsGraph': OverviewWaterRightsGraph,
+            'OverviewBaseWaterRightsGraph': OverviewBaseWaterRightsGraph,
         },
 
         data() {
