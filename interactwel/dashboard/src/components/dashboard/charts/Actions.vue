@@ -18,15 +18,20 @@
                             Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
                     </b-tooltip>
                 </b-col>
-                <b-col lg="2">
-                    <b-button-group size="sm">
-                        <b-button v-on:click="ganntChartVisibility = !ganntChartVisibility" variant="primary">Gannt</b-button>
-                        <b-button v-on:click="ActionsGraphSteppedLinesVisibility = !ActionsGraphSteppedLinesVisibility" variant="primary">Pathways</b-button>
-                    </b-button-group>
-                </b-col>
             </b-row>
-            <gannt-chart v-if="ganntChartVisibility"></gannt-chart>
-            <actions-graph-stepped-lines v-if="ActionsGraphSteppedLinesVisibility"></actions-graph-stepped-lines>
+
+            <b-tabs pills small align="right">
+                <b-tab title="Gannt" active><b-card-text>
+                    <gannt-chart></gannt-chart>
+                </b-card-text></b-tab>
+                <b-tab title="Pathways"><b-card-text>
+                    <actions-graph-stepped-lines></actions-graph-stepped-lines>
+                </b-card-text></b-tab>
+            </b-tabs>
+
+
+
+
             <!--<b-tabs card>
                 <b-tab title="Pathways" active>
                     <div class="card-body no-padding">
@@ -283,6 +288,10 @@
 
     .info-button-path {
         padding: .5em .5em !important;
+    }
+
+    .toggleGraphType{
+        float: right;
     }
 
 

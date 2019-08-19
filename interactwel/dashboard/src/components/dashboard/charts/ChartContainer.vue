@@ -208,6 +208,16 @@
         background-color: #4cae4c !important;
     }
 
+    .nav-pills .nav-link{
+        color: #333;
+        background-color: #efefef !important;
+        padding: 5px 10px;
+        -webkit-border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        border-radius: 0 !important;
+    }
+
+
     #sidebar .active {
         color: #FFF !important;
         background-color: #4cae4c;
@@ -224,7 +234,7 @@
         width: 750px;
     }
 
-    #graph .nav-item a {
+    /*#graph .nav-item a {
         color: #28a645;
         text-decoration: none;
         font-weight: 500;
@@ -238,7 +248,7 @@
         background-color: #FFFFFF;
         font-size: 14px;
         border-top: 2px solid #28a645;
-    }
+    }*/
 
     .feedback-bottom-pane {
         background-color: #ededed;
