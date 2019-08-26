@@ -1,0 +1,16 @@
+{
+    "type":"FeatureCollection",
+    "crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[
+    {"type":"Feature","properties":{"Id":"0","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.374881791,45.15032018000005,0]}},
+    {"type":"Feature","properties":{"Id":"1","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.846852491,45.23267566300007,0]}},
+    {"type":"Feature","properties":{"Id":"2","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.846852491,45.23267566300007,0]}},
+    {"type":"Feature","properties":{"Id":"3","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.846852491,45.23267566300007,0]}},
+    {"type":"Feature","properties":{"Id":"4","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.846852491,45.23267566300007,0]}},
+    {"type":"Feature","properties":{"Id":"5","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.846852491,45.23267566300007,0]}},
+    {"type":"Feature","properties":{"Id":"6","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.329372798,45.17240993100006,0]}},
+    {"type":"Feature","properties":{"Id":"7","Name":"Reservoir"},"geometry":{"type":"Point","coordinates":[-119.544586,45.346896,0]}},
+    {"type":"Feature","properties":{"Id":"8","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.772423754,45.49334906600006,0]}},
+    {"type":"Feature","properties":{"Id":"9","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.772423754,45.49334906600006,0]}},
+    {"type":"Feature","properties":{"Id":"10","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.772423754,45.49334906600006,0]}},
+    {"type":"Feature","properties":{"Id":"11","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.776500026,45.49455971800006,0]}},
+    {"type":"Feature","properties":{"Id":"12","Name":"Inlet"},"geometry":{"type":"Point","coordinates":[-119.776500026,45.49455971800006,0]}}]}

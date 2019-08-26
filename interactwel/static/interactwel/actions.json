@@ -1,0 +1,9 @@
+[
+    { "id": 0, "name": "act1", "action": "No changes to current water right allocations", "readonly": false, "info": "" },
+    { "id": 1, "name": "act2", "action": "Increase the volume of non-Columbia surface water", "readonly": false, "info": "Increase the volume of non-Columbia surface water, while reducing the same total volume of ground water and/or Columbia  water." },
+    { "id": 2, "name": "act3", "action": "Decrease the volume of non-Columbia surface water", "readonly": false, "info": "Decrease the volume of non-Columbia surface water, while increasing the same total volume of ground water and/or Columbia water." },
+    { "id": 3, "name": "act4", "action": "Increase the volume of groundwater", "readonly": false, "info": "Increase the volume of ground water, while reducing the same total volume of non-Columbia surface water and/or Columbia  water." },
+    { "id": 4, "name": "act5", "action": "Decrease the volume of groundwater", "readonly": false, "info": "Decrease the volume of ground water, while increasing the same total volume of non-Columbia surface water and/or Columbia water." },
+    { "id": 5, "name": "act7", "action": "Increase the volume of Columbia surface water", "readonly": true, "info": "Increase the volume of Columbia surface water, while reducing the same total volume of ground water and/or non-Columbia water." },
+    { "id": 6, "name": "act8", "action": "Decrease the volume of Columbia surface water", "readonly": true, "info": "Decrease the volume of Columbia surface water, while increasing the same total volume of ground water and/or non-Columbia water." }
+]

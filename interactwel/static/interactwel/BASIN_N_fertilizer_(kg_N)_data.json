@@ -1,0 +1,1263 @@
+{
+    "Description": "Amount of N fertilizer applied automatically in watershed (kg N).",
+    "Graph type": "stacked bar graph",
+    "Data type": "Yearly totals per crop",
+    "Adaptation_plans": {
+        "Adaptation Plan 1": {
+            "Data": {
+                "CWGR": {
+                    "Data": {
+                        "1": 7.35,
+                        "2": 48.18,
+                        "3": 0.0
+                    },
+                    "Name": "Crested Wheatgrass"
+                },
+                "POTA": {
+                    "Data": {
+                        "1": 182.0,
+                        "2": 134.1,
+                        "3": 1691.96
+                    },
+                    "Name": "Potato"
+                },
+                "OAK": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Oak"
+                },
+                "PEAS": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Garden or Canning Peas"
+                },
+                "GRSG": {
+                    "Data": {
+                        "1": 40.95,
+                        "2": 191.58,
+                        "3": 685.35
+                    },
+                    "Name": "Grain Sorghum"
+                },
+                "AGRL": {
+                    "Data": {
+                        "1": 11148.51,
+                        "2": 38010.32,
+                        "3": 8793.48
+                    },
+                    "Name": "Agricultural Land-Generic"
+                },
+                "CANP": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0
+                    },
+                    "Name": "Spring Canola-Polish"
+                },
+                "BARL": {
+                    "Data": {
+                        "1": 6661.47,
+                        "2": 4372.48,
+                        "3": 54.66
+                    },
+                    "Name": "Spring Barley"
+                },
+                "WWHT": {
+                    "Data": {
+                        "1": 228021.03,
+                        "2": 153672.72,
+                        "3": 165707.83
+                    },
+                    "Name": "Winter Wheat"
+                },
+                "ONIO": {
+                    "Data": {
+                        "1": 33.83,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Onion"
+                },
+                "CELR": {
+                    "Data": {
+                        "1": 21065.76,
+                        "2": 20079.53,
+                        "3": 17428.83
+                    },
+                    "Name": "Celery"
+                },
+                "SWGR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 140.05,
+                        "3": 95.6
+                    },
+                    "Name": "Slender Wheatgrass"
+                },
+                "WETN": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Wetlands-Non-Forested"
+                },
+                "ORCD": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 2.71
+                    },
+                    "Name": "Orchard"
+                },
+                "PEPR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Bell Pepper"
+                },
+                "EGAM": {
+                    "Data": {
+                        "1": 3.29,
+                        "2": 56.09,
+                        "3": 17.92
+                    },
+                    "Name": "Eastern Gamagrass"
+                },
+                "ALFA": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Alfalfa"
+                },
+                "WWGR": {
+                    "Data": {
+                        "1": 114213.74,
+                        "2": 11323.98,
+                        "3": 45551.29
+                    },
+                    "Name": "Western Wheatgrass"
+                },
+                "CORN": {
+                    "Data": {
+                        "1": 117991.63,
+                        "2": 195714.03,
+                        "3": 133212.53
+                    },
+                    "Name": "Corn"
+                },
+                "SGHY": {
+                    "Data": {
+                        "1": 52.74,
+                        "2": 44.58,
+                        "3": 40.78
+                    },
+                    "Name": "Sorghum Hay"
+                },
+                "SPOT": {
+                    "Data": {
+                        "1": 262.02,
+                        "2": 1377.23,
+                        "3": 922.63
+                    },
+                    "Name": "Sweetpotato"
+                },
+                "HAY": {
+                    "Data": {
+                        "1": 357.69,
+                        "2": 783.7,
+                        "3": 1145.55
+                    },
+                    "Name": "Hay"
+                },
+                "SWHT": {
+                    "Data": {
+                        "1": 25963.38,
+                        "2": 13990.64,
+                        "3": 42345.54
+                    },
+                    "Name": "Spring Wheat"
+                },
+                "LETT": {
+                    "Data": {
+                        "1": 16302.84,
+                        "2": 97649.61,
+                        "3": 4709.49
+                    },
+                    "Name": "Head Lettuce"
+                },
+                "SCRN": {
+                    "Data": {
+                        "1": 3189.81,
+                        "2": 6553.55,
+                        "3": 3877.76
+                    },
+                    "Name": "Sweet Corn"
+                }
+            }
+        },
+        "Adaptation Plan 2": {
+            "Data": {
+                "CWGR": {
+                    "Data": {
+                        "1": 7.35,
+                        "2": 48.18,
+                        "3": 0.0
+                    },
+                    "Name": "Crested Wheatgrass"
+                },
+                "POTA": {
+                    "Data": {
+                        "1": 182.0,
+                        "2": 134.1,
+                        "3": 1691.96
+                    },
+                    "Name": "Potato"
+                },
+                "OAK": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Oak"
+                },
+                "PEAS": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Garden or Canning Peas"
+                },
+                "GRSG": {
+                    "Data": {
+                        "1": 40.95,
+                        "2": 191.58,
+                        "3": 685.35
+                    },
+                    "Name": "Grain Sorghum"
+                },
+                "AGRL": {
+                    "Data": {
+                        "1": 11148.51,
+                        "2": 38010.32,
+                        "3": 8793.48
+                    },
+                    "Name": "Agricultural Land-Generic"
+                },
+                "CANP": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0
+                    },
+                    "Name": "Spring Canola-Polish"
+                },
+                "BARL": {
+                    "Data": {
+                        "1": 6661.47,
+                        "2": 4372.48,
+                        "3": 54.66
+                    },
+                    "Name": "Spring Barley"
+                },
+                "WWHT": {
+                    "Data": {
+                        "1": 228021.03,
+                        "2": 153672.72,
+                        "3": 165707.83
+                    },
+                    "Name": "Winter Wheat"
+                },
+                "ONIO": {
+                    "Data": {
+                        "1": 33.83,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Onion"
+                },
+                "CELR": {
+                    "Data": {
+                        "1": 21065.76,
+                        "2": 20079.53,
+                        "3": 17428.83
+                    },
+                    "Name": "Celery"
+                },
+                "SWGR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 140.05,
+                        "3": 95.6
+                    },
+                    "Name": "Slender Wheatgrass"
+                },
+                "WETN": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Wetlands-Non-Forested"
+                },
+                "ORCD": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 2.71
+                    },
+                    "Name": "Orchard"
+                },
+                "PEPR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Bell Pepper"
+                },
+                "EGAM": {
+                    "Data": {
+                        "1": 3.29,
+                        "2": 56.09,
+                        "3": 17.92
+                    },
+                    "Name": "Eastern Gamagrass"
+                },
+                "ALFA": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Alfalfa"
+                },
+                "WWGR": {
+                    "Data": {
+                        "1": 114213.74,
+                        "2": 11323.98,
+                        "3": 45551.29
+                    },
+                    "Name": "Western Wheatgrass"
+                },
+                "CORN": {
+                    "Data": {
+                        "1": 117991.63,
+                        "2": 195714.03,
+                        "3": 133212.53
+                    },
+                    "Name": "Corn"
+                },
+                "SGHY": {
+                    "Data": {
+                        "1": 52.74,
+                        "2": 44.58,
+                        "3": 40.78
+                    },
+                    "Name": "Sorghum Hay"
+                },
+                "SPOT": {
+                    "Data": {
+                        "1": 262.02,
+                        "2": 1377.23,
+                        "3": 922.63
+                    },
+                    "Name": "Sweetpotato"
+                },
+                "HAY": {
+                    "Data": {
+                        "1": 357.69,
+                        "2": 783.7,
+                        "3": 1145.55
+                    },
+                    "Name": "Hay"
+                },
+                "SWHT": {
+                    "Data": {
+                        "1": 25963.38,
+                        "2": 13990.64,
+                        "3": 42345.54
+                    },
+                    "Name": "Spring Wheat"
+                },
+                "LETT": {
+                    "Data": {
+                        "1": 16302.84,
+                        "2": 97649.61,
+                        "3": 4709.49
+                    },
+                    "Name": "Head Lettuce"
+                },
+                "SCRN": {
+                    "Data": {
+                        "1": 3189.81,
+                        "2": 6553.55,
+                        "3": 3877.76
+                    },
+                    "Name": "Sweet Corn"
+                }
+            }
+        },
+        "Adaptation Plan 3": {
+            "Data": {
+                "CWGR": {
+                    "Data": {
+                        "1": 7.35,
+                        "2": 48.18,
+                        "3": 0.0
+                    },
+                    "Name": "Crested Wheatgrass"
+                },
+                "POTA": {
+                    "Data": {
+                        "1": 182.0,
+                        "2": 134.1,
+                        "3": 1691.96
+                    },
+                    "Name": "Potato"
+                },
+                "OAK": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Oak"
+                },
+                "PEAS": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Garden or Canning Peas"
+                },
+                "GRSG": {
+                    "Data": {
+                        "1": 40.95,
+                        "2": 191.58,
+                        "3": 685.35
+                    },
+                    "Name": "Grain Sorghum"
+                },
+                "AGRL": {
+                    "Data": {
+                        "1": 11148.51,
+                        "2": 38010.32,
+                        "3": 8793.48
+                    },
+                    "Name": "Agricultural Land-Generic"
+                },
+                "CANP": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0
+                    },
+                    "Name": "Spring Canola-Polish"
+                },
+                "BARL": {
+                    "Data": {
+                        "1": 6661.47,
+                        "2": 4372.48,
+                        "3": 54.66
+                    },
+                    "Name": "Spring Barley"
+                },
+                "WWHT": {
+                    "Data": {
+                        "1": 228021.03,
+                        "2": 153672.72,
+                        "3": 165707.83
+                    },
+                    "Name": "Winter Wheat"
+                },
+                "ONIO": {
+                    "Data": {
+                        "1": 33.83,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Onion"
+                },
+                "CELR": {
+                    "Data": {
+                        "1": 21065.76,
+                        "2": 20079.53,
+                        "3": 17428.83
+                    },
+                    "Name": "Celery"
+                },
+                "SWGR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 140.05,
+                        "3": 95.6
+                    },
+                    "Name": "Slender Wheatgrass"
+                },
+                "WETN": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Wetlands-Non-Forested"
+                },
+                "ORCD": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 2.71
+                    },
+                    "Name": "Orchard"
+                },
+                "PEPR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Bell Pepper"
+                },
+                "EGAM": {
+                    "Data": {
+                        "1": 3.29,
+                        "2": 56.09,
+                        "3": 17.92
+                    },
+                    "Name": "Eastern Gamagrass"
+                },
+                "ALFA": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Alfalfa"
+                },
+                "WWGR": {
+                    "Data": {
+                        "1": 114213.74,
+                        "2": 11323.98,
+                        "3": 45551.29
+                    },
+                    "Name": "Western Wheatgrass"
+                },
+                "CORN": {
+                    "Data": {
+                        "1": 117991.63,
+                        "2": 195714.03,
+                        "3": 133212.53
+                    },
+                    "Name": "Corn"
+                },
+                "SGHY": {
+                    "Data": {
+                        "1": 52.74,
+                        "2": 44.58,
+                        "3": 40.78
+                    },
+                    "Name": "Sorghum Hay"
+                },
+                "SPOT": {
+                    "Data": {
+                        "1": 262.02,
+                        "2": 1377.23,
+                        "3": 922.63
+                    },
+                    "Name": "Sweetpotato"
+                },
+                "HAY": {
+                    "Data": {
+                        "1": 357.69,
+                        "2": 783.7,
+                        "3": 1145.55
+                    },
+                    "Name": "Hay"
+                },
+                "SWHT": {
+                    "Data": {
+                        "1": 25963.38,
+                        "2": 13990.64,
+                        "3": 42345.54
+                    },
+                    "Name": "Spring Wheat"
+                },
+                "LETT": {
+                    "Data": {
+                        "1": 16302.84,
+                        "2": 97649.61,
+                        "3": 4709.49
+                    },
+                    "Name": "Head Lettuce"
+                },
+                "SCRN": {
+                    "Data": {
+                        "1": 3189.81,
+                        "2": 6553.55,
+                        "3": 3877.76
+                    },
+                    "Name": "Sweet Corn"
+                }
+            }
+        },
+        "Adaptation Plan 4": {
+            "Data": {
+                "CWGR": {
+                    "Data": {
+                        "1": 7.35,
+                        "2": 48.18,
+                        "3": 0.0
+                    },
+                    "Name": "Crested Wheatgrass"
+                },
+                "POTA": {
+                    "Data": {
+                        "1": 182.0,
+                        "2": 134.1,
+                        "3": 1691.96
+                    },
+                    "Name": "Potato"
+                },
+                "OAK": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Oak"
+                },
+                "PEAS": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Garden or Canning Peas"
+                },
+                "GRSG": {
+                    "Data": {
+                        "1": 40.95,
+                        "2": 191.58,
+                        "3": 685.35
+                    },
+                    "Name": "Grain Sorghum"
+                },
+                "AGRL": {
+                    "Data": {
+                        "1": 11148.51,
+                        "2": 38010.32,
+                        "3": 8793.48
+                    },
+                    "Name": "Agricultural Land-Generic"
+                },
+                "CANP": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0
+                    },
+                    "Name": "Spring Canola-Polish"
+                },
+                "BARL": {
+                    "Data": {
+                        "1": 6661.47,
+                        "2": 4372.48,
+                        "3": 54.66
+                    },
+                    "Name": "Spring Barley"
+                },
+                "WWHT": {
+                    "Data": {
+                        "1": 228021.03,
+                        "2": 153672.72,
+                        "3": 165707.83
+                    },
+                    "Name": "Winter Wheat"
+                },
+                "ONIO": {
+                    "Data": {
+                        "1": 33.83,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Onion"
+                },
+                "CELR": {
+                    "Data": {
+                        "1": 21065.76,
+                        "2": 20079.53,
+                        "3": 17428.83
+                    },
+                    "Name": "Celery"
+                },
+                "SWGR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 140.05,
+                        "3": 95.6
+                    },
+                    "Name": "Slender Wheatgrass"
+                },
+                "WETN": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Wetlands-Non-Forested"
+                },
+                "ORCD": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 2.71
+                    },
+                    "Name": "Orchard"
+                },
+                "PEPR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Bell Pepper"
+                },
+                "EGAM": {
+                    "Data": {
+                        "1": 3.29,
+                        "2": 56.09,
+                        "3": 17.92
+                    },
+                    "Name": "Eastern Gamagrass"
+                },
+                "ALFA": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Alfalfa"
+                },
+                "WWGR": {
+                    "Data": {
+                        "1": 114213.74,
+                        "2": 11323.98,
+                        "3": 45551.29
+                    },
+                    "Name": "Western Wheatgrass"
+                },
+                "CORN": {
+                    "Data": {
+                        "1": 117991.63,
+                        "2": 195714.03,
+                        "3": 133212.53
+                    },
+                    "Name": "Corn"
+                },
+                "SGHY": {
+                    "Data": {
+                        "1": 52.74,
+                        "2": 44.58,
+                        "3": 40.78
+                    },
+                    "Name": "Sorghum Hay"
+                },
+                "SPOT": {
+                    "Data": {
+                        "1": 262.02,
+                        "2": 1377.23,
+                        "3": 922.63
+                    },
+                    "Name": "Sweetpotato"
+                },
+                "HAY": {
+                    "Data": {
+                        "1": 357.69,
+                        "2": 783.7,
+                        "3": 1145.55
+                    },
+                    "Name": "Hay"
+                },
+                "SWHT": {
+                    "Data": {
+                        "1": 25963.38,
+                        "2": 13990.64,
+                        "3": 42345.54
+                    },
+                    "Name": "Spring Wheat"
+                },
+                "LETT": {
+                    "Data": {
+                        "1": 16302.84,
+                        "2": 97649.61,
+                        "3": 4709.49
+                    },
+                    "Name": "Head Lettuce"
+                },
+                "SCRN": {
+                    "Data": {
+                        "1": 3189.81,
+                        "2": 6553.55,
+                        "3": 3877.76
+                    },
+                    "Name": "Sweet Corn"
+                }
+            }
+        },
+        "Adaptation Plan 5": {
+            "Data": {
+                "CWGR": {
+                    "Data": {
+                        "1": 7.35,
+                        "2": 48.18,
+                        "3": 0.0
+                    },
+                    "Name": "Crested Wheatgrass"
+                },
+                "POTA": {
+                    "Data": {
+                        "1": 182.0,
+                        "2": 134.1,
+                        "3": 1691.96
+                    },
+                    "Name": "Potato"
+                },
+                "OAK": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Oak"
+                },
+                "PEAS": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Garden or Canning Peas"
+                },
+                "GRSG": {
+                    "Data": {
+                        "1": 40.95,
+                        "2": 191.58,
+                        "3": 685.35
+                    },
+                    "Name": "Grain Sorghum"
+                },
+                "AGRL": {
+                    "Data": {
+                        "1": 11148.51,
+                        "2": 38010.32,
+                        "3": 8793.48
+                    },
+                    "Name": "Agricultural Land-Generic"
+                },
+                "CANP": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0
+                    },
+                    "Name": "Spring Canola-Polish"
+                },
+                "BARL": {
+                    "Data": {
+                        "1": 6661.47,
+                        "2": 4372.48,
+                        "3": 54.66
+                    },
+                    "Name": "Spring Barley"
+                },
+                "WWHT": {
+                    "Data": {
+                        "1": 228021.03,
+                        "2": 153672.72,
+                        "3": 165707.83
+                    },
+                    "Name": "Winter Wheat"
+                },
+                "ONIO": {
+                    "Data": {
+                        "1": 33.83,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Onion"
+                },
+                "CELR": {
+                    "Data": {
+                        "1": 21065.76,
+                        "2": 20079.53,
+                        "3": 17428.83
+                    },
+                    "Name": "Celery"
+                },
+                "SWGR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 140.05,
+                        "3": 95.6
+                    },
+                    "Name": "Slender Wheatgrass"
+                },
+                "WETN": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Wetlands-Non-Forested"
+                },
+                "ORCD": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 2.71
+                    },
+                    "Name": "Orchard"
+                },
+                "PEPR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Bell Pepper"
+                },
+                "EGAM": {
+                    "Data": {
+                        "1": 3.29,
+                        "2": 56.09,
+                        "3": 17.92
+                    },
+                    "Name": "Eastern Gamagrass"
+                },
+                "ALFA": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Alfalfa"
+                },
+                "WWGR": {
+                    "Data": {
+                        "1": 114213.74,
+                        "2": 11323.98,
+                        "3": 45551.29
+                    },
+                    "Name": "Western Wheatgrass"
+                },
+                "CORN": {
+                    "Data": {
+                        "1": 117991.63,
+                        "2": 195714.03,
+                        "3": 133212.53
+                    },
+                    "Name": "Corn"
+                },
+                "SGHY": {
+                    "Data": {
+                        "1": 52.74,
+                        "2": 44.58,
+                        "3": 40.78
+                    },
+                    "Name": "Sorghum Hay"
+                },
+                "SPOT": {
+                    "Data": {
+                        "1": 262.02,
+                        "2": 1377.23,
+                        "3": 922.63
+                    },
+                    "Name": "Sweetpotato"
+                },
+                "HAY": {
+                    "Data": {
+                        "1": 357.69,
+                        "2": 783.7,
+                        "3": 1145.55
+                    },
+                    "Name": "Hay"
+                },
+                "SWHT": {
+                    "Data": {
+                        "1": 25963.38,
+                        "2": 13990.64,
+                        "3": 42345.54
+                    },
+                    "Name": "Spring Wheat"
+                },
+                "LETT": {
+                    "Data": {
+                        "1": 16302.84,
+                        "2": 97649.61,
+                        "3": 4709.49
+                    },
+                    "Name": "Head Lettuce"
+                },
+                "SCRN": {
+                    "Data": {
+                        "1": 3189.81,
+                        "2": 6553.55,
+                        "3": 3877.76
+                    },
+                    "Name": "Sweet Corn"
+                }
+            }
+        },
+        "Adaptation Plan 6": {
+            "Data": {
+                "CWGR": {
+                    "Data": {
+                        "1": 7.35,
+                        "2": 48.18,
+                        "3": 0.0
+                    },
+                    "Name": "Crested Wheatgrass"
+                },
+                "POTA": {
+                    "Data": {
+                        "1": 182.0,
+                        "2": 134.1,
+                        "3": 1691.96
+                    },
+                    "Name": "Potato"
+                },
+                "OAK": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Oak"
+                },
+                "PEAS": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Garden or Canning Peas"
+                },
+                "GRSG": {
+                    "Data": {
+                        "1": 40.95,
+                        "2": 191.58,
+                        "3": 685.35
+                    },
+                    "Name": "Grain Sorghum"
+                },
+                "AGRL": {
+                    "Data": {
+                        "1": 11148.51,
+                        "2": 38010.32,
+                        "3": 8793.48
+                    },
+                    "Name": "Agricultural Land-Generic"
+                },
+                "CANP": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0
+                    },
+                    "Name": "Spring Canola-Polish"
+                },
+                "BARL": {
+                    "Data": {
+                        "1": 6661.47,
+                        "2": 4372.48,
+                        "3": 54.66
+                    },
+                    "Name": "Spring Barley"
+                },
+                "WWHT": {
+                    "Data": {
+                        "1": 228021.03,
+                        "2": 153672.72,
+                        "3": 165707.83
+                    },
+                    "Name": "Winter Wheat"
+                },
+                "ONIO": {
+                    "Data": {
+                        "1": 33.83,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Onion"
+                },
+                "CELR": {
+                    "Data": {
+                        "1": 21065.76,
+                        "2": 20079.53,
+                        "3": 17428.83
+                    },
+                    "Name": "Celery"
+                },
+                "SWGR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 140.05,
+                        "3": 95.6
+                    },
+                    "Name": "Slender Wheatgrass"
+                },
+                "WETN": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Wetlands-Non-Forested"
+                },
+                "ORCD": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 2.71
+                    },
+                    "Name": "Orchard"
+                },
+                "PEPR": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Bell Pepper"
+                },
+                "EGAM": {
+                    "Data": {
+                        "1": 3.29,
+                        "2": 56.09,
+                        "3": 17.92
+                    },
+                    "Name": "Eastern Gamagrass"
+                },
+                "ALFA": {
+                    "Data": {
+                        "1": 0.0,
+                        "2": 0.0,
+                        "3": 0.0
+                    },
+                    "Name": "Alfalfa"
+                },
+                "WWGR": {
+                    "Data": {
+                        "1": 114213.74,
+                        "2": 11323.98,
+                        "3": 45551.29
+                    },
+                    "Name": "Western Wheatgrass"
+                },
+                "CORN": {
+                    "Data": {
+                        "1": 117991.63,
+                        "2": 195714.03,
+                        "3": 133212.53
+                    },
+                    "Name": "Corn"
+                },
+                "SGHY": {
+                    "Data": {
+                        "1": 52.74,
+                        "2": 44.58,
+                        "3": 40.78
+                    },
+                    "Name": "Sorghum Hay"
+                },
+                "SPOT": {
+                    "Data": {
+                        "1": 262.02,
+                        "2": 1377.23,
+                        "3": 922.63
+                    },
+                    "Name": "Sweetpotato"
+                },
+                "HAY": {
+                    "Data": {
+                        "1": 357.69,
+                        "2": 783.7,
+                        "3": 1145.55
+                    },
+                    "Name": "Hay"
+                },
+                "SWHT": {
+                    "Data": {
+                        "1": 25963.38,
+                        "2": 13990.64,
+                        "3": 42345.54
+                    },
+                    "Name": "Spring Wheat"
+                },
+                "LETT": {
+                    "Data": {
+                        "1": 16302.84,
+                        "2": 97649.61,
+                        "3": 4709.49
+                    },
+                    "Name": "Head Lettuce"
+                },
+                "SCRN": {
+                    "Data": {
+                        "1": 3189.81,
+                        "2": 6553.55,
+                        "3": 3877.76
+                    },
+                    "Name": "Sweet Corn"
+                }
+            }
+        }
+    },
+    "Legend": [
+        "2008",
+        "2009",
+        "2010"
+    ],
+    "Data Labels": [
+        "CWGR",
+        "POTA",
+        "OAK",
+        "PEAS",
+        "GRSG",
+        "AGRL",
+        "CANP",
+        "BARL",
+        "WWHT",
+        "ONIO",
+        "CELR",
+        "SWGR",
+        "WETN",
+        "ORCD",
+        "PEPR",
+        "EGAM",
+        "ALFA",
+        "WWGR",
+        "CORN",
+        "SGHY",
+        "SPOT",
+        "HAY",
+        "SWHT",
+        "LETT",
+        "SCRN"
+    ]
+}
