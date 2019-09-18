@@ -9,11 +9,12 @@
                 <b-tab title="Water Rights" active>
                     <div class="card-body no-padding">
                         <b-row>
-                            <b-col lg="6">
+                            <b-col lg="6" class="action-graph-container">
+                            <h6 class="action-graph-title">Action Plan 1</h6>
                                 <overview-water-rights-graph></overview-water-rights-graph>
                             </b-col>
-                            <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Baseline Graph</h6>
+                            <b-col lg="6" class="action-graph-container">
+                                <h6 class="action-graph-title">Baseline Graph</h6>
                                 <overview-base-water-rights-graph></overview-base-water-rights-graph>
                             </b-col>
                         </b-row>
@@ -22,12 +23,13 @@
                 <b-tab title="Crop yield">
                     <div class="card-body no-padding">
                         <b-row>
-                            <b-col lg="6">
+                            <b-col lg="6" class="action-graph-container">
+                            <h6 class="action-graph-title">Action Plan 1</h6>
                                 <crop-yield-graph></crop-yield-graph>
                             </b-col>
-                            <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Baseline Graph</h6>
-                                <crop-yield-graph></crop-yield-graph>
+                            <b-col lg="6" class="action-graph-container">
+                                <h6 class="baseline-graph-title">Business as usual</h6>
+                                <base-crop-yield-graph></base-crop-yield-graph>
                             </b-col>
                         </b-row>
                     </div>
@@ -86,6 +88,7 @@
     import JSONData from "../../../assets/result_action_plans.json";
     import IrrigationGraph from './data/IrrigationGraph.vue'
     import CropYieldGraph from './data/CropYieldGraph.vue'
+    import BaseCropYieldGraph from './data/BaseCropYieldGraph.vue'
     import NFertilizerGraph from './data/NFertilizerGraph.vue'
     import PFertilizerGraph from './data/PFertilizerGraph.vue'
     import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue'
@@ -98,6 +101,7 @@
         components: {
             'irrigationGraph': IrrigationGraph,
             'cropYieldGraph': CropYieldGraph,
+            'BaseCropYieldGraph': BaseCropYieldGraph,
             'nFertilizerGraph': NFertilizerGraph,
             'pFertilizerGraph': PFertilizerGraph,
             'overviewWaterRightsGraph': OverviewWaterRightsGraph,
@@ -151,6 +155,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .baseline-graph-title{
+    background-color: #6c757d;
+    padding: 5px;
+    text-align: center;
+    color: #FFF;
+    font-size: 12px;
+}
+
+.action-graph-title{
     background-color: #6c757d;
     padding: 5px;
     text-align: center;
