@@ -319,6 +319,7 @@
                                         <sidebar></sidebar>
                                     </nav>
                                     <article>
+                                        <router-view></router-view>
                                         <charts :goals="goals" :actors="actors" :actions="actions"
                                                 :selectedGoals="selectedGoals" :selectedActors="selectedActors"
                                                 :selectedActions="selectedActions"></charts>
@@ -398,7 +399,7 @@
                         <b-card-body>
                             <b-table class="card-text" bordered small hover :items="items" :fields="fields">
                                 <template slot="rating" slot-scope="data">
-                                    <star-rating star-size="20  "></star-rating>
+                                    <star-rating></star-rating>
                                 </template>
                                 <template slot="download" slot-scope="data">
                                     <b-button pill size="sm"
@@ -706,6 +707,7 @@
                 else {
                     this.tabIndex++
                     this.isStep3Active = true
+                   // this.$router.push({ name: 'Plan', params: { planId: 1 } })
                     return true
                 }
 
@@ -1008,14 +1010,6 @@
         margin: .05rem !important;
         background-color: #FFFFFF;
         border-color: #FFF !important;
-    }
-
-    .custom-select{
-        background-color: #DCEDC8 !important;
-        border: 2px solid #28a645 !important;
-        border-bottom: 0px solid #28a645 !important;
-        border-right: 0px solid #28a645 !important;
-        border-left: 0px solid #28a645 !important;
     }
 
 </style>

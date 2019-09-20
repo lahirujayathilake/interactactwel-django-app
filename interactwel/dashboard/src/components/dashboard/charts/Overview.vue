@@ -8,13 +8,13 @@
             <b-row>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Goals</strong></h6>
-                    <b-list-group class="no-padding" v-for="item in selectedGoals">
+                    <b-list-group class="no-padding" v-for="item in selectedGoals" v-bind:key="item.id">
                         <b-list-group-item class="no-border"><small> &#10003;&nbsp;{{item.goal}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Actors</strong></h6>
-                    <b-list-group class="no-padding" v-for="item in selectedActors">
+                    <b-list-group class="no-padding" v-for="item in selectedActors" v-bind:key="item.id" >
                         <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.actor}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
@@ -44,6 +44,7 @@
         name: 'Overview',
 
         components: {
+            EventBus
         },
 
         props: {
