@@ -319,7 +319,7 @@
                                         <sidebar></sidebar>
                                     </nav>
                                     <article>
-                                        <router-view></router-view>
+                                        <!--<router-view></router-view>-->
                                         <charts :goals="goals" :actors="actors" :actions="actions"
                                                 :selectedGoals="selectedGoals" :selectedActors="selectedActors"
                                                 :selectedActions="selectedActions"></charts>
@@ -399,14 +399,14 @@
                         <b-card-body>
                             <b-table class="card-text" bordered small hover :items="items" :fields="fields">
                                 <template slot="rating" slot-scope="data">
-                                    <star-rating></star-rating>
+                                    <star-rating star-size="20"></star-rating>
                                 </template>
-                                <template slot="download" slot-scope="data">
+                                <template v-slot:cell(download)="data">
                                     <b-button pill size="sm"
                                               variant="primary">Download
                                     </b-button>
                                 </template>
-                                <template slot="save" slot-scope="data">
+                                <template v-slot:cell(save)="data">
                                     <b-button pill size="sm"
                                               variant="secondary">Save
                                     </b-button>
