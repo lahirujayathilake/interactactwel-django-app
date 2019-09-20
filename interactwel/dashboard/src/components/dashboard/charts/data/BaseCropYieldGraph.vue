@@ -7,13 +7,13 @@
     import EventBus from '../../../../event-bus';
 
     export default {
-        name: 'CropYieldGraph',
+        name: 'BaseCropYieldGraph',
         components: {
             VerticalBarChart
         },
         data() {
             return {
-                planName: "Adaptation Plan 1",
+                planName: "Adaptation Plan 6",
                 JSONData: null,
                 datacollection: null,
                 graphColors: [
@@ -69,6 +69,10 @@
                         yAxes: [{
                             display: true,
                             stacked: true,
+                            ticks: {
+                                min: 0,           
+                                max: 40000000,
+                                },
                             scaleLabel: {
                                 display: true,
                                 labelString: 'kg'
@@ -87,7 +91,7 @@
         //},
 
         created(){
-            axios.get("/static/interactwel/BASIN_Crop_yield_basin_data.json").then(response => {
+            axios.get("/static/BASIN_Crop_yield_basin_data.json").then(response => {
                 this.JSONData = response.data;
                 this.buildDataCollection(this.JSONData, this.planName);
             });

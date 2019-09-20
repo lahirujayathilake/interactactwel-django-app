@@ -19,39 +19,38 @@
             return {
 
                 data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
                     datasets: [{
-                        label: "Farmer with Columbia river water rights",
-                        backgroundColor: "#286bde",
-                        borderColor: "#286bde",
+                        label: "Farmers: Columbia River (CR)",
+                        backgroundColor: "#186a3b",
+                        borderColor: "#186a3b",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
                         data: [
-                            'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW' ],
+                            'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of CR', 'Increase amount of CR', 'Increase amount of CR', 'Business as usual', 'Business as usual', 'Business as usual'],
                         steppedLine: true,
                         fill: false,
                     },
                         {
-                            label: "Farmer with Columbia river water rights",
+                            label: "Farmers: Groundwater (GW)",
                             backgroundColor: "#286bde",
                             borderColor: "#286bde",
                             borderJoinStyle: 'round',
                             borderWidth: 6,
                             data: [
-                                '', '', '', '', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW' ],
+                                'Increase amount of CR', 'Increase amount of CR', 'Increase amount of CR', 'Increase amount of CR', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW'],
                             steppedLine: true,
                             fill: false,
                         },
                         {
-                        label: "Farmer with other surface water rights",
+                        label: "Farmers: Surface water (SW)",
                         fill: false,
                         backgroundColor: "#dd434e",
                         borderColor: "#dd434e",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
                         data: [
-                            'Increase amount of CR', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW','Decrease amount of GW'
-                        ],
+                            'Business as usual', 'Business as usual', 'Business as usual', 'Business as usual', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of SW','Increase amount of CR','Increase amount of CR'],
                         steppedLine: true,
                     }]
                 },

@@ -42,6 +42,15 @@
         />
         </l-layer-group>
 
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Tribal Lands</strong></font>">
+        <l-geo-json
+                v-if="show"
+                :geojson="geoJson_triballand"
+                :options="options_noclick"
+                :options-style="styleFunction_triballand"
+        />
+        </l-layer-group>
+
         <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
             <l-marker
                 v-for="reservoirStation in reservoirStationList"
@@ -92,7 +101,7 @@
 
      <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
      <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
-     <img src="../../../assets/water_rights_legend.png" class="map-legend">
+     <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
     </l-map>
     
 </template>
@@ -149,6 +158,7 @@
                 geoJson_reservoir: null,
                 geoJson_WaterRigths: null,
                 geoJson_irrland: null,
+                geoJson_triballand: null,
                 zoom: 9,
                 maxZoom: 17,
                 minZoom: 3,
@@ -299,6 +309,20 @@
                 };
             },
 
+            styleFunction_triballand() {
+                return () => {
+                    return {
+                        weight: 0.8,
+                        color: "#ffffff",
+                        opacity: 0.4,
+                        fillColor: "#00cccc",
+                        dashArray: '5, 5',
+                        dashOffset: '10',
+                        fillOpacity: 0.6
+                    };
+                };
+            },
+
             GetWRcolor(){
                 return (feature, layer) => {
                     if (feature.properties.WRSCI == '3'){
@@ -372,6 +396,11 @@
             axios.get("/static/irrigated_land.geojson")
                 .then(response => {
                     this.geoJson_irrland = response.data;
+                    this.loading = true;
+                    })
+            axios.get("/static/Tribal_Lands.geojson")
+                .then(response => {
+                    this.geoJson_triballand = response.data;
                     this.loading = true;
                     })
             axios.get("/static/water_rigths.geojson")

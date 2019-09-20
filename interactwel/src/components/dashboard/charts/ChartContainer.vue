@@ -230,6 +230,11 @@
         padding: 0.5rem;
     }
 
+    .action-graph-container{
+        background-color: #f7f7f7;
+        padding: 0.5rem;
+    }
+
     #graph {
         width: 750px;
     }
