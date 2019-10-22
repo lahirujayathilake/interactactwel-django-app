@@ -5,7 +5,11 @@
             <div class="row">
                 <div class="col-8"><strong>Sub-basins</strong></div>
                 <div class="col-4"><div class="form-group">
-                    <select class="form-control form-control-sm" v-model="selected" @change="changeBasin">
+                    <select class="form-control form-control-sm" v-model="selectedBasin" @change="selectBasin">
+                        <option v-for="(basin,index) in basins" :value="index">{{ basin.label }}</option>
+                    </select>
+
+                    <select class="form-control form-control-sm" v-model="selectedSubBasin" @change="changeBasin">
                         <option v-for="option in options" v-bind:key="option.value" v-bind:value="option.value">{{ option.text }}</option>
                     </select>
                 </div></div>
@@ -60,17 +64,30 @@
 
         data() {
             return {
-                selected: '1',
+                selectedBasin: 0,
+                selectedSubBasin: '1',
                 selectedBasinID: '1',
                 planName: 'Adaptation Plan 1',
                 JSONData: null,
-                options: [
+                basins: [
+                    {
+                        label: 'Willow',
+                        options: [
+                                {text: 'Sub-basin: 1', value: '1'},
+                                {text: 'Sub-basin: 2', value: '2'},
+                                {text: 'Sub-basin: 3', value: '3'},
+                                {text: 'Sub-basin: 4', value: '4'},
+                                {text: 'Sub-basin: 5', value: '5'}]
+                    }
+                ],
+                options:[
                     {text: 'Sub-basin: 1', value: '1'},
                     {text: 'Sub-basin: 2', value: '2'},
                     {text: 'Sub-basin: 3', value: '3'},
                     {text: 'Sub-basin: 4', value: '4'},
                     {text: 'Sub-basin: 5', value: '5'}
-                ],
+                    ],
+                
                 datacollection: null,
                 graphColors: [
                     "#3d71ff",
@@ -134,6 +151,11 @@
             dismiss() {
                 EventBus.$emit('CLOSE');
             },
+            
+            selectBasin:function() {
+                this.options = this.basins[this.selectedBasin].options;
+                this.selectedBasinsLabel = this.basins[this.selectedBasin].label;
+            },
 
             buildDataCollection(data, adaptationPlan, basinID) {
                 this.datacollection = {};
@@ -164,7 +186,7 @@
             },
 
             changeBasin() {
-                this.selectedBasinID = this.selected;
+                this.selectedBasinID = this.selectedSubBasin;
                 this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID)
             },
         },

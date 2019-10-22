@@ -109,7 +109,9 @@
         },
 
         data() {
-            return {};
+            return {
+                
+            };
         },
         computed: {
             jsonData() {
@@ -139,9 +141,12 @@
         },
 
         mounted() {
+            EventBus.$emit('START_RESULTSMAP');
+            EventBus.$emit('START_REGIONHEATMAP');
         },
 
         methods: {
+
             dismiss() {
                 EventBus.$emit('CLOSE');
             },

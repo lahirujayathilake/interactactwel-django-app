@@ -80,17 +80,25 @@
             </b-tabs>
         </div>
     </div>
+    <div id="main">
+        <article id="map">
+        <region-heat-map></region-heat-map>
+        </article>
+    </div>
+
 </template>
 
 <script>
     import JSONData from "../../../assets/result_action_plans.json";
-    import IrrigationGraph from './data/IrrigationGraph.vue'
-    import CropYieldGraph from './data/CropYieldGraph.vue'
-    import NFertilizerGraph from './data/NFertilizerGraph.vue'
-    import PFertilizerGraph from './data/PFertilizerGraph.vue'
-    import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue'
-    import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue'
+    import IrrigationGraph from './data/IrrigationGraph.vue';
+    import CropYieldGraph from './data/CropYieldGraph.vue';
+    import NFertilizerGraph from './data/NFertilizerGraph.vue';
+    import PFertilizerGraph from './data/PFertilizerGraph.vue';
+    import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue';
+    import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue';
     import EventBus from './../../../event-bus';
+
+    import RegionHeatMap from './../Region_HeatMap.vue';
 
     export default {
         name: 'Region',
@@ -102,6 +110,7 @@
             'pFertilizerGraph': PFertilizerGraph,
             'overviewWaterRightsGraph': OverviewWaterRightsGraph,
             'OverviewBaseWaterRightsGraph': OverviewBaseWaterRightsGraph,
+            'region-heat-map': RegionHeatMap,
         },
 
         data() {
