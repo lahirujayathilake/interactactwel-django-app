@@ -153,7 +153,6 @@
         mounted() {
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-
                 $this.showChart(planName);
             })
             EventBus.$on('CLICK_ITEM_PLAN', function () {

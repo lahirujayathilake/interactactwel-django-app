@@ -103,7 +103,6 @@
      <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
      <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
     </l-map>
-    
 </template>
 
 <script>
