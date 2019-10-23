@@ -1,11 +1,9 @@
 [
     { "id": "14036000", "name": "WILLOW CREEK NR ARLINGTON, OREG.", "position": { "lat": 45.752977, "lng": -120.011102 }, "data_Range": "1960-10 – 1979-09", "obs_type": "Daily", "num_flowobs": "6938" },
     { "id": "14020850", "name": "UMATILLA R AT W RESERV BOUNDARY NR PENDLETON, OR", "position": { "lat": 45.67235332, "lng": -118.7355371 }, "data_Range": "1995-10 – 2018-06", "obs_type": "Daily", "num_flowobs": "TBD" },
-    { "id": "14020990", "name": "WILDHORSE CR AT PENDLETON, OR", "position": { "lat": 45.685701, "lng": -118.747183 }, "data_Range": "1998-12 – 2014-09", "obs_type": "Daily", "num_flowobs": "TBD" },
 
+    { "id": "14020990", "name": "WILDHORSE CR AT PENDLETON, OR", "position": { "lat": 45.685701, "lng": -118.747183 }, "data_Range": "1998-12 – 2014-09", "obs_type": "Daily", "num_flowobs": "TBD" },
     { "id": "14031050", "name": "UMATILLA R AT I-84, NR STANFIELD, OR", "position": { "lat": 45.76479, "lng": -119.212 }, "data_Range": "2000-01 - 2016-10", "obs_type": "Daily", "num_flowobs": "TBD" },
-    { "id": "14031600", "name": "UMATILLA R BL MAXWELL CN NR HERMISTON, OR", "position": { "lat": 45.79546, "lng": -119.328 }, "data_Range": "2009-10 - 2011-09", "obs_type": "Daily", "num_flowobs": "TBD" },
-    { "id": "14032400", "name": "UMATILLA R BL WASTE WATER TREATMENT PLANT NR HERMIS", "position": { "lat": 45.86339, "lng": -119.316 }, "data_Range": "2007-08 - 2016-09", "obs_type": "Daily", "num_flowobs": "TBD" },
     { "id": "USGS14020850", "name": "UMATILLA R AT W RESERVATION BNDY NR PENDLETON, OR", "position": { "lat": 45.67151937, "lng": -118.736649 }, "data_Range": "1995-10 - 2019-3", "num_flowobs": "52" },
     { "id": "USGS14020300", "name": " MEACHAM CREEK AT GIBBON, OR", "position": { "lat": 45.6887429, "lng": -118.3566262 }, "data_Range": "1962-10 - 2019-3", "num_flowobs": "19" },
     { "id": "USGS14020000", "name": "UMATILLA RIVER ABOVE MEACHAM CREEK, NR GIBBON, OR", "position": { "lat": 45.71957668, "lng": -118.3232913 }, "data_Range": "1933-4 - 2019-03", "num_flowobs": "620" }

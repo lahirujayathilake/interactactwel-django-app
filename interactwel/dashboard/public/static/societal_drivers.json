@@ -1,0 +1,50 @@
+[{
+        "id": 0,
+        "type": "SD",
+        "name": "Regulations",
+        "readonly": false,
+        "info": ""
+    },
+    {
+        "id": 1,
+        "type": "SD",
+        "name": "Global/Regional Crop Prices",
+        "readonly": false,
+        "info": ""
+    },
+    {
+        "id": 2,
+        "type": "SD",
+        "name": "Population Dynamics ",
+        "readonly": false,
+        "info": ""
+    },
+    {
+        "id": 3,
+        "type": "SD",
+        "name": "Land Prices",
+        "readonly": false,
+        "info": ""
+    },
+    {
+        "id": 4,
+        "type": "SD",
+        "name": "Energy Prices",
+        "readonly": false,
+        "info": ""
+    },
+    {
+        "id": 5,
+        "type": "SD",
+        "name": "Public Perception",
+        "readonly": false,
+        "info": ""
+    },
+    {
+        "id": 5,
+        "type": "SD",
+        "name": "Cultural Resources",
+        "readonly": false,
+        "info": ""
+    }
+]

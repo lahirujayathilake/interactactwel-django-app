@@ -85,6 +85,7 @@
         },
 
         mounted() {
+            EventBus.$emit('HIDE_RESULTSMAP');
         },
 
         methods: {
