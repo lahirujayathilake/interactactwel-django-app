@@ -1,0 +1,440 @@
+<template>
+    <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
+        <l-control-zoom position="topright"></l-control-zoom>
+        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
+        </l-control-layers>
+
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Reservoirs</strong></font>">
+            <l-marker
+                v-for="reservoirStation in reservoirStationList"
+                :key="reservoirStation.id"
+                :lat-lng.sync="reservoirStation.position"
+                :icon="reservoirIcon"
+                :visible="true" >
+                <l-popup>
+                    <popup-content-rs :data="reservoirStation" :pcpdata="ReservoirData"/>
+                </l-popup>
+            </l-marker>
+        </l-layer-group>
+
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Gauging stations</strong></font>">
+            <l-marker
+                v-for="gaugingStation in gaugingStationList"
+                :key="gaugingStation.id"
+                :lat-lng.sync="gaugingStation.position"
+                :icon="gaugingIcon"
+                :visible="true" >
+                <l-popup>
+                    <popup-content-gs :data="gaugingStation" :pcpdata="GaugeData"/>
+                </l-popup>
+            </l-marker>
+        </l-layer-group>
+
+        <l-layer-group layer-type="overlay" name="<font size=4><strong>Weather stations</strong></font>">
+            <l-marker
+                v-for="weatherStation in weatherStationList"
+                :key="weatherStation.id"
+                :lat-lng.sync="weatherStation.position"
+                :icon="wstationIcon"
+                :visible="true" >
+                <l-popup>
+                    <popup-content-ws :data="weatherStation" :pcpdata="PrecipData"/>
+                </l-popup>
+            </l-marker>
+        </l-layer-group>
+
+        <l-tile-layer
+        v-for="tileProvider in tileProviders"
+        :key="tileProvider.name"
+        :name="tileProvider.name"
+        :visible="tileProvider.visible"
+        :url="tileProvider.url"
+        :attribution="tileProvider.attribution"
+        layer-type="base"/>
+
+     <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
+     <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
+     <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
+    </l-map>
+    
+</template>
+
+<script>
+
+    import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup, LControlZoom} from 'vue2-leaflet';
+    import axios from 'axios';
+    import L from 'leaflet';
+    import EventBus from './../../../event-bus';
+    import PopupContentWStations from "./../../dashboard/map/popup/PopupContent_WStations";
+    import PopupContentReservoirs from "./../../dashboard/map/popup/PopupContent_Reservoirs";
+    import PopupContentGaugeStations from "./../../dashboard/map/popup/PopupContent_GaugeStations.vue";
+
+    import PrecipDataJson from "../../../assets/weather_station_data.json";
+    import ReservoirDataJson from "../../../assets/reservoirs_data.json";
+    import GaugeDataJson from "../../../assets/streamflow_station_data.json";
+    import PopupContent_WaterRights from "./../../dashboard/map/popup/PopupContent_WaterRights";
+
+    import GaugingStations from './../../../../public/static/gauging_stations.json';
+    import ReservoirList from './../../../../public/static/reservoirs_list.json';
+    import WeatherStations from './../../../../public/static/weather_stations.json';
+
+    delete L.Icon.Default.prototype._getIconUrl;
+
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+        iconUrl: require('leaflet/dist/images/marker-icon.png'),
+        shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+        });
+
+    export default {
+        name: 'Map',
+        components: {
+            'l-map': LMap,
+            'l-tile-layer': LTileLayer,
+            'l-marker': LMarker,
+            'l-geo-json': LGeoJson,
+            'l-control-layers': LControlLayers,
+            'l-layer-group': LLayerGroup,
+            'l-control-scale': LControlScale,
+            'l-popup': LPopup,
+            'popup-content-ws': PopupContentWStations,
+            'popup-content-rs': PopupContentReservoirs,
+            'popup-content-gs': PopupContentGaugeStations,
+            'popup-content-wr': PopupContent_WaterRights,
+            'l-control-zoom': LControlZoom
+        },
+
+        data() {
+            return {
+                geoJson_reach: null,
+                geoJson_subbasin: null,
+                geoJson_reservoir: null,
+                geoJson_WaterRigths: null,
+                geoJson_irrland: null,
+                geoJson_triballand: null,
+                zoom: 9,
+                maxZoom: 17,
+                minZoom: 3,
+                center: L.latLng(45.4435777, -119.4455003),
+                url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                marker: L.latLng(45.6735777, -118.8455003),
+                detectRetina: true,
+                enableTooltip: true,
+                loading: true,
+                show: true,
+                fillColor: "rgba(76, 175, 80, 0.44)",
+                reservoirIcon: L.icon({
+                        iconUrl: require('../../../assets/reservoir_trans.png'),
+                        iconSize:     [27, 27], // size of the icon
+                        shadowSize:   [0, 0], // size of the shadow
+                        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [0, 0]  // the same for the shadow
+                    }),
+                wstationIcon: L.icon({
+                        iconUrl: require('../../../assets/OSU_icon_rain_01.png'),
+                        iconSize:     [27, 27], // size of the icon
+                        shadowSize:   [0, 0], // size of the shadow
+                        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [0, 0]  // the same for the shadow
+                    }),
+
+                gaugingIcon: L.icon({
+                        iconUrl: require('../../../assets/OSU_icon_water.png'),
+                        iconSize:     [27, 27], // size of the icon
+                        shadowSize:   [0, 0], // size of the shadow
+                        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [0, 0]  // the same for the shadow
+                    }),
+
+                subbasinID: null,
+
+                PrecipData: PrecipDataJson,
+                ReservoirData: ReservoirDataJson,
+                GaugeData: GaugeDataJson,
+
+                weatherStationList: WeatherStations,
+                reservoirStationList: ReservoirList,
+                gaugingStationList: GaugingStations,
+
+                tileProviders: [
+                    {
+                        name: "<font size=4><strong>Street Map</strong></font>",
+                        visible: false,
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    },
+                    {
+                        name: "<font size=4><strong>Satellite</strong></font>",
+                        visible: false,
+                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+                    },
+                    {
+                        name: "<font size=4><strong>Terrain Map",
+                        visible: true,
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
+                    }
+                ],
+
+                customPopup : "<div class=\"region_summary_popup\">" +
+                    "<div>\n" +
+                "        <div>\n" +
+                "            <h5>SubBasin</h5>\n" +
+                "        </div>\n" +
+                "        <div>Test Data</div>" +
+                "</div>",
+                customOptions: [
+                    {
+                        'font-size': '15px',
+                        'maxWidth': '1000px',
+                        'width': '500px',
+                        'className' : 'custom'
+                    }
+                    ]
+            }
+        },
+
+        computed: {
+            options() {
+                return {
+                    onEachFeature: this.onEachFeatureFunction
+                };
+            },
+            options_noclick() {
+                return {
+                };
+            },
+            options_wrrights() {
+                return {
+                    onEachFeature: this.GetWRcolor
+                };
+            },
+            styleFunction_reach() {
+                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+                return () => {
+                    return {
+                        weight: 2.5,
+                        color: "#3386ff",
+                        opacity: 1,
+                        fillColor: fillColor,
+                        fillOpacity: 1
+                    };
+                };
+            },
+
+            styleFunction_subbasin() {
+                return () => {
+                    return {
+                        weight: 1.5,
+                        color: "#7c7c7c",
+                        opacity: 1,
+                        fillColor: "#e3dddd",
+                        dashArray: '5, 5',
+                        dashOffset: '10',
+                        fillOpacity: 0.5
+                    };
+                };
+            },
+
+            styleFunction_waterrigths() {
+                return () => {
+                    return {
+                        weight: 1,
+                        color: "#7c7c7c",
+                        opacity: 0,
+                        fillColor: "#3386ff",
+                        fillOpacity: 1
+                    };
+                };
+            },
+
+            styleFunction_irrland() {
+                return () => {
+                    return {
+                        weight: 0.5,
+                        color: "#7c7c7c",
+                        opacity: 0.4,
+                        fillColor: "#eb984e",
+                        fillOpacity: 0.6
+                    };
+                };
+            },
+
+            styleFunction_triballand() {
+                return () => {
+                    return {
+                        weight: 0.8,
+                        color: "#ffffff",
+                        opacity: 0.4,
+                        fillColor: "#00cccc",
+                        dashArray: '5, 5',
+                        dashOffset: '10',
+                        fillOpacity: 0.6
+                    };
+                };
+            },
+
+            GetWRcolor(){
+                return (feature, layer) => {
+                    if (feature.properties.WRSCI == '3'){
+                        layer.setStyle({fillColor :'red'});
+                    }else if (feature.properties.WRSCI == '1'){
+                        layer.setStyle({fillColor :'blue'});
+                    }else if (feature.properties.WRSCI == '5'){
+                        layer.setStyle({fillColor :'green'});
+                    }else{
+                        layer.setStyle({fillColor :'black'});
+                        layer.setStyle({fillOpacity: "0"});
+                    }
+
+                    layer.on('click', function (e) {
+                    });
+
+
+                }
+            },
+
+            onEachFeatureFunction() {
+                var prevLayerClicked = null;
+                if (!this.enableTooltip) {
+                    return () => {
+                    };
+                }
+                return (feature, layer) => {
+                    layer.bindTooltip(
+                        "<div><strong>Click and explore!</strong>",
+                    );
+
+                    layer.on('click', function(e){
+                        EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
+
+                        var layer = e.target;
+                        if (prevLayerClicked !== null || prevLayerClicked == layer) {
+                            prevLayerClicked.setStyle({weight: 1.5,
+                            color: "#7c7c7c",
+                            opacity: 1,
+                            fillColor: "#e3dddd",
+                            dashArray: '5, 5',
+                            dashOffset: '10',
+                            fillOpacity: 0.5});
+                        }
+                        if (prevLayerClicked !== layer) {
+                            layer.setStyle({fillColor :'blue'});
+                            prevLayerClicked = layer;
+
+                        }else{
+                           prevLayerClicked = null;
+                        }
+
+                    });
+
+                };
+            }
+        },
+
+        created() {
+            this.loading = true;
+            axios.get("/static/subbasins.geojson")
+                .then(response => {
+                    this.geoJson_subbasin = response.data;
+                    this.loading = true;
+                })
+            axios.get("/static/reaches.geojson")
+                .then(response => {
+                    this.geoJson_reach = response.data;
+                    this.loading = true;
+                    })
+            axios.get("/static/irrigated_land.geojson")
+                .then(response => {
+                    this.geoJson_irrland = response.data;
+                    this.loading = true;
+                    })
+            axios.get("/static/Tribal_Lands.geojson")
+                .then(response => {
+                    this.geoJson_triballand = response.data;
+                    this.loading = true;
+                    })
+            axios.get("/static/water_rigths.geojson")
+                .then(response => {
+                    this.geoJson_WaterRigths = response.data;
+                    this.loading = true;
+                    });
+
+        },
+        methods: {
+            layerClicked() {
+                //alert("clicked me");
+                return (feature, layer) => {
+
+                    layer.bindPopup(this.customPopup,this.customOptions);
+                    };
+                
+            }
+            
+            //Layerselector(){
+                //alert('something');
+                // var x = document.getElementById("WRlegend").__vue__;
+                // console.log(x);
+                // if (x.src == "../../../assets/water_rights_legend.png") {
+                //     x.src = "none";
+                // } else {
+                //     x.src = "../../../assets/water_rights_legend.png";
+                // }
+                
+            //}
+        }
+    };
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+    @import '../../../static/vendor/Vue2Leaflet/leaflet.css';
+
+    .leaflet-touch .leaflet-control-layers-toggle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .leaflet-control-scale-line {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .region_summary_popup {
+        width: 300px;
+        height: 300px;
+    }
+
+    #img, a {
+        border: 0px transparent;
+        outline: none;
+    }
+
+    .count-icon {
+        background: #ff8888;
+        border: 5px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 50%;
+        line-height: 30px;
+    }
+
+    .count-icon:hover {
+        background: #bbb;
+    }
+
+    .map-legend {
+        position: absolute;
+        bottom: 85px;
+        left: 25px;
+        z-index: 500;
+        width: 200px;
+        height: 100px;
+    }
+
+
+</style>
