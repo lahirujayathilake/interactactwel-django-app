@@ -19,12 +19,7 @@ pip install -r requirements.txt
 python setup.py develop
 ```
 
-Now build the Vue JS app
-
-```
-cd interactwel/
-npm run build
-```
+Note: `python setup.py develop` also builds the Vue JS app.
 
 Go back to the airavata-django-portal and start the server
 

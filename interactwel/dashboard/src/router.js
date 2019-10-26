@@ -5,6 +5,9 @@ import Router from 'vue-router'
 const Dashboard = () => import('@/components/dashboard/Dashboard')
 const Home = () => import('@/components/interactwel/Home')
 const Community = () => import('@/components/interactwel/Community')
+const Members = () => import('@/components/interactwel/community/Members')
+const Events = () => import('@/components/interactwel/community/Events')
+const Groups = () => import('@/components/interactwel/community/Groups')
 const Visualization = () => import('@/components/interactwel/Visualization')
 const Plan = () => import('@/components/interactwel/visualization/Plan')
 //const Project = () => import('@/components/interactwel/visualization/Project')
@@ -42,12 +45,6 @@ export default new Router({
         //redirect: '/pages/404',
         name: 'Home',
         component: Home,
-    },
-    {
-        path: '/community',
-        //redirect: '/pages/404',
-        name: 'Community',
-        component: Community
     },
     {
         path: '/visualization/:projectId',
@@ -109,6 +106,30 @@ export default new Router({
                 component: ExploreProjects
             }
         ]
-    }
+    },
+    {
+        path: '/community',
+        //redirect: '/pages/404',
+        name: 'Community',
+        redirect: '/community/members',
+        component: Community,
+        children: [
+            {
+                path: 'members',
+                name: 'Members',
+                component: Members
+            },
+            {
+                path: 'events',
+                name: 'Events',
+                component: Events
+            },
+            {
+                path: 'groups',
+                name: 'Groups',
+                component: Groups
+            },
+        ]
+    },
   ]
 })

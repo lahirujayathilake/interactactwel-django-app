@@ -4,7 +4,10 @@
             <div class="step-header" slot="header">My Projects
             </div>
             <b-card-text>
-                <b-tabs pills vertical nav-wrapper-class="w-25">
+                <div class="map-wrapper">
+                <component v-bind:is="component='LeafletMap'"></component>
+                </div>
+                <!--<b-tabs pills vertical nav-wrapper-class="w-25">
                     <b-tab title="Umatilla" active>
 
                         <b-card footer-tag="footer" class="p-0">
@@ -27,7 +30,7 @@
                     <b-tab title="Colarado">
                         <b-card-text>Colarado</b-card-text>
                     </b-tab>
-                </b-tabs>
+                </b-tabs>-->
             </b-card-text>
         </b-card>
     </b-card-group>
@@ -36,7 +39,7 @@
 <script>
     import Header from './../Header.vue';
     import Footer from './../Footer.vue';
-    import LeafletMap from './../../dashboard/map/LeafletMap.vue'
+    import LeafletMap from './LeafletMap.vue'
 
     export default {
         components: {

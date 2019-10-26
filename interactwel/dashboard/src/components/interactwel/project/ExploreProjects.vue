@@ -4,6 +4,9 @@
             <div class="step-header" slot="header">Explore Projects
             </div>
             <b-card-text>
+                <div class="map-wrapper">
+                <component v-bind:is="component='LeafletMap'"></component>
+                </div>
             </b-card-text>
         </b-card>
     </b-card-group>
@@ -12,7 +15,7 @@
 <script>
     import Header from './../Header.vue';
     import Footer from './../Footer.vue';
-    import LeafletMap from './../../dashboard/map/LeafletMap.vue'
+    import LeafletMap from './LeafletMap.vue'
 
     export default {
         components: {

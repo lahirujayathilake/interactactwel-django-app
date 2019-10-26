@@ -348,12 +348,13 @@
                 <template slot="title">
                     <div class="step-progress-bar">
                         <div class="step-no">5</div>
-                        <h4 class="list-group-item-heading">Feedback</h4>
+                            <h4 class="list-group-item-heading">Feedback</h4>
                         <p class="list-group-item-text">{{step5_desc}}</p>
                     </div>
                 </template>
                 <div id="step5" title="Step 5"
                      icon="ti-check">
+
                     <b-card no-body footer-tag="footer">
                         <b-card-body class="no-padding">
                             <b-container>
@@ -365,6 +366,7 @@
                                         <charts :goals="goals" :actors="actors" :actions="actions"
                                                 :selectedGoals="selectedGoals" :selectedActors="selectedActors"
                                                 :selectedActions="selectedActions"></charts>
+                                        <feedback :feedbackOn="feedbackOn"></feedback>
                                     </article>
                                 </b-row>
                             </b-container>
@@ -528,8 +530,6 @@
                 actor: [],
                 selected: null,
 
-
-
                 fields: [
                     {
                         key: 'plan',
@@ -570,8 +570,6 @@
                     { isActive: false, plan: 3, q1: 'No', q2: 'Very well' , q3: 'Yes', q4: 'Yes', rating: 4},
                     { isActive: true, plan: 4, q1: 'Yes', q2: 'Neutral', q3: 'Yes', q4: 'Yes' , rating: 3}
                 ],
-
-
                 itemsX: [
                     { 'plan': 1, 'Meet Management Goals?' : 'yes', 'Expectations of projected impacts' : 'Dickerson', 'Likely to implement recommended actions': 'Macdonald' },
                 ],
@@ -584,8 +582,17 @@
                     {key: 'Overall rating', label: 'Overall rating'},
                     {key: 'download', label: ''},
                     {key: 'save', label: ''},
-                ]
+                ],
+
+                feedbackOn: "hello"
             }
+        },
+
+        mounted() {
+            let $this = this;
+            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
+                $this.feedbackOn == planName;
+            })
         },
 
         methods: {
@@ -714,7 +721,7 @@
             },
 
             step4NextClicked() {
-                EventBus.$emit('SHOW_ASIDE');
+                //EventBus.$emit('SHOW_ASIDE');
                 this.tabIndex++
             },
 

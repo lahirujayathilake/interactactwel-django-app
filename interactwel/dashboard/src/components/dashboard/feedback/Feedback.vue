@@ -3,7 +3,7 @@
         <span v-on:click="hideAside" class="close"><font-awesome-icon
                 icon="times-circle"/></span>
         <div class="header-container">
-            <h5>Evaluate Adaptation Plan</h5>
+            <h5>Evaluate Adaptation Plan {{feedbackOn}}</h5>
         </div>
         <div v-show="feedbackBlock" id="feedback-block">
             <b-form v-show="initialFeedback" @submit="onSubmit" @reset="onReset">
@@ -116,6 +116,14 @@
             StarRating
         },
 
+        props: {
+            feedbackOn: {
+                type: String,
+                default: ""
+            }
+        },
+
+
         data() {
             return {
                 feedbackBlock: true,
@@ -178,7 +186,12 @@
 <style>
 
     .feedback-container {
+        background-color: #ffffff;
         padding: 1rem;
+        position: absolute;
+        top: -52px;
+        left: 124%;
+        width: 400px;
     }
 
     #feedback-block {

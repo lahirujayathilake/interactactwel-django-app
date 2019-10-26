@@ -174,7 +174,6 @@
     
 
     </l-map>
-    
 </template>
 
 <script>
