@@ -399,7 +399,7 @@
                         <b-card-body>
                             <b-table class="card-text" bordered small hover :items="items" :fields="fields">
                                 <template slot="rating" slot-scope="data">
-                                    <star-rating star-size="20"></star-rating>
+                                    <star-rating star-size="20" :rating="items.rating"></star-rating>
                                 </template>
                                 <template v-slot:cell(download)="data">
                                     <b-button pill size="sm"
@@ -565,10 +565,10 @@
                     {key: 'save', label: ''},
                 ],
                 items: [
-                    { isActive: true, plan: 1, q1: 'yes', q2: 'Satisfactory', q3: 'yes', q4: 'yes'},
-                    { isActive: false, plan: 2, q1: 'yes', q2: 'Well' , q3: 'yes', q4: 'yes'},
-                    { isActive: false, plan: 3, q1: 'yes', q2: 'Very well' , q3: 'yes', q4: 'yes'},
-                    { isActive: true, plan: 4, q1: 'yes', q2: 'Neutral', q3: 'yes', q4: 'yes' }
+                    { isActive: true, plan: 1, q1: 'Yes', q2: 'Satisfactory', q3: 'Yes', q4: 'No', rating: 2},
+                    { isActive: false, plan: 2, q1: 'Yes', q2: 'Well' , q3: 'No', q4: 'No', rating: 1},
+                    { isActive: false, plan: 3, q1: 'No', q2: 'Very well' , q3: 'Yes', q4: 'Yes', rating: 4},
+                    { isActive: true, plan: 4, q1: 'Yes', q2: 'Neutral', q3: 'Yes', q4: 'Yes' , rating: 3}
                 ],
 
 

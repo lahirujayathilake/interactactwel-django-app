@@ -4,14 +4,14 @@
         <b-container fluid class="main">
             <b-container>
                 <b-row>
-                    <b-col>
+                    <b-col style="padding-top: 2rem;">
                         <b-card class="mb-2"
                                 tag="article"
-                                style="max-width: 25rem;"
+                                style="max-width: 25rem; height: 17rem;"
                         >
                             <h4 class="card-title"> Learn</h4>
                             <b-card-text>
-                                <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla.</p>
+                                <!--<p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla.</p> -->
                                 <b-button block>Instructional Videos</b-button>
                                 <b-button block>Adaptation Stories</b-button>
                                 <b-button block>Documentation</b-button>
@@ -20,15 +20,15 @@
 
                         </b-card>
                     </b-col>
-                    <b-col>
+                    <b-col style="padding-top: 2rem;">
                         <b-card class="mb-2"
                                 tag="article"
-                                style="max-width: 25rem;"
+                                style="max-width: 25rem; height: 17rem;"
                         >
                             <h4 class="card-title"> Plan</h4>
-                            <b-card-text>
-                                <p align="justify">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla. Curabitur lorem sapien, consectetur in faucibus vel, imperdiet at nulla.</p>
+                            <b-card-text style="padding-top: 1rem;">
+                               <!-- <p align="justify">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla. Curabitur lorem sapien, consectetur in faucibus vel, imperdiet at nulla.</p> -->
                                 <b-button block>Explore Community Projects</b-button>
                                 <b-button block>Visualize Potention Adaptation</b-button>
                                 <b-button block>
@@ -38,14 +38,14 @@
 
                         </b-card>
                     </b-col>
-                    <b-col>
+                    <b-col style="padding-top: 2rem;">
                         <b-card class="mb-2"
                                 tag="article"
-                                style="max-width: 25rem;"
+                                style="max-width: 25rem; height: 17rem;"
                         >
                             <h4 class="card-title"> Act</h4>
-                            <b-card-text>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique nisi ligula, sit amet sodales leo porta quis. Praesent nibh felis, finibus non venenatis vel, facilisis eget ante.</p>
+                            <b-card-text style="padding-top: 1rem;">
+                                <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique nisi ligula, sit amet sodales leo porta quis. Praesent nibh felis, finibus non venenatis vel, facilisis eget ante.</p>-->
                                 <b-button block>Share Plans with community</b-button>
                                 <b-button block>Create/ Edit plans</b-button>
                                 <b-button block>Adopt Plans</b-button>

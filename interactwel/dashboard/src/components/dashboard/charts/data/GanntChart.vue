@@ -1,8 +1,8 @@
 <template>
     <div>
         <line-chart :chart-data="datacollectionHHH" :options="optionsHHH" :width="687" :height="120"></line-chart>
-        <line-chart :chart-data="datacollectionHHH" :options="optionsHHH" :width="687" :height="120"></line-chart>
-        <line-chart :chart-data="datacollectionHH" :options="optionsHH" :width="700" :height="145"></line-chart>
+        <line-chart :chart-data="datacollectionHH" :options="optionsHH" :width="687" :height="120"></line-chart>
+        <line-chart :chart-data="datacollectionH" :options="optionsH" :width="700" :height="145"></line-chart>
         <!--<horizontal-bar-chart :chart-data="data" :options="optionsdata" :width="5"
                               :height="3"></horizontal-bar-chart>-->
 
@@ -30,7 +30,7 @@
                 datacollection: null,
 
                 datacollectionHHH: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["2001","2002","2003","2004","2005","2006","2007","2008","2009","2010"],
 
                     datasets: [
                         {
@@ -43,10 +43,10 @@
                             pointRadius: 0,
                             data: [
                                 {
-                                    x: "Jan",
+                                    x: "2001",
                                     y: "Actor 1"
                                 }, {
-                                    x: "Feb",
+                                    x: "2004",
                                     y: "Actor 1"
                                 }
                             ]
@@ -61,29 +61,11 @@
                             pointRadius: 0,
                             data: [
                                 {
-                                    x: "May",
+                                    x: "2004",
                                     y: "Actor 1.1"
                                 }, {
-                                    x: "Jun",
+                                    x: "2008",
                                     y: "Actor 1.1"
-                                }
-                            ]
-                        },
-                        {
-
-                            label: 'Action 2',
-                            backgroundColor: "#0f9c31",
-                            borderColor: "#0f9c31",
-                            fill: false,
-                            borderWidth: 20,
-                            pointRadius: 0,
-                            data: [
-                                {
-                                    x: "Jun",
-                                    y: "Actor 1.2"
-                                }, {
-                                    x: "Dec",
-                                    y: "Actor 1.2"
                                 }
                             ]
                         },
@@ -97,16 +79,17 @@
                             pointRadius: 0,
                             data: [
                                 {
-                                    x: "Jun",
-                                    y: "Actor 1.3"
+                                    x: "2008",
+                                    y: "Actor 1.5"
                                 }, {
-                                    x: "Oct",
-                                    y: "Actor 1.3"
+                                    x: "2010",
+                                    y: "Actor 1.5"
                                 }
                             ]
                         }
                     ]
                 },
+
                 optionsHHH: {
                     responsive: false,
                     legend: {
@@ -114,7 +97,7 @@
                     },
                     title: {
                         display: false,
-                        text: 'Actions taken by each actor through time'
+                        text: 'Farmers: Surface water',
                     },
 
                     tooltips: {
@@ -163,12 +146,12 @@
                             type: 'category',
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Actor 2'
+                                labelString: 'Farmers: SW'
                             },
                             ticks: {
                                 display: false
                             },
-                            labels: ["","Actor 1", "Actor 1.1", "Actor 1.2", "Actor 1.3", ""],
+                            labels: ["","Actor 1", "Actor 1.1", "Actor 1.2", "Actor 1.3","Actor 1.4", "Actor 1.5", "Actor 1.6", ""],
                         }],
                     },
                     annotation: {
@@ -188,30 +171,12 @@
                 },
 
                 datacollectionHH: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["2001","2002","2003","2004","2005","2006","2007","2008","2009","2010"],
 
                     datasets: [
                         {
 
                             label: 'Action 0',
-                            backgroundColor: "#dd434e",
-                            borderColor: "#de3131",
-                            fill: false,
-                            borderWidth: 20,
-                            pointRadius: 0,
-                            data: [
-                                {
-                                    x: "Feb",
-                                    y: "Actor 1"
-                                }, {
-                                    x: "Jun",
-                                    y: "Actor 1"
-                                }
-                            ]
-                        },
-                        {
-
-                            label: 'Action 1',
                             backgroundColor: "#ff8905",
                             borderColor: "#ff6a07",
                             fill: false,
@@ -219,35 +184,17 @@
                             pointRadius: 0,
                             data: [
                                 {
-                                    x: "May",
+                                    x: "2001",
                                     y: "Actor 1.1"
                                 }, {
-                                    x: "Jun",
+                                    x: "2005",
                                     y: "Actor 1.1"
                                 }
                             ]
                         },
                         {
 
-                            label: 'Action 2',
-                            backgroundColor: "#0f9c31",
-                            borderColor: "#0f9c31",
-                            fill: false,
-                            borderWidth: 20,
-                            pointRadius: 0,
-                            data: [
-                                {
-                                    x: "Jun",
-                                    y: "Actor 1.2"
-                                }, {
-                                    x: "Dec",
-                                    y: "Actor 1.2"
-                                }
-                            ]
-                        },
-                        {
-
-                            label: 'Action 2',
+                            label: 'Action 1',
                             backgroundColor: "#8d0c0d",
                             borderColor: "#640c0d",
                             fill: false,
@@ -255,17 +202,144 @@
                             pointRadius: 0,
                             data: [
                                 {
-                                    x: "Jun",
-                                    y: "Actor 1.3"
+                                    x: "2005",
+                                    y: "Actor 1.5"
                                 }, {
-                                    x: "Oct",
-                                    y: "Actor 1.3"
+                                    x: "2008",
+                                    y: "Actor 1.5"
+                                }
+                            ]
+                        },
+                        {
+
+                            label: 'Action 2',
+                            backgroundColor: "#dd434e",
+                            borderColor: "#de3131",
+                            fill: false,
+                            borderWidth: 20,
+                            pointRadius: 0,
+                            data: [
+                                {
+                                    x: "2008",
+                                    y: "Actor 1"
+                                }, {
+                                    x: "2010",
+                                    y: "Actor 1"
                                 }
                             ]
                         }
                     ]
                 },
+
                 optionsHH: {
+                    responsive: false,
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                        text: "Farmers: Groundwater (GW)",
+                    },
+                    tooltips: {
+                        mode: 'nearest',
+                        intersect: false,
+                        axis: 'x',
+                        position: 'nearest',
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                let start = 0;
+                                for (var i = 0; i < tooltipItem.datasetIndex; i++) {
+                                    start += data.datasets[i].data[tooltipItem.index];
+                                }
+                                return tooltipItem.yLabel
+                            }
+                        }
+                    },
+                    scales: {
+                         xAxes: [{
+                            type: 'category',
+                            position: 'bottom',
+                            scaleLabel: {
+                                display: false,
+                                labelString: 'Time'
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: { display: false },
+                            type: 'category',
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Farmers: GW'
+                            },
+                            ticks: {
+                                display: false
+                            },
+                            labels: ["","Actor 1", "Actor 1.1", "Actor 1.2", "Actor 1.3","Actor 1.4", "Actor 1.5", "Actor 1.6", ""],
+                        }],
+                    },
+                    annotation: {
+                        drawTime: 'afterDraw',
+                        events: ['dblclick'],
+                        annotations: [
+                            {
+                                type: 'box',
+                                xScaleID: 'x-axis-0',
+                                yScaleID: 'y-axis-0',
+                                backgroundColor: 'rgba(126, 50, 139, 0.2)',
+                                borderColor: 'rgba(126, 50, 139, 0)',
+                                borderWidth: 1
+                            }
+                        ]
+                    }
+                },
+
+                datacollectionH: {
+                    labels: ["2001","2002","2003","2004","2005","2006","2007","2008","2009","2010"],
+
+                    datasets: [
+                        {
+
+                            label: 'Action 0',
+                            backgroundColor: "#8d0c0d",
+                            borderColor: "#640c0d",
+                            fill: false,
+                            borderWidth: 20,
+                            pointRadius: 0,
+                            data: [
+                                {
+                                    x: "2001",
+                                    y: "Actor 1.5"
+                                }, {
+                                    x: "2004",
+                                    y: "Actor 1.5"
+                                }
+                            ]
+                        },
+                        {
+
+                            label: 'Action 1',
+                            backgroundColor: "#fffd62",
+                            borderColor: "#fffd62",
+                            fill: false,
+                            borderWidth: 20,
+                            pointRadius: 0,
+                            data: [
+                                {
+                                    x: "2004",
+                                    y: "Actor 1.4"
+                                }, {
+                                    x: "2010",
+                                    y: "Actor 1.4"
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                optionsH: {
                     responsive: false,
                     legend: {
                         display: false,
@@ -303,12 +377,12 @@
                             type: 'category',
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Actor 2'
+                                labelString: 'Farmers: CR'
                             },
                             ticks: {
                                 display: false
                             },
-                            labels: ["","Actor 1", "Actor 1.1", "Actor 1.2", "Actor 1.3", ""],
+                            labels: ["","Actor 1", "Actor 1.1", "Actor 1.2", "Actor 1.3","Actor 1.4", "Actor 1.5", "Actor 1.6", ""],
                         }],
                     },
                     annotation: {
@@ -432,7 +506,7 @@
                                 display: true,
                                 labelString: 'Time'
                             },
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                            labels: ["2001","2002","2003","2004","2005","2006","2007","2008","2009","2010"],
                         }],
                         yAxes: [{
                             type: 'category',

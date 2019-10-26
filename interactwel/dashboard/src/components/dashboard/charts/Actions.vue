@@ -21,7 +21,7 @@
             </b-row>
 
             <b-tabs pills small align="right">
-                <b-tab title="Gannt" active><b-card-text>
+                <b-tab title="Gantt" active><b-card-text>
                     <gannt-chart></gannt-chart>
                 </b-card-text></b-tab>
                 <b-tab title="Pathways"><b-card-text>

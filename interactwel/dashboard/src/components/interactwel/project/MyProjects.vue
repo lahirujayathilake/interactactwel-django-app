@@ -16,7 +16,7 @@
                                     <b-button class="mr-2"  size="sm"><router-link v-bind:to="'/visualization/' + this.projectId">Visualize</router-link></b-button>
                                 </em>
                             </div>
-                                <div class="map-wrapper">
+                            <div class="map-wrapper">
                                     <component v-bind:is="component='LeafletMap'"></component>
                             </div>
                         </b-card>

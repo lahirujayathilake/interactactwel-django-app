@@ -59,6 +59,13 @@
                         </b-col>
                     </b-row>
                 </b-tab>
+                <b-tab title="Precipitation">
+                    <b-row>
+                        <b-col>
+                            <line-chart :chart-data="datacollectionprism" :options="optionsprism" :width="5" :height="3"></line-chart>
+                        </b-col>
+                    </b-row>
+                </b-tab>
             </b-tabs>
         </div>
     </div>
@@ -72,12 +79,13 @@
     import PieChart from "./../charts/lib/PieChart";
     import VerticalBarChart from "./../charts/lib/VerticalBarChart";
     import HorizontalBarChart from "./../charts/lib/HorizontalBarChart";
+    import LineChart from "./../charts/lib/LineChart";
 
     export default {
         name: 'regional_summary',
 
         components: {
-            PieChart, HorizontalBarChart, VerticalBarChart,
+            PieChart, HorizontalBarChart, VerticalBarChart, LineChart
         },
 
         data() {
@@ -99,6 +107,46 @@
                 datacollectionirr: null,
                 datacollectionlnd: null,
                 datacollectioncrop: null,
+                datacollectionprism: null,
+
+                optionsprism: {
+                    responsive: true,
+                    color: "#073b4c",
+                    title: {
+                        display: true,
+                        text: 'Average yearly total precipitation (mm)'
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Years'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            stacked: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Precipitation (mm)'
+                            }
+                        }]
+                    }
+                },
+
                 optionswr: {
                     responsive: true,
                     title: {
@@ -257,6 +305,9 @@
                 axios.get("/static/BASIN_CropArea_chartjs.json").then(response => {
                     $this.buildDataCollectionCrop(response.data, $this.subbasinID);
                 });
+                axios.get("/static/BASIN_MeanPRISM.json").then(response => {
+                    $this.buildDataCollectionPRISM(response.data, $this.subbasinID);
+                });
                 $this.buildSelectedSubBasinInfoElement();
 
             })
@@ -371,7 +422,7 @@
 
                 let dataset = {};
                 dataset.label = dataPoint.Name;
-                dataset.backgroundColor = [];
+                dataset.backgroundColor = ["#fca650"];
                 
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
@@ -380,6 +431,34 @@
                 }
                 //console.log(dataset);
                 this.datacollectioncrop.datasets.push(dataset);
+                //}
+            },
+
+            buildDataCollectionPRISM(data, subbasinID) {
+                let $this = this
+                this.datacollectionprism = {};
+                this.datacollectionprism.labels = [];
+                for (let legend in data.Legend) {
+                    //console.log(data.Legend[legend]);
+                    this.datacollectionprism.labels.push(data.Legend[legend]);
+                }
+                this.datacollectionprism.datasets = [];
+                let dataIndex = subbasinID;
+                //console.log(subbasinID);
+                //for (let dataIndex in data.Data){
+                let dataPoint = data.Data[dataIndex];
+
+                let dataset = {};
+                //dataset.label = dataPoint.Name;
+                //dataset.backgroundColor = [];
+                
+                dataset.data = [];
+                for (let dataValue in dataPoint.Data) {
+                    //dataset.backgroundColor.push(this.getRandomColor())
+                    dataset.data.push(dataPoint.Data[dataValue]);
+                }
+                console.log(dataset.data);
+                this.datacollectionprism.datasets.push(dataset);
                 //}
             },
 
@@ -400,7 +479,7 @@
     #regionalSummary {
         position: absolute !important;
         top: 80px;
-        right: 50px;
+        right: 200px;
         z-index: 1000;
         width: 700px;
     }

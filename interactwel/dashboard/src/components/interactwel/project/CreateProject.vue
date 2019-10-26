@@ -77,7 +77,7 @@
             <b-card-text>
                 <div class="p-3">    
                             <b-card-text class="text-justify">Build a Conceptual System Diagram of your communities's adaptation plans 
-                            to manage food, energy, water and land resources to future perturbations. </b-card-text>
+                            to manage food, energy, water and land resources stressed by perturbation of concern. </b-card-text>
                             <br>
                             
                             <b-button @click="stepStartCSD" class="btn-upload" type="submit" variant="success">Start</b-button>
@@ -137,15 +137,15 @@
         </b-card>
 
 
-    <b-card footer-tag="footer" v-show="isStep1CSD">
-            <div class="step-header" slot="header">Societal and Natural Drivers</div>
+    <b-card footer-tag="footer" v-show="isStep2CSD">
+            <div class="step-header" slot="header">Natural Resources and Societal Drivers</div>
             <b-card-text>
                 <div class="p-3">
                     <b-col lg="8">
                         <b-form>
                             <b-form-group
                                     id="input-group-1"
-                                    label="Identify Societal and Natural Drivers"
+                                    label="Identify Natural Resources and Societal Drivers"
                                     label-for="input-1"
                                     description=""
                             >
@@ -154,7 +154,7 @@
                             </b-form-group>
 
                         <b-card-group deck>
-                            <b-card header="Select Natural Drivers">
+                            <b-card header="Select Natural Resources">
                                 <div class="list-group">
                                     <li class="list-group-item" v-for="ns in naturalsystems" v-bind:key="ns.id">
                                         <label class="form-checkbox" :disabled="ns.readonly">
@@ -167,7 +167,7 @@
                                 </div>
                             </b-card>
 
-                            <b-card header="Natural Resources in System Diagram">
+                            <b-card class="card-nb" header="Natural Resources in System Diagram">
                             <!--<b-card no-body style="max-width: 20rem;" img-src="https://placekitten.com/380/200" img-alt="Image" img-top>-->
                                 <img src="./../../../../public/static/img/Natural_systems.svg" width="200" height="121" class="center"></img>
                             </b-card>
@@ -175,7 +175,7 @@
                         </b-card-group>
 
                         <b-card-group deck>
-                            <b-card header="Select Natural Drivers">
+                            <b-card header="Select Societal Drivers">
                                 <div class="list-group">
                                     <li class="list-group-item" v-for="sd in societaldrivers" v-bind:key="sd.id">
                                         <label class="form-checkbox" :disabled="sd.readonly">
@@ -188,7 +188,7 @@
                                     </li>
                                 </div>
                             </b-card>
-                            <b-card header="Societal Drivers in System Diagram">
+                            <b-card class="card-nb" header="Societal Drivers in System Diagram">
                                 <img src="./../../../../public/static/img/societal_drivers.svg" width="200" height="121" class="center"></img>
                             </b-card>
                         </b-card-group>
@@ -204,7 +204,7 @@
         </b-card>
 
 
-        <b-card footer-tag="footer" v-show="isStep2CSD">
+        <b-card footer-tag="footer" v-show="isStep1CSD">
             <div class="step-header" slot="header">Perturbations</div>
             <b-card-text>
                 <div class="p-3">
@@ -212,11 +212,11 @@
                         <b-form>
                             <b-form-group
                                     id="input-group-1"
-                                    label="Identify Future Perturbations"
+                                    label="Identify Perturbations and Stresses"
                                     label-for="input-1"
                                     description=""
                             >
-                                <b-card-text>Imagine it is 20-30 years from now, what changes to you anticipate occurring to the land, energy, and water resources in your county (watershed? Property?)?
+                                <b-card-text>What chronic and/or sudden stresses threaten your community's land, energy, and water resources?
                                 </b-card-text>
                             </b-form-group>
 
@@ -234,7 +234,7 @@
                                 </div>
                             </b-card>
 
-                            <b-card header="Natural Resources in System Diagram">
+                            <b-card class="card-nb" header="Perturbations in the System Diagram">
                             <!--<b-card no-body style="max-width: 20rem;" img-src="https://placekitten.com/380/200" img-alt="Image" img-top>-->
                                 <img src="./../../../../public/static/img/perturbations.svg" width="200" height="200" class="center"></img>
                             </b-card>
@@ -291,8 +291,8 @@
 
                 geojson_files: [],
 
-                perturbations: [{id: "0", name: "Drought"},{id: "1", name: "Increase precipitation"},
-                                {id: "2", name: "Wild fires"},{id: "3", name: "Decrease in total precipitation"},{id: "4", name: "Reduction of snow pack"}],
+                perturbations: [{id: "0", name: "Drought"},{id: "1", name: "Declining water quality"},
+                                {id: "2", name: "Wild fires"},{id:"3", name: "Overuse of natural resources"},{id: "4", name: "Reduction in the snow pack"},{id: "5", name: "Floods"},{id:"6", name: "Changing energy policies"}],
                 perturbation: [{ text: 'Select One', value: null }, 'Surface Water Allocation', 'perturbation 1', 'perturbation 2', 'perturbation 3'],
                 show: true
             }
@@ -414,6 +414,10 @@ div.file-listing{
 
   .btn-upload{
       float:left;
+  }
+
+  .card-nb{
+    border:none;
   }
 
   .center {

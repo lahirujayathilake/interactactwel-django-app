@@ -36,7 +36,7 @@
                     </b-card>
                 </b-col>
                 <b-col lg="10">
-                    <h5>Project: Umatilla</h5>
+                    <!--<h5>Project: Umatilla</h5>-->
                     <b-card no-body>
                         <router-view></router-view>
                     </b-card>

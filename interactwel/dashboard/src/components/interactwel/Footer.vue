@@ -2,7 +2,7 @@
     <b-container fluid class="footer">
         <b-container>
         <b-row>
-            <b-col>Footer Content Goes Here</b-col>
+            <b-col></b-col>
         </b-row>
         </b-container>
     </b-container>
