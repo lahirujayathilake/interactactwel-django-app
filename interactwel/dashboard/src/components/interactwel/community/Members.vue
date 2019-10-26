@@ -22,8 +22,8 @@
                                             <b-list-group-item>John Doe</b-list-group-item>
                                             <b-list-group-item>Nick Harrison</b-list-group-item>
                                             <b-list-group-item>Justin Watson</b-list-group-item>
-                                            <b-list-group-item>Vestibulum at eros
-                                            </b-list-group-item>
+                                            <!--<b-list-group-item>Vestibulum at eros
+                                            </b-list-group-item> -->
                                         </b-list-group>
                                     </b-col>
                                 </b-row>
@@ -47,9 +47,9 @@
                                             <b-list-group-item>Justin Watson
                                                 <b-button size="sm">Invite</b-button>
                                             </b-list-group-item>
-                                            <b-list-group-item>Vestibulum at eros
+                                            <!--<b-list-group-item>Vestibulum at eros
                                                 <b-button size="sm">Invite</b-button>
-                                            </b-list-group-item>
+                                            </b-list-group-item> -->
                                         </b-list-group>
                                     </b-col>
                                 </b-row>
@@ -71,9 +71,9 @@
                                             <b-list-group-item>Justin Watson
                                                 <b-button size="sm">Connect</b-button>
                                             </b-list-group-item>
-                                            <b-list-group-item>Vestibulum at eros
+                                            <!--<b-list-group-item>Vestibulum at eros
                                                 <b-button size="sm">Connect</b-button>
-                                            </b-list-group-item>
+                                            </b-list-group-item> -->
                                         </b-list-group>
                                     </b-col>
                                 </b-row>
