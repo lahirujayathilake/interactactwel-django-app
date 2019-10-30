@@ -1,0 +1,50 @@
+<template>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'app',
+  components: {
+
+  }
+}
+</script>
+
+<style>
+  @import "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css";
+  @import "https://cdn.jsdelivr.net/npm/bootstrap-vue@2.0.0-rc.11/dist/bootstrap-vue.css";
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+
+  a {
+    color: #28a645;
+    font-weight: 700;
+  }
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #28a645;
+  }
+
+  .card-title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #5e6b7e;
+    border-bottom: 2px solid #28a645;
+    padding-bottom: 5px;
+  }
+
+  .card-text {
+    font-size: 13px;
+    color: #5e6b7e;
+  }
+
+</style>
