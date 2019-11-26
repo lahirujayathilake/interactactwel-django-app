@@ -20,7 +20,7 @@
             </b-row>
             <b-row>
                 <b-col>
-                    <div class="map-container">
+                    <div class="lg-map-container">
                         <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
                             <l-control-zoom position="topright"></l-control-zoom>
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -219,8 +219,10 @@
         <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
     </div>
 </template>
-
 <script>
+    import Welcome from './intro/Welcome.vue';
+    import TutorStep1 from './intro/TutorStep1.vue';
+    import TutorStep2 from './intro/TutorStep2.vue';
     import Header from './../../Header.vue';
     import Footer from './../../Footer.vue';
     import axios from 'axios';
@@ -261,7 +263,7 @@
     export default {
         name: 'AdaptationPlans',
         components: {
-            Header, Footer, RegionalSummary,
+            Header, Footer, RegionalSummary, Welcome, TutorStep1, TutorStep2,
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
             'l-marker': LMarker,
@@ -283,6 +285,12 @@
 
         data() {
             return {
+                isModalVisible: true,
+                isStep1Active: false,
+                isStep2Active: false,
+                istutor1Visible: false,
+                istutor2Visible: false,
+
                 geoJson_reach: null,
                 geoJson_subbasin: null,
                 geoJson_reservoir: null,
@@ -414,14 +422,17 @@
                     onEachFeature: this.onEachFeatureFunction
                 };
             },
+
             options_noclick() {
                 return {};
             },
+
             options_wrrights() {
                 return {
                     onEachFeature: this.GetWRcolor
                 };
             },
+
             options_heatmap() {
                 return {
                     onEachFeature: this.getHeatMapColor_Perct
@@ -580,7 +591,6 @@
                     ;
                 };
             },
-
 
             GetWRcolor() {
                 return (feature, layer) => {
@@ -832,8 +842,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    .map-container{
-        height: 700px;
+    .lg-map-container{
+        height: 92vh;
         overflow:auto;
     }
     #step1 {

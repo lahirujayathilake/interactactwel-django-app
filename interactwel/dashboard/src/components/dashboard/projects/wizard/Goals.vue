@@ -134,13 +134,13 @@
                 </em>
             </b-card>
         </div>
-        <b-modal v-model="showInfoModal" ok-only>
+        <b-modal v-model="showInfoModal">
             <template slot="modal-title">
                 <strong>No selections were made</strong>
             </template>
             Please be advised that all available choices will be selected.
             <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
-                <b-button size="sm" variant="next" @click="ok()">Ok</b-button>
+                <b-button size="sm" variant="next" @click="onConfirm">Ok</b-button>
             </template>
         </b-modal>
     </b-col>
@@ -203,8 +203,19 @@
                 }
 
             },
+
+            toggleModal() {
+                // We pass the ID of the button that we want to return focus to
+                // when the modal has hidden
+                this.$refs['my-modal'].toggle('#toggle-btn')
+            },
+
             submit() {
-                this.showInfoModal = true
+
+                this.showInfoModal = true;
+            },
+
+            onConfirm() {
                 localStorage.setItem('step1', true);
                 let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
                 adaptationPlan.selectedGoals = this.selectedGoals;
@@ -218,6 +229,19 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     h3 {
         margin: 40px 0 0;
     }
