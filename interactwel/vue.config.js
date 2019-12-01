@@ -13,23 +13,23 @@ module.exports = {
 
     chainWebpack: config => {
 
-        config.optimization
-        .splitChunks(false)
+    config.optimization
+    .splitChunks(false)
 
-        config
-            .plugin('BundleTracker')
-            .use(BundleTracker, [{filename: './static/interactwel/dashboard/dist/webpack-stats.json'}])
+config
+    .plugin('BundleTracker')
+    .use(BundleTracker, [{filename: './static/interactwel/dashboard/dist/webpack-stats.json'}])
 
-        config.resolve.alias
-            .set('__STATIC__', 'static')
+config.resolve.alias
+    .set('__STATIC__', 'static')
 
-        config.devServer
-            .public('http://0.0.0.0:9000')
-            .host('0.0.0.0')
-            .port(9000)
-            .hotOnly(true)
-            .watchOptions({poll: 1000})
-            .https(false)
-            .headers({"Access-Control-Allow-Origin": ["\*"]})
-    }
+config.devServer
+    .public('http://0.0.0.0:9000')
+    .host('0.0.0.0')
+    .port(9000)
+    .hotOnly(true)
+    .watchOptions({poll: 1000})
+    .https(false)
+    .headers({"Access-Control-Allow-Origin": ["\*"]})
+}
 };
