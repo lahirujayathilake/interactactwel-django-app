@@ -1,55 +1,55 @@
 <template>
     <b-col lg="12">
-        <!--<ol class="progress-bar">
+        <ol class="progress-bar">
             <li class="col-md-2 active">
                 <div id="active" class="step-progress-bar">
                     <div class="step-no">1</div>
                     <h4 class="list-group-item-heading">Goals</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">ererwe</p>
+                    <p class="list-group-item-text"># golas selected</p>
                 </div>
             </li>
-            <li class="col-md-2 inactive">
+            <li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">ewr</p>
+                    <p class="list-group-item-text"># Actores selected</p>
                 </div>
             </li>
-            <li class="col-md-2 inactive">
+            <li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">ewr</p>
+                    <p class="list-group-item-text"># Actions selected</p>
                 </div>
             </li>
-            <li class="col-md-2 inactive">
+            <li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Visualization</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">ewr</p>
+                    <p class="list-group-item-text">Adaptation Plans</p>
                 </div>
             </li>
-            <li class="col-md-2 inactive">
+            <li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">ewr</p>
+                    <p class="list-group-item-text">Rate each plan</p>
                 </div>
             </li>
-            <li class="col-md-2 inactive">
+            <li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Share</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">ewr</p>
+                    <p class="list-group-item-text">Share with community</p>
                 </div>
             </li>
-        </ol>-->
+        </ol>
         <div id="step1">
             <div class="help-block">
                 <b-collapse visible id="collapse-1">
@@ -211,7 +211,6 @@
             },
 
             submit() {
-
                 this.showInfoModal = true;
             },
 
@@ -261,5 +260,9 @@
 
     a {
         color: #42b983;
+    }
+
+    #active{
+        background-color: #dcedc8;
     }
 </style>

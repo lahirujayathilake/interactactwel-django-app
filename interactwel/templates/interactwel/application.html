@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load render_bundle from webpack_loader %}
 
 {% block content %}
@@ -14,6 +15,13 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static 'django_airavata_api/dist/airavata-api.js' %}"></script>
+    <script>
+        var userIsAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+        $(document).ready(function () {
+            //alert("user authenticated? " + userIsAuthenticated)
+        });
+    </script>
     {{ block.super }}
     {% render_bundle 'app' 'js' 'INTERACTWEL' %}
 {% endblock %}

@@ -1,4 +1,55 @@
 <template>
+    <b-col lg="12">
+        <ol class="progress-bar">
+            <li class="col-md-2">
+                <div id="active" class="step-progress-bar">
+                    <div class="step-no">1</div>
+                    <h4 class="list-group-item-heading">Goals</h4>
+                    <h4r class="list-group-item-heading">&#10003;</h4r>
+                    <p class="list-group-item-text"># golas selected</p>
+                </div>
+            </li>
+            <li class="col-md-2">
+                <div class="step-progress-bar">
+                    <div class="step-no">2</div>
+                    <h4 class="list-group-item-heading">Actors</h4>
+                    <h4r class="list-group-item-heading">&#10003;</h4r>
+                    <p class="list-group-item-text"># Actores selected</p>
+                </div>
+            </li>
+            <li class="col-md-2 active">
+                <div class="step-progress-bar">
+                    <div class="step-no">2</div>
+                    <h4 class="list-group-item-heading">Actions</h4>
+                    <h4r class="list-group-item-heading">&#10003;</h4r>
+                    <p class="list-group-item-text"># Actions selected</p>
+                </div>
+            </li>
+            <li class="col-md-2">
+                <div class="step-progress-bar">
+                    <div class="step-no">2</div>
+                    <h4 class="list-group-item-heading">Visualization</h4>
+                    <h4r class="list-group-item-heading">&#10003;</h4r>
+                    <p class="list-group-item-text">Adaptation Plans</p>
+                </div>
+            </li>
+            <li class="col-md-2">
+                <div class="step-progress-bar">
+                    <div class="step-no">2</div>
+                    <h4 class="list-group-item-heading">Feedback</h4>
+                    <h4r class="list-group-item-heading">&#10003;</h4r>
+                    <p class="list-group-item-text">Rate each plan</p>
+                </div>
+            </li>
+            <li class="col-md-2">
+                <div class="step-progress-bar">
+                    <div class="step-no">2</div>
+                    <h4 class="list-group-item-heading">Share</h4>
+                    <h4r class="list-group-item-heading">&#10003;</h4r>
+                    <p class="list-group-item-text">Share with community</p>
+                </div>
+            </li>
+        </ol>
     <div id="step3" title="Step 3"
          icon="ti-check">
         <div class="help-block-actions">
@@ -22,7 +73,7 @@
                 </b-card>
             </b-collapse>
         </div>
-        <b-card style="width: 700px" no-body footer-tag="footer">
+        <b-card style="width: 850px" no-body footer-tag="footer">
             <div class="step-header" slot="header">Choose Actions
                 <em slot="header">
                     <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Show instructions </b-button>
@@ -94,6 +145,7 @@
             </em>
         </b-card>
     </div>
+    </b-col>
 </template>
 
 <script>
@@ -108,6 +160,7 @@
                 selectAllActions: false,
                 selectedActions: [],
                 actions: ActionsOpts,
+                showInfoModal: false
             }
         },
         mounted() {
