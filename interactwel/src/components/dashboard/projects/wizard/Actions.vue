@@ -93,8 +93,8 @@
                 <p class="card-text"><i>
                     Please choose from the drop-down menu the actor for which you want to define the possible actions.</i>
                 </p>
-                <h4>Selected actors Available actions</h4>
-                <b-tabs card vertical content-class="mt-3" style="margin-top: 0px">
+                <h6>Selected actors Available actions</h6>
+                <b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
                     <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                         <div class="list-group">
                             <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
@@ -196,7 +196,7 @@
                 let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
                 adaptationPlan.selectedActions = this.selectedActions;
                 localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-                this.$router.push('/adaptation-plans/1/plans/1/overview')
+                this.$router.push('/adaptation-plans/1/plans/overview')
             },
 
             back(){

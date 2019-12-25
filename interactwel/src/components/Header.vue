@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="top-fixed-nav">
-            <b-navbar style="background-color: #263238!important;" toggleable="md" type="dark" variant="secondary">
+            <b-navbar style="padding: 0 1rem; background-color: #263238!important;" toggleable="md" type="dark" variant="secondary">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 <a class="navbar-brand" href="#">
                     <img src="../assets/InterACTWEL_logo.svg" width="140" height="35"
@@ -18,16 +18,16 @@
                 </b-collapse>
                 <b-collapse is-nav id="nav_collapse">
                     <!-- Right aligned nav items -->
-                    <b-navbar-nav class="ml-auto">
+                    <!--<b-navbar-nav class="ml-auto">
                         <b-nav-item-dropdown right>
-                            <!-- Using button-content slot -->
+                            &lt;!&ndash; Using button-content slot &ndash;&gt;
                             <template slot="button-content">
                                 <em>Nick</em>
                             </template>
                             <b-dropdown-item href="#">Profile</b-dropdown-item>
                             <b-dropdown-item href="#">Signout</b-dropdown-item>
                         </b-nav-item-dropdown>
-                    </b-navbar-nav>
+                    </b-navbar-nav>-->
                 </b-collapse>
             </b-navbar>
         </div>

@@ -11,8 +11,8 @@
                         <b-nav-text>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
-                <b-button variant="success" @click="startWizard" class="mr-2">Start</b-button>
-                <b-button variant="danger" @click="exitWizard">Exit</b-button>
+                <b-button v-show="startBtn" variant="success" @click="startWizard" class="mr-2 btn-sm">Start</b-button>
+                <b-button v-show ="exitBtn" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
             </b-navbar>
            <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
             <b-row>
@@ -21,7 +21,7 @@
             <b-row>
                 <b-col>
                     <div class="lg-map-container">
-                        <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
+                        <l-map ref="myMap" :maxZoom="maxZoom" :zoom="zoom" :center="center" :options="{zoomControl: false}">
                             <l-control-zoom position="topright"></l-control-zoom>
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                             <!--<l-control-layers position="topright" ref="layersControl" :sort-layers="true" :autoZIndex="true">-->
@@ -228,6 +228,7 @@
     import axios from 'axios';
     import EventBus from './../../../event-bus';
 
+    import L from 'leaflet';
     import {
         LMap,
         LTileLayer,
@@ -239,7 +240,6 @@
         LPopup,
         LControlZoom
     } from 'vue2-leaflet';
-    import L from 'leaflet';
 
     import PrecipDataJson from "./../../../../public/static/weather_station_data.json";
     import ReservoirDataJson from "./../../../../public/static/reservoirs_data.json";
@@ -285,6 +285,7 @@
 
         data() {
             return {
+                startBtn: true,
                 isModalVisible: true,
                 isStep1Active: false,
                 isStep2Active: false,
@@ -680,7 +681,7 @@
                 $this.regionalSummaryVisibility = true
             })
 
-            //const map = this.$refs.myMap.mapObject;
+            const map = this.$refs.myMap.mapObject;
             EventBus.$on('START_RESULTSMAP', function () {
                 var active = [];
                 var default_selected_layers = [];
@@ -828,6 +829,8 @@
                 EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
             },
             startWizard(){
+                this.startBtn = false;
+                this.exitBtn = true;
                 this.$router.push('/adaptation-plans/1/goals')
             },
 
@@ -842,9 +845,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+    @import '../../../assets/vendor/Vue2Leaflet/leaflet.css';
     .lg-map-container{
-        height: 92vh;
-        overflow:auto;
+        height: 85vh;
+        overflow: auto;
     }
     #step1 {
         position: absolute;
@@ -883,6 +887,7 @@
         z-index: 1000;
         left: 30px;
         top: 70px;
+        width: 1000px;
     }
 
     #step6 {

@@ -48,7 +48,7 @@
                             </l-map>
                         </div>
                         <div class="mt-3">
-                            <b-button class="mr-2" disabled>Request to join</b-button>
+                            <b-button class="mr-2 btn-sm" disabled>Request to join</b-button>
                         </div>
                     </b-card-body>
                 </b-tab>
@@ -77,7 +77,7 @@
                             </l-map>
                         </div>
                         <div class="mt-3">
-                            <b-button class="mr-2" disabled>Request to join</b-button>
+                            <b-button class="mr-2 btn-sm" disabled>Request to join</b-button>
                         </div>
                     </b-card-body>
                 </b-tab>
@@ -187,6 +187,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+    @import '../../../assets/vendor/Vue2Leaflet/leaflet.css';
     .map-container{
         height: 400px;
     }

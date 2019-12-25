@@ -24,7 +24,13 @@ export default {
   color: #2c3e50;
   width:100%;
   font-weight:500;
+  font-size: 14px;
 }
+
+  .main{
+    height: 90vh;
+    overflow: auto;
+  }
 
 
   a {
@@ -38,7 +44,7 @@ export default {
   }
 
   .card-title {
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
     color: #5e6b7e;
     border-bottom: 2px solid #28a645;
@@ -48,6 +54,14 @@ export default {
   .card-text {
     font-size: 13px;
     color: #5e6b7e;
+  }
+
+  .card-header{
+    font-size: 14px !important;
+  }
+
+  td{
+    font-size: 13px !important;
   }
 
 </style>

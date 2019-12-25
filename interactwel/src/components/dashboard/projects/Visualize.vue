@@ -14,10 +14,10 @@
                         </b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
-                <b-button variant="success" class="mr-2">
+                <b-button variant="success" class="mr-2 btn-sm">
                     <router-link to="/adaptation-plans/1">View Adaptation Plans</router-link>
                 </b-button>
-                <b-button class="mr-2">
+                <b-button class="mr-2 btn-sm">
                     <router-link to="/projects/my-projects">Back to Projects</router-link>
                 </b-button>
 
@@ -866,8 +866,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+    @import '../../../assets/vendor/Vue2Leaflet/leaflet.css';
     .lg-map-container {
-        height: 92vh;
+        height: 85vh;
         overflow: auto;
     }
     .modal-backdrop {

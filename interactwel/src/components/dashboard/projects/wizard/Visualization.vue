@@ -1,6 +1,6 @@
 <template>
    <div>
-       <h5>Adaptation Plan {{$route.params.planId}}</h5>
+       <h6 class="mt-3">Adaptation Plan {{$route.params.planId}}</h6>
        <router-view></router-view>
    </div>
 </template>

@@ -15,6 +15,7 @@ const Goals = () => import('@/components/dashboard/projects/wizard/Goals')
 const Actors = () => import('@/components/dashboard/projects/wizard/Actors')
 const Actions = () => import('@/components/dashboard/projects/wizard/Actions')
 const Plans = () => import('@/components/dashboard/projects/wizard/Plans')
+const Share = () => import('@/components/dashboard/projects/wizard/Share')
 const Visualization = () => import('@/components/dashboard/projects/wizard/Visualization')
 const Overview = () => import('@/components/dashboard/projects/charts/Overview')
 const Feedback = () => import('@/components/dashboard/projects/charts/Feedback')
@@ -123,16 +124,16 @@ export default new Router({
                     component: Plans,
                     children: [
                         {
+                            path: 'overview',
+                            name: 'Overview',
+                            component: Overview
+                        },
+                        {
                             path: ':planId',
                             name: 'Visualization',
                             redirect: ':planId/actions',
                             component: Visualization,
                             children: [
-                                {
-                                    path: 'overview',
-                                    name: 'Overview',
-                                    component: Overview
-                                },
                                 {
                                     path: 'actions',
                                     name: 'ChartActions',
@@ -162,6 +163,11 @@ export default new Router({
                         },
 
                     ]
+                },
+                {
+                    path: 'share',
+                    name: 'Share',
+                    component: Share,
                 },
 
             ]

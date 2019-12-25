@@ -16,5 +16,5 @@ urlpatterns = [
         "",
         TemplateView.as_view(template_name="interactwel/application.html"),
         name="app",
-    ),
+    )
 ]

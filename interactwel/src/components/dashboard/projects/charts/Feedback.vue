@@ -1,21 +1,18 @@
 <template>
     <div id="graph" class="card">
         <div class="card-header">
-            <strong>Feedback</strong>
+            <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
         <div class="card-body no-padding">
-            <div class="feedback-container">
-                <div class="header-container">
-                    <h5>Evaluate Adaptation Plan {{$route.params.planId}}</h5>
-                </div>
-                <div id="feedback-block">
-                    <b-form @submit="onSubmit" @reset="onReset">
+            <div v-show="feedbackVisibility" class="">
+                <div v-show="feedbackBlock" id="feedback-block">
+                    <b-form v-show="initialFeedback" @submit="onSubmit" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
-                            <b-form-radio v-model="feasibility" name="some-radios" value="1">Yes</b-form-radio>
-                            <b-form-radio v-model="feasibility" name="some-radios" value="0">No</b-form-radio>
+                            <b-form-radio v-model="feasibility" value="1" name="some-radios">Yes</b-form-radio>
+                            <b-form-radio v-model="feasibility" value="0" name="some-radios">No</b-form-radio>
                         </b-form-group>
                     </b-form>
-                    <b-form>
+                    <b-form v-if="feasibility === '0'">
                         <b-form-group label="Please state why this plan is infeasible">
                             <b-form-textarea
                                     id="textarea"
@@ -114,13 +111,90 @@
         name: 'Feedback',
         props: {},
         data() {
-            return {}
+            return {
+                feedbackVisibility: true,
+                feedbackBlock: true,
+                thankyouBlock: false,
+                feasibility: false,
+                initialFeedback: true,
+                ifFeasible: [],
+                ifNotFeasible: [],
+                ifFeasiblecomment: null,
+                ifNotFeasiblecomment: null,
+
+                options: [
+                    {text: 'Not at all', value: 1},
+                    {text: 'Satisfactory', value: 2},
+                    {text: 'Neutral', value: 3},
+                    {text: 'Well', value: 4},
+                    {text: 'Very Well', value: 5},
+                ],
+
+                factors: [
+                    {text: 'Infrastructure costs', value: 'Infrastructure costs'},
+                    {text: 'Permits or other regulatory approval processes and cost', value: 'Permits or other regulatory approval processes and cost'},
+                    {text: 'Reliance on other stakeholders to take action', value: 'Reliance on other stakeholders to take action'},
+                    {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
+                    {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
+                ],
+
+                feedbackProvided: false,
+                currentRouteName: '',
+
+                q1Selected: [],
+                q2Selected: [],
+                q3Selected: [],
+                q4Selected: [],
+                q5Selected: [],
+                SelectedFactors: [],
+            }
         },
         mounted() {
+            if(!localStorage.feedbackProvided){
+                localStorage.setItem('feedbackProvided', false);
+            }else{
+                let $this = this
+                $this.feedbackProvided = localStorage.feedbackProvided;
+            }
 
         },
         watch: {},
-        methods: {}
+        methods: {
+            submit(){
+                localStorage.setItem('step4', true);
+                this.feedbackVisibility = false
+
+            },
+            back(){
+                this.$router.push('/adaptation-plans/1/actions')
+            },
+            submitFeedback() {
+                let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
+                adaptationPlan.planId = this.$route.params.planId;
+                localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
+
+                localStorage.feedbackProvided = true
+                this.feedbackProvided = true
+                this.thankyouBlock = true
+                this.feedbackBlock = false
+            },
+            onSubmit(evt) {
+                evt.preventDefault()
+                alert(JSON.stringify(this))
+            },
+            onReset(evt) {
+                evt.preventDefault()
+                // Reset our form values
+                this.comment = null
+                this.feasibility = []
+                this.selected = []
+                // Trick to reset/clear native browser form validation state
+                this.show = false
+                this.$nextTick(() => {
+                    this.show = true
+                })
+            }
+        }
     }
 </script>
 

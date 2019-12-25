@@ -19,8 +19,8 @@
         <b-collapse is-nav id="nav_collapse">
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item href="#"><router-link to="/signup"><b-button variant="outline-success">SignUp</b-button></router-link></b-nav-item>
-            <b-nav-item href="#"><router-link to="/login"><b-button variant="success">Login</b-button></router-link></b-nav-item>
+            <!--<b-nav-item href="#"><router-link to="/signup"><b-button variant="outline-success">SignUp</b-button></router-link></b-nav-item>
+            <b-nav-item href="#"><router-link to="/login"><b-button variant="success">Login</b-button></router-link></b-nav-item>-->
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>

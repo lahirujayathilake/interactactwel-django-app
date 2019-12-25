@@ -478,7 +478,7 @@
 <style>
     #regionalSummary {
         position: absolute !important;
-        top: 140px;
+        top: 190px;
         right: 200px;
         z-index: 1000;
         width: 700px;

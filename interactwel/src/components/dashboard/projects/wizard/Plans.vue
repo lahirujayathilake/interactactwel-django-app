@@ -83,18 +83,22 @@
                 </em>
             </div>
             <b-card-body class="no-padding">
-                <b-container class="">
+                <b-container     class="">
                     <b-row>
                             <div id="sidebar" role="tablist">
                                 <b-nav header-tag="header" class="p-1" role="tab">
+                                    <b-nav-item block href="#" v-b-toggle.collapse-0 variant="info">
+                                        <router-link :to="{ name: 'Overview', params: { planId: 1 }}">Overview</router-link>
+                                    </b-nav-item>
+                                </b-nav>
+                                <b-nav header-tag="header" class="p-1" role="tab">
                                     <b-nav-item block href="#" v-b-toggle.collapse-1 variant="info">
-                                        <router-link :to="{ name: 'Overview', params: { planId: 1 }}">plan 1</router-link>
+                                        plan 1
                                     </b-nav-item>
                                 </b-nav>
                                 <b-collapse id="collapse-1" accordion="my-accordion" role="tabpanel">
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartActions', params: { planId: 1 }}">Actions
-                                        </router-link>
+                                    <b-nav-item @click="$router.push({ name: 'ChartActions', params: { planId: 1 }})" class="collapse-item">
+                                        Actions
                                     </b-nav-item>
                                     <b-nav-item class="collapse-item">
                                         <router-link :to="{ name: 'ChartStreams', params: { planId: 1 }}">Streams
@@ -108,10 +112,14 @@
                                         <router-link :to="{ name: 'ChartSubBasins', params: { planId: 1 }}">Sub Basins
                                         </router-link>
                                     </b-nav-item>
+                                    <b-nav-item class="collapse-item">
+                                        <router-link :to="{ name: 'Feedback', params: { planId: 1 }}">Feedback
+                                        </router-link>
+                                    </b-nav-item>
                                 </b-collapse>
-                                <b-nav header-tag="header" class="p-1" role="tab" v-show="feedbackProvided === true" >
+                                <b-nav header-tag="header" class="p-1" role="tab">
                                     <b-nav-item block href="#" v-b-toggle.collapse-2 variant="info">
-                                        <router-link :to="{ name: 'Overview', params: { planId: 2 }}">plan 2</router-link>
+                                        plan 2
                                     </b-nav-item>
                                 </b-nav>
                                 <b-collapse id="collapse-2" accordion="my-accordion" role="tabpanel">
@@ -129,6 +137,10 @@
                                     </b-nav-item>
                                     <b-nav-item class="collapse-item">
                                         <router-link :to="{ name: 'ChartSubBasins', params: { planId: 2 }}">Sub Basins
+                                        </router-link>
+                                    </b-nav-item>
+                                    <b-nav-item class="collapse-item">
+                                        <router-link :to="{ name: 'Feedback', params: { planId: 2 }}">Feedback
                                         </router-link>
                                     </b-nav-item>
                                 </b-collapse>
@@ -322,7 +334,8 @@
         methods: {
             submit(){
                 localStorage.setItem('step4', true);
-                this.feedbackVisibility = false
+                //this.feedbackVisibility = false
+                this.$router.push('/adaptation-plans/1/share')
 
             },
             back(){
