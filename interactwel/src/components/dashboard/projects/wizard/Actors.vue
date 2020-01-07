@@ -142,7 +142,7 @@
         }
     },
         mounted() {
-            if (localStorage.getItem('selectedActors')) this.selectedActors = JSON.parse(localStorage.getItem('selectedActors'));
+            if (localStorage.getItem('adaptationPlan')) this.selectedActors = JSON.parse(localStorage.getItem('adaptationPlan')).selectedActors;
         },
 
         watch: {

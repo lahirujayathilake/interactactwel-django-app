@@ -8,13 +8,13 @@
             <b-row>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Goals</strong></h6>
-                    <b-list-group class="no-padding" v-for="item in selectedGoals" v-bind:key="item.id">
+                    <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedGoals" v-bind:key="item.id">
                         <b-list-group-item class="no-border"><small> &#10003;&nbsp;{{item.goal}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Actors</strong></h6>
-                    <b-list-group class="no-padding" v-for="item in selectedActors" v-bind:key="item.id" >
+                    <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActors" v-bind:key="item.id" >
                         <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.actor}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
@@ -22,6 +22,17 @@
             <b-row style="margin-top:20px;">
                 <b-col lg="12">
                     <h6 class="chart-title"><strong>Selected Actions for Actors</strong></h6>
+
+                    <b-col lg="6">
+                        <b-list-group class="no-padding" v-for="actor in adaptationPlan.selectedActors" v-bind:key="actor.id" >
+                            <b-list-group-item class="no-border">&#10003;&nbsp;{{actor.actor}}</b-list-group-item>
+                            <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActions" v-bind:key="item.id"
+                                          v-if="item.actor.id == actor.id ">
+                                <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.action.action}}</small></b-list-group-item>
+                            </b-list-group>
+                        </b-list-group>
+                    </b-col>
+
                   <!--  <b-tabs card vertical>
                         <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
                             <b-list-group v-for="item in getActions(actor)">
@@ -50,6 +61,7 @@
         },
         data() {
             return {
+                adaptationPlan : [],
                 selectedGoals: [{
                     id: "1",
                     goal: "Increase recharge to shallow aquifer",
@@ -81,6 +93,7 @@
 
         mounted() {
             EventBus.$emit('HIDE_RESULTSMAP');
+            this.adaptationPlan = JSON.parse(localStorage.getItem('adaptationPlan'));
             /*this.selectedGoals = localStorage.getItem('selectedGoals');
             this.selectedActors = localStorage.getItem('selectedActors');
             this.selectedActions = localStorage.getItem('selectedActions');*/

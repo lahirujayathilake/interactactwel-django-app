@@ -163,7 +163,7 @@
         },
         mounted() {
 
-            if (localStorage.getItem('selectedGoals')) this.selectedGoals = JSON.parse(localStorage.getItem('selectedGoals'));
+            if (localStorage.getItem('adaptationPlan')) this.selectedGoals = JSON.parse(localStorage.getItem('adaptationPlan')).selectedGoals;
 
             /*let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
             if (adaptationPlan) {
@@ -178,7 +178,7 @@
         watch: {
             selectedGoals: {
                 handler() {
-                    localStorage.setItem('selectedGoals', JSON.stringify(this.selectedGoals));
+                    //localStorage.setItem('selectedGoals', JSON.stringify(this.selectedGoals));
                 },
                 deep: true,
             }

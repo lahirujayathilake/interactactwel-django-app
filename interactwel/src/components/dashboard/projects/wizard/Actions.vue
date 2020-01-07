@@ -94,12 +94,12 @@
                     Please choose from the drop-down menu the actor for which you want to define the possible actions.</i>
                 </p>
                 <h6>Selected actors Available actions</h6>
-                <b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
+                <!--<b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
                     <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                         <div class="list-group">
                             <li class="list-group-item" v-for="action in actions" v-bind:key="action.id">
                                 <label class="form-checkbox" :disabled="action.readonly">
-                                    <input type="checkbox" :value="actor.actor + ',' + action.action"
+                                    <input type="checkbox" :value="action"
                                            v-model="selectedActions"
                                            :disabled="action.readonly"/>
                                     {{action.action}}
@@ -107,6 +107,26 @@
                                 <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
                                          :title="action.info">
                                 </b-badge>
+                            </li>
+                        </div>
+                    </b-tab>
+                </b-tabs>
+-->
+
+                <b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
+                    <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
+                        <div class="list-group">
+                            <li class="list-group-item" v-for="item in actorActions" v-bind:key="item.id" v-if="item.actor.id == actor.id">
+                                    <label class="form-checkbox" :disabled="item.action.readonly">
+                                        <input type="checkbox" :value="item"
+                                               v-model="selectedActions"
+                                               :disabled="item.action.readonly"/>
+                                        {{ item.action.action}}
+                                    </label>
+                                    <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
+                                             :title="item.action.info">
+                                    </b-badge>
+
                             </li>
                         </div>
                     </b-tab>
@@ -160,12 +180,24 @@
                 selectAllActions: false,
                 selectedActions: [],
                 actions: ActionsOpts,
+                actorActions: [],
                 showInfoModal: false
             }
         },
         mounted() {
+            //todo: read from adaptation plan object
             this.selectedActors = JSON.parse(localStorage.getItem('selectedActors'));
             if (localStorage.getItem('selectedActions')) this.selectedActions = JSON.parse(localStorage.getItem('selectedActions'));
+
+            this.selectedActors.forEach( actor => {
+                this.actions.forEach( action => {
+                    let actorAction = {};
+                    actorAction.actor = actor;
+                    actorAction.action = action;
+                    this.actorActions.push(actorAction);
+                });
+            });
+
 
         },
         watch: {
@@ -178,6 +210,7 @@
         },
         methods: {
 
+            //todo: fix select all action
             selectActions() {
                 this.selectedActions = [];
                 if (!this.selectAllActions) {

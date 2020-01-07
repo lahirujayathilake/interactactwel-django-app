@@ -86,64 +86,43 @@
                 <b-container     class="">
                     <b-row>
                             <div id="sidebar" role="tablist">
+
                                 <b-nav header-tag="header" class="p-1" role="tab">
-                                    <b-nav-item block href="#" v-b-toggle.collapse-0 variant="info">
+                                    <b-nav-item block href="#" v-b-toggle.collapse-0 variant="info" >
                                         <router-link :to="{ name: 'Overview', params: { planId: 1 }}">Overview</router-link>
                                     </b-nav-item>
                                 </b-nav>
-                                <b-nav header-tag="header" class="p-1" role="tab">
-                                    <b-nav-item block href="#" v-b-toggle.collapse-1 variant="info">
-                                        plan 1
-                                    </b-nav-item>
-                                </b-nav>
-                                <b-collapse id="collapse-1" accordion="my-accordion" role="tabpanel">
-                                    <b-nav-item @click="$router.push({ name: 'ChartActions', params: { planId: 1 }})" class="collapse-item">
-                                        Actions
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartStreams', params: { planId: 1 }}">Streams
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartRegion', params: { planId: 1 }}">Region
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartSubBasins', params: { planId: 1 }}">Sub Basins
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'Feedback', params: { planId: 1 }}">Feedback
-                                        </router-link>
-                                    </b-nav-item>
-                                </b-collapse>
-                                <b-nav header-tag="header" class="p-1" role="tab">
-                                    <b-nav-item block href="#" v-b-toggle.collapse-2 variant="info">
-                                        plan 2
-                                    </b-nav-item>
-                                </b-nav>
-                                <b-collapse id="collapse-2" accordion="my-accordion" role="tabpanel">
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartActions', params: { planId: 2 }}">Actions
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartStreams', params: { planId: 2 }}">Streams
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartRegion', params: { planId: 2 }}">Region
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'ChartSubBasins', params: { planId: 2 }}">Sub Basins
-                                        </router-link>
-                                    </b-nav-item>
-                                    <b-nav-item class="collapse-item">
-                                        <router-link :to="{ name: 'Feedback', params: { planId: 2 }}">Feedback
-                                        </router-link>
-                                    </b-nav-item>
-                                </b-collapse>
+
+                                <div  v-for="plan in plans" v-bind:key="plan.id">
+                                    <b-nav header-tag="header" class="p-1" role="tab">
+                                        <b-nav-item block href="#" v-b-toggle="plan.id" variant="info" v-bind:class="{ nav_item_disabled: plan.disabled }" >
+                                            {{plan.name}}
+                                        </b-nav-item>
+                                    </b-nav>
+
+                                    <b-collapse :id="plan.id" accordion="my-accordion" role="tabpanel">
+                                        <b-nav-item @click="$router.push({ name: 'ChartActions', params: { planId: plan.id }})" class="collapse-item">
+                                            Actions
+                                        </b-nav-item>
+                                        <b-nav-item class="collapse-item">
+                                            <router-link :to="{ name: 'ChartStreams', params: { planId:  plan.id  }}">Streams
+                                            </router-link>
+                                        </b-nav-item>
+                                        <b-nav-item class="collapse-item">
+                                            <router-link :to="{ name: 'ChartRegion', params: { planId:  plan.id  }}">Region
+                                            </router-link>
+                                        </b-nav-item>
+                                        <b-nav-item class="collapse-item">
+                                            <router-link :to="{ name: 'ChartSubBasins', params: { planId:  plan.id  }}">Sub Basins
+                                            </router-link>
+                                        </b-nav-item>
+                                        <b-nav-item class="collapse-item">
+                                            <router-link :to="{ name: 'Feedback', params: { planId:  plan.id  }}">Feedback
+                                            </router-link>
+                                        </b-nav-item>
+                                    </b-collapse>
+                                </div>
+
                             </div>
                         <b-col>
                             <router-view></router-view>
@@ -303,6 +282,12 @@
                     {text: 'Reliance on other stakeholders to take action', value: 'Reliance on other stakeholders to take action'},
                     {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
                     {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
+                ],
+
+                plans:[
+                    {id: 1, name: "Plan 1", feedbackProvided: false, disabled: false},
+                    {id: 2, name: "Plan 2", feedbackProvided: false, disabled: true},
+                    {id: 3, name: "Plan 3", feedbackProvided: false, disabled: true},
                 ],
 
                 feedbackProvided: false,
@@ -487,5 +472,9 @@
     #feedback-block legend {
         font-weight: bold;
         font-size: 14px;
+    }
+    .nav_item_disabled{
+        pointer-events:none;
+        opacity:0.6;
     }
 </style>
