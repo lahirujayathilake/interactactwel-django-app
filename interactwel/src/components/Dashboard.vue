@@ -12,7 +12,7 @@
                             <h4 class="card-title"> Learn</h4>
                             <b-card-text>
                                 <!--<p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla.</p> -->
-                                <b-button block>Instructional Videos</b-button>
+                                <b-button block><router-link to="/learn/videos/1">Instructional Videos</router-link></b-button>
                                 <b-button block>Adaptation Stories</b-button>
                                 <b-button block>Documentation</b-button>
                                 <b-button block>Support</b-button>

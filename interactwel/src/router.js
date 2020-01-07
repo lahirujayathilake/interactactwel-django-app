@@ -4,11 +4,13 @@ import Router from 'vue-router'
 // Containers
 const Home = () => import('@/components/Index')
 const Dashboard = () => import('@/components/Dashboard')
+
 const Projects = () => import('@/components/dashboard/Projects')
 const MyProjects = () => import('@/components/dashboard/projects/MyProjects')
 const SuggestedProjects = () => import('@/components/dashboard/projects/SuggestedProjects')
 const ExploreProjects = () => import('@/components/dashboard/projects/ExploreProjects')
 const CreateProject = () => import('@/components/dashboard/projects/CreateProject')
+
 const Visualize = () => import('@/components/dashboard/projects/Visualize')
 const AdaptationPlans = () => import('@/components/dashboard/projects/AdaptationPlans')
 const Goals = () => import('@/components/dashboard/projects/wizard/Goals')
@@ -30,6 +32,11 @@ const Community = () => import('@/components/dashboard/Community')
 const Members = () => import('@/components/dashboard/community/Members')
 const Events = () => import('@/components/dashboard/community/Events')
 const Groups = () => import('@/components/dashboard//community/Groups')
+
+const Learn = () => import('@/components/dashboard/Learn')
+const Videos = () => import('@/components/dashboard/learn/Videos')
+
+
 /*const Dashboard = () => import('@/components/dashboard/Dashboard')
 const Home = () => import('@/components/interactwel/Home')
 const Community = () => import('@/components/interactwel/Community')
@@ -251,6 +258,21 @@ export default new Router({
                 }
             ]
         }, */
+
+        {
+            path: '/learn',
+            //redirect: '/pages/404',
+            name: 'Learn',
+            redirect: '/learn/videos',
+            component: Learn,
+            children: [
+                {
+                    path: 'videos/:videoId',
+                    name: 'videos',
+                    component: Videos
+                },
+            ]
+        },
         {
             path: '/community',
             //redirect: '/pages/404',
