@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block css %}
+{% render_bundle 'chunk-vendors' 'css' 'INTERACTWEL' %}
 {% render_bundle 'app' 'css' 'INTERACTWEL' %}
 {% endblock %}
 
@@ -23,5 +24,6 @@
         });
     </script>
     {{ block.super }}
+    {% render_bundle 'chunk-vendors' 'js' 'INTERACTWEL' %}
     {% render_bundle 'app' 'js' 'INTERACTWEL' %}
 {% endblock %}
