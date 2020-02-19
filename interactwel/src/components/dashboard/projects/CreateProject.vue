@@ -14,7 +14,7 @@
                             >
                                 <b-form-input
                                         id="input-1"
-                                        v-model="form.project"
+                                        v-model="form.projectName"
                                         type="text"
                                         required
                                         placeholder=""
@@ -42,7 +42,7 @@
 
                                     <b-input
                                             id="input-5"
-                                            v-model="form.longitude"
+                                            v-model="form.longtitude"
                                             required
                                             placeholder="Longitude (degrees)"
                                     ></b-input>
@@ -261,7 +261,8 @@
     import EventBus from './../../../event-bus';
     import NaturalSystems from './../../../../public/static/natural_systems.json';
     import SocietalDrivers from './../../../../public/static/societal_drivers.json';
-    import Image1 from './../../../../public/static/img/Natural_systems.svg'
+    import Image1 from './../../../../public/static/img/Natural_systems.svg';
+    import axios from 'axios';
 
     export default {
 
@@ -270,10 +271,12 @@
         data() {
             return {
                 form: {
-                    email: '',
-                    name: '',
-                    food: null,
-                    checked: []
+                    projectName: null,
+                    description: null,
+                    location: null,
+                    latitude: null,
+                    longtitude: null,
+                    feedbackProvided: false
                 },
 
                 naturalsystems: NaturalSystems,
@@ -313,6 +316,27 @@
             },
 
             step1NextClicked() {
+                axios.post(process.env.VUE_APP_API_BASE_URL + '/interactwel/api/projects/', {
+                        name: this.form.projectName,
+                        description: this.form.description,
+                        location: this.form.location,
+                        latitude: this.form.latitude,
+                        longtitude: this.form.longtitude,
+                        feedbackProvided: this.form.feedbackProvided
+                },
+                    {
+                        headers: {
+                          // "X-CSRFTOKEN" :  process.env.VUE_APP_X_CSRFTOKEN
+                          "X-CSRFTOKEN" :  "IJ3optOBMDCJ7cZDbjNH3t6Fn3rttsFKx79lyhx2maMsyL7FoEu8skYkst2v8rhS"
+                        }
+                    })
+                    .then(response => {
+                        this.responseData = response.data; console.log(response);
+                        alert("successfully added a new project");
+                    })
+                    .catch(error => {
+                        alert("Could not create the new project. API error! " + error)
+                    });
                 this.isStep1Active = false
                 this.isStep2Active = true
                 return true

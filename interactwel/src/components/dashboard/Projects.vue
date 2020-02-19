@@ -10,14 +10,16 @@
                     <b-button>Create New Project</b-button>
                 </b-col>-->
             </b-row>
+
             <b-row>
                 <b-col>
-                    <b-nav tabs justified>
-                        <b-nav-item><router-link to="/projects/my-projects">My Projects</router-link></b-nav-item>
-                        <b-nav-item><router-link to="/projects/suggested-projects">Suggested projects</router-link></b-nav-item>
-                        <b-nav-item><router-link to="/projects/explore-projects">Explore Projects</router-link></b-nav-item>
-                        <b-nav-item><router-link to="/projects/create-project">Create New Project</router-link></b-nav-item>
-                    </b-nav>
+                    <b-tabs>
+                        <b-tab :active="$route.path === '/projects/my-projects'" title="My Projects" v-on:click='loadTabContent("/projects/my-projects")'></b-tab>
+                        <b-tab :active="$route.path === '/projects/suggested-projects'" title="Suggested Projects" v-on:click='loadTabContent("/projects/suggested-projects")'></b-tab>
+                        <b-tab :active="$route.path === '/projects/explore-projects'" title="Explore Projects" v-on:click='loadTabContent("/projects/explore-projects")'></b-tab>
+                        <b-tab :active="$route.path === '/projects/create-project'" title="Create New Project" v-on:click='loadTabContent("/projects/create-project")'></b-tab>
+                        <b-tab :active="$route.path === '/projects/assign-projects'" title="Assign Projects" v-on:click='loadTabContent("/projects/assign-projects")'></b-tab>
+                    </b-tabs>
                 </b-col>
             </b-row>
             <b-row>
@@ -41,6 +43,33 @@
         },
         props: {
             msg: String
+        },
+
+        data(){
+            return{
+
+                isActive : true,
+                currentPage : null,
+                activeClass : 'active',
+            }
+        },
+
+        mounted(){
+            this.currentPage = this.$route.name
+
+        },
+
+        computed: {
+            currentRoute(){
+                return this.$route.path;
+            }
+        },
+
+        methods: {
+
+            loadTabContent(path) {
+                this.$router.push(path);
+            }
         }
     }
 </script>

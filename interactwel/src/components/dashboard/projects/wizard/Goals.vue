@@ -147,7 +147,8 @@
 </template>
 
 <script>
-    import GoalsOpts from './../../../../../public/static/goals.json';
+    //import GoalsOpts from './../../../../../public/static/goals.json';
+    import * as axios from "axios";
 
     export default {
         name: 'Goals',
@@ -157,11 +158,14 @@
                 itemInfoVisibility: false,
                 selectAllGoals: false,
                 selectedGoals: [],
-                goals: GoalsOpts,
+                goals: [],
                 showInfoModal: false
             }
         },
         mounted() {
+            axios
+                .get( process.env.VUE_APP_API_BASE_URL + '/interactwel/api/subbasins/')
+                .then(response => (this.goals = response))
 
             if (localStorage.getItem('adaptationPlan')) this.selectedGoals = JSON.parse(localStorage.getItem('adaptationPlan')).selectedGoals;
 

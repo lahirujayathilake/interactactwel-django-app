@@ -23,39 +23,10 @@
                         </l-map>
                     </div>
                 </b-tab>
-                <b-tab title="Ohio">
-                    <b-card-body title="Ohio Region Adapts To Changes In Allocation Of Water For irrigation">
+                <b-tab v-for=" project in projects" :title="project.location">
+                    <b-card-body :title="project.name">
                         <b-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
-                        </b-card-text>
-                        <div class="card map-container">
-                            <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
-                                <l-control-zoom position="topright"></l-control-zoom>
-                                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
-                                </l-control-layers>
-
-                                <l-tile-layer
-                                        v-for="tileProvider in tileProviders"
-                                        :key="tileProvider.name"
-                                        :name="tileProvider.name"
-                                        :visible="tileProvider.visible"
-                                        :url="tileProvider.url"
-                                        :attribution="tileProvider.attribution"
-                                        layer-type="base"/>
-
-                                <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
-                            </l-map>
-                        </div>
-                        <div class="mt-3">
-                            <b-button class="mr-2 btn-sm" disabled>Request to join</b-button>
-                        </div>
-                    </b-card-body>
-                </b-tab>
-                <b-tab title="Colarado">
-                    <b-card-body title="Colarado Region Adapts To Changes In Allocation Of Water For irrigation">
-                        <b-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
+                            {{project.description}}
                         </b-card-text>
                         <div class="card map-container">
                             <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
@@ -83,8 +54,8 @@
                 </b-tab>
             </b-tabs>
         </b-card>
-        <b-card v-show="">
-            <b-card-body title="You don't have any suggested projects">
+        <b-card v-show="projects.size == 0">
+            <b-card-body title="You don't have any suggested projects" >
                 <b-card-text>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
                 </b-card-text>
@@ -97,6 +68,7 @@
 
     import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup, LControlZoom} from 'vue2-leaflet';
     import L from 'leaflet';
+    import axios from 'axios';
 
     export default {
         components: {
@@ -134,6 +106,8 @@
                 show: true,
                 fillColor: "rgba(76, 175, 80, 0.44)",
                 subbasinID: null,
+
+                projects : [],
 
                 tileProviders: [
                     {
@@ -176,6 +150,21 @@
         },
 
         mounted() {
+
+            axios.get(process.env.VUE_APP_API_BASE_URL + '/interactwel/api/projects/',
+                {
+                    headers: {
+                        "X-CSRFTOKEN" : process.env.VUE_APP_X_CSRFTOKEN
+                    }
+                })
+                .then(response => {
+                    this.projects = response.data;
+                })
+                .catch(error => {
+                    alert("Could not create the new project. API error! " + error)
+                });
+
+
         },
 
 
