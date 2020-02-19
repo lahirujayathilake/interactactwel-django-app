@@ -150,21 +150,14 @@
         },
 
         mounted() {
-
-            axios.get(process.env.VUE_APP_API_BASE_URL + '/interactwel/api/projects/',
-                {
-                    headers: {
-                        "X-CSRFTOKEN" : process.env.VUE_APP_X_CSRFTOKEN
-                    }
-                })
-                .then(response => {
-                    this.projects = response.data;
+            const { utils } = AiravataAPI;
+            utils.FetchUtils.get('/interactwel/api/projects/')
+                .then(data => {
+                    this.projects = data;
                 })
                 .catch(error => {
                     alert("Could not create the new project. API error! " + error)
                 });
-
-
         },
 
 
