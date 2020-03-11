@@ -4,14 +4,14 @@
             <b-navbar toggleable="sm" type="dark" variant="dark">
                 <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
 
-                <b-navbar-brand>Project</b-navbar-brand>
+                <b-navbar-brand>Project Id : {{ $route.params.projectId }}</b-navbar-brand>
 
                 <b-collapse id="nav-text-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-text>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
-                <b-button v-show="startBtn" variant="success" @click="startWizard" class="mr-2 btn-sm">Start</b-button>
+                <b-button v-show="startBtn" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 btn-sm">Start</b-button>
                 <b-button v-show ="exitBtn" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
             </b-navbar>
            <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
@@ -828,10 +828,10 @@
             createRegionSummary(subbasinID) {
                 EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
             },
-            startWizard(){
+            startWizard(projectId){
                 this.startBtn = false;
                 this.exitBtn = true;
-                this.$router.push('/adaptation-plans/1/goals')
+                this.$router.push('/adaptation-plans/'+projectId+'/goals')
             },
 
             exitWizard(){

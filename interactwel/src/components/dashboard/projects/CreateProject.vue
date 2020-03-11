@@ -59,7 +59,7 @@
                                 ></b-form-textarea>
                             </b-form-group>
 
-                            <b-button @click="step1NextClicked" type="submit" variant="success">Next</b-button>
+                            <b-button @click="createProjectAction" type="submit" variant="success">Next</b-button>
                             <!--<b-button type="reset" class="mr-2" variant="dark">Reset</b-button>-->
                         </b-form>
                     </b-col>
@@ -315,48 +315,46 @@
                 alert(JSON.stringify(this.form))
             },
 
-            step1NextClicked() {
-                axios.post(process.env.VUE_APP_API_BASE_URL + '/interactwel/api/projects/', {
+            createProjectAction() {
+
+                const { utils } = AiravataAPI;
+                utils.FetchUtils.post(
+                    '/interactwel/api/projects/',
+                    {
                         name: this.form.projectName,
                         description: this.form.description,
                         location: this.form.location,
                         latitude: this.form.latitude,
                         longtitude: this.form.longtitude,
                         feedbackProvided: this.form.feedbackProvided
-                },
-                    {
-                        headers: {
-                          // "X-CSRFTOKEN" :  process.env.VUE_APP_X_CSRFTOKEN
-                          "X-CSRFTOKEN" :  "IJ3optOBMDCJ7cZDbjNH3t6Fn3rttsFKx79lyhx2maMsyL7FoEu8skYkst2v8rhS"
-                        }
                     })
-                    .then(response => {
-                        this.responseData = response.data; console.log(response);
-                        alert("successfully added a new project");
+                    .then(data => {
+                        this.projects = data;
                     })
                     .catch(error => {
-                        alert("Could not create the new project. API error! " + error)
+                        alert("Create the Projects. API error! " + error)
                     });
-                this.isStep1Active = false
-                this.isStep2Active = true
+
+                this.isStep1Active = false;
+                this.isStep2Active = true;
                 return true
             },
 
             step2NextClicked() {
-                this.isStep1Active = false
-                this.isStep2Active = false
+                this.isStep1Active = false;
+                this.isStep2Active = false;
                 return true
             },
 
             stepStartCSD() {
-                this.isStep1Active = false
-                this.isStep2Active = false
+                this.isStep1Active = false;
+                this.isStep2Active = false;
                 this.isStep1CSD = true;
                 return true
             },
 
             step2CSD() {
-                this.isStep2Active = false
+                this.isStep2Active = false;
                 this.isStep1CSD = false;
                 this.isStep2CSD = true;
                 return true
@@ -364,14 +362,14 @@
 
             stepBackStartCSD() {
                 this.isStep2CSD = false;
-                this.isStep1Active = false
-                this.isStep2Active = true
+                this.isStep1Active = false;
+                this.isStep2Active = true;
                 return true
             },
 
             step2BackClicked() {
-                this.isStep1Active = true
-                this.isStep2Active = false
+                this.isStep1Active = true;
+                this.isStep2Active = false;
                 return true
             },
 

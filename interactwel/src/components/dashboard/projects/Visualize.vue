@@ -15,7 +15,7 @@
                     </b-navbar-nav>
                 </b-collapse>
                 <b-button variant="success" class="mr-2 btn-sm">
-                    <router-link to="/adaptation-plans/1">View Adaptation Plans</router-link>
+                    <router-link :to="'/adaptation-plans/'+$route.params.projectId">View Adaptation Plans</router-link>
                 </b-button>
                 <b-button class="mr-2 btn-sm">
                     <router-link to="/projects/my-projects">Back to Projects</router-link>

@@ -2,14 +2,16 @@
     <div>
         <b-card no-body>
             <div class="col-4 p-3">
-                <b-form-select v-model="selectedProject" :options="projects" size="sm" class="mt-3"></b-form-select>
-                <b-form-select v-model="selectedUser" :options="users" size="sm" class="mt-3"></b-form-select>
-                <b-form-select v-model="selectedStatus" :options="statusList" size="sm" class="mt-3"></b-form-select>
-                <b-form-select v-model="selectedRole" :options="roles" size="sm" class="mt-3"></b-form-select>
-                <b-form-select v-model="selectedSector" :options="sectors" size="sm" class="mt-3"></b-form-select>
-                <b-form-select v-model="selectedActor" :options="actors" size="sm" class="mt-3"></b-form-select>
+                <b-form @submit.stop.prevent="submitAction">
+                    <b-form-select v-model="selectedProject" :options="projects" size="sm" class="mt-3" required></b-form-select>
+                    <b-form-select v-model="selectedUser" :options="users" size="sm" class="mt-3" required></b-form-select>
+                    <b-form-select v-model="selectedStatus" :options="statusList" size="sm" class="mt-3" required></b-form-select>
+                    <b-form-select v-model="selectedRole" :options="roles" size="sm" class="mt-3" required></b-form-select>
+                    <b-form-select v-model="selectedSector" :options="sectors" size="sm" class="mt-3" required></b-form-select>
+                    <b-form-select v-model="selectedActor" :options="actors" size="sm" class="mt-3" required></b-form-select>
 
-                <b-button @click="submitAction" type="submit" variant="success"  size="sm" class="mt-3" style="float:right">Assign</b-button>
+                    <b-button type="submit" variant="success"  size="sm" class="mt-3" style="float:right">Assign</b-button>
+                </b-form>
 
             </div>
         </b-card>
@@ -82,34 +84,25 @@
 
         mounted() {
 
-            axios.get( process.env.VUE_APP_API_BASE_URL + '/interactwel/api/projects/',
-                {
-                    headers: {
-                        "X-CSRFTOKEN" : "RtR4hQtbuve5i4RLgvWDkuWwIFwsS9WIcQNCSm4wlk9AHoTQtk2ekNcqBOQOvbhW"
-                    }
-                })
+            const { utils } = AiravataAPI;
+            utils.FetchUtils.get('/interactwel/api/projects/')
                 .then(response => {
-                    response.data.forEach( projectItem => {
-                        this.projects.push({value: projectItem.id, text: projectItem.name});
+                    response.forEach( projectItem => {
+                        this.projects.push({value: projectItem.project_id, text: projectItem.name});
                     });
                 })
                 .catch(error => {
-                    alert("Could not create the new project. API error! " + error)
+                    alert("Could not get the projects list. API error! " + error)
                 });
 
-            axios.get(process.env.VUE_APP_API_BASE_URL + '/interactwel/api/users/',
-                {
-                    headers: {
-                        "X-CSRFTOKEN" : "RtR4hQtbuve5i4RLgvWDkuWwIFwsS9WIcQNCSm4wlk9AHoTQtk2ekNcqBOQOvbhW"
-                    }
-                })
+            utils.FetchUtils.get('/interactwel/api/users/')
                 .then(response => {
-                    response.data.forEach( userItem => {
+                    response.forEach( userItem => {
                         this.users.push({value: userItem.id, text: userItem.username});
                     });
                 })
                 .catch(error => {
-                    alert("Could not create the new project. API error! " + error)
+                    alert("Could not get the projects list. API error! " + error)
                 });
 
         },
@@ -118,30 +111,33 @@
         methods: {
 
             submitAction() {
-                axios.post(process.env.VUE_APP_API_BASE_URL + '/interactwel/api/projectuserss/', {
-                        user_id: this.selectedUser.id,
-                        project_id: this.selectedProject.id,
+
+                const { utils } = AiravataAPI;
+                utils.FetchUtils.post(
+                    '/interactwel/api/projectuserss/',
+                    {
+                        user_id: this.selectedUser,
+                        project_id: this.selectedProject,
                         status : this.selectedStatus,
                         role: this.selectedRole,
                         sector: this.selectedSector,
                         actor: this.selectedActor
 
-                    },
-                    {
-                        headers: {
-                           // "X-CSRFTOKEN" :  process.env.VUE_APP_X_CSRFTOKEN
-                            "X-CSRFTOKEN" :  "IJ3optOBMDCJ7cZDbjNH3t6Fn3rttsFKx79lyhx2maMsyL7FoEu8skYkst2v8rhS"
+                    })
+                    .then(data => {
+                        console.log("data");
+                        if (data.error) {
+                            alert("failed to assign the user to the project");
+                        }
+                        else {
+                            alert("User project assignment was successful");
                         }
                     })
-                    .then(response => {
-                        this.responseData = response.data; console.log(response);
-                        alert (response);
-                    })
                     .catch(error => {
-                        alert("API error! " + error)
+                        alert("Create the Projects. API error! " + error)
                     });
                 return true
-            },
+            }
 
         }
 

@@ -105,19 +105,18 @@
                             <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
                             Select All
                         </label>
-                        <!-- <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
+                         <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>
                     </b-form-checkbox-group>
                 </b-list-group-item>
                 <b-list-group flush>
                     <b-form>
                         <div class="list-group">
-                            <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.id">
+                            <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.goal_id">
                                 <label class="form-checkbox" :disabled="goal.readonly">
-                                    <input type="checkbox" :value="goal" v-model="selectedGoals"
-                                           :disabled="goal.readonly"/>
-                                    {{goal.goal}}
+                                    <input type="checkbox" :value="goal.goal_id" v-model="selectedGoals"/>
+                                    {{goal.name}}
                                     <p v-show="itemInfoVisibility" class="item-info">
-                                        <small>{{goal.info}}</small>
+                                        <small>{{goal.description}}</small>
                                     </p>
                                 </label>
                                 <b-badge class="info-button" pill variant="secondary" @click="showItemInfo">i
@@ -130,7 +129,7 @@
                     </b-form>
                 </b-list-group>
                 <em slot="footer">
-                    <b-button variant="next" size="sm" @click="submit">Next</b-button>
+                    <b-button variant="next" size="sm" @click="submit($route.params.projectId)">Next</b-button>
                 </em>
             </b-card>
         </div>
@@ -159,30 +158,24 @@
                 selectAllGoals: false,
                 selectedGoals: [],
                 goals: [],
-                showInfoModal: false
+                showInfoModal: false,
             }
         },
         mounted() {
-            axios
-                .get( process.env.VUE_APP_API_BASE_URL + '/interactwel/api/subbasins/')
-                .then(response => (this.goals = response))
-
-            if (localStorage.getItem('adaptationPlan')) this.selectedGoals = JSON.parse(localStorage.getItem('adaptationPlan')).selectedGoals;
-
-            /*let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-            if (adaptationPlan) {
-                this.selectedGoals = adaptationPlan.selectedGoals;
-                this.$route.params.projectId = adaptationPlan.projectId;
-
-            } else {
-                localStorage.setItem('adaptationPlan', JSON.stringify({'selectedGoals': this.selectedGoals}));
-            }*/
+            const { utils } = AiravataAPI;
+            utils.FetchUtils.get('/interactwel/api/goals/')
+                .then(data => {
+                    this.goals = data;
+                })
+                .catch(error => {
+                    alert("Could not get the projects list. API error! " + error)
+                });
         },
 
         watch: {
             selectedGoals: {
                 handler() {
-                    //localStorage.setItem('selectedGoals', JSON.stringify(this.selectedGoals));
+                    this.goals.goal_id;
                 },
                 deep: true,
             }
@@ -214,8 +207,30 @@
                 this.$refs['my-modal'].toggle('#toggle-btn')
             },
 
-            submit() {
+            submit(projectId) {
                 this.showInfoModal = true;
+
+                const { utils } = AiravataAPI;
+                utils.FetchUtils.post(
+                    '/interactwel/api/projectgoals/',
+                    {
+                        goal_id: this.selectedGoals,
+                        project_id: projectId,
+
+                    })
+                    .then(data => {
+                        console.log("data");
+                        if (data.error) {
+                            alert("failed to assign the user to the project");
+                        }
+                        else {
+                            alert("User project assignment was successful");
+                        }
+                    })
+                    .catch(error => {
+                        alert("Create the Projects. API error! " + error)
+                    });
+                return true
             },
 
             onConfirm() {

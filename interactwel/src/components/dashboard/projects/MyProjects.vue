@@ -10,15 +10,28 @@
                         </l-map>
                     </div>
                 </b-tab>
-                <b-tab title="Umatilla">
-                    <b-card-body title="Umatilla Region Adapts To Changes In Allocation Of Water For irrigation">
+                <b-tab v-for="projectUser in projectsUsers" :title="'Project Id : ' + projectUser.project_id">
+                    <b-card-body :title="'Project Id : ' + projectUser.project_id">
                         <b-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
+                            User Assigned to this project is: {{projectUser.user_id}}
                         </b-card-text>
                         <div class="card map-container">
-                            <l-map :zoom="zoom" :center="center">
+                            <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
+                                <l-control-zoom position="topright"></l-control-zoom>
                                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                <l-marker :lat-lng="marker"></l-marker>
+                                <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
+                                </l-control-layers>
+
+                                <l-tile-layer
+                                        v-for="tileProvider in tileProviders"
+                                        :key="tileProvider.name"
+                                        :name="tileProvider.name"
+                                        :visible="tileProvider.visible"
+                                        :url="tileProvider.url"
+                                        :attribution="tileProvider.attribution"
+                                        layer-type="base"/>
+
+                                <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
                             </l-map>
                         </div>
                         <div class="mt-3">
@@ -26,56 +39,10 @@
                             <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
                             <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
                             <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
-                            <b-button class="mr-2 btn-sm"><router-link to="/visualize/1">Visualize</router-link></b-button>
+                            <b-button class="mr-2 btn-sm"><router-link :to="'/visualize/'+ projectUser.project_id">Visualize</router-link></b-button>
                             <b-button class="mr-2 btn-sm"><router-link to="/adaptation-plans/1">Adaptation Plans</router-link></b-button>
                         </div>
                     </b-card-body>
-                </b-tab>
-                <b-tab title="Colarado">
-                    <b-card-text>
-                        <b-card-body title="Colarado Region Adapts To Changes In Allocation Of Water For irrigation">
-                            <b-card-text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
-                            </b-card-text>
-                            <div class="card map-container">
-                                <l-map :zoom="zoom" :center="center">
-                                    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                    <l-marker :lat-lng="marker"></l-marker>
-                                </l-map>
-                            </div>
-                            <div class="mt-3">
-                                <b-button class="mr-2 btn-sm" disabled>Status</b-button>
-                                <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
-                                <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
-                                <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
-                                <b-button class="mr-2 btn-sm"><router-link to="/visualize/2">Visualize</router-link></b-button>
-                                <b-button class="mr-2 btn-sm"><router-link to="/adaptation-plans/2">Adaptation Plans</router-link></b-button>
-                            </div>
-                        </b-card-body>
-                    </b-card-text>
-                </b-tab>
-                <b-tab title="Texas">
-                    <b-card-text>
-                        <b-card-body title="Texas Region Adapts To Changes In Allocation Of Water For irrigation">
-                            <b-card-text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
-                            </b-card-text>
-                            <div class="card map-container">
-                                <l-map :zoom="zoom" :center="center">
-                                    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                    <l-marker :lat-lng="marker"></l-marker>
-                                </l-map>
-                            </div>
-                            <div class="mt-3">
-                                <b-button class="mr-2 btn-sm" disabled>Status</b-button>
-                                <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
-                                <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
-                                <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
-                                <b-button class="mr-2 btn-sm"><router-link to="/visualize/3">Visualize</router-link></b-button>
-                                <b-button class="mr-2 btn-sm"><router-link to="/adaptation-plans/3">Adaptation Plans</router-link></b-button>
-                            </div>
-                        </b-card-body>
-                    </b-card-text>
                 </b-tab>
             </b-tabs>
         </b-card>
@@ -107,11 +74,39 @@
                 url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 marker: L.latLng(47.413220, -1.219482),
+
+                users : [],
+                projects : [],
+                projectsUsers : [],
             }
 
         },
 
         mounted() {
+            const { utils } = AiravataAPI;
+            utils.FetchUtils.get('/interactwel/api/projectuserss/')
+                .then(data => {
+                    this.projectsUsers = data;
+                })
+                .catch(error => {
+                    alert("Could not get the projects list. API error! " + error)
+                });
+
+            utils.FetchUtils.get('/interactwel/api/users/')
+                .then(data => {
+                    this.users = data;
+                })
+                .catch(error => {
+                    alert("Could not get the projects list. API error! " + error)
+                });
+
+            utils.FetchUtils.get('/interactwel/api/projects/')
+                .then(data => {
+                    this.projects = data;
+                })
+                .catch(error => {
+                    alert("Could not get the projects list. API error! " + error)
+                });
 
         },
 

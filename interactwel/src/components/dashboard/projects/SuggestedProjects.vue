@@ -23,7 +23,7 @@
                         </l-map>
                     </div>
                 </b-tab>
-                <b-tab v-for=" project in projects" :title="project.location">
+                <b-tab v-for="project in projects" :title="project.location">
                     <b-card-body :title="project.name">
                         <b-card-text>
                             {{project.description}}
@@ -156,7 +156,7 @@
                     this.projects = data;
                 })
                 .catch(error => {
-                    alert("Could not create the new project. API error! " + error)
+                    alert("Could not get the projects list. API error! " + error)
                 });
         },
 
