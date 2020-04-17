@@ -5,10 +5,6 @@ Vue.use(Vuex);
  
 export default new Vuex.Store({
  state: {
-    user: {
-        username: 'matt',
-        fullName: 'Matt Maribojoc'
-    },
     feedbackProvided:false,
     step1:false,
     step2:false,

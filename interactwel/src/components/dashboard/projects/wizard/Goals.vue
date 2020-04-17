@@ -163,7 +163,6 @@
             }
         },
         mounted() {
-            console.log(this.$store.state.user.fullName);
             const { utils } = AiravataAPI;
             this.projectId = this.$route.params.projectId
             utils.FetchUtils.get('/interactwel/api/goals/')

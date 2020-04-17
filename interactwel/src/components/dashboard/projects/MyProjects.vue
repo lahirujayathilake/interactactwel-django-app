@@ -99,7 +99,6 @@ export default {
 
   mounted() {
     const { utils, session } = AiravataAPI;
-    console.log(AiravataAPI);
     this.loggedInUser.username=session.Session.username;
     
 
