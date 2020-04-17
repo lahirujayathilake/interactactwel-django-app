@@ -94,6 +94,7 @@
                     Please choose from the drop-down menu the actor for which you want to define the possible actions.</i>
                 </p>
                 <h6>Selected actors Available actions</h6>
+                 <!-- <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div> -->
                 <!--<b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
                     <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                         <div class="list-group">
@@ -114,17 +115,17 @@
 -->
 
                 <b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
-                    <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
+                    <b-tab :title="actor.name" v-for="actor in selectedActors" v-bind:key="actor.id">
                         <div class="list-group">
-                            <li class="list-group-item" v-for="item in actorActions" v-bind:key="item.id" v-if="item.actor.id == actor.id">
+                            <li class="list-group-item" v-for="item in actorActions" v-bind:key="item.id" v-if="item.actor.actor_id == actor.actor_id">
                                     <label class="form-checkbox" :disabled="item.action.readonly">
                                         <input type="checkbox" :value="item"
                                                v-model="selectedActions"
                                                :disabled="item.action.readonly"/>
-                                        {{ item.action.action}}
+                                        {{ item.action.name}}
                                     </label>
                                     <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
-                                             :title="item.action.info">
+                                             :title="item.action.description">
                                     </b-badge>
 
                             </li>
@@ -152,14 +153,6 @@
 
             </b-card-body>
             <em slot="footer">
-                <!--<b-button-group>
-                    <b-button id="step3-back-btn" @click="tabIndex--" variant="back" size="sm">
-                        Back
-                    </b-button>
-                    <b-button id="step3-next-btn" @click="step3NextClicked" variant="next"
-                              size="sm">Next
-                    </b-button>
-                </b-button-group>-->
                 <b-button id="step3-next-btn" @click="submit" variant="next" size="sm">Next</b-button>
                 <b-button id="step3-back-btn" @click="back" variant="back" size="sm">Back</b-button>
             </em>
@@ -169,7 +162,7 @@
 </template>
 
 <script>
-    import ActionsOpts from './../../../../../public/static/actions.json';
+    // import ActionsOpts from './../../../../../public/static/actions.json';
 
     export default {
         name: 'Actors',
@@ -179,31 +172,38 @@
                 selectedActors: [],
                 selectAllActions: false,
                 selectedActions: [],
-                actions: ActionsOpts,
+                actions: [], //ActionsOpts
                 actorActions: [],
                 showInfoModal: false
             }
         },
         mounted() {
-            //todo: read from adaptation plan object
-            this.selectedActors = JSON.parse(localStorage.getItem('selectedActors'));
-            if (localStorage.getItem('selectedActions')) this.selectedActions = JSON.parse(localStorage.getItem('selectedActions'));
+            this.projectId = this.$route.params.projectId;
+            const { utils } = AiravataAPI;
+            utils.FetchUtils.get('/interactwel/api/actions/')
+                .then(data => {
+                    this.actions = data;
 
-            this.selectedActors.forEach( actor => {
-                this.actions.forEach( action => {
-                    let actorAction = {};
-                    actorAction.actor = actor;
-                    actorAction.action = action;
-                    this.actorActions.push(actorAction);
-                });
+                    this.selectedActors=this.$store.state.currentAdaptationPlan.selectedActors;
+                    this.selectedActors.forEach( actor => {
+                        this.actions.forEach( action => {
+                        let actorAction = {};
+                        actorAction.actor = actor;
+                        actorAction.action = action;
+                        this.actorActions.push(actorAction);
+                    });
             });
 
+                })
+                .catch(error => {
+                    alert("Could not get the actors list. API error! " + error)
+                });
 
         },
         watch: {
             selectedActions: {
                 handler() {
-                    localStorage.setItem('selectedActions', JSON.stringify(this.selectedActions));
+                    this.actions.id
                 },
                 deep: true,
             }
@@ -225,11 +225,15 @@
             },
 
             submit() {
-                localStorage.setItem('step3', true);
-                let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                adaptationPlan.selectedActions = this.selectedActions;
-                localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-                this.$router.push('/adaptation-plans/1/plans/overview')
+                // localStorage.setItem('step3', true);
+                // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
+                // adaptationPlan.selectedActions = this.selectedActions;
+                // localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
+                // this.$router.push('/adaptation-plans/1/plans/overview')
+
+                this.$store.commit("setSelectedActions", this.selectedActions);
+                this.$store.commit("step3", true);
+                this.$router.push('/adaptation-plans/'+this.projectId+'/plans/overview');
             },
 
             back(){

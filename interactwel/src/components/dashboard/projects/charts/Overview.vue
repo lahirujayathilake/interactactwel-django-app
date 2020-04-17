@@ -2,20 +2,20 @@
     <div id="graph" class="card">
         <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span>
-            <strong style="font-size:18px">Overview</strong>
+            <strong style="font-size:18px">Overview2</strong>
         </div>
         <div class="card-body">
             <b-row>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Goals</strong></h6>
-                    <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedGoals" v-bind:key="item.id">
-                        <b-list-group-item class="no-border"><small> &#10003;&nbsp;{{item.goal}}</small></b-list-group-item>
+                    <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedGoals" v-bind:key="item.goal_id">
+                        <b-list-group-item class="no-border"><small> &#10003;&nbsp;{{item.name}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Actors</strong></h6>
-                    <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActors" v-bind:key="item.id" >
-                        <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.actor}}</small></b-list-group-item>
+                    <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActors" v-bind:key="item.actor_id" >
+                        <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.name}}</small></b-list-group-item>
                     </b-list-group>
                 </b-col>
             </b-row>
@@ -25,14 +25,13 @@
 
                     <b-col lg="6">
                         <b-list-group class="no-padding" v-for="actor in adaptationPlan.selectedActors" v-bind:key="actor.id" >
-                            <b-list-group-item class="no-border">&#10003;&nbsp;{{actor.actor}}</b-list-group-item>
+                            <b-list-group-item class="no-border">&#10003;&nbsp;{{actor.name}}</b-list-group-item>
                             <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActions" v-bind:key="item.id"
-                                          v-if="item.actor.id == actor.id ">
-                                <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.action.action}}</small></b-list-group-item>
+                                          v-if="item.actor.actor_id == actor.actor_id ">
+                                <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.action.name}}</small></b-list-group-item>
                             </b-list-group>
                         </b-list-group>
                     </b-col>
-
                   <!--  <b-tabs card vertical>
                         <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
                             <b-list-group v-for="item in getActions(actor)">
@@ -62,27 +61,9 @@
         data() {
             return {
                 adaptationPlan : [],
-                selectedGoals: [{
-                    id: "1",
-                    goal: "Increase recharge to shallow aquifer",
-                    readonly: false,
-                    tooltip: true,
-                    info: "Shallow aquifer recharge is assessed for each sub-basin, based on millimeters of water infiltrated."
-                },
-                    {
-                        id: "0",
-                        goal: "Improve surface water quality",
-                        readonly: false,
-                        tooltip: true,
-                        info: "Surface water quality is assessed for each stream, based on total nitrogen loading, temperature, and dissolved oxygen."
-                    }
-                ],
-                selectedActors : [{id: 1,
-                    name: "F_SW",
-                    actor: "Farmer with other surface water rights",
-                    readonly: false,
-                    info: "actor's that currently produce agricultural products and have the right to use surface water (excluding Columbia River)."}],
-                selectedActions: []
+                selectedGoals: [],
+                selectedActors : [],
+                selectedActions: [] 
 
             }
         },
@@ -93,7 +74,8 @@
 
         mounted() {
             EventBus.$emit('HIDE_RESULTSMAP');
-            this.adaptationPlan = JSON.parse(localStorage.getItem('adaptationPlan'));
+            // this.adaptationPlan = JSON.parse(localStorage.getItem('adaptationPlan'));
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
             /*this.selectedGoals = localStorage.getItem('selectedGoals');
             this.selectedActors = localStorage.getItem('selectedActors');
             this.selectedActions = localStorage.getItem('selectedActions');*/

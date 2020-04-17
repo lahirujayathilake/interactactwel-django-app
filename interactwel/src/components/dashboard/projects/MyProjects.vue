@@ -99,6 +99,7 @@ export default {
 
   mounted() {
     const { utils, session } = AiravataAPI;
+    console.log(AiravataAPI);
     this.loggedInUser.username=session.Session.username;
     
 
@@ -140,24 +141,6 @@ export default {
       .catch(error => {
         alert("Could not get the projects list. API error! " + error);
       });
-
-    // utils.FetchUtils.get("/interactwel/api/projects/")
-    //   .then(data => {
-    //     this.projects = data;
-    //   })
-    //   .catch(error => {
-    //     alert("Could not get the projects list. API error! " + error);
-    //   });
-    // utils.FetchUtils.get("/interactwel/api/projects/")
-    //     .then(projects => {
-    //         this.projects=this.projects=projects.filter(project=>{
-    //             return project.username===this.loggedInUserName;
-    //         });
-    //     })
-    //     .catch(error => {
-    //         alert("Could not get the projects list. API error! " + error);
-    //     });
-    // console.log(this.projects);
   },
 
   methods: {}

@@ -105,7 +105,7 @@
                             <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
                             Select All
                         </label>
-                         <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>
+                         <!-- <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div> -->
                     </b-form-checkbox-group>
                 </b-list-group-item>
                 <b-list-group flush>
@@ -113,7 +113,7 @@
                         <div class="list-group">
                             <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.goal_id">
                                 <label class="form-checkbox" :disabled="goal.readonly">
-                                    <input type="checkbox" :value="goal.goal_id" v-model="selectedGoals"/>
+                                    <input type="checkbox" :value="goal" v-model="selectedGoals"/>
                                     {{goal.name}}
                                     <p v-show="itemInfoVisibility" class="item-info">
                                         <small>{{goal.description}}</small>
@@ -159,10 +159,13 @@
                 selectedGoals: [],
                 goals: [],
                 showInfoModal: false,
+                goalsAssignedToThisProject:[]
             }
         },
         mounted() {
+            console.log(this.$store.state.user.fullName);
             const { utils } = AiravataAPI;
+            this.projectId = this.$route.params.projectId
             utils.FetchUtils.get('/interactwel/api/goals/')
                 .then(data => {
                     this.goals = data;
@@ -175,7 +178,7 @@
         watch: {
             selectedGoals: {
                 handler() {
-                    this.goals.goal_id;
+                    this.goals;
                 },
                 deep: true,
             }
@@ -208,37 +211,57 @@
             },
 
             submit(projectId) {
-                this.showInfoModal = true;
+                if(this.selectedGoals.length<1){
+                    this.showInfoModal = true;
+                }
 
                 const { utils } = AiravataAPI;
-                utils.FetchUtils.post(
+
+                this.selectedGoals.forEach(goal=>{
+                    utils.FetchUtils.post(
                     '/interactwel/api/projectgoals/',
                     {
-                        goal_id: this.selectedGoals,
+                        goal_id: goal.goal_id,
                         project_id: projectId,
 
                     })
                     .then(data => {
                         console.log("data");
-                        if (data.error) {
-                            alert("failed to assign the user to the project");
-                        }
-                        else {
-                            alert("User project assignment was successful");
-                        }
                     })
                     .catch(error => {
                         alert("Create the Projects. API error! " + error)
                     });
+                });
+                
+                this.$store.commit("setSelectedGoals", this.selectedGoals);
+                this.$store.commit("step1", true);
+                this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
                 return true
             },
 
             onConfirm() {
-                localStorage.setItem('step1', true);
-                let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                adaptationPlan.selectedGoals = this.selectedGoals;
-                localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-                this.$router.push('/adaptation-plans/1/actors')
+                this.selectGoals();
+                const projectId=this.$route.params.projectId;
+                const { utils } = AiravataAPI;
+                this.selectedGoals.forEach(goal=>{
+                    utils.FetchUtils.post(
+                    '/interactwel/api/projectgoals/',
+                    {
+                        goal_id: goal.goal_id,
+                        project_id: projectId,
+
+                    })
+                    .then(data => {
+                        console.log("data");
+                    })
+                    .catch(error => {
+                        alert("Create the Projects. API error! " + error)
+                    });
+                });
+                
+                this.$store.commit("setSelectedGoals", this.selectedGoals);
+                this.$store.commit("step1", true);
+                this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
             }
         }
 

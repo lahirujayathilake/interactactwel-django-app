@@ -8,7 +8,7 @@
 
                 <b-collapse id="nav-text-collapse" is-nav>
                     <b-navbar-nav>
-                        <b-nav-text>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</b-nav-text>
+                        <b-nav-text>{{selectedProject.name}}</b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
                 <b-button v-show="startBtn" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 btn-sm">Start</b-button>
@@ -410,6 +410,7 @@
 
                 mapOptions: {attributionControl: false},
                 currentStrokeColor: '3d3213',
+                selectedProject:{}
 
             }
         },
@@ -652,14 +653,32 @@
         },
 
         mounted() {
-
+            const { utils } = AiravataAPI;
             this.projectId = this.$route.params.projectId
-            let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-            if (adaptationPlan) {
-                adaptationPlan.projectId = this.projectId;
-            } else {
-                localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
-            }
+            // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
+            // if (adaptationPlan) {
+            //     adaptationPlan.projectId = this.projectId;
+            // } else {
+            //     localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
+            // }
+
+            this.$store.commit("setProjectId", this.projectId);
+
+
+            // TODO: call the /interactwel/api/projects/{project_id} to get the specific project 
+           utils.FetchUtils.get("/interactwel/api/projects/")
+                .then(projects=>{
+                    this.selectedProject=projects.find(project=>{
+                        console.log(project.project_id+" "+this.projectId);
+                        console.log(project.project_id==this.projectId);
+                        return project.project_id==this.projectId;
+                    });
+                    console.log(this.selectedProject);
+                })
+                .catch(error => {
+                    alert("Could not get the project. API error! " + error);
+                });
+
 
             let $this = this;
             EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {

@@ -10,7 +10,7 @@
                 <b-collapse id="nav-text-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-text>
-                            <strong>Umatilla Region Adapts To Changes In Allocation Of Water For irrigation</strong>
+                            <strong>{{selectedProject.name}}</strong>
                         </b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
@@ -28,7 +28,6 @@
                         <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
                             <l-control-zoom position="topright"></l-control-zoom>
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                            <!--<l-control-layers position="topright" ref="layersControl" :sort-layers="true" :autoZIndex="true">-->
                             <l-control-layers position="topright" ref="layersControl"
                                               :sort-layers="false"></l-control-layers>
 
@@ -419,7 +418,7 @@
 
                 mapOptions: {attributionControl: false},
                 currentStrokeColor: '3d3213',
-
+                selectedProject:{}
             }
         },
 
@@ -661,7 +660,7 @@
         },
 
         mounted() {
-
+            const { utils } = AiravataAPI;
             this.projectId = this.$route.params.projectId
             let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
             if (adaptationPlan) {
@@ -669,6 +668,20 @@
             } else {
                 localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
             }
+            console.log("((((((((((((((((((((((((((((((((((((((((((((((((");
+
+            // TODO: call the /interactwel/api/projects/{project_id} to get the specific project 
+            utils.FetchUtils.get("/interactwel/api/projects/")
+                .then(projects=>{
+                    this.selectedProject=projects.find(project=>{
+                        return project.project_id==this.projectId
+                    });
+                    console.log(this.selectedProject);
+                })
+                .catch(error => {
+                    alert("Could not get the project. API error! " + error);
+                });
+
 
             let $this = this;
             EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
@@ -751,6 +764,7 @@
 
         created() {
             this.loading = true;
+            console.log("****************************************");
             axios.get("/static/subbasins.geojson")
                 .then(response => {
                     this.geoJson_subbasin = response.data;
