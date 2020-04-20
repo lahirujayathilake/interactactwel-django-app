@@ -19,6 +19,8 @@
     <script src="{% static 'django_airavata_api/dist/airavata-api.js' %}"></script>
     <script>
         var userIsAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+        var user={{request.user.is_authenticated|yesno:"true,false"}};
+        // console.log(user);
         $(document).ready(function () {
             //alert("user authenticated? " + userIsAuthenticated)
         });

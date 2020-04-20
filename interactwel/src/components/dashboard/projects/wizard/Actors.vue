@@ -90,6 +90,7 @@
           <label class="form-checkbox">
             <input type="checkbox" v-model="selectAllActors" @click="selectActors">
             Select All
+            <!-- <div class="text-uppercase text-bold">id selected: {{selectedActors}}</div> -->
           </label>
           <!--<div class="text-uppercase text-bold">id selected: {{selectedActors}}</div>-->
         </b-form-checkbox-group>
@@ -101,10 +102,10 @@
               <label class="form-checkbox">
                 <input type="checkbox" :value="actor" v-model="selectedActors"
                        :disabled="actor.readonly">
-                {{actor.actor}}
+                {{actor.name}}
               </label>
               <b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
-                       :title="actor.info">i
+                       :title="actor.description">i
               </b-badge>
             </li>
           </div>
@@ -130,25 +131,34 @@
 
     export default {
   name: 'Actors',
-  props: {
-
-  },
+  props: ['goalsAssignedToThisProject'],
     data() {
         return {
             itemInfoVisibility: false,
             selectAllActors: false,
             selectedActors: [],
-            actors: ActorsOpts,
+            actors: [], //ActorsOpts
         }
     },
         mounted() {
-            if (localStorage.getItem('adaptationPlan')) this.selectedActors = JSON.parse(localStorage.getItem('adaptationPlan')).selectedActors;
+            // if (localStorage.getItem('adaptationPlan')) this.selectedActors = JSON.parse(localStorage.getItem('adaptationPlan')).selectedActors;
+
+            const { utils } = AiravataAPI;
+            this.projectId = this.$route.params.projectId
+            utils.FetchUtils.get('/interactwel/api/actors/')
+                .then(data => {
+                    this.actors = data;
+                })
+                .catch(error => {
+                    alert("Could not get the actors list. API error! " + error)
+                });
+
         },
 
         watch: {
             selectedActors: {
                 handler() {
-                    localStorage.setItem('selectedActors', JSON.stringify(this.selectedActors));
+                    this.actors.id;
                 },
                 deep: true,
             }
@@ -166,11 +176,14 @@
                 }
             },
             submit() {
-                localStorage.setItem('step2', true);
-                let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                adaptationPlan.selectedActors = this.selectedActors;
-                localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-                this.$router.push('/adaptation-plans/1/actions')
+                // localStorage.setItem('step2', true);
+                // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
+                // adaptationPlan.selectedActors = this.selectedActors;
+                // localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
+                // this.$router.push('/adaptation-plans/1/actions')
+                this.$store.commit("setSelectedActors", this.selectedActors);
+                this.$store.commit("step2", true);
+                this.$router.push('/adaptation-plans/'+this.projectId+'/actions');
             },
 
             back(){
