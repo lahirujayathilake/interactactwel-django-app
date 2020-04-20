@@ -49,6 +49,20 @@
                         </div>
                         <div class="mt-3">
                             <b-button class="mr-2 btn-sm" disabled>Request to join</b-button>
+
+                            <div class="mt-3">
+                                <b-button class="mr-2 btn-sm" disabled>Status</b-button>
+                                <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
+                                <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
+                                <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
+                                <b-button class="mr-2 btn-sm">
+                                    <router-link :to="'/visualize/'+ 1">Visualize</router-link>
+                                </b-button>
+                                <b-button class="mr-2 btn-sm">
+                                    <router-link to="/adaptation-plans/1">Adaptation Plans</router-link>
+                                </b-button>
+                            </div>
+
                         </div>
                     </b-card-body>
                 </b-tab>

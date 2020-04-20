@@ -22,8 +22,6 @@
             </b-card-text>
         </b-card-body>
         </b-card>
-
-
     </div>
 </template>
 
