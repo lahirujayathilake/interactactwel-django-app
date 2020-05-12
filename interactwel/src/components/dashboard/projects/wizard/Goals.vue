@@ -6,7 +6,7 @@
                     <div class="step-no">1</div>
                     <h4 class="list-group-item-heading">Goals</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># golas selected</p>
+                    <p class="list-group-item-text">{{selectedGoals.length}} goals selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -102,10 +102,10 @@
                 <b-list-group-item>
                     <b-form-checkbox-group>
                         <label class="form-checkbox">
-                            <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
+                            <input type="checkbox" v-model="selectedGoals" @click="selectAllGoals">
                             Select All
                         </label>
-                         <!-- <div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div> -->
+                          <!--<div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
                     </b-form-checkbox-group>
                 </b-list-group-item>
                 <b-list-group flush>
@@ -194,6 +194,18 @@
                     });
                 }
             },
+
+            selectAllGoals() {
+                this.selectedGoals = [];
+                if (!this.selectAllGoals) {
+                    this.goals.forEach(element => {
+                        if (element.readonly == false) {
+                            this.selectedGoals.push(element);
+                        }
+                    });
+                }
+            },
+
             showItemInfo() {
                 if (this.itemInfoVisibility == true) {
                     this.itemInfoVisibility = false

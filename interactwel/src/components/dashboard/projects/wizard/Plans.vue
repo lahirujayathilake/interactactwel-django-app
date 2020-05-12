@@ -6,7 +6,7 @@
                     <div class="step-no">1</div>
                     <h4 class="list-group-item-heading">Goals</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># golas selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedGoals.length}} goals selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -14,7 +14,7 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># Actores selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedActions.length}} Actors selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -22,7 +22,7 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># Actions selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedActions.length}} Actions selected</p>
                 </div>
             </li>
             <li class="col-md-2 active">
@@ -299,9 +299,13 @@
                 q4Selected: [],
                 q5Selected: [],
                 SelectedFactors: [],
+
+                adaptationPlan: [],
             }
         },
         mounted() {
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+
             if(!localStorage.feedbackProvided){
                 localStorage.setItem('feedbackProvided', false);
             }else{
@@ -364,6 +368,8 @@
 
     #graph{
         width:700px;
+        height: 500px;
+        overflow: auto;
     }
 
     #feedback{

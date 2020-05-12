@@ -6,7 +6,7 @@
           <div class="step-no">1</div>
           <h4 class="list-group-item-heading">Goals</h4>
           <h4r class="list-group-item-heading">&#10003;</h4r>
-          <p class="list-group-item-text"># golas selected</p>
+          <p class="list-group-item-text">{{adaptationPlan.selectedGoals.length}} goals selected</p>
         </div>
       </li>
       <li class="col-md-2 active">
@@ -14,7 +14,7 @@
           <div class="step-no">2</div>
           <h4 class="list-group-item-heading">Actors</h4>
           <h4r class="list-group-item-heading">&#10003;</h4r>
-          <p class="list-group-item-text"># Actores selected</p>
+          <p class="list-group-item-text">{{selectedActors.length}} Actors selected</p>
         </div>
       </li>
       <li class="col-md-2">
@@ -138,9 +138,12 @@
             selectAllActors: false,
             selectedActors: [],
             actors: [], //ActorsOpts
+            adaptationPlan: [],
         }
     },
         mounted() {
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+
             // if (localStorage.getItem('adaptationPlan')) this.selectedActors = JSON.parse(localStorage.getItem('adaptationPlan')).selectedActors;
 
             const { utils } = AiravataAPI;
