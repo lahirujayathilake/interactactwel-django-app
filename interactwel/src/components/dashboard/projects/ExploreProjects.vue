@@ -1,14 +1,37 @@
 <template>
     <div>
         <b-card no-body>
-            <b-tabs pills card vertical nav-wrapper-class="w-25">
-                <b-tab title="Explore Projects">
+        <b-tabs pills card vertical nav-wrapper-class="w-25">
+            <b-tab title="All Projects" v-on:click="mapSelected()">
+                <div class="card map-container">
+                    <l-map :zoom="5" :center="getMainMapCenterLocation()">
+                        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                        <l-marker :lat-lng="marker"></l-marker>
+
+                        <l-marker
+                                v-for="project in projects"
+                                :key="project.project_id"
+                                :lat-lng="{ lat: project.latitude, lng: project.longtitude }"
+                                :icon="reservoirIcon"
+                                :visible="true"/>
+                    </l-map>
+                </div>
+            </b-tab>
+            <b-tab
+                    v-for="project in projects"
+                    :title="project.name"
+                    v-on:click="mapSelected()">
+                <b-card-body :title="project.name">
+                    <!--
+                                <b-card-text>User Assigned to this project is: {{loggedInUser.username}}</b-card-text>
+                    -->
+                    <b-card-text>{{project.description}}</b-card-text>
                     <div class="card map-container">
-                        <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
+                        <l-map ref="myMap" :zoom="zoom" :center="getCenterOfMap(project)">
                             <l-control-zoom position="topright"></l-control-zoom>
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                            <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
-                            </l-control-layers>
+                            <l-control-layers position="topright" ref="layersControl"
+                                              :sort-layers="true"></l-control-layers>
 
                             <l-tile-layer
                                     v-for="tileProvider in tileProviders"
@@ -17,71 +40,63 @@
                                     :visible="tileProvider.visible"
                                     :url="tileProvider.url"
                                     :attribution="tileProvider.attribution"
-                                    layer-type="base"/>
+                                    layer-type="base"
+                            />
+
+                            <l-layer-group layer-type="overlay"
+                                           name="<font size=2><strong>Reservoirs</strong></font>">
+                                <l-marker :key="project.project_id"
+                                          :lat-lng="{ lat: project.latitude, lng: project.longtitude }"
+                                          :icon="reservoirIcon"
+                                          :visible="true">
+                                    <l-popup>
+                                        <div id="PopupContentReservoirs" class="card">
+                                            <div class="card-header"><strong>{{ project.name }}</strong></div>
+                                            <div class="card-body">
+                                                <table class="table table-borderless table-sm">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>Description</th>
+                                                        <th>{{project.description}}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>latitude</td>
+                                                        <td><span
+                                                                class="badge badge-secondary">{{project.latitude}}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>longtitude</td>
+                                                        <td><span
+                                                                class="badge badge-secondary">{{project.longtitude}}</span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </l-popup>
+                                </l-marker>
+                            </l-layer-group>
 
                             <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
                         </l-map>
                     </div>
-                </b-tab>
-                <b-tab title="Ohio">
-                    <b-card-body title="Ohio Region Adapts To Changes In Allocation Of Water For irrigation">
-                        <b-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
-                        </b-card-text>
-                        <div class="card map-container">
-                            <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
-                                <l-control-zoom position="topright"></l-control-zoom>
-                                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
-                                </l-control-layers>
-
-                                <l-tile-layer
-                                        v-for="tileProvider in tileProviders"
-                                        :key="tileProvider.name"
-                                        :name="tileProvider.name"
-                                        :visible="tileProvider.visible"
-                                        :url="tileProvider.url"
-                                        :attribution="tileProvider.attribution"
-                                        layer-type="base"/>
-
-                                <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
-                            </l-map>
-                        </div>
-                        <div class="mt-3">
-                            <b-button class="mr-2 btn-sm" disabled>Request to join</b-button>
-                        </div>
-                    </b-card-body>
-                </b-tab>
-                <b-tab title="Colarado">
-                    <b-card-body title="Colarado Region Adapts To Changes In Allocation Of Water For irrigation">
-                        <b-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
-                        </b-card-text>
-                        <div class="card map-container">
-                            <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
-                                <l-control-zoom position="topright"></l-control-zoom>
-                                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                <l-control-layers position="topright" ref="layersControl" :sort-layers="true">
-                                </l-control-layers>
-
-                                <l-tile-layer
-                                        v-for="tileProvider in tileProviders"
-                                        :key="tileProvider.name"
-                                        :name="tileProvider.name"
-                                        :visible="tileProvider.visible"
-                                        :url="tileProvider.url"
-                                        :attribution="tileProvider.attribution"
-                                        layer-type="base"/>
-
-                                <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
-                            </l-map>
-                        </div>
-                        <div class="mt-3">
-                            <b-button class="mr-2 btn-sm" disabled>Request to join</b-button>
-                        </div>
-                    </b-card-body>
-                </b-tab>
-            </b-tabs>
+                    <div class="mt-3">
+                        <b-button class="mr-2 btn-sm" disabled>Status</b-button>
+                        <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
+                        <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
+                        <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
+                        <b-button class="mr-2 btn-sm">
+                            <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
+                        </b-button>
+                        <b-button class="mr-2 btn-sm">
+                            <router-link to="/adaptation-plans/1">Adaptation Plans</router-link>
+                        </b-button>
+                    </div>
+                </b-card-body>
+            </b-tab>
+        </b-tabs>
         </b-card>
         <b-card v-show="">
             <b-card-body title="You don't have any projects to explore">
@@ -95,8 +110,11 @@
 
 <script>
 
+    import L from "leaflet";
     import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup, LControlZoom} from 'vue2-leaflet';
-    import L from 'leaflet';
+    import ReservoirList from './../../../../public/static/reservoirs_list.json';
+    import ReservoirDataJson from "./../../../../public/static/reservoirs_data.json";
+    import PopupContentReservoirs from "./popup/PopupContent_Reservoirs";
 
     export default {
         components: {
@@ -111,75 +129,90 @@
             'l-control-zoom': LControlZoom
 
         },
-        name: 'MyProjects',
+        name: 'ExploreProjects',
 
         data() {
             return {
-                geoJson_reach: null,
-                geoJson_subbasin: null,
-                geoJson_reservoir: null,
-                geoJson_WaterRigths: null,
-                geoJson_irrland: null,
-                geoJson_triballand: null,
+                center: L.latLng(45.4435777, -119.4455003),
+                test_position: {"lat": 45.346896, "lng": -119.544586},
                 zoom: 9,
                 maxZoom: 17,
                 minZoom: 3,
-                center: L.latLng(45.4435777, -119.4455003),
+                //center: L.latLng(45.4435777, -119.4455003),
                 url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                marker: L.latLng(45.6735777, -118.8455003),
-                detectRetina: true,
-                enableTooltip: true,
-                loading: true,
-                show: true,
-                fillColor: "rgba(76, 175, 80, 0.44)",
-                subbasinID: null,
+                attribution:
+                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                marker: L.latLng(47.41322, -1.219482),
+
+
+                urlx : 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
+                attributionx: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                reservoirStationList: ReservoirList,
+                ReservoirData: ReservoirDataJson,
 
                 tileProviders: [
                     {
-                        name: "<font size=4><strong>Street Map</strong></font>",
+                        name: "<font size=2><strong>Street Map</strong></font>",
                         visible: false,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     },
                     {
-                        name: "<font size=4><strong>Satellite</strong></font>",
+                        name: "<font size=2><strong>Satellite</strong></font>",
                         visible: false,
                         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
                         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     },
                     {
-                        name: "<font size=4><strong>Terrain Map",
+                        name: "<font size=2><strong>Terrain Map",
                         visible: true,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
                     }
                 ],
+                reservoirIcon: L.icon({
+                    iconUrl: require('../../../../public/static/img/reservoir_trans.png'),
+                    iconSize: [27, 27], // size of the icon
+                    shadowSize: [0, 0], // size of the shadow
+                    iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+                    shadowAnchor: [0, 0]  // the same for the shadow
+                }),
 
-                customPopup : "<div class=\"region_summary_popup\">" +
-                "<div>\n" +
-                "        <div>\n" +
-                "            <h5>SubBasin</h5>\n" +
-                "        </div>\n" +
-                "        <div>Test Data</div>" +
-                "</div>",
-                customOptions: [
-                    {
-                        'font-size': '15px',
-                        'maxWidth': '1000px',
-                        'width': '500px',
-                        'className' : 'custom'
-                    }
-                ]
+                projects: [],
             }
 
         },
 
         mounted() {
+            const {utils, session} = AiravataAPI;
+
+            utils.FetchUtils.get("/interactwel/api/projects/")
+                .then(projects => {
+                    console.log(projects);
+                    this.projects = projects;
+                })
+                .catch(error => {
+                    alert("Could not get the projects list. API error! " + error);
+                });
+
         },
 
 
-        methods: {}
+        methods: {
+            getCenterOfMap: function (project) {
+                return L.latLng(project.latitude, project.longtitude);
+            },
+            getMainMapCenterLocation: function () {
+                return L.latLng(45.346896, -119.544586);
+
+            },
+            getMainMapZoomValue: function () {
+                return 3;
+            },
+            mapSelected: function () {
+                window.dispatchEvent(new Event('resize'))
+            }
+        }
 
     }
 
