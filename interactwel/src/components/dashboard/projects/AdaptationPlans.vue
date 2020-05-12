@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="wizard-container">
             <b-navbar toggleable="sm" type="dark" variant="dark">
                 <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
 
@@ -15,10 +15,7 @@
                 <b-button v-show ="exitBtn" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
             </b-navbar>
            <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
-            <b-row>
                 <router-view></router-view>
-            </b-row>
-            <b-row>
                 <b-col>
                     <div class="lg-map-container">
                         <l-map ref="myMap" :maxZoom="maxZoom" :zoom="zoom" :center="center" :options="{zoomControl: false}">
@@ -214,7 +211,6 @@
                         </l-map>
                     </div>
                 </b-col>
-            </b-row>
         </div>
         <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
     </div>
@@ -969,8 +965,8 @@
     }
 
     .wizard-container .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        background: #DCEDC8 !important;
-        border: none;
+        /*background: #DCEDC8 !important;
+        border: none;*/
     }
 
     .wizard-container .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover {
@@ -1140,6 +1136,11 @@
     .list-group-item{
         padding: 0.5rem 1.25rem;
         font-size: 14px;
+    }
+
+    .wizard-container{
+        height: 92vh;
+        overflow: auto;
     }
 
 </style>

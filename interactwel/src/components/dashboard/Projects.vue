@@ -4,7 +4,7 @@
         <b-container fluid class="main">
             <b-row>
                 <b-col>
-                    <h3>Projects</h3>
+                    <h3 class="mb-3">Projects</h3>
                 </b-col>
                 <!--<b-col align="right">
                     <b-button>Create New Project</b-button>
@@ -15,7 +15,7 @@
                 <b-col>
                     <b-tabs>
                         <b-tab :active="$route.path === '/projects/my-projects'" title="My Projects" v-on:click='loadTabContent("/projects/my-projects")'></b-tab>
-                        <b-tab :active="$route.path === '/projects/suggested-projects'" title="Suggested Projects" v-on:click='loadTabContent("/projects/suggested-projects")'></b-tab>
+                        <b-tab :active="$route.path === '/projects/suggested-projects'" title="Invited Projects" v-on:click='loadTabContent("/projects/suggested-projects")'></b-tab>
                         <b-tab :active="$route.path === '/projects/explore-projects'" title="Explore Projects" v-on:click='loadTabContent("/projects/explore-projects")'></b-tab>
                         <b-tab :active="$route.path === '/projects/create-project'" title="Create New Project" v-on:click='loadTabContent("/projects/create-project")'></b-tab>
                         <b-tab :active="$route.path === '/projects/assign-projects'" title="Assign Projects" v-on:click='loadTabContent("/projects/assign-projects")'></b-tab>
@@ -23,7 +23,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col class="mt-4">
+                <b-col>
                 <router-view></router-view>
                 </b-col>
             </b-row>
@@ -48,6 +48,8 @@
         data(){
             return{
 
+                auth: null,
+
                 isActive : true,
                 currentPage : null,
                 activeClass : 'active',
@@ -55,6 +57,8 @@
         },
 
         mounted(){
+            const SessionData = AiravataPortalSessionData;
+            this.auth = SessionData.username;
             this.currentPage = this.$route.name
 
         },
@@ -77,10 +81,9 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .main {
-        /*background-color: #efefef;*/
-        padding: 1rem;
+        background-color: #efefef;
+        padding: 1rem 2rem;
         min-height: 90vh;
-        max-width: 1400px;
         text-align: left;
     }
 

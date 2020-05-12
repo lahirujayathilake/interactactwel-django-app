@@ -64,4 +64,8 @@ export default {
     font-size: 13px !important;
   }
 
+  .c-nav{
+    display:none;
+  }
+
 </style>

@@ -147,6 +147,8 @@
                 q4Selected: [],
                 q5Selected: [],
                 SelectedFactors: [],
+
+                questions: [],
             }
         },
         mounted() {

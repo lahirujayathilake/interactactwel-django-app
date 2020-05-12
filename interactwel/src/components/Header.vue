@@ -3,10 +3,10 @@
         <div class="top-fixed-nav">
             <b-navbar style="padding: 0 1rem; background-color: #263238!important;" toggleable="md" type="dark" variant="secondary">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-                <a class="navbar-brand" href="#">
+                <!--<a class="navbar-brand" href="#">
                     <img src="../assets/InterACTWEL_logo.svg" width="140" height="35"
-                         class="d-inline-block align-top" alt=""> Dashboard
-                </a>
+                         class="d-inline-block align-top" alt="">
+                </a>-->
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-item href="#"><router-link to="/dashboard">Home</router-link></b-nav-item>
@@ -17,17 +17,16 @@
                     </b-navbar-nav>
                 </b-collapse>
                 <b-collapse is-nav id="nav_collapse">
-                    <!-- Right aligned nav items -->
-                    <!--<b-navbar-nav class="ml-auto">
-                        <b-nav-item-dropdown right>
-                            &lt;!&ndash; Using button-content slot &ndash;&gt;
+                    <b-navbar-nav class="ml-auto" type="dark" variant="secondary">
+                        <b-nav-item v-if="!loggedInUser.username" href="/auth/login">Login</b-nav-item>
+                        <b-nav-item-dropdown right v-if="loggedInUser.username">
+                            <!-- Using button-content slot -->
                             <template slot="button-content">
-                                <em>Nick</em>
+                                <i class="fa fa-user"></i> <em> {{loggedInUser.username}}</em>
                             </template>
-                            <b-dropdown-item href="#">Profile</b-dropdown-item>
-                            <b-dropdown-item href="#">Signout</b-dropdown-item>
+                            <b-dropdown-item href="/auth/logout">Signout</b-dropdown-item>
                         </b-nav-item-dropdown>
-                    </b-navbar-nav>-->
+                    </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
         </div>
@@ -44,10 +43,24 @@
 
         data() {
             return {
+
+                site_url: "http://localhost:8000",
+
+                loggedInUser: {
+                    id: -1,
+                    username: "",
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    phone: "",
+                    organization: ""
+                }
             }
         },
 
         mounted() {
+            const SessionData = AiravataPortalSessionData;
+            this.loggedInUser.username = SessionData.username;
         },
 
 
@@ -62,7 +75,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
     .top-fixed-nav{
-        border-top: 4px solid #ff7853 !important;
+        /*border-top: 4px solid #ff7853 !important;*/
     }
 .top-fixed-nav a, button a{
     color: #fff;

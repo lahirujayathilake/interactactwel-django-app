@@ -2,7 +2,7 @@
     <div id="graph" class="card">
         <div class="card-header"><span v-on:click="dismiss" class="close"><font-awesome-icon
                 icon="times-circle"/> Close</span>
-            <strong style="font-size:18px">Overview2</strong>
+            <strong style="font-size:18px">Overview</strong>
         </div>
         <div class="card-body">
             <b-row>
@@ -73,6 +73,7 @@
         },
 
         mounted() {
+
             EventBus.$emit('HIDE_RESULTSMAP');
             // this.adaptationPlan = JSON.parse(localStorage.getItem('adaptationPlan'));
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
