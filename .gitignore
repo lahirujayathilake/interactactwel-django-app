@@ -13,3 +13,6 @@ jsconfig.json
 pyc
 orig
 .deploy
+interactwel_django_app.egg-info/
+build
+package-lock.json
