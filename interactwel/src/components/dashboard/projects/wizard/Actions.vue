@@ -19,7 +19,7 @@
             </li>
             <li class="col-md-2 active">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">3</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">{{selectedActions.length}} Actions selected</p>
@@ -27,7 +27,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">4</div>
                     <h4 class="list-group-item-heading">Visualization</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Adaptation Plans</p>
@@ -35,7 +35,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">5</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Rate each plan</p>
@@ -43,7 +43,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">6</div>
                     <h4 class="list-group-item-heading">Share</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Share with community</p>
@@ -82,7 +82,7 @@
             <b-list-group-item>
                 <b-form-checkbox-group>
                     <label class="form-checkbox">
-                        <input type="checkbox" v-model="selectAllActions">
+                        <input type="checkbox" v-model="selectAllActions" @click="selectActions">
                         Select All
                     </label>
                     <!-- <div class="text-uppercase text-bold">id selected: {{selectedActions}}</div>-->
@@ -158,6 +158,15 @@
             </em>
         </b-card>
     </div>
+    <b-modal v-model="showInfoModal">
+            <template slot="modal-title">
+                <strong>No selections were made</strong>
+            </template>
+            You forgot to select any actions. We filled that for you.
+            <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
+                <b-button size="sm" variant="next" @click="onConfirm">Ok</b-button>
+            </template>
+        </b-modal>
     </b-col>
 </template>
 
@@ -176,10 +185,16 @@
                 actorActions: [],
                 showInfoModal: false,
                 adaptationPlan: [],
+                selectedActionsActorsIds: [],
+                showInfoModal: false,
             }
         },
         mounted() {
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            if(this.adaptationPlan){
+                this.selectedActions=this.adaptationPlan.selectedActions;
+            }
+
             this.projectId = this.$route.params.projectId;
             const { utils } = AiravataAPI;
             utils.FetchUtils.get('/interactwel/api/actions/')
@@ -216,23 +231,25 @@
             selectActions() {
                 this.selectedActions = [];
                 if (!this.selectAllActions) {
-                    for (let actor in this.selectedActors) {
-                        for (let action in this.actions) {
-                            if (this.selectedActors[actor].readonly == false && this.actions[action].readonly == false) {
-                                this.selectedActions.push(this.selectedActors[actor].id + ',' + this.actions[action].id);
-                            }
+                    for (let actor of this.selectedActors) {
+                        for (let action of this.actions) {
+                            console.log(actor,action);
+                            let actorAction = {};
+                            actorAction.actor = actor;
+                            actorAction.action = action;
+                            this.selectedActions.push(actorAction)
+                            // this.selectedActionsActorsIds.push(this.selectedActors[actor].id + ',' + this.actions[action].id);
                         }
                     }
                 }
             },
 
             submit() {
-                // localStorage.setItem('step3', true);
-                // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                // adaptationPlan.selectedActions = this.selectedActions;
-                // localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-                // this.$router.push('/adaptation-plans/1/plans/overview')
-
+                if(this.selectedActions.length<1){
+                    this.showInfoModal = true;
+                    return;
+                }
+                
                 this.$store.commit("setSelectedActions", this.selectedActions);
                 this.$store.commit("step3", true);
                 this.$router.push('/adaptation-plans/'+this.projectId+'/plans/overview');
@@ -240,6 +257,12 @@
 
             back(){
                 this.$router.push('/adaptation-plans/1/actors')
+            },
+            onConfirm() {
+                this.selectActions();
+                this.$store.commit("setSelectedActions", this.selectedActions);
+                this.$store.commit("step3", true);
+                this.$router.push('/adaptation-plans/'+this.projectId+'/plans/overview');
             },
 
 

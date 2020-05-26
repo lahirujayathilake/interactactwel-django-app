@@ -19,15 +19,15 @@
       </li>
       <li class="col-md-2">
         <div class="step-progress-bar">
-          <div class="step-no">2</div>
+          <div class="step-no">3</div>
           <h4 class="list-group-item-heading">Actions</h4>
           <h4r class="list-group-item-heading">&#10003;</h4r>
-          <p class="list-group-item-text"># Actions selected</p>
+          <p class="list-group-item-text">0 Actions selected</p>
         </div>
       </li>
       <li class="col-md-2">
         <div class="step-progress-bar">
-          <div class="step-no">2</div>
+          <div class="step-no">4</div>
           <h4 class="list-group-item-heading">Visualization</h4>
           <h4r class="list-group-item-heading">&#10003;</h4r>
           <p class="list-group-item-text">Adaptation Plans</p>
@@ -35,7 +35,7 @@
       </li>
       <li class="col-md-2">
         <div class="step-progress-bar">
-          <div class="step-no">2</div>
+          <div class="step-no">5</div>
           <h4 class="list-group-item-heading">Feedback</h4>
           <h4r class="list-group-item-heading">&#10003;</h4r>
           <p class="list-group-item-text">Rate each plan</p>
@@ -43,7 +43,7 @@
       </li>
       <li class="col-md-2">
         <div class="step-progress-bar">
-          <div class="step-no">2</div>
+          <div class="step-no">6</div>
           <h4 class="list-group-item-heading">Share</h4>
           <h4r class="list-group-item-heading">&#10003;</h4r>
           <p class="list-group-item-text">Share with community</p>
@@ -124,6 +124,15 @@
       </em>
     </b-card>
   </div>
+  <b-modal v-model="showInfoModal">
+            <template slot="modal-title">
+                <strong>No selections were made</strong>
+            </template>
+            You forgot to select any actors. We filled that for you.
+            <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
+                <b-button size="sm" variant="next" @click="onConfirm">Ok</b-button>
+            </template>
+        </b-modal>
   </b-col>
 </template>
 <script>
@@ -139,10 +148,14 @@
             selectedActors: [],
             actors: [], //ActorsOpts
             adaptationPlan: [],
+            showInfoModal: false,
         }
     },
         mounted() {
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            if(this.adaptationPlan){
+                this.selectedActors=this.adaptationPlan.selectedActors;
+            }
 
             // if (localStorage.getItem('adaptationPlan')) this.selectedActors = JSON.parse(localStorage.getItem('adaptationPlan')).selectedActors;
 
@@ -172,18 +185,17 @@
                 this.selectedActors = [];
                 if (!this.selectAllActors) {
                     this.actors.forEach(element => {
-                        if (element.readonly == false) {
-                            this.selectedActors.push(element);
-                        }
+                      this.selectedActors.push(element); 
                     });
+                }else{
+                  this.selectedActors = [];
                 }
             },
             submit() {
-                // localStorage.setItem('step2', true);
-                // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                // adaptationPlan.selectedActors = this.selectedActors;
-                // localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-                // this.$router.push('/adaptation-plans/1/actions')
+              if(this.selectedActors.length<1){
+                    this.showInfoModal = true;
+                    return;
+                }
                 this.$store.commit("setSelectedActors", this.selectedActors);
                 this.$store.commit("step2", true);
                 this.$router.push('/adaptation-plans/'+this.projectId+'/actions');
@@ -191,6 +203,12 @@
 
             back(){
                 this.$router.push('/adaptation-plans/1/goals')
+            },
+            onConfirm() {
+                this.selectActors();
+                this.$store.commit("setSelectedActors", this.selectedActors);
+                this.$store.commit("step2", true);
+                this.$router.push('/adaptation-plans/'+this.projectId+'/actions');
             }
         }
 

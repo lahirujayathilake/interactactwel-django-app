@@ -14,12 +14,12 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{adaptationPlan.selectedActions.length}} Actors selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedActors.length}} Actors selected</p>
                 </div>
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">3</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">{{adaptationPlan.selectedActions.length}} Actions selected</p>
@@ -27,7 +27,7 @@
             </li>
             <li class="col-md-2 active">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">4</div>
                     <h4 class="list-group-item-heading">Visualization</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Adaptation Plans</p>
@@ -35,7 +35,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">5</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Rate each plan</p>
@@ -43,7 +43,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">6</div>
                     <h4 class="list-group-item-heading">Share</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Share with community</p>

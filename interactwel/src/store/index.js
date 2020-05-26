@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
  
 Vue.use(Vuex);
  
 export default new Vuex.Store({
+ plugins: [createPersistedState()],
  state: {
     feedbackProvided:false,
     step1:false,
@@ -16,7 +18,8 @@ export default new Vuex.Store({
         selectedGoals:[],
         selectedActors:[],
         selectedActions:[]
-    }
+    },
+    wizardFlowStarted:false
 
  },
  getters: {},
@@ -54,6 +57,24 @@ export default new Vuex.Store({
     setStep4(state, payload){
         state.step4=payload;
     },
+    setWizardFlowStarted(state,payload){
+        state.wizardFlowStarted=payload;
+    },
+    resetWizardFlow(state,payload){
+        state.feedbackProvided=false;
+        state.step1=false;
+        state.step2=false;
+        state.step3=false;
+        state.step4=false;
+        state.adaptationPlans=[];
+        state.currentAdaptationPlan={
+            projectId:'',
+            selectedGoals:[],
+            selectedActors:[],
+            selectedActions:[]
+        };
+        state.wizardFlowStarted=false
+    }
 
  },
  actions: {}

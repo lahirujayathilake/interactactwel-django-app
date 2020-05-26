@@ -11,8 +11,8 @@
                         <b-nav-text>{{selectedProject.name}}</b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
-                <b-button v-show="startBtn" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 btn-sm">Start</b-button>
-                <b-button v-show ="exitBtn" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
+                <b-button v-show="!isWizardFlowStarted" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 btn-sm">Start</b-button>
+                <b-button v-show ="isWizardFlowStarted" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
             </b-navbar>
            <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
                 <router-view></router-view>
@@ -406,8 +406,8 @@
 
                 mapOptions: {attributionControl: false},
                 currentStrokeColor: '3d3213',
-                selectedProject:{}
-
+                selectedProject:{},
+                isWizardFlowStarted:false,
             }
         },
 
@@ -658,6 +658,9 @@
             //     localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
             // }
 
+            this.isWizardFlowStarted=this.$store.state.wizardFlowStarted;
+
+
             this.$store.commit("setProjectId", this.projectId);
 
 
@@ -844,13 +847,22 @@
                 EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
             },
             startWizard(projectId){
+                this.isWizardFlowStarted=true;
+                this.$store.commit("setWizardFlowStarted", true);
                 this.startBtn = false;
                 this.exitBtn = true;
                 this.$router.push('/adaptation-plans/'+projectId+'/goals')
             },
 
             exitWizard(){
-                this.$router.push('/projects/my-projects')
+                
+                let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
+                if(confirmResponse){
+                    this.$store.commit("resetWizardFlow", null);
+                    this.$router.push('/projects/my-projects');
+                    this.isWizardFlowStarted=false;
+                }
+                
             }
         }
 

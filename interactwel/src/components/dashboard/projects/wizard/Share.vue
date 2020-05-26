@@ -6,7 +6,7 @@
                     <div class="step-no">1</div>
                     <h4 class="list-group-item-heading">Goals</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># golas selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedGoals.length}} goals selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -14,20 +14,20 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># Actores selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedActors.length}} Actores selected</p>
                 </div>
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">3</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># Actions selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedActions.length}} Actions selected</p>
                 </div>
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">4</div>
                     <h4 class="list-group-item-heading">Visualization</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Adaptation Plans</p>
@@ -35,7 +35,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">5</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Rate each plan</p>
@@ -43,7 +43,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar active">
-                    <div class="step-no">2</div>
+                    <div class="step-no">6</div>
                     <h4 class="list-group-item-heading">Share</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Share with community</p>
@@ -134,11 +134,13 @@
                     { isActive: false, plan: 3, q1: 'yes', q2: 'Very well' , q3: 'yes', q4: 'yes'},
                     { isActive: true, plan: 4, q1: 'yes', q2: 'Neutral', q3: 'yes', q4: 'yes' }
                 ],
+                adaptationPlan: [],
             }
         },
         mounted() {
 
             if (localStorage.getItem('selectedGoals')) this.selectedGoals = JSON.parse(localStorage.getItem('selectedGoals'));
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
 
             /*let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
             if (adaptationPlan) {

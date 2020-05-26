@@ -14,20 +14,20 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># Actores selected</p>
+                    <p class="list-group-item-text">0 Actores selected</p>
                 </div>
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">3</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text"># Actions selected</p>
+                    <p class="list-group-item-text">0 Actions selected</p>
                 </div>
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">4</div>
                     <h4 class="list-group-item-heading">Visualization</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Adaptation Plans</p>
@@ -35,7 +35,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">5</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Rate each plan</p>
@@ -43,7 +43,7 @@
             </li>
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">2</div>
+                    <div class="step-no">6</div>
                     <h4 class="list-group-item-heading">Share</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Share with community</p>
@@ -52,13 +52,13 @@
         </ol>
         <div id="step1">
             <div class="help-block">
-                <b-collapse visible id="collapse-1">
+                <b-collapse visible id="collapse-what_are_goals">
                     <b-card class="mb-2"
                             tag="article"
                             style="max-width: 25rem;"
                     >
                         <h4 class="card-title"> "What are Goals?" {{$route.params.projectId}}
-                            <b-button v-b-toggle.collapse-1 variant="outline-info" class="m-1b" size="sm">
+                            <b-button v-b-toggle.collapse-what_are_goals variant="outline-info" class="m-1b" size="sm">
                                 <i>Hide panel</i>
                             </b-button>
                         </h4>
@@ -91,7 +91,7 @@
             <b-card no-body footer-tag="footer">
                 <div class="step-header" slot="header">Choose Goals
                     <em slot="header">
-                        <b-button v-b-toggle.collapse-1 class="m-1" size="sm"> Show instructions </b-button>
+                        <b-button v-b-toggle.collapse-what_are_goals class="m-1" size="sm"> Show instructions </b-button>
                     </em>
                 </div>
                 <b-card-body>
@@ -102,7 +102,7 @@
                 <b-list-group-item>
                     <b-form-checkbox-group>
                         <label class="form-checkbox">
-                            <input type="checkbox" v-model="selectedGoals" @click="selectAllGoals">
+                            <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
                             Select All
                         </label>
                           <!--<div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
@@ -115,12 +115,15 @@
                                 <label class="form-checkbox" :disabled="goal.readonly">
                                     <input type="checkbox" :value="goal" v-model="selectedGoals"/>
                                     {{goal.name}}
-                                    <p v-show="itemInfoVisibility" class="item-info">
-                                        <small>{{goal.description}}</small>
-                                    </p>
+                                    <b-collapse :id="'collapse-'+goal.goal_id">
+                                        <p class="item-info">
+                                            <small>{{goal.description}}</small>
+                                        </p>
+                                    </b-collapse>
                                 </label>
-                                <b-badge class="info-button" pill variant="secondary" @click="showItemInfo">i
-                                </b-badge>
+                                <b-button v-b-toggle="'collapse-' + goal.goal_id" variant="outline-secondary">
+                                    <b-badge class="info-button" pill variant="secondary" >i</b-badge>
+                                </b-button>
                                 <!--<b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
                                          :title="goal.info">i
                                 </b-badge>-->
@@ -137,7 +140,7 @@
             <template slot="modal-title">
                 <strong>No selections were made</strong>
             </template>
-            Please be advised that all available choices will be selected.
+            You forgot to select any goals. We filled that for you.
             <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
                 <b-button size="sm" variant="next" @click="onConfirm">Ok</b-button>
             </template>
@@ -159,10 +162,17 @@
                 selectedGoals: [],
                 goals: [],
                 showInfoModal: false,
-                goalsAssignedToThisProject:[]
+                goalsAssignedToThisProject:[],
+                adaptationPlan: [],
             }
         },
         mounted() {
+
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            if(this.adaptationPlan){
+                this.selectedGoals=this.adaptationPlan.selectedGoals;
+            }
+
             const { utils } = AiravataAPI;
             this.projectId = this.$route.params.projectId
             utils.FetchUtils.get('/interactwel/api/goals/')
@@ -186,23 +196,12 @@
         methods: {
             selectGoals() {
                 this.selectedGoals = [];
-                if (!this.selectAllGoals) {
+                if(!this.selectAllGoals){
                     this.goals.forEach(element => {
-                        if (element.readonly == false) {
-                            this.selectedGoals.push(element);
-                        }
+                        this.selectedGoals.push(element);
                     });
-                }
-            },
-
-            selectAllGoals() {
-                this.selectedGoals = [];
-                if (!this.selectAllGoals) {
-                    this.goals.forEach(element => {
-                        if (element.readonly == false) {
-                            this.selectedGoals.push(element);
-                        }
-                    });
+                }else{
+                    this.selectedGoals=[];
                 }
             },
 
@@ -224,6 +223,7 @@
             submit(projectId) {
                 if(this.selectedGoals.length<1){
                     this.showInfoModal = true;
+                    return;
                 }
 
                 const { utils } = AiravataAPI;
@@ -269,7 +269,7 @@
                         alert("Create the Projects. API error! " + error)
                     });
                 });
-                
+                console.log(this.selectAllGoals);
                 this.$store.commit("setSelectedGoals", this.selectedGoals);
                 this.$store.commit("step1", true);
                 this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
