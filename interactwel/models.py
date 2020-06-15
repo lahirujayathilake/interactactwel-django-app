@@ -157,72 +157,6 @@ class InteractwelDocumentation(models.Model):
         verbose_name = 'Interactwel Documentation'
         verbose_name_plural = 'Interactwel Documentation'
 
-########################### Project ############################################
-################################################################################
-
-class InteractwelProject(models.Model):
-    project_id = models.BigAutoField(primary_key=True, editable=False)
-    name = models.CharField(max_length=256)
-    description = models.CharField(max_length=256)
-    location = models.CharField(max_length=256)
-    latitude = models.CharField(max_length=256)
-    longtitude = models.CharField(max_length=256)
-    feedbackProvided = models.BooleanField()
-
-    class Meta:
-        managed = True
-        db_table = 'interactwel_project'
-        verbose_name = 'Interactwel Project'
-        verbose_name_plural = 'Interactwel Project'
-
-class InteractwelProjectUser(models.Model):
-    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
-
-    status = models.CharField(max_length=256)
-    role = models.CharField(max_length=256)
-    sector = models.CharField(max_length=256)
-    actor = models.CharField(max_length=256)
-
-    class Meta:
-        managed = True
-        db_table = 'interactwel_project_user'
-        verbose_name = 'Interactwel Project User'
-        verbose_name_plural = 'Interactwel Project User'
-        unique_together = (('user_id', 'project_id'),)
-
-class InteractwelPlan(models.Model):
-    plan_id = models.BigAutoField(primary_key=True, editable=False)
-    description = models.CharField(max_length=256)
-
-    class Meta:
-        managed = True
-        db_table = 'interactwel_plan'
-        verbose_name = 'Interactwel Plan'
-        verbose_name_plural = 'Interactwel Plan'
-
-class InteractwelFeedback(models.Model):
-    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
-    plan_id = models.ForeignKey(InteractwelPlan, on_delete=models.CASCADE)
-
-    date_created = models.fields.DateTimeField()
-    date_modified = models.fields.DateTimeField()
-    feasibilty = models.CharField(max_length=256)
-    comments = models.CharField(max_length=256)
-    q1 = models.CharField(max_length=1024)
-    q2 = models.CharField(max_length=1024)
-    q3 = models.CharField(max_length=1024)
-    q4 = models.CharField(max_length=1024)
-    rating = models.CharField(max_length=256)
-
-    class Meta:
-        managed = True
-        db_table = 'interactwel_feedback'
-        verbose_name = 'Interactwel Feedback'
-        verbose_name_plural = 'Interactwel Feedback'
-        unique_together = (('user_id', 'project_id', 'plan_id'),)
-
 ########################### Goals Actors Actions Questions #####################
 ################################################################################
 
@@ -271,6 +205,76 @@ class InteractwelQuestion(models.Model):
         db_table = 'interactwel_question'
         verbose_name = 'Interactwel Question'
         verbose_name_plural = 'Interactwel Question'
+
+########################### Project ############################################
+################################################################################
+
+class InteractwelProject(models.Model):
+    project_id = models.BigAutoField(primary_key=True, editable=False)
+    name = models.CharField(max_length=256)
+    description = models.CharField(max_length=256)
+    location = models.CharField(max_length=256)
+    latitude = models.CharField(max_length=256)
+    longtitude = models.CharField(max_length=256)
+    feedbackProvided = models.BooleanField()
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_project'
+        verbose_name = 'Interactwel Project'
+        verbose_name_plural = 'Interactwel Project'
+
+class InteractwelProjectUser(models.Model):
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+
+    status = models.CharField(max_length=256)
+    role = models.CharField(max_length=256)
+    sector = models.CharField(max_length=256)
+    actor = models.CharField(max_length=256)
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_project_user'
+        verbose_name = 'Interactwel Project User'
+        verbose_name_plural = 'Interactwel Project User'
+        unique_together = (('user_id', 'project_id'),)
+
+class InteractwelPlan(models.Model):
+    plan_id = models.BigAutoField(primary_key=True, editable=False)
+    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+    goals = models.ManyToManyField('InteractwelGoal', related_name='plans', blank=True)
+    actors = models.ManyToManyField('InteractwelActor', related_name='actors', blank=True)
+    actions = models.ManyToManyField('InteractwelAction', related_name='actions', blank=True)
+    timestamp = models.fields.DateTimeField()
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_plan'
+        verbose_name = 'Interactwel Plan'
+        verbose_name_plural = 'Interactwel Plan'
+
+class InteractwelFeedback(models.Model):
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+    plan_id = models.ForeignKey(InteractwelPlan, on_delete=models.CASCADE)
+
+    date_created = models.fields.DateTimeField()
+    date_modified = models.fields.DateTimeField()
+    feasibilty = models.CharField(max_length=256)
+    comments = models.CharField(max_length=256)
+    q1 = models.CharField(max_length=1024)
+    q2 = models.CharField(max_length=1024)
+    q3 = models.CharField(max_length=1024)
+    q4 = models.CharField(max_length=1024)
+    rating = models.CharField(max_length=256)
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_feedback'
+        verbose_name = 'Interactwel Feedback'
+        verbose_name_plural = 'Interactwel Feedback'
+        unique_together = (('user_id', 'project_id', 'plan_id'),)
 
 ########################### Project mapping in Goals Actors Actions Questions ##
 ################################################################################

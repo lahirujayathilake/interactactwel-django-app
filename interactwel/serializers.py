@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+import json
 
 from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelAdaptationStory, \
 InteractwelInstructionalVideo, InteractwelDocumentation, InteractwelGroup, \
@@ -97,6 +98,7 @@ class InteractwelPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelPlan
         fields = '__all__'
+        extra_kwargs = {'goals': {'required': False}, 'actors': {'required': False}, 'actions': {'required': False}}
 
 class InteractwelFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
@@ -122,7 +124,30 @@ class InteractwelActionSerializer(serializers.ModelSerializer):
         model = InteractwelAction
         fields = '__all__'
 
+class StoredJSONField(serializers.JSONField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def to_representation(self, value):
+        try:
+            if value:
+                print(value)
+                return json.loads(value)
+            else:
+                return value
+        except Exception:
+            return value
+
+    def to_internal_value(self, data):
+        try:
+            return json.dumps(data)
+        except (TypeError, ValueError):
+            self.fail('invalid')
+
 class InteractwelQuestionSerializer(serializers.ModelSerializer):
+
+    possible_answers = StoredJSONField()
+
     class Meta:
         model = InteractwelQuestion
         fields = '__all__'

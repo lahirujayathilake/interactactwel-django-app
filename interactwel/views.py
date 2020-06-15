@@ -18,7 +18,7 @@ InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, Intera
 
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-
+from rest_framework import generics
 
 class SubbasinViewSet(viewsets.ViewSet):
 
@@ -396,7 +396,7 @@ class PlanViewSet(viewsets.ViewSet):
 
 class FeedbackViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = InteractwelFeedback.objects.all()
+        queryset = self.get_queryset()
         serializer = InteractwelFeedbackSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -417,6 +417,22 @@ class FeedbackViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data)
+    
+    def get_queryset(self):
+        queryset = InteractwelFeedback.objects.all()
+        user_id = self.request.query_params.get('user_id', None)
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
+
+        plan_id = self.request.query_params.get('plan_id', None)
+        if plan_id is not None:
+            queryset = queryset.filter(plan_id=plan_id)
+
+        project_id = self.request.query_params.get('project_id', None)
+        if project_id is not None:
+            queryset = queryset.filter(project_id=project_id)
+
+        return queryset
 
 ########################### Goals Actors Actions Questions #####################
 ################################################################################
@@ -501,7 +517,7 @@ class QuestionViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
         queryset = InteractwelQuestion.objects.all()
-        project = get_object_or_404(queryset, plan_id=pk)
+        project = get_object_or_404(queryset, question_id=pk)
         serializer = InteractwelQuestionSerializer(project)
         return Response(serializer.data)
 
