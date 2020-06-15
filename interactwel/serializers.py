@@ -8,7 +8,7 @@ InteractwelGroupRoleMapping, InteractwelGroupMembership, InteractwelEvent, \
 InteractwelEventAttendance, InteractwelInvitation, InteractwelProject, InteractwelProjectUser, \
 InteractwelPlan, InteractwelFeedback, InteractwelGoal, InteractwelActor, InteractwelAction, \
 InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, InteractwelProjectAction, \
-InteractwelProjectQuestion, InteractwelProjectPlan
+InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelProjectData
 
 class SubbasinSerializer(serializers.ModelSerializer):
 
@@ -103,6 +103,11 @@ class InteractwelPlanSerializer(serializers.ModelSerializer):
 class InteractwelFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelFeedback
+        fields = '__all__'
+
+class InteractwelProjectDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelProjectData
         fields = '__all__'
 
 ########################### Goals Actors Actions Questions #####################

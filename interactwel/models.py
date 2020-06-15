@@ -276,6 +276,18 @@ class InteractwelFeedback(models.Model):
         verbose_name_plural = 'Interactwel Feedback'
         unique_together = (('user_id', 'project_id', 'plan_id'),)
 
+class InteractwelProjectData(models.Model):
+    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+    name = models.CharField(max_length=256)
+    data_type = models.CharField(max_length=256)
+    data = models.TextField(blank=True)
+    
+    class Meta:
+        managed = True
+        db_table = 'interactwel_project_data'
+        verbose_name = 'Interactwel Project Data'
+        verbose_name_plural = 'Interactwel Project Data'
+        unique_together = (('name', 'project_id'),)
 ########################### Project mapping in Goals Actors Actions Questions ##
 ################################################################################
 

@@ -24,7 +24,8 @@ router.register(r"adaptations", views.AdaptationStoryViewSet, base_name = "adapt
 router.register(r"documentations", views.DocumentationViewSet, base_name = "documentation")
 
 router.register(r"projects", views.ProjectViewSet, base_name = "project")
-router.register(r"projectuserss", views.ProjectUserViewSet, base_name = "projectuser")
+router.register(r"projectusers", views.ProjectUserViewSet, base_name = "projectuser")
+router.register(r"projectdata", views.ProjectDataViewSet, base_name = "projectdata")
 router.register(r"plans", views.PlanViewSet, base_name = "plan")
 router.register(r"feedbacks", views.FeedbackViewSet, base_name = "feedback")
 

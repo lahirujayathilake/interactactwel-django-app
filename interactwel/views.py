@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelInstructionalVideo, \
 InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, InteractwelGroupRoleMapping, \
 InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
-InteractwelProject, InteractwelProjectUser, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
+InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
 InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
 InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan
 
@@ -11,7 +11,7 @@ from .serializers import SubbasinSerializer, InteractwelUserSerializer, Interact
 InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
 InteractwelDocumentationSerializer, InteractwelGroupSerializer, InteractwelGroupRoleMappingSerializer, \
 InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEventAttendanceSerializer, \
-InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, \
+InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, InteractwelProjectDataSerializer, \
 InteractwelPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
 InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
 InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer
@@ -363,6 +363,30 @@ class ProjectUserViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response({"message", "Project User Created"})
+        else:
+            data = {
+                "error": True,
+                "errors": serializer.errors,
+            }
+            return Response(data)
+
+class ProjectDataViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = InteractwelProjectData.objects.all()
+        serializer = InteractwelProjectDataSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = InteractwelProjectData.objects.all()
+        data = queryset.filter(name=pk)
+        serializer = InteractwelProjectDataSerializer(data, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = InteractwelProjectDataSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message", "Project Data Created"})
         else:
             data = {
                 "error": True,
