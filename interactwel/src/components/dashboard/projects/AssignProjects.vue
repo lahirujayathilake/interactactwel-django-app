@@ -164,7 +164,7 @@
         methods: {
             submitAction() {
                 const {utils} = AiravataAPI;
-                utils.FetchUtils.post("/interactwel/api/projectuserss/", {
+                utils.FetchUtils.post("/interactwel/api/projectusers/", {
                     user_id: this.selectedUser,
                     project_id: this.selectedProject,
                     status: this.selectedStatus,

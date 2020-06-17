@@ -196,7 +196,7 @@
                         return user.username = this.loggedInUser.username;
                     });
                     console.log(this.loggedInUser);
-                    utils.FetchUtils.get("/interactwel/api/projectuserss/")
+                    utils.FetchUtils.get("/interactwel/api/projectusers/")
                         .then(projectsUsers => {
                             this.projectsUsers = projectsUsers.filter(projectUser => {
                                 return projectUser.user_id === this.loggedInUser.id && projectUser.status === "Inactive";
