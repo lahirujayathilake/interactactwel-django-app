@@ -198,14 +198,16 @@
             const {utils, session} = AiravataAPI;
             const SessionData = AiravataPortalSessionData;
             this.loggedInUser.username = SessionData.username;
+            console.log("user " + this.loggedInUser.username);
+            debugger;
 
             utils.FetchUtils.get("/interactwel/api/users/")
                 .then(users => {
                     this.loggedInUser = users.find(user => {
                         return user.username = this.loggedInUser.username;
                     });
-                    console.log(this.loggedInUser);
-                    utils.FetchUtils.get("/interactwel/api/projectuserss/")
+                    //console.log("user"+ this.loggedInUser);
+                    utils.FetchUtils.get("/interactwel/api/projectusers/")
                         .then(projectsUsers => {
                             this.projectsUsers = projectsUsers.filter(projectUser => {
                                 return projectUser.user_id === this.loggedInUser.id && projectUser.status === "Active";
