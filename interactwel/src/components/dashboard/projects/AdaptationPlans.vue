@@ -658,8 +658,7 @@
             //     localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
             // }
 
-            this.isWizardFlowStarted=this.$store.state.wizardFlowStarted;
-
+            this.$store.commit("setWizardFlowStarted", false);
 
             this.$store.commit("setProjectId", this.projectId);
 
