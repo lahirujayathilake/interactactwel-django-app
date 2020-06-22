@@ -278,7 +278,7 @@ class InteractwelFeedback(models.Model):
 
 class InteractwelProjectData(models.Model):
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=255)
     data_type = models.CharField(max_length=256)
     data = models.TextField(blank=True)
     

@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='InteractwelProjectData',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256)),
+                ('name', models.CharField(max_length=255)),
                 ('data_type', models.CharField(max_length=256)),
                 ('data', models.TextField(blank=True)),
                 ('project_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='interactwel.InteractwelProject')),
