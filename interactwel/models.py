@@ -255,6 +255,7 @@ class InteractwelPlan(models.Model):
         verbose_name_plural = 'Interactwel Plan'
 
 class InteractwelFeedback(models.Model):
+    feedback_id = models.BigAutoField(primary_key=True, editable=False)
     user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
     plan_id = models.ForeignKey(InteractwelPlan, on_delete=models.CASCADE)
@@ -263,10 +264,6 @@ class InteractwelFeedback(models.Model):
     date_modified = models.fields.DateTimeField()
     feasibilty = models.CharField(max_length=256)
     comments = models.CharField(max_length=256)
-    q1 = models.CharField(max_length=1024)
-    q2 = models.CharField(max_length=1024)
-    q3 = models.CharField(max_length=1024)
-    q4 = models.CharField(max_length=1024)
     rating = models.CharField(max_length=256)
 
     class Meta:
@@ -275,6 +272,16 @@ class InteractwelFeedback(models.Model):
         verbose_name = 'Interactwel Feedback'
         verbose_name_plural = 'Interactwel Feedback'
         unique_together = (('user_id', 'project_id', 'plan_id'),)
+
+class InteractwelFeedbackQuestion(models.Model):
+    feedback_id = models.ForeignKey(InteractwelFeedback, on_delete=models.CASCADE)
+    question = models.CharField(max_length=1024)
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_feedback_question'
+        verbose_name = 'Interactwel Feedback Question'
+        verbose_name_plural = 'Interactwel Feedback Question'
 
 class InteractwelProjectData(models.Model):
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
