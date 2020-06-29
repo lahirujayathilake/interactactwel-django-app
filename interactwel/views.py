@@ -14,7 +14,7 @@ InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEve
 InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, InteractwelProjectDataSerializer, \
 InteractwelPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
 InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
-InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer
+InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackQuestionSerializer
 
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -457,6 +457,21 @@ class FeedbackViewSet(viewsets.ViewSet):
             queryset = queryset.filter(project_id=project_id)
 
         return queryset
+
+class FeedbackQuestionViewSet(viewsets.ViewSet):
+
+    def create(self, request):
+        serializer = InteractwelFeedbackQuestionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message", "Feedback Question Created"})
+        else:
+            data = {
+                "error": True,
+                "errors": serializer.errors,
+            }
+            return Response(data)
+
 
 ########################### Goals Actors Actions Questions #####################
 ################################################################################

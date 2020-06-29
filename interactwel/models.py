@@ -274,7 +274,7 @@ class InteractwelFeedback(models.Model):
         unique_together = (('user_id', 'project_id', 'plan_id'),)
 
 class InteractwelFeedbackQuestion(models.Model):
-    feedback_id = models.ForeignKey(InteractwelFeedback, on_delete=models.CASCADE)
+    feedback_id = models.ForeignKey(InteractwelFeedback, related_name='questions', on_delete=models.CASCADE)
     question = models.CharField(max_length=1024)
 
     class Meta:
@@ -282,6 +282,9 @@ class InteractwelFeedbackQuestion(models.Model):
         db_table = 'interactwel_feedback_question'
         verbose_name = 'Interactwel Feedback Question'
         verbose_name_plural = 'Interactwel Feedback Question'
+
+    def __str__(self):
+        return '%s' % (self.question)
 
 class InteractwelProjectData(models.Model):
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)

@@ -28,6 +28,7 @@ router.register(r"projectusers", views.ProjectUserViewSet, base_name = "projectu
 router.register(r"projectdata", views.ProjectDataViewSet, base_name = "projectdata")
 router.register(r"plans", views.PlanViewSet, base_name = "plan")
 router.register(r"feedbacks", views.FeedbackViewSet, base_name = "feedback")
+router.register(r"feedbackquestions", views.FeedbackQuestionViewSet, base_name = "feedbackquestion")
 
 router.register(r"actions", views.ActionViewSet, base_name = "action")
 router.register(r"questions", views.QuestionViewSet, base_name = "question")
