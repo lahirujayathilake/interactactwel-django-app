@@ -273,15 +273,16 @@ class InteractwelFeedback(models.Model):
         verbose_name_plural = 'Interactwel Feedback'
         unique_together = (('user_id', 'project_id', 'plan_id'),)
 
-class InteractwelFeedbackQuestion(models.Model):
-    feedback_id = models.ForeignKey(InteractwelFeedback, related_name='questions', on_delete=models.CASCADE)
+class InteractwelFeedbackAnswer(models.Model):
+    feedback_id = models.ForeignKey(InteractwelFeedback, related_name='feedback_answers', on_delete=models.CASCADE)
     question = models.CharField(max_length=1024)
+    answer = models.CharField(max_length=1024)
 
     class Meta:
         managed = True
-        db_table = 'interactwel_feedback_question'
-        verbose_name = 'Interactwel Feedback Question'
-        verbose_name_plural = 'Interactwel Feedback Question'
+        db_table = 'interactwel_feedback_answer'
+        verbose_name = 'Interactwel Feedback Answer'
+        verbose_name_plural = 'Interactwel Feedback Answer'
 
     def __str__(self):
         return '%s' % (self.question)

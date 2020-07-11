@@ -14,7 +14,7 @@ InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEve
 InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, InteractwelProjectDataSerializer, \
 InteractwelPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
 InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
-InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackQuestionSerializer
+InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackAnswerSerializer
 
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -458,13 +458,13 @@ class FeedbackViewSet(viewsets.ViewSet):
 
         return queryset
 
-class FeedbackQuestionViewSet(viewsets.ViewSet):
+class FeedbackAnswerViewSet(viewsets.ViewSet):
 
     def create(self, request):
-        serializer = InteractwelFeedbackQuestionSerializer(data=request.data)
+        serializer = InteractwelFeedbackAnswerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Feedback Question Created"})
+            return Response({"message", "Feedback Answer Created"})
         else:
             data = {
                 "error": True,
@@ -649,7 +649,7 @@ class ProjectActionViewSet(viewsets.ViewSet):
 
 class ProjectQuestionViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = InteractwelProjectQuestion.objects.all()
+        queryset = self.get_queryset()
         serializer = InteractwelProjectQuestionSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -670,6 +670,17 @@ class ProjectQuestionViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data)
+
+    def get_queryset(self):
+        queryset = InteractwelProjectQuestion.objects.all()
+        project_id = self.request.query_params.get('project_id', None)
+        if project_id is not None:
+            queryset = queryset.filter(project_id=project_id)
+
+        question_id = self.request.query_params.get('question_id', None)
+        if question_id is not None:
+            queryset = queryset.filter(question_id=question_id)
+        return queryset
 
 class ProjectPlanViewSet(viewsets.ViewSet):
     def list(self, request):
