@@ -117,9 +117,7 @@
                 ],
 
                 roles: [
-                    {value: null, text: "Please select a Role"},
-                    {value: "Admin", text: "Admin"},
-                    {value: "Non-Admin", text: "Non-Admin"}
+                    {value: null, text: "Please select a Role"}
                 ],
                 sectors: [
                     {value: null, text: "Please select a Sector"},
@@ -154,6 +152,19 @@
                     response.forEach(userItem => {
                         this.users.push({value: userItem.id, text: userItem.username});
                         console.log(this.users);
+                    });
+                })
+                .catch(error => {
+                    alert("Could not get the projects list. API error! " + error);
+                });
+
+            utils.FetchUtils.get("/interactwel/api/roles/")
+                .then(response => {
+                    response.forEach(role => {
+                        this.roles.push({
+                            value: role.role_id,
+                            text: role.role_name
+                        });
                     });
                 })
                 .catch(error => {
