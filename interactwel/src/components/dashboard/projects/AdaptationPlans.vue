@@ -12,6 +12,9 @@
                     </b-navbar-nav>
                 </b-collapse>
                 <b-button v-show="!isWizardFlowStarted" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 btn-sm">Start</b-button>
+                <b-button v-show ="!isWizardFlowStarted" class="mr-2 btn-sm">
+                    <router-link to="/projects/my-projects">Back to Projects</router-link>
+                </b-button>
                 <b-button v-show ="isWizardFlowStarted" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
             </b-navbar>
            <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->

@@ -84,16 +84,17 @@
                             </l-map>
                         </div>
                         <div class="mt-3">
-                            <b-button class="mr-2 btn-sm" disabled>Status</b-button>
+                            <b-button-group>
                             <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
                             <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
                             <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
-                            <b-button class="mr-2 btn-sm">
+                            <!--<b-button class="mr-2 btn-sm">
                                 <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
-                            </b-button>
+                            </b-button>-->
                             <b-button class="mr-2 btn-sm">
-                                <router-link to="/adaptation-plans/1">Adaptation Plans</router-link>
+                                <router-link :to="'/adaptation-plans/'+ project.project_id">Visualize New Plans</router-link>
                             </b-button>
+                            </b-button-group>
                         </div>
                     </b-card-body>
 
@@ -199,7 +200,6 @@
             const SessionData = AiravataPortalSessionData;
             this.loggedInUser.username = SessionData.username;
             console.log("user " + this.loggedInUser.username);
-            debugger;
 
             utils.FetchUtils.get("/interactwel/api/users/")
                 .then(users => {

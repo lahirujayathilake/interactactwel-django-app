@@ -5,6 +5,8 @@ import Router from 'vue-router'
 const Home = () => import('@/components/Index')
 const Dashboard = () => import('@/components/Dashboard')
 
+const MyPlans = () => import('@/components/dashboard/MyPlans')
+
 const Projects = () => import('@/components/dashboard/Projects')
 const MyProjects = () => import('@/components/dashboard/projects/MyProjects')
 const SuggestedProjects = () => import('@/components/dashboard/projects/SuggestedProjects')
@@ -36,6 +38,9 @@ const Groups = () => import('@/components/dashboard//community/Groups')
 
 const Learn = () => import('@/components/dashboard/Learn')
 const Videos = () => import('@/components/dashboard/learn/Videos')
+const Stories = () => import('@/components/dashboard/learn/Stories')
+const Docs = () => import('@/components/dashboard/learn/Docs')
+const Support = () => import('@/components/dashboard/learn/Support')
 
 
 /*const Dashboard = () => import('@/components/dashboard/Dashboard')
@@ -63,15 +68,21 @@ export default new Router({
     routes: [
         {
             path: '/',
-            //redirect: '/index',
-            name: 'Home',
-            component: Home,
+            //redirect: '/dashboard',
+            name: 'Dashboard',
+            component: Dashboard,
         },
         {
             path: '/dashboard',
             //redirect: '/pages/404',
             name: 'Dashboard',
             component: Dashboard,
+        },
+        {
+            path: '/my-plans',
+            //redirect: '/pages/404',
+            name: 'MyPlans',
+            component: MyPlans,
         },
         {
             path: '/projects',
@@ -276,6 +287,21 @@ export default new Router({
                     path: 'videos/:videoId',
                     name: 'videos',
                     component: Videos
+                },
+                {
+                    path: 'stories/',
+                    name: 'Stories',
+                    component: Stories
+                },
+                {
+                    path: 'docs',
+                    name: 'Docs',
+                    component: Docs
+                },
+                {
+                    path: 'support',
+                    name: 'Support',
+                    component: Support
                 },
             ]
         },

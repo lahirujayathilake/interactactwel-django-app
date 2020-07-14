@@ -83,16 +83,12 @@
                         </l-map>
                     </div>
                     <div class="mt-3">
-                        <b-button class="mr-2 btn-sm" disabled>Status</b-button>
-                        <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
-                        <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
-                        <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
+                        <b-button-group>
+                        <b-button class="mr-2 btn-sm" disabled>Join</b-button>
                         <b-button class="mr-2 btn-sm">
-                            <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
+                            <router-link :to="'/visualize/'+ project.project_id">View Project</router-link>
                         </b-button>
-                        <b-button class="mr-2 btn-sm">
-                            <router-link to="/adaptation-plans/1">Adaptation Plans</router-link>
-                        </b-button>
+                        </b-button-group>
                     </div>
                 </b-card-body>
             </b-tab>

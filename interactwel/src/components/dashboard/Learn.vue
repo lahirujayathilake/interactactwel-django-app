@@ -13,10 +13,10 @@
             <b-row>
                 <b-col>
                     <b-nav tabs justified>
-                        <b-nav-item><router-link to="/learn/videos">Instructional Videos</router-link></b-nav-item>
-                        <b-nav-item><router-link to="/learn/videos">Documentaion</router-link></b-nav-item>
-                        <b-nav-item><router-link to="/learn/videos">Adaptation Stories</router-link></b-nav-item>
-                        <b-nav-item><router-link to="/learn/videos">Support</router-link></b-nav-item>
+                        <b-nav-item :active="$route.path === '/learn/videos/1'"><router-link to="/learn/videos/1">Instructional Videos</router-link></b-nav-item>
+                        <b-nav-item :active="$route.path === '/learn/docs'"><router-link to="/learn/docs">Documentation</router-link></b-nav-item>
+                        <b-nav-item :active="$route.path === '/learn/stories'"><router-link to="/learn/stories">Adaptation Stories</router-link></b-nav-item>
+                        <b-nav-item :active="$route.path === '/learn/support'"><router-link to="/learn/support">Support</router-link></b-nav-item>
                     </b-nav>
                 </b-col>
             </b-row>

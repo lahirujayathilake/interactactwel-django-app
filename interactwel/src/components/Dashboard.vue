@@ -13,9 +13,9 @@
                             <b-card-text>
                                 <!--<p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla.</p> -->
                                 <b-button block><router-link to="/learn/videos/1">Instructional Videos</router-link></b-button>
-                                <b-button block>Adaptation Stories</b-button>
-                                <b-button block>Documentation</b-button>
-                                <b-button block>Support</b-button>
+                                <b-button block><router-link to="/learn/stories">Adaptation Stories</router-link></b-button>
+                                <b-button block><router-link to="/learn/docs">Documentation</router-link></b-button>
+                                <b-button block><router-link to="/learn/support">Support</router-link></b-button>
                             </b-card-text>
 
                         </b-card>
@@ -29,8 +29,8 @@
                             <b-card-text style="padding-top: 1rem;">
                                 <!-- <p align="justify">
                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla. Curabitur lorem sapien, consectetur in faucibus vel, imperdiet at nulla.</p> -->
-                                <b-button block>Explore Community Projects</b-button>
-                                <b-button block>Visualize Potention Adaptation</b-button>
+                                <b-button block><router-link to="/projects/explore-projects">Explore Community Projects</router-link></b-button>
+                                <b-button block>Visualize Potential Adaptation Plans</b-button>
                                 <b-button block>
                                     <router-link to="/Dashboard">Evaluate Adaptation Plans</router-link>
                                 </b-button>

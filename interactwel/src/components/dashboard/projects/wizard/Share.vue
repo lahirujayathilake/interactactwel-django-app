@@ -33,14 +33,14 @@
                     <p class="list-group-item-text">Adaptation Plans</p>
                 </div>
             </li>
-            <li class="col-md-2">
+            <!--<li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">5</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Rate each plan</p>
                 </div>
-            </li>
+            </li>-->
             <li class="col-md-2">
                 <div class="step-progress-bar active">
                     <div class="step-no">6</div>
