@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='interactwelfeedback',
             name='feedback_id',
-            field=models.BigAutoField(default=0, editable=False, primary_key=True, serialize=False),
+            field=models.BigAutoField(editable=False, primary_key=True, serialize=False),
             preserve_default=False,
         ),
     ]
