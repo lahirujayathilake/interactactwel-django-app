@@ -19,6 +19,7 @@ InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, Intera
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework import status
 
 class SubbasinViewSet(viewsets.ViewSet):
 
@@ -37,13 +38,13 @@ class SubbasinViewSet(viewsets.ViewSet):
         serializer = SubbasinSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "Subbasin Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 ################# User Management ##############################################
 ################################################################################
@@ -64,13 +65,13 @@ class UserViewSet(viewsets.ViewSet):
         serializer = InteractwelUserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "User Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class RoleViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -88,13 +89,13 @@ class RoleViewSet(viewsets.ViewSet):
         serializer = InteractwelRoleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "User Role Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class GroupViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -112,13 +113,13 @@ class GroupViewSet(viewsets.ViewSet):
         serializer = InteractwelGroupSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "User Group Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class GroupRoleMappingViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -136,13 +137,13 @@ class GroupRoleMappingViewSet(viewsets.ViewSet):
         serializer = InteractwelGroupRoleMappingSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Group Role Mapping Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class GroupMembershipViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -160,13 +161,13 @@ class GroupMembershipViewSet(viewsets.ViewSet):
         serializer = InteractwelGroupMembershipSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Group Membership Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
 ################################## Events ######################################
@@ -188,13 +189,13 @@ class EventViewSet(viewsets.ViewSet):
         serializer = InteractwelEventSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Event Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class EventAttendanceViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -212,13 +213,13 @@ class EventAttendanceViewSet(viewsets.ViewSet):
         serializer = InteractwelEventAttendanceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Event Attendance Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class InvitationViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -236,13 +237,13 @@ class InvitationViewSet(viewsets.ViewSet):
         serializer = InteractwelInvitationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Event Invitation Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 ################################################################################
 ################################################################################
@@ -269,7 +270,7 @@ class InstructionalVideoViewSet(viewsets.ViewSet):
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class AdaptationStoryViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -293,7 +294,7 @@ class AdaptationStoryViewSet(viewsets.ViewSet):
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class DocumentationViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -311,13 +312,13 @@ class DocumentationViewSet(viewsets.ViewSet):
         serializer = InteractwelDocumentationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Documentation Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 ########################### Project ############################################
 ################################################################################
@@ -338,13 +339,13 @@ class ProjectViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectUserViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -362,13 +363,13 @@ class ProjectUserViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectUserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project User Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectDataViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -392,7 +393,7 @@ class ProjectDataViewSet(viewsets.ViewSet):
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class PlanViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -410,13 +411,13 @@ class PlanViewSet(viewsets.ViewSet):
         serializer = InteractwelPlanSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Plan Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class FeedbackViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -433,14 +434,14 @@ class FeedbackViewSet(viewsets.ViewSet):
     def create(self, request):
         serializer = InteractwelFeedbackSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({"message", "Feedback Created"})
+            saved = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
     
     def get_queryset(self):
         queryset = InteractwelFeedback.objects.all()
@@ -464,13 +465,13 @@ class FeedbackAnswerViewSet(viewsets.ViewSet):
         serializer = InteractwelFeedbackAnswerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Feedback Answer Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
 ########################### Goals Actors Actions Questions #####################
@@ -492,13 +493,13 @@ class GoalViewSet(viewsets.ViewSet):
         serializer = InteractwelGoalSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Goal Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ActorViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -516,13 +517,13 @@ class ActorViewSet(viewsets.ViewSet):
         serializer = InteractwelActorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Actor Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ActionViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -540,13 +541,13 @@ class ActionViewSet(viewsets.ViewSet):
         serializer = InteractwelActionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Action Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class QuestionViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -564,13 +565,13 @@ class QuestionViewSet(viewsets.ViewSet):
         serializer = InteractwelQuestionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Question Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 ########################### Project mapping in Goals Actors Actions Questions ##
 ################################################################################
@@ -591,13 +592,13 @@ class ProjectGoalViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectGoalSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project Goal Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectActorViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -615,13 +616,13 @@ class ProjectActorViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectActorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project Actor Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectActionViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -639,13 +640,13 @@ class ProjectActionViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectActionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project Action Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class ProjectQuestionViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -663,13 +664,13 @@ class ProjectQuestionViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectQuestionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project Question Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
         queryset = InteractwelProjectQuestion.objects.all()
@@ -698,10 +699,10 @@ class ProjectPlanViewSet(viewsets.ViewSet):
         serializer = InteractwelProjectPlanSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message", "Project Plan Created"})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             data = {
                 "error": True,
                 "errors": serializer.errors,
             }
-            return Response(data)
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
