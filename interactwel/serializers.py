@@ -110,6 +110,7 @@ class InteractwelFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelFeedback
         fields = '__all__'
+        extra_kwargs = {'comments': {'required': False}, 'rating': {'required': False}}
 
 class InteractwelProjectDataSerializer(serializers.ModelSerializer):
     class Meta:
