@@ -9,13 +9,13 @@
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Goals</strong></h6>
                     <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedGoals" v-bind:key="item.goal_id">
-                        <b-list-group-item class="no-border"><small> &#10003;&nbsp;{{item.name}}</small></b-list-group-item>
+                        <b-list-group-item class="no-border py-1"> &#10003;&nbsp;{{item.name}}</b-list-group-item>
                     </b-list-group>
                 </b-col>
                 <b-col lg="6">
                     <h6 class="chart-title"><strong>Selected Actors</strong></h6>
                     <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActors" v-bind:key="item.actor_id" >
-                        <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.name}}</small></b-list-group-item>
+                        <b-list-group-item class="no-border py-1">&#10003;&nbsp;{{item.description}}</b-list-group-item>
                     </b-list-group>
                 </b-col>
             </b-row>
@@ -23,23 +23,16 @@
                 <b-col lg="12">
                     <h6 class="chart-title"><strong>Selected Actions for Actors</strong></h6>
 
-                    <b-col lg="6">
+                    <b-col lg="12">
                         <b-list-group class="no-padding" v-for="actor in adaptationPlan.selectedActors" v-bind:key="actor.id" >
-                            <b-list-group-item class="no-border">&#10003;&nbsp;{{actor.name}}</b-list-group-item>
-                            <b-list-group class="no-padding" v-for="item in adaptationPlan.selectedActions" v-bind:key="item.id"
+                            <b-list-group-item class="no-border py-1">&#10003;&nbsp;{{actor.description}}
+                            <b-list-group class="no-padding py-0 mr-2" v-for="item in adaptationPlan.selectedActions" v-bind:key="item.id"
                                           v-if="item.actor.actor_id == actor.actor_id ">
-                                <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.action.name}}</small></b-list-group-item>
+                                <b-list-group-item class="no-border py-1"><small>&#10003;&nbsp;{{item.action.name}}</small></b-list-group-item>
                             </b-list-group>
+                            </b-list-group-item>
                         </b-list-group>
                     </b-col>
-                  <!--  <b-tabs card vertical>
-                        <b-tab v-for="actor in selectedActors" v-bind:key="actor.id"  :title="actor.actor" active>
-                            <b-list-group v-for="item in getActions(actor)">
-                                <b-list-group-item class="no-border"><small>&#10003;&nbsp;{{item.action}}</small></b-list-group-item>
-                            </b-list-group>
-                        </b-tab>
-
-                    </b-tabs>-->
                 </b-col>
             </b-row>
         </div>

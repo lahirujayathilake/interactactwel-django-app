@@ -1,8 +1,8 @@
 <template>
     <div>
-        <b-card no-body>
+        <b-card v-if="projects" no-body>
             <b-tabs pills card vertical nav-wrapper-class="w-25">
-                <b-tab title="My Projects" v-on:click="mapSelected()">
+                <!--<b-tab title="My Projects" v-on:click="mapSelected()">
                     <div class="card map-container">
                         <l-map :zoom="5" :center="getMainMapCenterLocation()">
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -16,7 +16,7 @@
                                     :visible="true"/>
                         </l-map>
                     </div>
-                </b-tab>
+                </b-tab>-->
                 <b-tab
                         v-for="project in projects"
                         :title="project.name"
@@ -92,7 +92,7 @@
                                 <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
                             </b-button>-->
                             <b-button class="mr-2 btn-sm">
-                                <router-link :to="'/adaptation-plans/'+ project.project_id">Visualize New Plans</router-link>
+                                <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
                             </b-button>
                             </b-button-group>
                         </div>
@@ -101,7 +101,7 @@
                 </b-tab>
             </b-tabs>
         </b-card>
-        <b-card v-show="!projects">
+        <b-card v-if="!projects">
             <b-card-body title="You don't have access to any projects">
                 <b-card-text>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.

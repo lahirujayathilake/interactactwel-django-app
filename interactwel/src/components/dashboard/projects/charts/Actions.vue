@@ -2,31 +2,27 @@
     <div id="graph" class="card">
 
         <div class="card-header"><span v-on:click="dismiss" class="close">  Close</span>
-            <strong style="font-size:18px">Adaptation Plans</strong>
+            <strong style="font-size:18px">Adaptation Pathways</strong>
+            <b-badge id="tooltip-button-1" class="info-button-path ml-2" pill variant="secondary" v-b-tooltip.hover>
+                How to read this chart?
+            </b-badge>
+            <b-tooltip target="tooltip-button-1" placement="bottom">
+                <p aling="justify">
+                    This chart shows the actions that different actors will take for this adaptation plan.</p>
+                <p aling="justify">
+                    Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
+            </b-tooltip>
         </div>
         <div class="card-body">
             <b-row>
                 <b-col lg="6">
-                    <b-badge id="tooltip-button-1" class="info-button-path" pill variant="secondary" v-b-tooltip.hover>
-                        How to read this chart?
-                    </b-badge>
-                    <b-tooltip target="tooltip-button-1" placement="bottom">
-                        <p aling="justify">
-                            This chart shows the actions that different actors will take for this adaptation plan.</p>
-                        <p aling="justify">
-                            Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
-                    </b-tooltip>
+
+                </b-col>
+                <b-col lg="12">
+                    <actions-graph-stepped-lines></actions-graph-stepped-lines>
                 </b-col>
             </b-row>
 
-            <b-tabs pills small align="right">
-                <b-tab title="Gannt" active><b-card-text>
-                    <gannt-chart></gannt-chart>
-                </b-card-text></b-tab>
-                <b-tab title="Pathways"><b-card-text>
-                    <actions-graph-stepped-lines></actions-graph-stepped-lines>
-                </b-card-text></b-tab>
-            </b-tabs>
 
 
 

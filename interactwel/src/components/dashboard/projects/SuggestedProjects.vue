@@ -1,22 +1,22 @@
 <template>
     <div>
-        <b-card no-body>
+        <b-card v-if="!projects" no-body>
             <b-tabs pills card vertical nav-wrapper-class="w-25">
-                <b-tab title="Invited Projects" v-on:click="mapSelected()">
-                    <div class="card map-container">
-                        <l-map :zoom="5" :center="getMainMapCenterLocation()">
-                            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                            <l-marker :lat-lng="marker"></l-marker>
+                <!--<b-tab title="Invited Projects" v-on:click="mapSelected()">-->
+                    <!--<div class="card map-container">-->
+                        <!--<l-map :zoom="5" :center="getMainMapCenterLocation()">-->
+                            <!--<l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>-->
+                            <!--<l-marker :lat-lng="marker"></l-marker>-->
 
-                            <l-marker
-                                    v-for="project in projects"
-                                    :key="project.project_id"
-                                    :lat-lng="{ lat: project.latitude, lng: project.longtitude }"
-                                    :icon="reservoirIcon"
-                                    :visible="true"/>
-                        </l-map>
-                    </div>
-                </b-tab>
+                            <!--<l-marker-->
+                                    <!--v-for="project in projects"-->
+                                    <!--:key="project.project_id"-->
+                                    <!--:lat-lng="{ lat: project.latitude, lng: project.longtitude }"-->
+                                    <!--:icon="reservoirIcon"-->
+                                    <!--:visible="true"/>-->
+                        <!--</l-map>-->
+                    <!--</div>-->
+                <!--</b-tab>-->
                 <b-tab
                         v-for="project in projects"
                         :title="project.name"
@@ -89,8 +89,8 @@
                 </b-tab>
             </b-tabs>
         </b-card>
-        <b-card v-show="">
-            <b-card-body title="You don't have any projects to explore">
+        <b-card v-if="projects">
+            <b-card-body title="You don't have any invited projects">
                 <b-card-text>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
                 </b-card-text>

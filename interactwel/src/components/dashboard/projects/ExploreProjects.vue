@@ -86,7 +86,7 @@
                         <b-button-group>
                         <b-button class="mr-2 btn-sm" disabled>Join</b-button>
                         <b-button class="mr-2 btn-sm">
-                            <router-link :to="'/visualize/'+ project.project_id">View Project</router-link>
+                            <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
                         </b-button>
                         </b-button-group>
                     </div>

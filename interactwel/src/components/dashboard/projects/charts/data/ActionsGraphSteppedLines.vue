@@ -1,6 +1,6 @@
 <template>
     <div>
-        <line-chart :chart-data="data" :options="options" :width="600" :height="400"></line-chart>
+        <line-chart :chart-data="data" :options="options" :width="650" :height="400"></line-chart>
     </div>
 </template>
 
@@ -55,12 +55,12 @@
                     }]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
                     legend: {
                         display: true
                     },
                     title: {
-                        display: true,
+                        display: false,
                         text: 'Actions taken by each actor through time'
                     },
                     scales: {
@@ -84,7 +84,7 @@
                             },
                             ticks: {
                                 beginAtZero: false,
-                                max: 7
+                                max: 9
                             },
                             labels: ["Business as usual", "Increase amount of SW", "Decrease amount of SW", "Increase amount of GW", "Decrease amount of GW", "Increase amount of CR", "Decrease amount of CR"],
                         }]
