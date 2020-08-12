@@ -12,7 +12,7 @@
                         <b-nav-item href="#"><router-link to="/dashboard">Home</router-link></b-nav-item>
                         <b-nav-item href="#"><router-link to="/community/events">Community</router-link></b-nav-item>
                         <b-nav-item href="#"><router-link to="/projects/my-projects">Projects</router-link></b-nav-item>
-                        <b-nav-item href="#"><router-link to="/my-plans">Plans</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link to="/plans/new-plan">Plans</router-link></b-nav-item>
                         <b-nav-item href="#">Profile</b-nav-item>
                     </b-navbar-nav>
                 </b-collapse>

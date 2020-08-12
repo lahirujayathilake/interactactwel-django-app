@@ -4,48 +4,23 @@
         <b-container fluid class="main">
             <b-row>
                 <b-col>
-                    <h3>My Saved Plans</h3>
+                    <h3 class="mb-3">Plans</h3>
                 </b-col>
             </b-row>
-            <b-row class="mt-3">
+            <b-row>
                 <b-col>
-                    <b-card no-body>
-                        <b-tabs pills card vertical>
-                            <b-tab title="Plan 1" active><b-card-text>
-                                <b-row>
-                                <b-col lg="6">
-
-                                </b-col>
-                                <b-col lg="6">
-
-                                </b-col>
-                                </b-row>
-                            </b-card-text></b-tab>
-                            <b-tab title="Plan 2">
-                                <b-row>
-                                    <b-col lg="6">
-
-                                    </b-col>
-                                    <b-col lg="6">
-
-                                    </b-col>
-                                </b-row><b-card-text>
-
-                            </b-card-text></b-tab>
-                            <b-tab title="Plan 3"><b-card-text>
-                                <b-row>
-                                    <b-col lg="6">
-
-                                    </b-col>
-                                    <b-col lg="6">
-
-                                    </b-col>
-                                </b-row>
-                            </b-card-text></b-tab>
-                        </b-tabs>
-                    </b-card>
+                    <b-tabs>
+                        <b-tab :active="$route.path === '/plans/new-plan'" title="Generate New Plan" v-on:click='loadTabContent("/plans/new-plan")'></b-tab>
+                        <b-tab :active="$route.path === '/plans/saved-plans/1'" title="Saved Plans" v-on:click='loadTabContent("/plans/saved-plans/1")'></b-tab>
+                    </b-tabs>
                 </b-col>
             </b-row>
+            <b-row>
+                <b-col>
+                    <router-view></router-view>
+                </b-col>
+            </b-row>
+
         </b-container>
         <component v-bind:is="component='Footer'"></component>
     </div>
@@ -62,7 +37,19 @@
             Header, Footer
         },
         props: {
-            msg: String
+
+        },
+
+        computed: {
+            currentRoute(){
+                return this.$route.path;
+            }
+        },
+        methods: {
+
+            loadTabContent(path) {
+                this.$router.push(path);
+            }
         }
     }
 </script>
