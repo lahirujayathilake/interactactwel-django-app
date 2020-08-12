@@ -6,6 +6,9 @@ const Home = () => import('@/components/Index')
 const Dashboard = () => import('@/components/Dashboard')
 
 const MyPlans = () => import('@/components/dashboard/MyPlans')
+const NewPlan = () => import('@/components/dashboard/plans/NewPlan')
+const SavedPlans = () => import('@/components/dashboard/plans/SavedPlans')
+const SavedPlan = () => import('@/components/dashboard/plans/SavedPlan')
 
 const Projects = () => import('@/components/dashboard/Projects')
 const MyProjects = () => import('@/components/dashboard/projects/MyProjects')
@@ -73,16 +76,29 @@ export default new Router({
             component: Dashboard,
         },
         {
-            path: '/dashboard',
-            //redirect: '/pages/404',
-            name: 'Dashboard',
-            component: Dashboard,
-        },
-        {
-            path: '/my-plans',
+            path: '/plans',
             //redirect: '/pages/404',
             name: 'MyPlans',
             component: MyPlans,
+            children: [
+                {
+                    path: 'new-plan',
+                    name: 'NewPlan',
+                    component: NewPlan
+                },
+                {
+                    path: 'saved-plans',
+                    name: 'SavedPlans',
+                    component: SavedPlans,
+                    children: [
+                        {
+                            path: ':planId',
+                            name: 'SavedPlan',
+                            component: SavedPlan
+                        }
+                    ]
+                },
+            ]
         },
         {
             path: '/projects',
