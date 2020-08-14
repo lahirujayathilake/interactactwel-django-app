@@ -6,41 +6,48 @@
         <div class="card-body no-padding">
             <div v-show="feedbackVisibility" class="">
                 <div v-show="feedbackBlock" id="feedback-block">
-                    <b-form v-show="initialFeedback" @submit="onSubmit" @reset="onReset">
+                    <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
-                            <b-form-radio v-model="feasibility" value="1" name="some-radios">Yes</b-form-radio>
-                            <b-form-radio v-model="feasibility" value="0" name="some-radios">No</b-form-radio>
+                            <b-form-radio-group required v-model="feasibility" value="1" name="feasibility-choice" :options="feasibilityChoice"></b-form-radio-group>
                         </b-form-group>
                         <div v-if="feasibility === '0'">
                             <b-form-group label="Please state why this plan is infeasible">
                                 <b-form-textarea
                                         id="textarea"
-                                        v-model="ifNotFeasiblecomment"
+                                        v-model="comment"
                                         rows="3"
                                         max-rows="6"
                                 ></b-form-textarea>
                             </b-form-group>
                         </div>
                         <div v-if="feasibility === '1'">
-
                             <b-form-group v-for="question in questions" :key="question.question_id"
                                           :label="question.question_text">
                                 <b-form-radio-group v-if="question.question_type === 'multi_choice'"
-                                                    :id="question.question_id"
-                                                    v-model="form.answers[question.question_id]"
-                                                    :options="options"
+                                                    :id="question.question_id.toString()"
+                                                    v-model="answers[question.question_id]"
+                                                    :options="question.options"
                                 ></b-form-radio-group>
-
                                 <b-form-textarea v-if="question.question_type === 'text'"
-                                                 :id="question.question_id"
-                                                 v-model="form.answers[question.question_id]"
+                                                 :id="question.question_id.toString()"
+                                                 v-model="answers[question.question_id]"
                                                  rows="3"
                                                  max-rows="6"
                                 ></b-form-textarea>
-
+                            </b-form-group>
+                            <b-form-group label="How do you rate this plan?">
+                                <star-rating v-model="rating"></star-rating>
+                            </b-form-group>
+                            <b-form-group label="Please share any additional thoughts about the alternative plans or the plan builder tool">
+                                <b-form-textarea
+                                        id="textarea"
+                                        v-model="comment"
+                                        rows="3"
+                                        max-rows="6"
+                                ></b-form-textarea>
                             </b-form-group>
                         </div>
-                        <b-button type="submit" @click="submitFeedback">Submit</b-button>
+                        <b-button type="submit">Submit</b-button>
                     </b-form>
                 </div>
                 <div id="thankyou-block" v-show="thankyouBlock">
@@ -65,16 +72,11 @@
                 ifFeasible: [],
                 ifNotFeasible: [],
                 ifFeasiblecomment: null,
-                ifNotFeasiblecomment: null,
-
-                options: [
-                    {text: 'Not at all', value: 1},
-                    {text: 'Satisfactory', value: 2},
-                    {text: 'Neutral', value: 3},
-                    {text: 'Well', value: 4},
-                    {text: 'Very Well', value: 5},
+                comment: null,
+                feasibilityChoice: [
+                    {text:"Yes", value: "1"},
+                    {text:"No", value: "0"}
                 ],
-
                 factors: [
                     {text: 'Infrastructure costs', value: 'Infrastructure costs'},
                     {text: 'Permits or other regulatory approval processes and cost', value: 'Permits or other regulatory approval processes and cost'},
@@ -82,16 +84,12 @@
                     {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
                     {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
                 ],
-
                 feedbackProvided: false,
                 currentRouteName: '',
-
                 SelectedFactors: [],
-
                 questions: [],
-                form: {
-                    answers: []
-                }
+                answers: new Map(),
+                rating: null
             }
         },
         mounted() {
@@ -117,8 +115,8 @@
                                 for (let sortedQuestion of sortedQuestions) {
                                     for (let question of allQuestions) {
                                         if (question.question_id === sortedQuestion.question_id){
+                                            this.addQuestionOptions(question);
                                             projectQuestions.push(question);
-
                                         }
                                     }
                                 }
@@ -138,38 +136,59 @@
             submit(){
                 localStorage.setItem('step4', true);
                 this.feedbackVisibility = false
-
             },
             back(){
                 this.$router.push('/adaptation-plans/1/actions')
             },
-            async submitFeedback() {
+            async submitFeedback(evt) {
+                evt.preventDefault()
                 //let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
                 //adaptationPlan.planId = this.$route.params.planId;
                 //localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
                 let user = await this.getLoggedInUser();
                 let planId = this.$route.params.planId;
                 let projectId = this.$route.params.projectId;
-
-                const { utils } = AiravataAPI;
+                debugger;
+                const {utils} = AiravataAPI;
                 utils.FetchUtils.post(
                     '/interactwel/api/feedbacks/',
                     {
                         date_created: new Date(),
                         date_modified: new Date(),
-                        feasibility: this.feasibility,
+                        feasibilty: this.feasibility,
                         comments: this.comment,
-                        q1: this.q1Selected,
-                        q2: this.q2Selected,
-                        q3: this.q3Selected,
-                        q4: this.q4Selected,
                         rating: this.rating,
                         user_id: user.id,
                         project_id: projectId,
-                        plan_Id: planId
+                        plan_id: planId
                     })
-                    .then(data => {
-
+                    .then(feedback => {
+                        if (feedback.error != null && feedback.error === true) {
+                            alert("Error while posting the feedback.");
+                            return;
+                        }
+                        //feedback posted successfully. now post the questions and answers
+                        //prepare the answers body
+                        let answerBody = [];
+                        for (var element in this.answers) {
+                            if (this.answers.hasOwnProperty(element)) {
+                                let question = this.getQuestionById(element);
+                                if (question === null || question === undefined) {
+                                    continue;
+                                }
+                                answerBody.push({
+                                    question:question.question_text,
+                                    answer:this.answers[element],
+                                    feedback_id:feedback.feedback_id
+                                })
+                            }
+                        }
+                        utils.FetchUtils.post("/interactwel/api/feedbackanswers",
+                            answerBody).then( result => {
+                                if (result.error != null && result.error === true) {
+                                    alert("Error while posting the answers. " + feedback.error)
+                                }
+                        });
                     })
                     .catch(error => {
                         alert("API error while posting the feedback! " + error)
@@ -180,10 +199,17 @@
                 this.thankyouBlock = true
                 this.feedbackBlock = false
             },
+            addQuestionOptions(question) {
 
-            onSubmit(evt) {
-                evt.preventDefault()
-                alert(JSON.stringify(this))
+                let options = [];
+                question.possible_answers.forEach(answer => {
+                    options.push({
+                        text:answer,
+                        value:answer
+                    })
+                })
+                question.options = options;
+
             },
             onReset(evt) {
                 evt.preventDefault()
@@ -196,8 +222,16 @@
                 this.$nextTick(() => {
                     this.show = true
                 })
+            },
+            getQuestionById(id) {
+                for (const question of this.questions) {
+                    if (question.question_id == id) {
+                        return question;
+                    }
+                }
             }
-        }
+        },
+
     }
 </script>
 

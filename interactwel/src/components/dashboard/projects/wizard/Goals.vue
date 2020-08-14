@@ -225,25 +225,6 @@
                     this.showInfoModal = true;
                     return;
                 }
-
-                const { utils } = AiravataAPI;
-
-                this.selectedGoals.forEach(goal=>{
-                    utils.FetchUtils.post(
-                    '/interactwel/api/projectgoals/',
-                    {
-                        goal_id: goal.goal_id,
-                        project_id: projectId,
-
-                    })
-                    .then(data => {
-                        console.log("data");
-                    })
-                    .catch(error => {
-                        alert("Create the Projects. API error! " + error)
-                    });
-                });
-                
                 this.$store.commit("setSelectedGoals", this.selectedGoals);
                 this.$store.commit("step1", true);
                 this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
@@ -252,24 +233,6 @@
 
             onConfirm() {
                 this.selectGoals();
-                const projectId=this.$route.params.projectId;
-                const { utils } = AiravataAPI;
-                this.selectedGoals.forEach(goal=>{
-                    utils.FetchUtils.post(
-                    '/interactwel/api/projectgoals/',
-                    {
-                        goal_id: goal.goal_id,
-                        project_id: projectId,
-
-                    })
-                    .then(data => {
-                        console.log("data");
-                    })
-                    .catch(error => {
-                        alert("Create the Projects. API error! " + error)
-                    });
-                });
-                console.log(this.selectAllGoals);
                 this.$store.commit("setSelectedGoals", this.selectedGoals);
                 this.$store.commit("step1", true);
                 this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
