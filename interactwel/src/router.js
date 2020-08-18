@@ -8,7 +8,7 @@ const Dashboard = () => import('@/components/Dashboard')
 const MyPlans = () => import('@/components/dashboard/MyPlans')
 const NewPlan = () => import('@/components/dashboard/plans/NewPlan')
 const SavedPlans = () => import('@/components/dashboard/plans/SavedPlans')
-const SavedPlan = () => import('@/components/dashboard/plans/SavedPlan')
+const ProjectPlansList = () => import('@/components/dashboard/plans/ProjectPlansList')
 
 const Projects = () => import('@/components/dashboard/Projects')
 const MyProjects = () => import('@/components/dashboard/projects/MyProjects')
@@ -92,9 +92,9 @@ export default new Router({
                     component: SavedPlans,
                     children: [
                         {
-                            path: ':planId',
-                            name: 'SavedPlan',
-                            component: SavedPlan
+                            path: ':projectId',
+                            name: 'ProjectPlansList',
+                            component: ProjectPlansList
                         }
                     ]
                 },

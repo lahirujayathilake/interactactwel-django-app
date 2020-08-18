@@ -5,7 +5,7 @@
                 <b-tab
                         v-for="project in projects"
                         :title="project.name"
-                        v-on:click="mapSelected()">
+                        v-on:click="projectSelected(project.project_id)">
                     <!--<router-view></router-view>-->
                         <b-card-body class="no-padding">
                             <b-row class="mb-2">
@@ -108,31 +108,28 @@
             const {utils, session} = AiravataAPI;
             const SessionData = AiravataPortalSessionData;
             this.loggedInUser.username = SessionData.username;
-            console.log("user " + this.loggedInUser.username);
-
             utils.FetchUtils.get("/interactwel/api/users/")
                 .then(users => {
                     this.loggedInUser = users.find(user => {
                         return user.username = this.loggedInUser.username;
                     });
-                    //console.log("user"+ this.loggedInUser);
                     utils.FetchUtils.get("/interactwel/api/projectusers/")
                         .then(projectsUsers => {
                             this.projectsUsers = projectsUsers.filter(projectUser => {
                                 return projectUser.user_id === this.loggedInUser.id && projectUser.status === "Active";
                             })
-                            console.log(this.projectsUsers);
                             utils.FetchUtils.get("/interactwel/api/projects/")
                                 .then(projects => {
-                                    console.log(projects);
                                     this.projects = projects.filter(project => {
-                                        console.log(project);
                                         return this.projectsUsers.findIndex(projectUser => {
                                             console.log(projectUser.project_id === project.project_id);
                                             return projectUser.project_id === project.project_id;
                                         }) !== -1 ? true : false;
                                     });
-                                    console.log(this.projects);
+                                    //set the route to first project
+                                    if (projects.length > 0){
+                                        this.$router.push('/plans/saved-plans/'+ projects[0].project_id);
+                                    }
                                 })
                                 .catch(error => {
                                     alert("Could not get the projects list. API error! " + error);
@@ -142,30 +139,10 @@
                         .catch(error => {
                             alert("Could not get the projects list. API error! " + error);
                         });
-
-
                 })
                 .catch(error => {
                     alert("Could not get the projects list. API error! " + error);
                 });
-
-            // utils.FetchUtils.get("/interactwel/api/projects/")
-            //   .then(data => {
-            //     this.projects = data;
-            //   })
-            //   .catch(error => {
-            //     alert("Could not get the projects list. API error! " + error);
-            //   });
-            // utils.FetchUtils.get("/interactwel/api/projects/")
-            //     .then(projects => {
-            //         this.projects=this.projects=projects.filter(project=>{
-            //             return project.username===this.loggedInUserName;
-            //         });
-            //     })
-            //     .catch(error => {
-            //         alert("Could not get the projects list. API error! " + error);
-            //     });
-            // console.log(this.projects);
 
         },
 
@@ -184,7 +161,7 @@
                 window.dispatchEvent(new Event('resize'))
             },
             projectSelected: function (projectId) {
-                this.$router.push('/projects/my-projects/'+ projectId);
+                this.$router.push('/plans/saved-plans/'+ projectId);
 
             }
 

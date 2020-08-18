@@ -128,7 +128,7 @@
                         });
                 }
             ).catch(error => {
-                alert("Failed to fetch questions");
+                alert("Failed to fetch questions", error);
             })
         },
         watch: {},
@@ -148,7 +148,6 @@
                 let user = await this.getLoggedInUser();
                 let planId = this.$route.params.planId;
                 let projectId = this.$route.params.projectId;
-                debugger;
                 const {utils} = AiravataAPI;
                 utils.FetchUtils.post(
                     '/interactwel/api/feedbacks/',
