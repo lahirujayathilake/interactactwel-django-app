@@ -52,33 +52,12 @@
 
         async mounted() {
             const {utils} = AiravataAPI;
-            let user = await this.getLoggedInUser();
 
-            utils.FetchUtils.get("/interactwel/api/projectusers/")
-                .then(projectsUsers => {
-                    this.projectsUsers = projectsUsers.filter(projectUser => {
-                        return projectUser.user_id === user.id && projectUser.status === "Active";
-                    })
-                    utils.FetchUtils.get("/interactwel/api/projects/")
-                        .then(projects => {
-                            this.projects = projects.filter(project => {
-                                return this.projectsUsers.findIndex(projectUser => {
-                                    return projectUser.project_id === project.project_id;
-                                }) !== -1 ? true : false;
-                            });
-                            //set the route to first project
-                            if (projects.length > 0){
-                                this.$router.push('/plans/saved-plans/'+ projects[0].project_id);
-                            }
-                        })
-                        .catch(error => {
-                            alert("Could not get the projects list. API error! " + error);
-                        });
+            this.projects = await this.getProjectsListOfLoggedInUser();
 
-                })
-                .catch(error => {
-                    alert("Could not get the projects list. API error! " + error);
-                });
+            if (this.projects.length > 0){
+                this.$router.push('/plans/saved-plans/'+ projects[0].project_id);
+            }
 
 
         },

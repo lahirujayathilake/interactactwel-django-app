@@ -185,67 +185,9 @@
         },
 
 
-        mounted() {
-            const {utils, session} = AiravataAPI;
-            const SessionData = AiravataPortalSessionData;
-            this.loggedInUser.username = SessionData.username;
+        async mounted() {
 
-            utils.FetchUtils.get("/interactwel/api/users/")
-                .then(users => {
-                    this.loggedInUser = users.find(user => {
-                        return user.username = this.loggedInUser.username;
-                    });
-                    console.log(this.loggedInUser);
-                    utils.FetchUtils.get("/interactwel/api/projectusers/")
-                        .then(projectsUsers => {
-                            this.projectsUsers = projectsUsers.filter(projectUser => {
-                                return projectUser.user_id === this.loggedInUser.id && projectUser.status === "Inactive";
-                            })
-                            console.log(this.projectsUsers);
-                            utils.FetchUtils.get("/interactwel/api/projects/")
-                                .then(projects => {
-                                    console.log(projects);
-                                    this.projects = projects.filter(project => {
-                                        console.log(project);
-                                        return this.projectsUsers.findIndex(projectUser => {
-                                            console.log(projectUser.project_id === project.project_id);
-                                            return projectUser.project_id === project.project_id;
-                                        }) !== -1 ? true : false;
-                                    });
-                                    console.log(this.projects);
-                                })
-                                .catch(error => {
-                                    alert("Could not get the projects list. API error! " + error);
-                                });
-
-                        })
-                        .catch(error => {
-                            alert("Could not get the projects list. API error! " + error);
-                        });
-
-
-                })
-                .catch(error => {
-                    alert("Could not get the projects list. API error! " + error);
-                });
-
-            // utils.FetchUtils.get("/interactwel/api/projects/")
-            //   .then(data => {
-            //     this.projects = data;
-            //   })
-            //   .catch(error => {
-            //     alert("Could not get the projects list. API error! " + error);
-            //   });
-            // utils.FetchUtils.get("/interactwel/api/projects/")
-            //     .then(projects => {
-            //         this.projects=this.projects=projects.filter(project=>{
-            //             return project.username===this.loggedInUserName;
-            //         });
-            //     })
-            //     .catch(error => {
-            //         alert("Could not get the projects list. API error! " + error);
-            //     });
-            // console.log(this.projects);
+            this.projects = await this.getProjectsListOfLoggedInUser();
 
         },
 
