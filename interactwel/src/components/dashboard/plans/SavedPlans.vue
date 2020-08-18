@@ -22,24 +22,9 @@
 
 
 <script>
-    import L from "leaflet";
-    import {LMap, LTileLayer, LMarker, LGeoJson, LControlLayers, LControlScale, LLayerGroup, LPopup, LControlZoom} from 'vue2-leaflet';
-    import ReservoirList from './../../../../public/static/reservoirs_list.json';
-    import ReservoirDataJson from "./../../../../public/static/reservoirs_data.json";
-    import PopupContentReservoirs from "./../projects/popup/PopupContent_Reservoirs";
-
 
     export default {
         components: {
-            'l-map': LMap,
-            'l-tile-layer': LTileLayer,
-            'l-marker': LMarker,
-            'l-control-layers': LControlLayers,
-            'l-layer-group': LLayerGroup,
-            'l-control-scale': LControlScale,
-            'l-popup': LPopup,
-            'l-control-zoom': LControlZoom,
-            'popup-content-rs': PopupContentReservoirs,
         },
         name: "SavedPlans",
 
@@ -51,7 +36,6 @@
         },
 
         async mounted() {
-            const {utils} = AiravataAPI;
 
             this.projects = await this.getProjectsListOfLoggedInUser();
 
