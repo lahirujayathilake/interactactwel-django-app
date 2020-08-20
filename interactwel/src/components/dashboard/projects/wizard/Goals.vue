@@ -6,7 +6,7 @@
                     <div class="step-no">1</div>
                     <h4 class="list-group-item-heading">Goals</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{selectedGoals.length}} goals selected</p>
+                    <p class="list-group-item-text">{{selectedGoals.length}} Goals Selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -14,7 +14,7 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">0 Actores selected</p>
+                    <p class="list-group-item-text">0 Actors Selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -22,7 +22,7 @@
                     <div class="step-no">3</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">0 Actions selected</p>
+                    <p class="list-group-item-text">0 Actions Selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -43,10 +43,10 @@
             </li>-->
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">6</div>
-                    <h4 class="list-group-item-heading">Save and Print</h4>
+                    <div class="step-no">5</div>
+                    <h4 class="list-group-item-heading">Wrap Up</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Save and print Plans</p>
+                    <p class="list-group-item-text">Save and Print Plans</p>
                 </div>
             </li>
         </ol>

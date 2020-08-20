@@ -6,7 +6,7 @@
                     <div class="step-no">1</div>
                     <h4 class="list-group-item-heading">Goals</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{adaptationPlan.selectedGoals.length}} golas selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedGoals.length}} Goals Selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -14,7 +14,7 @@
                     <div class="step-no">2</div>
                     <h4 class="list-group-item-heading">Actors</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{adaptationPlan.selectedActors.length}} Actores selected</p>
+                    <p class="list-group-item-text">{{adaptationPlan.selectedActors.length}} Actors Selected</p>
                 </div>
             </li>
             <li class="col-md-2 active">
@@ -22,7 +22,7 @@
                     <div class="step-no">3</div>
                     <h4 class="list-group-item-heading">Actions</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{selectedActions.length}} Actions selected</p>
+                    <p class="list-group-item-text">{{selectedActions.length}} Actions Selected</p>
                 </div>
             </li>
             <li class="col-md-2">
@@ -43,10 +43,10 @@
             </li>-->
             <li class="col-md-2">
                 <div class="step-progress-bar">
-                    <div class="step-no">6</div>
-                    <h4 class="list-group-item-heading">Save and Print</h4>
+                    <div class="step-no">5</div>
+                    <h4 class="list-group-item-heading">Wrap Up</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Save and print Plans</p>
+                    <p class="list-group-item-text">Save and Print Plans</p>
                 </div>
             </li>
         </ol>
