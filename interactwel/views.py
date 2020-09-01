@@ -397,7 +397,7 @@ class ProjectDataViewSet(viewsets.ViewSet):
 
 class PlanViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = InteractwelPlan.objects.all()
+        queryset = self.get_queryset()
         serializer = InteractwelPlanSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -418,6 +418,18 @@ class PlanViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_queryset(self):
+        queryset = InteractwelPlan.objects.all()
+        project_id = self.request.query_params.get('project_id', None)
+        if project_id is not None:
+            queryset = queryset.filter(project_id=project_id)
+
+        plan_id = self.request.query_params.get('plan_id', None)
+        if plan_id is not None:
+            queryset = queryset.filter(plan_id=plan_id)
+        return queryset
+
 
 class FeedbackViewSet(viewsets.ViewSet):
     def list(self, request):
