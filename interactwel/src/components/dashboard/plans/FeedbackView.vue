@@ -21,6 +21,9 @@
                     Answer: {{feedbackItem.answer}}
                     <hr>
                 </div>
+                <div v-if="feedback.comments != null">
+                    Comment: {{feedback.comments}}
+                </div>
             </div>
         </b-card-text>
     </b-card>

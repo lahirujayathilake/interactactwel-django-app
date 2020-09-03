@@ -2,7 +2,7 @@
     <div>
         <b-card no-body>
             <b-tabs card pills vertical>
-                <b-tab :key="plan.id" :title="'Plan ' + plan.plan_id" active v-for="plan in plans">
+                <b-tab :key="plan.plan_id" :title="'Plan ' + plan.plan_id" active v-for="plan in plans">
                     <b-row>
                         <b-col lg="6">
                             <b-card title="Overview">
@@ -14,7 +14,7 @@
                             </b-card>
                         </b-col>
                         <b-col lg="6">
-                            <feedback-view :plan-id="plan.id" :project-id="projectId"></feedback-view>
+                            <feedback-view :plan-id="plan.plan_id" :project-id="projectId"></feedback-view>
                         </b-col>
                         <b-col lg="12">
                             <b-card title="Adaptation Pathways">
@@ -52,19 +52,12 @@
         mounted() {
             const {utils} = AiravataAPI;
             this.projectId = this.$route.params.projectId
-            utils.FetchUtils.get("/interactwel/api/projectplans/")
+            utils.FetchUtils.get("/interactwel/api/plans/?project_id"+this.projectId)
                 .then(projectPlansList => {
-                    //filter by project id todo: ideally this filtration should happen at DB level
-                    if (projectPlansList != null) {
-                        projectPlansList.forEach(projectPlan => {
-                            if (projectPlan.project_id == this.projectId) {
-                                this.plans.push(projectPlan);
-                            }
-                        });
-                    }
+                    this.plans = projectPlansList;
                 })
                 .catch(error => {
-                    alert("Could not get the projects list. API error! " + error);
+                    alert("Could not get the plans list. API error! " + error);
                 });
 
         },

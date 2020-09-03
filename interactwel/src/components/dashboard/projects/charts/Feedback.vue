@@ -4,7 +4,7 @@
             <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
         <div class="card-body no-padding">
-            <div v-show="feedbackVisibility" class="">
+            <div v-show="feedbackSectionVisibility" class="">
                 <div v-show="feedbackBlock" id="feedback-block">
                     <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
@@ -54,6 +54,7 @@
                     Thank you
                 </div>
             </div>
+            <div v-show="!feedbackSectionVisibility"> You have already provided feedback for this plan</div>
         </div>
     </div>
 </template>
@@ -64,7 +65,7 @@
         props: {},
         data() {
             return {
-                feedbackVisibility: true,
+                feedbackSectionVisibility: true,
                 feedbackBlock: true,
                 thankyouBlock: false,
                 feasibility: false,
@@ -84,7 +85,6 @@
                     {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
                     {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
                 ],
-                feedbackProvided: false,
                 currentRouteName: '',
                 SelectedFactors: [],
                 questions: [],
@@ -92,50 +92,59 @@
                 rating: null
             }
         },
-        mounted() {
+        async mounted() {
             const {utils} = AiravataAPI;
-
-            if(!localStorage.feedbackProvided){
-                localStorage.setItem('feedbackProvided', false);
-            }else{
-                let $this = this
-                $this.feedbackProvided = localStorage.feedbackProvided;
-            }
             let projectId = this.$route.params.projectId;
+            let planId = this.$route.params.planId;
 
-            //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
-            //TODO: Ideally this join should happen in db level
-            utils.FetchUtils.get("/interactwel/api/questions/").then(
-                allQuestions => {
-                    utils.FetchUtils.get("/interactwel/api/projectquestions/?project_id="+projectId)
-                        .then(questions => {
-                            if (questions != null) {
-                                let sortedQuestions = questions.sort((x, y) => x.id - y.id);
-                                let projectQuestions = []
-                                for (let sortedQuestion of sortedQuestions) {
-                                    for (let question of allQuestions) {
-                                        if (question.question_id === sortedQuestion.question_id){
-                                            this.addQuestionOptions(question);
-                                            projectQuestions.push(question);
+            let user = await this.getLoggedInUser();
+            utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ planId + "&user_id="+user.id).then(result => {
+
+                    if (result.length > 0) {
+                        this.feedbackSectionVisibility = false; //user has already provided the feedback for this plan.
+                    }
+
+                    else {
+                        //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
+                        //TODO: Ideally this join should happen in db level
+                        utils.FetchUtils.get("/interactwel/api/questions/").then(
+                            allQuestions => {
+                                utils.FetchUtils.get("/interactwel/api/projectquestions/?project_id="+projectId)
+                                    .then(questions => {
+                                        if (questions != null) {
+                                            let sortedQuestions = questions.sort((x, y) => x.id - y.id);
+                                            let projectQuestions = []
+                                            for (let sortedQuestion of sortedQuestions) {
+                                                for (let question of allQuestions) {
+                                                    if (question.question_id === sortedQuestion.question_id){
+                                                        this.addQuestionOptions(question);
+                                                        projectQuestions.push(question);
+                                                    }
+                                                }
+                                            }
+                                            this.questions = projectQuestions;
                                         }
-                                    }
-                                }
-                                this.questions = projectQuestions;
+                                    })
+                                    .catch(error => {
+                                        alert("Could not get the projects list. API error! " + error);
+                                    });
                             }
+                        ).catch(error => {
+                            alert("Failed to fetch questions", error);
                         })
-                        .catch(error => {
-                            alert("Could not get the projects list. API error! " + error);
-                        });
+                    }
+
                 }
             ).catch(error => {
-                alert("Failed to fetch questions", error);
+                alert("Failed to fetch questions " + error);
             })
+
+
         },
         watch: {},
         methods: {
             submit(){
                 localStorage.setItem('step4', true);
-                this.feedbackVisibility = false
             },
             back(){
                 this.$router.push('/adaptation-plans/1/actions')

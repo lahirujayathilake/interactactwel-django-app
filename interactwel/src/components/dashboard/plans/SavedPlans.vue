@@ -40,7 +40,7 @@
             this.projects = await this.getProjectsListOfLoggedInUser();
 
             if (this.projects.length > 0){
-                this.$router.push('/plans/saved-plans/'+ projects[0].project_id);
+                this.$router.push('/plans/saved-plans/'+ this.projects[0].project_id);
             }
 
 
