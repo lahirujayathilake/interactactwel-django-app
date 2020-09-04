@@ -33,14 +33,6 @@
                     <p class="list-group-item-text">Adaptation Plans</p>
                 </div>
             </li>
-            <!--<li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">5</div>
-                    <h4 class="list-group-item-heading">Feedback</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Rate each plan</p>
-                </div>
-            </li>-->
             <li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">5</div>
@@ -62,7 +54,6 @@
                         <b-button v-b-toggle.collapse-4 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i>
                         </b-button>
                     </h4>
-                    <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
                     <b-card-text>
                         <p align="justify">
                             In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong>
@@ -131,151 +122,21 @@
                 </b-container>
             </b-card-body>
             <em slot="footer">
-                <!--<b-button-group>
-                    <b-button id="step2-back-btn" @click="step4BackClicked" variant="outline-success" size="sm">
-                        Back
-                    </b-button>
-                    <b-button id="step2-next-btn" @click="step4NextClicked" variant="success" size="sm">Next
-                    </b-button>
-                </b-button-group>-->
-                <b-button id="step2-next-btn" @click="submit" variant="next" size="sm">Next</b-button>
+                <b-button id="step2-next-btn" @click="next" variant="next" size="sm">Next</b-button>
                 <b-button id="step2-back-btn" @click="back" variant="back" size="sm">Back</b-button>
-
             </em>
         </b-card>
     </div>
-        <div v-show="!feedbackVisibility" class="feedback-container">
-                <div class="header-container">
-                    <h5>Evaluate Adaptation Plan {{$route.params.planId}}</h5>
-                </div>
-                <div v-show="feedbackBlock" id="feedback-block">
-                    <b-form v-show="initialFeedback" @submit="onSubmit" @reset="onReset">
-                        <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
-                            <b-form-radio v-model="feasibility" value="1" name="some-radios">Yes</b-form-radio>
-                            <b-form-radio v-model="feasibility" value="0" name="some-radios">No</b-form-radio>
-                        </b-form-group>
-                    </b-form>
-                    <b-form v-if="feasibility === '0'">
-                        <b-form-group label="Please state why this plan is infeasible">
-                            <b-form-textarea
-                                    id="textarea"
-                                    v-model="ifNotFeasiblecomment"
-                                    rows="3"
-                                    max-rows="6"
-                            ></b-form-textarea>
-                        </b-form-group>
-                    </b-form>
-                    <b-form v-if="feasibility === '1'">
-
-                        <b-form-group
-                                label="How well does this plan (alternative plan 1, 2, etc.) meet the management goals you identified in Step 1?">
-                            <b-form-radio-group
-                                    id="radio-group-1"
-                                    v-model="q1Selected"
-                                    :options="options"
-                                    name="q1"
-                            ></b-form-radio-group>
-                        </b-form-group>
-
-                        <b-form-group
-                                label="Do you think that the projected results/impacts from this plan will occur if the proposed actions are implemented?">
-                            <b-form-radio-group
-                                    id="radio-group-2"
-                                    v-model="q2Selected"
-                                    :options="options"
-                                    name="q2"
-                            ></b-form-radio-group>
-                        </b-form-group>
-
-                        <b-form-group label="What factors might prevent you from taking the recommended actions listed in this plan? (check all that apply)">
-                            <b-form-checkbox-group
-                                    id="checkbox-group-1"
-                                    v-model="SelectedFactors"
-                                    :options="factors"
-                                    name="q3"
-                            ></b-form-checkbox-group>
-                        </b-form-group>
-
-                        <b-form-group
-                                label="What factors might prevent you from taking the recommended actions listed in this plan? (check all that apply)">
-                            <b-form-radio-group
-                                    id="radio-group-3"
-                                    v-model="q3Selected"
-                                    :options="options"
-                                    name="q4"
-                            ></b-form-radio-group>
-                        </b-form-group>
-
-                        <b-form-group
-                                label="How likely are you to implement the actions recommended in this plan?">
-                            <b-form-radio-group
-                                    id="radio-group-4"
-                                    v-model="q4Selected"
-                                    :options="options"
-                                    name="q5"
-                            ></b-form-radio-group>
-                        </b-form-group>
-
-                        <b-form-group
-                                label="How likely are you to work with other stakeholder groups to implement this plan?">
-                            <b-form-radio-group
-                                    id="radio-group-5"
-                                    v-model="q5Selected"
-                                    :options="options"
-                                    name="q6"
-                            ></b-form-radio-group>
-                        </b-form-group>
-                        <b-form-group label="Rate this plan">
-                            <star-rating star-size="30  "></star-rating>
-                        </b-form-group>
-
-                        <b-form-group label="Please share any additional thoughts about the alternative plans or the plan builder tool">
-                            <b-form-textarea
-                                    id="textarea"
-                                    v-model="ifNotFeasiblecomment"
-                                    rows="3"
-                                    max-rows="6"
-                            ></b-form-textarea>
-                        </b-form-group>
-
-                    </b-form>
-                    <b-button @click="submitFeedback">Submit</b-button>
-                </div>
-                <div id="thankyou-block" v-show="thankyouBlock">
-                    Thank you
-                </div>
-            </div>
     </b-col>
 </template>
 
 <script>
-    //import ActionsOpts from './../../../../../public/static/actions.json';
-    //import Feedback from './../charts/Feedback.vue'
 
     export default {
-        /*components: {Feedback},*/
         name: 'Actors',
         props: {},
         data() {
             return {
-                feedbackVisibility: true,
-                feedbackBlock: true,
-                thankyouBlock: false,
-                feasibility: false,
-                initialFeedback: true,
-                ifFeasible: [],
-                ifNotFeasible: [],
-                ifFeasiblecomment: null,
-                ifNotFeasiblecomment: null,
-
-                options: [
-                    {text: 'Not at all', value: 1},
-                    {text: 'Satisfactory', value: 2},
-                    {text: 'Neutral', value: 3},
-                    {text: 'Well', value: 4},
-                    {text: 'Very Well', value: 5},
-                ],
-
                 factors: [
                     {text: 'Infrastructure costs', value: 'Infrastructure costs'},
                     {text: 'Permits or other regulatory approval processes and cost', value: 'Permits or other regulatory approval processes and cost'},
@@ -285,34 +146,18 @@
                 ],
 
                 plans:[
-                    {id: 1, name: "Plan 1", feedbackProvided: false, disabled: false},
-                    {id: 2, name: "Plan 2", feedbackProvided: false, disabled: true},
-                    {id: 3, name: "Plan 3", feedbackProvided: false, disabled: true},
+                    {id: '1', name: "Plan 1", feedbackProvided: false, disabled: false},
+                    {id: '2', name: "Plan 2", feedbackProvided: false, disabled: false},
+                    {id: '3', name: "Plan 3", feedbackProvided: false, disabled: false},
                 ],
 
-                feedbackProvided: false,
                 currentRouteName: '',
-
-                q1Selected: [],
-                q2Selected: [],
-                q3Selected: [],
-                q4Selected: [],
-                q5Selected: [],
-                SelectedFactors: [],
 
                 adaptationPlan: [],
             }
         },
         mounted() {
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
-
-            if(!localStorage.feedbackProvided){
-                localStorage.setItem('feedbackProvided', false);
-            }else{
-            let $this = this
-            $this.feedbackProvided = localStorage.feedbackProvided;
-            }
-
         },
         computed: {
 
@@ -321,24 +166,13 @@
 
         },
         methods: {
-            submit(){
+            next(){
                 localStorage.setItem('step4', true);
-                //this.feedbackVisibility = false
                 this.$router.push('/adaptation-plans/1/share')
 
             },
             back(){
                 this.$router.push('/adaptation-plans/1/actions')
-            },
-            submitFeedback() {
-                let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                adaptationPlan.planId = this.$route.params.planId;
-                localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
-
-                localStorage.feedbackProvided = true
-                this.feedbackProvided = true
-                this.thankyouBlock = true
-                this.feedbackBlock = false
             },
             onSubmit(evt) {
                 evt.preventDefault()
@@ -484,3 +318,4 @@
         opacity:0.6;
     }
 </style>
+
