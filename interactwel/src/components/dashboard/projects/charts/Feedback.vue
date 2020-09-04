@@ -4,7 +4,7 @@
             <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
         <div class="card-body no-padding">
-            <div v-show="feedbackSectionVisibility" class="">
+            <div v-show="!feedbackAlreadyProvidedSectionVisibility" class="">
                 <div v-show="feedbackBlock" id="feedback-block">
                     <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
@@ -54,7 +54,7 @@
                     Thank you
                 </div>
             </div>
-            <div v-show="!feedbackSectionVisibility"> You have already provided feedback for this plan</div>
+            <div v-show="feedbackAlreadyProvidedSectionVisibility"> You have already provided feedback for this plan</div>
         </div>
     </div>
 </template>
@@ -65,7 +65,7 @@
         props: {},
         data() {
             return {
-                feedbackSectionVisibility: true,
+                feedbackAlreadyProvidedSectionVisibility: false,
                 feedbackBlock: true,
                 thankyouBlock: false,
                 feasibility: false,
@@ -112,10 +112,12 @@
                 let user = await this.getLoggedInUser();
                 utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ planId + "&user_id="+user.id).then(result => {
                         if (result.length > 0) {
-                            this.feedbackSectionVisibility = false; //user has already provided the feedback for this plan.
+                            this.feedbackAlreadyProvidedSectionVisibility = true; //user has already provided the feedback for this plan.
                         }
                         else {
-                            this.feedbackSectionVisibility = true;
+                            this.feedbackAlreadyProvidedSectionVisibility = false;
+                            this.feedbackBlock = true;
+                            this.thankyouBlock = false;
                             //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
                             //TODO: Ideally this join should happen in db level
                             utils.FetchUtils.get("/interactwel/api/questions/").then(
