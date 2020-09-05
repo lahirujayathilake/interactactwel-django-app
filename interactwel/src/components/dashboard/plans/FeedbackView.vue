@@ -24,6 +24,10 @@
                 <div v-if="feedback.comments != null">
                     Comment: {{feedback.comments}}
                 </div>
+                <hr>
+                <div v-if="feedback.rating != null">
+                    How do you rate this plan? <star-rating :rating="feedback.rating" read-only></star-rating>
+                </div>
             </div>
         </b-card-text>
     </b-card>
