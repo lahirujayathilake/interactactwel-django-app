@@ -201,7 +201,7 @@
                                 })
                             }
                         }
-                        utils.FetchUtils.post("/interactwel/api/feedbackanswers",
+                        utils.FetchUtils.post("/interactwel/api/feedbackanswers/",
                             answerBody).then( result => {
                                 if (result.error != null && result.error === true) {
                                     alert("Error while posting the answers. " + feedback.error)
