@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './router'
 import store from "./store";
 import App from './App.vue'
+import VueFilterDateFormat from 'vue-filter-date-format';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('star-rating', StarRating);
@@ -14,6 +15,7 @@ Vue.component('star-rating', StarRating);
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);
 Vue.use(userPlugin);
+Vue.use(VueFilterDateFormat);
 
 new Vue({
     store,

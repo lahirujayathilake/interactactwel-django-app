@@ -6,7 +6,7 @@
             </div>
             <div v-if="feedback != null">
                 <div>
-                    Feedback Provided Date: {{feedback.date_modified }}
+                    Feedback Provided DateTime: {{new Date(feedback.date_modified)| dateFormat('YYYY.MM.DD : HH.mm') }}
                 </div>
                 <hr>
                 <div>
@@ -15,7 +15,7 @@
                     Answer: {{feedback.feasibilty==1 ? 'Yes' : 'No' }}
                 </div>
                 <hr>
-                <div v-for="feedbackItem in feedback.feedback_answers" :key="feedback.id">
+                <div v-for="feedbackItem in feedback.feedback_answers" :key="feedbackItem.id">
                     Question: {{feedbackItem.question}}
                     <br>
                     Answer: {{feedbackItem.answer}}
