@@ -25,14 +25,14 @@
                                 tag="article"
                                 style="max-width: 25rem; height: 17rem;"
                         >
-                            <h4 class="card-title"> Plan</h4>
+                            <h4 class="card-title"> Prepare</h4>
                             <b-card-text style="padding-top: 1rem;">
                                 <!-- <p align="justify">
                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla. Curabitur lorem sapien, consectetur in faucibus vel, imperdiet at nulla.</p> -->
-                                <b-button block><router-link to="/projects/explore-projects">Explore Community Projects</router-link></b-button>
-                                <b-button block>Visualize Potential Adaptation Plans</b-button>
+                                <b-button block><router-link to="/projects/explore-projects">Join a New Project</router-link></b-button>
+                                <b-button block><router-link to="/plans/new-plan">Generate New Plans</router-link></b-button>
                                 <b-button block>
-                                    <router-link to="/Dashboard">Evaluate Adaptation Plans</router-link>
+                                    <router-link to="/plans/saved-plans/1">Review Saved Plans</router-link>
                                 </b-button>
                             </b-card-text>
 
@@ -46,9 +46,9 @@
                             <h4 class="card-title"> Act</h4>
                             <b-card-text style="padding-top: 1rem;">
                                 <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique nisi ligula, sit amet sodales leo porta quis. Praesent nibh felis, finibus non venenatis vel, facilisis eget ante.</p>-->
-                                <b-button block>Share Plans with community</b-button>
-                                <b-button block>Create/ Edit plans</b-button>
-                                <b-button block>Adopt Plans</b-button>
+                                <b-button block><router-link to="/plans/saved-plans/1">Share Plans</router-link></b-button>
+                                <b-button block><router-link to="/community/groups">Participate in Group</router-link></b-button>
+                                <b-button block><router-link to="/community/events">Participate in Events</router-link></b-button>
                             </b-card-text>
 
                         </b-card>
