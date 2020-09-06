@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-card no-body>
+        <b-card  v-if="projects" no-body>
                 <b-tabs pills card vertical nav-wrapper-class="w-25">
                 <b-tab
                         v-for="project in projects"
@@ -16,6 +16,13 @@
                         </b-card-body>
                 </b-tab>
             </b-tabs>
+        </b-card>
+        <b-card v-if="!projects">
+            <b-card-body title="You don't have any saved plans">
+                <b-card-text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+                </b-card-text>
+            </b-card-body>
         </b-card>
     </div>
 </template>

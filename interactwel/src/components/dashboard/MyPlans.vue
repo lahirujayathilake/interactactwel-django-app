@@ -11,7 +11,7 @@
                 <b-col>
                     <b-tabs>
                         <b-tab :active="$route.path === '/plans/new-plan'" title="Generate New Plan" v-on:click='loadTabContent("/plans/new-plan")'></b-tab>
-                        <b-tab :active="$route.path === '/plans/saved-plans'" title="Saved Plans" v-on:click='loadTabContent("/plans/saved-plans")'></b-tab>
+                        <b-tab :active="$route.path === '/plans/saved-plans/:projectId'" title="Saved Plans" v-on:click='loadTabContent("/plans/saved-plans")'></b-tab>
                     </b-tabs>
                 </b-col>
             </b-row>

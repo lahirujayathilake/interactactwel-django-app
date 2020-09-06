@@ -46,7 +46,7 @@
                             <h4 class="card-title"> Act</h4>
                             <b-card-text style="padding-top: 1rem;">
                                 <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique nisi ligula, sit amet sodales leo porta quis. Praesent nibh felis, finibus non venenatis vel, facilisis eget ante.</p>-->
-                                <b-button block><router-link to="/plans/saved-plans/1">Share Plans</router-link></b-button>
+                                <b-button block><router-link to="/plans/saved-plans">Share Plans</router-link></b-button>
                                 <b-button block><router-link to="/community/groups">Participate in Group</router-link></b-button>
                                 <b-button block><router-link to="/community/events">Participate in Events</router-link></b-button>
                             </b-card-text>
