@@ -949,6 +949,7 @@
     .item-info {
         margin-top: 5px;
         max-width: 250px;
+        border-color: #28a745 !important;
     }
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
