@@ -96,7 +96,7 @@
                 </div>
                 <b-card-body>
                     <p class="card-text"><i>
-                        Choose adaptation goals that are important to you. This is text to test the update from Github.
+                        Choose adaptation goals that are important to you.
                     </i></p>
                 </b-card-body>
                 <b-list-group-item>
@@ -257,7 +257,7 @@
         align-items: center;
     }
     
-    .item-info {
+    #item-info {
         margin-top: 5px;
         max-width: 250px;
         border-color: #ffffff !important;
