@@ -96,7 +96,7 @@
                 </div>
                 <b-card-body>
                     <p class="card-text"><i>
-                        Choose adaptation goals that are important to you.
+                        Choose adaptation goals that are important to you. This is text to test the update from Github.
                     </i></p>
                 </b-card-body>
                 <b-list-group-item>
