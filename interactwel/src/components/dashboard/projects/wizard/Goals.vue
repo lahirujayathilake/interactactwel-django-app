@@ -256,10 +256,6 @@
         justify-content: center;
         align-items: center;
     }
-    
-    #btn.btn-outline-secondary.collapsed{
-        border-color: #ffffff !important;
-    }
 
     h3 {
         margin: 40px 0 0;
