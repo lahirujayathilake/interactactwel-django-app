@@ -243,6 +243,7 @@ class InteractwelProjectUser(models.Model):
 class InteractwelPlan(models.Model):
     plan_id = models.BigAutoField(primary_key=True, editable=False)
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
     goals = models.ManyToManyField('InteractwelGoal', related_name='plans', blank=True)
     actors = models.ManyToManyField('InteractwelActor', related_name='actors', blank=True)
     actions = models.ManyToManyField('InteractwelAction', related_name='actions', blank=True)
