@@ -257,9 +257,7 @@
         align-items: center;
     }
     
-    #item-info {
-        margin-top: 5px;
-        max-width: 250px;
+    #btn.btn-outline-secondary.collapsed{
         border-color: #ffffff !important;
     }
 
