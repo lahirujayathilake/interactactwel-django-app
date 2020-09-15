@@ -256,12 +256,6 @@
         justify-content: center;
         align-items: center;
     }
-    
-    #item-info {
-        margin-top: 5px;
-        max-width: 250px;
-        border-color: #ffffff !important;
-    }
 
     h3 {
         margin: 40px 0 0;
