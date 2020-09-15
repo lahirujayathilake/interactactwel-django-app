@@ -158,7 +158,7 @@
         data() {
             return {
                 itemInfoVisibility: false,
-                selectAllGoals: true,
+                selectAllGoals: false,
                 selectedGoals: [],
                 goals: [],
                 showInfoModal: false,
