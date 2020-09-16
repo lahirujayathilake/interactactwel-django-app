@@ -126,14 +126,15 @@
                 //let i= 0;
                 this.cr_data.datasets = [];
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
+                    console.log(dataIndex);
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
                     let dataset = {};
                     //dataset.label = dataPoint.Name;
                     //dataset.backgroundColor = this.getColor(i++);
+                    console.log(dataPoint);
                     dataset.data = [];
                     if (dataIndex == "1"){
                     for (let dataValue in dataPoint.Data) {
-                        console.log(dataPoint.Data[dataValue])
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
                     this.cr_data.datasets.push(dataset);
