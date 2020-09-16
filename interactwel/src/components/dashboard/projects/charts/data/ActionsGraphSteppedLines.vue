@@ -120,7 +120,7 @@
 
 
                 //this.datacollection.labels = [];
-                this.cr_data = [];
+                //this.cr_data = [];
                 //for (let legend in data.Legend) {
                 //    this.datacollection.labels.push(data.Legend[legend]);
                 //}
@@ -140,7 +140,7 @@
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
                     }
-                    this.cr_data.push(dataset);
+                    this.datacollection.datasets[0].data.push(dataset);
                     }
                 }
                 //i++;
