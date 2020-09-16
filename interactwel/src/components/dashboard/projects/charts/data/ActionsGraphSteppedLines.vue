@@ -6,7 +6,7 @@
 
 <script>
     import axios from 'axios';
-    import LineChart from "./../lib/LineChart";
+    import LineChart from "../lib/LineChart";
     import chartjsPluginAnnotation from "chartjs-plugin-annotation";
     import EventBus from '../../../../../event-bus';
 
