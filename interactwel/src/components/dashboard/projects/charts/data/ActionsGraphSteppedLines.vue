@@ -32,8 +32,7 @@
                         borderColor: "#186a3b",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        data: [
-                                'Increase amount of SW','Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of CR','Increase amount of CR','Increase amount of CR','Business as usual','Business as usual','Business as usual'],
+                        data: cr_data,
                         steppedLine: true,
                         fill: false,
                     },
