@@ -133,7 +133,7 @@
                     dataset.data = [];
                     if (dataIndex == "1"){
                     for (let dataValue in dataPoint.Data) {
-                        console.log(dataValue)
+                        console.log(dataPoint.Data[dataValue])
                         dataset.push(dataPoint.Data[dataValue]);
                     }
                     this.cr_data.datasets.push(dataset);
