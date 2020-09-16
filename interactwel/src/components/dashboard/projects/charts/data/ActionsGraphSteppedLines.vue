@@ -128,7 +128,7 @@
                 //let i= 0;
                 //this.cr_data.datasets = [];
 
-                this.datacollection.datasets[0].data[0] =[];
+                this.datacollection.datasets[0].data =[];
 
 
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
@@ -143,9 +143,10 @@
                         //console.log(dataPoint);
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
+                        this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
                     }
-                    this.datacollection.datasets[0].data[0].push(dataset);
-                    console.log(this.datacollection.datasets[0].data[0]);
+                    //this.datacollection.datasets[0].data.push(dataset);
+                    console.log(this.datacollection.datasets[0].data);
                     }
                 }
                 //i++;
