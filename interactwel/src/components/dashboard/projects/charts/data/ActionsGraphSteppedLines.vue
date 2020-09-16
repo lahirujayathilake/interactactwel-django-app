@@ -32,8 +32,8 @@
                         borderColor: "#186a3b",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        data: cr_data,
-                        //data: ['Increase amount of SW','Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of CR','Increase amount of CR','Increase amount of CR','Business as usual','Business as usual','Business as usual'],
+                        data: [
+                                'Increase amount of SW','Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of CR','Increase amount of CR','Increase amount of CR','Business as usual','Business as usual','Business as usual'],
                         steppedLine: true,
                         fill: false,
                     },
