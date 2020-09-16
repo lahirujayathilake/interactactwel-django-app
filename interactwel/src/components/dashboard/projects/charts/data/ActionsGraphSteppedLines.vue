@@ -129,13 +129,15 @@
                     //dataset.label = dataPoint.Name;
                     //dataset.backgroundColor = this.getColor(i++);
                     //dataset.data = [];
+                    if (dataIndex == "1"){
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
                     }
                     this.cr_data.push(dataset);
+                    }
                 }
-                i++;
-            }
+                //i++;
+            },
         }
     };
 </script>
