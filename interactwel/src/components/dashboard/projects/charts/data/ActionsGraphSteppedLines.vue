@@ -144,9 +144,10 @@
                 }
                 //i++;
             },
+
             showChart: function (selectedPlan) {
                 this.planName = selectedPlan;
-            },
+            }
         }
     };
 </script>
