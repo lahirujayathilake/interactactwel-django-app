@@ -128,7 +128,7 @@
                 //let i= 0;
                 //this.cr_data.datasets = [];
 
-                this.datacollection.datasets[0].data =[];
+                this.datacollection.datasets[0].data[0] =[];
 
 
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
@@ -144,7 +144,7 @@
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
                     }
-                    this.datacollection.datasets[0].data.push(dataset);
+                    this.datacollection.datasets[0].data[0].push(dataset);
                     console.log(this.datacollection.datasets[0].data[0]);
                     }
                 }
