@@ -22,6 +22,7 @@
                 planName: "Adaptation Plan 1",
                 JSONData: null,
                 datacollection: null,
+                cr_data: null,
 
                 data: {
                     labels: ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
@@ -31,8 +32,7 @@
                         borderColor: "#186a3b",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        data: [
-                            'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of CR', 'Increase amount of CR', 'Increase amount of CR', 'Business as usual', 'Business as usual', 'Business as usual'],
+                        data: cr_data,
                         steppedLine: true,
                         fill: false,
                     },
@@ -107,7 +107,7 @@
         },
 
         created(){
-            axios.get("/static/BASIN_Water_Rights_plans.json").then(response => {
+            axios.get("/static/BASIN_Action_Plans.json").then(response => {
                 this.JSONData = response.data;
                 this.buildDataCollection(this.JSONData, this.planName);
             });
@@ -115,23 +115,24 @@
 
         methods: {
             buildDataCollection(data, adaptationPlan){
-                this.datacollection = {};
-                this.datacollection.labels = [];
-                for (let legend in data.Legend) {
-                    this.datacollection.labels.push(data.Legend[legend]);
-                }
-                this.datacollection.datasets = [];
-                let i= 0;
+                //this.datacollection = {};
+                //this.datacollection.labels = [];
+                this.cr_data = [];
+                //for (let legend in data.Legend) {
+                //    this.datacollection.labels.push(data.Legend[legend]);
+                //}
+                //this.datacollection.datasets = [];
+                //let i= 0;
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
-                    let dataset = {};
-                    dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = this.getColor(i++);
-                    dataset.data = [];
+                    let dataset = [];
+                    //dataset.label = dataPoint.Name;
+                    //dataset.backgroundColor = this.getColor(i++);
+                    //dataset.data = [];
                     for (let dataValue in dataPoint.Data) {
-                        dataset.data.push(dataPoint.Data[dataValue]);
+                        dataset.push(dataPoint.Data[dataValue]);
                     }
-                    this.datacollection.datasets.push(dataset);
+                    this.cr_data.push(dataset);
                 }
                 i++;
             }

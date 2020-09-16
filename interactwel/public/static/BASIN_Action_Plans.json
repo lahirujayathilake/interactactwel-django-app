@@ -1,12 +1,12 @@
 {
     "Data type": "Total water rights volume (ac-ft)",
-    "Legend": ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
+    "labels": ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
     "Adaptation_plans": {
         "Adaptation Plan 1": {
             "Data": {
                 "1": {
-                    "Data": { "1": 10295, "2": 20844, "3": 17139, "4": 11716, "5": 19549, "6": 10536, "7": 17965, "8": 40639, "9": 15287, "10": 20083, "11": 15513, "12": 7798 },
-                    "Name": "Surface water"
+                    "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of CR", "6": "Increase amount of CR", "7": "Increase amount of CR", "8": "Business as usual", "9": "Business as usual", "10": "Business as usual" },
+                    "Name": "Farmers: Columbia River (CR)"
                 },
                 "5": {
                     "Data": { "1": 28313, "2": 17690, "3": 12601, "4": 19643, "5": 13380, "6": 23853, "7": 19290, "8": 15912, "9": 14044, "10": 19080, "11": 16992, "12": 25622 },
