@@ -138,7 +138,8 @@
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
                     }
-                    console.log("CR_Data is");
+                    var str = "CR_Data is";
+                    console.log(str);
                     console.log(dataset);
                     this.cr_data.push(dataset);
                     }
