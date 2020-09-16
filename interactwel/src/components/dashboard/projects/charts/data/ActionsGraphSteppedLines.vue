@@ -133,7 +133,7 @@
                     //dataset.backgroundColor = this.getColor(i++);
                     console.log(dataPoint);
                     dataset.data = [];
-                    if (dataIndex == "1"){
+                    if (dataIndex == 1){
                     for (let dataValue in dataPoint.Data) {
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
