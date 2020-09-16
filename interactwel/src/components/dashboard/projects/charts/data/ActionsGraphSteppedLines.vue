@@ -127,6 +127,10 @@
                 //this.datacollection.datasets = [];
                 //let i= 0;
                 //this.cr_data.datasets = [];
+
+                this.datacollection.datasets[0].data =[];
+
+
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
