@@ -5,8 +5,10 @@
 </template>
 
 <script>
+    import axios from 'axios';
     import LineChart from "./../lib/LineChart";
     import chartjsPluginAnnotation from "chartjs-plugin-annotation";
+    import EventBus from '../../../../../event-bus';
 
     export default {
         name: 'actions-graph-stepped-lines',
