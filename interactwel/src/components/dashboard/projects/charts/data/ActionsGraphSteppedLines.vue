@@ -32,7 +32,8 @@
                         borderColor: "#186a3b",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        data: ['Increase amount of SW','Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of CR','Increase amount of CR','Increase amount of CR','Business as usual','Business as usual','Business as usual'],
+                        data: [
+                                'Increase amount of SW','Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of CR','Increase amount of CR','Increase amount of CR','Business as usual','Business as usual','Business as usual'],
                         steppedLine: true,
                         fill: false,
                     },
@@ -117,24 +118,25 @@
             buildDataCollection(data, adaptationPlan){
                 //this.datacollection = {};
                 //this.datacollection.labels = [];
-                this.cr_data = [];
+                this.cr_data = {};
                 //for (let legend in data.Legend) {
                 //    this.datacollection.labels.push(data.Legend[legend]);
                 //}
                 //this.datacollection.datasets = [];
                 //let i= 0;
+                this.cr_data.datasets = [];
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
-                    let dataset = [];
+                    let dataset = {};
                     //dataset.label = dataPoint.Name;
                     //dataset.backgroundColor = this.getColor(i++);
-                    //dataset.data = [];
+                    dataset.data = [];
                     if (dataIndex == "1"){
                     for (let dataValue in dataPoint.Data) {
                         console.log(dataValue)
                         dataset.push(dataPoint.Data[dataValue]);
                     }
-                    this.cr_data.push(dataset);
+                    this.cr_data.datasets.push(dataset);
                     }
                 }
                 //i++;
