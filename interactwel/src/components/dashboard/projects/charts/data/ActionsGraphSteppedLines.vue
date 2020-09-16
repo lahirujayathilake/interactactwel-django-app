@@ -32,7 +32,7 @@
                         borderColor: "#186a3b",
                         borderJoinStyle: 'round',
                         borderWidth: 6,
-                        data: cr_data,
+                        data: this.cr_data,
                         steppedLine: true,
                         fill: false,
                     },
