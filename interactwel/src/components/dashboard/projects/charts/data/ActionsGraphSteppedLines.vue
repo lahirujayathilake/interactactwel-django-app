@@ -141,6 +141,7 @@
                         dataset.push(dataPoint.Data[dataValue]);
                     }
                     this.datacollection.datasets[0].data.push(dataset);
+                    console.log(this.datacollection.datasets[0].data);
                     }
                 }
                 //i++;
