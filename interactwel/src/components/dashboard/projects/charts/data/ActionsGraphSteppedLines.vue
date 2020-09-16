@@ -118,28 +118,28 @@
             buildDataCollection(data, adaptationPlan){
                 //this.datacollection = {};
                 //this.datacollection.labels = [];
-                this.cr_data = {};
+                this.cr_data = [];
                 //for (let legend in data.Legend) {
                 //    this.datacollection.labels.push(data.Legend[legend]);
                 //}
                 //this.datacollection.datasets = [];
                 //let i= 0;
-                this.cr_data.datasets = [];
+                //this.cr_data.datasets = [];
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
-                    let dataset = {};
+                    let dataset = [];
                     //dataset.label = dataPoint.Name;
                     //dataset.backgroundColor = this.getColor(i++);
                     
-                    dataset.data = [];
+                    //dataset.data = [];
                     if (dataIndex == 1){
                         //console.log(dataPoint);
                     for (let dataValue in dataPoint.Data) {
-                        console.log(dataPoint.Data[dataValue]);
-                        dataset.data.push(dataPoint.Data[dataValue]);
+                        dataset.push(dataPoint.Data[dataValue]);
                     }
-                    this.cr_data.datasets.push(dataset);
+                    console.log(dataset);
+                    this.cr_data.push(dataset);
                     }
                 }
                 //i++;
