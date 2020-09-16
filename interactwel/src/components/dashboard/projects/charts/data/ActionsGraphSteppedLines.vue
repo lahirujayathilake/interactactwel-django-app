@@ -144,7 +144,7 @@
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
                     }
-                    this.datacollection.datasets[0].data.push(dataset);
+                    this.datacollection.datasets[0].data.push(dataset[0]);
                     console.log(this.datacollection.datasets[0].data);
                     }
                 }
