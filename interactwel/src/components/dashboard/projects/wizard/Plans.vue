@@ -116,7 +116,7 @@
 
                             </div>
                         <b-col>
-                            <router-view></router-view>
+                            <router-view :key="$route.fullPath"></router-view>
                         </b-col>
                     </b-row>
                 </b-container>
