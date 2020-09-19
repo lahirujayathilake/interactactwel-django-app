@@ -3,9 +3,12 @@
         <div class="card-header">
             <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
+        <b-alert :show="feedbackAlreadyProvided">You have already provided feedback for this plan. Adding a new feedback will override the previous one.</b-alert>
+        <b-alert :show="feedbackRecorded">Your feedback has been recorded. Edit it if required and submit again.</b-alert>
+
         <div class="card-body no-padding">
-            <div v-show="!feedbackAlreadyProvidedSectionVisibility" class="">
-                <div v-show="feedbackBlock" id="feedback-block">
+            <div class="">
+                <div id="feedback-block">
                     <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
                             <b-form-radio-group required v-model="feasibility" value="1" name="feasibility-choice" :options="feasibilityChoice"></b-form-radio-group>
@@ -47,15 +50,13 @@
                                 ></b-form-textarea>
                             </b-form-group>
                         </div>
-                        <b-button type="submit">Submit</b-button>
+                        <b-button type="submit">Submit Feedback</b-button>
                     </b-form>
                 </div>
-                <div id="thankyou-block" v-show="thankyouBlock">
-                    Thank you
-                </div>
             </div>
-            <div v-show="feedbackAlreadyProvidedSectionVisibility"> You have already provided feedback for this plan</div>
+
         </div>
+
     </div>
 </template>
 <script>
@@ -65,9 +66,8 @@
         props: {},
         data() {
             return {
-                feedbackAlreadyProvidedSectionVisibility: false,
-                feedbackBlock: true,
-                thankyouBlock: false,
+                feedbackAlreadyProvided: false,
+                feedbackRecorded: false,
                 feasibility: false,
                 initialFeedback: true,
                 ifFeasible: [],
@@ -89,7 +89,7 @@
                 SelectedFactors: [],
                 questions: [],
                 answers: new Map(),
-                rating: null
+                rating: null,
             }
         },
         async mounted() {
@@ -108,49 +108,44 @@
                 const {utils} = AiravataAPI;
                 let projectId = this.$route.params.projectId;
                 let planId = this.$route.params.planId;
-
                 let user = await this.getLoggedInUser();
                 utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ planId + "&user_id="+user.id).then(result => {
                         if (result.length > 0) {
-                            this.feedbackAlreadyProvidedSectionVisibility = true; //user has already provided the feedback for this plan.
+                            this.feedbackAlreadyProvided = true; //user has already provided the feedback for this plan.
                         }
-                        else {
-                            this.feedbackAlreadyProvidedSectionVisibility = false;
-                            this.feedbackBlock = true;
-                            this.thankyouBlock = false;
-                            //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
-                            //TODO: Ideally this join should happen in db level
-                            utils.FetchUtils.get("/interactwel/api/questions/").then(
-                                allQuestions => {
-                                    utils.FetchUtils.get("/interactwel/api/projectquestions/?project_id="+projectId)
-                                        .then(questions => {
-                                            if (questions != null) {
-                                                let sortedQuestions = questions.sort((x, y) => x.id - y.id);
-                                                let projectQuestions = []
-                                                for (let sortedQuestion of sortedQuestions) {
-                                                    for (let question of allQuestions) {
-                                                        if (question.question_id === sortedQuestion.question_id){
-                                                            this.addQuestionOptions(question);
-                                                            projectQuestions.push(question);
-                                                        }
+                        //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
+                        //TODO: Ideally this join should happen in db level
+                        utils.FetchUtils.get("/interactwel/api/questions/").then(
+                            allQuestions => {
+                                utils.FetchUtils.get("/interactwel/api/projectquestions/?project_id="+projectId)
+                                    .then(questions => {
+                                        if (questions != null) {
+                                            let sortedQuestions = questions.sort((x, y) => x.id - y.id);
+                                            let projectQuestions = []
+                                            for (let sortedQuestion of sortedQuestions) {
+                                                for (let question of allQuestions) {
+                                                    if (question.question_id === sortedQuestion.question_id){
+                                                        this.addQuestionOptions(question);
+                                                        projectQuestions.push(question);
                                                     }
                                                 }
-                                                this.questions = projectQuestions;
                                             }
-                                        })
-                                        .catch(error => {
-                                            alert("Could not get the projects list. API error! " + error);
-                                        });
-                                }
-                            ).catch(error => {
-                                alert("Failed to fetch questions", error);
-                            })
-                        }
+                                            this.questions = projectQuestions;
+                                        }
+                                    })
+                                    .catch(error => {
+                                        alert("Could not get the projects list. API error! " + error);
+                                    });
+                            }
+                        ).catch(error => {
+                            alert("Failed to fetch questions", error);
+                        })
 
-                    }
-                ).catch(error => {
-                    alert("Failed to fetch questions " + error);
-                })
+
+                }
+            ).catch(error => {
+                alert("Failed to fetch questions " + error);
+            })
 
             },
             submit(){
@@ -161,9 +156,6 @@
             },
             async submitFeedback(evt) {
                 evt.preventDefault()
-                //let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-                //adaptationPlan.planId = this.$route.params.planId;
-                //localStorage.setItem('adaptationPlan', JSON.stringify(adaptationPlan));
                 let user = await this.getLoggedInUser();
                 let planId = this.$route.params.planId;
                 let projectId = this.$route.params.projectId;
@@ -182,7 +174,7 @@
                     })
                     .then(feedback => {
                         if (feedback.error != null && feedback.error === true) {
-                            alert("Error while posting the feedback.");
+                            this.$toast.error("API error while posting the feedback! " + feedback.error);
                             return;
                         }
                         //feedback posted successfully. now post the questions and answers
@@ -204,18 +196,17 @@
                         utils.FetchUtils.post("/interactwel/api/feedbackanswers/",
                             answerBody).then( result => {
                                 if (result.error != null && result.error === true) {
-                                    alert("Error while posting the answers. " + feedback.error)
+                                    this.$toast.error("Error while posting the answers. " + error);
+                                } else {
+                                    this.feedbackRecorded = true;
+                                    this.$toast.success("Thank You!. We have recorded your feedback. ");
                                 }
                         });
                     })
                     .catch(error => {
-                        alert("API error while posting the feedback! " + error)
+                        this.$toast.error("API error while posting the feedback! " + error);
                     });
 
-                localStorage.feedbackProvided = true
-                this.feedbackProvided = true
-                this.thankyouBlock = true
-                this.feedbackBlock = false
             },
             addQuestionOptions(question) {
 
