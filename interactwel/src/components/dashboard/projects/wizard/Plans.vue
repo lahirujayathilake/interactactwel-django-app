@@ -145,11 +145,7 @@
                     {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
                 ],
 
-                plans:[
-                    {id: '1', name: "Plan 1", feedbackProvided: false, disabled: false},
-                    {id: '2', name: "Plan 2", feedbackProvided: false, disabled: false},
-                    {id: '3', name: "Plan 3", feedbackProvided: false, disabled: false},
-                ],
+                plans:[],
 
                 currentRouteName: '',
 
@@ -158,6 +154,18 @@
         },
         mounted() {
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            this.projectId = this.$route.params.projectId
+            this.getProjectPlans(this.projectId).then(result => {
+                if (result == null) {
+                    return;
+                }
+                result.forEach(plan => {
+                    this.plans.push({
+                        id : plan.plan_id,
+                        name : "Plan " + plan.plan_id
+                    })
+                })
+            })
         },
         computed: {
 

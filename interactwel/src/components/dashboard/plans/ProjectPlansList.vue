@@ -49,16 +49,9 @@
             };
         },
 
-        mounted() {
-            const {utils} = AiravataAPI;
+        async mounted() {
             this.projectId = this.$route.params.projectId
-            utils.FetchUtils.get("/interactwel/api/plans/?project_id"+this.projectId)
-                .then(projectPlansList => {
-                    this.plans = projectPlansList;
-                })
-                .catch(error => {
-                    alert("Could not get the plans list. API error! " + error);
-                });
+            this.plans = await this.getProjectPlans(this.projectId)
 
         },
 

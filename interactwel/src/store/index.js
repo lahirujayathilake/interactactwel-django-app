@@ -19,7 +19,8 @@ export default new Vuex.Store({
         selectedActors:[],
         selectedActions:[]
     },
-    wizardFlowStarted:false
+    wizardFlowStarted:false,
+     feedbackList: []
 
  },
  getters: {},
@@ -74,7 +75,28 @@ export default new Vuex.Store({
             selectedActions:[]
         };
         state.wizardFlowStarted=false
-    }
+        state.feedbackList = [];
+    },
+     addFeedback(state, feedback) {
+        let feedbackAlreadyPosted = false;
+        let index;
+         for (let i = 0; i < state.feedbackList.length; i++) {
+             if (state.feedbackList[i] == null) {
+                 continue;
+             }
+             if(state.feedbackList[i].plan_id === feedback.plan_id) {
+                 feedbackAlreadyPosted = true;
+                 index = i;
+                 break;
+             }
+         }
+         if (feedbackAlreadyPosted) {
+             //remove it
+             state.feedbackList.splice(index, feedback);
+             return;
+         }
+        state.feedbackList.push(feedback);
+     }
 
  },
  actions: {}

@@ -202,6 +202,8 @@
                                     this.$toast.success("Thank You!. We have recorded your feedback. ");
                                 }
                         });
+                        this.$store.commit("addFeedback", feedback);
+
                     })
                     .catch(error => {
                         this.$toast.error("API error while posting the feedback! " + error);
