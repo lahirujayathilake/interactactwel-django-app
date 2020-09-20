@@ -21,7 +21,7 @@
 
         data() {
             return {
-                planName: "Adaptation Plan 1",
+                planId: "1",
                 JSONData: null,
                 datacollection: null,
                 graphColors: [
@@ -66,17 +66,14 @@
         },
 
         mounted() {
-            let $this = this;
-            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                $this.planName = planName;
-                $this.buildDataCollection($this.JSONData, $this.planName);
-            });
+            this.planId = this.$route.params.planId;
+            this.buildDataCollection(this.JSONData, this.planId);
         },
 
         created() {
             axios.get("/static/BASIN_Irrigation_plans_data.json").then(response => {
                 this.JSONData = response.data;
-                this.buildDataCollection(this.JSONData, this.planName);
+                this.buildDataCollection(this.JSONData, this.planId);
             })
         },
 

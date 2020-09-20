@@ -63,7 +63,6 @@
             this.planId = this.$route.params.planId;
             this.buildDataCollection(this.JSONData, this.planId);
 
-
         },
 
         created(){
