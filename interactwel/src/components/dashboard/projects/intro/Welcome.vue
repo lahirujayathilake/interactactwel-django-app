@@ -3,7 +3,7 @@
         <div class="responsive modal">
             <header class="modal-header">
                 <slot name="header">
-                    Welcome Nick!
+                    Welcome {{loggedInUser.first_name}}!
                 </slot>
             </header>
             <section class="modal-body">
@@ -33,12 +33,20 @@
     export default {
         name: 'modal',
 
+        data(){
+          return {
+              loggedInUser: null
+          }
+        },
 
         methods: {
             close() {
                 this.$emit('close');
             },
         },
+        async mounted() {
+            this.loggedInUser = await this.getLoggedInUser();
+        }
     };
 </script>
 
