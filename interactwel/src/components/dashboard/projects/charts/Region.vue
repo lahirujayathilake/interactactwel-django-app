@@ -9,11 +9,11 @@
                     <div class="card-body no-padding">
                         <b-row>
                             <b-col lg="6" class="action-graph-container">
-                            <h6 class="action-graph-title">Action Plan 1</h6>
+                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
                                 <overview-water-rights-graph></overview-water-rights-graph>
                             </b-col>
                             <b-col lg="6" class="action-graph-container">
-                                <h6 class="action-graph-title">Baseline Graph</h6>
+                                <h6 class="baseline-graph-title">Business as usual</h6>
                                 <overview-base-water-rights-graph></overview-base-water-rights-graph>
                             </b-col>
                         </b-row>
@@ -23,7 +23,7 @@
                     <div class="card-body no-padding">
                         <b-row>
                             <b-col lg="6" class="action-graph-container">
-                            <h6 class="action-graph-title">Action Plan 1</h6>
+                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
                                 <crop-yield-graph></crop-yield-graph>
                             </b-col>
                             <b-col lg="6" class="action-graph-container">
@@ -37,10 +37,11 @@
                     <div class="card-body no-padding">
                         <b-row>
                             <b-col lg="6">
-                        <n-fertilizer-graph></n-fertilizer-graph>
+                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
+                                <n-fertilizer-graph></n-fertilizer-graph>
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Baseline Graph</h6>
+                                <h6 class="baseline-graph-title">Business as usual</h6>
                                 <n-fertilizer-graph></n-fertilizer-graph>
                             </b-col>
                         </b-row>
@@ -50,10 +51,11 @@
                     <div class="card-body no-padding">
                         <b-row>
                             <b-col lg="6">
+                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
                                 <p-fertilizer-graph></p-fertilizer-graph>
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Baseline Graph</h6>
+                                <h6 class="baseline-graph-title">Business as usual</h6>
                                 <p-fertilizer-graph></p-fertilizer-graph>
                             </b-col>
                         </b-row>
@@ -63,20 +65,21 @@
                     <div class="card-body no-padding">
                         <b-row>
                             <b-col lg="6">
+                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
                                 <irrigation-graph></irrigation-graph>
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Baseline Graph</h6>
+                                <h6 class="baseline-graph-title">Business as usual</h6>
                                 <irrigation-base-line-graph></irrigation-base-line-graph>
                             </b-col>
                         </b-row>
                     </div>
                 </b-tab>
-                <b-tab title="Groundwater Recharge">
+                <!--<b-tab title="Groundwater Recharge">
                     <div class="card-body no-padding">
                         <img class="img-fluid"  src="../../../../assets/graph-placeholder.png"/>
                     </div>
-                </b-tab>
+                </b-tab>-->
 
             </b-tabs>
         </div>

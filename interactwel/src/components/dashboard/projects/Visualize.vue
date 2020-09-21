@@ -18,7 +18,7 @@
                     <router-link :to="'/adaptation-plans/'+$route.params.projectId">View Adaptation Plans</router-link>
                 </b-button>-->
                 <b-button class="mr-2 btn-sm">
-                    <router-link to="/projects/explore-projects">Back to Projects</router-link>
+                    <router-link to="/projects/my-projects">Back to Projects</router-link>
                 </b-button>
 
             </b-navbar>
