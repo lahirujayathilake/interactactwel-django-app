@@ -5,7 +5,7 @@ InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, Interact
 InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
 InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
 InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
-InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan
+InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions
 
 from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, \
 InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
@@ -14,7 +14,8 @@ InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEve
 InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, InteractwelProjectDataSerializer, \
 InteractwelPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
 InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
-InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackAnswerSerializer
+InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackAnswerSerializer, \
+InteractwelPlanActorActionsSerializer
 
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -430,6 +431,29 @@ class PlanViewSet(viewsets.ViewSet):
             queryset = queryset.filter(plan_id=plan_id)
         return queryset
 
+class PlanActorActionsViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = InteractwelPlanActorActions.objects.all()
+        serializer = InteractwelPlanActorActionsSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = InteractwelPlanActorActions.objects.all()
+        plans = queryset.filter(plan_id=pk)
+        serializer = InteractwelPlanActorActionsSerializer(plans, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = InteractwelPlanActorActionsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            data = {
+                "error": True,
+                "errors": serializer.errors,
+            }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class FeedbackViewSet(viewsets.ViewSet):
     def list(self, request):
