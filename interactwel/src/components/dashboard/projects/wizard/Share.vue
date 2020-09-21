@@ -43,8 +43,8 @@
             </li>-->
             <li class="col-md-2">
                 <div class="step-progress-bar active">
-                    <div class="step-no">6</div>
-                    <h4 class="list-group-item-heading">Save and Print</h4>
+                    <div class="step-no">5</div>
+                    <h4 class="list-group-item-heading">Wrap Up</h4>
                     <h4r class="list-group-item-heading">&#10003;</h4r>
                     <p class="list-group-item-text">Save and print Plans</p>
                 </div>
@@ -54,7 +54,7 @@
         <b-card no-body footer-tag="footer">
             <div class="step-header" slot="header">Share</div>
             <b-card-body>
-                <b-table class="card-text" bordered small hover :items="items" :fields="fields">
+                <b-table class="card-text" bordered small hover :items="tableRow" :fields="fields">
                     <template slot="rating" slot-scope="data">
                         <star-rating star-size="20"></star-rating>
                     </template>
@@ -97,27 +97,17 @@
                 fields: [
                     {
                         key: 'plan',
-                        label: 'Plan',
+                        label: 'Adaptation Plan',
                         sortable: true
                     },
                     {
                         key: 'q1',
-                        label: 'Meet Management Goals?',
+                        label: 'Do you think the actions and timeframes presented in this plan are feasible?',
                         sortable: false
                     },
                     {
                         key: 'q2',
-                        label: 'Expectations of projected impacts',
-                        sortable: false
-                    },
-                    {
-                        key: 'q3',
-                        label: 'Likely to implement recommended actions',
-                        sortable: false
-                    },
-                    {
-                        key: 'q4',
-                        label: 'Likely to collaborate with others to implement plan',
+                        label: 'Please share any additional thoughts about the alternative plans or the plan builder tool',
                         sortable: false
                     },
                     {
@@ -128,28 +118,33 @@
                     {key: 'download', label: ''},
                     {key: 'save', label: ''},
                 ],
-                items: [
-                    { isActive: true, plan: 1, q1: 'yes', q2: 'Satisfactory', q3: 'yes', q4: 'yes'},
-                    { isActive: false, plan: 2, q1: 'yes', q2: 'Well' , q3: 'yes', q4: 'yes'},
-                    { isActive: false, plan: 3, q1: 'yes', q2: 'Very well' , q3: 'yes', q4: 'yes'},
-                    { isActive: true, plan: 4, q1: 'yes', q2: 'Neutral', q3: 'yes', q4: 'yes' }
+                tableRow: [
+
                 ],
                 adaptationPlan: [],
+                projectId: null
             }
         },
-        mounted() {
+        async mounted() {
 
             if (localStorage.getItem('selectedGoals')) this.selectedGoals = JSON.parse(localStorage.getItem('selectedGoals'));
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            let feedbackList = this.$store.state.feedbackList;
+            if (feedbackList != null && !feedbackList.length !== 0) {
+                feedbackList.forEach(feedback => {
+                    if (feedback == null) {
+                        return;
+                    }
+                    let row = {};
+                    row.plan = feedback.plan_id;
+                    row.q1 = feedback.feasibility === true ? "Yes" : "No";
+                    row.q2 = feedback.comments;
+                    row.rating = feedback.rating;
+                    this.tableRow.push(row);
+                })
 
-            /*let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-            if (adaptationPlan) {
-                this.selectedGoals = adaptationPlan.selectedGoals;
-                this.$route.params.projectId = adaptationPlan.projectId;
+            }
 
-            } else {
-                localStorage.setItem('adaptationPlan', JSON.stringify({'selectedGoals': this.selectedGoals}));
-            }*/
         },
 
         watch: {

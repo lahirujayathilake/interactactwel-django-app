@@ -5,7 +5,7 @@
                 <b-tab
                         v-for="project in projects"
                         :title="project.name"
-                        v-on:click="mapSelected()">
+                        v-on:click="emitWindowResizeEvent()">
                     <!--<router-view></router-view>-->
                     <b-card-body :title="project.name">
                         <!--
@@ -174,8 +174,10 @@
         },
 
         async mounted() {
-            this.projects = await this.getProjectsListOfLoggedInUser()
+            this.projects = await this.getProjectsListOfLoggedInUser();
+            setInterval(() => this.emitWindowResizeEvent(), 500);
         },
+
 
         methods: {
             getCenterOfMap: function (project) {
@@ -188,8 +190,8 @@
             getMainMapZoomValue: function () {
                 return 3;
             },
-            mapSelected: function () {
-                window.dispatchEvent(new Event('resize'))
+            emitWindowResizeEvent: function () {
+                window.dispatchEvent(new Event('resize')) //a hack to get rid of map partially showing issue
             },
             projectSelected: function (projectId) {
                 this.$router.push('/projects/my-projects/'+ projectId);

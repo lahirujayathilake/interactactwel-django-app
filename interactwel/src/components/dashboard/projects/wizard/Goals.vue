@@ -158,7 +158,7 @@
         data() {
             return {
                 itemInfoVisibility: false,
-                selectAllGoals: true,
+                selectAllGoals: false,
                 selectedGoals: [],
                 goals: [],
                 showInfoModal: false,
@@ -255,12 +255,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-    
-    #item-info {
-        margin-top: 5px;
-        max-width: 250px;
-        border-color: #ffffff !important;
     }
 
     h3 {

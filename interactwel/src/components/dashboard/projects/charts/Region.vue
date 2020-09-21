@@ -67,7 +67,7 @@
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
                                 <h6 class="baseline-graph-title">Baseline Graph</h6>
-                                <irrigation-graph></irrigation-graph>
+                                <irrigation-base-line-graph></irrigation-base-line-graph>
                             </b-col>
                         </b-row>
                     </div>
@@ -93,11 +93,13 @@
     import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue'
     import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue'
     import EventBus from './../../../../event-bus';
+    import IrrigationBaseLineGraph from "./data/IrrigationBaselineGraph";
 
     export default {
         name: 'Region',
 
         components: {
+            IrrigationBaseLineGraph,
             'irrigationGraph': IrrigationGraph,
             'cropYieldGraph': CropYieldGraph,
             'BaseCropYieldGraph': BaseCropYieldGraph,

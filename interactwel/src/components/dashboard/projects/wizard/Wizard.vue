@@ -1003,7 +1003,7 @@
     .btn-outline-info{
         margin: .05rem !important;
         background-color: #FFFFFF;
-        border-color: #FFF !important;
+        border-color: #FFFFFF !important;
     }
 
 </style>

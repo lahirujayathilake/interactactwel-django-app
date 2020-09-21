@@ -851,6 +851,7 @@
             startWizard(projectId){
                 this.isWizardFlowStarted=true;
                 this.$store.commit("setWizardFlowStarted", true);
+                this.$store.commit("resetWizardFlow", null);
                 this.startBtn = false;
                 this.exitBtn = true;
                 this.$router.push('/adaptation-plans/'+projectId+'/goals')

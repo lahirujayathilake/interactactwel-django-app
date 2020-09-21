@@ -9,7 +9,7 @@
     import EventBus from '../../../../../event-bus';
 
     export default {
-        name: 'IrrigationGraph',
+        name: 'IrrigationBaseLineGraph',
         components: {
             VerticalBarChart
         },

@@ -149,7 +149,7 @@
     data() {
       return {
         itemInfoVisibility: false,
-        selectAllActors: true,
+        selectAllActors: false,
         selectedActors: [],
         actors: [], //ActorsOpts
         adaptationPlan: [],

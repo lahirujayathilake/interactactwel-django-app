@@ -50,6 +50,17 @@ export default {
                             alert("Could not get the projects list. API error! " + error);
                         });
 
+                },
+
+                async getProjectPlans(projectId) {
+                    const {utils} = AiravataAPI;
+                    return await utils.FetchUtils.get("/interactwel/api/plans/?project_id=" + projectId)
+                        .then(projectPlansList => {
+                            return  projectPlansList;
+                        })
+                        .catch(error => {
+                            alert("Could not get the plans list. API error! " + error);
+                        });
                 }
             }
         })
