@@ -243,9 +243,8 @@ class InteractwelProjectUser(models.Model):
 class InteractwelPlan(models.Model):
     plan_id = models.BigAutoField(primary_key=True, editable=False)
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
     goals = models.ManyToManyField('InteractwelGoal', related_name='plans', blank=True)
-    actors = models.ManyToManyField('InteractwelActor', related_name='actors', blank=True)
-    actions = models.ManyToManyField('InteractwelAction', related_name='actions', blank=True)
     timestamp = models.fields.DateTimeField()
 
     class Meta:
@@ -253,6 +252,18 @@ class InteractwelPlan(models.Model):
         db_table = 'interactwel_plan'
         verbose_name = 'Interactwel Plan'
         verbose_name_plural = 'Interactwel Plan'
+
+class InteractwelPlanActorActions(models.Model):
+    plan_id = models.ForeignKey(InteractwelPlan, on_delete=models.CASCADE)
+    actor_id = models.ForeignKey(InteractwelActor, on_delete=models.CASCADE)
+    action_id = models.ForeignKey(InteractwelAction, on_delete=models.CASCADE)
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_plan_actor_action'
+        verbose_name = 'Interactwel Plan Actor Action Mapping'
+        verbose_name_plural = 'Interactwel Plan Actor Action Mapping'
+        unique_together = (('plan_id', 'actor_id', 'action_id'),)
 
 class InteractwelFeedback(models.Model):
     feedback_id = models.BigAutoField(primary_key=True, editable=False)

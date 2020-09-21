@@ -24,7 +24,7 @@ Note: `python setup.py develop` also builds the Vue JS app.
 Go back to the airavata-django-portal and start the server
 
 ```
-cd /path/to/airavata-django-portal
+cd ../airavata-django-portal
 python manage.py migrate
 python manage.py runserver
 ```
