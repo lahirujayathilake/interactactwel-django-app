@@ -1,11 +1,23 @@
 [{
-    "id": "1",
-    "name": "Willow Creek Reservoir",
-    "position": { "lat": 45.346896, "lng": -119.544586 },
-    "spillway_vol": "4142 ac-ft",
-    "spillway_sfarea": "125 ac",
-    "espillway_vol": "6048 ac-ft",
-    "espillway_sfarea": "158 ac",
-    "release_schd0": "Jan. – Jun.: 0, 0, 0, 50, 375, 450",
-    "release_schd1": "Jul. – Dec.: 625, 550, 400, 50, 0, 0"
-}]
+        "id": "1",
+        "name": "Willow Creek Reservoir",
+        "position": { "lat": 45.346896, "lng": -119.544586 },
+        "spillway_vol": "4142 ac-ft",
+        "spillway_sfarea": "125 ac",
+        "espillway_vol": "6048 ac-ft",
+        "espillway_sfarea": "158 ac",
+        "release_schd0": "Jan. – Jun.: 0, 0, 0, 50, 375, 450",
+        "release_schd1": "Jul. – Dec.: 625, 550, 400, 50, 0, 0"
+    },
+    {
+        "id": "2",
+        "name": "Cold Springs Reservoir",
+        "position": { "lat": 45.8592328, "lng": -119.173679 },
+        "spillway_vol": "44668 ac-ft",
+        "spillway_sfarea": "1530 ac",
+        "espillway_vol": "-",
+        "espillway_sfarea": "-",
+        "release_schd0": "Jan. – Jun.: 0, 0, 0, 50, 375, 450",
+        "release_schd1": "Jul. – Dec.: 625, 550, 400, 50, 0, 0"
+    }
+]
