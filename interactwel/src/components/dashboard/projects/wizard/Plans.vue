@@ -177,7 +177,7 @@
         methods: {
             next(){
                 localStorage.setItem('step4', true);
-                this.$router.push('/adaptation-plans/' + this.projectId+'+/share')
+                this.$router.push('/adaptation-plans/' + this.projectId+'/share')
 
             },
             back(){
