@@ -129,6 +129,8 @@
                 //this.cr_data.datasets = [];
 
                 this.datacollection.datasets[0].data =[];
+                this.datacollection.datasets[1].data =[];
+                this.datacollection.datasets[2].data =[];
 
 
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
@@ -139,15 +141,20 @@
                     //dataset.backgroundColor = this.getColor(i++);
                     
                     //dataset.data = [];
-                    if (dataIndex == 1){
+                    
                         //console.log(dataPoint);
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
-                        this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
+                        if (dataIndex == 1){
+                            this.datacollection.datasets[2].data.push(dataPoint.Data[dataValue]);
+                        }else if (dataIndex == 3){
+                            this.datacollection.datasets[1].data.push(dataPoint.Data[dataValue]);
+                        }else if (dataIndex == 5){
+                            this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
                     }
                     //this.datacollection.datasets[0].data.push(dataset);
                     console.log(this.datacollection.datasets[0].data);
-                    }
+                    
                 }
                 //i++;
             }

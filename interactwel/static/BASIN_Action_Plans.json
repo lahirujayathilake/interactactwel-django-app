@@ -4,11 +4,11 @@
     "Adaptation_plans": {
         "Adaptation Plan 1": {
             "Data": {
-                "1": {
+                "5": {
                     "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of CR", "6": "Increase amount of CR", "7": "Increase amount of CR", "8": "Business as usual", "9": "Business as usual", "10": "Business as usual" },
                     "Name": "Farmers: Columbia River (CR)"
                 },
-                "5": {
+                "1": {
                     "Data": { "1": "Business as usual", "2": "Business as usual", "3": "Business as usual", "4": "Business as usual", "5": "Increase amount of SW", "6": "Increase amount of SW", "7": "Increase amount of SW", "8": "Increase amount of SW", "9": "Increase amount of CR", "10": "Increase amount of CR" },
                     "Name": "Farmers: Surface water (SW)"
                 },
