@@ -31,7 +31,10 @@
                     </div>
                 </b-tab>
                 <b-tab title="Data">
-                        <line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>
+                <div class="card-body">
+                        <!--<line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>-->
+                        <vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>
+                        </div>
                 </b-tab>
             </b-tabs>
         </div>
@@ -40,6 +43,7 @@
 <script>
     import axios from 'axios';
     import LineChart from "./../charts/lib/LineChart";
+    import VerticalBarChart from "./../charts/lib/VerticalBarChart";
 
     export default {
         name: "PopupContentGaugeStations",
@@ -49,6 +53,16 @@
         props: {
             data: {},
             pcpdata: {}
+        },
+        chartOptions: {
+            chart: {
+                title: "Aveage monthly streamflow (cfs)",
+                subtitle: "Aveage monthly streamflow (cfs)",
+            },
+            width: 500,
+            height: 250,
+            legend: {position: 'top', maxLines: 3},
+            chartArea: {width: "90%", height: "90%"}
         },
 
         data() {
