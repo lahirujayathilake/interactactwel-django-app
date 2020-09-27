@@ -145,12 +145,15 @@
                         //console.log(dataPoint);
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
+                        
                         if (dataIndex == 1){
                             this.datacollection.datasets[2].data.push(dataPoint.Data[dataValue]);
                         }else if (dataIndex == 3){
                             this.datacollection.datasets[1].data.push(dataPoint.Data[dataValue]);
                         }else if (dataIndex == 5){
                             this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
+                        }
+                    
                     }
                     //this.datacollection.datasets[0].data.push(dataset);
                     console.log(this.datacollection.datasets[0].data);
