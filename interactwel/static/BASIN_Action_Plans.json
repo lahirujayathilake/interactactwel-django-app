@@ -21,15 +21,15 @@
         "2": {
             "Data": {
                 "1": {
-                    "Data": { "1": "Decrease amount of CR", "2": "Decrease amount of CR", "3": "Decrease amount of CR", "4": "Decrease amount of CR", "5": "Decrease amount of CR", "6": "Decrease amount of CR", "7": "Decrease amount of CR", "8": "Decrease amount of CR", "9": "Decrease amount of CR", "10": "Decrease amount of CR", "11": "Decrease amount of CR", "12": "Decrease amount of CR", },
+                    "Data": { "1": "Decrease amount of CR", "2": "Decrease amount of CR", "3": "Decrease amount of CR", "4": "Decrease amount of CR", "5": "Decrease amount of CR", "6": "Decrease amount of CR", "7": "Decrease amount of CR", "8": "Decrease amount of CR", "9": "Decrease amount of CR", "10": "Decrease amount of CR" },
                     "Name": "Farmers: Surface water (SW)"
                 },
                 "5": {
-                    "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of SW", "6": "Increase amount of SW", "7": "Increase amount of SW", "8": "Increase amount of SW", "9": "Increase amount of SW", "10": "Increase amount of SW", "11": "Increase amount of SW", "12": "Increase amount of SW", },
+                    "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of SW", "6": "Increase amount of SW", "7": "Increase amount of SW", "8": "Increase amount of SW", "9": "Increase amount of SW", "10": "Increase amount of SW" },
                     "Name": "Farmers: Columbia River (CR)"
                 },
                 "3": {
-                    "Data": { "1": "Decrease amount of GW", "2": "Decrease amount of GW", "3": "Decrease amount of GW", "4": "Decrease amount of GW", "5": "Decrease amount of GW", "6": "Decrease amount of GW", "7": "Decrease amount of GW", "8": "Decrease amount of GW", "9": "Decrease amount of GW", "10": "Decrease amount of GW", "11": "Decrease amount of GW", "12": "Decrease amount of GW", },
+                    "Data": { "1": "Decrease amount of GW", "2": "Decrease amount of GW", "3": "Decrease amount of GW", "4": "Decrease amount of GW", "5": "Decrease amount of GW", "6": "Decrease amount of GW", "7": "Decrease amount of GW", "8": "Decrease amount of GW", "9": "Decrease amount of GW", "10": "Decrease amount of GW" },
                     "Name": "Farmers: Groundwater (GW)"
                 }
             }
@@ -37,15 +37,15 @@
         "3": {
             "Data": {
                 "1": {
-                    "Data": { "1": "Decrease amount of CR", "2": "Decrease amount of CR", "3": "Decrease amount of CR", "4": "Decrease amount of CR", "5": "Decrease amount of CR", "6": "Decrease amount of CR", "7": "Decrease amount of CR", "8": "Decrease amount of CR", "9": "Decrease amount of CR", "10": "Decrease amount of CR", "11": "Decrease amount of CR", "12": "Decrease amount of CR", },
+                    "Data": { "1": "Decrease amount of CR", "2": "Decrease amount of CR", "3": "Decrease amount of CR", "4": "Decrease amount of CR", "5": "Decrease amount of CR", "6": "Decrease amount of CR", "7": "Decrease amount of CR", "8": "Decrease amount of CR", "9": "Decrease amount of CR", "10": "Decrease amount of CR" },
                     "Name": "Farmers: Surface water (SW)"
                 },
                 "5": {
-                    "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of SW", "6": "Increase amount of SW", "7": "Increase amount of SW", "8": "Increase amount of SW", "9": "Increase amount of SW", "10": "Increase amount of SW", "11": "Increase amount of SW", "12": "Increase amount of SW", },
+                    "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of SW", "6": "Increase amount of SW", "7": "Increase amount of SW", "8": "Increase amount of SW", "9": "Increase amount of SW", "10": "Increase amount of SW" },
                     "Name": "Farmers: Columbia River (CR)"
                 },
                 "3": {
-                    "Data": { "1": "Decrease amount of GW", "2": "Decrease amount of GW", "3": "Decrease amount of GW", "4": "Decrease amount of GW", "5": "Decrease amount of GW", "6": "Decrease amount of GW", "7": "Decrease amount of GW", "8": "Decrease amount of GW", "9": "Decrease amount of GW", "10": "Increase amount of GW", "11": "Decrease amount of GW", "12": "Decrease amount of GW", },
+                    "Data": { "1": "Decrease amount of GW", "2": "Decrease amount of GW", "3": "Decrease amount of GW", "4": "Decrease amount of GW", "5": "Decrease amount of GW", "6": "Decrease amount of GW", "7": "Decrease amount of GW", "8": "Decrease amount of GW", "9": "Decrease amount of GW", "10": "Increase amount of GW" },
                     "Name": "Farmers: Groundwater (GW)"
                 }
             }
