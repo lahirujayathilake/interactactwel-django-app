@@ -19,5 +19,16 @@
         "espillway_sfarea": "-",
         "release_schd0": "Jan. – Jun.: 0, 0, 0, 50, 375, 450",
         "release_schd1": "Jul. – Dec.: 625, 550, 400, 50, 0, 0"
+    },
+    {
+        "id": "3",
+        "name": "McKay Creek Reservoir",
+        "position": { "lat": 45.605406, "lng": -118.7957668 },
+        "spillway_vol": "71534 ac-ft",
+        "spillway_sfarea": "1283 ac",
+        "espillway_vol": "78994 ac-ft",
+        "espillway_sfarea": "1381",
+        "release_schd0": "Jan. – Jun.: 0, 0, 0, 50, 375, 450",
+        "release_schd1": "Jul. – Dec.: 625, 550, 400, 50, 0, 0"
     }
 ]
