@@ -1024,6 +1024,13 @@
 
     .info-button {
         float: right !important;
+        cursor: pointer;
+        border: 3px solid #6d757d
+    }
+
+    .info-button:hover {
+        background-color: #000;
+        border: 3px solid #000
     }
 
     .help-block {
@@ -1115,7 +1122,7 @@
         border-top: 2px solid #28a645;
     }
 
-    .btn{
+    .show-info-btn{
         float: right;
         margin-right: 0px;
     }

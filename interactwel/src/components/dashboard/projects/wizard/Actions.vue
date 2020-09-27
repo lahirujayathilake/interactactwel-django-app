@@ -76,7 +76,7 @@
         <b-card style="width: 850px" no-body footer-tag="footer">
             <div class="step-header" slot="header">Choose Actions
                 <em slot="header">
-                    <b-button v-b-toggle.collapse-3 class="m-1" size="sm"> Show instructions </b-button>
+                    <b-button v-b-toggle.collapse-3 class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
                 </em>
             </div>
             <b-list-group-item>
