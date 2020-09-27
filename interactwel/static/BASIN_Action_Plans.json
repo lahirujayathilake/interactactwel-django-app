@@ -76,7 +76,7 @@
                         "4": "Business as usual",
                         "5": "Business as usual",
                         "6": "Business as usual",
-                        "7": "Increase amount of SW",
+                        "7": "Business as usual",
                         "8": "Business as usual",
                         "9": "Business as usual",
                         "10": "Business as usual"
@@ -91,9 +91,9 @@
                         "4": "Increase amount of CR",
                         "5": "Increase amount of CR",
                         "6": "Increase amount of CR",
-                        "7": "Business as usual",
-                        "8": "Business as usual",
-                        "9": "Business as usual",
+                        "7": "Decrease amount of GW",
+                        "8": "Decrease amount of GW",
+                        "9": "Decrease amount of GW",
                         "10": "Decrease amount of GW"
                     },
                     "Name": "Farmers: Groundwater (GW)"
