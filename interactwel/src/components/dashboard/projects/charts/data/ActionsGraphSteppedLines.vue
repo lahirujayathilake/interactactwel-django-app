@@ -19,7 +19,7 @@
 
         data() {
             return {
-                planName: "Adaptation Plan 1",
+                planName: "1",
                 JSONData: null,
                 datacollection: null,
                 cr_data: null,
@@ -63,11 +63,12 @@
             }
         },
         mounted() {
-            let $this = this;
-            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                $this.planName = planName;
-                $this.buildDataCollection($this.JSONData, $this.planName);
-            });
+            //let $this = this;
+                this.planId = this.$route.params.planId;
+            //EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
+                this.planName = planName;
+                this.buildDataCollection(this.JSONData, this.planId);
+            //});
 
         },
 
