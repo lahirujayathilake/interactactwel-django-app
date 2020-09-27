@@ -76,7 +76,7 @@
         created(){
             axios.get("/static/BASIN_Action_Plans.json").then(response => {
                 this.JSONData = response.data;
-                this.buildDataCollection(this.JSONData, this.planName);
+                this.buildDataCollection(this.JSONData, this.planId);
             });
         },
 
@@ -165,7 +165,7 @@
             },
             showChart: function (selectedPlan) {
                 console.log(selectedPlan);
-                this.planName = selectedPlan;
+                this.planId = selectedPlan;
             }
         }
     };
