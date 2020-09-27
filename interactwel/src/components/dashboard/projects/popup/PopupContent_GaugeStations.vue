@@ -32,8 +32,8 @@
                 </b-tab>
                 <b-tab title="Data">
                 <div class="card-body">
-                        <!--<line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>-->
-                        <vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>
+                        <line-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></line-chart>
+                        <!--<vertical-bar-chart :chart-data="datacollection" :options="options" :width="5" :height="3"></vertical-bar-chart>-->
                         </div>
                 </b-tab>
             </b-tabs>
