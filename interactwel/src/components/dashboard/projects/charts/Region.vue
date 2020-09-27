@@ -13,7 +13,7 @@
                                 <overview-water-rights-graph></overview-water-rights-graph>
                             </b-col>
                             <b-col lg="6" class="action-graph-container">
-                                <h6 class="baseline-graph-title">Business as usual</h6>
+                                <h6 class="baseline-graph-title">Business as Usual</h6>
                                 <overview-base-water-rights-graph></overview-base-water-rights-graph>
                             </b-col>
                         </b-row>
@@ -27,7 +27,7 @@
                                 <crop-yield-graph></crop-yield-graph>
                             </b-col>
                             <b-col lg="6" class="action-graph-container">
-                                <h6 class="baseline-graph-title">Business as usual</h6>
+                                <h6 class="baseline-graph-title">Business as Usual</h6>
                                 <base-crop-yield-graph></base-crop-yield-graph>
                             </b-col>
                         </b-row>
@@ -41,7 +41,7 @@
                                 <n-fertilizer-graph></n-fertilizer-graph>
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Business as usual</h6>
+                                <h6 class="baseline-graph-title">Business as Usual</h6>
                                 <n-fertilizer-graph></n-fertilizer-graph>
                             </b-col>
                         </b-row>
@@ -55,7 +55,7 @@
                                 <p-fertilizer-graph></p-fertilizer-graph>
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Business as usual</h6>
+                                <h6 class="baseline-graph-title">Business as Usual</h6>
                                 <p-fertilizer-graph></p-fertilizer-graph>
                             </b-col>
                         </b-row>
@@ -69,7 +69,7 @@
                                 <irrigation-graph></irrigation-graph>
                             </b-col>
                             <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Business as usual</h6>
+                                <h6 class="baseline-graph-title">Business as Usual</h6>
                                 <irrigation-base-line-graph></irrigation-base-line-graph>
                             </b-col>
                         </b-row>
