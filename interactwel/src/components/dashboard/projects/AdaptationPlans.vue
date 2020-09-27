@@ -112,7 +112,7 @@
                             <l-layer-group layer-type="overlay"
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"></l-layer-group>
 
-                            <l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
+                            <!--<l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>Water Rights</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -131,7 +131,7 @@
                                         :options-style="styleFunction_irrland"
 
                                 />
-                            </l-layer-group>
+                            </l-layer-group>-->
 
                             <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>GW Restricted Areas</strong></font>">
