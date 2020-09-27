@@ -115,7 +115,7 @@
 -->
 
                 <b-tabs card vertical content-class="" style="margin-top: 0px; height: 35vh; overflow: auto">
-                    <b-tab :title="actor.name" v-for="actor in selectedActors" v-bind:key="actor.id">
+                    <b-tab :title="actor.actor" v-for="actor in selectedActors" v-bind:key="actor.id">
                         <div class="list-group">
                             <li class="list-group-item" v-for="item in actorActions" v-bind:key="item.id" v-if="item.actor.actor_id == actor.actor_id">
                                     <label class="form-checkbox" :disabled="item.action.readonly">
