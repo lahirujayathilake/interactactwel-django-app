@@ -2,7 +2,7 @@
     "Data type": "Total water rights volume (ac-ft)",
     "labels": ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
     "Adaptation_plans": {
-        "Adaptation Plan 1": {
+        "1": {
             "Data": {
                 "5": {
                     "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of CR", "6": "Increase amount of CR", "7": "Increase amount of CR", "8": "Business as usual", "9": "Business as usual", "10": "Business as usual" },
