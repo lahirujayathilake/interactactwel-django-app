@@ -3,15 +3,22 @@
         <div class="card-header">
             <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
-        <b-alert :show="feedbackAlreadyProvided">You have already provided feedback for this plan. Adding a new feedback will override the previous one.</b-alert>
+
+        <b-alert :show="feedbackAlreadyProvided">You have already provided feedback for this plan. </b-alert>
         <b-alert :show="feedbackRecorded">Your feedback has been recorded. Edit it if required and submit again.</b-alert>
 
         <div class="card-body no-padding">
-            <div class="">
+
+            <div v-if="feedbackAlreadyProvided && showOldFeedbackView">
+                <b-button @click="onAddFeedbackAgainClick()">Provide Feedback Again</b-button>
+                <old-feedback-view  :feedback="oldFeedback"></old-feedback-view>
+            </div>
+
+            <div v-if="showAddFeedbackForm">
                 <div id="feedback-block">
                     <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
-                            <b-form-radio-group required v-model="feasibility" value="1" name="feasibility-choice" :options="feasibilityChoice"></b-form-radio-group>
+                            <b-form-radio-group required v-model="feasibility" name="feasibility-choice" :options="feasibilityChoice"></b-form-radio-group>
                         </b-form-group>
                         <div v-if="feasibility === '0'">
                             <b-form-group label="Please state why this plan is infeasible">
@@ -61,14 +68,19 @@
 </template>
 <script>
 
+    import OldFeedbackView from "./OldFeedbackView";
     export default {
         name: 'Feedback',
+        components: {OldFeedbackView},
         props: {},
         data() {
             return {
+                showAddFeedbackForm: true,
+                showOldFeedbackView:false,
+                showAddFeedbackAgainButton: false,
                 feedbackAlreadyProvided: false,
                 feedbackRecorded: false,
-                feasibility: false,
+                feasibility: null,
                 initialFeedback: true,
                 ifFeasible: [],
                 ifNotFeasible: [],
@@ -90,6 +102,7 @@
                 questions: [],
                 answers: new Map(),
                 rating: null,
+                oldFeedback: null //if user has provided any feedback earlier, it will be displayed here.
             }
         },
         async mounted() {
@@ -112,6 +125,10 @@
                 utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ planId + "&user_id="+user.id).then(result => {
                         if (result.length > 0) {
                             this.feedbackAlreadyProvided = true; //user has already provided the feedback for this plan.
+                            this.showAddFeedbackForm = false;
+                            this.showOldFeedbackView = true;
+                            this.showAddFeedbackAgainButton = true;
+                            this.oldFeedback = result[0];
                         }
                         //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
                         //TODO: Ideally this join should happen in db level
@@ -198,7 +215,6 @@
                                 if (result.error != null && result.error === true) {
                                     this.$toast.error("Error while posting the answers. " + error);
                                 } else {
-                                    this.feedbackRecorded = true;
                                     this.$toast.success("Thank You!. We have recorded your feedback. ");
                                 }
                         });
@@ -240,6 +256,12 @@
                         return question;
                     }
                 }
+            },
+            onAddFeedbackAgainClick(){
+                debugger;
+                this.showOldFeedbackView = false;
+                this.showAddFeedbackForm = true;
+                this.showAddFeedbackAgainButton = false;
             }
         },
 

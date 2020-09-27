@@ -2,7 +2,7 @@
     <div>
         <b-card no-body>
         <b-tabs pills card vertical nav-wrapper-class="w-25">
-            <b-tab title="All Projects" v-on:click="mapSelected()">
+            <!--<b-tab title="All Projects" v-on:click="mapSelected()">
                 <div class="card map-container">
                     <l-map :zoom="5" :center="getMainMapCenterLocation()">
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -16,7 +16,7 @@
                                 :visible="true"/>
                     </l-map>
                 </div>
-            </b-tab>
+            </b-tab>-->
             <b-tab
                     v-for="project in projects"
                     :title="project.name"
@@ -28,7 +28,6 @@
                     <b-card-text>{{project.description}}</b-card-text>
                     <div class="card map-container">
                         <l-map ref="myMap" :zoom="zoom" :center="getCenterOfMap(project)">
-                            <l-control-zoom position="topright"></l-control-zoom>
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                             <l-control-layers position="topright" ref="layersControl"
                                               :sort-layers="true"></l-control-layers>
@@ -122,8 +121,6 @@
             'l-layer-group': LLayerGroup,
             'l-control-scale': LControlScale,
             'l-popup': LPopup,
-            'l-control-zoom': LControlZoom
-
         },
         name: 'ExploreProjects',
 
@@ -180,16 +177,20 @@
         },
 
         mounted() {
+
             const {utils, session} = AiravataAPI;
 
             utils.FetchUtils.get("/interactwel/api/projects/")
                 .then(projects => {
                     console.log(projects);
                     this.projects = projects;
+                    setInterval(() => this.emitWindowResizeEvent(), 500);
+
                 })
                 .catch(error => {
                     alert("Could not get the projects list. API error! " + error);
                 });
+
 
         },
 
@@ -207,7 +208,10 @@
             },
             mapSelected: function () {
                 window.dispatchEvent(new Event('resize'))
-            }
+            },
+            emitWindowResizeEvent: function () {
+                window.dispatchEvent(new Event('resize')) //a hack to get rid of map partially showing issue
+            },
         }
 
     }

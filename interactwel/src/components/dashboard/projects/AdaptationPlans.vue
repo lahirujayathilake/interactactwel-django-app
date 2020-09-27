@@ -862,7 +862,7 @@
                 let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
                 if(confirmResponse){
                     this.$store.commit("resetWizardFlow", null);
-                    this.$router.push('/projects/my-projects');
+                    this.$router.push('/plans/saved-plans');
                     this.isWizardFlowStarted=false;
                 }
                 

@@ -78,7 +78,7 @@
                     <b-button id="step6-next-btn" @click="tabIndex++" variant="success" size="sm">Finish
                     </b-button>
                 </b-button-group>-->
-                <b-button id="step6-next-btn" @click="submit" variant="next" size="sm">Finish</b-button>
+                <b-button id="step6-next-btn" @click="exitWizard" variant="next" size="sm">Finish</b-button>
                 <b-button id="step6-next-btn" @click="back" variant="back" size="sm">Back</b-button>
             </em>
         </b-card>
@@ -102,7 +102,7 @@
                     },
                     {
                         key: 'q1',
-                        label: 'Do you think the actions and timeframes presented in this plan are feasible?',
+                        label: 'Do you think the actions and time frames presented in this plan are feasible?',
                         sortable: false
                     },
                     {
@@ -152,11 +152,13 @@
         },
 
         methods: {
-            submit(){
-                localStorage.setItem('step4', true);
-                this.feedbackVisibility = false
+
+            exitWizard(){
+                this.$toast.success("Thank You for evaluating plans.");
+                this.$router.push('/plans/saved-plans');
 
             },
+
             back(){
                 this.$router.push('/adaptation-plans/1/plans/overview')
             },
