@@ -66,7 +66,7 @@
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Average monthly releases volume (ac-ft)'
+                        text: 'Average monthly storage volume (ac-ft)'
                     },
                     legend: {
                         display: false,
