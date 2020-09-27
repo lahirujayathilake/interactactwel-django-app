@@ -20,7 +20,5 @@
         "num_Pobs": "TBD",
         "num_Tobs": "0"
     },
-    { "id": "5", "name": "USC00355593 (Milton Freewater, OR US)", "position": { "lat": 45.9428, "lng": -118.4089 }, "data_Range": "1/1/1928 – 5/31/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" },
-    { "id": "6", "name": "USC00358726 (Ukiah, OR US)", "position": { "lat": 45.1358, "lng": -118.9389 }, "data_Range": "5/1/1922 – 1/28/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" },
-    { "id": "7", "name": "NOAA P353818", "position": { "lat": 45.862, "lng": -119.312 }, "data_Range": "5/1/1922 – 1/28/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" }
+    { "id": "5", "name": "NOAA P353818", "position": { "lat": 45.862, "lng": -119.312 }, "data_Range": "5/1/1922 – 1/28/2019", "obs_type": "Daily", "num_Pobs": "TBD", "num_Tobs": "0" }
 ]
