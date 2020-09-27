@@ -369,13 +369,13 @@
                     },
                     {
                         name: "<font size=2><strong>Terrain Map",
-                        visible: true,
+                        visible: false,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
                     },
                     {
                         name: "<font size=2><strong>Satellite</strong></font>",
-                        visible: false,
+                        visible: true,
                         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
                         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     }
