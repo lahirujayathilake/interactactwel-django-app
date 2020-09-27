@@ -156,6 +156,7 @@
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
             this.projectId = this.$route.params.projectId
             this.getProjectPlans(this.projectId).then(result => {
+                this.$store.commit("setPlanList", result);
                 if (result == null) {
                     return;
                 }
