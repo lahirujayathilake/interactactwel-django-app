@@ -133,6 +133,7 @@
                             this.showOldFeedbackView = true;
                             this.showAddFeedbackAgainButton = true;
                             this.oldFeedback = result[0];
+                            this.$store.commit("addFeedback", this.oldFeedback);
                         }
                         //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
                         //TODO: Ideally this join should happen in db level

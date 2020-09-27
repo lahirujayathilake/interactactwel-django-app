@@ -156,6 +156,7 @@
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
             this.projectId = this.$route.params.projectId
             this.getProjectPlans(this.projectId).then(result => {
+                this.$store.commit("setPlanList", result);
                 if (result == null) {
                     return;
                 }
@@ -176,11 +177,11 @@
         methods: {
             next(){
                 localStorage.setItem('step4', true);
-                this.$router.push('/adaptation-plans/1/share')
+                this.$router.push('/adaptation-plans/' + this.projectId+'/share')
 
             },
             back(){
-                this.$router.push('/adaptation-plans/1/actions')
+                this.$router.push('/adaptation-plans/' + this.projectId +'/actions')
             },
             onSubmit(evt) {
                 evt.preventDefault()

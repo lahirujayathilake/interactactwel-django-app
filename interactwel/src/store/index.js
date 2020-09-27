@@ -20,7 +20,8 @@ export default new Vuex.Store({
         selectedActions:[]
     },
     wizardFlowStarted:false,
-     feedbackList: []
+     planList: [], //the current set of plans getting evaluated in the wizard
+     feedbackList: [] //the feedback list that the user provided
 
  },
  getters: {},
@@ -96,7 +97,10 @@ export default new Vuex.Store({
              return;
          }
         state.feedbackList.push(feedback);
-     }
+     },
+     setPlanList(state, payload){
+         state.planList= payload;
+     },
 
  },
  actions: {}
