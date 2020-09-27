@@ -1,6 +1,6 @@
 <template>
     <div id="graph" class="card">
-        <div class="card-header"><span v-on:click="dismiss" class="close">Close</span>
+        <div class="card-header">
             <strong>Region</strong>
         </div>
         <div class="card-body no-padding">
