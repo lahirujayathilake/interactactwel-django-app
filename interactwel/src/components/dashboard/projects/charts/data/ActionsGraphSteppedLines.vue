@@ -19,7 +19,7 @@
 
         data() {
             return {
-                planName: "1",
+                planId: "1",
                 JSONData: null,
                 datacollection: null,
                 cr_data: null,
@@ -66,7 +66,8 @@
             //let $this = this;
                 this.planId = this.$route.params.planId;
             //EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                this.planName = planName;
+                //this.planName = planName;
+                console.log(this.planId);
                 this.buildDataCollection(this.JSONData, this.planId);
             //});
 
