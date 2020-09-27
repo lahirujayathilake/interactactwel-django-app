@@ -48,7 +48,8 @@
     export default {
         name: "PopupContentGaugeStations",
         components: {
-            LineChart
+            LineChart,
+            VerticalBarChart
         },
         props: {
             data: {},
