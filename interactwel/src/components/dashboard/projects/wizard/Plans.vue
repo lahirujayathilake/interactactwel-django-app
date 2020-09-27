@@ -70,7 +70,7 @@
         <b-card no-body footer-tag="footer">
             <div class="step-header" slot="header">Visualization
                 <em slot="header">
-                    <b-button v-b-toggle.collapse-4 class="m-1" size="sm"> Show instructions </b-button>
+                    <b-button v-b-toggle.collapse-4 class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
                 </em>
             </div>
             <b-card-body class="no-padding">

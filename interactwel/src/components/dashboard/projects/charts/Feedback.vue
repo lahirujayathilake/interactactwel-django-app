@@ -4,16 +4,20 @@
             <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
 
-        <b-alert :show="feedbackAlreadyProvided">You have already provided feedback for this plan. </b-alert>
+        <b-alert :show="feedbackAlreadyProvided && showOldFeedbackView">
+
+            <p><strong>You have already provided feedback for this plan.</strong></p>
+            <p><b-button variant="success" size="sm" @click="onAddFeedbackAgainClick()">Resubmit Feedback</b-button></p>
+            <hr>
+            <p class="mb-0">
+                <small>Note: If you choose to provide feedback again, already given feedback will be replaced.</small>
+            </p>
+        </b-alert>
         <b-alert :show="feedbackRecorded">Your feedback has been recorded. Edit it if required and submit again.</b-alert>
-
         <div class="card-body no-padding">
-
             <div v-if="feedbackAlreadyProvided && showOldFeedbackView">
-                <b-button @click="onAddFeedbackAgainClick()">Provide Feedback Again</b-button>
                 <old-feedback-view  :feedback="oldFeedback"></old-feedback-view>
             </div>
-
             <div v-if="showAddFeedbackForm">
                 <div id="feedback-block">
                     <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
