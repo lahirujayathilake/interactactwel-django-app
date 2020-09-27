@@ -1,20 +1,20 @@
 [{
         "id": 0,
-        "name": "F_SW_GW",
+        "name": "Farmer with Columbia river water rights",
         "actor": "Farmer with Columbia river water rights",
         "readonly": false,
         "info": "actor's that currently produce agricultural products and have the right to use Columbia River water."
     },
     {
         "id": 1,
-        "name": "F_SW_test",
+        "name": "Farmer with other surface water rights",
         "actor": "Farmer with other surface water rights",
         "readonly": false,
         "info": "actor's that currently produce agricultural products and have the right to use surface water (excluding Columbia River)."
     },
     {
         "id": 2,
-        "name": "F_GW",
+        "name": "Farmer with groundwater rights",
         "actor": "Farmer with groundwater rights",
         "readonly": false,
         "info": "actor's that currently produce agricultural products and have the right to use ground water."
