@@ -102,7 +102,7 @@
                 <label class="form-checkbox">
                   <input type="checkbox" :value="actor" v-model="selectedActors"
                          :disabled="actor.readonly">
-                  {{actor.name}}
+                  {{actor.actor}}
                   <b-collapse :id="'collapse_'+actor.actor_id">
                     <p class="item-info">
                       <small>{{actor.description}}</small>
