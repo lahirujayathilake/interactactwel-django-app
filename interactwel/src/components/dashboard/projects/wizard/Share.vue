@@ -163,7 +163,7 @@
             },
 
             back(){
-                this.$router.push('/adaptation-plans/1/plans/overview')
+                this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/plans/overview')
             },
         }
 

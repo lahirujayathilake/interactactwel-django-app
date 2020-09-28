@@ -79,6 +79,7 @@
         props: {},
         data() {
             return {
+                adaptationPlan: null,
                 showAddFeedbackForm: true,
                 showOldFeedbackView:false,
                 showAddFeedbackAgainButton: false,
@@ -111,6 +112,9 @@
         },
         async mounted() {
             //this.fetchData();
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            debugger;
+
         },
         watch: {
             '$route.params': {
@@ -174,7 +178,7 @@
                 localStorage.setItem('step4', true);
             },
             back(){
-                this.$router.push('/adaptation-plans/1/actions')
+                this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/actions')
             },
             async submitFeedback(evt) {
                 evt.preventDefault()

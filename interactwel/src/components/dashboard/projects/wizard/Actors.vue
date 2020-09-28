@@ -205,7 +205,7 @@
       },
 
       back(){
-        this.$router.push('/adaptation-plans/1/goals')
+        this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/goals')
       },
       onConfirm() {
         this.selectActors();
