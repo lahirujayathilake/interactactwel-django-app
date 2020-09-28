@@ -361,7 +361,7 @@
                 let dataPoint = data.Data[dataIndex];
 
                 let dataset = {};
-                dataset.label = dataPoint.Name;
+                //dataset.label = dataPoint.Name;
                 dataset.backgroundColor = ["#4e85eb", "#eb4e4e", "#186a3b"];
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
@@ -386,7 +386,7 @@
                 let dataPoint = data.Data[dataIndex];
 
                 let dataset = {};
-                dataset.label = dataPoint.Name;
+                //dataset.label = dataPoint.Name;
                 dataset.backgroundColor = ["#fca650", "#4e85eb", "#eb4e4e", "#186a3b"];
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
