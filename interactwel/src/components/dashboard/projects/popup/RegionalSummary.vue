@@ -472,7 +472,7 @@
                     //dataset.backgroundColor.push(this.getRandomColor())
                     dataset.data.push(dataPoint.Data[dataValue]);
                 }
-                console.log(dataset.data);
+                //console.log(dataset.data);
                 this.datacollectionprism.datasets.push(dataset);
                 //}
             },
