@@ -91,7 +91,7 @@
             <b-card no-body footer-tag="footer">
                 <div class="step-header" slot="header">Choose Goals
                     <em slot="header">
-                        <b-button v-b-toggle.collapse-what_are_goals class="m-1" size="sm"> Show instructions </b-button>
+                        <b-button v-b-toggle.collapse-what_are_goals class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
                     </em>
                 </div>
                 <b-card-body>
@@ -121,12 +121,7 @@
                                         </p>
                                     </b-collapse>
                                 </label>
-                                <b-button v-b-toggle="'collapse-' + goal.goal_id" variant="outline-secondary">
-                                    <b-badge class="info-button" pill variant="secondary" >i</b-badge>
-                                </b-button>
-                                <!--<b-badge class="info-button" pill variant="secondary" v-b-tooltip.hover
-                                         :title="goal.info">i
-                                </b-badge>-->
+                                <b-badge v-b-toggle="'collapse-' + goal.goal_id" class="info-button" pill variant="secondary" >i</b-badge>
                             </li>
                         </div>
                     </b-form>

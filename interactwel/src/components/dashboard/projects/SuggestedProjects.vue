@@ -28,7 +28,6 @@
                         <b-card-text>{{project.description}}</b-card-text>
                         <div class="card map-container">
                             <l-map ref="myMap" :zoom="zoom" :center="getCenterOfMap(project)">
-                                <l-control-zoom position="topright"></l-control-zoom>
                                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                                 <l-control-layers position="topright" ref="layersControl"
                                                   :sort-layers="true"></l-control-layers>
@@ -117,8 +116,6 @@
             'l-layer-group': LLayerGroup,
             'l-control-scale': LControlScale,
             'l-popup': LPopup,
-            'l-control-zoom': LControlZoom
-
         },
         name: 'ExploreProjects',
 
@@ -188,6 +185,7 @@
         async mounted() {
 
             this.projects = await this.getProjectsListOfLoggedInUser();
+            setInterval(() => this.emitWindowResizeEvent(), 500);
 
         },
 
@@ -205,7 +203,8 @@
             },
             mapSelected: function () {
                 window.dispatchEvent(new Event('resize'))
-            }
+            },
+
         }
 
     }

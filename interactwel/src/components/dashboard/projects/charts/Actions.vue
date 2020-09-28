@@ -1,7 +1,7 @@
 <template>
     <div id="graph" class="card">
 
-        <div class="card-header"><span v-on:click="dismiss" class="close">  Close</span>
+        <div class="card-header">
             <strong style="font-size:18px">Adaptation Pathways</strong>
             <b-badge id="tooltip-button-1" class="info-button-path ml-2" pill variant="secondary" v-b-tooltip.hover>
                 How to read this chart?

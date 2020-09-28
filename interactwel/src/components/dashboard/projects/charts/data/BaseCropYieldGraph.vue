@@ -13,7 +13,7 @@
         },
         data() {
             return {
-                planName: "Adaptation Plan 6",
+                planName: "1",
                 JSONData: null,
                 datacollection: null,
                 graphColors: [

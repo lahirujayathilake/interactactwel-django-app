@@ -18,7 +18,7 @@
                     <router-link :to="'/adaptation-plans/'+$route.params.projectId">View Adaptation Plans</router-link>
                 </b-button>-->
                 <b-button class="mr-2 btn-sm">
-                    <router-link to="/projects/explore-projects">Back to Projects</router-link>
+                    <router-link to="/projects/my-projects">Back to Projects</router-link>
                 </b-button>
 
             </b-navbar>
@@ -115,7 +115,7 @@
                             <l-layer-group layer-type="overlay"
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"></l-layer-group>
 
-                            <l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
+                            <!--<l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>Water Rights</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -123,9 +123,9 @@
                                         :options="options_wrrights"
                                         :options-style="styleFunction_waterrigths"
                                 />
-                            </l-layer-group>
+                            </l-layer-group>-->
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
+                            <!--<l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>Irrigated Land</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -134,7 +134,7 @@
                                         :options-style="styleFunction_irrland"
 
                                 />
-                            </l-layer-group>
+                            </l-layer-group>-->
 
                             <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>GW Restricted Areas</strong></font>">

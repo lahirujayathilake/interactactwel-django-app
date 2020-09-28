@@ -1,7 +1,6 @@
 <template>
     <div id="graph" class="card">
         <div class="card-header">
-            <span v-on:click="dismiss" class="close">Close</span>
             <div class="row">
                 <div class="col-8"><strong>Sub-basins</strong></div>
                 <div class="col-4"><div class="form-group">

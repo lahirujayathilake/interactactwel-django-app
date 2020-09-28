@@ -19,7 +19,7 @@
 
         data() {
             return {
-                planName: "Adaptation Plan 1",
+                planId: "1",
                 JSONData: null,
                 datacollection: null,
                 cr_data: null,
@@ -63,18 +63,20 @@
             }
         },
         mounted() {
-            let $this = this;
-            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                $this.planName = planName;
-                $this.buildDataCollection($this.JSONData, $this.planName);
-            });
+            //let $this = this;
+                this.planId = this.$route.params.planId;
+            //EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
+                //this.planName = planName;
+                console.log(this.planId);
+                this.buildDataCollection(this.JSONData, this.planId);
+            //});
 
         },
 
         created(){
             axios.get("/static/BASIN_Action_Plans.json").then(response => {
                 this.JSONData = response.data;
-                this.buildDataCollection(this.JSONData, this.planName);
+                this.buildDataCollection(this.JSONData, this.planId);
             });
         },
 
@@ -129,6 +131,8 @@
                 //this.cr_data.datasets = [];
 
                 this.datacollection.datasets[0].data =[];
+                this.datacollection.datasets[1].data =[];
+                this.datacollection.datasets[2].data =[];
 
 
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
@@ -139,17 +143,29 @@
                     //dataset.backgroundColor = this.getColor(i++);
                     
                     //dataset.data = [];
-                    if (dataIndex == 1){
+                    
                         //console.log(dataPoint);
                     for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
-                        this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
+                        
+                        if (dataIndex == 1){
+                            this.datacollection.datasets[2].data.push(dataPoint.Data[dataValue]);
+                        }else if (dataIndex == 3){
+                            this.datacollection.datasets[1].data.push(dataPoint.Data[dataValue]);
+                        }else if (dataIndex == 5){
+                            this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
+                        }
+                    
                     }
                     //this.datacollection.datasets[0].data.push(dataset);
-                    console.log(this.datacollection.datasets[0].data);
-                    }
+                    //console.log(this.datacollection.datasets[0].data);
+                    
                 }
                 //i++;
+            },
+            showChart: function (selectedPlan) {
+                console.log(selectedPlan);
+                this.planId = selectedPlan;
             }
         }
     };

@@ -2,26 +2,152 @@
     "Data type": "Total water rights volume (ac-ft)",
     "labels": ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
     "Adaptation_plans": {
-        "Adaptation Plan 1": {
+        "1": {
             "Data": {
-                "1": {
-                    "Data": { "1": "Increase amount of SW", "2": "Increase amount of SW", "3": "Increase amount of SW", "4": "Increase amount of SW", "5": "Increase amount of CR", "6": "Increase amount of CR", "7": "Increase amount of CR", "8": "Increase amount of SW", "9": "Business as usual", "10": "Business as usual" },
+                "5": {
+                    "Data": {
+                        "1": "Increase amount of SW",
+                        "2": "Increase amount of SW",
+                        "3": "Increase amount of SW",
+                        "4": "Increase amount of SW",
+                        "5": "Increase amount of CR",
+                        "6": "Increase amount of CR",
+                        "7": "Increase amount of CR",
+                        "8": "Decrease amount of SW",
+                        "9": "Decrease amount of SW",
+                        "10": "Decrease amount of SW"
+                    },
                     "Name": "Farmers: Columbia River (CR)"
                 },
-                "5": {
-                    "Data": { "1": 28313, "2": 17690, "3": 12601, "4": 19643, "5": 13380, "6": 23853, "7": 19290, "8": 15912, "9": 14044, "10": 19080, "11": 16992, "12": 25622 },
-                    "Name": "Columbia River"
+                "1": {
+                    "Data": {
+                        "1": "Business as usual",
+                        "2": "Business as usual",
+                        "3": "Business as usual",
+                        "4": "Business as usual",
+                        "5": "Increase amount of SW",
+                        "6": "Increase amount of SW",
+                        "7": "Increase amount of SW",
+                        "8": "Increase amount of SW",
+                        "9": "Increase amount of CR",
+                        "10": "Increase amount of CR"
+                    },
+                    "Name": "Farmers: Surface water (SW)"
                 },
                 "3": {
-                    "Data": { "1": 39130, "2": 63341, "3": 68156, "4": 73564, "5": 66605, "6": 60131, "7": 41779, "8": 28416, "9": 51428, "10": 45838, "11": 42407, "12": 65399 },
-                    "Name": "Groundwater"
+                    "Data": {
+                        "1": "Increase amount of CR",
+                        "2": "Increase amount of CR",
+                        "3": "Increase amount of CR",
+                        "4": "Increase amount of CR",
+                        "5": "Decrease amount of GW",
+                        "6": "Decrease amount of GW",
+                        "7": "Decrease amount of GW",
+                        "8": "Decrease amount of GW",
+                        "9": "Decrease amount of GW",
+                        "10": "Decrease amount of GW"
+                    },
+                    "Name": "Farmers: Groundwater (GW)"
                 }
             }
         },
-        "Adaptation Plan 2": { "Data": { "1": { "Data": { "1": 15595, "2": 18217, "3": 8365, "4": 22883, "5": 13229, "6": 22923, "7": 28552, "8": 6752, "9": 22374, "10": 30546, "11": 15719, "12": 6973 }, "Name": "Surface water" }, "5": { "Data": { "1": 14263, "2": 18883, "3": 20801, "4": 18697, "5": 22838, "6": 20023, "7": 11328, "8": 14972, "9": 15872, "10": 0, "11": 10746, "12": 9395 }, "Name": "Columbia River" }, "3": { "Data": { "1": 25573, "2": 54570, "3": 65198, "4": 26171, "5": 23828, "6": 18274, "7": 36880, "8": 53138, "9": 37485, "10": 22995, "11": 28458, "12": 60992 }, "Name": "Groundwater" } } },
-        "Adaptation Plan 3": { "Data": { "1": { "Data": { "1": 21841, "2": 30913, "3": 25067, "4": 18238, "5": 9745, "6": 19177, "7": 0, "8": 15067, "9": 27289, "10": 6960, "11": 18544, "12": 10680 }, "Name": "Surface water" }, "5": { "Data": { "1": 16522, "2": 16685, "3": 8819, "4": 13375, "5": 17728, "6": 21332, "7": 27999, "8": 13541, "9": 12947, "10": 9874, "11": 16283, "12": 24250 }, "Name": "Columbia River" }, "3": { "Data": { "1": 15776, "2": 56773, "3": 60534, "4": 52132, "5": 46144, "6": 35997, "7": 72486, "8": 47240, "9": 29162, "10": 75226, "11": 34520, "12": 52841 }, "Name": "Groundwater" } } },
-        "Adaptation Plan 4": { "Data": { "1": { "Data": { "1": 17047, "2": 0, "3": 27004, "4": 20517, "5": 26385, "6": 28959, "7": 15609, "8": 9491, "9": 11380, "10": 9411, "11": 15145, "12": 16776 }, "Name": "Surface water" }, "5": { "Data": { "1": 8766, "2": 21293, "3": 15804, "4": 17317, "5": 2994, "6": 12319, "7": 18232, "8": 20682, "9": 25827, "10": 30561, "11": 16177, "12": 13608 }, "Name": "Columbia River" }, "3": { "Data": { "1": 35117, "2": 72368, "3": 36941, "4": 58201, "5": 57999, "6": 12940, "7": 59411, "8": 51692, "9": 62279, "10": 51095, "11": 39083, "12": 26287 }, "Name": "Groundwater" } } },
-        "Adaptation Plan 5": { "Data": { "1": { "Data": { "1": 10234, "2": 21498, "3": 12523, "4": 17515, "5": 31713, "6": 13566, "7": 13325, "8": 12789, "9": 12298, "10": 15859, "11": 26903, "12": 21564 }, "Name": "Surface water" }, "5": { "Data": { "1": 21285, "2": 9565, "3": 19594, "4": 15581, "5": 11610, "6": 17091, "7": 17032, "8": 19746, "9": 20963, "10": 13819, "11": 18831, "12": 18862 }, "Name": "Columbia River" }, "3": { "Data": { "1": 32057, "2": 72832, "3": 64491, "4": 49351, "5": 44918, "6": 60355, "7": 43030, "8": 37262, "9": 37859, "10": 47031, "11": 25973, "12": 54117 }, "Name": "Groundwater" } } },
-        "Adaptation Plan 6": { "Data": { "1": { "Data": { "1": 12994, "2": 14556, "3": 14912, "4": 15954, "5": 16062, "6": 14923, "7": 14681, "8": 14839, "9": 15146, "10": 14504, "11": 15121, "12": 14850 }, "Name": "Surface water" }, "5": { "Data": { "1": 16936, "2": 15057, "3": 15229, "4": 15962, "5": 15159, "6": 15156, "7": 15474, "8": 16155, "9": 15625, "10": 16670, "11": 16374, "12": 15968 }, "Name": "Columbia River" }, "3": { "Data": { "1": 23231, "2": 23521, "3": 22760, "4": 21107, "5": 21751, "6": 22842, "7": 22836, "8": 21944, "9": 22082, "10": 22032, "11": 21543, "12": 22296 }, "Name": "Groundwater" } } }
+        "2": {
+            "Data": {
+                "1": {
+                    "Data": {
+                        "1": "Increase amount of GW",
+                        "2": "Increase amount of GW",
+                        "3": "Increase amount of GW",
+                        "4": "Increase amount of SW",
+                        "5": "Increase amount of SW",
+                        "6": "Increase amount of SW",
+                        "7": "Decrease amount of CR",
+                        "8": "Decrease amount of CR",
+                        "9": "Decrease amount of CR",
+                        "10": "Decrease amount of CR"
+                    },
+                    "Name": "Farmers: Surface water (SW)"
+                },
+                "5": {
+                    "Data": {
+                        "1": "Increase amount of SW",
+                        "2": "Increase amount of GW",
+                        "3": "Increase amount of GW",
+                        "4": "Business as usual",
+                        "5": "Business as usual",
+                        "6": "Business as usual",
+                        "7": "Business as usual",
+                        "8": "Business as usual",
+                        "9": "Business as usual",
+                        "10": "Business as usual"
+                    },
+                    "Name": "Farmers: Columbia River (CR)"
+                },
+                "3": {
+                    "Data": {
+                        "1": "Business as usual",
+                        "2": "Business as usual",
+                        "3": "Business as usual",
+                        "4": "Increase amount of CR",
+                        "5": "Increase amount of CR",
+                        "6": "Increase amount of CR",
+                        "7": "Decrease amount of GW",
+                        "8": "Decrease amount of GW",
+                        "9": "Decrease amount of GW",
+                        "10": "Decrease amount of GW"
+                    },
+                    "Name": "Farmers: Groundwater (GW)"
+                }
+            }
+        },
+        "3": {
+            "Data": {
+                "1": {
+                    "Data": {
+                        "1": "Increase amount of SW",
+                        "2": "Business as usual",
+                        "3": "Business as usual",
+                        "4": "Increase amount of SW",
+                        "5": "Increase amount of SW",
+                        "6": "Increase amount of SW",
+                        "7": "Increase amount of SW",
+                        "8": "Increase amount of SW",
+                        "9": "Business as usual",
+                        "10": "Business as usual"
+                    },
+                    "Name": "Farmers: Surface water (SW)"
+                },
+                "5": {
+                    "Data": {
+                        "1": "Increase amount of CR",
+                        "2": "Increase amount of CR",
+                        "3": "Increase amount of CR",
+                        "4": "Decrease amount of CR",
+                        "5": "Decrease amount of CR",
+                        "6": "Increase amount of CR",
+                        "7": "Decrease amount of CR",
+                        "8": "Decrease amount of CR",
+                        "9": "Business as usual",
+                        "10": "Business as usual"
+                    },
+                    "Name": "Farmers: Columbia River (CR)"
+                },
+                "3": {
+                    "Data": {
+                        "1": "Business as usual",
+                        "2": "Business as usual",
+                        "3": "Business as usual",
+                        "4": "Business as usual",
+                        "5": "Business as usual",
+                        "6": "Decrease amount of GW",
+                        "7": "Decrease amount of GW",
+                        "8": "Decrease amount of GW",
+                        "9": "Decrease amount of GW",
+                        "10": "Decrease amount of GW"
+                    },
+                    "Name": "Farmers: Groundwater (GW)"
+                }
+            }
+        }
     }
 }

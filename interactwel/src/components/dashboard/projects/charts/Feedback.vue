@@ -3,15 +3,26 @@
         <div class="card-header">
             <strong>Evaluate Adaptation Plan {{$route.params.planId}}</strong>
         </div>
-        <b-alert :show="feedbackAlreadyProvided">You have already provided feedback for this plan. Adding a new feedback will override the previous one.</b-alert>
-        <b-alert :show="feedbackRecorded">Your feedback has been recorded. Edit it if required and submit again.</b-alert>
 
+        <b-alert :show="feedbackAlreadyProvided && showOldFeedbackView">
+
+            <p><strong>You have already provided feedback for this plan.</strong></p>
+            <p><b-button variant="success" size="sm" @click="onAddFeedbackAgainClick()">Resubmit Feedback</b-button></p>
+            <hr>
+            <p class="mb-0">
+                <small>Note: If you choose to provide feedback again, already given feedback will be replaced.</small>
+            </p>
+        </b-alert>
+        <b-alert :show="feedbackRecorded">Your feedback has been recorded. Edit it if required and submit again.</b-alert>
         <div class="card-body no-padding">
-            <div class="">
+            <div v-if="feedbackAlreadyProvided && showOldFeedbackView">
+                <old-feedback-view  :feedback="oldFeedback"></old-feedback-view>
+            </div>
+            <div v-if="showAddFeedbackForm">
                 <div id="feedback-block">
                     <b-form v-show="initialFeedback" @submit="submitFeedback" @reset="onReset">
                         <b-form-group label="Do you think the actions and timeframes presented in this plan are feasible?">
-                            <b-form-radio-group required v-model="feasibility" value="1" name="feasibility-choice" :options="feasibilityChoice"></b-form-radio-group>
+                            <b-form-radio-group required v-model="feasibility" name="feasibility-choice" :options="feasibilityChoice"></b-form-radio-group>
                         </b-form-group>
                         <div v-if="feasibility === '0'">
                             <b-form-group label="Please state why this plan is infeasible">
@@ -61,14 +72,20 @@
 </template>
 <script>
 
+    import OldFeedbackView from "./OldFeedbackView";
     export default {
         name: 'Feedback',
+        components: {OldFeedbackView},
         props: {},
         data() {
             return {
+                adaptationPlan: null,
+                showAddFeedbackForm: true,
+                showOldFeedbackView:false,
+                showAddFeedbackAgainButton: false,
                 feedbackAlreadyProvided: false,
                 feedbackRecorded: false,
-                feasibility: false,
+                feasibility: null,
                 initialFeedback: true,
                 ifFeasible: [],
                 ifNotFeasible: [],
@@ -90,10 +107,14 @@
                 questions: [],
                 answers: new Map(),
                 rating: null,
+                oldFeedback: null //if user has provided any feedback earlier, it will be displayed here.
             }
         },
         async mounted() {
             //this.fetchData();
+            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+            debugger;
+
         },
         watch: {
             '$route.params': {
@@ -112,6 +133,11 @@
                 utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ planId + "&user_id="+user.id).then(result => {
                         if (result.length > 0) {
                             this.feedbackAlreadyProvided = true; //user has already provided the feedback for this plan.
+                            this.showAddFeedbackForm = false;
+                            this.showOldFeedbackView = true;
+                            this.showAddFeedbackAgainButton = true;
+                            this.oldFeedback = result[0];
+                            this.$store.commit("addFeedback", this.oldFeedback);
                         }
                         //get the list of questions for this project. First fetches all questions and joins it with the project questions result.
                         //TODO: Ideally this join should happen in db level
@@ -152,7 +178,7 @@
                 localStorage.setItem('step4', true);
             },
             back(){
-                this.$router.push('/adaptation-plans/1/actions')
+                this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/actions')
             },
             async submitFeedback(evt) {
                 evt.preventDefault()
@@ -198,7 +224,6 @@
                                 if (result.error != null && result.error === true) {
                                     this.$toast.error("Error while posting the answers. " + error);
                                 } else {
-                                    this.feedbackRecorded = true;
                                     this.$toast.success("Thank You!. We have recorded your feedback. ");
                                 }
                         });
@@ -240,6 +265,12 @@
                         return question;
                     }
                 }
+            },
+            onAddFeedbackAgainClick(){
+                debugger;
+                this.showOldFeedbackView = false;
+                this.showAddFeedbackForm = true;
+                this.showAddFeedbackAgainButton = false;
             }
         },
 

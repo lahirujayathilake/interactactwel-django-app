@@ -55,14 +55,14 @@
             <div class="step-header" slot="header">Share</div>
             <b-card-body>
                 <b-table class="card-text" bordered small hover :items="tableRow" :fields="fields">
-                    <template slot="rating" slot-scope="data">
-                        <star-rating star-size="20"></star-rating>
+                    <template v-slot:cell(rating)="data">
+                        <star-rating :rating="data.item.rating" read-only></star-rating>
                     </template>
-                    <template v-slot:cell(download)="data">
+                    <!--<template v-slot:cell(download)="data">
                         <b-button pill size="sm"
                                   variant="primary">Print
                         </b-button>
-                    </template>
+                    </template>-->
                     <template v-slot:cell(save)="data">
                         <b-button pill size="sm"
                                   variant="secondary">Save
@@ -78,7 +78,7 @@
                     <b-button id="step6-next-btn" @click="tabIndex++" variant="success" size="sm">Finish
                     </b-button>
                 </b-button-group>-->
-                <b-button id="step6-next-btn" @click="submit" variant="next" size="sm">Finish</b-button>
+                <b-button id="step6-next-btn" @click="exitWizard" variant="next" size="sm">Finish</b-button>
                 <b-button id="step6-next-btn" @click="back" variant="back" size="sm">Back</b-button>
             </em>
         </b-card>
@@ -87,7 +87,6 @@
 </template>
 
 <script>
-    import GoalsOpts from './../../../../../public/static/goals.json';
 
     export default {
         name: 'Goals',
@@ -102,7 +101,7 @@
                     },
                     {
                         key: 'q1',
-                        label: 'Do you think the actions and timeframes presented in this plan are feasible?',
+                        label: 'Do you think the actions and time frames presented in this plan are feasible?',
                         sortable: false
                     },
                     {
@@ -115,36 +114,40 @@
                         label: 'Overall rating',
                         sortable: true
                     },
-                    {key: 'download', label: ''},
+                    /*{key: 'download', label: ''},*/
                     {key: 'save', label: ''},
                 ],
                 tableRow: [
 
                 ],
                 adaptationPlan: [],
-                projectId: null
+                projectId: null,
+                planList:[],
             }
         },
         async mounted() {
-
-            if (localStorage.getItem('selectedGoals')) this.selectedGoals = JSON.parse(localStorage.getItem('selectedGoals'));
+            const {utils} = AiravataAPI;
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
-            let feedbackList = this.$store.state.feedbackList;
-            if (feedbackList != null && !feedbackList.length !== 0) {
-                feedbackList.forEach(feedback => {
-                    if (feedback == null) {
-                        return;
+            if (localStorage.getItem('selectedGoals')) this.selectedGoals = JSON.parse(localStorage.getItem('selectedGoals'));
+            let user = await this.getLoggedInUser();
+            this.planList = this.$store.state.planList;
+            this.planList.forEach(plan => {
+                utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ plan.plan_id + "&user_id="+user.id).then(result => {
+                     if (result.length > 0) {
+                            let feedback = result[0]; //assuming that one user can have one feedback for one plan
+                            let row = {};
+                            row.plan = "Plan " + feedback.plan_id;
+                            row.q1 = feedback.feasibility === true ? "Yes" : "No";
+                            row.q2 = feedback.comments;
+                            row.rating = feedback.rating;
+                            this.tableRow.push(row);
+                        }
+
                     }
-                    let row = {};
-                    row.plan = feedback.plan_id;
-                    row.q1 = feedback.feasibility === true ? "Yes" : "No";
-                    row.q2 = feedback.comments;
-                    row.rating = feedback.rating;
-                    this.tableRow.push(row);
+                ).catch(error => {
+                    alert("Failed to fetch questions " + error);
                 })
-
-            }
-
+            })
         },
 
         watch: {
@@ -152,13 +155,15 @@
         },
 
         methods: {
-            submit(){
-                localStorage.setItem('step4', true);
-                this.feedbackVisibility = false
+
+            exitWizard(){
+                this.$toast.success("Thank You for evaluating plans.");
+                this.$router.push('/plans/saved-plans');
 
             },
+
             back(){
-                this.$router.push('/adaptation-plans/1/plans/overview')
+                this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/plans/overview')
             },
         }
 

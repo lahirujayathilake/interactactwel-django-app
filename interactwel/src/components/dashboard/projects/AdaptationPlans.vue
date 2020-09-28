@@ -112,7 +112,7 @@
                             <l-layer-group layer-type="overlay"
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"></l-layer-group>
 
-                            <l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
+                            <!--<l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>Water Rights</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -131,7 +131,7 @@
                                         :options-style="styleFunction_irrland"
 
                                 />
-                            </l-layer-group>
+                            </l-layer-group>-->
 
                             <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>GW Restricted Areas</strong></font>">
@@ -368,16 +368,16 @@
                         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     },
                     {
-                        name: "<font size=2><strong>Satellite</strong></font>",
-                        visible: false,
-                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-                        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
-                    },
-                    {
                         name: "<font size=2><strong>Terrain Map",
-                        visible: true,
+                        visible: false,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
+                    },
+                    {
+                        name: "<font size=2><strong>Satellite</strong></font>",
+                        visible: true,
+                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     }
                 ],
 
@@ -862,7 +862,7 @@
                 let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
                 if(confirmResponse){
                     this.$store.commit("resetWizardFlow", null);
-                    this.$router.push('/projects/my-projects');
+                    this.$router.push('/plans/saved-plans');
                     this.isWizardFlowStarted=false;
                 }
                 
@@ -1024,6 +1024,13 @@
 
     .info-button {
         float: right !important;
+        cursor: pointer;
+        border: 3px solid #6d757d
+    }
+
+    .info-button:hover {
+        background-color: #000;
+        border: 3px solid #000
     }
 
     .help-block {
@@ -1115,7 +1122,7 @@
         border-top: 2px solid #28a645;
     }
 
-    .btn{
+    .show-info-btn{
         float: right;
         margin-right: 0px;
     }

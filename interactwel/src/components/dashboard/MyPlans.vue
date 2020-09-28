@@ -9,9 +9,9 @@
             </b-row>
             <b-row>
                 <b-col>
-                    <b-tabs>
-                        <b-tab :active="$route.path === '/plans/new-plan'" title="Generate New Plan" v-on:click='loadTabContent("/plans/new-plan")'></b-tab>
-                        <b-tab :active="$route.path === '/plans/saved-plans/:projectId'" title="Saved Plans" v-on:click='loadTabContent("/plans/saved-plans")'></b-tab>
+                    <b-tabs v-model="tabIndex">
+                        <b-tab  title="Generate New Plan" v-on:click='loadTabContent("/plans/new-plan")'></b-tab>
+                        <b-tab  title="Saved Plans" v-on:click='loadTabContent("/plans/saved-plans")'></b-tab>
                     </b-tabs>
                 </b-col>
             </b-row>
@@ -36,8 +36,20 @@
         components: {
             Header, Footer
         },
-        props: {
+        data(){
+            return {
+                tabIndex:0
+            }
+        },
 
+        mounted() {
+            let currentRoutePath = this.$route.path;
+            if (currentRoutePath.includes("new-plan")){
+                this.tabIndex = 0;
+            }
+            if (currentRoutePath.includes("saved-plans")){
+                this.tabIndex = 1;
+            }
         },
 
         computed: {

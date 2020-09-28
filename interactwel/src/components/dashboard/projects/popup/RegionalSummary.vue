@@ -100,7 +100,21 @@
                     {id: "3", area: '146,020', numHRUs: '768', agrland: '63,345', stream: "Rhea Creek"},
                     {id: "4", area: '162,546', numHRUs: '821', agrland: '54,076', stream: "Eightmile Canyon"},
                     {id: "5", area: '70,672', numHRUs: '794', agrland: '71,920', stream:"Lower Willow Creek"},
-                    {id: "6", area: '86,795', numHRUs: 'TBD', agrland: '71,920', stream:"Lower Willow Creek"}
+
+                    {id: "6", area: '86,745', numHRUs: 'TBD', agrland:'33', stream:"Umatilla Basin"},
+                    {id: "7", area: '114,083', numHRUs: 'TBD', agrland:'495', stream:"Umatilla Basin"},
+                    {id: "8", area: '125,380', numHRUs: 'TBD', agrland:'8', stream:"Umatilla Basin"},
+                    {id: "9", area: '127,396', numHRUs: 'TBD', agrland:'269', stream:"Umatilla Basin"},
+                    {id: "10", area: '131,340', numHRUs: 'TBD', agrland:'221', stream:"Umatilla Basin"},
+                    {id: "11", area: '182,006', numHRUs: 'TBD', agrland:'101,845', stream:"Umatilla Basin"},
+                    {id: "12", area: '132,186', numHRUs: 'TBD', agrland:'69,575', stream:"Umatilla Basin"},
+                    {id: "13", area: '71,131', numHRUs: 'TBD', agrland:'28,844', stream:"Umatilla Basin"},
+                    {id: "14", area: '206,648', numHRUs: 'TBD', agrland:'10,522', stream:"Umatilla Basin"},
+                    {id: "15", area: '81,082', numHRUs: 'TBD', agrland:'287', stream:"Umatilla Basin"},
+                    {id: "16", area: '107,063', numHRUs: 'TBD', agrland:'435', stream:"Umatilla Basin"},
+                    {id: "17", area: '128,285', numHRUs: 'TBD', agrland:'4429', stream:"Umatilla Basin"},
+                    {id: "18", area: '122,697', numHRUs: 'TBD', agrland:'29674', stream:"Umatilla Basin"}
+
                 ],
 
                 datacollectionwr: null,
@@ -347,12 +361,13 @@
                 let dataPoint = data.Data[dataIndex];
 
                 let dataset = {};
-                dataset.label = dataPoint.Name;
+                //dataset.label = dataPoint.Name;
                 dataset.backgroundColor = ["#4e85eb", "#eb4e4e", "#186a3b"];
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
                     //dataset.data.label = $this.getColorwr(dataValue);
                     dataset.data.push(dataPoint.Data[dataValue]);
+                    console.log(dataPoint.Data[dataValue]);
                 }
                 //console.log(dataset);
                 this.datacollectionwr.datasets.push(dataset);
@@ -372,7 +387,7 @@
                 let dataPoint = data.Data[dataIndex];
 
                 let dataset = {};
-                dataset.label = dataPoint.Name;
+                //dataset.label = dataPoint.Name;
                 dataset.backgroundColor = ["#fca650", "#4e85eb", "#eb4e4e", "#186a3b"];
                 dataset.data = [];
                 for (let dataValue in dataPoint.Data) {
@@ -457,7 +472,7 @@
                     //dataset.backgroundColor.push(this.getRandomColor())
                     dataset.data.push(dataPoint.Data[dataValue]);
                 }
-                console.log(dataset.data);
+                //console.log(dataset.data);
                 this.datacollectionprism.datasets.push(dataset);
                 //}
             },

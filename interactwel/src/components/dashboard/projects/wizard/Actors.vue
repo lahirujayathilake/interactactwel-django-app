@@ -77,7 +77,7 @@
       <b-card no-body footer-tag="footer">
         <div class="step-header" slot="header">Choose Actors
           <em slot="header">
-            <b-button v-b-toggle.collapse-2 class="m-1" size="sm"> Show instructions </b-button>
+            <b-button v-b-toggle.collapse-2 class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
           </em>
         </div>
         <b-card-body>
@@ -109,9 +109,7 @@
                     </p>
                   </b-collapse>
                 </label>
-                <b-button v-b-toggle="'collapse_' + actor.actor_id" variant="outline-secondary">
-                  <b-badge class="info-button" pill variant="secondary" >i</b-badge>
-                </b-button>
+                <b-badge  v-b-toggle="'collapse_' + actor.actor_id"  class="info-button" pill variant="secondary" >i</b-badge>
               </li>
             </div>
           </b-form>
@@ -207,7 +205,7 @@
       },
 
       back(){
-        this.$router.push('/adaptation-plans/1/goals')
+        this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/goals')
       },
       onConfirm() {
         this.selectActors();
