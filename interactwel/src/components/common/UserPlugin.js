@@ -16,7 +16,7 @@ export default {
                     return await utils.FetchUtils.get("/interactwel/api/users/")
                         .then(users => {
                             return users.find(user => {
-                                return user.username = username;
+                                return user.username === username;
                             });
                         })
                         .catch(error => {
