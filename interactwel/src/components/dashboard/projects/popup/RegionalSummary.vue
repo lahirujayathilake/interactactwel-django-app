@@ -100,7 +100,21 @@
                     {id: "3", area: '146,020', numHRUs: '768', agrland: '63,345', stream: "Rhea Creek"},
                     {id: "4", area: '162,546', numHRUs: '821', agrland: '54,076', stream: "Eightmile Canyon"},
                     {id: "5", area: '70,672', numHRUs: '794', agrland: '71,920', stream:"Lower Willow Creek"},
-                    {id: "6", area: '86,795', numHRUs: 'TBD', agrland: '71,920', stream:"Lower Willow Creek"}
+
+                    {id: "6", area: '86745.8643', numHRUs: 'TBD', agrland:'33.1368', stream:"Umatilla Basin"},
+                    {id: "7", area: '114083.041', numHRUs: 'TBD', agrland:'495.9397', stream:"Umatilla Basin"},
+                    {id: "8", area: '125380.4592', numHRUs: 'TBD', agrland:'8.6734', stream:"Umatilla Basin"},
+                    {id: "9", area: '127396.4654', numHRUs: 'TBD', agrland:'269.0973', stream:"Umatilla Basin"},
+                    {id: "10", area: '131340.6318', numHRUs: 'TBD', agrland:'221.7273', stream:"Umatilla Basin"},
+                    {id: "11", area: '182006.7692', numHRUs: 'TBD', agrland:'101845.3389', stream:"Umatilla Basin"},
+                    {id: "12", area: '132186.8429', numHRUs: 'TBD', agrland:'69575.0074', stream:"Umatilla Basin"},
+                    {id: "13", area: '71131.7689', numHRUs: 'TBD', agrland:'28844.3443', stream:"Umatilla Basin"},
+                    {id: "14", area: '206648.5246', numHRUs: 'TBD', agrland:'10522.5958', stream:"Umatilla Basin"},
+                    {id: "15", area: '81082.366', numHRUs: 'TBD', agrland:'287.1113', stream:"Umatilla Basin"},
+                    {id: "16", area: '107063.1586', numHRUs: 'TBD', agrland:'435.8932', stream:"Umatilla Basin"},
+                    {id: "17", area: '128285.821', numHRUs: 'TBD', agrland:'4429.4313', stream:"Umatilla Basin"},
+                    {id: "18", area: '122697.492', numHRUs: 'TBD', agrland:'29674.9877', stream:"Umatilla Basin"}
+
                 ],
 
                 datacollectionwr: null,
