@@ -367,6 +367,7 @@
                 for (let dataValue in dataPoint.Data) {
                     //dataset.data.label = $this.getColorwr(dataValue);
                     dataset.data.push(dataPoint.Data[dataValue]);
+                    console.log(dataPoint.Data[dataValue]);
                 }
                 //console.log(dataset);
                 this.datacollectionwr.datasets.push(dataset);
