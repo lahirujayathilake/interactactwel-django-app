@@ -274,7 +274,7 @@ class InteractwelFeedback(models.Model):
     date_created = models.fields.DateTimeField()
     date_modified = models.fields.DateTimeField()
     feasibilty = models.CharField(max_length=256)
-    comments = models.CharField(max_length=256, null = True)
+    comments = models.CharField(max_length=256, null = True, blank = True)
     rating = models.CharField(max_length=256, null = True)
 
     class Meta:
