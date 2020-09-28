@@ -3,7 +3,7 @@
         <div class="responsive modal">
             <header class="modal-header">
                 <slot name="header">
-                    Welcome! {{loggedInUser.first_name}}
+                    Welcome {{loggedInUser.first_name}}!
                 </slot>
             </header>
             <section class="modal-body">
