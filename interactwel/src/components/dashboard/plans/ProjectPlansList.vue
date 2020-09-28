@@ -8,7 +8,7 @@
                             <b-card title="Overview">
                                 <b-row>
                                     <b-col lg="6">
-                                        <h6 class="chart-title"><strong>Selected Goals</strong></h6>
+                                        <span class="chart-title"><strong>This section is under construction</strong></span>
                                     </b-col>
                                 </b-row>
                             </b-card>

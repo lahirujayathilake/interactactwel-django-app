@@ -10,7 +10,7 @@
                         <b-card-body class="no-padding">
                             <b-row class="mb-2">
                                 <b-col lg="9"><h5>{{project.name}}</h5></b-col>
-                           <b-col lg="3"><b-button class="float-right" size="sm" variant="success">Visualize Selected Plans</b-button></b-col>
+                           <b-col lg="3"><!--<b-button class="float-right" size="sm" variant="success">Visualize Selected Plans</b-button>--></b-col>
                             </b-row>
                             <router-view></router-view>
                         </b-card-body>
