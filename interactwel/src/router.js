@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Containers
-const Home = () => import('@/components/Index')
 const Dashboard = () => import('@/components/Dashboard')
 
 const MyPlans = () => import('@/components/dashboard/MyPlans')
@@ -66,11 +65,11 @@ Vue.use(Router)
 
 export default new Router({
     mode: 'hash', // https://router.vuejs.org/api/#mode
-    linkActiveClass: 'open active',
+    linkActiveClass: 'active',
     scrollBehavior: () => ({ y: 0 }),
     routes: [
         {
-            path: '/',
+            path: '/dashboard',
             //redirect: '/dashboard',
             name: 'Dashboard',
             component: Dashboard,

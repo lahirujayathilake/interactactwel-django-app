@@ -9,25 +9,25 @@
                 </a>-->
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav>
-                        <b-nav-item href="#"><router-link to="/">Home</router-link></b-nav-item>
-                        <b-nav-item href="#"><router-link to="/projects/my-projects">Projects</router-link></b-nav-item>
-                        <b-nav-item href="#"><router-link to="/plans/new-plan">Plans</router-link></b-nav-item>
-                        <b-nav-item href="#"><router-link to="/community/events">Community</router-link></b-nav-item>
-                        <b-nav-item href="#"><router-link to="/learn/videos/1">Help</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link routerLinkActive="active" :to="{ name: 'Dashboard'}">Home</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link routerLinkActive="active" to="/projects/my-projects">Projects</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link routerLinkActive="active" to="/plans/new-plan">Plans</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link routerLinkActive="active" to="/community/events">Community</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link routerLinkActive="active" to="/learn/videos/1">Help</router-link></b-nav-item>
                     </b-navbar-nav>
                 </b-collapse>
-                <b-collapse is-nav id="nav_collapse">
+                <!--<b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav class="ml-auto" type="dark" variant="secondary">
                         <b-nav-item v-if="!loggedInUser.username" href="/auth/login">Login</b-nav-item>
                         <b-nav-item-dropdown right v-if="loggedInUser.username">
-                            <!-- Using button-content slot -->
+                            &lt;!&ndash; Using button-content slot &ndash;&gt;
                             <template slot="button-content">
                                 <i class="fa fa-user"></i> <em> {{loggedInUser.username}}</em>
                             </template>
                             <b-dropdown-item href="/auth/logout">Signout</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
-                </b-collapse>
+                </b-collapse>-->
             </b-navbar>
         </div>
     </div>
@@ -74,11 +74,13 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    .top-fixed-nav{
-        /*border-top: 4px solid #ff7853 !important;*/
-    }
-.top-fixed-nav a, button a{
-    color: #fff;
-}
+.top-fixed-nav a{
+     color: #f5f8fa;
+     text-transform: none;
+ }
+.top-fixed-nav .active{
+    color: #28a645;
+    font-weight: bold;
+ }
 </style>
 

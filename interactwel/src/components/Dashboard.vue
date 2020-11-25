@@ -5,52 +5,58 @@
             <b-container>
                 <b-row>
                     <b-col style="padding-top: 2rem;">
-                        <b-card class="mb-2"
+                        <b-card class="mb-2 learn-block"
                                 tag="article"
-                                style="max-width: 25rem; height: 17rem;"
+                                style="max-width: 25rem"
                         >
-                            <h4 class="card-title"> Learn</h4>
+                            <template #header style="background-color: #4caf50 !important;">
+                                <div class="h2 font-weight-bold">Learn</div>
+                                <p>Learn about how adaptation can help FEW actors in watershed communities be resilient</p>
+                            </template>
                             <b-card-text>
-                                <!--<p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla.</p> -->
-                                <b-button block><router-link to="/learn/videos/1">Instructional Videos</router-link></b-button>
-                                <b-button block><router-link to="/learn/stories">Adaptation Stories</router-link></b-button>
-                                <b-button block><router-link to="/learn/docs">Documentation</router-link></b-button>
-                                <b-button block><router-link to="/learn/support">Support</router-link></b-button>
+                                <div class="d-flex flex-column p-4">
+                                    <div class="p-1"><b-button @click="$router.push('learn/videos/1')" pill block variant="outline-secondary">Instructional Videos</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('learn/stories')" pill block  variant="outline-secondary">Adaptation Stories</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('learn/docs')" pill block  variant="outline-secondary">Documentation</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('learn/support')" pill block variant="outline-secondary">Support</b-button></div>
+                                </div>
                             </b-card-text>
-
                         </b-card>
                     </b-col>
                     <b-col style="padding-top: 2rem;">
-                        <b-card class="mb-2"
+                        <b-card class="mb-2 prepare-block"
                                 tag="article"
-                                style="max-width: 25rem; height: 17rem;"
+                                style="max-width: 25rem"
                         >
-                            <h4 class="card-title"> Prepare</h4>
-                            <b-card-text style="padding-top: 1rem;">
-                                <!-- <p align="justify">
-                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat mollis dolor id pellentesque. Aliquam lacinia sagittis fringilla. Curabitur lorem sapien, consectetur in faucibus vel, imperdiet at nulla.</p> -->
-                                <b-button block><router-link to="/projects/explore-projects">Join a New Project</router-link></b-button>
-                                <b-button block><router-link to="/plans/new-plan">Generate New Plans</router-link></b-button>
-                                <b-button block>
-                                    <router-link to="/plans/saved-plans/1">Review Saved Plans</router-link>
-                                </b-button>
+                            <template #header style="background-color: #4caf50 !important;">
+                                <div class="h2 font-weight-bold">Prepare</div>
+                                <p>Create portfolios of community wide adaptation strategies using advanced scientific models and machine learning</p>
+                            </template>
+                            <b-card-text>
+                                <div class="d-flex flex-column p-4">
+                                    <div class="p-1"><b-button @click="$router.push('projects/explore-projects')" pill block variant="outline-secondary">Join a New Project</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('plans/new-plan')" pill block  variant="outline-secondary">Generate New Plans</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('plans/saved-plans/1')" pill block  variant="outline-secondary">Review Saved Plans</b-button></div>
+                                </div>
                             </b-card-text>
-
                         </b-card>
                     </b-col>
                     <b-col style="padding-top: 2rem;">
-                        <b-card class="mb-2"
+                        <b-card class="mb-2 act-block"
                                 tag="article"
-                                style="max-width: 25rem; height: 17rem;"
+                                style="max-width: 25rem"
                         >
-                            <h4 class="card-title"> Act</h4>
-                            <b-card-text style="padding-top: 1rem;">
-                                <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique nisi ligula, sit amet sodales leo porta quis. Praesent nibh felis, finibus non venenatis vel, facilisis eget ante.</p>-->
-                                <b-button block><router-link to="/plans/saved-plans">Share Plans</router-link></b-button>
-                                <b-button block><router-link to="/community/groups">Participate in Group</router-link></b-button>
-                                <b-button block><router-link to="/community/events">Participate in Events</router-link></b-button>
+                            <template #header style="background-color: #4caf50 !important;">
+                                <div class="h2 font-weight-bold">Act</div>
+                                <p>Visualize, evaluate, recommend, identify and adopt community preffered adaptation plans</p>
+                            </template>
+                            <b-card-text>
+                                <div class="d-flex flex-column p-4">
+                                    <div class="p-1"><b-button @click="$router.push('plans/saved-plans')" pill block variant="outline-secondary">Share Plans</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('community/groups')" pill block  variant="outline-secondary">Participate in Group</b-button></div>
+                                    <div class="p-1"><b-button @click="$router.push('community/events')" pill block  variant="outline-secondary">Participate in Events</b-button></div>
+                                </div>
                             </b-card-text>
-
                         </b-card>
                     </b-col>
                 </b-row>
@@ -95,5 +101,28 @@
     .card-text {
         font-size: 13px;
         color: #5e6b7e;
+    }
+
+    .learn-block .card-header{
+        background-color: #daf0d4;
+        padding:2rem;
+     }
+    .learn-block .h2, .learn-block p{
+        color: #446b3a;
+    }
+
+    .prepare-block .card-header{
+        background-color: #ffe6db;
+        padding:2rem;
+    }
+    .prepare-block .h2, .prepare-block p{
+        color: #b74949;
+    }
+    .act-block .card-header{
+        background-color: #d1e4f5;
+        padding:2rem;
+    }
+    .act-block .h2, .act-block p{
+        color: #2b689f;
     }
 </style>

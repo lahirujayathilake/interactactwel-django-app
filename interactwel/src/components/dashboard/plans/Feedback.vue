@@ -153,12 +153,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    .top-fixed-nav a, button a {
-        color: #fff;
-    }
-
-    .router-link-exact-active {
-        color: #4cae4c;
-    }
 </style>
 

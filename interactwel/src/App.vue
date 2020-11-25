@@ -33,11 +33,11 @@ export default {
   }
 
 
-  a {
+  /*a {
     color: #28a645;
     font-weight: 700;
   }
-
+*/
   .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
     background-color: #28a645;
