@@ -1,13 +1,13 @@
 from rest_framework import viewsets
 
-from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelInstructionalVideo, \
+from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelUserRole, InteractwelInstructionalVideo, \
 InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, InteractwelGroupRoleMapping, \
 InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
 InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
 InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
 InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions
 
-from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, \
+from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, InteractwelUserRoleSerializer, \
 InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
 InteractwelDocumentationSerializer, InteractwelGroupSerializer, InteractwelGroupRoleMappingSerializer, \
 InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEventAttendanceSerializer, \
@@ -97,6 +97,31 @@ class RoleViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+class UserRoleViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = InteractwelUserRole.objects.all()
+        serializer = InteractwelUserRoleSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = InteractwelUserRole.objects.all()
+        groups = queryset.filter(group_id=pk)
+        serializer = InteractwelUserRoleSerializer(groups, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = InteractwelUserRoleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            data = {
+                "error": True,
+                "errors": serializer.errors,
+            }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class GroupViewSet(viewsets.ViewSet):
     def list(self, request):

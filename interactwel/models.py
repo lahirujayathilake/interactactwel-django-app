@@ -43,6 +43,17 @@ class InteractwelRole(models.Model):
         verbose_name_plural = 'Interactwel Role'
         unique_together = (('role_name'),)
 
+class InteractwelUserRole(models.Model):
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
+    role_id = models.ForeignKey(InteractwelRole, on_delete=models.CASCADE)
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_user_role'
+        verbose_name = 'Interactwel User Role'
+        verbose_name_plural = 'Interactwel User Role'
+        unique_together = (('user_id', 'role_id'),)
+
 class InteractwelGroup(models.Model):
     group_id = models.BigAutoField(primary_key=True, editable=False)
     group_name = models.CharField(max_length=64)

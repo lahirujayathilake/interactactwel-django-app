@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 import json
 
-from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelAdaptationStory, \
+from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelUserRole, InteractwelAdaptationStory, \
 InteractwelInstructionalVideo, InteractwelDocumentation, InteractwelGroup, \
 InteractwelGroupRoleMapping, InteractwelGroupMembership, InteractwelEvent, \
 InteractwelEventAttendance, InteractwelInvitation, InteractwelProject, InteractwelProjectUser, \
@@ -29,6 +29,11 @@ class InteractwelUserSerializer(serializers.ModelSerializer):
 class InteractwelRoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelRole
+        fields = '__all__'
+
+class InteractwelUserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelUserRole
         fields = '__all__'
 
 class InteractwelGroupSerializer(serializers.ModelSerializer):
