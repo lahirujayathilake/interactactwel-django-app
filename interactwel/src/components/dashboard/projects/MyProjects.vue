@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-card v-if="projects" no-body>
-            <b-tabs pills card vertical nav-wrapper-class="w-25">
+            <b-tabs card vertical nav-wrapper-class="w-25">
                 <!--<b-tab title="My Projects" v-on:click="mapSelected()">
                     <div class="card map-container">
                         <l-map :zoom="5" :center="getMainMapCenterLocation()">
@@ -22,11 +22,45 @@
                         :title="project.name"
                         v-on:click="mapSelected()">
                     <!--<router-view></router-view>-->
-                    <b-card-body :title="project.name">
+                    <b-card-body>
+                        <b-card-title>{{project.name}}</b-card-title>
                         <!--
                                     <b-card-text>User Assigned to this project is: {{loggedInUser.username}}</b-card-text>
                         -->
-                        <b-card-text>{{project.description}}</b-card-text>
+                        <b-container class="bv-example-row">
+                            <b-row>
+                        <b-col lg="5">
+                            <div class="d-flex flex-column">
+                                <div class="mt-3">
+                                    <b-button class="mr-2" @click="$router.push('/visualize/'+ project.project_id)"
+                                              variant="success">See Project Data
+                                    </b-button>
+                                    <b-button @click="$router.push('/adaptation-plans/'+ project.project_id)"
+                                              variant="outline-success">Generate New Plan
+                                    </b-button>
+                                </div>
+                                <div class="mt-3">
+                                    <b-card-text>{{project.description}}</b-card-text>
+                                </div>
+                                <div class="mt-3">
+                                    <div>
+                                        <b-button class="mr-2 btn-sm" disabled><i class="fa fa-envelope"></i></b-button>
+                                        <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
+                                        <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h6>Associated Plans</h6>
+                                    <b-list-group>
+                                        <b-list-group-item>Global Admin: </b-list-group-item>
+                                        <b-list-group-item>Organizations Participating: </b-list-group-item>
+                                        <b-list-group-item>Actors: </b-list-group-item>
+                                        <b-list-group-item>Start Date: </b-list-group-item>
+                                    </b-list-group>
+                                </div>
+                            </div>
+                        </b-col>
+                        <b-col lg="7">
                         <div class="card map-container">
                             <l-map ref="myMap" :zoom="zoom" :center="getCenterOfMap(project)">
                                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -82,19 +116,9 @@
                                 <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
                             </l-map>
                         </div>
-                        <div class="mt-3">
-                            <b-button-group>
-                            <b-button class="mr-2 btn-sm" disabled>Send Email</b-button>
-                            <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
-                            <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
-                            <!--<b-button class="mr-2 btn-sm">
-                                <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
-                            </b-button>-->
-                            <b-button class="mr-2 btn-sm">
-                                <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
-                            </b-button>
-                            </b-button-group>
-                        </div>
+                        </b-col>
+                            </b-row>
+                        </b-container>
                     </b-card-body>
 
                 </b-tab>

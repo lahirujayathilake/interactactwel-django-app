@@ -3,19 +3,18 @@
         <div class="wizard-container">
             <b-navbar toggleable="sm" type="dark" variant="dark">
                 <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-
-                <b-navbar-brand>Project Id : {{ $route.params.projectId }}</b-navbar-brand>
+                <b-button class="btn-sm mr-3" v-show ="!isWizardFlowStarted" @click="$router.push('/plans/new-plan')"
+                          variant="outline-light"><i class="fa fa-chevron-left"></i> Plans
+                </b-button>
+                <b-navbar-brand class="h5">Project : </b-navbar-brand>
 
                 <b-collapse id="nav-text-collapse" is-nav>
                     <b-navbar-nav>
-                        <b-nav-text>{{selectedProject.name}}</b-nav-text>
+                        <b-nav-text class="h5">{{selectedProject.name}}</b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
-                <b-button v-show="!isWizardFlowStarted" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 btn-sm">Start</b-button>
-                <b-button v-show ="!isWizardFlowStarted" class="mr-2 btn-sm">
-                    <router-link to="/plans/new-plan">Back to Plans</router-link>
-                </b-button>
-                <b-button v-show ="isWizardFlowStarted" variant="danger" @click="exitWizard" class="btn-sm">Exit</b-button>
+                <b-button v-show="!isWizardFlowStarted" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 glowing-button">Start</b-button>
+                <b-button v-show ="isWizardFlowStarted" variant="danger" @click="exitWizard" class="">Exit</b-button>
             </b-navbar>
            <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
                 <router-view></router-view>
@@ -1163,6 +1162,12 @@
     .wizard-container{
         height: 92vh;
         overflow: auto;
+    }
+    .glowing-button{
+        padding: 0.5rem 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-shadow: 1px 1px 1px #3f3f3f, 0 0 1em #72ffb3, 0 0 0.1em darkblue;
     }
 
 </style>
