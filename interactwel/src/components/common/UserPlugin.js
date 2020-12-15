@@ -25,7 +25,6 @@ export default {
                 },
 
                 async getProjectsListOfLoggedInUser() {
-
                     let user = await this.getLoggedInUser();
                     const { utils } = AiravataAPI;
                     this.projectsUsers = await utils.FetchUtils.get("/interactwel/api/projectusers/")
@@ -60,6 +59,24 @@ export default {
                         })
                         .catch(error => {
                             alert("Could not get the plans list. API error! " + error);
+                        });
+                },
+
+                async getUserRoles() {
+                    const { utils } = AiravataAPI;
+                    let roles = await utils.FetchUtils.get("/interactwel/api/roles/")
+                        .then(roleSet => {
+                            return  roleSet;
+                        })
+                        .catch(error => {
+                            alert("Could not get the user roles list. API error! " + error);
+                        });
+
+                    //todo pass the user id
+                    return await utils.FetchUtils.get("/interactwel/api/userroles/")
+                        .then(userRoles => userRoles.map(userRole => roles.find(role => role.role_id === userRole.role_id)))
+                        .catch(error => {
+                            alert("Could not get the user roles list. API error! " + error);
                         });
                 }
             }

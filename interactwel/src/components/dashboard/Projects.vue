@@ -17,11 +17,29 @@
             <b-row>
                 <b-col>
                     <b-tabs>
-                        <b-tab :active="$route.path === '/projects/my-projects'" title="My Projects" v-on:click='loadTabContent("/projects/my-projects")'></b-tab>
-                        <b-tab :active="$route.path === '/projects/suggested-projects'" title="Invited Projects" v-on:click='loadTabContent("/projects/suggested-projects")'></b-tab>
-                        <b-tab :active="$route.path === '/projects/explore-projects'" title="Explore Projects" v-on:click='loadTabContent("/projects/explore-projects")'></b-tab>
-                        <b-tab :active="$route.path === '/projects/create-project'" title="Create New Project" v-on:click='loadTabContent("/projects/create-project")'></b-tab>
-                        <b-tab :active="$route.path === '/projects/assign-projects'" title="Assign Projects" v-on:click='loadTabContent("/projects/assign-projects")'></b-tab>
+                        <b-tab
+                            :active="$route.path === '/projects/my-projects'"
+                            title="My Projects" v-on:click='loadTabContent("/projects/my-projects")'>
+                        </b-tab>
+                        <b-tab
+                            :active="$route.path === '/projects/suggested-projects'"
+                            title="Invited Projects" v-on:click='loadTabContent("/projects/suggested-projects")'>
+                        </b-tab>
+                        <b-tab
+                            :active="$route.path === '/projects/explore-projects'"
+                            title="Explore Projects" v-on:click='loadTabContent("/projects/explore-projects")'>
+                        </b-tab>
+                        <b-tab
+                            :v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+                            :active="$route.path === '/projects/create-project'"
+                            title="Create New Project" v-on:click='loadTabContent("/projects/create-project")'>
+                        </b-tab>
+                        <b-tab
+                            :v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+                            :active="$route.path === '/projects/assign-projects'"
+                            title="Assign Projects"
+                            v-on:click='loadTabContent("/projects/assign-projects")'>
+                        </b-tab>
                     </b-tabs>
                 </b-col>
             </b-row>
@@ -50,20 +68,19 @@
 
         data(){
             return{
-
                 auth: null,
-
                 isActive : true,
                 currentPage : null,
                 activeClass : 'active',
+                userRoleNames: [],
             }
         },
 
-        mounted(){
+        async mounted(){
             const SessionData = AiravataPortalSessionData;
             this.auth = SessionData.username;
             this.currentPage = this.$route.name
-
+            this.userRoleNames = await this.getUserRoles().map(role=> role.role_name);
         },
 
         computed: {
@@ -73,7 +90,6 @@
         },
 
         methods: {
-
             loadTabContent(path) {
                 this.$router.push(path);
             }
