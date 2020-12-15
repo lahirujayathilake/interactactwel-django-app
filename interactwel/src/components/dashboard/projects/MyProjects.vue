@@ -33,14 +33,20 @@
                             <div class="d-flex flex-column">
                                 <div class="mt-3">
                                     <b-button class="mr-2" @click="$router.push('/visualize/'+ project.project_id)"
-                                              variant="success">See Project Data
+                                              variant="success">View Project Data
                                     </b-button>
-                                    <b-button @click="$router.push('/adaptation-plans/'+ project.project_id)"
-                                              variant="outline-success">Generate New Plan
+                                    <b-button @click="$router.push('/plans/new-plan')"
+                                              variant="outline-success">View Plans
                                     </b-button>
                                 </div>
-                                <div class="mt-3">
-                                    <b-card-text>{{project.description}}</b-card-text>
+                                <div class="mt-4">
+                                    <h6>Project Details</h6>
+                                    <b-list-group>
+                                        <b-list-group-item>{{project.description}}</b-list-group-item>
+                                        <b-list-group-item>Location: {{project.location}}</b-list-group-item>
+                                        <b-list-group-item>Latitude: {{project.latitude}}</b-list-group-item>
+                                        <b-list-group-item>Longtitude: {{project.longtitude}} </b-list-group-item>
+                                    </b-list-group>
                                 </div>
                                 <div class="mt-3">
                                     <div>
@@ -48,15 +54,6 @@
                                         <b-button class="mr-2 btn-sm" disabled>Unjoin</b-button>
                                         <b-button class="mr-2 btn-sm" disabled>Invite</b-button>
                                     </div>
-                                </div>
-                                <div class="mt-3">
-                                    <h6>Associated Plans</h6>
-                                    <b-list-group>
-                                        <b-list-group-item>Global Admin: </b-list-group-item>
-                                        <b-list-group-item>Organizations Participating: </b-list-group-item>
-                                        <b-list-group-item>Actors: </b-list-group-item>
-                                        <b-list-group-item>Start Date: </b-list-group-item>
-                                    </b-list-group>
                                 </div>
                             </div>
                         </b-col>

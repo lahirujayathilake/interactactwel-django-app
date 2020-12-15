@@ -6,11 +6,11 @@
                 <b-button class="btn-sm mr-3" v-show ="!isWizardFlowStarted" @click="$router.push('/plans/new-plan')"
                           variant="outline-light"><i class="fa fa-chevron-left"></i> Plans
                 </b-button>
-                <b-navbar-brand class="h5">Project : </b-navbar-brand>
+                <b-navbar-brand class="h5 py-0">Project : </b-navbar-brand>
 
                 <b-collapse id="nav-text-collapse" is-nav>
                     <b-navbar-nav>
-                        <b-nav-text class="h5">{{selectedProject.name}}</b-nav-text>
+                        <b-nav-text class="h5 py-0">{{selectedProject.name}}</b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
                 <b-button v-show="!isWizardFlowStarted" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 glowing-button">Start</b-button>
@@ -168,8 +168,7 @@
                             <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
                             <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
 
-                            <l-control-layers v-if="ResultsMap" position="topright" ref="layersControl"
-                                              :sort-layers="false"></l-control-layers>
+
                             <l-layer-group ref="RegionalMap" v-if="ResultsMap" layer-type="overlay"
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>">
                                 <l-geo-json
@@ -214,11 +213,12 @@
                     </div>
                 </b-col>
         </div>
+        <welcomex v-show="isModalVisible" @close="closeModal"/>
         <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
     </div>
 </template>
 <script>
-    import Welcome from './intro/Welcome.vue';
+    import Welcomex from './intro/Welcomex.vue';
     import TutorStep1 from './intro/TutorStep1.vue';
     import TutorStep2 from './intro/TutorStep2.vue';
     import Header from './../../Header.vue';
@@ -261,7 +261,7 @@
     export default {
         name: 'AdaptationPlans',
         components: {
-            Header, Footer, RegionalSummary, Welcome, TutorStep1, TutorStep2,
+            Header, Footer, RegionalSummary, Welcomex, TutorStep1, TutorStep2,
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
             'l-marker': LMarker,
@@ -865,6 +865,10 @@
                     this.isWizardFlowStarted=false;
                 }
                 
+            },
+
+            closeModal() {
+                this.isModalVisible = false;
             }
         }
 
@@ -1169,6 +1173,59 @@
         text-transform: uppercase;
         box-shadow: 1px 1px 1px #3f3f3f, 0 0 1em #72ffb3, 0 0 0.1em darkblue;
     }
+
+    #welcome-modal .modal {
+        background: #FFFFFF;
+        box-shadow: 2px 2px 20px 1px;
+        height: auto;
+        overflow: scroll;
+        position: fixed;
+        top: 52%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+        max-width: 450px;
+        /*overflow-x: auto;*/
+        display: flex;
+        flex-direction: column;
+    }
+
+    #welcome-modal .modal-header,
+    #welcome-modal .modal-footer {
+        padding: 15px;
+        display: flex;
+    }
+
+    #welcome-modal .modal-header {
+        border-bottom: 1px solid #eeeeee;
+        color: #4cae4c;
+        justify-content: space-between;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    #welcome-modal .modal-footer {
+        justify-content: flex-end;
+    }
+
+    #welcome-modal .modal-body {
+        position: relative;
+        padding: 30px 40px;
+        font-size: 16px;
+        max-height: 400px;
+        overflow: auto;
+
+    }
+    #welcome-modal.modal-backdrop{
+        background-color: rgba(0, 0, 0, 0.42);
+    }
+
+    .h5{
+        text-transform: capitalize;
+        line-height: 1.5;
+    }
+
+
 
 </style>
 

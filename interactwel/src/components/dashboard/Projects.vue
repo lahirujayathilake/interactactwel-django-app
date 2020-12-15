@@ -5,8 +5,8 @@
             <b-row>
                 <b-col lg="10">
                     <h3 class="mb-3">Projects</h3>
-                    <p>Projects in the tabs below include the community adaptation projects that you are a member of (My Projects), projects that you have been invited
-                        to participate in (Invited Projects), and the other ongoing community adaptation projects globally that are using InterACTWEL (Explore Projects).
+                    <p>Projects in the tabs below include the community adaptation projects that you are a member of (<strong class="text-success">My Projects</strong>), projects that you have been invited
+                        to participate in (<strong class="text-success">Invited Projects</strong>), and the other ongoing community adaptation projects globally that are using InterACTWEL (<strong class="text-success">Explore Projects</strong>).
                         If you are an administrator, you will also be able to Create New Project for your community, and invite InterACTWEL members to join your community project via Assign Projects.</p>
                 </b-col>
                 <!--<b-col align="right">
