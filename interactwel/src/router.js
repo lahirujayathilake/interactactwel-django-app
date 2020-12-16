@@ -5,7 +5,6 @@ import Router from 'vue-router'
 const Dashboard = () => import('@/components/Dashboard')
 
 const MyPlans = () => import('@/components/dashboard/MyPlans')
-const AllPlans = () => import('@/components/dashboard/plans/AllPlans')
 const NewPlan = () => import('@/components/dashboard/plans/NewPlan')
 const SavedPlans = () => import('@/components/dashboard/plans/SavedPlans')
 const ProjectPlansList = () => import('@/components/dashboard/plans/ProjectPlansList')
@@ -85,11 +84,6 @@ export default new Router({
             name: 'MyPlans',
             component: MyPlans,
             children: [
-                {
-                    path: 'all-plans',
-                    name: 'AllPlans',
-                    component: AllPlans
-                },
                 {
                     path: 'new-plan',
                     name: 'NewPlan',
