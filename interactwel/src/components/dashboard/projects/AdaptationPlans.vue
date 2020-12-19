@@ -213,12 +213,12 @@
                     </div>
                 </b-col>
         </div>
-        <welcome v-show="isModalVisible" @close="closeModal"/>
+        <info-modal v-show="isModalVisible" @close="closeModal"/>
         <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
     </div>
 </template>
 <script>
-    import Welcome from './intro/Welcome.vue';
+    import InfoModal from './intro/InfoModal.vue';
     import TutorStep1 from './intro/TutorStep1.vue';
     import TutorStep2 from './intro/TutorStep2.vue';
     import Header from './../../Header.vue';
@@ -261,7 +261,7 @@
     export default {
         name: 'AdaptationPlans',
         components: {
-            Header, Footer, RegionalSummary, Welcome, TutorStep1, TutorStep2,
+            Header, Footer, RegionalSummary, InfoModal, TutorStep1, TutorStep2,
             'l-map': LMap,
             'l-tile-layer': LTileLayer,
             'l-marker': LMarker,
