@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // Containers
 const Dashboard = () => import('@/components/Dashboard')
 
+const AllPlans = () => import('@/components/dashboard/plans/AllPlans')
 const MyPlans = () => import('@/components/dashboard/MyPlans')
 const NewPlan = () => import('@/components/dashboard/plans/NewPlan')
 const SavedPlans = () => import('@/components/dashboard/plans/SavedPlans')
@@ -77,6 +78,12 @@ export default new Router({
             //redirect: '/dashboard',
             name: 'Dashboard',
             component: Dashboard,
+        },
+        {
+            path: '/all-plans',
+            //redirect: '/pages/404',
+            name: 'AllPlans',
+            component: AllPlans,
         },
         {
             path: '/plans',
