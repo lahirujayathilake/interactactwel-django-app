@@ -8,7 +8,6 @@
     import axios from 'axios';
     import LineChart from "../lib/LineChart";
     import chartjsPluginAnnotation from "chartjs-plugin-annotation";
-    import EventBus from '../../../../../event-bus';
 
     export default {
         name: 'actions-graph-stepped-lines',
@@ -63,13 +62,9 @@
             }
         },
         mounted() {
-            //let $this = this;
-                this.planId = this.$route.params.planId;
-            //EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                //this.planName = planName;
-                console.log(this.planId);
-                this.buildDataCollection(this.JSONData, this.planId);
-            //});
+          this.planId = this.$route.params.planId;
+          this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+          this.buildDataCollection(this.JSONData, this.planId);
 
         },
 
@@ -84,88 +79,90 @@
             buildDataCollection(data, adaptationPlan){
                 this.datacollection = {
                     labels: ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
-                    datasets: [{
-                        label: "Farmers: Columbia River (CR)",
-                        backgroundColor: "#186a3b",
-                        borderColor: "#186a3b",
-                        borderJoinStyle: 'round',
-                        borderWidth: 6,
-                        data: [
-                                'Increase amount of SW','Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of CR','Increase amount of CR','Increase amount of CR','Business as usual','Business as usual','Business as usual'],
-                        steppedLine: true,
-                        fill: false,
-                    },
-                        {
-                            label: "Farmers: Groundwater (GW)",
-                            backgroundColor: "#286bde",
-                            borderColor: "#286bde",
-                            borderJoinStyle: 'round',
-                            borderWidth: 6,
-                            data: [
-                                'Increase amount of CR', 'Increase amount of CR', 'Increase amount of CR', 'Increase amount of CR', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW', 'Decrease amount of GW'],
-                            steppedLine: true,
-                            fill: false,
-                        },
-                        {
-                        label: "Farmers: Surface water (SW)",
-                        fill: false,
-                        backgroundColor: "#dd434e",
-                        borderColor: "#dd434e",
-                        borderJoinStyle: 'round',
-                        borderWidth: 6,
-                        data: [
-                            'Business as usual', 'Business as usual', 'Business as usual', 'Business as usual', 'Increase amount of SW', 'Increase amount of SW', 'Increase amount of SW','Increase amount of SW','Increase amount of CR','Increase amount of CR'],
-                        steppedLine: true,
-                    }]
+                    datasets: this.getChartPlaceholderData()
                 };
-
-
-
-                //this.datacollection.labels = [];
-                //this.cr_data = [];
-                //for (let legend in data.Legend) {
-                //    this.datacollection.labels.push(data.Legend[legend]);
-                //}
-                //this.datacollection.datasets = [];
-                //let i= 0;
-                //this.cr_data.datasets = [];
-
-                this.datacollection.datasets[0].data =[];
-                this.datacollection.datasets[1].data =[];
-                this.datacollection.datasets[2].data =[];
 
 
                 for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
                     
                     let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
                     let dataset = [];
-                    //dataset.label = dataPoint.Name;
-                    //dataset.backgroundColor = this.getColor(i++);
-                    
-                    //dataset.data = [];
-                    
-                        //console.log(dataPoint);
-                    for (let dataValue in dataPoint.Data) {
+
+                  /**
+                   * Tracked by the CR, GW or SW
+                   * TODO: Track by actor ID
+                   */
+                  for (let selectedActorIndex in this.adaptationPlan['selectedActors']){
+                    if ((dataPoint.Name.split(' ')[(dataPoint.Name.split(' ').length-1)]).replace('(','').replace(')','') == this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_')[(this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_').length-1)]) {
+                      for (let dataValue in dataPoint.Data) {
                         dataset.push(dataPoint.Data[dataValue]);
-                        
+
                         if (dataIndex == 1){
-                            this.datacollection.datasets[2].data.push(dataPoint.Data[dataValue]);
+                          this.datacollection.datasets[selectedActorIndex].data.push(dataPoint.Data[dataValue]);
                         }else if (dataIndex == 3){
-                            this.datacollection.datasets[1].data.push(dataPoint.Data[dataValue]);
+                          this.datacollection.datasets[selectedActorIndex].data.push(dataPoint.Data[dataValue]);
                         }else if (dataIndex == 5){
-                            this.datacollection.datasets[0].data.push(dataPoint.Data[dataValue]);
+                          this.datacollection.datasets[selectedActorIndex].data.push(dataPoint.Data[dataValue]);
                         }
-                    
+
+                      }
                     }
-                    //this.datacollection.datasets[0].data.push(dataset);
-                    //console.log(this.datacollection.datasets[0].data);
+                  }
                     
                 }
-                //i++;
             },
             showChart: function (selectedPlan) {
                 console.log(selectedPlan);
                 this.planId = selectedPlan;
+            },
+
+            // TODO: remove when integration with backend, randomize colors, replace labels from input data
+            getChartPlaceholderData: function () {
+              let data = [{
+                  label: "Farmers: Columbia River (CR)",
+                  backgroundColor: "#186a3b",
+                  borderColor: "#186a3b",
+                  borderJoinStyle: 'round',
+                  borderWidth: 6,
+                  data: [],
+                  steppedLine: true,
+                  fill: false,
+                },
+                {
+                  label: "Farmers: Groundwater (GW)",
+                  backgroundColor: "#286bde",
+                  borderColor: "#286bde",
+                  borderJoinStyle: 'round',
+                  borderWidth: 6,
+                  data: [],
+                  steppedLine: true,
+                  fill: false,
+                },
+                {
+                  label: "Farmers: Surface water (SW)",
+                  fill: false,
+                  backgroundColor: "#dd434e",
+                  borderColor: "#dd434e",
+                  borderJoinStyle: 'round',
+                  borderWidth: 6,
+                  data: [],
+                  steppedLine: true,
+                }];
+              var selectedData = [];
+
+              /**
+               * Tracked by the CR, GW or SW
+               * TODO: Track by actor ID
+               */
+              for (let dataIndex in data){
+                let dataPoint = data[dataIndex];
+                for (let selectedActorIndex in this.adaptationPlan['selectedActors']){
+                  if ((dataPoint.label.split(' ')[(dataPoint.label.split(' ').length-1)]).replace('(','').replace(')','') == this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_')[(this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_').length-1)]) {
+                    selectedData.push(data[dataIndex]);
+                  }
+                }
+              }
+              return selectedData;
             }
         }
     };
