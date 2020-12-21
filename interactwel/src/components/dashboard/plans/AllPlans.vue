@@ -31,7 +31,10 @@
                                     </b-card>
                                     <div class="mt-3">
                                         <b-tabs>
-                                            <b-tab title="Plan 1">
+                                            <b-tab
+                                                v-for="plan in plans"
+                                                v-if="project.project_id == plan.project_id"
+                                                :title="'Plan '+plan.plan_id">
                                                 <div class="d-lg-flex d-sm-block py-3">
                                                     <b-button size="sm" variant="outline-success">Visualize this Plan
                                                     </b-button>
@@ -41,14 +44,11 @@
                                                         <b-list-group-item class="flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Goals</h5>
-                                                                <small>3 Goals selected</small>
+                                                                <small>{{project.goals.length}} Goals selected</small>
                                                             </div>
                                                             <small>
                                                                 <ul class="no-padding">
-                                                                    <li>Improve surface water quality</li>
-                                                                    <li>Increase recharge to shallow aquifer</li>
-                                                                    <li>Increase agriculture productivity</li>
-                                                                    <li>Improve ecological habitat</li>
+                                                                    <li v-for="goal in project.goals">{{goal.name}}</li>
                                                                 </ul>
                                                             </small>
                                                         </b-list-group-item>
@@ -56,13 +56,11 @@
                                                         <b-list-group-item class="flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Actors</h5>
-                                                                <small class="text-muted">2 Actors Selected</small>
+                                                                <small class="text-muted">{{project.actors.length}} Actors Selected</small>
                                                             </div>
                                                             <small>
                                                                 <ul class="no-padding">
-                                                                    <li>Farmer with Columbia river water rights</li>
-                                                                    <li>Farmer with other surface water rights</li>
-                                                                    <li>Farmer with groundwater rights</li>
+                                                                    <li v-for="actor in project.actors">{{actor.description}}</li>
                                                                 </ul>
                                                             </small>
                                                         </b-list-group-item>
@@ -73,37 +71,36 @@
 
                                                             <small>
                                                                 <ul class="no-padding">
-                                                                    <li>Farmer with Columbia river water rights
+                                                                  <li v-for="actor in project.actors">{{actor.description}}
                                                                         <ul>
-                                                                            <li>
-                                                                                action 1
-                                                                            </li>
-                                                                            <li>
-                                                                                action 2
-                                                                            </li>
-                                                                            <li>
-                                                                                action 1
+                                                                            <li v-for="action in actions" v-if="action.actor_id == actor.actor_id && action.plan_id == plan.plan_id">
+                                                                                {{action.name}}
                                                                             </li>
                                                                         </ul>
                                                                     </li>
-                                                                    <li>Farmer with other surface water rights
-                                                                        <ul>
-                                                                            <li>
-                                                                                action 1
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li>Farmer with groundwater rights</li>
                                                                 </ul>
                                                             </small>
                                                         </b-list-group-item>
                                                     </b-list-group>
                                                     <div class="d-block mx-3">
-                                                        <b-card>graph</b-card>
+                                                        <b-card>
+                                                          <actions-graph-stepped-lines></actions-graph-stepped-lines>
+                                                        </b-card>
                                                     </div>
                                                 </div>
                                                 <div class="d-block my-3">
-                                                    <b-card>feedback</b-card>
+                                                    <b-card>
+                                                      <b-list-group-item class="flex-column align-items-start">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                          <h5 class="mb-1">Feedbacks</h5>
+                                                        </div>
+                                                        <small>
+                                                          <ul class="no-padding">
+                                                            <li v-for="feedback in plan.feedbacks">{{feedback.comments}}</li>
+                                                          </ul>
+                                                        </small>
+                                                      </b-list-group-item>
+                                                    </b-card>
                                                 </div>
                                             </b-tab>
                                         </b-tabs>
@@ -123,23 +120,63 @@
 
     import Header from './../../Header.vue';
     import Footer from './../../Footer.vue';
+    import GanntChart from "@/components/dashboard/projects/charts/data/GanntChart";
+    import ActionsGraphSteppedLines from "@/components/dashboard/projects/charts/data/ActionsGraphSteppedLines";
 
     export default {
         components: {},
         name: "AllPlans",
         components: {
-            Header, Footer
+            Header, Footer,
+          'actions-graph-stepped-lines': ActionsGraphSteppedLines
         },
 
         data() {
             return {
                 projects: [],
-                projectsUsers: []
+                projectsUsers: [],
+                plans: [],
+                actions: [],
+                feedbacks: []
             };
         },
 
         async mounted() {
-            this.projects = await this.getProjectsListOfLoggedInUser();
+          const {utils} = AiravataAPI;
+            this.projects = await this.getProjectsListWithPlansOfLoggedInUser();
+            for (let project of this.projects){
+              let plans = await this.getProjectPlans(project.project_id);
+              plans.forEach(plan => {
+                plan.feedbacks = [];
+                utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ plan.plan_id).then(result => {
+                      if (result.length > 0) {
+                        plan.feedbacks.push(result[0]);
+                      }
+                    }
+                ).catch(error => {
+                  alert("Failed to fetch feedbacks " + error);
+                })
+              });
+              this.plans = this.plans.concat(plans);
+              project.goals = await this.getProjectGoals(project.project_id);
+              project.actors = await this.getProjectActors(project.project_id);
+              // project.actions = await this.getProjectActions(project.project_id);
+              for (let actor of project.actors){
+                for (let plan of plans){
+                  let actions = await this.getActorActions(plan.plan_id, actor.actor_id);
+                  for (let action of actions){
+                    action.actor_id = actor.actor_id;
+                    action.plan_id = plan.plan_id;
+                    this.actions.push(action);
+                  }
+                }
+              }
+            }
+            localStorage.setItem('currentPlanId','');
+            if (this.plans.length > 0){
+              localStorage.setItem('currentPlanId', this.plans[0].plan_id);
+              ActionsGraphSteppedLines.mounted();
+            }
         },
 
         methods: {},
