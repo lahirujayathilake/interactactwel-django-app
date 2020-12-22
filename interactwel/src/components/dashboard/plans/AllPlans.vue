@@ -3,20 +3,24 @@
         <component v-bind:is="component='Header'"></component>
         <b-container fluid class="main">
             <b-row>
-                <b-col>
+                <b-col lg="1">
                     <h3 class="mb-3">Plans</h3>
+                </b-col>
+                <b-col lg="11">
+                    <p>Plans are different scenarios of recommended adaptation decisions and strategies for the different community projects that you are a member of. <br/>
+                        Under each Project tab, you can Generate New Plan with assistance from InterACTWEL as well as view details on plans previously saved by you.</p>
                 </b-col>
             </b-row>
             <b-row>
                 <b-col lg="12">
                     <b-card v-if="projects" no-body>
-                        <b-tabs vertical nav-wrapper-class="w-25">
+                        <b-tabs nav-wrapper-class="project-tabs">
                             <b-tab
                                     v-for="project in projects"
                                     :title="project.name"
                                     v-on:click="projectSelected(project.project_id)">
                                 <!--<router-view></router-view>-->
-                                <b-card-body class="no-padding">
+                                <b-card-body>
                                     <div class="d-lg-flex d-sm-block">
                                         <h5 class="mr-auto">{{project.name}}</h5>
                                         <b-button size="sm" variant="success" @click="$router.push('/adaptation-plans/'+ project.project_id)">Generate New Plan</b-button>
@@ -29,14 +33,17 @@
                                             </b-card-text>
                                         </b-card-body>
                                     </b-card>
-                                    <div class="mt-3">
-                                        <b-tabs>
-                                            <b-tab
+                                    <div class="mt-3 pl-2">
+                                        <b-tabs vertical nav-wrapper-class="plan-tabs bg-light px-0">
+                                            <b-tab class="p-3 bg-light border"
                                                 v-for="plan in plans"
                                                 v-if="project.project_id == plan.project_id"
                                                 :title="'Plan '+plan.plan_id">
-                                                <div class="d-lg-flex d-sm-block py-3">
-                                                    <b-button size="sm" variant="outline-success">Visualize this Plan
+                                                <div class="d-lg-flex d-sm-block pb-2">
+                                                    <small> You saved this plan on {{plan.timestamp}}</small>
+                                                    </div>
+                                                <div class="d-lg-flex d-sm-block pb-3">
+                                                    <b-button size="sm" variant="dark">Visualize this Plan
                                                     </b-button>
                                                 </div>
                                                 <div class="d-lg-flex d-sm-block">
@@ -44,11 +51,11 @@
                                                         <b-list-group-item class="flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Goals</h5>
-                                                                <small>{{project.goals.length}} Goals selected</small>
+                                                                <small>{{goals.length}} Goals selected</small>
                                                             </div>
                                                             <small>
                                                                 <ul class="no-padding">
-                                                                    <li v-for="goal in project.goals">{{goal.name}}</li>
+                                                                    <li v-for="goal in goals">{{goal.name}}</li>
                                                                 </ul>
                                                             </small>
                                                         </b-list-group-item>
@@ -56,11 +63,11 @@
                                                         <b-list-group-item class="flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Actors</h5>
-                                                                <small class="text-muted">{{project.actors.length}} Actors Selected</small>
+                                                                <small class="text-muted">{{actors.length}} Actors Selected</small>
                                                             </div>
                                                             <small>
                                                                 <ul class="no-padding">
-                                                                    <li v-for="actor in project.actors">{{actor.description}}</li>
+                                                                    <li v-for="actor in actors">{{actor.description}}</li>
                                                                 </ul>
                                                             </small>
                                                         </b-list-group-item>
@@ -71,7 +78,7 @@
 
                                                             <small>
                                                                 <ul class="no-padding">
-                                                                  <li v-for="actor in project.actors">{{actor.description}}
+                                                                  <li v-for="actor in actors">{{actor.description}}
                                                                         <ul>
                                                                             <li v-for="action in actions" v-if="action.actor_id == actor.actor_id && action.plan_id == plan.plan_id">
                                                                                 {{action.name}}
@@ -84,22 +91,45 @@
                                                     </b-list-group>
                                                     <div class="d-block mx-3">
                                                         <b-card>
+                                                            <h5 class="text-center">Actions taken over time</h5>
                                                           <actions-graph-stepped-lines></actions-graph-stepped-lines>
                                                         </b-card>
                                                     </div>
                                                 </div>
-                                                <div class="d-block my-3">
+                                                <div class="d-block">
                                                     <b-card>
-                                                      <b-list-group-item class="flex-column align-items-start">
-                                                        <div class="d-flex w-100 justify-content-between">
-                                                          <h5 class="mb-1">Feedbacks</h5>
+                                                        <div class="" v-for="feedback in plan.feedbacks" v-if=" plan.feedbacks != null">
+                                                            <b-button size="sm" class="float-right" v-b-toggle.collapse-1 variant="light">View More <i class="fa fa-chevron-down"></i> </b-button>
+                                                            <h5 class="mb-1">Feedback</h5>
+                                                            <div>
+                                                                <small>Feedback Provided on: {{new Date(feedback.date_modified)| dateFormat('YYYY.MM.DD : HH.mm') }}</small>
+                                                            </div>
+                                                            <div v-if="feedback.rating != null">
+                                                                <star-rating :rating="feedback.rating" read-only></star-rating>
+                                                            </div>
                                                         </div>
-                                                        <small>
-                                                          <ul class="no-padding">
-                                                            <li v-for="feedback in plan.feedbacks">{{feedback.comments}}</li>
-                                                          </ul>
-                                                        </small>
-                                                      </b-list-group-item>
+                                                        <b-collapse id="collapse-1" class="mt-2">
+                                                                <small>
+                                                                    <hr/>
+                                                                    <div v-for="feedback in plan.feedbacks" v-if=" plan.feedbacks != null">
+                                                                        <div>
+                                                                            Question: Do you think the actions and timeframes presented in this plan are feasible?
+                                                                            <br>
+                                                                            Answer: {{feedback.feasibilty==1 ? 'Yes' : 'No' }}
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div v-for="feedbackItem in feedback.feedback_answers" :key="feedbackItem.id">
+                                                                            Question: {{feedbackItem.question}}
+                                                                            <br>
+                                                                            Answer: {{feedbackItem.answer}}
+                                                                            <hr>
+                                                                        </div>
+                                                                        <div v-if="feedback.comments != null">
+                                                                            Comment: {{feedback.comments}}
+                                                                        </div>
+                                                                    </div>
+                                                                </small>
+                                                        </b-collapse>
                                                     </b-card>
                                                 </div>
                                             </b-tab>
@@ -122,6 +152,8 @@
     import Footer from './../../Footer.vue';
     import GanntChart from "@/components/dashboard/projects/charts/data/GanntChart";
     import ActionsGraphSteppedLines from "@/components/dashboard/projects/charts/data/ActionsGraphSteppedLines";
+    import FeedbackView from "./FeedbackView.vue";
+
 
     export default {
         components: {},
@@ -134,6 +166,8 @@
         data() {
             return {
                 projects: [],
+                goals: [],
+                actors: [],
                 projectsUsers: [],
                 plans: [],
                 actions: [],
@@ -145,7 +179,7 @@
           const {utils} = AiravataAPI;
             this.projects = await this.getProjectsListWithPlansOfLoggedInUser();
             for (let project of this.projects){
-              let plans = await this.getProjectPlans(project.project_id);
+              let plans = await this.getPlans(project.project_id);
               plans.forEach(plan => {
                 plan.feedbacks = [];
                 utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id="+ plan.plan_id).then(result => {
@@ -158,10 +192,10 @@
                 })
               });
               this.plans = this.plans.concat(plans);
-              project.goals = await this.getProjectGoals(project.project_id);
-              project.actors = await this.getProjectActors(project.project_id);
+              this.goals = await this.getProjectGoals(project.project_id);
+              this.actors = await this.getProjectActors(project.project_id);
               // project.actions = await this.getProjectActions(project.project_id);
-              for (let actor of project.actors){
+              for (let actor of actors){
                 for (let plan of plans){
                   let actions = await this.getActorActions(plan.plan_id, actor.actor_id);
                   for (let action of actions){
@@ -191,6 +225,22 @@
         padding: 1rem 2rem;
         min-height: 90vh;
         text-align: left;
+    }
+    .project-tabs ul li a , .plan-tabs ul li a{
+        color: #2c3e50;
+    }
+    .project-tabs ul li a:hover , .plan-tabs ul li a:hover{
+        color: #28a745;
+    }
+    .plan-tabs ul li a.active {
+        border-top:none;
+        border-right: none;
+        border-left: 3px solid #28a745 !important;
+    }
+
+    .project-tabs ul li a.active {
+        font-weight: bold;
+        border-top:2px solid #28a745 !important;
     }
 
 </style>

@@ -51,7 +51,7 @@
 
         async mounted() {
             this.projectId = this.$route.params.projectId
-            this.plans = await this.getProjectPlans(this.projectId)
+            this.plans = await this.getPlans(this.projectId)
 
         },
 
