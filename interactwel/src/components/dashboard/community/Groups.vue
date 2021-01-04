@@ -18,11 +18,7 @@
                   <b-row>
                     <b-col>
                       <b-list-group>
-                        <b-list-group-item>Group 1 <b-button size="sm">Leave</b-button><b-button size="sm" class="mr-2">Add Friend</b-button></b-list-group-item>
-                        <b-list-group-item>Group 2 <b-button size="sm">Leave</b-button><b-button size="sm" class="mr-2">Add Friend</b-button></b-list-group-item>
-                        <b-list-group-item>Group 3 <b-button size="sm">Leave</b-button><b-button size="sm" class="mr-2">Add Friend</b-button></b-list-group-item>
-                        <b-list-group-item>Group 4 <b-button size="sm">Leave</b-button><b-button size="sm" class="mr-2">Add Friend</b-button></b-list-group-item>
-                        <b-list-group-item>Group 5 <b-button size="sm">Leave</b-button><b-button size="sm" class="mr-2">Add Friend</b-button></b-list-group-item>
+                        <b-list-group-item v-for="group in groups">{{group.group_name}} <b-button size="sm">Leave</b-button><b-button size="sm" class="mr-2">Add Friend</b-button></b-list-group-item>
                       </b-list-group>
                     </b-col>
                   </b-row>
@@ -141,10 +137,12 @@
                 group_name: null,
                 group_description: null,
               },
+              groups: [],
             }
         },
 
         mounted() {
+          this.getAllGroups();
         },
 
 
@@ -168,6 +166,18 @@
               return true
             }
           },
+
+          getAllGroups() {
+            const { utils } = AiravataAPI;
+            utils.FetchUtils.get("/interactwel/api/groups/").then(result => {
+                  if (result.length > 0) {
+                    this.groups = result;
+                  }
+                }
+            ).catch(error => {
+              alert("Failed to fetch groups " + error);
+            })
+          }
         }
 
     }
