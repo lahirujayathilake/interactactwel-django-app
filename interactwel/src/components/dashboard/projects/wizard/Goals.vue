@@ -57,11 +57,15 @@
                             tag="article"
                             style="max-width: 25rem;"
                     >
-                        <h4 class="card-title"> "What are Goals?" {{$route.params.projectId}}
-                            <b-button v-b-toggle.collapse-what_are_goals variant="outline-info" class="m-1b" size="sm">
-                                <i>Hide panel</i>
-                            </b-button>
-                        </h4>
+                        <div class="row">
+                          <div class="col">
+                            <h4 class="card-title"> "What are Goals?" {{$route.params.projectId}}
+                            </h4>
+                          </div>
+                          <div class="col-1 mr-3">
+                            <h5 class="text-right font-weight-light"><i class="fas fa-times" v-b-toggle.collapse-what_are_goals style="cursor: pointer"></i></h5>
+                          </div>
+                        </div>
 
                         <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
                         <!--<b-card-text v-if="isHelpStep1Active">-->
@@ -91,7 +95,7 @@
             <b-card no-body footer-tag="footer">
                 <div class="step-header" slot="header">Choose Goals
                     <em slot="header">
-                        <b-button v-b-toggle.collapse-what_are_goals class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
+                        <i v-b-toggle.collapse-what_are_goals class="far fa-question-circle" title="Show instructions" style="cursor: pointer"></i>
                     </em>
                 </div>
                 <b-card-body>
