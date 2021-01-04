@@ -59,7 +59,7 @@
                     >
                         <div class="row">
                           <div class="col">
-                            <h4 class="card-title"> "What are Goals?" {{$route.params.projectId}}
+                            <h4 class="card-title"> "What are Goals?"
                             </h4>
                           </div>
                           <div class="col-1 mr-3">

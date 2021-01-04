@@ -3,7 +3,7 @@
         <div class="wizard-container">
             <b-navbar toggleable="sm" type="dark" variant="dark">
                 <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-                <b-button class="btn-sm mr-3" v-show ="!isWizardFlowStarted" @click="$router.push('/plans/new-plan')"
+                <b-button class="btn-sm mr-3" v-show ="!isWizardFlowStarted" @click="$router.push('/all-plans')"
                           variant="outline-light"><i class="fa fa-chevron-left"></i> Plans
                 </b-button>
                 <b-navbar-brand class="h5 py-0">Project : </b-navbar-brand>
@@ -861,7 +861,7 @@
                 let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
                 if(confirmResponse){
                     this.$store.commit("resetWizardFlow", null);
-                    this.$router.push('/plans/saved-plans');
+                    this.$router.push('/all-plans');
                     this.isWizardFlowStarted=false;
                 }
                 

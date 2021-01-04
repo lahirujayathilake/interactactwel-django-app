@@ -47,7 +47,7 @@
                                                     </b-button>
                                                 </div>
                                                 <div class="d-lg-flex d-sm-block">
-                                                    <b-list-group>
+                                                    <b-list-group class="col-lg-3 col-md-12 col-sm-12">
                                                         <b-list-group-item class="flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Goals</h5>
@@ -63,11 +63,17 @@
                                                         <b-list-group-item class="flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Actors</h5>
-                                                                <small class="text-muted">{{actors.length}} Actors Selected</small>
+                                                                <small class="text-muted">{{actors.length}} 2 Actors Selected</small>
                                                             </div>
-                                                            <small>
+                                                            <!--<small>
                                                                 <ul class="no-padding">
                                                                     <li v-for="actor in actors">{{actor.description}}</li>
+                                                                </ul>
+                                                            </small>-->
+                                                            <small>
+                                                                <ul class="no-padding">
+                                                                    <li>Farmers: Ground Water (GW)</li>
+                                                                    <li>Farmers: Surface Water (SW)</li>
                                                                 </ul>
                                                             </small>
                                                         </b-list-group-item>
@@ -76,7 +82,7 @@
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-1">Actions</h5></div>
 
-                                                            <small>
+                                                            <!--<small>
                                                                 <ul class="no-padding">
                                                                   <li v-for="actor in actors">{{actor.description}}
                                                                         <ul>
@@ -86,29 +92,43 @@
                                                                         </ul>
                                                                     </li>
                                                                 </ul>
+                                                            </small>-->
+                                                            <small>
+                                                                <ul class="no-padding">
+                                                                    <li>Farmers: Ground Water (GW)
+                                                                        <ul>
+                                                                            <li>Increase the volume of non-Columbia surface water</li>
+                                                                            <li>Decrease the volume of non-Columbia surface water</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>Farmers: Surface Water (SW)
+                                                                        <ul>
+                                                                            <li>Increase the volume of non-Columbia surface water</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
                                                             </small>
                                                         </b-list-group-item>
                                                     </b-list-group>
-                                                    <div class="d-block mx-3">
+                                                    <div class="d-block flex-column col-md-12 col-lg-6 col-sm-12">
                                                         <b-card>
                                                             <h5 class="text-center">Actions taken over time</h5>
                                                           <actions-graph-stepped-lines></actions-graph-stepped-lines>
                                                         </b-card>
                                                     </div>
-                                                </div>
-                                                <div class="d-block">
-                                                    <b-card>
-                                                        <div class="" v-for="feedback in plan.feedbacks" v-if=" plan.feedbacks != null">
-                                                            <b-button size="sm" class="float-right" v-b-toggle.collapse-1 variant="light">View More <i class="fa fa-chevron-down"></i> </b-button>
-                                                            <h5 class="mb-1">Feedback</h5>
-                                                            <div>
-                                                                <small>Feedback Provided on: {{new Date(feedback.date_modified)| dateFormat('YYYY.MM.DD : HH.mm') }}</small>
+                                                    <div class="d-block col-lg-3 col-md-12 col-sm-12">
+                                                        <b-card>
+                                                            <div class="" v-for="feedback in plan.feedbacks" v-if=" plan.feedbacks != null">
+                                                                <b-button size="sm" class="float-right" v-b-toggle.collapse-1 variant="light">View More <i class="fa fa-chevron-down"></i> </b-button>
+                                                                <h5 class="mb-1">Feedback</h5>
+                                                                <div>
+                                                                    <small>Feedback Provided on: {{new Date(feedback.date_modified)| dateFormat('YYYY.MM.DD : HH.mm') }}</small>
+                                                                </div>
+                                                                <div v-if="feedback.rating != null">
+                                                                    <star-rating :rating="feedback.rating" read-only></star-rating>
+                                                                </div>
                                                             </div>
-                                                            <div v-if="feedback.rating != null">
-                                                                <star-rating :rating="feedback.rating" read-only></star-rating>
-                                                            </div>
-                                                        </div>
-                                                        <b-collapse id="collapse-1" class="mt-2">
+                                                            <b-collapse id="collapse-1" class="mt-2">
                                                                 <small>
                                                                     <hr/>
                                                                     <div v-for="feedback in plan.feedbacks" v-if=" plan.feedbacks != null">
@@ -129,8 +149,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </small>
-                                                        </b-collapse>
-                                                    </b-card>
+                                                            </b-collapse>
+                                                        </b-card>
+                                                    </div>
                                                 </div>
                                             </b-tab>
                                         </b-tabs>

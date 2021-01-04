@@ -16,7 +16,7 @@
 
             <b-row>
                 <b-col>
-                    <b-tabs>
+                    <b-tabs nav-wrapper-class="project-tabs">
                         <b-tab
                             :active="$route.path === '/projects/my-projects'"
                             title="My Projects" v-on:click='loadTabContent("/projects/my-projects")'>
@@ -105,8 +105,14 @@
         min-height: 90vh;
         text-align: left;
     }
-
-    a {
-        color: #42b983;
+    .project-tabs ul li a{
+        color: #2c3e50;
+    }
+    .project-tabs ul li a:hover{
+        color: #28a745;
+    }
+    .project-tabs ul li a.active {
+        font-weight: bold;
+        border-top:2px solid #28a745 !important;
     }
 </style>

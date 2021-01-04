@@ -44,16 +44,21 @@
         </ol>
     <div id="step4" title="Step 4">
         <div class="help-block-viz">
-            <b-collapse visible id="collapse-4">
+            <b-collapse visible id="collapse-what_are_plans">
                 <b-card
                         tag="article"
                         style="max-width: 33rem;"
                         class="mb-2"
                 >
-                    <h4 class="card-title">"What are Adaptation Plans?"
-                        <b-button v-b-toggle.collapse-4 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i>
-                        </b-button>
-                    </h4>
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title"> "What are Adaptation Plans?"
+                            </h4>
+                        </div>
+                        <div class="col-1 mr-3">
+                            <h5 class="text-right font-weight-light"><i class="fas fa-times" v-b-toggle.collapse-what_are_plans style="cursor: pointer"></i></h5>
+                        </div>
+                    </div>
                     <b-card-text>
                         <p align="justify">
                             In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong>
@@ -70,7 +75,7 @@
         <b-card no-body footer-tag="footer">
             <div class="step-header" slot="header">Visualization
                 <em slot="header">
-                    <b-button v-b-toggle.collapse-4 class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
+                    <i v-b-toggle.collapse-what_are_plans class="far fa-question-circle" title="Show instructions" style="cursor: pointer"></i>
                 </em>
             </div>
             <b-card-body class="no-padding">

@@ -24,7 +24,7 @@
                 cr_data: null,
 
                 options: {
-                    responsive: false,
+                    responsive: true,
                     legend: {
                         display: true
                     },

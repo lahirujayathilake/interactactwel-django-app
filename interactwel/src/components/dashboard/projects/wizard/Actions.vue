@@ -53,16 +53,20 @@
     <div id="step3" title="Step 3"
          icon="ti-check">
         <div class="help-block-actions">
-            <b-collapse visible id="collapse-3">
+            <b-collapse visible id="collapse-what_are_actions">
                 <b-card
                         tag="article"
                         style="max-width: 25rem;"
                         class="mb-2">
-                    <h4 class="card-title">"What are Actions?"
-                        <b-button v-b-toggle.collapse-3 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i>
-                        </b-button>
-                    </h4>
-                    <!-- <b-card-text><strong>Why select Actions?</strong></b-card-text><br/> -->
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title"> "What are Actions?"
+                            </h4>
+                        </div>
+                        <div class="col-1 mr-3">
+                            <h5 class="text-right font-weight-light"><i class="fas fa-times" v-b-toggle.collapse-what_are_actions style="cursor: pointer"></i></h5>
+                        </div>
+                    </div>
                     <b-card-text>
                         <p align="justify"><b>Adaptation Actions</b>
                             are management actions that adjust the allocation of resources, operations, and assets.  These management actions are formulated to adapt to changing basin conditions that effect quality, quantity, and accessibility of water, energy, and land resources. These actions include a variety of approaches – from infrastructure building, adopting new technologies to raising awareness.
@@ -76,7 +80,7 @@
         <b-card style="width: 850px" no-body footer-tag="footer">
             <div class="step-header" slot="header">Choose Actions
                 <em slot="header">
-                    <b-button v-b-toggle.collapse-3 class="m-1 show-info-btn" size="sm"> Show instructions </b-button>
+                    <i v-b-toggle.collapse-what_are_actions class="far fa-question-circle" title="Show instructions" style="cursor: pointer"></i>
                 </em>
             </div>
             <b-list-group-item>

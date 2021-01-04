@@ -35,7 +35,7 @@
                                     <b-button class="mr-2" @click="$router.push('/visualize/'+ project.project_id)"
                                               variant="success">View Project Data
                                     </b-button>
-                                    <b-button @click="$router.push('/plans/new-plan')"
+                                    <b-button @click="$router.push('/all-plans')"
                                               variant="outline-success">View Plans
                                     </b-button>
                                 </div>
