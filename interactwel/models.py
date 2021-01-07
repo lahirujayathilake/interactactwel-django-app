@@ -120,14 +120,14 @@ class InteractwelInvitation(models.Model):
     invitee_id = models.ForeignKey(InteractwelUser, related_name='invitee_id', on_delete=models.CASCADE)
     event_id = models.ForeignKey(InteractwelEvent, on_delete=models.CASCADE)
     invite_status = models.CharField(max_length=256)
+    group_id = models.ForeignKey(InteractwelGroup, on_delete=models.CASCADE)
 
     class Meta:
         managed = True
         db_table = 'interactwel_invitation'
         verbose_name = 'Interactwel Invitation'
         verbose_name_plural = 'Interactwel Invitation'
-        unique_together = (('event_id', 'inviter_id', 'invitee_id'),)
-
+        unique_together = (('event_id', 'inviter_id', 'invitee_id', 'group_id'),)
 
 
 ################################################################################
