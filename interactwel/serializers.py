@@ -9,7 +9,7 @@ InteractwelEventAttendance, InteractwelInvitation, InteractwelProject, Interactw
 InteractwelPlan, InteractwelFeedback, InteractwelGoal, InteractwelActor, InteractwelAction, \
 InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, InteractwelProjectAction, \
 InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelProjectData, InteractwelFeedbackAnswer, \
-InteractwelPlanActorActions
+InteractwelPlanActorActions, InteractwelProjectJoinRequest
 
 class SubbasinSerializer(serializers.ModelSerializer):
 
@@ -202,4 +202,9 @@ class InteractwelProjectQuestionSerializer(serializers.ModelSerializer):
 class InteractwelProjectPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelProjectPlan
+        fields = '__all__'
+
+class InteractwelProjectJoinRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelProjectJoinRequest
         fields = '__all__'

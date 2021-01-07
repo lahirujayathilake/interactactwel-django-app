@@ -5,7 +5,7 @@ InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, Interact
 InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
 InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
 InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
-InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions
+InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions, InteractwelProjectJoinRequest
 
 from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, InteractwelUserRoleSerializer, \
 InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
@@ -15,7 +15,7 @@ InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjec
 InteractwelPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
 InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
 InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackAnswerSerializer, \
-InteractwelPlanActorActionsSerializer
+InteractwelPlanActorActionsSerializer, InteractwelProjectJoinRequestSerializer
 
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -768,6 +768,30 @@ class ProjectPlanViewSet(viewsets.ViewSet):
 
     def create(self, request):
         serializer = InteractwelProjectPlanSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            data = {
+                "error": True,
+                "errors": serializer.errors,
+            }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+class ProjectJoinRequestViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = InteractwelProjectJoinRequest.objects.all()
+        serializer = InteractwelProjectJoinRequestSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = InteractwelProjectJoinRequest.objects.all()
+        requests = queryset.filter(project_id=pk)
+        serializer = InteractwelProjectJoinRequestSerializer(requests, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = InteractwelProjectJoinRequestSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

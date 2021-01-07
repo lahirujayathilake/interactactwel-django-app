@@ -42,6 +42,7 @@ router.register(r"projectactors", views.ProjectActorViewSet, base_name = "projec
 router.register(r"projectactions", views.ProjectActionViewSet, base_name = "projectaction")
 router.register(r"projectquestions", views.ProjectQuestionViewSet, base_name = "projectquestion")
 router.register(r"projectplans", views.ProjectPlanViewSet, base_name = "projectplan")
+router.register(r"projectjoinrquests", views.ProjectJoinRequestViewSet, base_name = "projectjoinrequest")
 
 urlpatterns = [
     url(r"^api/", include(router.urls)),

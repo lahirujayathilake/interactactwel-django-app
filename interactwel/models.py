@@ -378,3 +378,15 @@ class InteractwelProjectPlan(models.Model):
         verbose_name = 'Interactwel Project Plan'
         verbose_name_plural = 'Interactwel Project Plan'
         unique_together = (('project_id', 'plan_id'),)
+
+class InteractwelProjectJoinRequest(models.Model):
+    project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
+    status = models.CharField(max_length=256)
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_project_join_request'
+        verbose_name = 'Interactwel Project Join Request'
+        verbose_name_plural = 'Interactwel Project Join Request'
+        unique_together = (('project_id', 'user_id'),)
