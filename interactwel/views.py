@@ -100,14 +100,14 @@ class RoleViewSet(viewsets.ViewSet):
 
 class UserRoleViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = InteractwelUserRole.objects.all()
+        queryset = self.get_queryset()
         serializer = InteractwelUserRoleSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         queryset = InteractwelUserRole.objects.all()
-        groups = queryset.filter(group_id=pk)
-        serializer = InteractwelUserRoleSerializer(groups, many=True)
+        userroles = queryset.filter(user_id=pk)
+        serializer = InteractwelUserRoleSerializer(userroles, many=True)
         return Response(serializer.data)
 
     def create(self, request):
@@ -122,6 +122,16 @@ class UserRoleViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+    def get_queryset(self):
+        queryset = InteractwelUserRole.objects.all()
+        user_id = self.request.query_params.get('user_id', None)
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
+
+        role_id = self.request.query_params.get('role_id', None)
+        if role_id is not None:
+            queryset = queryset.filter(role_id=role_id)
+        return queryset
 
 class GroupViewSet(viewsets.ViewSet):
     def list(self, request):
