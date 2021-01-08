@@ -9,7 +9,7 @@ InteractwelEventAttendance, InteractwelInvitation, InteractwelProject, Interactw
 InteractwelPlan, InteractwelFeedback, InteractwelGoal, InteractwelActor, InteractwelAction, \
 InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, InteractwelProjectAction, \
 InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelProjectData, InteractwelFeedbackAnswer, \
-InteractwelPlanActorActions, InteractwelProjectJoinRequest
+InteractwelPlanActorActions, InteractwelProjectJoinRequest, InteractwelSelectedPlan
 
 class SubbasinSerializer(serializers.ModelSerializer):
 
@@ -105,12 +105,17 @@ class InteractwelPlanActorActionsSerializer(serializers.ModelSerializer):
         model = InteractwelPlanActorActions
         fields = '__all__'
 
+class InteractwelSelectedPlanSerializer(serializers.ModelSerializer):
+    action_mapping = InteractwelPlanActorActionsSerializer(source='interactwelplanactoractions_set', many=True, required=False)    
+    class Meta:
+        model = InteractwelSelectedPlan
+        fields = ("selected_plan_id", "timestamp", "user_id", "goals", "action_mapping", "plan_id")
+        extra_kwargs = {'goals': {'required': False}, 'action_mapping': {'required': False}}
+
 class InteractwelPlanSerializer(serializers.ModelSerializer):
-    action_mapping = InteractwelPlanActorActionsSerializer(source='interactwelplanactoractions_set', many=True)    
     class Meta:
         model = InteractwelPlan
-        fields = ("plan_id", "timestamp", "project_id", "user_id", "goals", "action_mapping")
-        extra_kwargs = {'goals': {'required': False}, 'action_mapping': {'required': False}}
+        fields = '__all__'
 
 class InteractwelFeedbackAnswerSerializer(serializers.ModelSerializer):
     class Meta:

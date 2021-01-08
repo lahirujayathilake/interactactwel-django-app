@@ -28,7 +28,8 @@ router.register(r"projects", views.ProjectViewSet, base_name = "project")
 router.register(r"projectusers", views.ProjectUserViewSet, base_name = "projectuser")
 router.register(r"projectdata", views.ProjectDataViewSet, base_name = "projectdata")
 router.register(r"plans", views.PlanViewSet, base_name = "plan")
-router.register(r"planactoraction", views.PlanActorActionsViewSet, base_name = "planactoraction")
+router.register(r"selectedplans", views.SelectedPlanViewSet, base_name = "selectedplan")
+router.register(r"selectedplanactoraction", views.PlanActorActionsViewSet, base_name = "selectedplanactoraction")
 router.register(r"feedbacks", views.FeedbackViewSet, base_name = "feedback")
 router.register(r"feedbackanswers", views.FeedbackAnswerViewSet, base_name = "feedbackanswer")
 
@@ -41,7 +42,7 @@ router.register(r"projectgoals", views.ProjectGoalViewSet, base_name = "projectg
 router.register(r"projectactors", views.ProjectActorViewSet, base_name = "projectactor")
 router.register(r"projectactions", views.ProjectActionViewSet, base_name = "projectaction")
 router.register(r"projectquestions", views.ProjectQuestionViewSet, base_name = "projectquestion")
-router.register(r"projectplans", views.ProjectPlanViewSet, base_name = "projectplan")
+router.register(r"projectselectedplans", views.ProjectPlanViewSet, base_name = "projectselectedplan")
 router.register(r"projectjoinrquests", views.ProjectJoinRequestViewSet, base_name = "projectjoinrequest")
 
 urlpatterns = [

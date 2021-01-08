@@ -5,14 +5,15 @@ InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, Interact
 InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
 InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
 InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
-InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions, InteractwelProjectJoinRequest
+InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions, InteractwelProjectJoinRequest, \
+InteractwelSelectedPlan
 
 from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, InteractwelUserRoleSerializer, \
 InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
 InteractwelDocumentationSerializer, InteractwelGroupSerializer, InteractwelGroupRoleMappingSerializer, \
 InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEventAttendanceSerializer, \
 InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, InteractwelProjectDataSerializer, \
-InteractwelPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
+InteractwelPlanSerializer, InteractwelSelectedPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
 InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
 InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackAnswerSerializer, \
 InteractwelPlanActorActionsSerializer, InteractwelProjectJoinRequestSerializer
@@ -457,6 +458,41 @@ class PlanViewSet(viewsets.ViewSet):
 
     def get_queryset(self):
         queryset = InteractwelPlan.objects.all()
+        project_id = self.request.query_params.get('project_id', None)
+        if project_id is not None:
+            queryset = queryset.filter(project_id=project_id)
+
+        plan_id = self.request.query_params.get('plan_id', None)
+        if plan_id is not None:
+            queryset = queryset.filter(plan_id=plan_id)
+        return queryset
+
+class SelectedPlanViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = InteractwelSelectedPlanSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = InteractwelSelectedPlan.objects.all()
+        project = get_object_or_404(queryset, selected_plan_id=pk)
+        serializer = InteractwelSelectedPlanSerializer(project)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = InteractwelSelectedPlanSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            data = {
+                "error": True,
+                "errors": serializer.errors,
+            }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_queryset(self):
+        queryset = InteractwelSelectedPlan.objects.all()
         project_id = self.request.query_params.get('project_id', None)
         if project_id is not None:
             queryset = queryset.filter(project_id=project_id)

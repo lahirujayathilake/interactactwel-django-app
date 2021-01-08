@@ -254,9 +254,7 @@ class InteractwelProjectUser(models.Model):
 class InteractwelPlan(models.Model):
     plan_id = models.BigAutoField(primary_key=True, editable=False)
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
-    goals = models.ManyToManyField('InteractwelGoal', related_name='plans', blank=True)
-    timestamp = models.fields.DateTimeField()
+    plan_json = JSONField()
 
     class Meta:
         managed = True
@@ -264,8 +262,21 @@ class InteractwelPlan(models.Model):
         verbose_name = 'Interactwel Plan'
         verbose_name_plural = 'Interactwel Plan'
 
-class InteractwelPlanActorActions(models.Model):
+class InteractwelSelectedPlan(models.Model):
+    selected_plan_id = models.BigAutoField(primary_key=True, editable=False)
+    user_id = models.ForeignKey(InteractwelUser, on_delete=models.CASCADE)
     plan_id = models.ForeignKey(InteractwelPlan, on_delete=models.CASCADE)
+    goals = models.ManyToManyField('InteractwelGoal', related_name='plans', blank=True)
+    timestamp = models.fields.DateTimeField()
+
+    class Meta:
+        managed = True
+        db_table = 'interactwel_selected_plan'
+        verbose_name = 'Interactwel Selected Plan'
+        verbose_name_plural = 'Interactwel Selected Plan'
+
+class InteractwelPlanActorActions(models.Model):
+    selected_plan_id = models.ForeignKey(InteractwelSelectedPlan, on_delete=models.CASCADE)
     actor_id = models.ForeignKey(InteractwelActor, on_delete=models.CASCADE)
     action_id = models.ForeignKey(InteractwelAction, on_delete=models.CASCADE)
 
@@ -274,7 +285,7 @@ class InteractwelPlanActorActions(models.Model):
         db_table = 'interactwel_plan_actor_action'
         verbose_name = 'Interactwel Plan Actor Action Mapping'
         verbose_name_plural = 'Interactwel Plan Actor Action Mapping'
-        unique_together = (('plan_id', 'actor_id', 'action_id'),)
+        unique_together = (('actor_id', 'action_id', 'selected_plan_id'),)
 
 class InteractwelFeedback(models.Model):
     feedback_id = models.BigAutoField(primary_key=True, editable=False)
@@ -370,14 +381,14 @@ class InteractwelProjectQuestion(models.Model):
 
 class InteractwelProjectPlan(models.Model):
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
-    plan_id = models.ForeignKey(InteractwelPlan, on_delete=models.CASCADE)
+    selected_plan_id = models.ForeignKey(InteractwelSelectedPlan, on_delete=models.CASCADE)
 
     class Meta:
         managed = True
         db_table = 'interactwel_project_plan'
         verbose_name = 'Interactwel Project Plan'
         verbose_name_plural = 'Interactwel Project Plan'
-        unique_together = (('project_id', 'plan_id'),)
+        unique_together = (('project_id', 'selected_plan_id'),)
 
 class InteractwelProjectJoinRequest(models.Model):
     project_id = models.ForeignKey(InteractwelProject, on_delete=models.CASCADE)
