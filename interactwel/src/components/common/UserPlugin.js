@@ -92,7 +92,7 @@ export default {
 
                 async getProjectPlans(projectId) {
                     const {utils} = AiravataAPI;
-                    return await utils.FetchUtils.get("/interactwel/api/projectplans/?project_id=" + projectId)
+                    return await utils.FetchUtils.get("/interactwel/api/plans/?project_id=" + projectId)
                         .then(projectPlansList => {
                             return  projectPlansList;
                         })
