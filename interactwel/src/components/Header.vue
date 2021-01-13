@@ -11,7 +11,7 @@
                     <b-navbar-nav>
                         <b-nav-item href="#"><router-link routerLinkActive="active" :to="{ name: 'Dashboard'}">Home</router-link></b-nav-item>
                         <b-nav-item href="#"><router-link routerLinkActive="active" to="/projects/my-projects">Projects</router-link></b-nav-item>
-                        <b-nav-item href="#"><router-link routerLinkActive="active" to="/all-plans">Plans</router-link></b-nav-item>
+                        <b-nav-item href="#"><router-link routerLinkActive="active" to="/all-plans/1">Plans</router-link></b-nav-item>
                         <b-nav-item href="#"><router-link routerLinkActive="active" to="/community/events">Community</router-link></b-nav-item>
                         <b-nav-item href="#"><router-link routerLinkActive="active" to="/learn/videos/1">Help</router-link></b-nav-item>
                     </b-navbar-nav>

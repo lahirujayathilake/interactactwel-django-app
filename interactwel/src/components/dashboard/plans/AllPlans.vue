@@ -38,7 +38,9 @@
                                             <b-tab class="p-3 bg-light border"
                                                 v-for="plan in plans"
                                                 v-if="project.project_id == plan.project_id"
-                                                :title="'Plan '+plan.plan_id">
+                                                :title="'Plan '+plan.plan_id"
+                                                v-on:click='loadTabContent(plan.plan_id)'
+                                            >
                                                 <div class="d-lg-flex d-sm-block pb-2">
                                                     <small> You saved this plan on {{plan.timestamp}}</small>
                                                     </div>
@@ -234,7 +236,11 @@
             }
         },
 
-        methods: {},
+        methods: {
+          loadTabContent(planId) {
+            this.$router.push('/all-plans/'+planId);
+          }
+        },
         computed: {}
     };
 </script>
