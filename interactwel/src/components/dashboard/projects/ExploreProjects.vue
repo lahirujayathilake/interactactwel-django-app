@@ -20,7 +20,7 @@
             <b-tab
                     v-for="project in projects"
                     :title="project.name"
-                    v-on:click="mapSelected()">
+                    v-on:click="mapSelected(project)">
                 <b-card-body :title="project.name">
                     <!--
                                 <b-card-text>User Assigned to this project is: {{loggedInUser.username}}</b-card-text>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="mt-3">
                         <b-button-group>
-                        <b-button class="mr-2 btn-sm" disabled>Join</b-button>
+                        <b-button class="mr-2 btn-sm" @click="postJoinProjectRequest">Join</b-button>
                         <b-button class="mr-2 btn-sm">
                             <router-link :to="'/visualize/'+ project.project_id">Visualize</router-link>
                         </b-button>
@@ -172,24 +172,31 @@
                 }),
 
                 projects: [],
+                user: null,
+                selectedProject: null,
             }
 
         },
 
-        mounted() {
+        async mounted() {
 
-            const {utils, session} = AiravataAPI;
+          const {utils, session} = AiravataAPI;
 
-            utils.FetchUtils.get("/interactwel/api/projects/")
-                .then(projects => {
-                    console.log(projects);
-                    this.projects = projects;
-                    setInterval(() => this.emitWindowResizeEvent(), 500);
+          utils.FetchUtils.get("/interactwel/api/projects/")
+              .then(projects => {
+                console.log(projects);
+                this.projects = projects;
+                if (this.projects.length > 0) {
+                  this.selectedProject = this.projects[0];
+                }
+                setInterval(() => this.emitWindowResizeEvent(), 500);
 
-                })
-                .catch(error => {
-                    alert("Could not get the projects list. API error! " + error);
-                });
+              })
+              .catch(error => {
+                alert("Could not get the projects list. API error! " + error);
+              });
+
+          this.user = await this.getLoggedInUser();
 
 
         },
@@ -206,12 +213,29 @@
             getMainMapZoomValue: function () {
                 return 3;
             },
-            mapSelected: function () {
+            mapSelected: function (project) {
+                this.selectedProject = project;
                 window.dispatchEvent(new Event('resize'))
             },
             emitWindowResizeEvent: function () {
                 window.dispatchEvent(new Event('resize')) //a hack to get rid of map partially showing issue
             },
+            postJoinProjectRequest: function () {
+              const { utils } = AiravataAPI;
+              utils.FetchUtils.post(
+                  '/interactwel/api/projectjoinrquests/',
+                  {
+                    status: 'pending',
+                    project_id: this.selectedProject.project_id,
+                    user_id: this.user.id
+                  })
+                  .then(data => {
+                    alert("Project join request submitted");
+                  })
+                  .catch(error => {
+                    alert("You have already submitted a join request for this project. " + error);
+                  });
+            }
         }
 
     }
