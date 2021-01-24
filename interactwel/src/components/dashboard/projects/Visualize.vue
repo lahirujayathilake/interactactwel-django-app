@@ -23,6 +23,132 @@
 
             </b-navbar>
             <b-row>
+              <b-col>
+                <div class="text-left my-1 ml-1">
+                  <b-button id="popover-target-1" variant="outline-primary"><i class="fas fa-layer-group"></i> Layers</b-button>
+                  <b-popover target="popover-target-1" triggers="hover" placement="top">
+                    <template #title>Map type</template>
+                    <template>
+                      <div>
+                        <b-form-group label="Individual radios" v-slot="{ ariaDescribedby }">
+                          <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="street_map" value="street_map">Street Map</b-form-radio>
+                          <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="satellite" value="satellite">Satellite</b-form-radio>
+                          <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="terrain_map" value="terrain_map">Terrain Map</b-form-radio>
+                        </b-form-group>
+                      </div>
+                    </template>
+                    <h6 class="font-weight-bold text-dark">Default Layers</h6>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-1"
+                            v-model="sub_basins_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Sub-basins
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-2"
+                            v-model="streams_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Streams
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <h6 class="font-weight-bold text-dark">Station Data</h6>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-3"
+                            v-model="reservoirs_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Reservoirs
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-4"
+                            v-model="gauging_stations_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Gauging Stations
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-5"
+                            v-model="weather_stations_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Weather Stations
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <h6 class="font-weight-bold text-dark">Additional Layers</h6>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-6"
+                            v-model="gw_restricted_areas_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/stream_ico.png" style="width: 20px"> GW Restricted Areas
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-7"
+                            v-model="tribal_lands_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Tribal Lands
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                    <template>
+                      <div>
+                        <b-form-checkbox
+                            id="checkbox-8"
+                            v-model="nowa_pumping_limit_layer_show"
+                            name="checkbox-1"
+                            value="checked"
+                            unchecked-value="unchecked"
+                        >
+                          <img src="../../../assets/stream_ico.png" style="width: 20px"> NOWA Pumping Limit
+                        </b-form-checkbox>
+                      </div>
+                    </template>
+                  </b-popover>
+                </div>
+              </b-col>
+            </b-row>
+            <b-row>
                 <b-col>
                     <div class="lg-map-container">
                         <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
@@ -35,7 +161,7 @@
                                     v-for="tileProvider in tileProviders"
                                     :key="tileProvider.name"
                                     :name="tileProvider.name"
-                                    :visible="tileProvider.visible"
+                                    :visible="tileProvider.visible && tileProvider.mapType == selectedMapType"
                                     :url="tileProvider.url"
                                     :attribution="tileProvider.attribution"
                                     layer-type="base"/>
@@ -44,7 +170,7 @@
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Default Layers</strong></u></i></font>"
                                            v-on:change="myFunction($event)"></l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="defaultvisibility"
+                            <l-layer-group v-if="sub_basins_layer_show == 'checked'" layer-type="overlay" :visible="defaultvisibility"
                                            name="<font size=2><strong>Sub-basins</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -54,7 +180,7 @@
                                 />
                             </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="defaultvisibility"
+                            <l-layer-group v-if="streams_layer_show == 'checked'" layer-type="overlay" :visible="defaultvisibility"
                                            name="<font size=2><strong>Streams</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -69,7 +195,7 @@
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Station Data</strong></u></i></font>"></l-layer-group>
 
 
-                            <l-layer-group layer-type="overlay" :visible="stationvisibility"
+                            <l-layer-group v-if="reservoirs_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
                                            name="<font size=2><strong>Reservoirs</strong></font>">
                                 <l-marker
                                         v-for="reservoirStation in reservoirStationList"
@@ -83,7 +209,7 @@
                                 </l-marker>
                             </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="stationvisibility"
+                            <l-layer-group v-if="gauging_stations_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
                                            name="<font size=2><strong>Gauging stations</strong></font>">
                                 <l-marker
                                         v-for="gaugingStation in gaugingStationList"
@@ -97,7 +223,7 @@
                                 </l-marker>
                             </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="stationvisibility"
+                            <l-layer-group v-if="weather_stations_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
                                            name="<font size=2><strong>Weather stations</strong></font>">
                                 <l-marker
                                         v-for="weatherStation in weatherStationList"
@@ -136,7 +262,7 @@
                                 />
                             </l-layer-group>-->
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
+                            <l-layer-group v-if="gw_restricted_areas_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>GW Restricted Areas</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -146,7 +272,7 @@
                                 />
                             </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
+                            <l-layer-group v-if="tribal_lands_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>Tribal Lands</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -156,7 +282,7 @@
                                 />
                             </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
+                            <l-layer-group v-if="nowa_pumping_limit_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>NOWA Pumping Limit</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -371,18 +497,21 @@
 
                 tileProviders: [
                     {
+                        mapType: 'street_map',
                         name: "<font size=2><strong>Street Map</strong></font>",
-                        visible: false,
+                        visible: true,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     },
                     {
+                        mapType: 'satellite',
                         name: "<font size=2><strong>Satellite</strong></font>",
-                        visible: false,
+                        visible: true,
                         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
                         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
                     },
                     {
+                        mapType: 'terrain_map',
                         name: "<font size=2><strong>Terrain Map",
                         visible: true,
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -418,7 +547,16 @@
 
                 mapOptions: {attributionControl: false},
                 currentStrokeColor: '3d3213',
-                selectedProject:{}
+                selectedProject:{},
+              selectedMapType: 'street_map',
+              sub_basins_layer_show: 'checked',
+              streams_layer_show: 'checked',
+              reservoirs_layer_show: 'checked',
+              gauging_stations_layer_show: 'checked',
+              weather_stations_layer_show: 'checked',
+              gw_restricted_areas_layer_show: 'checked',
+              tribal_lands_layer_show: 'checked',
+              nowa_pumping_limit_layer_show: 'checked',
             }
         },
 
@@ -871,7 +1009,7 @@
                 this.istutor1Visible = false;
                 this.isStep1Active = false;
                 this.istutor2Visible = true;
-            }
+            },
         }
 
     }

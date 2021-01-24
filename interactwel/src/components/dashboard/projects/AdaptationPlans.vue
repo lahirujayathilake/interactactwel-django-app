@@ -652,6 +652,7 @@
 
         mounted() {
             const { utils } = AiravataAPI;
+            this.isWizardFlowStarted = 'true' == localStorage.getItem('adaptation_wizardStarted');
             this.projectId = this.$route.params.projectId
             // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
             // if (adaptationPlan) {
@@ -848,6 +849,7 @@
                 EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
             },
             startWizard(projectId){
+                localStorage.setItem('adaptation_wizardStarted', true);
                 this.isWizardFlowStarted=true;
                 this.$store.commit("setWizardFlowStarted", true);
                 this.$store.commit("resetWizardFlow", null);
@@ -857,7 +859,7 @@
             },
 
             exitWizard(){
-                
+                localStorage.setItem('adaptation_wizardStarted', false);
                 let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
                 if(confirmResponse){
                     this.$store.commit("resetWizardFlow", null);
