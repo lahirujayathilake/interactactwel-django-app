@@ -4,9 +4,7 @@
         <b-container fluid class="main">
             <b-navbar toggleable="sm" type="light" variant="light">
                 <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-
                 <b-navbar-brand><strong>Project :</strong></b-navbar-brand>
-
                 <b-collapse id="nav-text-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-text>
@@ -14,20 +12,14 @@
                         </b-nav-text>
                     </b-navbar-nav>
                 </b-collapse>
-                <!--<b-button variant="success" class="mr-2 btn-sm">
-                    <router-link :to="'/adaptation-plans/'+$route.params.projectId">View Adaptation Plans</router-link>
-                </b-button>-->
-                <b-button class="mr-2 btn-sm">
-                    <router-link to="/projects/my-projects">Back to Projects</router-link>
-                </b-button>
-
+                <b-button class="mr-2 btn-sm" @click="$router.push('../projects/my-projects')" variant="outline-secondary"><i class="fa fa-chevron-left"></i> Back to Projects</b-button>
             </b-navbar>
             <b-row>
               <b-col>
                 <div class="text-left my-1 ml-1">
-                  <b-button id="popover-target-1" variant="outline-primary"><i class="fas fa-layer-group"></i> Layers</b-button>
-                  <b-popover target="popover-target-1" triggers="hover" placement="top">
-                    <template #title>Map type</template>
+                  <b-button id="layers-popover" variant="success"><i class="fas fa-layer-group"></i></b-button>
+                  <b-popover target="layers-popover" triggers="hover" placement="top">
+                    <template #title>Legend</template>
                     <template>
                       <div>
                         <b-form-group label="Individual radios" v-slot="{ ariaDescribedby }">
@@ -1113,6 +1105,13 @@
     .tutor-footer {
         display: flex;
         justify-content: flex-end;
+    }
+
+    #layers-popover{
+      position: absolute;
+      top: 20px;
+      z-index: 1000;
+      left: 30px;
     }
 
 </style>

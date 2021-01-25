@@ -34,8 +34,8 @@
                                 <b-card-text>
                                     <div class="d-flex flex-column p-4">
                                         <div class="p-1"><b-button @click="$router.push('projects/explore-projects')" pill block variant="outline-secondary">Join a New Project</b-button></div>
-                                        <div class="p-1"><b-button @click="$router.push('all-plans')" pill block  variant="outline-secondary">Generate New Plans</b-button></div>
-                                        <div class="p-1"><b-button @click="$router.push('all-plans')" pill block  variant="outline-secondary">Review Saved Plans</b-button></div>
+                                        <div class="p-1"><b-button @click="$router.push('all-plans/1')" pill block  variant="outline-secondary">Generate New Plans</b-button></div>
+                                        <div class="p-1"><b-button @click="$router.push('all-plans/1')" pill block  variant="outline-secondary">Review Saved Plans</b-button></div>
                                     </div>
                                 </b-card-text>
                             </b-card>

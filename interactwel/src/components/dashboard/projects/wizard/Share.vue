@@ -158,7 +158,7 @@
 
             exitWizard(){
                 this.$toast.success("Thank You for evaluating plans.");
-                this.$router.push('/plans/saved-plans');
+                this.$router.push('/all-plans/'+ this.$route.params.projectId);
 
             },
 
