@@ -855,15 +855,15 @@
                 this.$store.commit("resetWizardFlow", null);
                 this.startBtn = false;
                 this.exitBtn = true;
-                this.$router.push('/adaptation-plans/'+projectId+'/goals')
+                this.$router.push('/adaptation-plans/'+this.projectId+'/goals')
             },
 
-            exitWizard(){
+            exitWizard(projectId){
                 localStorage.setItem('adaptation_wizardStarted', false);
                 let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
                 if(confirmResponse){
                     this.$store.commit("resetWizardFlow", null);
-                    this.$router.push('/all-plans'+projectId);
+                    this.$router.push('/all-plans/'+this.projectId);
                     this.isWizardFlowStarted=false;
                 }
                 
