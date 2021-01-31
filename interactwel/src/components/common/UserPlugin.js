@@ -179,7 +179,8 @@ export default {
 
                 async getUserRoles() {
                     const { utils } = AiravataAPI;
-                    let roles = await utils.FetchUtils.get("/interactwel/api/roles/")
+                    const user = await this.getLoggedInUser();
+                    let roles = await utils.FetchUtils.get("/interactwel/api/roles/?user_id="+user.id)
                         .then(roleSet => {
                             return  roleSet;
                         })
@@ -187,7 +188,6 @@ export default {
                             alert("Could not get the user roles list. API error! " + error);
                         });
 
-                    //todo pass the user id
                     return await utils.FetchUtils.get("/interactwel/api/userroles/")
                         .then(userRoles => userRoles.map(userRole => roles.find(role => role.role_id === userRole.role_id)))
                         .catch(error => {
