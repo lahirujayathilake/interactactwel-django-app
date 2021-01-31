@@ -151,7 +151,6 @@
                 .then(response => {
                     response.forEach(userItem => {
                         this.users.push({value: userItem.id, text: userItem.username});
-                        console.log(this.users);
                     });
                 })
                 .catch(error => {
@@ -184,7 +183,6 @@
                     actor: this.selectedActor
                 })
                     .then(data => {
-                        console.log("data");
                         if (data.error) {
                             alert("failed to assign the user to the project");
                         } else {

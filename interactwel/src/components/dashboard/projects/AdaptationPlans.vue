@@ -545,7 +545,6 @@
 
             getHeatMapColor() {
                 return (feature, layer) => {
-                    //console.log(feature.properties.Name);
                     if (feature.properties.Name > 1000) {
                         layer.setStyle({fillColor: '#581845'});
                     } else if (feature.properties.Name > 500) {
@@ -570,10 +569,7 @@
 
             getHeatMapColor_Perct() {
                 return (feature, layer) => {
-                    //console.log(feature.properties[this.HeatMapProp]);
                     var subid = feature.properties[this.HeatMapProp];
-                    //console.log(this.paraguayGeojson["Adaptation_plans"]["Adaptation Plan 1"][subid]["Data"]["1"]["Data"]["1"])
-                    //console.log(subid);
                     if (feature.properties[this.HeatMapProp] > 20) {
                         layer.setStyle({fillColor: '#800026'});
                     } else if (feature.properties[this.HeatMapProp] > 15) {
@@ -670,11 +666,8 @@
            utils.FetchUtils.get("/interactwel/api/projects/")
                 .then(projects=>{
                     this.selectedProject=projects.find(project=>{
-                        console.log(project.project_id+" "+this.projectId);
-                        console.log(project.project_id==this.projectId);
                         return project.project_id==this.projectId;
                     });
-                    console.log(this.selectedProject);
                 })
                 .catch(error => {
                     alert("Could not get the project. API error! " + error);
@@ -710,12 +703,10 @@
                 for (i = 3; i < active.length; i++) {
                     //if ($this.unchecked_layers.includes(active[i].labels[0].innerText)==false && active[i].checked==true){
                     if (active[i].checked == true && $this.default_selected_layers.includes(active[i].labels[0].innerText) == false) {
-                        //console.log(active[i].labels[0].innerText);
                         default_selected_layers.push(active[i].labels[0].innerText);
                         $('.leaflet-control-layers-selector')[i].click();
                     }
                 }
-                //console.log(default_selected_layers);
                 $this.ResultsMap = true;
                 $this.default_selected_layers = default_selected_layers;
             }),
@@ -735,7 +726,6 @@
                 EventBus.$on('HIDE_RESULTSMAP', function () {
                     var active = [];
                     var i;
-                    console.log(this.default_selected_layers);
                     active = $('.leaflet-control-layers-selector')
                     for (i = 0; i < active.length; i++) {
 
@@ -836,7 +826,6 @@
                     //if (this.title_layers.includes(active[i].labels[0].innerText)==true && active[i].labels[0].innerText !== this.title_layers[0]){
                     if (this.title_layers.includes(active[i].labels[0].innerText)==true){
                         $('.leaflet-control-layers-selector')[i].hidden=true;
-                        //console.log(active[i].labels[0].innerText);
                         //$('.leaflet-control-layers-selector')[i].click();
                     }
                 }

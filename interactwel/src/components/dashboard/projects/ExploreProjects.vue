@@ -184,7 +184,6 @@
 
           utils.FetchUtils.get("/interactwel/api/projects/")
               .then(projects => {
-                console.log(projects);
                 this.projects = projects;
                 if (this.projects.length > 0) {
                   this.selectedProject = this.projects[0];

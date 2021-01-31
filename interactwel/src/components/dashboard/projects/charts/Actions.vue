@@ -157,7 +157,6 @@
                     })
                     .filter(d => {
                         if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
-                            //console.log(this.selectedKeyList.findIndex(k => k === d.key) > -1);
                             return true;
                         } else {
                             return false;

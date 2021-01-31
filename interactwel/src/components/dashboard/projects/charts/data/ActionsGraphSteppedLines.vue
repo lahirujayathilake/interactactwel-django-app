@@ -115,7 +115,6 @@
                 }
             },
             showChart: function (selectedPlan) {
-                console.log(selectedPlan);
                 this.planId = selectedPlan;
             },
 

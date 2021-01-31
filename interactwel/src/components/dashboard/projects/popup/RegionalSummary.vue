@@ -367,9 +367,7 @@
                 for (let dataValue in dataPoint.Data) {
                     //dataset.data.label = $this.getColorwr(dataValue);
                     dataset.data.push(dataPoint.Data[dataValue]);
-                    console.log(dataPoint.Data[dataValue]);
                 }
-                //console.log(dataset);
                 this.datacollectionwr.datasets.push(dataset);
                 //}
             },
@@ -394,7 +392,6 @@
                     //dataset.data.label = $this.getColorwr(dataValue);
                     dataset.data.push(dataPoint.Data[dataValue]);
                 }
-                //console.log(dataset);
                 this.datacollectionirr.datasets.push(dataset);
                 //}
             },
@@ -418,7 +415,6 @@
                 for (let dataValue in dataPoint.Data) {
                     dataset.data.push(dataPoint.Data[dataValue]);
                 }
-                //console.log(dataset);
                 this.datacollectionlnd.datasets.push(dataset);
                 //}
             },
@@ -444,7 +440,6 @@
                     dataset.backgroundColor.push(this.getRandomColor())
                     dataset.data.push(dataPoint.Data[dataValue]);
                 }
-                //console.log(dataset);
                 this.datacollectioncrop.datasets.push(dataset);
                 //}
             },
@@ -454,12 +449,10 @@
                 this.datacollectionprism = {};
                 this.datacollectionprism.labels = [];
                 for (let legend in data.Legend) {
-                    //console.log(data.Legend[legend]);
                     this.datacollectionprism.labels.push(data.Legend[legend]);
                 }
                 this.datacollectionprism.datasets = [];
                 let dataIndex = subbasinID;
-                //console.log(subbasinID);
                 //for (let dataIndex in data.Data){
                 let dataPoint = data.Data[dataIndex];
 
@@ -472,7 +465,6 @@
                     //dataset.backgroundColor.push(this.getRandomColor())
                     dataset.data.push(dataPoint.Data[dataValue]);
                 }
-                //console.log(dataset.data);
                 this.datacollectionprism.datasets.push(dataset);
                 //}
             },

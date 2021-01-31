@@ -611,14 +611,12 @@
                     for (var i = 0; i < this.selectedActions.length; i++) {
                         if(this.selectedActionsActors.includes(this.selectedActions[i][0]) == false){
                             this.selectedActionsActors.push(this.selectedActions[i][0]);
-                            //console.log(this.selectedActions[i][0]);
                         }
                     }
                     for (let actor in this.selectedActors) {
                         if(this.selectedActionsActors.includes(actor) == false){
                             this.missingActionsActors.push(actor);
-                            //console.log(actor);
-                        } 
+                        }
                     }
                 }
             },
@@ -637,10 +635,8 @@
                 
                 if (this.missingActionsActors.length !== 0) {
                     for (var i = 0; i < this.missingActionsActors.length; i++) {
-                        //console.log(this.missingActionsActors[i])
                         for (let action in this.actions) {
                             if (this.actors[this.missingActionsActors[i]].readonly == false && this.actions[action].readonly == false) {
-                                //console.log(this.actors[this.missingActionsActors[i]].id + ',' + this.actions[action].id)
                                 this.selectedActions.push(this.actors[this.missingActionsActors[i]].id + ',' + this.actions[action].id);
                             }
                         }
