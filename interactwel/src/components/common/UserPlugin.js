@@ -188,11 +188,13 @@ export default {
                             alert("Could not get the user roles list. API error! " + error);
                         });
 
-                    return await utils.FetchUtils.get("/interactwel/api/userroles/")
+                    const userRoles = await utils.FetchUtils.get("/interactwel/api/userroles/")
                         .then(userRoles => userRoles.map(userRole => roles.find(role => role.role_id === userRole.role_id)))
                         .catch(error => {
                             alert("Could not get the user roles list. API error! " + error);
                         });
+
+                    return userRoles || [];
                 }
             }
         })

@@ -237,7 +237,10 @@
             projectSelected: function (projectId) {
                 this.$router.push('/projects/my-projects/'+ projectId);
 
-            }
+            },
+            emitWindowResizeEvent: function () {
+                window.dispatchEvent(new Event('resize')) //a hack to get rid of map partially showing issue
+            },
 
         },
         computed: {}
