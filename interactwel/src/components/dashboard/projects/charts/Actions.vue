@@ -105,6 +105,8 @@
 
         data() {
             return {
+                planId: null,
+                plan: null,
                 ganntChartVisibility: true,
                 ActionsGraphSteppedLinesVisibility: false,
                 colorIndex: 0,
@@ -186,6 +188,8 @@
         },
 
         mounted() {
+            this.planId = this.$route.params.planId;
+            localStorage.setItem('currentPlanId', this.planId);
             let $this = this;
             EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
                 $this.showChart(planName);

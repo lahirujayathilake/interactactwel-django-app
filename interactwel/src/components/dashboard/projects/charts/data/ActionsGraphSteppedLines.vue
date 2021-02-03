@@ -19,6 +19,7 @@
         data() {
             return {
                 planId: "1",
+                plan: null,
                 JSONData: null,
                 datacollection: null,
                 cr_data: null,
@@ -67,105 +68,66 @@
             this.planId = localStorage.getItem('currentPlanId');
           }
           this.adaptationPlan = this.$store.state.currentAdaptationPlan;
-          this.buildDataCollection(this.JSONData, this.planId);
           localStorage.setItem('currentPlanId','');
 
         },
 
         created(){
             axios.get("/static/BASIN_Action_Plans.json").then(response => {
+              console.log(this.planId);
+              this.getPlanById(this.planId).then(planResponse => {
+                this.plan = planResponse[0];
+                this.plan.plan_json = JSON.parse(this.plan.plan_json);
+                console.log(this.plan.plan_json.Years);
                 this.JSONData = response.data;
-                this.buildDataCollection(this.JSONData, this.planId);
+                this.buildDataCollection(this.plan.plan_json, this.plan.plan_json.Years, this.adaptationPlan['selectedActors'], this.planId);
+              });
             });
         },
 
         methods: {
-            buildDataCollection(data, adaptationPlan){
+            buildDataCollection(data, labelsArr, selectedActors, adaptationPlan){
+                console.log(data);
+                let actions = data.Actions;
                 this.datacollection = {
-                    labels: ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
-                    datasets: this.getChartPlaceholderData()
+                    labels: [],
+                    datasets: this.getChartDataFromPlanJson(data, selectedActors)
                 };
-
-                for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
-                    
-                    let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
-                    let dataset = [];
-
-                  /**
-                   * Tracked by the CR, GW or SW
-                   * TODO: Track by actor ID
-                   */
-                  for (let selectedActorIndex in this.adaptationPlan['selectedActors']){
-                    if ((dataPoint.Name.split(' ')[(dataPoint.Name.split(' ').length-1)]).replace('(','').replace(')','') == this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_')[(this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_').length-1)]) {
-                      for (let dataValue in dataPoint.Data) {
-                        dataset.push(dataPoint.Data[dataValue]);
-
-                        if (dataIndex == 1){
-                          this.datacollection.datasets[selectedActorIndex].data.push(dataPoint.Data[dataValue]);
-                        }else if (dataIndex == 3){
-                          this.datacollection.datasets[selectedActorIndex].data.push(dataPoint.Data[dataValue]);
-                        }else if (dataIndex == 5){
-                          this.datacollection.datasets[selectedActorIndex].data.push(dataPoint.Data[dataValue]);
-                        }
-
-                      }
-                    }
-                  }
-                    
-                }
+                this.datacollection.labels = this.datacollection.labels.concat(labelsArr);
             },
             showChart: function (selectedPlan) {
                 console.log(selectedPlan);
                 this.planId = selectedPlan;
             },
 
-            // TODO: remove when integration with backend, randomize colors, replace labels from input data
-            getChartPlaceholderData: function () {
-              let data = [{
-                  label: "Farmers: Columbia River (CR)",
-                  backgroundColor: "#186a3b",
-                  borderColor: "#186a3b",
+            getChartDataFromPlanJson: function (plan_json, selectedActors) {
+              let data = [];
+              for (let i = 0; i < selectedActors.length; i++) {
+                let color = '#'+Math.floor(Math.random()*16777215).toString(16);
+                let data_obj = {
+                  label: selectedActors[i].name,
+                  backgroundColor: color,
+                  borderColor: color,
                   borderJoinStyle: 'round',
                   borderWidth: 6,
                   data: [],
                   steppedLine: true,
                   fill: false,
-                },
-                {
-                  label: "Farmers: Groundwater (GW)",
-                  backgroundColor: "#286bde",
-                  borderColor: "#286bde",
-                  borderJoinStyle: 'round',
-                  borderWidth: 6,
-                  data: [],
-                  steppedLine: true,
-                  fill: false,
-                },
-                {
-                  label: "Farmers: Surface water (SW)",
-                  fill: false,
-                  backgroundColor: "#dd434e",
-                  borderColor: "#dd434e",
-                  borderJoinStyle: 'round',
-                  borderWidth: 6,
-                  data: [],
-                  steppedLine: true,
-                }];
-              var selectedData = [];
-
-              /**
-               * Tracked by the CR, GW or SW
-               * TODO: Track by actor ID
-               */
-              for (let dataIndex in data){
-                let dataPoint = data[dataIndex];
-                for (let selectedActorIndex in this.adaptationPlan['selectedActors']){
-                  if ((dataPoint.label.split(' ')[(dataPoint.label.split(' ').length-1)]).replace('(','').replace(')','') == this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_')[(this.adaptationPlan['selectedActors'][selectedActorIndex].name.split('_').length-1)]) {
-                    selectedData.push(data[dataIndex]);
+                };
+                let actorsIndexes = Object.keys(plan_json.Actors);
+                let plan_json_data = plan_json[Object.keys(plan_json)[3]].Data;
+                let dataRow = [];
+                for (let actorIndex of actorsIndexes) {
+                  if ((plan_json.Actors[actorIndex].split(' ')[plan_json.Actors[actorIndex].split(' ').length-1]) == (selectedActors[i].name.split(' ')[selectedActors[i].name.split(' ').length-1])) {
+                    for (let j = 0; j < plan_json_data[actorIndex].Data.length; j++) {
+                      dataRow.push(plan_json['Actions'][plan_json_data[actorIndex].Data[j]]);
+                    }
                   }
                 }
+                data_obj.data = dataRow;
+                data.push(data_obj);
               }
-              return selectedData;
+              return data;
             }
         }
     };

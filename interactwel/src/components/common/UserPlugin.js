@@ -84,11 +84,22 @@ export default {
                     const {utils} = AiravataAPI;
                     return await utils.FetchUtils.get("/interactwel/api/plans/?project_id=" + projectId)
                         .then(projectPlansList => {
-                        return  projectPlansList;
-                })
-                .catch(error => {
-                        alert("Could not get the plans list. API error! " + error);
-                });
+                            return  projectPlansList;
+                        })
+                        .catch(error => {
+                            alert("Could not get the plans list. API error! " + error);
+                        });
+                },
+
+                async getPlanById(planId) {
+                    const {utils} = AiravataAPI;
+                    return await utils.FetchUtils.get("/interactwel/api/plans/?plan_id=" + planId)
+                        .then(projectPlansList => {
+                            return  projectPlansList;
+                        })
+                        .catch(error => {
+                            alert("Could not get the plans list. API error! " + error);
+                        });
                 },
 
                 async getProjectPlans(projectId) {
