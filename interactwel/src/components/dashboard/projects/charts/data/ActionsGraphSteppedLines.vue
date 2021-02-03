@@ -74,8 +74,7 @@
 
         created(){
             axios.get("/static/BASIN_Action_Plans.json").then(response => {
-              console.log(this.planId);
-              this.getPlanById(this.planId).then(planResponse => {
+              this.getPlanById(this.$route.params.planId).then(planResponse => {
                 this.plan = planResponse[0];
                 this.plan.plan_json = JSON.parse(this.plan.plan_json);
                 console.log(this.plan.plan_json.Years);
