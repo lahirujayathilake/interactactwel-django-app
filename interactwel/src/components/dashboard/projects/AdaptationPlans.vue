@@ -859,11 +859,11 @@
             },
 
             exitWizard(){
-                localStorage.setItem('adaptation_wizardStarted', false);
                 let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
-                if(confirmResponse){
+                if(confirmResponse == true){
+                    localStorage.setItem('adaptation_wizardStarted', false);
                     this.$store.commit("resetWizardFlow", null);
-                    this.$router.push('/all-plans'+projectId);
+                    this.$router.push('/all-plans/'+this.$route.params.projectId);
                     this.isWizardFlowStarted=false;
                 }
                 
