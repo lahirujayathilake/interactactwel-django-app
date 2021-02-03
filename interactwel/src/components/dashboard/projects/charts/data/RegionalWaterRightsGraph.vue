@@ -59,7 +59,6 @@
 
         methods: {
             buildDataCollection(data, subbasinID){
-                console.log(subbasinID);
                 this.datacollection = {};
                 this.datacollection.labels = [];
                 for (let legend in data.Legend) {
@@ -78,7 +77,6 @@
                         //dataset.data.label = $this.getColorwr(dataValue);
                         dataset.data.push(dataPoint.Data[dataValue]);
                     }
-                    //console.log(dataset);
                     this.datacollection.datasets.push(dataset);
                 //}
             },

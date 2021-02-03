@@ -96,7 +96,6 @@
                 this.datacollection.labels = this.datacollection.labels.concat(labelsArr);
             },
             showChart: function (selectedPlan) {
-                console.log(selectedPlan);
                 this.planId = selectedPlan;
             },
 

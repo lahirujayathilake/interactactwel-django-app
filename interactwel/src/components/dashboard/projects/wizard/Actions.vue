@@ -237,7 +237,6 @@
                 if (!this.selectAllActions) {
                     for (let actor of this.selectedActors) {
                         for (let action of this.actions) {
-                            console.log(actor,action);
                             let actorAction = {};
                             actorAction.actor = actor;
                             actorAction.action = action;
@@ -277,13 +276,11 @@
                     for (var i = 0; i < this.selectedActions.length; i++) {
                         if(this.selectedActionsActors.includes(this.selectedActions[i][0]) == false){
                             this.selectedActionsActors.push(this.selectedActions[i][0]);
-                            //console.log(this.selectedActions[i][0]);
                         }
                     }
                     for (let actor in this.selectedActors) {
                         if(this.selectedActionsActors.includes(actor) == false){
                             this.missingActionsActors.push(actor);
-                            //console.log(actor);
                         }
                     }
                 }

@@ -80,7 +80,8 @@
             const SessionData = AiravataPortalSessionData;
             this.auth = SessionData.username;
             this.currentPage = this.$route.name
-            this.userRoleNames = await this.getUserRoles().map(role=> role.role_name);
+            const userRoles = await this.getUserRoles();
+            this.userRoleNames = userRoles.map(role=> role.role_name);
         },
 
         computed: {

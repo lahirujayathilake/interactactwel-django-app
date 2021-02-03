@@ -380,7 +380,6 @@
                 Adds the uploaded file to the files array
                 */
                 for( var i = 0; i < uploadedFiles.length; i++ ){
-                    //console.log(uploadedFiles[i]);
                     this.geojson_files.push( uploadedFiles[i] );
                 }
             },

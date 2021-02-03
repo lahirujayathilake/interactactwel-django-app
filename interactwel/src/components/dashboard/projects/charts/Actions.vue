@@ -19,7 +19,7 @@
 
                 </b-col>
                 <b-col lg="12">
-                    <actions-graph-stepped-lines></actions-graph-stepped-lines>
+                    <actions-graph></actions-graph>
                 </b-col>
             </b-row>
 
@@ -61,7 +61,7 @@
 
 <script>
     import JSONData from "../../../../../public/static/result_action_plans.json";
-    import ActionsGraphSteppedLines from "./data/ActionsGraphSteppedLines.vue";
+    import ActionsGraph from "./data/ActionsGraph.vue";
     import GanntChart from "./data/GanntChart.vue";
     import EventBus from './../../../../event-bus';
 
@@ -69,10 +69,9 @@
         name: 'Actions',
 
         components: {
-            ActionsGraphSteppedLines,
+            ActionsGraph,
             GanntChart,
-            'gannt-chart': GanntChart,
-            'actions-graph-stepped-lines': ActionsGraphSteppedLines
+            'gannt-chart': GanntChart
         },
 
         props: {
@@ -160,7 +159,6 @@
                     })
                     .filter(d => {
                         if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
-                            //console.log(this.selectedKeyList.findIndex(k => k === d.key) > -1);
                             return true;
                         } else {
                             return false;

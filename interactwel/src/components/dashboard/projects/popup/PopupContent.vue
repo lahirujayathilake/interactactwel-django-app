@@ -55,7 +55,6 @@
     computed:{
         jsonData() {
             var data = this.pcpdata[this.data.id];
-            console.log(data)
             return data;
             },
         },
