@@ -30,7 +30,7 @@ export default {
                     this.projectsUsers = await utils.FetchUtils.get("/interactwel/api/projectusers/")
                         .then(users => {
                             return  users.filter(projectUser => {
-                                return projectUser.user_id === user.id && projectUser.status === "Active";
+                                return projectUser.user_id === user.id;
                             })
                         })
                         .catch(error => {
