@@ -114,10 +114,10 @@
               const json = JSON.parse(result[0].plan_json);
               this.datacollection.labels = json.Years;
               this.datacollection.datasets = json.Data.map((dataSeries, index)=>{
-                const backgroundColor = colors.length < index ? colors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                const hoverBorderColor = hoverBorderColors.length < index ? hoverBorderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                const borderColor = borderColors.length < index ? borderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                const pointHoverBackgroundColor = pointHoverBackgroundColors.length < index ? pointHoverBackgroundColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const backgroundColor = colors.length > index ? colors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const hoverBorderColor = hoverBorderColors.length > index ? hoverBorderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const borderColor = borderColors.length > index ? borderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const pointHoverBackgroundColor = pointHoverBackgroundColors.length > index ? pointHoverBackgroundColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
                 return {
                   label: dataSeries.Actor,
                   backgroundColor,
