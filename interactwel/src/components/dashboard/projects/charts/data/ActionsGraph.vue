@@ -101,32 +101,40 @@
 
         methods: {
           buildDataCollection () {
-            this.datacollection = {
-              labels:  ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
-              datasets: [
-                {
-                  label: 'Actor 1',
-                  backgroundColor: '#286bde',
-                  borderColor: "rgba(40, 107, 222, 0.5)",
-                  hoverBorderColor: '#286bde',
-                  pointHoverBackgroundColor: '#28de40',
+            const {utils} = AiravataAPI; // eslint-disable-line
+            const colors = ['#286bde'];
+            const hoverBorderColors = ['#286bde'];
+            const borderColors = ['#286bde'];
+            const pointHoverBackgroundColors = ['#286bde'];
+            utils.FetchUtils.get("/interactwel/api/plans/?plan_id="+ this.planId).then(result => {
+              this.datacollection = {};
+              if (result.length < 1 || !result[0].plan_json) {
+                return;
+              }
+              const json = JSON.parse(result[0].plan_json);
+              this.datacollection.labels = json.Years;
+              this.datacollection.datasets = json.Data.map((dataSeries, index)=>{
+                const backgroundColor = colors.length < index ? colors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const hoverBorderColor = hoverBorderColors.length < index ? hoverBorderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const borderColor = borderColors.length < index ? borderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const pointHoverBackgroundColor = pointHoverBackgroundColors.length < index ? pointHoverBackgroundColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                return {
+                  label: dataSeries.Actor,
+                  backgroundColor,
+                  borderColor,
+                  hoverBorderColor,
+                  pointHoverBackgroundColor,
                   borderDash: [5, 5],
                   borderWidth: 5,
-                  data: [1, 3, 4, 4, 4, 6, 2, 1, 1, 3, 5],
-                  steppedLine: true,
-                  fill: false,
-                }, {
-                  label: 'Actor 2',
-                  backgroundColor: '#f87979',
-                  borderColor: "rgba(248, 121, 121, 0.5)",
-                  hoverBorderColor: '#f87979',
-                  borderWidth: 5,
-                  data: [1, 5, 6, 3, 3, 3, 3, 4, 4, 6, 5],
+                  data: dataSeries.Values,
                   steppedLine: true,
                   fill: false,
                 }
-              ]
+              })
             }
+            ).catch(error => {
+              alert("Failed to fetch graph data. " + error);
+            })
           },
 
           showActionsGraph(){
