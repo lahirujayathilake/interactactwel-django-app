@@ -1,6 +1,6 @@
 <template>
     <div>
-      <i class="fas fa-2x fa-search-plus" @click="showActionsGraph()"></i>
+      <b-button variant="secondary" size="sm"><i class="fas fa-search-plus" @click="showActionsGraph()"></i></b-button>
       <actions-graph-modal v-show="isModalVisible" @close="closeModal"/>
       <line-chart :chart-data="datacollection" :options="options" :width="650" :height="400"></line-chart>
     </div>
@@ -105,7 +105,7 @@
             const colors = ['#286bde'];
             const hoverBorderColors = ['#286bde'];
             const borderColors = ['#286bde'];
-            const pointHoverBackgroundColors = ['#286bde'];
+            const pointHoverBackgroundColors = ['#07d221'];
             utils.FetchUtils.get("/interactwel/api/plans/?plan_id="+ this.planId).then(result => {
               this.datacollection = {};
               if (result.length < 1 || !result[0].plan_json) {
@@ -124,8 +124,8 @@
                   borderColor,
                   hoverBorderColor,
                   pointHoverBackgroundColor,
-                  borderDash: [5, 5],
-                  borderWidth: 5,
+                  borderDash: [2, 2],
+                  borderWidth: 2,
                   data: dataSeries.Values,
                   steppedLine: true,
                   fill: false,

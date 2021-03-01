@@ -18,7 +18,7 @@
               <b-col>
                 <div class="text-left my-1 ml-1">
                   <b-button id="layers-popover" variant="success"><i class="fas fa-layer-group"></i></b-button>
-                  <b-popover target="layers-popover" triggers="hover" placement="top">
+                  <b-popover show target="layers-popover" triggers="hover" placement="top">
                     <template #title>Legend</template>
                     <template>
                       <div>

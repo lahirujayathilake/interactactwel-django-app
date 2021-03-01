@@ -3,21 +3,19 @@
 
         <div class="card-header">
             <strong style="font-size:18px">Adaptation Pathways</strong>
-            <b-badge id="tooltip-button-1" class="info-button-path ml-2" pill variant="secondary" v-b-tooltip.hover>
-                How to read this chart?
-            </b-badge>
-            <b-tooltip target="tooltip-button-1" placement="bottom">
-                <p aling="justify">
-                    This chart shows the actions that different actors will take for this adaptation plan.</p>
-                <p aling="justify">
-                    Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
-            </b-tooltip>
+          <b-badge id="how-to-read-chart" class="info-button-path ml-2" pill variant="secondary">
+            How to read this chart?
+          </b-badge>
+          <b-popover target="how-to-read-chart" variant="info" triggers="hover" placement="top">
+            <template #title>How to read this chart?</template>
+            <p aling="justify">
+              This chart shows the actions that different actors will take for this adaptation plan.</p>
+            <p aling="justify">
+              Click on each actor box to show the actions that actor will take over time.  Where the line shifts up or down represents when an actor shifts from one action to another.</p>
+          </b-popover>
         </div>
         <div class="card-body">
             <b-row>
-                <b-col lg="6">
-
-                </b-col>
                 <b-col lg="12">
                     <actions-graph></actions-graph>
                 </b-col>
@@ -283,6 +281,10 @@
 
     .info-button-path {
         padding: .5em .5em !important;
+    }
+
+    .info-button-path :hover {
+      cursor: pointer;
     }
 
     .toggleGraphType{
