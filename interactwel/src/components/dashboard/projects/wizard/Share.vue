@@ -199,7 +199,6 @@ export default {
               });
           });
           this.$toast.success("Successfully Saved the plan.");
-          this.exitWizard();
         }
       ).catch(error => {
         this.$toast.error("API error while saving the selected plan! " + error);
