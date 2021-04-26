@@ -64,7 +64,7 @@
                 </b-button>
             </template>-->
             <template v-slot:cell(save)="data">
-              <b-button @click="savePlan()" pill size="sm" variant="secondary">
+              <b-button @click="savePlan(data.item.planId)" pill size="sm" variant="secondary">
                 Save
               </b-button>
             </template>
@@ -121,7 +121,6 @@ export default {
       adaptationPlan: [],
       projectId: null,
       planList: [],
-      planId: null,
     }
   },
   async mounted() {
@@ -134,9 +133,9 @@ export default {
       utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id=" + plan.plan_id + "&user_id=" + user.id).then(result => {
           if (result.length > 0) {
             let feedback = result[0]; //assuming that one user can have one feedback for one plan
-            this.planId = feedback.plan_id;
             let row = {};
-            row.plan = "Plan " + this.planId;
+            row.plan = "Plan " + feedback.plan_id;
+            row.planId = feedback.plan_id;
             row.q1 = feedback.feasibility === true ? "Yes" : "No";
             row.q2 = feedback.comments;
             row.rating = feedback.rating;
@@ -164,7 +163,8 @@ export default {
       this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/plans/overview')
     },
 
-    async savePlan() {
+    async savePlan(planId) {
+      debugger;
       let user = await this.getLoggedInUser();
       let goals = this.adaptationPlan['selectedGoals'];
       let selectedActions = this.adaptationPlan['selectedActions'];
@@ -175,7 +175,7 @@ export default {
         {
           timestamp: new Date(),
           user_id: user.id,
-          plan_id: this.planId,
+          plan_id: planId,
           goals: goals.map(goal => goal.goal_id),
         }).then(selectedPlan => {
           utils.FetchUtils.post(
