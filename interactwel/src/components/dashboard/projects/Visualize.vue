@@ -15,139 +15,130 @@
                 <b-button class="mr-2 btn-sm" @click="$router.push('../projects/my-projects')" variant="outline-secondary"><i class="fa fa-chevron-left"></i> Back to Projects</b-button>
             </b-navbar>
             <b-row>
-              <b-col>
-                <div class="text-left my-1 ml-1">
-                  <b-button id="layers-popover" variant="success"><i class="fas fa-layer-group"></i></b-button>
-                  <b-popover show target="layers-popover" triggers="hover" placement="top">
-                    <template #title>Legend</template>
-                    <template>
-                      <div>
-                        <b-form-group label="Individual radios" v-slot="{ ariaDescribedby }">
+            </b-row>
+            <b-row>
+              <b-col class="bg-dark pt-3" lg="2">
+                <div id="legend">
+                  <div class="list-group panel">
+                    <h5 class="text-light pb-2">Legend</h5>
+                      <div class="text-light">
+                        <b-form-group label="" v-slot="{ ariaDescribedby }">
                           <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="street_map" value="street_map">Street Map</b-form-radio>
                           <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="satellite" value="satellite">Satellite</b-form-radio>
                           <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="terrain_map" value="terrain_map">Terrain Map</b-form-radio>
                         </b-form-group>
                       </div>
-                    </template>
-                    <h6 class="font-weight-bold text-dark">Default Layers</h6>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-1"
-                            v-model="sub_basins_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Sub-basins
-                        </b-form-checkbox>
+                    <div>
+                      <a href="#default" class="list-group-item bg-light font-weight-bold text-dark" data-toggle="collapse" data-parent="#legend">Default Layers <i class="fa fa-caret-down"></i></a>
+                      <div class="collapse show" id="default">
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-1"
+                              v-model="sub_basins_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Sub-basins
+                          </b-form-checkbox>
+                        </div>
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-2"
+                              v-model="streams_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/stream_ico.png" style="width: 20px"> Streams
+                          </b-form-checkbox>
+                        </div>
                       </div>
-                    </template>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-2"
-                            v-model="streams_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Streams
-                        </b-form-checkbox>
+                    </div>
+                    <div>
+                      <a href="#stationData" class="list-group-item bg-light font-weight-bold text-dark" data-toggle="collapse" data-parent="#legend">Station Data <i class="fa fa-caret-down"></i></a>
+                      <div class="collapse show" id="stationData">
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-3"
+                              v-model="reservoirs_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Reservoirs
+                          </b-form-checkbox>
+                        </div>
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-4"
+                              v-model="gauging_stations_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/stream_ico.png" style="width: 20px"> Gauging Stations
+                          </b-form-checkbox>
+                        </div>
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-5"
+                              v-model="weather_stations_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/stream_ico.png" style="width: 20px"> Weather Stations
+                          </b-form-checkbox>
+                        </div>
                       </div>
-                    </template>
-                    <h6 class="font-weight-bold text-dark">Station Data</h6>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-3"
-                            v-model="reservoirs_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Reservoirs
-                        </b-form-checkbox>
-                      </div>
-                    </template>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-4"
-                            v-model="gauging_stations_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Gauging Stations
-                        </b-form-checkbox>
-                      </div>
-                    </template>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-5"
-                            v-model="weather_stations_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Weather Stations
-                        </b-form-checkbox>
-                      </div>
-                    </template>
-                    <h6 class="font-weight-bold text-dark">Additional Layers</h6>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-6"
-                            v-model="gw_restricted_areas_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/stream_ico.png" style="width: 20px"> GW Restricted Areas
-                        </b-form-checkbox>
-                      </div>
-                    </template>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-7"
-                            v-model="tribal_lands_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/stream_ico.png" style="width: 20px"> Tribal Lands
-                        </b-form-checkbox>
-                      </div>
-                    </template>
-                    <template>
-                      <div>
-                        <b-form-checkbox
-                            id="checkbox-8"
-                            v-model="nowa_pumping_limit_layer_show"
-                            name="checkbox-1"
-                            value="checked"
-                            unchecked-value="unchecked"
-                        >
-                          <img src="../../../assets/stream_ico.png" style="width: 20px"> NOWA Pumping Limit
-                        </b-form-checkbox>
-                      </div>
-                    </template>
-                  </b-popover>
+                    </div>
+                    <div>
+                      <a href="#additional" class="list-group-item bg-light font-weight-bold text-dark" data-toggle="collapse" data-parent="#legend">Addional Layers <i class="fa fa-caret-down"></i></a>
+                      <div class="collapse" id="additional">
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-6"
+                              v-model="gw_restricted_areas_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/stream_ico.png" style="width: 20px"> GW Restricted Areas
+                          </b-form-checkbox>
+                        </div>
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-7"
+                              v-model="tribal_lands_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/stream_ico.png" style="width: 20px"> Tribal Lands
+                          </b-form-checkbox>
+                        </div>
+                        <div class="list-group-item">
+                          <b-form-checkbox
+                              id="checkbox-8"
+                              v-model="nowa_pumping_limit_layer_show"
+                              name="checkbox-1"
+                              value="checked"
+                              unchecked-value="unchecked"
+                          >
+                            <img src="../../../assets/stream_ico.png" style="width: 20px"> NOWA Pumping Limit
+                          </b-form-checkbox>
+                        </div>
+                        </div>
+                    </div>
+                  </div>
                 </div>
               </b-col>
-            </b-row>
-            <b-row>
-                <b-col>
+                <b-col lg="10">
                     <div class="lg-map-container">
                         <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
                             <l-control-zoom position="topright"></l-control-zoom>
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                            <l-control-layers position="topright" ref="layersControl"
-                                              :sort-layers="false"></l-control-layers>
 
                             <l-tile-layer
                                     v-for="tileProvider in tileProviders"
@@ -182,10 +173,8 @@
                                 />
                             </l-layer-group>
 
-
                             <l-layer-group layer-type="overlay"
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Station Data</strong></u></i></font>"></l-layer-group>
-
 
                             <l-layer-group v-if="reservoirs_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
                                            name="<font size=2><strong>Reservoirs</strong></font>">
@@ -229,30 +218,8 @@
                                 </l-marker>
                             </l-layer-group>
 
-
                             <l-layer-group layer-type="overlay"
                                            name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"></l-layer-group>
-
-                            <!--<l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
-                                           name="<font size=2><strong>Water Rights</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_WaterRigths"
-                                        :options="options_wrrights"
-                                        :options-style="styleFunction_waterrigths"
-                                />
-                            </l-layer-group>-->
-
-                            <!--<l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
-                                           name="<font size=2><strong>Irrigated Land</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_irrland"
-                                        :options="options_noclick"
-                                        :options-style="styleFunction_irrland"
-
-                                />
-                            </l-layer-group>-->
 
                             <l-layer-group v-if="gw_restricted_areas_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>GW Restricted Areas</strong></font>">
@@ -1094,13 +1061,6 @@
     .tutor-footer {
         display: flex;
         justify-content: flex-end;
-    }
-
-    #layers-popover{
-      position: absolute;
-      top: 20px;
-      z-index: 1000;
-      left: 30px;
     }
 
 </style>
