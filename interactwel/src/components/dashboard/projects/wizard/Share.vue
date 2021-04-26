@@ -164,7 +164,6 @@ export default {
     },
 
     async savePlan(planId) {
-      debugger;
       let user = await this.getLoggedInUser();
       let goals = this.adaptationPlan['selectedGoals'];
       let selectedActions = this.adaptationPlan['selectedActions'];
