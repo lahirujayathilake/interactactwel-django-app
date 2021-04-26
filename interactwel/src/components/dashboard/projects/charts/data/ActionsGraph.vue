@@ -10,8 +10,6 @@
     import ActionsGraphModal from './../../intro/ActionsGraphModal.vue';
     import LineChart from "../lib/LineChart";
 
-    //let adaptationPlanId;
-
     export default {
         name: 'actions-graph-stepped-lines',
 
