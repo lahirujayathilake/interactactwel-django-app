@@ -190,16 +190,17 @@ export default {
                 async getUserRoles() {
                     const { utils } = AiravataAPI;
                     const user = await this.getLoggedInUser();
-                    let roles = await utils.FetchUtils.get("/interactwel/api/roles/?user_id="+user.id)
+                    let roles = await utils.FetchUtils.get("/interactwel/api/roles/")
                         .then(roleSet => {
                             return  roleSet;
                         })
                         .catch(error => {
                             alert("Could not get the user roles list. API error! " + error);
                         });
-
                     const userRoles = await utils.FetchUtils.get("/interactwel/api/userroles/")
-                        .then(userRoles => userRoles.map(userRole => roles.find(role => role.role_id === userRole.role_id)))
+                        .then(userRoles =>
+                          userRoles.filter(role=>role.user_id === user.id) //todo - this filtering should happen in backend
+                            .map(userRole => roles.find(role => role.role_id === userRole.role_id)))
                         .catch(error => {
                             alert("Could not get the user roles list. API error! " + error);
                         });

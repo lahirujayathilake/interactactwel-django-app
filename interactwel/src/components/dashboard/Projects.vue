@@ -30,12 +30,12 @@
                             title="Explore Projects" v-on:click='loadTabContent("/projects/explore-projects")'>
                         </b-tab>
                         <b-tab
-                            :v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+                            v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
                             :active="$route.path === '/projects/create-project'"
                             title="Create New Project" v-on:click='loadTabContent("/projects/create-project")'>
                         </b-tab>
                         <b-tab
-                            :v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+                            v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
                             :active="$route.path === '/projects/assign-projects'"
                             title="Assign Projects"
                             v-on:click='loadTabContent("/projects/assign-projects")'>
