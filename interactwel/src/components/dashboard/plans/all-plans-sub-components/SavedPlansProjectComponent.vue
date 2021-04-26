@@ -16,7 +16,7 @@
       <b-tabs vertical nav-wrapper-class="plan-tabs bg-light px-0">
         <section v-for="plan in plans" v-bind:key="plan.selected_plan_id">
           <b-tab class="p-3 bg-light border"
-                 :title="'Plan '+plan.plan_id"
+                 :title="'Plan ' + plan.plan_id"
                  v-on:click='loadTabContent(plan.plan_id)'
           >
             <div class="d-lg-flex d-sm-block pb-3">
@@ -32,20 +32,19 @@
                   </div>
                   <small>
                     <ul class="no-padding">
-                      <li v-for="goal in plan.goals" v-bind:key="goal.goal_id">{{goal.name}}</li>
+                      <li v-for="goalId in plan.goals" v-bind:key="goalId">{{getGoalName(goalId).name}}</li>
                     </ul>
                   </small>
                 </b-list-group-item>
 
                 <b-list-group-item class="flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Actors</h5>
-                    <small class="text-muted"> 2 Actors Selected</small>
+                    <h5 class="mb-1">Actors Actions</h5>
+                    <small class="text-muted"> {{plan.actors.length}} Actors Selected</small>
                   </div>
                   <small>
                     <ul class="no-padding">
-                      <li>Farmers: Ground Water (GW)</li>
-                      <li>Farmers: Surface Water (SW)</li>
+                      <li v-for="actorId in plan.actors" v-bind:key="actorId">{{getActorName(actorId).name}}</li>
                     </ul>
                   </small>
                 </b-list-group-item>
@@ -55,10 +54,12 @@
                     <h5 class="mb-1">Actions</h5></div>
                   <small>
                     <ul class="no-padding">
-                      <li>Farmers: Ground Water (GW)
+                      <li v-for="actorId in plan.actors" v-bind:key="actorId">
+                        {{getActorName(actorId).name}}
                         <ul>
-                          <li>Increase the volume of non-Columbia surface water</li>
-                          <li>Decrease the volume of non-Columbia surface water</li>
+                          <li v-for="action_mapping in getActionMappings(actorId, plan.action_mapping)" v-bind:key="action_mapping.id">
+                            {{getActionName(action_mapping.action_id).name}}
+                          </li>
                         </ul>
                       </li>
                       <li>Farmers: Surface Water (SW)
@@ -107,16 +108,54 @@ export default {
   data() {
     return {
       plans: [],
+      goals: [],
+      actors: [],
+      actions: [],
     };
   },
-  mounted() {
+  async mounted() {
     const {utils} = AiravataAPI;
 
-    this.plans = utils.FetchUtils.get("/interactwel/api/selectedplans/").then(
+    utils.FetchUtils.get("/interactwel/api/selectedplans/").then(
       result => {
-        this.plans = result.filter(plan => plan.user_id === this.user.id);//todo: do this filtering in backend
+        const userPlans = result.filter(plan => plan.user_id === this.user.id);//todo: do this filtering in backend
+        userPlans.forEach(plan => {
+          const action_mapping = plan.action_mapping;
+          plan.actors = [];
+          action_mapping.forEach(mapping => {
+            if (!plan.actors.includes(mapping.actor_id)) {
+              plan.actors.push(mapping.actor_id);
+            }
+          })
+          this.plans.push(plan);
+        })
       }
     )
+
+     utils.FetchUtils.get("/interactwel/api/goals/")
+      .then(goals => {
+        this.goals = goals;
+      })
+      .catch(error => {
+        alert("Could not get the projects list. API error! " + error);
+      });
+
+    utils.FetchUtils.get("/interactwel/api/actors/")
+      .then(actors => {
+        this.actors = actors;
+      })
+      .catch(error => {
+        alert("Could not get the projects list. API error! " + error);
+      });
+
+    utils.FetchUtils.get("/interactwel/api/actions/")
+      .then(actions => {
+        this.actions = actions;
+      })
+      .catch(error => {
+        alert("Could not get the projects list. API error! " + error);
+      });
+
   },
 
   methods: {
@@ -126,6 +165,35 @@ export default {
 
     visualizePlan(planId) {
       this.$router.push('/adaptation-plans/1/plans/' + planId + '/actions');
+    },
+
+    getGoalName(goalId) {
+      if (this.goals) {
+        return this.goals.find(goal => goal.goal_id === goalId);
+      }
+      return {};
+    },
+
+    getActorName(actorId) {
+      if (this.actors) {
+        return this.actors.find(actor => actor.actor_id === actorId);
+      }
+      return {};
+    },
+
+    getActionName(actionId) {
+      if (this.actions) {
+        return this.actions.find(action => action.action_id === actionId);
+      }
+      return {};
+    },
+
+    getActionMappings(actorId, mappings) {
+      if (mappings) {
+       return  mappings.filter(mapping => mapping.actor_id === actorId);
+      }
+
+      return [];
     }
   },
 }
