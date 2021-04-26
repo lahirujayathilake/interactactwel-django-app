@@ -17,8 +17,7 @@
                         <b-tabs nav-wrapper-class="project-tabs">
                             <b-tab
                                     v-for="project in projects"
-                                    :title="project.name"
-                                    v-on:click="projectSelected(project.project_id)">
+                                    :title="project.name">
                                 <!--<router-view></router-view>-->
                                 <b-card-body>
                                     <div class="d-lg-flex d-sm-block">
@@ -35,17 +34,15 @@
                                     </b-card>
                                     <div class="mt-3 pl-2">
                                         <b-tabs vertical nav-wrapper-class="plan-tabs bg-light px-0">
+                                          <section v-for="plan in plans"
+                                                   v-if="project.project_id == plan.project_id">
                                             <b-tab class="p-3 bg-light border"
-                                                v-for="plan in plans"
-                                                v-if="project.project_id == plan.project_id"
+                                                   v-if="plan.feedbacks != null && plan.feedbacks.length > 0"
                                                 :title="'Plan '+plan.plan_id"
                                                 v-on:click='loadTabContent(plan.plan_id)'
                                             >
-                                                <div class="d-lg-flex d-sm-block pb-2">
-                                                    <small> You saved this plan on {{plan.timestamp}}</small>
-                                                    </div>
                                                 <div class="d-lg-flex d-sm-block pb-3">
-                                                    <b-button size="sm" variant="dark">Visualize this Plan
+                                                    <b-button size="sm" @click="visualizePlan(plan.plan_id)" variant="dark">Visualize this Plan
                                                     </b-button>
                                                 </div>
                                                 <div class="d-lg-flex d-sm-block">
@@ -114,13 +111,12 @@
                                                     </b-list-group>
                                                     <div class="d-block flex-column col-md-12 col-lg-6 col-sm-12">
                                                         <b-card>
-                                                            <h5 class="text-center">Actions taken over time</h5>
-                                                          <actions-graph-stepped-lines></actions-graph-stepped-lines>
+                                                          <actions-graph :adaptationPlanId="plan.plan_id"></actions-graph>
                                                         </b-card>
                                                     </div>
                                                     <div class="d-block col-lg-3 col-md-12 col-sm-12">
-                                                        <b-card>
-                                                            <div class="" v-for="feedback in plan.feedbacks" v-if=" plan.feedbacks != null">
+                                                        <b-card v-if="plan.feedbacks != null && plan.feedbacks.length > 0">
+                                                            <div class="" v-for="feedback in plan.feedbacks">
                                                                 <b-button size="sm" class="float-right" v-b-toggle.collapse-1 variant="light">View More <i class="fa fa-chevron-down"></i> </b-button>
                                                                 <h5 class="mb-1">Feedback</h5>
                                                                 <div>
@@ -153,9 +149,11 @@
                                                                 </small>
                                                             </b-collapse>
                                                         </b-card>
+                                                      <b-card v-if="plan.feedbacks.length == 0">No feedback provided yet</b-card>
                                                     </div>
                                                 </div>
                                             </b-tab>
+                                          </section>
                                         </b-tabs>
                                     </div>
                                 </b-card-body>
@@ -175,15 +173,16 @@
     import Footer from './../../Footer.vue';
     import GanntChart from "@/components/dashboard/projects/charts/data/GanntChart";
     import ActionsGraphSteppedLines from "@/components/dashboard/projects/charts/data/ActionsGraphSteppedLines";
+    import ActionsGraph from "@/components/dashboard/projects/charts/data/ActionsGraph";
     import FeedbackView from "./FeedbackView.vue";
 
 
     export default {
-        components: {},
+
         name: "AllPlans",
         components: {
-            Header, Footer,
-          'actions-graph-stepped-lines': ActionsGraphSteppedLines
+            Header, Footer, ActionsGraph,
+          'actions-graph-stepped-lines': ActionsGraphSteppedLines,
         },
 
         data() {
@@ -239,6 +238,10 @@
         methods: {
           loadTabContent(planId) {
             this.$router.push('/all-plans/'+planId);
+          },
+
+          visualizePlan(planId) {
+            this.$router.push('/adaptation-plans/1/plans/'+planId+'/actions');
           }
         },
         computed: {}

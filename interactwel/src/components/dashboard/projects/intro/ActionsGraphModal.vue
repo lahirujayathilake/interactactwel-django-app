@@ -103,10 +103,7 @@ import LineChart from "../../projects/charts/lib/LineChart";
 
           buildDataCollection () {
             const {utils} = AiravataAPI; // eslint-disable-line
-            const colors = ['#286bde'];
-            const hoverBorderColors = ['#286bde'];
-            const borderColors = ['#286bde'];
-            const pointHoverBackgroundColors = ['#286bde'];
+            const colors = ['#43AA8B','#F9C74F','#F3722C','#277DA1'];
             utils.FetchUtils.get("/interactwel/api/plans/?plan_id="+ this.planId).then(result => {
                   this.datacollection = {};
                   if (result.length < 1 || !result[0].plan_json) {
@@ -116,17 +113,21 @@ import LineChart from "../../projects/charts/lib/LineChart";
                   this.datacollection.labels = json.Years;
                   this.datacollection.datasets = json.Data.map((dataSeries, index)=>{
                     const backgroundColor = colors.length > index ? colors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                    const hoverBorderColor = hoverBorderColors.length > index ? hoverBorderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                    const borderColor = borderColors.length > index ? borderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                    const pointHoverBackgroundColor = pointHoverBackgroundColors.length > index ? pointHoverBackgroundColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                    const borderColor = backgroundColor;
+                    const hoverBackgroundColor = '#000000'
+                    const hoverBorderColor = '#000000'
+                    const pointHoverBackgroundColor = '#000000';
                     return {
                       label: dataSeries.Actor,
                       backgroundColor,
                       borderColor,
                       hoverBorderColor,
                       pointHoverBackgroundColor,
-                      borderDash: [2, 2],
+                      borderDash: [5, 5],
+                      hoverBorderDash: [2, 2],
+                      hoverBackgroundColor,
                       borderWidth: 2,
+                      hoverBorderWidth: 4,
                       data: dataSeries.Values,
                       steppedLine: true,
                       fill: false,
@@ -137,31 +138,6 @@ import LineChart from "../../projects/charts/lib/LineChart";
               alert("Failed to fetch graph data. " + error);
             })
           },
-
-          /*buildDataCollection () {
-            this.datacollection = {
-              labels:  ["2000","2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
-              datasets: [
-                {
-                  label: 'Actor 1',
-                  backgroundColor: '#345fb5',
-                  borderColor: "#286bde",
-                  borderWidth: 2,
-                  data: [1, 3, 4, 4, 4, 6, 2, 1, 1, 3, 5],
-                  steppedLine: true,
-                  fill: false,
-                }, {
-                  label: 'Actor 2',
-                  backgroundColor: '#f87979',
-                  borderColor: "#f87979",
-                  borderWidth: 2,
-                  data: [1, 5, 6, 3, 3, 3, 3, 4, 4, 6, 5],
-                  steppedLine: true,
-                  fill: false,
-                }
-              ]
-            }
-          },*/
 
             close() {
                 this.$emit('close');

@@ -12,8 +12,14 @@
     import LineChart from "../lib/LineChart";
     import chartjsPluginAnnotation from "chartjs-plugin-annotation";
 
+    let adaptationPlanId;
+
     export default {
         name: 'actions-graph-stepped-lines',
+
+        props: {
+          adaptationPlanId
+        },
 
         components: {
             LineChart, ActionsGraphModal
@@ -85,7 +91,8 @@
         },
         mounted() {
 
-          this.planId = this.$route.params.planId;
+          this.adaptationPlanId ? this.planId = this.adaptationPlanId: this.planId = this.$route.params.planId
+
           if (!this.planId){
             this.planId = localStorage.getItem('currentPlanId');
           }
@@ -102,10 +109,7 @@
         methods: {
           buildDataCollection () {
             const {utils} = AiravataAPI; // eslint-disable-line
-            const colors = ['#286bde'];
-            const hoverBorderColors = ['#286bde'];
-            const borderColors = ['#286bde'];
-            const pointHoverBackgroundColors = ['#07d221'];
+            const colors = ['#43AA8B','#F9C74F','#F3722C','#277DA1'];
             utils.FetchUtils.get("/interactwel/api/plans/?plan_id="+ this.planId).then(result => {
               this.datacollection = {};
               if (result.length < 1 || !result[0].plan_json) {
@@ -115,20 +119,24 @@
               this.datacollection.labels = json.Years;
               this.datacollection.datasets = json.Data.map((dataSeries, index)=>{
                 const backgroundColor = colors.length > index ? colors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                const hoverBorderColor = hoverBorderColors.length > index ? hoverBorderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                const borderColor = borderColors.length > index ? borderColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
-                const pointHoverBackgroundColor = pointHoverBackgroundColors.length > index ? pointHoverBackgroundColors[index] : "#" + ((1<<24)*Math.random() | 0).toString(16);
+                const borderColor = backgroundColor;
+                const hoverBackgroundColor = '#000000'
+                const hoverBorderColor = '#000000'
+                const pointHoverBackgroundColor = '#000000';
                 return {
                   label: dataSeries.Actor,
                   backgroundColor,
                   borderColor,
                   hoverBorderColor,
                   pointHoverBackgroundColor,
-                  borderDash: [2, 2],
+                  borderDash: [5, 5],
+                  hoverBorderDash: [2, 2],
+                  hoverBackgroundColor,
                   borderWidth: 2,
+                  hoverBorderWidth: 4,
                   data: dataSeries.Values,
                   steppedLine: true,
-                  fill: false,
+                  fill: false
                 }
               })
             }

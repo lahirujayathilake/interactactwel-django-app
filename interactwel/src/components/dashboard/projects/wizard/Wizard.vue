@@ -298,8 +298,9 @@
                         <h4 class="card-title">"What are Adaptation Plans?"<b-button v-b-toggle.collapse-4 variant="outline-info" class="m-1b" size="sm"><i>Hide panel</i></b-button></h4>
                             <!--<b-card-text><strong>Who are Actors?</strong></b-card-text><br/>-->
                             <b-card-text>
-                                <p align="justify">In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong> and actions <strong>(Step 3)</strong> that you selected.  You can compare how each adaptation plan meets the goals you selected in <strong>Step 1</strong> for the entire basin, sub-basins, and individual streams.  You can also compare the actions and their timeframes included within each plan.</p>
-                                <p aling="justify">Remember that you can click the map to visualize the data. </p>
+                                <p align="justify">
+                                  In this section you will be able to view multiple adaptation plans that incorporate the actors (Step 2) and actions (Step 3) that you selected. You can compare how each adaptation plan meets the goals you selected in Step 1 for the entire basin, sub-basins, and individual streams. You can also compare the actions and their timeframes included within each plan. Remember, that you can always click on the map to visualize additional spatial information.
+                                </p>
                             </b-card-text>
                             
                         </b-card>

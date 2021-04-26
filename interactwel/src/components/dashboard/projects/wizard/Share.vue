@@ -64,7 +64,7 @@
                         </b-button>
                     </template>-->
                     <template v-slot:cell(save)="data">
-                        <b-button pill size="sm"
+                        <b-button @click="savePlan()" pill size="sm"
                                   variant="secondary">Save
                         </b-button>
                     </template>
@@ -165,7 +165,40 @@
             back(){
                 this.$router.push('/adaptation-plans/'+this.$route.params.projectId+'/plans/overview')
             },
-        }
+
+          savePlan(){
+              let user = this.getLoggedInUser();
+              let goals = this.adaptationPlan['selectedGoals'];
+              let actors = this.adaptationPlan['selectedActors'];
+              let planId = this.$store.state.currentAdaptationPlan;
+              let actions = "";
+            for(const index in goals)
+            {
+              console.log(goals[index].goal_id);  // output: Apple Orange Banana
+              console.log(goals[index].name);  // output: Apple Orange Banana
+            }
+            for(const index in actors) {
+              console.log(actors[index].actor_id);  // output: Apple Orange Banana
+              console.log(actors[index].name);  // output: Apple Orange Banana
+            }
+
+              const {utils} = AiravataAPI;
+              utils.FetchUtils.post(
+                  '/interactwel/api/selectedplans/',
+                  {
+                    timestamp: new Date(),
+                    user_id: user.id,
+                    plan_id: planId,
+                    goals: goals,
+                  })
+                  .catch(error => {
+                    this.$toast.error("API error while posting the goals! " + error);
+                  });
+
+            },
+
+          }
+
 
     }
 </script>
