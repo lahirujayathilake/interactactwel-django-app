@@ -44,14 +44,14 @@
 <style>
     #tutor-step1{
         top: 200px;
-        left: 200px;
+        left: 230px;
         width: 300px;
         position: absolute;
     }
     #tutor-step1-arrow{
         position: absolute;
         top: 200px;
-        left:30px;
+        left:90px;
         height: 100px;
     }
 .rotate {
