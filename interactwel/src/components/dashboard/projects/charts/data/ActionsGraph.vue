@@ -7,18 +7,18 @@
 </template>
 
 <script>
-    import axios from 'axios';
     import ActionsGraphModal from './../../intro/ActionsGraphModal.vue';
     import LineChart from "../lib/LineChart";
-    import chartjsPluginAnnotation from "chartjs-plugin-annotation";
 
-    let adaptationPlanId;
+    //let adaptationPlanId;
 
     export default {
         name: 'actions-graph-stepped-lines',
 
         props: {
-          adaptationPlanId
+          adaptationPlanId: {
+            type: Number,
+          }
         },
 
         components: {
@@ -91,8 +91,7 @@
         },
         mounted() {
 
-          this.adaptationPlanId ? this.planId = this.adaptationPlanId: this.planId = this.$route.params.planId
-
+          this.planId = this.adaptationPlanId ||  this.$route.params.planId;
           if (!this.planId){
             this.planId = localStorage.getItem('currentPlanId');
           }

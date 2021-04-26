@@ -113,7 +113,6 @@
         async mounted() {
             //this.fetchData();
             this.adaptationPlan = this.$store.state.currentAdaptationPlan;
-            debugger;
 
         },
         watch: {
@@ -267,7 +266,6 @@
                 }
             },
             onAddFeedbackAgainClick(){
-                debugger;
                 this.showOldFeedbackView = false;
                 this.showAddFeedbackForm = true;
                 this.showAddFeedbackAgainButton = false;
