@@ -54,7 +54,7 @@ export default {
   },
 
   async mounted() {
-            const {utils} = AiravataAPI; // eslint-disable-line
+    const {utils} = AiravataAPI; // eslint-disable-line
     let user = await this.getLoggedInUser();
     utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id=" + this.planId + "&user_id=" + user.id).then(result => {
 

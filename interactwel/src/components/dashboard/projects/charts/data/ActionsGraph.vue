@@ -97,7 +97,6 @@ export default {
               beginAtZero: false,
               max: 10,
             },
-            //labels: ["Business as usual", "Increase amount of SW", "Decrease amount of SW", "Increase amount of GW", "Decrease amount of GW", "Increase amount of CR", "Decrease amount of CR"],
           }],
         },
       },
@@ -109,7 +108,7 @@ export default {
     if (!this.planId){
       this.planId = localStorage.getItem('currentPlanId');
     }
-    this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+    this.adaptationPlan = this.$store.state.currentAdaptationPlan || {};
     localStorage.setItem('currentPlanId', '');
     this.buildDataCollection();
 
@@ -121,8 +120,9 @@ export default {
 
   methods: {
     buildDataCollection() {
-            const {utils} = AiravataAPI; // eslint-disable-line
+      const {utils} = AiravataAPI; // eslint-disable-line
       const colors = ['#43AA8B', '#F9C74F', '#F3722C', '#277DA1'];
+      const selectedActorNames = this.adaptationPlan.selectedActors.map(actor => actor.name) || [];
       utils.FetchUtils.get("/interactwel/api/plans/?plan_id=" + this.planId).then(result => {
         this.datacollection = {};
         if (result.length < 1 || !result[0].plan_json) {
@@ -130,7 +130,9 @@ export default {
         }
         const json = JSON.parse(result[0].plan_json);
         this.datacollection.labels = json.Years;
-        this.datacollection.datasets = json.Data.map((dataSeries, index)=>{
+        this.datacollection.datasets = json.Data.filter(
+          dataSeries => selectedActorNames.includes(dataSeries.Actor)
+        ).map((dataSeries, index)=>{
           const backgroundColor = colors.length > index ? colors[index] : "#" + ((1 << 24) * Math.random() | 0).toString(16);
           const borderColor = backgroundColor;
           const hoverBackgroundColor = '#000000';

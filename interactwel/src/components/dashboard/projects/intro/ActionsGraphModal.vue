@@ -116,7 +116,7 @@ export default {
   methods: {
 
     buildDataCollection() {
-            const {utils} = AiravataAPI; // eslint-disable-line
+      const {utils} = AiravataAPI; // eslint-disable-line
       const colors = ['#43AA8B', '#F9C74F', '#F3722C', '#277DA1'];
       utils.FetchUtils.get("/interactwel/api/plans/?plan_id=" + this.planId).then(result => {
         this.datacollection = {};
