@@ -1,39 +1,74 @@
 <template>
-    <b-col lg="12">
-        <ol class="progress-bar">
-            <li class="col-md-2 active">
-                <div id="active" class="step-progress-bar">
-                    <div class="step-no">1</div>
-                    <h4 class="list-group-item-heading">Goals</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{selectedGoals.length}} Goals Selected</p>
-                </div>
-            </li>
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">2</div>
-                    <h4 class="list-group-item-heading">Actors</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">0 Actors Selected</p>
-                </div>
-            </li>
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">3</div>
-                    <h4 class="list-group-item-heading">Actions</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">0 Actions Selected</p>
-                </div>
-            </li>
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">4</div>
-                    <h4 class="list-group-item-heading">Visualize and Evaluate</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Adaptation Plans</p>
-                </div>
-            </li>
-            <!--<li class="col-md-2">
+  <b-col lg="12">
+    <ol class="progress-bar">
+      <li class="col-md-2 active">
+        <div
+          id="active"
+          class="step-progress-bar"
+        >
+          <div class="step-no">
+            1
+          </div>
+          <h4 class="list-group-item-heading">
+            Goals
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            {{ selectedGoals.length }} Goals Selected
+          </p>
+        </div>
+      </li>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            2
+          </div>
+          <h4 class="list-group-item-heading">
+            Actors
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            0 Actors Selected
+          </p>
+        </div>
+      </li>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            3
+          </div>
+          <h4 class="list-group-item-heading">
+            Actions
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            0 Actions Selected
+          </p>
+        </div>
+      </li>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            4
+          </div>
+          <h4 class="list-group-item-heading">
+            Visualize and Evaluate
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            Adaptation Plans
+          </p>
+        </div>
+      </li>
+      <!--<li class="col-md-2">
                 <div class="step-progress-bar">
                     <div class="step-no">5</div>
                     <h4 class="list-group-item-heading">Feedback</h4>
@@ -41,204 +76,273 @@
                     <p class="list-group-item-text">Rate each plan</p>
                 </div>
             </li>-->
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">5</div>
-                    <h4 class="list-group-item-heading">Wrap Up</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Save and Print Plans</p>
-                </div>
-            </li>
-        </ol>
-        <div id="step1">
-            <div class="help-block">
-                <b-collapse visible id="collapse-what_are_goals">
-                    <b-card class="mb-2"
-                            tag="article"
-                            style="max-width: 25rem;"
-                    >
-                        <div class="row">
-                          <div class="col">
-                            <h4 class="card-title"> "What are Goals?"
-                            </h4>
-                          </div>
-                          <div class="col-1 mr-3">
-                            <h5 class="text-right font-weight-light"><i class="fas fa-times" v-b-toggle.collapse-what_are_goals style="cursor: pointer"></i></h5>
-                          </div>
-                        </div>
-
-                        <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
-                        <!--<b-card-text v-if="isHelpStep1Active">-->
-                        <b-card-text>
-                            <!--<p align="justify">
-                                A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>-->
-                            <p align="justify">
-                                Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve.
-                            </p>
-                            <ul>
-                                <li>These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community at large.
-                                </li>
-                                <li>
-                                    Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.
-                                </li>
-                            </ul>
-                            <p align="justify"> In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests.
-                            </p>
-                            <p aling="justify">
-                                You will be able to visualize how each adaptation plan meets the goals in <strong>Step 4</strong>.
-                            </p>
-                        </b-card-text>
-
-                    </b-card>
-                </b-collapse>
-            </div>
-            <b-card no-body footer-tag="footer">
-                <div class="step-header" slot="header">Choose Goals
-                    <em slot="header">
-                        <i v-b-toggle.collapse-what_are_goals class="far fa-question-circle" title="Show instructions" style="cursor: pointer"></i>
-                    </em>
-                </div>
-                <b-card-body>
-                    <p class="card-text"><i>
-                        Choose adaptation goals that are important to you.
-                    </i></p>
-                </b-card-body>
-                <b-list-group-item>
-                    <b-form-checkbox-group>
-                        <label class="form-checkbox">
-                            <input type="checkbox" v-model="selectAllGoals" @click="selectGoals">
-                            Select All
-                        </label>
-                          <!--<div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
-                    </b-form-checkbox-group>
-                </b-list-group-item>
-                <b-list-group flush>
-                    <b-form>
-                        <div class="list-group">
-                            <li class="list-group-item" v-for="goal in goals" v-bind:key="goal.goal_id">
-                                <label class="form-checkbox" :disabled="goal.readonly">
-                                    <input type="checkbox" :value="goal" v-model="selectedGoals"/>
-                                    {{goal.name}}
-                                    <b-collapse :id="'collapse-'+goal.goal_id">
-                                        <p class="item-info">
-                                            <small>{{goal.description}}</small>
-                                        </p>
-                                    </b-collapse>
-                                </label>
-                                <b-badge v-b-toggle="'collapse-' + goal.goal_id" class="info-button" pill variant="secondary" >i</b-badge>
-                            </li>
-                        </div>
-                    </b-form>
-                </b-list-group>
-                <em slot="footer">
-                    <b-button variant="next" size="sm" @click="submit($route.params.projectId)">Next</b-button>
-                </em>
-            </b-card>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            5
+          </div>
+          <h4 class="list-group-item-heading">
+            Wrap Up
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            Save and Print Plans
+          </p>
         </div>
-        <b-modal v-model="showInfoModal">
-            <template slot="modal-title">
-                <strong>No selections were made</strong>
-            </template>
-            You forgot to select any goals. We filled that for you.
-            <template slot="modal-footer" slot-scope="{ ok, cancel, hide }">
-                <b-button size="sm" variant="next" @click="onConfirm">Ok</b-button>
-            </template>
-        </b-modal>
-    </b-col>
+      </li>
+    </ol>
+    <div id="step1">
+      <div class="help-block">
+        <b-collapse
+          id="collapse-what_are_goals"
+          visible
+        >
+          <b-card
+            class="mb-2"
+            tag="article"
+            style="max-width: 25rem;"
+          >
+            <div class="row">
+              <div class="col">
+                <h4 class="card-title">
+                  "What are Goals?"
+                </h4>
+              </div>
+              <div class="col-1 mr-3">
+                <h5 class="text-right font-weight-light">
+                  <i
+                    v-b-toggle.collapse-what_are_goals
+                    class="fas fa-times"
+                    style="cursor: pointer"
+                  />
+                </h5>
+              </div>
+            </div>
+
+            <!--<b-card title><strong>What are Goals?</strong></b-card title> -->
+            <!--<b-card-text v-if="isHelpStep1Active">-->
+            <b-card-text>
+              <!--<p align="justify">
+                                A community can suffer severe consequences from not effectively managing its water, energy, and land resources, especially when slow and sudden changes in the environment (e.g., changing climate, new policies, etc.) impair the quality, quantity, and accessibility of these resources over time.</p>-->
+              <p align="justify">
+                Before choosing an appropriate plan of response (called <b>Adaptation Plan</b>), community members must choose what types of goals are important for them to achieve.
+              </p>
+              <ul>
+                <li>
+                  These goals, also called <b>Adaptation Goals</b>, allow different groups within the community to evaluate how an adaptation plan may impact the bottom-line of each group, as well as that of the community at large.
+                </li>
+                <li>
+                  Further, many of these goals may be short-term goals, while others may need to be accomplished over a longer period of time.
+                </li>
+              </ul>
+              <p align="justify">
+                In <b>Step 1</b>, think about what goals would be of interest to you and your stakeholders. Then choose from the options available in this list by clicking on the goals that reflect your priorities and interests.
+              </p>
+              <p aling="justify">
+                You will be able to visualize how each adaptation plan meets the goals in <strong>Step 4</strong>.
+              </p>
+            </b-card-text>
+          </b-card>
+        </b-collapse>
+      </div>
+      <b-card
+        no-body
+        footer-tag="footer"
+      >
+        <div
+          slot="header"
+          class="step-header"
+        >
+          Choose Goals
+          <em slot="header">
+            <i
+              v-b-toggle.collapse-what_are_goals
+              class="far fa-question-circle"
+              title="Show instructions"
+              style="cursor: pointer"
+            />
+          </em>
+        </div>
+        <b-card-body>
+          <p class="card-text">
+            <i>
+              Choose adaptation goals that are important to you.
+            </i>
+          </p>
+        </b-card-body>
+        <b-list-group-item>
+          <b-form-checkbox-group>
+            <label class="form-checkbox">
+              <input
+                v-model="selectAllGoals"
+                type="checkbox"
+                @click="selectGoals"
+              >
+              Select All
+            </label>
+            <!--<div class="text-uppercase text-bold">id selected: {{selectedGoals}}</div>-->
+          </b-form-checkbox-group>
+        </b-list-group-item>
+        <b-list-group flush>
+          <b-form>
+            <div class="list-group">
+              <li
+                v-for="goal in goals"
+                :key="goal.goal_id"
+                class="list-group-item"
+              >
+                <label
+                  class="form-checkbox"
+                  :disabled="goal.readonly"
+                >
+                  <input
+                    v-model="selectedGoals"
+                    type="checkbox"
+                    :value="goal"
+                  >
+                  {{ goal.name }}
+                  <b-collapse :id="'collapse-'+goal.goal_id">
+                    <p class="item-info">
+                      <small>{{ goal.description }}</small>
+                    </p>
+                  </b-collapse>
+                </label>
+                <b-badge
+                  v-b-toggle="'collapse-' + goal.goal_id"
+                  class="info-button"
+                  pill
+                  variant="secondary"
+                >
+                  i
+                </b-badge>
+              </li>
+            </div>
+          </b-form>
+        </b-list-group>
+        <em slot="footer">
+          <b-button
+            variant="next"
+            size="sm"
+            @click="submit($route.params.projectId)"
+          >Next</b-button>
+        </em>
+      </b-card>
+    </div>
+    <b-modal v-model="showInfoModal">
+      <template slot="modal-title">
+        <strong>No selections were made</strong>
+      </template>
+      You forgot to select any goals. We filled that for you.
+      <template
+        slot="modal-footer"
+        slot-scope="{ ok, cancel, hide }"
+      >
+        <b-button
+          size="sm"
+          variant="next"
+          @click="onConfirm"
+        >
+          Ok
+        </b-button>
+      </template>
+    </b-modal>
+  </b-col>
 </template>
 
 <script>
-    //import GoalsOpts from './../../../../../public/static/goals.json';
-    import * as axios from "axios";
+//import GoalsOpts from './../../../../../public/static/goals.json';
+import * as axios from "axios";
 
-    export default {
-        name: 'Goals',
-        props: {},
-        data() {
-            return {
-                itemInfoVisibility: false,
-                selectAllGoals: false,
-                selectedGoals: [],
-                goals: [],
-                showInfoModal: false,
-                goalsAssignedToThisProject:[],
-                adaptationPlan: [],
-            }
-        },
-        mounted() {
+export default {
+  name: 'Goals',
+  props: {},
+  data() {
+    return {
+      itemInfoVisibility: false,
+      selectAllGoals: false,
+      selectedGoals: [],
+      goals: [],
+      showInfoModal: false,
+      goalsAssignedToThisProject: [],
+      adaptationPlan: [],
+    };
+  },
 
-            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
-            if(this.adaptationPlan){
-                this.selectedGoals=this.adaptationPlan.selectedGoals;
-            }
+  watch: {
+    selectedGoals: {
+      handler() {
+        this.goals;
+      },
+      deep: true,
+    },
+  },
+  mounted() {
 
-            const { utils } = AiravataAPI;
-            this.projectId = this.$route.params.projectId
-            utils.FetchUtils.get('/interactwel/api/goals/')
-                .then(data => {
-                    this.goals = data;
-                })
-                .catch(error => {
-                    alert("Could not get the projects list. API error! " + error)
-                });
-        },
-
-        watch: {
-            selectedGoals: {
-                handler() {
-                    this.goals;
-                },
-                deep: true,
-            }
-        },
-
-        methods: {
-            selectGoals() {
-                this.selectedGoals = [];
-                if(!this.selectAllGoals){
-                    this.goals.forEach(element => {
-                        this.selectedGoals.push(element);
-                    });
-                }else{
-                    this.selectedGoals=[];
-                }
-            },
-
-            showItemInfo() {
-                if (this.itemInfoVisibility == true) {
-                    this.itemInfoVisibility = false
-                } else {
-                    this.itemInfoVisibility = true
-                }
-
-            },
-
-            toggleModal() {
-                // We pass the ID of the button that we want to return focus to
-                // when the modal has hidden
-                this.$refs['my-modal'].toggle('#toggle-btn')
-            },
-
-            submit(projectId) {
-                if(this.selectedGoals.length<1){
-                    this.showInfoModal = true;
-                    return;
-                }
-                this.$store.commit("setSelectedGoals", this.selectedGoals);
-                this.$store.commit("step1", true);
-                this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
-                return true
-            },
-
-            onConfirm() {
-                this.selectGoals();
-                this.$store.commit("setSelectedGoals", this.selectedGoals);
-                this.$store.commit("step1", true);
-                this.$router.push('/adaptation-plans/'+this.projectId+'/actors');
-            }
-        }
-
+    this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+    if (this.adaptationPlan){
+      this.selectedGoals = this.adaptationPlan.selectedGoals;
     }
+
+    const { utils } = AiravataAPI;
+    this.projectId = this.$route.params.projectId;
+    utils.FetchUtils.get('/interactwel/api/goals/')
+      .then(data => {
+        this.goals = data;
+      })
+      .catch(error => {
+        alert("Could not get the projects list. API error! " + error);
+      });
+  },
+
+  methods: {
+    selectGoals() {
+      this.selectedGoals = [];
+      if (!this.selectAllGoals){
+        this.goals.forEach(element => {
+          this.selectedGoals.push(element);
+        });
+      } else {
+        this.selectedGoals = [];
+      }
+    },
+
+    showItemInfo() {
+      if (this.itemInfoVisibility == true) {
+        this.itemInfoVisibility = false;
+      } else {
+        this.itemInfoVisibility = true;
+      }
+
+    },
+
+    toggleModal() {
+      // We pass the ID of the button that we want to return focus to
+      // when the modal has hidden
+      this.$refs['my-modal'].toggle('#toggle-btn');
+    },
+
+    submit(projectId) {
+      if (this.selectedGoals.length < 1){
+        this.showInfoModal = true;
+        return;
+      }
+      this.$store.commit("setSelectedGoals", this.selectedGoals);
+      this.$store.commit("step1", true);
+      this.$router.push('/adaptation-plans/' + this.projectId + '/actors');
+      return true;
+    },
+
+    onConfirm() {
+      this.selectGoals();
+      this.$store.commit("setSelectedGoals", this.selectedGoals);
+      this.$store.commit("step1", true);
+      this.$router.push('/adaptation-plans/' + this.projectId + '/actors');
+    },
+  },
+
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

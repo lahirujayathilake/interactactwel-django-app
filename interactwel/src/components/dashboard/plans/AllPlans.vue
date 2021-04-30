@@ -1,33 +1,48 @@
 <template>
   <div>
-    <component v-bind:is="component='Header'"></component>
-    <b-container fluid class="main">
+    <component :is="component='Header'" />
+    <b-container
+      fluid
+      class="main"
+    >
       <b-row>
         <b-col lg="1">
-          <h3 class="mb-3">Plans</h3>
+          <h3 class="mb-3">
+            Plans
+          </h3>
         </b-col>
         <b-col lg="11">
-          <p>Plans are different scenarios of recommended adaptation decisions and strategies for the different
-            community projects that you are a member of. <br/>
+          <p>
+            Plans are different scenarios of recommended adaptation decisions and strategies for the different
+            community projects that you are a member of. <br>
             Under each Project tab, you can Generate New Plan with assistance from InterACTWEL as well as view details
-            on plans previously saved by you.</p>
+            on plans previously saved by you.
+          </p>
         </b-col>
       </b-row>
       <b-row>
         <b-col lg="12">
-          <b-card v-if="projects" no-body>
+          <b-card
+            v-if="projects"
+            no-body
+          >
             <b-tabs nav-wrapper-class="project-tabs">
               <b-tab
                 v-for="project in projects"
-                :title="project.name" v-bind:key="project.id">
-                <SavedPlansProjectComponent v-bind:project="project" v-bind:user="user"/>
+                :key="project.id"
+                :title="project.name"
+              >
+                <SavedPlansProjectComponent
+                  :project="project"
+                  :user="user"
+                />
               </b-tab>
             </b-tabs>
           </b-card>
         </b-col>
       </b-row>
     </b-container>
-    <component v-bind:is="component='Footer'"></component>
+    <component :is="component='Footer'" />
   </div>
 </template>
 

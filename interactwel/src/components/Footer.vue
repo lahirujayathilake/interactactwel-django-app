@@ -1,35 +1,37 @@
 <template>
-    <b-container fluid class="footer">
-        <b-container>
-        <b-row>
-            <b-col></b-col>
-        </b-row>
-        </b-container>
+  <b-container
+    fluid
+    class="footer"
+  >
+    <b-container>
+      <b-row>
+        <b-col />
+      </b-row>
     </b-container>
+  </b-container>
 </template>
 
 <script>
 
-    export default {
-        components: {
+export default {
+  name: 'Footer',
+  components: {
 
-        },
-        name: 'Footer',
+  },
 
-        data() {
-            return {
-            }
-        },
+  data() {
+    return {
+    };
+  },
 
-        mounted() {
-        },
+  mounted() {
+  },
 
+  methods: {
 
-        methods: {
+  },
 
-        }
-
-    }
+};
 
 </script>
 

@@ -1,26 +1,24 @@
 <template>
-
-    <div>
-        water rights popup content
-    </div>
-
+  <div>
+    water rights popup content
+  </div>
 </template>
 
 <script>
 
-    export default {
-        name: "PopupContentWaterRights",
-        components: {
-        },
-        props: {
-            data: {
-                name: String
-            },
-            pcpdata: {}
-        },
+export default {
+  name: "PopupContentWaterRights",
+  components: {
+  },
+  props: {
+    data: {
+      name: String,
+    },
+    pcpdata: {},
+  },
 
-        computed: {}
-    }
+  computed: {},
+};
 </script>
 
 <style>

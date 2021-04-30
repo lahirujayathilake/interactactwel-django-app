@@ -1,15 +1,15 @@
 const BundleTracker = require("webpack-bundle-tracker");
 
 module.exports = {
-    publicPath:
+  publicPath:
         process.env.NODE_ENV === "development"
-            ? "http://0.0.0.0:9000/static/interactwel/dashboard/dist/": "/static/interactwel/dashboard/dist/",
-    // baseUrl: "http://0.0.0.0:8080/",
-    outputDir: './static/interactwel/dashboard/dist',
+          ? "http://0.0.0.0:9000/static/interactwel/dashboard/dist/" : "/static/interactwel/dashboard/dist/",
+  // baseUrl: "http://0.0.0.0:8080/",
+  outputDir: './static/interactwel/dashboard/dist',
 
-    devServer: {
-        disableHostCheck: true
-    },
+  devServer: {
+    disableHostCheck: true,
+  },
   configureWebpack: {
     optimization: {
       /*
@@ -25,7 +25,7 @@ module.exports = {
             name: 'chunk-vendors',
             test: /[\\/]node_modules[\\/]/,
             priority: -10,
-            chunks: 'initial'
+            chunks: 'initial',
           },
         // there is only one entry point so common chunk isn't needed
         //   common: {
@@ -35,27 +35,27 @@ module.exports = {
         //     chunks: 'initial',
         //     reuseExistingChunk: true
         //   }
-        }
-      }
-    }
+        },
+      },
+    },
   },
 
-    chainWebpack: config => {
+  chainWebpack: config => {
 
-config
-    .plugin('BundleTracker')
-    .use(BundleTracker, [{filename: './static/interactwel/dashboard/dist/webpack-stats.json'}])
+    config
+      .plugin('BundleTracker')
+      .use(BundleTracker, [{filename: './static/interactwel/dashboard/dist/webpack-stats.json'}]);
 
-config.resolve.alias
-    .set('__STATIC__', 'static')
+    config.resolve.alias
+      .set('__STATIC__', 'static');
 
-config.devServer
-    .public('http://0.0.0.0:9000')
-    .host('0.0.0.0')
-    .port(9000)
-    .hotOnly(true)
-    .watchOptions({poll: 1000})
-    .https(false)
-    .headers({"Access-Control-Allow-Origin": ["\*"]})
-}
+    config.devServer
+      .public('http://0.0.0.0:9000')
+      .host('0.0.0.0')
+      .port(9000)
+      .hotOnly(true)
+      .watchOptions({poll: 1000})
+      .https(false)
+      .headers({"Access-Control-Allow-Origin": ["\*"]});
+  },
 };

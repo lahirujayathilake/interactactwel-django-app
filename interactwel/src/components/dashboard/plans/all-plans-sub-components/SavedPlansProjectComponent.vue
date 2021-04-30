@@ -1,9 +1,23 @@
 <template>
   <b-card-body>
     <div class="d-lg-flex d-sm-block">
-      <h5 class="mr-auto">{{project.name}}</h5>
-      <b-button size="sm" variant="success" @click="$router.push('/adaptation-plans/'+ project.project_id)">Generate New Plan</b-button>
-      <b-button size="sm" variant="outline-success" @click="$router.push('/visualize/'+ project.project_id)">View Project Data</b-button>
+      <h5 class="mr-auto">
+        {{ project.name }}
+      </h5>
+      <b-button
+        size="sm"
+        variant="success"
+        @click="$router.push('/adaptation-plans/'+ project.project_id)"
+      >
+        Generate New Plan
+      </b-button>
+      <b-button
+        size="sm"
+        variant="outline-success"
+        @click="$router.push('/visualize/'+ project.project_id)"
+      >
+        View Project Data
+      </b-button>
     </div>
     <b-card v-if="false">
       <b-card-body title="You don't have access to any saved plans">
@@ -13,52 +27,83 @@
       </b-card-body>
     </b-card>
     <div class="mt-3 pl-2">
-      <b-tabs vertical nav-wrapper-class="plan-tabs bg-light px-0">
-        <section v-for="plan in plans" v-bind:key="plan.selected_plan_id">
-          <b-tab class="p-3 bg-light border"
-                 :title="'Plan ' + plan.plan_id"
-                 v-on:click='loadTabContent(plan.plan_id)'
+      <b-tabs
+        vertical
+        nav-wrapper-class="plan-tabs bg-light px-0"
+      >
+        <section
+          v-for="plan in plans"
+          :key="plan.selected_plan_id"
+        >
+          <b-tab
+            class="p-3 bg-light border"
+            :title="'Plan ' + plan.plan_id"
+            @click="loadTabContent(plan.plan_id)"
           >
             <div class="d-lg-flex d-sm-block pb-3">
-              <b-button size="sm" @click="visualizePlan(plan.plan_id)" variant="dark">Visualize this Plan
+              <b-button
+                size="sm"
+                variant="dark"
+                @click="visualizePlan(plan.plan_id)"
+              >
+                Visualize this Plan
               </b-button>
             </div>
             <div class="d-lg-flex d-sm-block">
               <b-list-group class="col-lg-3 col-md-12 col-sm-12">
                 <b-list-group-item class="flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Goals</h5>
-                    <small>{{plan.goals.length}} Goals selected</small>
+                    <h5 class="mb-1">
+                      Goals
+                    </h5>
+                    <small>{{ plan.goals.length }} Goals selected</small>
                   </div>
                   <small>
                     <ul class="no-padding">
-                      <li v-for="goalId in plan.goals" v-bind:key="goalId">{{getGoalName(goalId).name}}</li>
+                      <li
+                        v-for="goalId in plan.goals"
+                        :key="goalId"
+                      >{{ getGoalName(goalId).name }}</li>
                     </ul>
                   </small>
                 </b-list-group-item>
 
                 <b-list-group-item class="flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Actors</h5>
-                    <small class="text-muted"> {{plan.actors.length}} Actors Selected</small>
+                    <h5 class="mb-1">
+                      Actors
+                    </h5>
+                    <small class="text-muted"> {{ plan.actors.length }} Actors Selected</small>
                   </div>
                   <small>
                     <ul class="no-padding">
-                      <li v-for="actorId in plan.actors" v-bind:key="actorId">{{getActorName(actorId).name}}</li>
+                      <li
+                        v-for="actorId in plan.actors"
+                        :key="actorId"
+                      >{{ getActorName(actorId).name }}</li>
                     </ul>
                   </small>
                 </b-list-group-item>
 
                 <b-list-group-item class="flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Actions</h5></div>
+                    <h5 class="mb-1">
+                      Actions
+                    </h5>
+                  </div>
                   <small>
                     <ul class="no-padding">
-                      <li v-for="actorId in plan.actors" v-bind:key="actorId">
-                        {{getActorName(actorId).name}}
+                      <li
+                        v-for="actorId in plan.actors"
+                        :key="actorId"
+                      >
+                        {{ getActorName(actorId).name }}
                         <ul>
-                          <li v-for="action_mapping in getActionMappings(actorId, plan.action_mapping)" v-bind:key="action_mapping.id">
-                            {{getActionName(action_mapping.action_id).name}}
+                          <li
+                            v-for="action_mapping in getActionMappings(actorId, plan.action_mapping)"
+                            :key="action_mapping.id"
+                          >
+                            {{ getActionName(action_mapping.action_id).name }}
                           </li>
                         </ul>
                       </li>
@@ -73,11 +118,11 @@
               </b-list-group>
               <div class="d-block flex-column col-md-12 col-lg-6 col-sm-12">
                 <b-card>
-                  <actions-graph v-bind:adaptation-plan-id="plan.plan_id"></actions-graph>
+                  <actions-graph :adaptation-plan-id="plan.plan_id" />
                 </b-card>
               </div>
               <div class="d-block col-lg-3 col-md-12 col-sm-12">
-                <PlanFeedbackComponent v-bind:selected-plan="plan"/>
+                <PlanFeedbackComponent :selected-plan="plan" />
               </div>
             </div>
           </b-tab>
@@ -103,7 +148,7 @@ export default {
     },
     user: {
       type: Object,
-    }
+    },
   },
   data() {
     return {
@@ -126,13 +171,13 @@ export default {
             if (!plan.actors.includes(mapping.actor_id)) {
               plan.actors.push(mapping.actor_id);
             }
-          })
+          });
           this.plans.push(plan);
-        })
+        });
       }
-    )
+    );
 
-     utils.FetchUtils.get("/interactwel/api/goals/")
+    utils.FetchUtils.get("/interactwel/api/goals/")
       .then(goals => {
         this.goals = goals;
       })
@@ -190,13 +235,13 @@ export default {
 
     getActionMappings(actorId, mappings) {
       if (mappings) {
-       return  mappings.filter(mapping => mapping.actor_id === actorId);
+        return mappings.filter(mapping => mapping.actor_id === actorId);
       }
 
       return [];
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>

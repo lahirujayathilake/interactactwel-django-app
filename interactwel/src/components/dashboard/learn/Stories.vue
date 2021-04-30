@@ -1,75 +1,97 @@
 <template>
-    <b-row>
-
-        <b-col cols="12">
-            <b-card-group deck>
-            <b-card no-body class="overflow-hidden">
-                <b-row no-gutters>
-                    <b-col md="12">
-                        <b-card-body title="Story 1">
-                            <b-card-text>
-                                This is a wider card with supporting text as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </b-card-text>
-                            <b-button href="#" variant="primary">Read More</b-button>
-                        </b-card-body>
-                    </b-col>
-                </b-row>
-            </b-card>
-                <b-card no-body class="overflow-hidden">
-                    <b-row no-gutters>
-                        <b-col md="12">
-                            <b-card-body title="Story 2">
-                                <b-card-text>
-                                    This is a wider card with supporting text as a natural lead-in to additional content.
-                                    This content is a little bit longer.
-                                </b-card-text>
-                                <b-button href="#" variant="primary">Read More</b-button>
-                            </b-card-body>
-                        </b-col>
-                    </b-row>
-                </b-card>
-                <b-card no-body class="overflow-hidden">
-                    <b-row no-gutters>
-                        <b-col md="12">
-                            <b-card-body title="Story 3">
-                                <b-card-text>
-                                    This is a wider card with supporting text as a natural lead-in to additional content.
-                                    This content is a little bit longer.
-                                </b-card-text>
-                                <b-button href="#" variant="primary">Read More</b-button>
-                            </b-card-body>
-                        </b-col>
-                    </b-row>
-                </b-card>
-            </b-card-group>
-        </b-col>
-    </b-row>
+  <b-row>
+    <b-col cols="12">
+      <b-card-group deck>
+        <b-card
+          no-body
+          class="overflow-hidden"
+        >
+          <b-row no-gutters>
+            <b-col md="12">
+              <b-card-body title="Story 1">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+                <b-button
+                  href="#"
+                  variant="primary"
+                >
+                  Read More
+                </b-button>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card
+          no-body
+          class="overflow-hidden"
+        >
+          <b-row no-gutters>
+            <b-col md="12">
+              <b-card-body title="Story 2">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+                <b-button
+                  href="#"
+                  variant="primary"
+                >
+                  Read More
+                </b-button>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card
+          no-body
+          class="overflow-hidden"
+        >
+          <b-row no-gutters>
+            <b-col md="12">
+              <b-card-body title="Story 3">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+                <b-button
+                  href="#"
+                  variant="primary"
+                >
+                  Read More
+                </b-button>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-card-group>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
-    import Header from './../../Header.vue';
-    import Footer from './../../Footer.vue';
+import Header from './../../Header.vue';
+import Footer from './../../Footer.vue';
 
-    export default {
-        components: {
-            Header, Footer
-        },
-        name: 'Stories',
+export default {
+  name: 'Stories',
+  components: {
+    Header, Footer,
+  },
 
-        data() {
-            return {
-            }
-        },
+  data() {
+    return {
+    };
+  },
 
-        mounted() {
-        }
-        ,
+  mounted() {
+  }
+  ,
 
+  methods: {},
 
-        methods: {}
-
-    }
+};
 
 </script>
 

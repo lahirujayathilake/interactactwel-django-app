@@ -1,115 +1,120 @@
 <template>
-    <vertical-bar-chart :chart-data="datacollection" :options="options" :width="320" :height="350"></vertical-bar-chart>
+  <vertical-bar-chart
+    :chart-data="datacollection"
+    :options="options"
+    :width="320"
+    :height="350"
+  />
 </template>
 
 <script>
-    import axios from 'axios';
-    import VerticalBarChart from "../lib/VerticalBarChart";
+import axios from 'axios';
+import VerticalBarChart from "../lib/VerticalBarChart";
 
-    import EventBus from '../../../../../event-bus';
+import EventBus from '../../../../../event-bus';
 
-    export default {
-        name: 'IrrigationGraph',
-        components: {
-            VerticalBarChart
+export default {
+  name: 'IrrigationGraph',
+  components: {
+    VerticalBarChart,
+  },
+  props: {
+    selectedBasinID: {
+      name: String,
+    },
+  },
+
+  data() {
+    return {
+      planId: "1",
+      JSONData: null,
+      datacollection: null,
+      graphColors: [
+        "#3d71ff",
+        "#00b3eb",
+        "#61cf94",
+      ],
+      options: {
+        responsive: false,
+        title: {
+          display: true,
+          text: 'Irrigation - Yearly totals per water source',
         },
-        props: {
-            selectedBasinID: {
-                name: String
+        tooltips: {
+          mode: 'point',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true,
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            stacked: false,
+            scaleLabel: {
+              display: true,
+              labelString: 'Years',
             },
-        },
-
-        data() {
-            return {
-                planId: "1",
-                JSONData: null,
-                datacollection: null,
-                graphColors: [
-                    "#3d71ff",
-                    "#00b3eb",
-                    "#61cf94"
-                ],
-                options: {
-                    responsive: false,
-                    title: {
-                        display: true,
-                        text: 'Irrigation - Yearly totals per water source'
-                    },
-                    tooltips: {
-                        mode: 'point',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: true,
-                            stacked: false,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Years'
-                            }
-                        }],
-                        yAxes: [{
-                            display: true,
-                            stacked: false,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'acre-ft'
-                            }
-                        }]
-                    }
-                }
-            }
-        },
-
-        mounted() {
-            this.planId = this.$route.params.planId;
-            this.buildDataCollection(this.JSONData, this.planId);
-        },
-
-        created() {
-            axios.get("/static/BASIN_Irrigation_plans_data.json").then(response => {
-                this.JSONData = response.data;
-                this.buildDataCollection(this.JSONData, this.planId);
-            })
-        },
-
-        methods: {
-            buildDataCollection(data, adaptationPlan) {
-                this.datacollection = {};
-                this.datacollection.labels = [];
-                for (let legend in data.Legend) {
-                    this.datacollection.labels.push(data.Legend[legend]);
-                }
-
-                this.datacollection.datasets = [];
-                let i= 0;
-                for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
-                    let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
-                    let dataset = {};
-                    dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = this.getColor(i++);
-                    dataset.data = [];
-                    for (let dataValue in dataPoint.Data) {
-                        dataset.data.push(dataPoint.Data[dataValue]);
-                    }
-                    this.datacollection.datasets.push(dataset);
-                }
-                i++;
+          }],
+          yAxes: [{
+            display: true,
+            stacked: false,
+            scaleLabel: {
+              display: true,
+              labelString: 'acre-ft',
             },
+          }],
+        },
+      },
+    };
+  },
 
-            showChart: function (selectedPlan) {
-                this.planName = selectedPlan;
-            },
+  mounted() {
+    this.planId = this.$route.params.planId;
+    this.buildDataCollection(this.JSONData, this.planId);
+  },
 
-            getColor(i) {
-                let color;
-                color = this.graphColors[i];
-                return color;
-            },
+  created() {
+    axios.get("/static/BASIN_Irrigation_plans_data.json").then(response => {
+      this.JSONData = response.data;
+      this.buildDataCollection(this.JSONData, this.planId);
+    });
+  },
+
+  methods: {
+    buildDataCollection(data, adaptationPlan) {
+      this.datacollection = {};
+      this.datacollection.labels = [];
+      for (let legend in data.Legend) {
+        this.datacollection.labels.push(data.Legend[legend]);
+      }
+
+      this.datacollection.datasets = [];
+      let i = 0;
+      for (let dataIndex in data.Adaptation_plans[adaptationPlan]["Data"]) {
+        let dataPoint = data.Adaptation_plans[adaptationPlan]["Data"][dataIndex];
+        let dataset = {};
+        dataset.label = dataPoint.Name;
+        dataset.backgroundColor = this.getColor(i++);
+        dataset.data = [];
+        for (let dataValue in dataPoint.Data) {
+          dataset.data.push(dataPoint.Data[dataValue]);
         }
-    }
+        this.datacollection.datasets.push(dataset);
+      }
+      i++;
+    },
+
+    showChart: function(selectedPlan) {
+      this.planName = selectedPlan;
+    },
+
+    getColor(i) {
+      let color;
+      color = this.graphColors[i];
+      return color;
+    },
+  },
+};
 </script>

@@ -1,117 +1,190 @@
 <template>
-    <div>
-        <div class="wizard-container">
-            <b-navbar toggleable="sm" type="dark" variant="dark">
-                <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-                <b-button class="btn-sm mr-3" v-show ="!isWizardFlowStarted" @click="$router.push('/all-plans')"
-                          variant="outline-light"><i class="fa fa-chevron-left"></i> Plans
-                </b-button>
-                <b-navbar-brand class="h5 py-0">Project : </b-navbar-brand>
+  <div>
+    <div class="wizard-container">
+      <b-navbar
+        toggleable="sm"
+        type="dark"
+        variant="dark"
+      >
+        <b-navbar-toggle target="nav-text-collapse" />
+        <b-button
+          v-show="!isWizardFlowStarted"
+          class="btn-sm mr-3"
+          variant="outline-light"
+          @click="$router.push('/all-plans')"
+        >
+          <i class="fa fa-chevron-left" /> Plans
+        </b-button>
+        <b-navbar-brand class="h5 py-0">
+          Project :
+        </b-navbar-brand>
 
-                <b-collapse id="nav-text-collapse" is-nav>
-                    <b-navbar-nav>
-                        <b-nav-text class="h5 py-0">{{selectedProject.name}}</b-nav-text>
-                    </b-navbar-nav>
-                </b-collapse>
-                <b-button v-show="!isWizardFlowStarted" variant="success" @click="startWizard($route.params.projectId)" class="mr-2 glowing-button">Start</b-button>
-                <b-button v-show ="isWizardFlowStarted" variant="danger" @click="exitWizard" class="">Exit</b-button>
-            </b-navbar>
-           <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
-                <router-view></router-view>
-                <b-col>
-                    <div class="lg-map-container">
-                        <l-map ref="myMap" :maxZoom="maxZoom" :zoom="zoom" :center="center" :options="{zoomControl: false}">
-                            <l-control-zoom position="topright"></l-control-zoom>
-                            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                            <!--<l-control-layers position="topright" ref="layersControl" :sort-layers="true" :autoZIndex="true">-->
-                            <l-control-layers position="topright" ref="layersControl"
-                                              :sort-layers="false"></l-control-layers>
+        <b-collapse
+          id="nav-text-collapse"
+          is-nav
+        >
+          <b-navbar-nav>
+            <b-nav-text class="h5 py-0">
+              {{ selectedProject.name }}
+            </b-nav-text>
+          </b-navbar-nav>
+        </b-collapse>
+        <b-button
+          v-show="!isWizardFlowStarted"
+          variant="success"
+          class="mr-2 glowing-button"
+          @click="startWizard($route.params.projectId)"
+        >
+          Start
+        </b-button>
+        <b-button
+          v-show="isWizardFlowStarted"
+          variant="danger"
+          class=""
+          @click="exitWizard"
+        >
+          Exit
+        </b-button>
+      </b-navbar>
+      <!-- <component v-show="!wizardVisibility" v-bind:is="component='Wizard'"></component>-->
+      <router-view />
+      <b-col>
+        <div class="lg-map-container">
+          <l-map
+            ref="myMap"
+            :max-zoom="maxZoom"
+            :zoom="zoom"
+            :center="center"
+            :options="{zoomControl: false}"
+          >
+            <l-control-zoom position="topright" />
+            <l-tile-layer
+              :url="url"
+              :attribution="attribution"
+            />
+            <!--<l-control-layers position="topright" ref="layersControl" :sort-layers="true" :autoZIndex="true">-->
+            <l-control-layers
+              ref="layersControl"
+              position="topright"
+              :sort-layers="false"
+            />
 
-                            <l-tile-layer
-                                    v-for="tileProvider in tileProviders"
-                                    :key="tileProvider.name"
-                                    :name="tileProvider.name"
-                                    :visible="tileProvider.visible"
-                                    :url="tileProvider.url"
-                                    :attribution="tileProvider.attribution"
-                                    layer-type="base"/>
+            <l-tile-layer
+              v-for="tileProvider in tileProviders"
+              :key="tileProvider.name"
+              :name="tileProvider.name"
+              :visible="tileProvider.visible"
+              :url="tileProvider.url"
+              :attribution="tileProvider.attribution"
+              layer-type="base"
+            />
 
-                            <l-layer-group layer-type="overlay"
-                                           name="<font size=2 color=#5e6b7e><i><u><strong>Default Layers</strong></u></i></font>"
-                                           v-on:change="myFunction($event)"></l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              name="<font size=2 color=#5e6b7e><i><u><strong>Default Layers</strong></u></i></font>"
+              @change="myFunction($event)"
+            />
 
-                            <l-layer-group layer-type="overlay" :visible="defaultvisibility"
-                                           name="<font size=2><strong>Sub-basins</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_subbasin"
-                                        :options="options"
-                                        :options-style="styleFunction_subbasin"
-                                />
-                            </l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              :visible="defaultvisibility"
+              name="<font size=2><strong>Sub-basins</strong></font>"
+            >
+              <l-geo-json
+                v-if="show"
+                :geojson="geoJson_subbasin"
+                :options="options"
+                :options-style="styleFunction_subbasin"
+              />
+            </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="defaultvisibility"
-                                           name="<font size=2><strong>Streams</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_reach"
-                                        :options="options_noclick"
-                                        :options-style="styleFunction_reach"
-                                />
-                            </l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              :visible="defaultvisibility"
+              name="<font size=2><strong>Streams</strong></font>"
+            >
+              <l-geo-json
+                v-if="show"
+                :geojson="geoJson_reach"
+                :options="options_noclick"
+                :options-style="styleFunction_reach"
+              />
+            </l-layer-group>
 
+            <l-layer-group
+              layer-type="overlay"
+              name="<font size=2 color=#5e6b7e><i><u><strong>Station Data</strong></u></i></font>"
+            />
 
-                            <l-layer-group layer-type="overlay"
-                                           name="<font size=2 color=#5e6b7e><i><u><strong>Station Data</strong></u></i></font>"></l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              :visible="stationvisibility"
+              name="<font size=2><strong>Reservoirs</strong></font>"
+            >
+              <l-marker
+                v-for="reservoirStation in reservoirStationList"
+                :key="reservoirStation.id"
+                :lat-lng.sync="reservoirStation.position"
+                :icon="reservoirIcon"
+                :visible="true"
+              >
+                <l-popup>
+                  <popup-content-rs
+                    :data="reservoirStation"
+                    :pcpdata="ReservoirData"
+                  />
+                </l-popup>
+              </l-marker>
+            </l-layer-group>
 
+            <l-layer-group
+              layer-type="overlay"
+              :visible="stationvisibility"
+              name="<font size=2><strong>Gauging stations</strong></font>"
+            >
+              <l-marker
+                v-for="gaugingStation in gaugingStationList"
+                :key="gaugingStation.id"
+                :lat-lng.sync="gaugingStation.position"
+                :icon="gaugingIcon"
+                :visible="true"
+              >
+                <l-popup>
+                  <popup-content-gs
+                    :data="gaugingStation"
+                    :pcpdata="GaugeData"
+                  />
+                </l-popup>
+              </l-marker>
+            </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="stationvisibility"
-                                           name="<font size=2><strong>Reservoirs</strong></font>">
-                                <l-marker
-                                        v-for="reservoirStation in reservoirStationList"
-                                        :key="reservoirStation.id"
-                                        :lat-lng.sync="reservoirStation.position"
-                                        :icon="reservoirIcon"
-                                        :visible="true">
-                                    <l-popup>
-                                        <popup-content-rs :data="reservoirStation" :pcpdata="ReservoirData"/>
-                                    </l-popup>
-                                </l-marker>
-                            </l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              :visible="stationvisibility"
+              name="<font size=2><strong>Weather stations</strong></font>"
+            >
+              <l-marker
+                v-for="weatherStation in weatherStationList"
+                :key="weatherStation.id"
+                :lat-lng.sync="weatherStation.position"
+                :icon="wstationIcon"
+                :visible="true"
+              >
+                <l-popup>
+                  <popup-content-ws
+                    :data="weatherStation"
+                    :pcpdata="PrecipData"
+                  />
+                </l-popup>
+              </l-marker>
+            </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="stationvisibility"
-                                           name="<font size=2><strong>Gauging stations</strong></font>">
-                                <l-marker
-                                        v-for="gaugingStation in gaugingStationList"
-                                        :key="gaugingStation.id"
-                                        :lat-lng.sync="gaugingStation.position"
-                                        :icon="gaugingIcon"
-                                        :visible="true">
-                                    <l-popup>
-                                        <popup-content-gs :data="gaugingStation" :pcpdata="GaugeData"/>
-                                    </l-popup>
-                                </l-marker>
-                            </l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"
+            />
 
-                            <l-layer-group layer-type="overlay" :visible="stationvisibility"
-                                           name="<font size=2><strong>Weather stations</strong></font>">
-                                <l-marker
-                                        v-for="weatherStation in weatherStationList"
-                                        :key="weatherStation.id"
-                                        :lat-lng.sync="weatherStation.position"
-                                        :icon="wstationIcon"
-                                        :visible="true">
-                                    <l-popup>
-                                        <popup-content-ws :data="weatherStation" :pcpdata="PrecipData"/>
-                                    </l-popup>
-                                </l-marker>
-                            </l-layer-group>
-
-
-                            <l-layer-group layer-type="overlay"
-                                           name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"></l-layer-group>
-
-                            <!--<l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
+            <!--<l-layer-group id="wtrights" layer-type="overlay" :visible="otherlayersvisibility"
                                            name="<font size=2><strong>Water Rights</strong></font>">
                                 <l-geo-json
                                         v-if="show"
@@ -132,55 +205,68 @@
                                 />
                             </l-layer-group>-->
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
-                                           name="<font size=2><strong>GW Restricted Areas</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_gwrestricted"
-                                        :options="options_noclick"
-                                        :options-style="styleFunction_gwrestricted"
-                                />
-                            </l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              :visible="otherlayersvisibility"
+              name="<font size=2><strong>GW Restricted Areas</strong></font>"
+            >
+              <l-geo-json
+                v-if="show"
+                :geojson="geoJson_gwrestricted"
+                :options="options_noclick"
+                :options-style="styleFunction_gwrestricted"
+              />
+            </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
-                                           name="<font size=2><strong>Tribal Lands</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_triballand"
-                                        :options="options_noclick"
-                                        :options-style="styleFunction_triballand"
-                                />
-                            </l-layer-group>
+            <l-layer-group
+              layer-type="overlay"
+              :visible="otherlayersvisibility"
+              name="<font size=2><strong>Tribal Lands</strong></font>"
+            >
+              <l-geo-json
+                v-if="show"
+                :geojson="geoJson_triballand"
+                :options="options_noclick"
+                :options-style="styleFunction_triballand"
+              />
+            </l-layer-group>
 
-                            <l-layer-group layer-type="overlay" :visible="otherlayersvisibility"
-                                           name="<font size=2><strong>NOWA Pumping Limit</strong></font>">
-                                <l-geo-json
-                                        v-if="show"
-                                        :geojson="geoJson_pumping_limit"
-                                        :options="options_noclick"
-                                        :options-style="styleFunction_pumping_limit"
+            <l-layer-group
+              layer-type="overlay"
+              :visible="otherlayersvisibility"
+              name="<font size=2><strong>NOWA Pumping Limit</strong></font>"
+            >
+              <l-geo-json
+                v-if="show"
+                :geojson="geoJson_pumping_limit"
+                :options="options_noclick"
+                :options-style="styleFunction_pumping_limit"
+              />
+            </l-layer-group>
 
-                                />
-                            </l-layer-group>
+            <l-control-scale
+              position="bottomright"
+              :max-width="200"
+              imperial="imperial"
+            />
+            <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
+            <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
 
+            <l-layer-group
+              v-if="ResultsMap"
+              ref="RegionalMap"
+              layer-type="overlay"
+              name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>"
+            >
+              <l-geo-json
+                v-if="RegionHeatMap"
+                :geojson="geoJson_subbasin"
+                :options="options_heatmap"
+                :options-style="getStyle_HeatMap"
+              />
+            </l-layer-group>
 
-                            <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
-                            <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
-                            <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
-
-
-                            <l-layer-group ref="RegionalMap" v-if="ResultsMap" layer-type="overlay"
-                                           name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>">
-                                <l-geo-json
-                                        v-if="RegionHeatMap"
-                                        :geojson="geoJson_subbasin"
-                                        :options="options_heatmap"
-                                        :options-style="getStyle_HeatMap"
-
-                                />
-                            </l-layer-group>
-
-                            <!--<l-choropleth-layer
+            <!--<l-choropleth-layer
                               id="regional_layer"
                               v-if="RegionHeatMap"
                               :data="pyDepartmentsData"
@@ -207,609 +293,611 @@
 
                                 </template>
                             </l-choropleth-layer>-->
-
-
-                        </l-map>
-                    </div>
-                </b-col>
+          </l-map>
         </div>
-        <info-modal v-show="isModalVisible" @close="closeModal"/>
-        <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
+      </b-col>
     </div>
+    <info-modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
+    <component
+      :is="component='regional-summary'"
+      v-show="!regionalSummaryVisibility"
+    />
+  </div>
 </template>
 <script>
-    import InfoModal from './intro/InfoModal.vue';
-    import TutorStep1 from './intro/TutorStep1.vue';
-    import TutorStep2 from './intro/TutorStep2.vue';
-    import Header from './../../Header.vue';
-    import Footer from './../../Footer.vue';
-    import axios from 'axios';
-    import EventBus from './../../../event-bus';
+import InfoModal from './intro/InfoModal.vue';
+import TutorStep1 from './intro/TutorStep1.vue';
+import TutorStep2 from './intro/TutorStep2.vue';
+import Header from './../../Header.vue';
+import Footer from './../../Footer.vue';
+import axios from 'axios';
+import EventBus from './../../../event-bus';
 
-    import L from 'leaflet';
-    import {
-        LMap,
-        LTileLayer,
-        LMarker,
-        LGeoJson,
-        LControlLayers,
-        LControlScale,
-        LLayerGroup,
-        LPopup,
-        LControlZoom
-    } from 'vue2-leaflet';
+import L from 'leaflet';
+import {
+  LMap,
+  LTileLayer,
+  LMarker,
+  LGeoJson,
+  LControlLayers,
+  LControlScale,
+  LLayerGroup,
+  LPopup,
+  LControlZoom,
+} from 'vue2-leaflet';
 
-    import PrecipDataJson from "./../../../../public/static/weather_station_data.json";
-    import ReservoirDataJson from "./../../../../public/static/reservoirs_data.json";
-    import GaugeDataJson from "./../../../../public/static/streamflow_station_data.json";
+import PrecipDataJson from "./../../../../public/static/weather_station_data.json";
+import ReservoirDataJson from "./../../../../public/static/reservoirs_data.json";
+import GaugeDataJson from "./../../../../public/static/streamflow_station_data.json";
 
-    import GaugingStations from './../../../../public/static/gauging_stations.json';
-    import ReservoirList from './../../../../public/static/reservoirs_list.json';
-    import WeatherStations from './../../../../public/static/weather_stations.json';
+import GaugingStations from './../../../../public/static/gauging_stations.json';
+import ReservoirList from './../../../../public/static/reservoirs_list.json';
+import WeatherStations from './../../../../public/static/weather_stations.json';
 
-    import PopupContentReservoirs from "./popup/PopupContent_Reservoirs";
-    import PopupContent_WaterRights from "./popup/PopupContent_WaterRights";
-    import PopupContentWStations from "./popup/PopupContent_WStations";
-    import PopupContentGaugeStations from "./popup/PopupContent_GaugeStations.vue";
-    import RegionalSummary from './popup/RegionalSummary.vue';
+import PopupContentReservoirs from "./popup/PopupContent_Reservoirs";
+import PopupContent_WaterRights from "./popup/PopupContent_WaterRights";
+import PopupContentWStations from "./popup/PopupContent_WStations";
+import PopupContentGaugeStations from "./popup/PopupContent_GaugeStations.vue";
+import RegionalSummary from './popup/RegionalSummary.vue';
 
-    import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
+import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
 
-    import paraguayGeojson from './../../../../public/static/BASIN_Irrigation_basins_data.json'
-    import {pyDepartmentsData} from './../../../../public/static/py-departments-data'
+import paraguayGeojson from './../../../../public/static/BASIN_Irrigation_basins_data.json';
+import {pyDepartmentsData} from './../../../../public/static/py-departments-data';
 
-    export default {
-        name: 'AdaptationPlans',
-        components: {
-            Header, Footer, RegionalSummary, InfoModal, TutorStep1, TutorStep2,
-            'l-map': LMap,
-            'l-tile-layer': LTileLayer,
-            'l-marker': LMarker,
-            'l-geo-json': LGeoJson,
-            'l-control-layers': LControlLayers,
-            'l-layer-group': LLayerGroup,
-            'l-control-scale': LControlScale,
-            'l-popup': LPopup,
-            'l-control-zoom': LControlZoom,
-            'popup-content-ws': PopupContentWStations,
-            'popup-content-rs': PopupContentReservoirs,
-            'popup-content-gs': PopupContentGaugeStations,
-            'popup-content-wr': PopupContent_WaterRights,
-            'l-choropleth-layer': ChoroplethLayer,
-            'l-info-control': InfoControl,
-            'l-reference-chart': ReferenceChart,
+export default {
+  name: 'AdaptationPlans',
+  components: {
+    Header, Footer, RegionalSummary, InfoModal, TutorStep1, TutorStep2,
+    'l-map': LMap,
+    'l-tile-layer': LTileLayer,
+    'l-marker': LMarker,
+    'l-geo-json': LGeoJson,
+    'l-control-layers': LControlLayers,
+    'l-layer-group': LLayerGroup,
+    'l-control-scale': LControlScale,
+    'l-popup': LPopup,
+    'l-control-zoom': LControlZoom,
+    'popup-content-ws': PopupContentWStations,
+    'popup-content-rs': PopupContentReservoirs,
+    'popup-content-gs': PopupContentGaugeStations,
+    'popup-content-wr': PopupContent_WaterRights,
+    'l-choropleth-layer': ChoroplethLayer,
+    'l-info-control': InfoControl,
+    'l-reference-chart': ReferenceChart,
 
+  },
+
+  data() {
+    return {
+      startBtn: true,
+      isModalVisible: true,
+      isStep1Active: false,
+      isStep2Active: false,
+      istutor1Visible: false,
+      istutor2Visible: false,
+
+      geoJson_reach: null,
+      geoJson_subbasin: null,
+      geoJson_reservoir: null,
+      geoJson_WaterRigths: null,
+      geoJson_irrland: null,
+      geoJson_triballand: null,
+      geoJson_pumping_limit: null,
+      geoJson_gwrestricted: null,
+      zoom: 9,
+      maxZoom: 17,
+      minZoom: 3,
+      center: L.latLng(45.4435777, -119.4455003),
+      url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      marker: L.latLng(45.6735777, -118.8455003),
+      detectRetina: true,
+      enableTooltip: true,
+      loading: true,
+      show: true,
+      update_flag: true,
+
+      unchecked_layers: [" Irrigated Land", " NOWA Pumping Limit", " GW Restricted Areas", " Tribal Lands", " Water Rights"],
+      title_layers: [" Default Layers", " Station Data", " Additional Layers", " Regional Results"],
+      default_num_layers: 0,
+      default_selected_layers: [],
+      paraguayGeojson,
+      pyDepartmentsData,
+      RegionHeatMap: false,
+      ResultsMap: false,
+      HeatMapProp: 'Name',
+      defaultvisibility: true,
+      otherlayersvisibility: true,
+      stationvisibility: true,
+      regionalSummaryVisibility: true,
+
+      fillColor: "rgba(76, 175, 80, 0.44)",
+      reservoirIcon: L.icon({
+        iconUrl: require('../../../../public/static/img/reservoir_trans.png'),
+        iconSize: [27, 27], // size of the icon
+        shadowSize: [0, 0], // size of the shadow
+        iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 0], // the same for the shadow
+      }),
+      wstationIcon: L.icon({
+        iconUrl: require('../../../../public/static/img/OSU_icon_rain_01.png'),
+        iconSize: [27, 27], // size of the icon
+        shadowSize: [0, 0], // size of the shadow
+        iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 0], // the same for the shadow
+      }),
+
+      gaugingIcon: L.icon({
+        iconUrl: require('../../../../public/static/img/OSU_icon_water.png'),
+        iconSize: [27, 27], // size of the icon
+        shadowSize: [0, 0], // size of the shadow
+        iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 0], // the same for the shadow
+      }),
+
+      subbasinID: null,
+
+      PrecipData: PrecipDataJson,
+      ReservoirData: ReservoirDataJson,
+      GaugeData: GaugeDataJson,
+
+      weatherStationList: WeatherStations,
+      reservoirStationList: ReservoirList,
+      gaugingStationList: GaugingStations,
+
+      tileProviders: [
+        {
+          name: "<font size=2><strong>Street Map</strong></font>",
+          visible: false,
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         },
+        {
+          name: "<font size=2><strong>Terrain Map",
+          visible: false,
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png",
+        },
+        {
+          name: "<font size=2><strong>Satellite</strong></font>",
+          visible: true,
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+          url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
+        },
+      ],
 
-        data() {
-            return {
-                startBtn: true,
-                isModalVisible: true,
-                isStep1Active: false,
-                isStep2Active: false,
-                istutor1Visible: false,
-                istutor2Visible: false,
-
-                geoJson_reach: null,
-                geoJson_subbasin: null,
-                geoJson_reservoir: null,
-                geoJson_WaterRigths: null,
-                geoJson_irrland: null,
-                geoJson_triballand: null,
-                geoJson_pumping_limit: null,
-                geoJson_gwrestricted: null,
-                zoom: 9,
-                maxZoom: 17,
-                minZoom: 3,
-                center: L.latLng(45.4435777, -119.4455003),
-                url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                marker: L.latLng(45.6735777, -118.8455003),
-                detectRetina: true,
-                enableTooltip: true,
-                loading: true,
-                show: true,
-                update_flag: true,
-
-                unchecked_layers: [" Irrigated Land", " NOWA Pumping Limit", " GW Restricted Areas", " Tribal Lands", " Water Rights"],
-                title_layers: [" Default Layers", " Station Data", " Additional Layers", " Regional Results"],
-                default_num_layers: 0,
-                default_selected_layers: [],
-                paraguayGeojson,
-                pyDepartmentsData,
-                RegionHeatMap: false,
-                ResultsMap: false,
-                HeatMapProp: 'Name',
-                defaultvisibility: true,
-                otherlayersvisibility: true,
-                stationvisibility: true,
-                regionalSummaryVisibility: true,
-
-                fillColor: "rgba(76, 175, 80, 0.44)",
-                reservoirIcon: L.icon({
-                    iconUrl: require('../../../../public/static/img/reservoir_trans.png'),
-                    iconSize: [27, 27], // size of the icon
-                    shadowSize: [0, 0], // size of the shadow
-                    iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [0, 0]  // the same for the shadow
-                }),
-                wstationIcon: L.icon({
-                    iconUrl: require('../../../../public/static/img/OSU_icon_rain_01.png'),
-                    iconSize: [27, 27], // size of the icon
-                    shadowSize: [0, 0], // size of the shadow
-                    iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [0, 0]  // the same for the shadow
-                }),
-
-                gaugingIcon: L.icon({
-                    iconUrl: require('../../../../public/static/img/OSU_icon_water.png'),
-                    iconSize: [27, 27], // size of the icon
-                    shadowSize: [0, 0], // size of the shadow
-                    iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [0, 0]  // the same for the shadow
-                }),
-
-                subbasinID: null,
-
-                PrecipData: PrecipDataJson,
-                ReservoirData: ReservoirDataJson,
-                GaugeData: GaugeDataJson,
-
-                weatherStationList: WeatherStations,
-                reservoirStationList: ReservoirList,
-                gaugingStationList: GaugingStations,
-
-                tileProviders: [
-                    {
-                        name: "<font size=2><strong>Street Map</strong></font>",
-                        visible: false,
-                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    },
-                    {
-                        name: "<font size=2><strong>Terrain Map",
-                        visible: false,
-                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                        url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
-                    },
-                    {
-                        name: "<font size=2><strong>Satellite</strong></font>",
-                        visible: true,
-                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-                        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
-                    }
-                ],
-
-                customPopup: "<div class=\"region_summary_popup\">" +
+      customPopup: "<div class=\"region_summary_popup\">" +
                 "<div>\n" +
                 "        <div>\n" +
                 "            <h5>SubBasin</h5>\n" +
                 "        </div>\n" +
                 "        <div>Test Data</div>" +
                 "</div>",
-                customOptions: [
-                    {
-                        'font-size': '15px',
-                        'maxWidth': '1000px',
-                        'width': '500px',
-                        'className': 'custom'
-                    }
-                ],
-
-                colorScale: ["e7d090", "e9ae7b", "de7062"],
-                value: {
-                    key: "amount_w",
-                    metric: "% of SW Reduction"
-                },
-                extraValues: [{
-                    key: "amount_m",
-                    metric: "% of GW Reduction"
-                }],
-
-                mapOptions: {attributionControl: false},
-                currentStrokeColor: '3d3213',
-                selectedProject:{},
-                isWizardFlowStarted:false,
-            }
+      customOptions: [
+        {
+          'font-size': '15px',
+          'maxWidth': '1000px',
+          'width': '500px',
+          'className': 'custom',
         },
+      ],
 
-        computed: {
-            //jsonData() {
-            //    return JSONData;
-            //},
-            options() {
-                return {
-                    onEachFeature: this.onEachFeatureFunction
-                };
-            },
+      colorScale: ["e7d090", "e9ae7b", "de7062"],
+      value: {
+        key: "amount_w",
+        metric: "% of SW Reduction",
+      },
+      extraValues: [{
+        key: "amount_m",
+        metric: "% of GW Reduction",
+      }],
 
-            options_noclick() {
-                return {};
-            },
+      mapOptions: {attributionControl: false},
+      currentStrokeColor: '3d3213',
+      selectedProject: {},
+      isWizardFlowStarted: false,
+    };
+  },
 
-            options_wrrights() {
-                return {
-                    onEachFeature: this.GetWRcolor
-                };
-            },
+  computed: {
+    //jsonData() {
+    //    return JSONData;
+    //},
+    options() {
+      return {
+        onEachFeature: this.onEachFeatureFunction,
+      };
+    },
 
-            options_heatmap() {
-                return {
-                    onEachFeature: this.getHeatMapColor_Perct
-                };
-            },
+    options_noclick() {
+      return {};
+    },
 
-            styleFunction_reach() {
-                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
-                return () => {
-                    return {
-                        weight: 2.5,
-                        color: "#3386ff",
-                        opacity: 1,
-                        fillColor: fillColor,
-                        fillOpacity: 1
-                    };
-                };
-            },
+    options_wrrights() {
+      return {
+        onEachFeature: this.GetWRcolor,
+      };
+    },
 
-            styleFunction_pumping_limit() {
-                const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
-                return () => {
-                    return {
-                        weight: 1.5,
-                        color: "#e773e1",
-                        opacity: 1,
-                        fillColor: fillColor,
-                        fillOpacity: 1
-                    };
-                };
-            },
+    options_heatmap() {
+      return {
+        onEachFeature: this.getHeatMapColor_Perct,
+      };
+    },
 
-            styleFunction_subbasin() {
-                return () => {
-                    return {
-                        weight: 1.5,
-                        color: "#7c7c7c",
-                        opacity: 1,
-                        fillColor: "#e3dddd",
-                        dashArray: '5, 5',
-                        dashOffset: '10',
-                        fillOpacity: 0.5
-                    };
-                };
-            },
+    styleFunction_reach() {
+      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+      return () => {
+        return {
+          weight: 2.5,
+          color: "#3386ff",
+          opacity: 1,
+          fillColor: fillColor,
+          fillOpacity: 1,
+        };
+      };
+    },
 
-            styleFunction_waterrigths() {
-                return () => {
-                    return {
-                        weight: 1,
-                        color: "#7c7c7c",
-                        opacity: 0,
-                        fillColor: "#3386ff",
-                        fillOpacity: 1
-                    };
-                };
-            },
+    styleFunction_pumping_limit() {
+      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+      return () => {
+        return {
+          weight: 1.5,
+          color: "#e773e1",
+          opacity: 1,
+          fillColor: fillColor,
+          fillOpacity: 1,
+        };
+      };
+    },
 
-            styleFunction_irrland() {
-                return () => {
-                    return {
-                        weight: 0.5,
-                        color: "#7c7c7c",
-                        opacity: 0.4,
-                        fillColor: "#eb984e",
-                        fillOpacity: 0.6
-                    };
-                };
-            },
+    styleFunction_subbasin() {
+      return () => {
+        return {
+          weight: 1.5,
+          color: "#7c7c7c",
+          opacity: 1,
+          fillColor: "#e3dddd",
+          dashArray: '5, 5',
+          dashOffset: '10',
+          fillOpacity: 0.5,
+        };
+      };
+    },
 
-            styleFunction_triballand() {
-                return () => {
-                    return {
-                        weight: 0.8,
-                        color: "#ffffff",
-                        opacity: 0.4,
-                        fillColor: "#00cccc",
-                        dashArray: '5, 5',
-                        dashOffset: '10',
-                        fillOpacity: 0.6
-                    };
-                };
-            },
+    styleFunction_waterrigths() {
+      return () => {
+        return {
+          weight: 1,
+          color: "#7c7c7c",
+          opacity: 0,
+          fillColor: "#3386ff",
+          fillOpacity: 1,
+        };
+      };
+    },
 
-            styleFunction_gwrestricted() {
-                return () => {
-                    return {
-                        weight: 0.8,
-                        color: "#ffffff",
-                        opacity: 0.4,
-                        fillColor: "#aff479",
-                        dashArray: '5, 5',
-                        dashOffset: '10',
-                        fillOpacity: 0.6
-                    };
-                };
-            },
+    styleFunction_irrland() {
+      return () => {
+        return {
+          weight: 0.5,
+          color: "#7c7c7c",
+          opacity: 0.4,
+          fillColor: "#eb984e",
+          fillOpacity: 0.6,
+        };
+      };
+    },
 
-            getStyle_HeatMap() {
-                return () => {
-                    return {
-                        weight: 1.5,
-                        color: "#ffffff",
-                        opacity: 1,
-                        fillOpacity: 0.7,
-                        fillColor: '#8c2d04'
-                    };
-                };
-            },
+    styleFunction_triballand() {
+      return () => {
+        return {
+          weight: 0.8,
+          color: "#ffffff",
+          opacity: 0.4,
+          fillColor: "#00cccc",
+          dashArray: '5, 5',
+          dashOffset: '10',
+          fillOpacity: 0.6,
+        };
+      };
+    },
 
-            getHeatMapColor() {
-                return (feature, layer) => {
-                    if (feature.properties.Name > 1000) {
-                        layer.setStyle({fillColor: '#581845'});
-                    } else if (feature.properties.Name > 500) {
-                        layer.setStyle({fillColor: '#900C3F'});
-                    } else if (feature.properties.Name > 200) {
-                        layer.setStyle({fillColor: '#C70039'});
-                    } else if (feature.properties.Name > 100) {
-                        layer.setStyle({fillColor: '#FF5733'});
-                    } else if (feature.properties.Name > 50) {
-                        layer.setStyle({fillColor: '#FFC300'});
-                    } else if (feature.properties.Name > 20) {
-                        layer.setStyle({fillColor: 'fee391'});
-                    } else if (feature.properties.Name > 10) {
-                        layer.setStyle({fillColor: '#fff7bc'});
-                    } else {
-                        layer.setStyle({fillColor: '#ffffe5'});
+    styleFunction_gwrestricted() {
+      return () => {
+        return {
+          weight: 0.8,
+          color: "#ffffff",
+          opacity: 0.4,
+          fillColor: "#aff479",
+          dashArray: '5, 5',
+          dashOffset: '10',
+          fillOpacity: 0.6,
+        };
+      };
+    },
 
-                    }
-                    ;
-                };
-            },
+    getStyle_HeatMap() {
+      return () => {
+        return {
+          weight: 1.5,
+          color: "#ffffff",
+          opacity: 1,
+          fillOpacity: 0.7,
+          fillColor: '#8c2d04',
+        };
+      };
+    },
 
-            getHeatMapColor_Perct() {
-                return (feature, layer) => {
-                    var subid = feature.properties[this.HeatMapProp];
-                    if (feature.properties[this.HeatMapProp] > 20) {
-                        layer.setStyle({fillColor: '#800026'});
-                    } else if (feature.properties[this.HeatMapProp] > 15) {
-                        layer.setStyle({fillColor: '#E31A1C'});
-                    } else if (feature.properties[this.HeatMapProp] > 10) {
-                        layer.setStyle({fillColor: '#FF5733'});
-                    } else if (feature.properties[this.HeatMapProp] > 5) {
-                        layer.setStyle({fillColor: '#FD8D3C'});
-                    } else if (feature.properties[this.HeatMapProp] > 2) {
-                        layer.setStyle({fillColor: '#FED976'});
-                    } else {
-                        layer.setStyle({fillColor: '#ffffe5'});
-                        layer.setStyle({fillOpacity: "0"});
-                    }
-                    ;
-                };
-            },
+    getHeatMapColor() {
+      return (feature, layer) => {
+        if (feature.properties.Name > 1000) {
+          layer.setStyle({fillColor: '#581845'});
+        } else if (feature.properties.Name > 500) {
+          layer.setStyle({fillColor: '#900C3F'});
+        } else if (feature.properties.Name > 200) {
+          layer.setStyle({fillColor: '#C70039'});
+        } else if (feature.properties.Name > 100) {
+          layer.setStyle({fillColor: '#FF5733'});
+        } else if (feature.properties.Name > 50) {
+          layer.setStyle({fillColor: '#FFC300'});
+        } else if (feature.properties.Name > 20) {
+          layer.setStyle({fillColor: 'fee391'});
+        } else if (feature.properties.Name > 10) {
+          layer.setStyle({fillColor: '#fff7bc'});
+        } else {
+          layer.setStyle({fillColor: '#ffffe5'});
 
-            GetWRcolor() {
-                return (feature, layer) => {
-                    if (feature.properties.WRSCI == '3') {
-                        layer.setStyle({fillColor: 'red'});
-                    } else if (feature.properties.WRSCI == '1') {
-                        layer.setStyle({fillColor: 'blue'});
-                    } else if (feature.properties.WRSCI == '5') {
-                        layer.setStyle({fillColor: 'green'});
-                    } else {
-                        layer.setStyle({fillColor: 'black'});
-                        layer.setStyle({fillOpacity: "0"});
-                    }
+        }
 
-                    layer.on('click', function (e) {
-                    });
-                }
-            },
+      };
+    },
 
-            onEachFeatureFunction() {
-                var prevLayerClicked = null;
-                if (!this.enableTooltip) {
-                    return () => {
-                    };
-                }
-                return (feature, layer) => {
-                    layer.bindTooltip(
-                        "<div><strong>Click and explore!</strong>",
-                    );
+    getHeatMapColor_Perct() {
+      return (feature, layer) => {
+        var subid = feature.properties[this.HeatMapProp];
+        if (feature.properties[this.HeatMapProp] > 20) {
+          layer.setStyle({fillColor: '#800026'});
+        } else if (feature.properties[this.HeatMapProp] > 15) {
+          layer.setStyle({fillColor: '#E31A1C'});
+        } else if (feature.properties[this.HeatMapProp] > 10) {
+          layer.setStyle({fillColor: '#FF5733'});
+        } else if (feature.properties[this.HeatMapProp] > 5) {
+          layer.setStyle({fillColor: '#FD8D3C'});
+        } else if (feature.properties[this.HeatMapProp] > 2) {
+          layer.setStyle({fillColor: '#FED976'});
+        } else {
+          layer.setStyle({fillColor: '#ffffe5'});
+          layer.setStyle({fillOpacity: "0"});
+        }
 
-                    layer.on('click', function (e) {
-                        EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
+      };
+    },
 
-                        var layer = e.target;
-                        if (prevLayerClicked !== null || prevLayerClicked == layer) {
-                            prevLayerClicked.setStyle({
-                                weight: 1.5,
-                                color: "#7c7c7c",
-                                opacity: 1,
-                                fillColor: "#e3dddd",
-                                dashArray: '5, 5',
-                                dashOffset: '10',
-                                fillOpacity: 0.5
-                            });
-                        }
-                        if (prevLayerClicked !== layer) {
-                            layer.setStyle({fillColor: 'blue'});
-                            prevLayerClicked = layer;
+    GetWRcolor() {
+      return (feature, layer) => {
+        if (feature.properties.WRSCI == '3') {
+          layer.setStyle({fillColor: 'red'});
+        } else if (feature.properties.WRSCI == '1') {
+          layer.setStyle({fillColor: 'blue'});
+        } else if (feature.properties.WRSCI == '5') {
+          layer.setStyle({fillColor: 'green'});
+        } else {
+          layer.setStyle({fillColor: 'black'});
+          layer.setStyle({fillOpacity: "0"});
+        }
 
-                        } else {
-                            prevLayerClicked = null;
-                        }
+        layer.on('click', function(e) {
+        });
+      };
+    },
 
-                    });
+    onEachFeatureFunction() {
+      var prevLayerClicked = null;
+      if (!this.enableTooltip) {
+        return () => {
+        };
+      }
+      return (feature, layer) => {
+        layer.bindTooltip(
+          "<div><strong>Click and explore!</strong>",
+        );
 
-                };
-            }
-        },
+        layer.on('click', function(e) {
+          EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
 
-        mounted() {
-            const { utils } = AiravataAPI;
-            this.isWizardFlowStarted = 'true' == localStorage.getItem('adaptation_wizardStarted');
-            this.projectId = this.$route.params.projectId
-            // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-            // if (adaptationPlan) {
-            //     adaptationPlan.projectId = this.projectId;
-            // } else {
-            //     localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
-            // }
+          var layer = e.target;
+          if (prevLayerClicked !== null || prevLayerClicked == layer) {
+            prevLayerClicked.setStyle({
+              weight: 1.5,
+              color: "#7c7c7c",
+              opacity: 1,
+              fillColor: "#e3dddd",
+              dashArray: '5, 5',
+              dashOffset: '10',
+              fillOpacity: 0.5,
+            });
+          }
+          if (prevLayerClicked !== layer) {
+            layer.setStyle({fillColor: 'blue'});
+            prevLayerClicked = layer;
 
-            this.$store.commit("setWizardFlowStarted", false);
+          } else {
+            prevLayerClicked = null;
+          }
 
-            this.$store.commit("setProjectId", this.projectId);
+        });
 
+      };
+    },
+  },
 
-            // TODO: call the /interactwel/api/projects/{project_id} to get the specific project 
-           utils.FetchUtils.get("/interactwel/api/projects/")
-                .then(projects=>{
-                    this.selectedProject=projects.find(project=>{
-                        return project.project_id==this.projectId;
-                    });
-                })
-                .catch(error => {
-                    alert("Could not get the project. API error! " + error);
-                });
+  mounted() {
+    const { utils } = AiravataAPI;
+    this.isWizardFlowStarted = 'true' == localStorage.getItem('adaptation_wizardStarted');
+    this.projectId = this.$route.params.projectId;
+    // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
+    // if (adaptationPlan) {
+    //     adaptationPlan.projectId = this.projectId;
+    // } else {
+    //     localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
+    // }
 
+    this.$store.commit("setWizardFlowStarted", false);
 
-            let $this = this;
-            EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
+    this.$store.commit("setProjectId", this.projectId);
 
-                $this.regionalSummaryVisibility = true;
+    // TODO: call the /interactwel/api/projects/{project_id} to get the specific project
+    utils.FetchUtils.get("/interactwel/api/projects/")
+      .then(projects=>{
+        this.selectedProject = projects.find(project=>{
+          return project.project_id == this.projectId;
+        });
+      })
+      .catch(error => {
+        alert("Could not get the project. API error! " + error);
+      });
 
-                if ($this.prevLayerClicked !== null || $this.prevLayerClicked == selectedBasinID) {
-                    $this.regionalSummaryVisibility = true;
-                }
-                if ($this.prevLayerClicked !== selectedBasinID) {
-                    $this.createRegionSummary(selectedBasinID)
-                    $this.regionalSummaryVisibility = false;
-                    $this.prevLayerClicked = selectedBasinID;
-                } else {
-                    $this.regionalSummaryVisibility = true;
-                    $this.prevLayerClicked = null;
-                }
-            }),EventBus.$on('CLOSE', function () {
-                $this.regionalSummaryVisibility = true
-            })
+    let $this = this;
+    EventBus.$on('SELECTED_BASIN', function(selectedBasinID) {
 
-            const map = this.$refs.myMap.mapObject;
-            EventBus.$on('START_RESULTSMAP', function () {
-                var active = [];
-                var default_selected_layers = [];
-                var i;
-                active = $('.leaflet-control-layers-selector')
-                for (i = 3; i < active.length; i++) {
-                    //if ($this.unchecked_layers.includes(active[i].labels[0].innerText)==false && active[i].checked==true){
-                    if (active[i].checked == true && $this.default_selected_layers.includes(active[i].labels[0].innerText) == false) {
-                        default_selected_layers.push(active[i].labels[0].innerText);
-                        $('.leaflet-control-layers-selector')[i].click();
-                    }
-                }
-                $this.ResultsMap = true;
-                $this.default_selected_layers = default_selected_layers;
-            }),
+      $this.regionalSummaryVisibility = true;
 
-                EventBus.$on('START_REGIONHEATMAP', function () {
-                    var active = [];
-                    var i;
-                    active = $('.leaflet-control-layers-selector')
-                    for (i = $this.default_num_layers; i < active.length; i++) {
-                        if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
-                            $('.leaflet-control-layers-selector')[i].hidden = true;
-                        }
-                    }
-                    $this.RegionHeatMap = true;
-                }),
+      if ($this.prevLayerClicked !== null || $this.prevLayerClicked == selectedBasinID) {
+        $this.regionalSummaryVisibility = true;
+      }
+      if ($this.prevLayerClicked !== selectedBasinID) {
+        $this.createRegionSummary(selectedBasinID);
+        $this.regionalSummaryVisibility = false;
+        $this.prevLayerClicked = selectedBasinID;
+      } else {
+        $this.regionalSummaryVisibility = true;
+        $this.prevLayerClicked = null;
+      }
+    }), EventBus.$on('CLOSE', function() {
+      $this.regionalSummaryVisibility = true;
+    });
 
-                EventBus.$on('HIDE_RESULTSMAP', function () {
-                    var active = [];
-                    var i;
-                    active = $('.leaflet-control-layers-selector')
-                    for (i = 0; i < active.length; i++) {
+    const map = this.$refs.myMap.mapObject;
+    EventBus.$on('START_RESULTSMAP', function() {
+      var active = [];
+      var default_selected_layers = [];
+      var i;
+      active = $('.leaflet-control-layers-selector');
+      for (i = 3; i < active.length; i++) {
+        //if ($this.unchecked_layers.includes(active[i].labels[0].innerText)==false && active[i].checked==true){
+        if (active[i].checked == true && $this.default_selected_layers.includes(active[i].labels[0].innerText) == false) {
+          default_selected_layers.push(active[i].labels[0].innerText);
+          $('.leaflet-control-layers-selector')[i].click();
+        }
+      }
+      $this.ResultsMap = true;
+      $this.default_selected_layers = default_selected_layers;
+    }),
 
-                        if ($this.default_selected_layers.includes(active[i].labels[0].innerText) == true) {
-                            $('.leaflet-control-layers-selector')[i].click();
-                        }
+    EventBus.$on('START_REGIONHEATMAP', function() {
+      var active = [];
+      var i;
+      active = $('.leaflet-control-layers-selector');
+      for (i = $this.default_num_layers; i < active.length; i++) {
+        if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
+          $('.leaflet-control-layers-selector')[i].hidden = true;
+        }
+      }
+      $this.RegionHeatMap = true;
+    }),
 
-                        if (i >= $this.default_num_layers && active[i].checked == true) {
-                            $('.leaflet-control-layers-selector')[i].click();
-                        }
+    EventBus.$on('HIDE_RESULTSMAP', function() {
+      var active = [];
+      var i;
+      active = $('.leaflet-control-layers-selector');
+      for (i = 0; i < active.length; i++) {
 
-                        if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
-                            $('.leaflet-control-layers-selector')[i].hidden = true;
-                        }
-                    }
-                    $this.RegionHeatMap = false;
-                    $this.ResultsMap = false;
-                })
-        },
+        if ($this.default_selected_layers.includes(active[i].labels[0].innerText) == true) {
+          $('.leaflet-control-layers-selector')[i].click();
+        }
 
-        beforeDestroy() {
-            this.$parent.mapObject = $('.parent.mapObject');
-        },
+        if (i >= $this.default_num_layers && active[i].checked == true) {
+          $('.leaflet-control-layers-selector')[i].click();
+        }
 
-        created() {
-            this.loading = true;
-            axios.get("/static/subbasins.geojson")
-                .then(response => {
-                    this.geoJson_subbasin = response.data;
-                    this.loading = true;
-                })
-            axios.get("/static/reaches.geojson")
-                .then(response => {
-                    this.geoJson_reach = response.data;
-                    this.loading = true;
-                })
-            axios.get("/static/NOWA_Pumping_Limit.geojson")
-                .then(response => {
-                    this.geoJson_pumping_limit = response.data;
-                    this.loading = true;
-                })
-            axios.get("/static/irrigated_land.geojson")
-                .then(response => {
-                    this.geoJson_irrland = response.data;
-                    this.loading = true;
-                })
-            axios.get("/static/Tribal_Lands.geojson")
-                .then(response => {
-                    this.geoJson_triballand = response.data;
-                    this.loading = true;
-                })
+        if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
+          $('.leaflet-control-layers-selector')[i].hidden = true;
+        }
+      }
+      $this.RegionHeatMap = false;
+      $this.ResultsMap = false;
+    });
+  },
 
-            axios.get("/static/GW_Restricted_Areas_Umatilla.geojson")
-                .then(response => {
-                    this.geoJson_gwrestricted = response.data;
-                    this.loading = true;
-                })
+  beforeDestroy() {
+    this.$parent.mapObject = $('.parent.mapObject');
+  },
 
-            axios.get("/static/water_rigths.geojson")
-                .then(response => {
-                    this.geoJson_WaterRigths = response.data;
-                    this.loading = true;
-                });
+  created() {
+    this.loading = true;
+    axios.get("/static/subbasins.geojson")
+      .then(response => {
+        this.geoJson_subbasin = response.data;
+        this.loading = true;
+      });
+    axios.get("/static/reaches.geojson")
+      .then(response => {
+        this.geoJson_reach = response.data;
+        this.loading = true;
+      });
+    axios.get("/static/NOWA_Pumping_Limit.geojson")
+      .then(response => {
+        this.geoJson_pumping_limit = response.data;
+        this.loading = true;
+      });
+    axios.get("/static/irrigated_land.geojson")
+      .then(response => {
+        this.geoJson_irrland = response.data;
+        this.loading = true;
+      });
+    axios.get("/static/Tribal_Lands.geojson")
+      .then(response => {
+        this.geoJson_triballand = response.data;
+        this.loading = true;
+      });
 
-            // var active = [];
-            // var i;
-            // active = $('.leaflet-control-layers-selector')
-            // this.default_num_layers = active.length;
+    axios.get("/static/GW_Restricted_Areas_Umatilla.geojson")
+      .then(response => {
+        this.geoJson_gwrestricted = response.data;
+        this.loading = true;
+      });
 
-            // for (i = 0; i < active.length; i++) {
-            //     if (this.unchecked_layers.includes(active[i].labels[0].innerText)==true && active[i].checked==true){
-            //     //if (active[i].checked==true){
-            //         $('.leaflet-control-layers-selector')[i].click();
-            //     }else{
-            //         this.default_selected_layers.push(active[i].labels[0].innerText);
-            //     }
+    axios.get("/static/water_rigths.geojson")
+      .then(response => {
+        this.geoJson_WaterRigths = response.data;
+        this.loading = true;
+      });
 
-            //     if (this.title_layers.includes(active[i].labels[0].innerText)==true){
-            //         $('.leaflet-control-layers-selector')[i].hidden=true;
-            //     }
-            // }
-        },
+    // var active = [];
+    // var i;
+    // active = $('.leaflet-control-layers-selector')
+    // this.default_num_layers = active.length;
 
-        /*updated: function(){
+    // for (i = 0; i < active.length; i++) {
+    //     if (this.unchecked_layers.includes(active[i].labels[0].innerText)==true && active[i].checked==true){
+    //     //if (active[i].checked==true){
+    //         $('.leaflet-control-layers-selector')[i].click();
+    //     }else{
+    //         this.default_selected_layers.push(active[i].labels[0].innerText);
+    //     }
+
+    //     if (this.title_layers.includes(active[i].labels[0].innerText)==true){
+    //         $('.leaflet-control-layers-selector')[i].hidden=true;
+    //     }
+    // }
+  },
+
+  /*updated: function(){
             // Create array for holding active layers
             var active = [];
             var i;
@@ -833,37 +921,37 @@
             }
         },*/
 
-        methods: {
-            createRegionSummary(subbasinID) {
-                EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
-            },
-            startWizard(projectId){
-                localStorage.setItem('adaptation_wizardStarted', true);
-                this.isWizardFlowStarted=true;
-                this.$store.commit("setWizardFlowStarted", true);
-                this.$store.commit("resetWizardFlow", null);
-                this.startBtn = false;
-                this.exitBtn = true;
-                this.$router.push('/adaptation-plans/'+this.projectId+'/goals')
-            },
+  methods: {
+    createRegionSummary(subbasinID) {
+      EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
+    },
+    startWizard(projectId){
+      localStorage.setItem('adaptation_wizardStarted', true);
+      this.isWizardFlowStarted = true;
+      this.$store.commit("setWizardFlowStarted", true);
+      this.$store.commit("resetWizardFlow", null);
+      this.startBtn = false;
+      this.exitBtn = true;
+      this.$router.push('/adaptation-plans/' + this.projectId + '/goals');
+    },
 
-            exitWizard(projectId){
-                localStorage.setItem('adaptation_wizardStarted', false);
-                let confirmResponse=confirm("If you exit now all data will be cleared. Do you want to proceed");
-                if(confirmResponse){
-                    this.$store.commit("resetWizardFlow", null);
-                    this.$router.push('/all-plans/'+this.projectId);
-                    this.isWizardFlowStarted=false;
-                }
-                
-            },
+    exitWizard(projectId){
+      localStorage.setItem('adaptation_wizardStarted', false);
+      let confirmResponse = confirm("If you exit now all data will be cleared. Do you want to proceed");
+      if (confirmResponse){
+        this.$store.commit("resetWizardFlow", null);
+        this.$router.push('/all-plans/' + this.projectId);
+        this.isWizardFlowStarted = false;
+      }
 
-            closeModal() {
-                this.isModalVisible = false;
-            }
-        }
+    },
 
-    }
+    closeModal() {
+      this.isModalVisible = false;
+    },
+  },
+
+};
 
 </script>
 
@@ -1215,8 +1303,6 @@
         text-transform: capitalize;
         line-height: 1.5;
     }
-
-
 
 </style>
 

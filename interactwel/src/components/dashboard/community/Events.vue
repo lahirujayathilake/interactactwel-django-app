@@ -1,95 +1,120 @@
 <template>
-    <b-card-group>
-        <b-card footer-tag="footer">
-            <div class="step-header" slot="header">Events
-            </div>
-            <b-card-text>
-                <b-row>
-                    <b-col lg="8">
-                        <b-container>
-                            <b-row>
-                                <b-col>
-                                    <b-button class="mr-2" size="sm">Create Event</b-button>
-                                </b-col>
-                            </b-row>
-                        </b-container>
-                        <b-container class="mt-3">
-                            <b-row>
-                                <b-col>
-                                    <b-list-group>
-                                        <b-list-group-item>Event 1</b-list-group-item>
-                                        <b-list-group-item>Event 2</b-list-group-item>
-                                        <b-list-group-item>Event 3</b-list-group-item>
-                                        <b-list-group-item>Event 4</b-list-group-item>
-                                        <b-list-group-item>Event 5
-                                        </b-list-group-item>
-                                    </b-list-group>
-                                </b-col>
-                            </b-row>
-                        </b-container>
-                    </b-col>
-                    <b-col lg="4">
-                        <b-container>
-                            <b-row>
-                                <b-col class="widget">
-                                    <div class="widget-title">
-                                        Events you may like
-                                    </div>
-                                    <b-list-group class="mt-2">
-                                        <b-list-group-item>Andrew Smith
-                                            <b-button size="sm">Connect</b-button>
-                                        </b-list-group-item>
-                                        <b-list-group-item>John Doe
-                                            <b-button size="sm">Connect</b-button>
-                                        </b-list-group-item>
-                                        <b-list-group-item>Nick Harrison
-                                            <b-button size="sm">Connect</b-button>
-                                        </b-list-group-item>
-                                        <b-list-group-item>Justin Watson
-                                            <b-button size="sm">Connect</b-button>
-                                        </b-list-group-item>
-                                        <b-list-group-item>Vestibulum at eros
-                                            <b-button size="sm">Connect</b-button>
-                                        </b-list-group-item>
-                                    </b-list-group>
-                                </b-col>
-                            </b-row>
-                            <b-row>
-                                <b-col class="widget">
-                                    <div class="widget-title">Calender</div>
-
-                                </b-col>
-                            </b-row>
-                        </b-container>
-                    </b-col>
-                </b-row>
-            </b-card-text>
-        </b-card>
-    </b-card-group>
+  <b-card-group>
+    <b-card footer-tag="footer">
+      <div
+        slot="header"
+        class="step-header"
+      >
+        Events
+      </div>
+      <b-card-text>
+        <b-row>
+          <b-col lg="8">
+            <b-container>
+              <b-row>
+                <b-col>
+                  <b-button
+                    class="mr-2"
+                    size="sm"
+                  >
+                    Create Event
+                  </b-button>
+                </b-col>
+              </b-row>
+            </b-container>
+            <b-container class="mt-3">
+              <b-row>
+                <b-col>
+                  <b-list-group>
+                    <b-list-group-item>Event 1</b-list-group-item>
+                    <b-list-group-item>Event 2</b-list-group-item>
+                    <b-list-group-item>Event 3</b-list-group-item>
+                    <b-list-group-item>Event 4</b-list-group-item>
+                    <b-list-group-item>
+                      Event 5
+                    </b-list-group-item>
+                  </b-list-group>
+                </b-col>
+              </b-row>
+            </b-container>
+          </b-col>
+          <b-col lg="4">
+            <b-container>
+              <b-row>
+                <b-col class="widget">
+                  <div class="widget-title">
+                    Events you may like
+                  </div>
+                  <b-list-group class="mt-2">
+                    <b-list-group-item>
+                      Andrew Smith
+                      <b-button size="sm">
+                        Connect
+                      </b-button>
+                    </b-list-group-item>
+                    <b-list-group-item>
+                      John Doe
+                      <b-button size="sm">
+                        Connect
+                      </b-button>
+                    </b-list-group-item>
+                    <b-list-group-item>
+                      Nick Harrison
+                      <b-button size="sm">
+                        Connect
+                      </b-button>
+                    </b-list-group-item>
+                    <b-list-group-item>
+                      Justin Watson
+                      <b-button size="sm">
+                        Connect
+                      </b-button>
+                    </b-list-group-item>
+                    <b-list-group-item>
+                      Vestibulum at eros
+                      <b-button size="sm">
+                        Connect
+                      </b-button>
+                    </b-list-group-item>
+                  </b-list-group>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col class="widget">
+                  <div class="widget-title">
+                    Calender
+                  </div>
+                </b-col>
+              </b-row>
+            </b-container>
+          </b-col>
+        </b-row>
+      </b-card-text>
+    </b-card>
+  </b-card-group>
 </template>
 
 <script>
-    import Header from './../../Header.vue';
-    import Footer from './../../Footer.vue';
+import Header from './../../Header.vue';
+import Footer from './../../Footer.vue';
 
-    export default {
-        components: {
-            Header, Footer
-        },
-        name: 'Events',
+export default {
+  name: 'Events',
+  components: {
+    Header, Footer,
+  },
 
-        data() {
-            return {
-            }
-        },
+  data() {
+    return {
+    };
+  },
 
-        mounted() {
-        },
+  mounted() {
+  },
 
+  methods: {},
 
-        methods: {}
-
-    }
+};
 
 </script>
 

@@ -1,115 +1,183 @@
 <template>
-    <b-card-group>
-        <b-card footer-tag="footer" v-show="isStep1Active">
-            <div class="step-header" slot="header">Create New Project</div>
-            <b-card-text>
-                <div class="p-3">
-                    <b-col lg="6">
-                        <b-form>
-                            <b-form-group
-                                    id="input-group-1"
-                                    label="Project Name"
-                                    label-for="input-1"
-                                    description=""
-                            >
-                                <b-form-input
-                                        id="input-1"
-                                        v-model="form.projectName"
-                                        type="text"
-                                        required
-                                        placeholder=""
-                                ></b-form-input>
-                            </b-form-group>
+  <b-card-group>
+    <b-card
+      v-show="isStep1Active"
+      footer-tag="footer"
+    >
+      <div
+        slot="header"
+        class="step-header"
+      >
+        Create New Project
+      </div>
+      <b-card-text>
+        <div class="p-3">
+          <b-col lg="6">
+            <b-form>
+              <b-form-group
+                id="input-group-1"
+                label="Project Name"
+                label-for="input-1"
+                description=""
+              >
+                <b-form-input
+                  id="input-1"
+                  v-model="form.projectName"
+                  type="text"
+                  required
+                  placeholder=""
+                />
+              </b-form-group>
 
-                            <b-form-group id="input-group-3" label="Location" label-for="input-3">
-                                <b-form-input
-                                        id="input-3"
-                                        v-model="form.location"
-                                        required
-                                        placeholder="City, Region, Country"
-                                ></b-form-input>
+              <b-form-group
+                id="input-group-3"
+                label="Location"
+                label-for="input-3"
+              >
+                <b-form-input
+                  id="input-3"
+                  v-model="form.location"
+                  required
+                  placeholder="City, Region, Country"
+                />
+              </b-form-group>
 
-                            </b-form-group>
+              <b-form-group
+                id="input-group-4"
+                label="Coordinates"
+                label-for="input-4"
+              >
+                <b-form inline>
+                  <b-input
+                    id="input-4"
+                    v-model="form.latitude"
+                    required
+                    placeholder="Latitude (degrees)"
+                  />
 
-                            <b-form-group id="input-group-4" label="Coordinates" label-for="input-4">
-                                <b-form inline>
-                                    <b-input
-                                            id="input-4"
-                                            v-model="form.latitude"
-                                            required
-                                            placeholder="Latitude (degrees)"
-                                    ></b-input>
+                  <b-input
+                    id="input-5"
+                    v-model="form.longtitude"
+                    required
+                    placeholder="Longitude (degrees)"
+                  />
+                </b-form inline>
+              </b-form-group>
 
-                                    <b-input
-                                            id="input-5"
-                                            v-model="form.longtitude"
-                                            required
-                                            placeholder="Longitude (degrees)"
-                                    ></b-input>
-                                </b-form inline>
+              <b-form-group
+                id="input-group-2"
+                label="Description"
+                label-for="input-2"
+              >
+                <b-form-textarea
+                  id="input-2"
+                  v-model="form.description"
+                  required
+                  placeholder=""
+                />
+              </b-form-group>
 
-                            </b-form-group>
-
-                            <b-form-group id="input-group-2" label="Description" label-for="input-2">
-                                <b-form-textarea
-                                        id="input-2"
-                                        v-model="form.description"
-                                        required
-                                        placeholder=""
-                                ></b-form-textarea>
-                            </b-form-group>
-
-                            <b-button @click="createProjectAction" type="submit" variant="success">Next</b-button>
-                            <!--<b-button type="reset" class="mr-2" variant="dark">Reset</b-button>-->
-                        </b-form>
-                    </b-col>
-                    <!--<b-card class="mt-3" header="Form Data Result">
+              <b-button
+                type="submit"
+                variant="success"
+                @click="createProjectAction"
+              >
+                Next
+              </b-button>
+              <!--<b-button type="reset" class="mr-2" variant="dark">Reset</b-button>-->
+            </b-form>
+          </b-col>
+          <!--<b-card class="mt-3" header="Form Data Result">
                         <pre class="m-0">{{ form }}</pre>
                     </b-card>-->
-                </div>
-            </b-card-text>
-        </b-card>
+        </div>
+      </b-card-text>
+    </b-card>
 
+    <b-card
+      v-show="isStep2Active"
+      footer-tag="footer"
+    >
+      <div
+        slot="header"
+        class="step-header"
+      >
+        Create Conceptual System Diagram
+      </div>
+      <b-card-text>
+        <div class="p-3">
+          <b-card-text class="text-justify">
+            Build a Conceptual System Diagram of your communities's adaptation plans
+            to manage food, energy, water and land resources stressed by perturbation of concern.
+          </b-card-text>
+          <br>
 
-        <b-card footer-tag="footer" v-show="isStep2Active">
-            <div class="step-header" slot="header">Create Conceptual System Diagram
-            </div>
-            <b-card-text>
-                <div class="p-3">
-                    <b-card-text class="text-justify">Build a Conceptual System Diagram of your communities's adaptation plans
-                        to manage food, energy, water and land resources stressed by perturbation of concern. </b-card-text>
-                    <br>
+          <b-button
+            class="btn-upload"
+            type="submit"
+            variant="success"
+            @click="stepStartCSD"
+          >
+            Start
+          </b-button>
 
-                    <b-button @click="stepStartCSD" class="btn-upload" type="submit" variant="success">Start</b-button>
-
-                    <!--<b-card class="mt-3" header="Form Data Result">
+          <!--<b-card class="mt-3" header="Form Data Result">
                         <pre class="m-0">{{ form }}</pre>
                     </b-card>-->
-                </div>
-            </b-card-text>
-            <template v-slot:footer>
-                <b-button @click="step2BackClicked" type="reset" class="btn-upload" variant="dark">Back</b-button>
-            </template>
-        </b-card>
+        </div>
+      </b-card-text>
+      <template v-slot:footer>
+        <b-button
+          type="reset"
+          class="btn-upload"
+          variant="dark"
+          @click="step2BackClicked"
+        >
+          Back
+        </b-button>
+      </template>
+    </b-card>
 
-
-        <b-card footer-tag="footer" v-show="isStep2Active">
-            <div class="step-header" slot="header">Upload Map Spatial Layers
-            </div>
-            <b-card-text>
-                <div class="p-3">
-                    <b-col lg="6">
-                        <b-form>
-                            <b-form-group id="input-group-2" label="Select GeoJson Files " label-for="input-2">
-                                <label class="file-select">
-                                    <div class="large-12 medium-12 small-12 cell">
-                                        <input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
-                                    </div>
-                                    <div class="large-12 medium-12 small-12 cell">
-                                        <div v-for="(file, key) in geojson_files" class="file-listing">{{ file.name }}
-                                            <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
-                                    </div>
-                                    <!--<br>
+    <b-card
+      v-show="isStep2Active"
+      footer-tag="footer"
+    >
+      <div
+        slot="header"
+        class="step-header"
+      >
+        Upload Map Spatial Layers
+      </div>
+      <b-card-text>
+        <div class="p-3">
+          <b-col lg="6">
+            <b-form>
+              <b-form-group
+                id="input-group-2"
+                label="Select GeoJson Files "
+                label-for="input-2"
+              >
+                <label class="file-select">
+                  <div class="large-12 medium-12 small-12 cell">
+                    <input
+                      id="files"
+                      ref="files"
+                      type="file"
+                      multiple
+                      @change="handleFilesUpload()"
+                    >
+                  </div>
+                  <div class="large-12 medium-12 small-12 cell">
+                    <div
+                      v-for="(file, key) in geojson_files"
+                      class="file-listing"
+                    >{{ file.name }}
+                      <span
+                        class="remove-file"
+                        @click="removeFile( key )"
+                      >Remove</span></div>
+                  </div>
+                  <!--<br>
                                     <div class="large-12 medium-12 small-12 cell">
                                         <button v-on:click="addFiles()">Add Files</button>
                                     </div>
@@ -118,295 +186,394 @@
                                         <button v-on:click="submitFiles()">Submit</button>
                                     </div>-->
 
-                                </label>
-                            </b-form-group>
+                </label>
+              </b-form-group>
 
-                            <b-button @click="" class="btn-upload" type="submit" variant="success">Submit</b-button>
-
-                        </b-form>
-                    </b-col>
-                    <!--<b-card class="mt-3" header="Form Data Result">
+              <b-button
+                class="btn-upload"
+                type="submit"
+                variant="success"
+                @click=""
+              >
+                Submit
+              </b-button>
+            </b-form>
+          </b-col>
+          <!--<b-card class="mt-3" header="Form Data Result">
                         <pre class="m-0">{{ form }}</pre>
                     </b-card>-->
-                </div>
-            </b-card-text>
+        </div>
+      </b-card-text>
 
-            <template v-slot:footer>
-                <b-button @click="step3NextClicked" type="submit" variant="success">Next</b-button>
-            </template>
-        </b-card>
+      <template v-slot:footer>
+        <b-button
+          type="submit"
+          variant="success"
+          @click="step3NextClicked"
+        >
+          Next
+        </b-button>
+      </template>
+    </b-card>
 
+    <b-card
+      v-show="isStep2CSD"
+      footer-tag="footer"
+    >
+      <div
+        slot="header"
+        class="step-header"
+      >
+        Natural Resources and Societal Drivers
+      </div>
+      <b-card-text>
+        <div class="p-3">
+          <b-col lg="8">
+            <b-form>
+              <b-form-group
+                id="input-group-1"
+                label="Identify Natural Resources and Societal Drivers"
+                label-for="input-1"
+                description=""
+              >
+                <b-card-text>
+                  How important are the following factors to you in supporting the social, environmental, and economic well-being of your community?
+                </b-card-text>
+              </b-form-group>
 
-        <b-card footer-tag="footer" v-show="isStep2CSD">
-            <div class="step-header" slot="header">Natural Resources and Societal Drivers</div>
-            <b-card-text>
-                <div class="p-3">
-                    <b-col lg="8">
-                        <b-form>
-                            <b-form-group
-                                    id="input-group-1"
-                                    label="Identify Natural Resources and Societal Drivers"
-                                    label-for="input-1"
-                                    description=""
-                            >
-                                <b-card-text>How important are the following factors to you in supporting the social, environmental, and economic well-being of your community?
-                                </b-card-text>
-                            </b-form-group>
+              <b-card-group deck>
+                <b-card header="Select Natural Resources">
+                  <div class="list-group">
+                    <li
+                      v-for="ns in naturalsystems"
+                      :key="ns.id"
+                      class="list-group-item"
+                    >
+                      <label
+                        class="form-checkbox"
+                        :disabled="ns.readonly"
+                      >
+                        <input
+                          v-model="selectedActions"
+                          type="checkbox"
+                          :value="ns.id"
+                          :disabled="ns.readonly"
+                        >
+                        {{ ns.name }}
+                      </label>
+                    </li>
+                  </div>
+                </b-card>
 
-                            <b-card-group deck>
-                                <b-card header="Select Natural Resources">
-                                    <div class="list-group">
-                                        <li class="list-group-item" v-for="ns in naturalsystems" v-bind:key="ns.id">
-                                            <label class="form-checkbox" :disabled="ns.readonly">
-                                                <input type="checkbox" :value="ns.id"
-                                                       v-model="selectedActions"
-                                                       :disabled="ns.readonly"/>
-                                                {{ns.name}}
-                                            </label>
-                                        </li>
-                                    </div>
-                                </b-card>
+                <b-card
+                  class="card-nb"
+                  header="Natural Resources in System Diagram"
+                >
+                  <!--<b-card no-body style="max-width: 20rem;" img-src="https://placekitten.com/380/200" img-alt="Image" img-top>-->
+                  <img
+                    src="./../../../../public/static/img/Natural_systems.svg"
+                    width="200"
+                    height="121"
+                    class="center"
+                  ></img>
+                </b-card>
+              </b-card-group>
 
-                                <b-card class="card-nb" header="Natural Resources in System Diagram">
-                                    <!--<b-card no-body style="max-width: 20rem;" img-src="https://placekitten.com/380/200" img-alt="Image" img-top>-->
-                                    <img src="./../../../../public/static/img/Natural_systems.svg" width="200" height="121" class="center"></img>
-                                </b-card>
+              <b-card-group deck>
+                <b-card header="Select Societal Drivers">
+                  <div class="list-group">
+                    <li
+                      v-for="sd in societaldrivers"
+                      :key="sd.id"
+                      class="list-group-item"
+                    >
+                      <label
+                        class="form-checkbox"
+                        :disabled="sd.readonly"
+                      >
+                        <input
+                          v-model="selectedActions"
+                          type="checkbox"
+                          :value="sd.id"
+                          :disabled="sd.readonly"
+                        >
+                        {{ sd.name }}
+                      </label>
+                    </li>
+                  </div>
+                </b-card>
+                <b-card
+                  class="card-nb"
+                  header="Societal Drivers in System Diagram"
+                >
+                  <img
+                    src="./../../../../public/static/img/societal_drivers.svg"
+                    width="200"
+                    height="121"
+                    class="center"
+                  ></img>
+                </b-card>
+              </b-card-group>
+            </b-form>
+          </b-col>
+        </div>
+      </b-card-text>
+      <template v-slot:footer>
+        <b-button
+          type="reset"
+          class="btn-upload"
+          variant="dark"
+          @click="stepBackStartCSD"
+        >
+          Back
+        </b-button>
+        <b-button
+          type="submit"
+          variant="success"
+          @click="step2CSD"
+        >
+          Next
+        </b-button>
+      </template>
+    </b-card>
 
-                            </b-card-group>
+    <b-card
+      v-show="isStep1CSD"
+      footer-tag="footer"
+    >
+      <div
+        slot="header"
+        class="step-header"
+      >
+        Perturbations
+      </div>
+      <b-card-text>
+        <div class="p-3">
+          <b-col lg="8">
+            <b-form>
+              <b-form-group
+                id="input-group-1"
+                label="Identify Perturbations and Stresses"
+                label-for="input-1"
+                description=""
+              >
+                <b-card-text>
+                  What chronic and/or sudden stresses threaten your community's land, energy, and water resources?
+                </b-card-text>
+              </b-form-group>
 
-                            <b-card-group deck>
-                                <b-card header="Select Societal Drivers">
-                                    <div class="list-group">
-                                        <li class="list-group-item" v-for="sd in societaldrivers" v-bind:key="sd.id">
-                                            <label class="form-checkbox" :disabled="sd.readonly">
-                                                <input type="checkbox" :value="sd.id"
-                                                       v-model="selectedActions"
-                                                       :disabled="sd.readonly"/>
-                                                {{sd.name}}
-                                            </label>
+              <b-card-group deck>
+                <b-card header="Potential Perturbations">
+                  <div class="list-group">
+                    <li
+                      v-for="ps in perturbations"
+                      :key="ps.id"
+                      class="list-group-item"
+                    >
+                      <label
+                        class="form-checkbox"
+                        :disabled="ps.readonly"
+                      >
+                        <input
+                          v-model="selectedActions"
+                          type="checkbox"
+                          :value="ps.id"
+                          :disabled="ps.readonly"
+                        >
+                        {{ ps.name }}
+                      </label>
+                    </li>
+                  </div>
+                </b-card>
 
-                                        </li>
-                                    </div>
-                                </b-card>
-                                <b-card class="card-nb" header="Societal Drivers in System Diagram">
-                                    <img src="./../../../../public/static/img/societal_drivers.svg" width="200" height="121" class="center"></img>
-                                </b-card>
-                            </b-card-group>
-
-                        </b-form>
-                    </b-col>
-                </div>
-            </b-card-text>
-            <template v-slot:footer>
-                <b-button @click="stepBackStartCSD" type="reset" class="btn-upload" variant="dark">Back</b-button>
-                <b-button @click="step2CSD" type="submit" variant="success">Next</b-button>
-            </template>
-        </b-card>
-
-
-        <b-card footer-tag="footer" v-show="isStep1CSD">
-            <div class="step-header" slot="header">Perturbations</div>
-            <b-card-text>
-                <div class="p-3">
-                    <b-col lg="8">
-                        <b-form>
-                            <b-form-group
-                                    id="input-group-1"
-                                    label="Identify Perturbations and Stresses"
-                                    label-for="input-1"
-                                    description=""
-                            >
-                                <b-card-text>What chronic and/or sudden stresses threaten your community's land, energy, and water resources?
-                                </b-card-text>
-                            </b-form-group>
-
-                            <b-card-group deck>
-                                <b-card header="Potential Perturbations">
-                                    <div class="list-group">
-                                        <li class="list-group-item" v-for="ps in perturbations" v-bind:key="ps.id">
-                                            <label class="form-checkbox" :disabled="ps.readonly">
-                                                <input type="checkbox" :value="ps.id"
-                                                       v-model="selectedActions"
-                                                       :disabled="ps.readonly"/>
-                                                {{ps.name}}
-                                            </label>
-                                        </li>
-                                    </div>
-                                </b-card>
-
-                                <b-card class="card-nb" header="Perturbations in the System Diagram">
-                                    <!--<b-card no-body style="max-width: 20rem;" img-src="https://placekitten.com/380/200" img-alt="Image" img-top>-->
-                                    <img src="./../../../../public/static/img/perturbations.svg" width="200" height="200" class="center"></img>
-                                </b-card>
-
-                            </b-card-group>
-
-                        </b-form>
-                    </b-col>
-                </div>
-            </b-card-text>
-            <template v-slot:footer>
-                <b-button @click="stepBackStartCSD" type="reset" class="btn-upload" variant="dark">Back</b-button>
-                <b-button @click="step2CSD" type="submit" variant="success">Next</b-button>
-            </template>
-        </b-card>
-
-
-
-
-    </b-card-group>
+                <b-card
+                  class="card-nb"
+                  header="Perturbations in the System Diagram"
+                >
+                  <!--<b-card no-body style="max-width: 20rem;" img-src="https://placekitten.com/380/200" img-alt="Image" img-top>-->
+                  <img
+                    src="./../../../../public/static/img/perturbations.svg"
+                    width="200"
+                    height="200"
+                    class="center"
+                  ></img>
+                </b-card>
+              </b-card-group>
+            </b-form>
+          </b-col>
+        </div>
+      </b-card-text>
+      <template v-slot:footer>
+        <b-button
+          type="reset"
+          class="btn-upload"
+          variant="dark"
+          @click="stepBackStartCSD"
+        >
+          Back
+        </b-button>
+        <b-button
+          type="submit"
+          variant="success"
+          @click="step2CSD"
+        >
+          Next
+        </b-button>
+      </template>
+    </b-card>
+  </b-card-group>
 </template>
 
 <script>
-    import EventBus from './../../../event-bus';
-    import NaturalSystems from './../../../../public/static/natural_systems.json';
-    import SocietalDrivers from './../../../../public/static/societal_drivers.json';
-    import Image1 from './../../../../public/static/img/Natural_systems.svg';
-    import axios from 'axios';
+import EventBus from './../../../event-bus';
+import NaturalSystems from './../../../../public/static/natural_systems.json';
+import SocietalDrivers from './../../../../public/static/societal_drivers.json';
+import Image1 from './../../../../public/static/img/Natural_systems.svg';
+import axios from 'axios';
 
-    export default {
+export default {
 
-        name: 'CreateProject',
+  name: 'CreateProject',
 
-        data() {
-            return {
-                form: {
-                    projectName: null,
-                    description: null,
-                    location: null,
-                    latitude: null,
-                    longtitude: null,
-                    feedbackProvided: false
-                },
+  data() {
+    return {
+      form: {
+        projectName: null,
+        description: null,
+        location: null,
+        latitude: null,
+        longtitude: null,
+        feedbackProvided: false,
+      },
 
-                naturalsystems: NaturalSystems,
-                societaldrivers: SocietalDrivers,
+      naturalsystems: NaturalSystems,
+      societaldrivers: SocietalDrivers,
 
-                tabIndex: 0,
-                isStep1Active: true,
-                isStep2Active: false,
-                isStep1CSD: false,
-                isStep2CSD: false,
+      tabIndex: 0,
+      isStep1Active: true,
+      isStep2Active: false,
+      isStep1CSD: false,
+      isStep2CSD: false,
 
-                geojson_files: [],
+      geojson_files: [],
 
-                perturbations: [{id: "0", name: "Drought"},{id: "1", name: "Increase precipitation"},
-                    {id: "2", name: "Wild fires"},{id: "3", name: "Decrease in total precipitation"},{id: "4", name: "Reduction of snow pack"}],
-                perturbation: [{ text: 'Select One', value: null }, 'Surface Water Allocation', 'perturbation 1', 'perturbation 2', 'perturbation 3'],
-                show: true
-            }
-        },
+      perturbations: [{id: "0", name: "Drought"}, {id: "1", name: "Increase precipitation"},
+        {id: "2", name: "Wild fires"}, {id: "3", name: "Decrease in total precipitation"}, {id: "4", name: "Reduction of snow pack"}],
+      perturbation: [{ text: 'Select One', value: null }, 'Surface Water Allocation', 'perturbation 1', 'perturbation 2', 'perturbation 3'],
+      show: true,
+    };
+  },
 
-        mounted() {
-        },
+  mounted() {
+  },
 
-        methods: {
-            handleFileChange(e) {
-                //this.$emit('input', e.target.files[0])
-                this.$emit('input', e.target.files[0])
-            },
+  methods: {
+    handleFileChange(e) {
+      //this.$emit('input', e.target.files[0])
+      this.$emit('input', e.target.files[0]);
+    },
 
-            addFiles(){
-                this.$refs.files.click();
-            },
+    addFiles(){
+      this.$refs.files.click();
+    },
 
-            onSubmit(evt) {
-                evt.preventDefault()
-                alert(JSON.stringify(this.form))
-            },
+    onSubmit(evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
+    },
 
-            createProjectAction() {
+    createProjectAction() {
 
-                const { utils } = AiravataAPI;
-                utils.FetchUtils.post(
-                    '/interactwel/api/projects/',
-                    {
-                        name: this.form.projectName,
-                        description: this.form.description,
-                        location: this.form.location,
-                        latitude: this.form.latitude,
-                        longtitude: this.form.longtitude,
-                        feedbackProvided: this.form.feedbackProvided
-                    })
-                    .then(data => {
-                        this.projects = data;
-                    })
-                    .catch(error => {
-                        alert("Create the Projects. API error! " + error)
-                    });
+      const { utils } = AiravataAPI;
+      utils.FetchUtils.post(
+        '/interactwel/api/projects/',
+        {
+          name: this.form.projectName,
+          description: this.form.description,
+          location: this.form.location,
+          latitude: this.form.latitude,
+          longtitude: this.form.longtitude,
+          feedbackProvided: this.form.feedbackProvided,
+        })
+        .then(data => {
+          this.projects = data;
+        })
+        .catch(error => {
+          alert("Create the Projects. API error! " + error);
+        });
 
-                this.isStep1Active = false;
-                this.isStep2Active = true;
-                return true
-            },
+      this.isStep1Active = false;
+      this.isStep2Active = true;
+      return true;
+    },
 
-            step2NextClicked() {
-                this.isStep1Active = false;
-                this.isStep2Active = false;
-                return true
-            },
+    step2NextClicked() {
+      this.isStep1Active = false;
+      this.isStep2Active = false;
+      return true;
+    },
 
-            stepStartCSD() {
-                this.isStep1Active = false;
-                this.isStep2Active = false;
-                this.isStep1CSD = true;
-                return true
-            },
+    stepStartCSD() {
+      this.isStep1Active = false;
+      this.isStep2Active = false;
+      this.isStep1CSD = true;
+      return true;
+    },
 
-            step2CSD() {
-                this.isStep2Active = false;
-                this.isStep1CSD = false;
-                this.isStep2CSD = true;
-                return true
-            },
+    step2CSD() {
+      this.isStep2Active = false;
+      this.isStep1CSD = false;
+      this.isStep2CSD = true;
+      return true;
+    },
 
-            stepBackStartCSD() {
-                this.isStep2CSD = false;
-                this.isStep1Active = false;
-                this.isStep2Active = true;
-                return true
-            },
+    stepBackStartCSD() {
+      this.isStep2CSD = false;
+      this.isStep1Active = false;
+      this.isStep2Active = true;
+      return true;
+    },
 
-            step2BackClicked() {
-                this.isStep1Active = true;
-                this.isStep2Active = false;
-                return true
-            },
+    step2BackClicked() {
+      this.isStep1Active = true;
+      this.isStep2Active = false;
+      return true;
+    },
 
-            handleFilesUpload(){
-                let uploadedFiles = this.$refs.files.files;
+    handleFilesUpload(){
+      let uploadedFiles = this.$refs.files.files;
 
-                /*
+      /*
                 Adds the uploaded file to the files array
                 */
-                for( var i = 0; i < uploadedFiles.length; i++ ){
-                    this.geojson_files.push( uploadedFiles[i] );
-                }
-            },
+      for ( var i = 0; i < uploadedFiles.length; i++ ){
+        this.geojson_files.push( uploadedFiles[i] );
+      }
+    },
 
-            /*
+    /*
                 Removes a select file the user has uploaded
             */
-            removeFile( key ){
-                this.geojson_files.splice( key, 1 );
-            },
+    removeFile( key ){
+      this.geojson_files.splice( key, 1 );
+    },
 
-            onReset(evt) {
-                evt.preventDefault()
-                // Reset our form values
-                this.form.email = ''
-                this.form.name = ''
-                this.form.food = null
-                this.form.checked = []
-                // Trick to reset/clear native browser form validation state
-                this.show = false
-                this.$nextTick(() => {
-                    this.show = true
-                })
-            }
-        }
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.form.email = '';
+      this.form.name = '';
+      this.form.food = null;
+      this.form.checked = [];
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+  },
 
-    }
+};
 
 </script>
 

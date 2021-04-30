@@ -1,211 +1,326 @@
 <template>
-    <b-col lg="12">
-        <ol class="progress-bar">
-            <li class="col-md-2">
-                <div id="active" class="step-progress-bar">
-                    <div class="step-no">1</div>
-                    <h4 class="list-group-item-heading">Goals</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{adaptationPlan.selectedGoals.length}} Goals Selected</p>
-                </div>
-            </li>
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">2</div>
-                    <h4 class="list-group-item-heading">Actors</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{adaptationPlan.selectedActors.length}} Actors Selected</p>
-                </div>
-            </li>
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">3</div>
-                    <h4 class="list-group-item-heading">Actions</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">{{adaptationPlan.selectedActions.length}} Actions Selected</p>
-                </div>
-            </li>
-            <li class="col-md-2 active">
-                <div class="step-progress-bar">
-                    <div class="step-no">4</div>
-                    <h4 class="list-group-item-heading">Visualize and Evaluate</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Adaptation Plans</p>
-                </div>
-            </li>
-            <li class="col-md-2">
-                <div class="step-progress-bar">
-                    <div class="step-no">5</div>
-                    <h4 class="list-group-item-heading">Wrap Up</h4>
-                    <h4r class="list-group-item-heading">&#10003;</h4r>
-                    <p class="list-group-item-text">Save and Print Plans</p>
-                </div>
-            </li>
-        </ol>
-    <div id="step4" title="Step 4">
-        <div class="help-block-viz">
-            <b-collapse visible id="collapse-what_are_plans">
-                <b-card
-                        tag="article"
-                        style="max-width: 33rem;"
-                        class="mb-2"
-                >
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="card-title"> "What are Adaptation Plans?"
-                            </h4>
-                        </div>
-                        <div class="col-1 mr-3">
-                            <h5 class="text-right font-weight-light"><i class="fas fa-times" v-b-toggle.collapse-what_are_plans style="cursor: pointer"></i></h5>
-                        </div>
-                    </div>
-                    <b-card-text>
-                        <p align="justify">
-                            In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong>
-                            and actions <strong>(Step 3)</strong>
-                            that you selected.  You can compare how each adaptation plan meets the goals you selected in <strong>Step 1</strong>
-                            for the entire basin, sub-basins, and individual streams.  You can also compare the actions and their timeframes included within each plan.
-                        </p>
-                        <p aling="justify">Remember that you can click the map to visualize the data. </p>
-                    </b-card-text>
-
-                </b-card>
-            </b-collapse>
+  <b-col lg="12">
+    <ol class="progress-bar">
+      <li class="col-md-2">
+        <div
+          id="active"
+          class="step-progress-bar"
+        >
+          <div class="step-no">
+            1
+          </div>
+          <h4 class="list-group-item-heading">
+            Goals
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            {{ adaptationPlan.selectedGoals.length }} Goals Selected
+          </p>
         </div>
-        <b-card no-body footer-tag="footer">
-            <div class="step-header" slot="header">Visualization
-                <em slot="header">
-                    <i v-b-toggle.collapse-what_are_plans class="far fa-question-circle" title="Show instructions" style="cursor: pointer"></i>
-                </em>
+      </li>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            2
+          </div>
+          <h4 class="list-group-item-heading">
+            Actors
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            {{ adaptationPlan.selectedActors.length }} Actors Selected
+          </p>
+        </div>
+      </li>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            3
+          </div>
+          <h4 class="list-group-item-heading">
+            Actions
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            {{ adaptationPlan.selectedActions.length }} Actions Selected
+          </p>
+        </div>
+      </li>
+      <li class="col-md-2 active">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            4
+          </div>
+          <h4 class="list-group-item-heading">
+            Visualize and Evaluate
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            Adaptation Plans
+          </p>
+        </div>
+      </li>
+      <li class="col-md-2">
+        <div class="step-progress-bar">
+          <div class="step-no">
+            5
+          </div>
+          <h4 class="list-group-item-heading">
+            Wrap Up
+          </h4>
+          <h4r class="list-group-item-heading">
+            &#10003;
+          </h4r>
+          <p class="list-group-item-text">
+            Save and Print Plans
+          </p>
+        </div>
+      </li>
+    </ol>
+    <div
+      id="step4"
+      title="Step 4"
+    >
+      <div class="help-block-viz">
+        <b-collapse
+          id="collapse-what_are_plans"
+          visible
+        >
+          <b-card
+            tag="article"
+            style="max-width: 33rem;"
+            class="mb-2"
+          >
+            <div class="row">
+              <div class="col">
+                <h4 class="card-title">
+                  "What are Adaptation Plans?"
+                </h4>
+              </div>
+              <div class="col-1 mr-3">
+                <h5 class="text-right font-weight-light">
+                  <i
+                    v-b-toggle.collapse-what_are_plans
+                    class="fas fa-times"
+                    style="cursor: pointer"
+                  />
+                </h5>
+              </div>
             </div>
-            <b-card-body class="no-padding">
-                <b-container     class="">
-                    <b-row>
-                            <div id="sidebar" role="tablist">
+            <b-card-text>
+              <p align="justify">
+                In this section you will be able to view multiple adaptation plans that incorporate the actors <strong>(Step 2)</strong>
+                and actions <strong>(Step 3)</strong>
+                that you selected.  You can compare how each adaptation plan meets the goals you selected in <strong>Step 1</strong>
+                for the entire basin, sub-basins, and individual streams.  You can also compare the actions and their timeframes included within each plan.
+              </p>
+              <p aling="justify">
+                Remember that you can click the map to visualize the data.
+              </p>
+            </b-card-text>
+          </b-card>
+        </b-collapse>
+      </div>
+      <b-card
+        no-body
+        footer-tag="footer"
+      >
+        <div
+          slot="header"
+          class="step-header"
+        >
+          Visualization
+          <em slot="header">
+            <i
+              v-b-toggle.collapse-what_are_plans
+              class="far fa-question-circle"
+              title="Show instructions"
+              style="cursor: pointer"
+            />
+          </em>
+        </div>
+        <b-card-body class="no-padding">
+          <b-container class="">
+            <b-row>
+              <div
+                id="sidebar"
+                role="tablist"
+              >
+                <b-nav
+                  header-tag="header"
+                  class="p-1"
+                  role="tab"
+                >
+                  <b-nav-item
+                    v-b-toggle.collapse-0
+                    block
+                    href="#"
+                    variant="info"
+                  >
+                    <router-link :to="{ name: 'Overview', params: { planId: 1 }}">
+                      Overview
+                    </router-link>
+                  </b-nav-item>
+                </b-nav>
 
-                                <b-nav header-tag="header" class="p-1" role="tab">
-                                    <b-nav-item block href="#" v-b-toggle.collapse-0 variant="info" >
-                                        <router-link :to="{ name: 'Overview', params: { planId: 1 }}">Overview</router-link>
-                                    </b-nav-item>
-                                </b-nav>
+                <div
+                  v-for="plan in plans"
+                  :key="plan.id"
+                >
+                  <b-nav
+                    header-tag="header"
+                    class="p-1"
+                    role="tab"
+                  >
+                    <b-nav-item
+                      v-b-toggle="plan.id"
+                      block
+                      href="#"
+                      variant="info"
+                      :class="{ nav_item_disabled: plan.disabled }"
+                    >
+                      {{ plan.name }}
+                    </b-nav-item>
+                  </b-nav>
 
-                                <div  v-for="plan in plans" v-bind:key="plan.id">
-                                    <b-nav header-tag="header" class="p-1" role="tab">
-                                        <b-nav-item block href="#" v-b-toggle="plan.id" variant="info" v-bind:class="{ nav_item_disabled: plan.disabled }" >
-                                            {{plan.name}}
-                                        </b-nav-item>
-                                    </b-nav>
-
-                                    <b-collapse :id="plan.id" accordion="my-accordion" role="tabpanel">
-                                        <b-nav-item @click="$router.push({ name: 'ChartActions', params: { planId: plan.id }})" class="collapse-item">
-                                            Actions
-                                        </b-nav-item>
-                                        <b-nav-item class="collapse-item">
-                                            <router-link :to="{ name: 'ChartStreams', params: { planId:  plan.id  }}">Streams
-                                            </router-link>
-                                        </b-nav-item>
-                                        <b-nav-item class="collapse-item">
-                                            <router-link :to="{ name: 'ChartRegion', params: { planId:  plan.id  }}">Region
-                                            </router-link>
-                                        </b-nav-item>
-                                        <b-nav-item class="collapse-item">
-                                            <router-link :to="{ name: 'ChartSubBasins', params: { planId:  plan.id  }}">Sub Basins
-                                            </router-link>
-                                        </b-nav-item>
-                                        <b-nav-item class="collapse-item">
-                                            <router-link :to="{ name: 'Feedback', params: { planId:  plan.id  }}">Feedback
-                                            </router-link>
-                                        </b-nav-item>
-                                    </b-collapse>
-                                </div>
-
-                            </div>
-                        <b-col>
-                            <router-view :key="$route.fullPath"></router-view>
-                        </b-col>
-                    </b-row>
-                </b-container>
-            </b-card-body>
-            <em slot="footer">
-                <b-button id="step2-next-btn" @click="next" variant="next" size="sm">Next</b-button>
-                <b-button id="step2-back-btn" @click="back" variant="back" size="sm">Back</b-button>
-            </em>
-        </b-card>
+                  <b-collapse
+                    :id="plan.id"
+                    accordion="my-accordion"
+                    role="tabpanel"
+                  >
+                    <b-nav-item
+                      class="collapse-item"
+                      @click="$router.push({ name: 'ChartActions', params: { planId: plan.id }})"
+                    >
+                      Actions
+                    </b-nav-item>
+                    <b-nav-item class="collapse-item">
+                      <router-link :to="{ name: 'ChartStreams', params: { planId: plan.id }}">
+                        Streams
+                      </router-link>
+                    </b-nav-item>
+                    <b-nav-item class="collapse-item">
+                      <router-link :to="{ name: 'ChartRegion', params: { planId: plan.id }}">
+                        Region
+                      </router-link>
+                    </b-nav-item>
+                    <b-nav-item class="collapse-item">
+                      <router-link :to="{ name: 'ChartSubBasins', params: { planId: plan.id }}">
+                        Sub Basins
+                      </router-link>
+                    </b-nav-item>
+                    <b-nav-item class="collapse-item">
+                      <router-link :to="{ name: 'Feedback', params: { planId: plan.id }}">
+                        Feedback
+                      </router-link>
+                    </b-nav-item>
+                  </b-collapse>
+                </div>
+              </div>
+              <b-col>
+                <router-view :key="$route.fullPath" />
+              </b-col>
+            </b-row>
+          </b-container>
+        </b-card-body>
+        <em slot="footer">
+          <b-button
+            id="step2-next-btn"
+            variant="next"
+            size="sm"
+            @click="next"
+          >Next</b-button>
+          <b-button
+            id="step2-back-btn"
+            variant="back"
+            size="sm"
+            @click="back"
+          >Back</b-button>
+        </em>
+      </b-card>
     </div>
-    </b-col>
+  </b-col>
 </template>
 
 <script>
 
-    export default {
-        name: 'Actors',
-        props: {},
-        data() {
-            return {
-                factors: [
-                    {text: 'Infrastructure costs', value: 'Infrastructure costs'},
-                    {text: 'Permits or other regulatory approval processes and cost', value: 'Permits or other regulatory approval processes and cost'},
-                    {text: 'Reliance on other stakeholders to take action', value: 'Reliance on other stakeholders to take action'},
-                    {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
-                    {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
-                ],
+export default {
+  name: 'Actors',
+  props: {},
+  data() {
+    return {
+      factors: [
+        {text: 'Infrastructure costs', value: 'Infrastructure costs'},
+        {text: 'Permits or other regulatory approval processes and cost', value: 'Permits or other regulatory approval processes and cost'},
+        {text: 'Reliance on other stakeholders to take action', value: 'Reliance on other stakeholders to take action'},
+        {text: 'Long time period before seeing positive results', value: 'Long time period before seeing positive results'},
+        {text: 'Public disapproval of the actions listed in the plan', value: 'Public disapproval of the actions listed in the plan'},
+      ],
 
-                plans:[],
+      plans: [],
 
-                currentRouteName: '',
+      currentRouteName: '',
 
-                adaptationPlan: [],
-            }
-        },
-        mounted() {
-            this.adaptationPlan = this.$store.state.currentAdaptationPlan;
-            this.projectId = this.$route.params.projectId
-            this.getProjectPlans(this.projectId).then(result => {
-                this.$store.commit("setPlanList", result);
-                if (result == null) {
-                    return;
-                }
-                result.forEach(plan => {
-                    this.plans.push({
-                        id : plan.plan_id,
-                        name : "Plan " + plan.plan_id
-                    })
-                })
-            })
-        },
-        computed: {
+      adaptationPlan: [],
+    };
+  },
+  computed: {
 
-            },
-        watch: {
+  },
+  watch: {
 
-        },
-        methods: {
-            next(){
-                localStorage.setItem('step4', true);
-                this.$router.push('/adaptation-plans/' + this.projectId+'/share')
+  },
+  mounted() {
+    this.adaptationPlan = this.$store.state.currentAdaptationPlan;
+    this.projectId = this.$route.params.projectId;
+    this.getProjectPlans(this.projectId).then(result => {
+      this.$store.commit("setPlanList", result);
+      if (result == null) {
+        return;
+      }
+      result.forEach(plan => {
+        this.plans.push({
+          id: plan.plan_id,
+          name: "Plan " + plan.plan_id,
+        });
+      });
+    });
+  },
+  methods: {
+    next(){
+      localStorage.setItem('step4', true);
+      this.$router.push('/adaptation-plans/' + this.projectId + '/share');
 
-            },
-            back(){
-                this.$router.push('/adaptation-plans/' + this.projectId +'/actions')
-            },
-            onSubmit(evt) {
-                evt.preventDefault()
-                alert(JSON.stringify(this))
-            },
-            onReset(evt) {
-                evt.preventDefault()
-                // Reset our form values
-                this.comment = null
-                this.feasibility = []
-                this.selected = []
-                // Trick to reset/clear native browser form validation state
-                this.show = false
-                this.$nextTick(() => {
-                    this.show = true
-                })
-            }
-        }
-    }
+    },
+    back(){
+      this.$router.push('/adaptation-plans/' + this.projectId + '/actions');
+    },
+    onSubmit(evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this));
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.comment = null;
+      this.feasibility = [];
+      this.selected = [];
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

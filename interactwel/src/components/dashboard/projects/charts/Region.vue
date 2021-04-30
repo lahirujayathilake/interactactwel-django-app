@@ -1,159 +1,204 @@
 <template>
-    <div id="graph" class="card">
-        <div class="card-header">
-            <strong>Region</strong>
-        </div>
-        <div class="card-body no-padding">
-            <b-tabs card>
-                <b-tab title="Water Rights" active>
-                    <div class="card-body no-padding">
-                        <b-row>
-                            <b-col lg="6" class="action-graph-container">
-                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
-                                <overview-water-rights-graph></overview-water-rights-graph>
-                            </b-col>
-                            <b-col lg="6" class="action-graph-container">
-                                <h6 class="baseline-graph-title">Business as Usual</h6>
-                                <overview-base-water-rights-graph></overview-base-water-rights-graph>
-                            </b-col>
-                        </b-row>
-                    </div>
-                </b-tab>
-                <b-tab title="Crop yield">
-                    <div class="card-body no-padding">
-                        <b-row>
-                            <b-col lg="6" class="action-graph-container">
-                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
-                                <crop-yield-graph></crop-yield-graph>
-                            </b-col>
-                            <b-col lg="6" class="action-graph-container">
-                                <h6 class="baseline-graph-title">Business as Usual</h6>
-                                <base-crop-yield-graph></base-crop-yield-graph>
-                            </b-col>
-                        </b-row>
-                    </div>
-                </b-tab>
-                <b-tab title="N fertilizer">
-                    <div class="card-body no-padding">
-                        <b-row>
-                            <b-col lg="6">
-                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
-                                <n-fertilizer-graph></n-fertilizer-graph>
-                            </b-col>
-                            <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Business as Usual</h6>
-                                <n-fertilizer-graph></n-fertilizer-graph>
-                            </b-col>
-                        </b-row>
-                    </div>
-                </b-tab>
-                <b-tab title="P fertilizer">
-                    <div class="card-body no-padding">
-                        <b-row>
-                            <b-col lg="6">
-                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
-                                <p-fertilizer-graph></p-fertilizer-graph>
-                            </b-col>
-                            <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Business as Usual</h6>
-                                <p-fertilizer-graph></p-fertilizer-graph>
-                            </b-col>
-                        </b-row>
-                    </div>
-                </b-tab>
-                <b-tab title="Irrigation">
-                    <div class="card-body no-padding">
-                        <b-row>
-                            <b-col lg="6">
-                                <h6 class="baseline-graph-title">Action Plan {{$route.params.planId}}</h6>
-                                <irrigation-graph></irrigation-graph>
-                            </b-col>
-                            <b-col lg="6" class="baseline-graph-container">
-                                <h6 class="baseline-graph-title">Business as Usual</h6>
-                                <irrigation-base-line-graph></irrigation-base-line-graph>
-                            </b-col>
-                        </b-row>
-                    </div>
-                </b-tab>
-                <!--<b-tab title="Groundwater Recharge">
+  <div
+    id="graph"
+    class="card"
+  >
+    <div class="card-header">
+      <strong>Region</strong>
+    </div>
+    <div class="card-body no-padding">
+      <b-tabs card>
+        <b-tab
+          title="Water Rights"
+          active
+        >
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col
+                lg="6"
+                class="action-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <overview-water-rights-graph />
+              </b-col>
+              <b-col
+                lg="6"
+                class="action-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <overview-base-water-rights-graph />
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Crop yield">
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col
+                lg="6"
+                class="action-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <crop-yield-graph />
+              </b-col>
+              <b-col
+                lg="6"
+                class="action-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <base-crop-yield-graph />
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="N fertilizer">
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col lg="6">
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <n-fertilizer-graph />
+              </b-col>
+              <b-col
+                lg="6"
+                class="baseline-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <n-fertilizer-graph />
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="P fertilizer">
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col lg="6">
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <p-fertilizer-graph />
+              </b-col>
+              <b-col
+                lg="6"
+                class="baseline-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <p-fertilizer-graph />
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Irrigation">
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col lg="6">
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <irrigation-graph />
+              </b-col>
+              <b-col
+                lg="6"
+                class="baseline-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <irrigation-base-line-graph />
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <!--<b-tab title="Groundwater Recharge">
                     <div class="card-body no-padding">
                         <img class="img-fluid"  src="../../../../assets/graph-placeholder.png"/>
                     </div>
                 </b-tab>-->
-
-            </b-tabs>
-        </div>
+      </b-tabs>
     </div>
+  </div>
 </template>
 
 <script>
-    import JSONData from "../../../../../public/static/result_action_plans.json";
-    import IrrigationGraph from './data/IrrigationGraph.vue'
-    import CropYieldGraph from './data/CropYieldGraph.vue'
-    import BaseCropYieldGraph from './data/BaseCropYieldGraph.vue'
-    import NFertilizerGraph from './data/NFertilizerGraph.vue'
-    import PFertilizerGraph from './data/PFertilizerGraph.vue'
-    import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue'
-    import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue'
-    import EventBus from './../../../../event-bus';
-    import IrrigationBaseLineGraph from "./data/IrrigationBaselineGraph";
+import JSONData from "../../../../../public/static/result_action_plans.json";
+import IrrigationGraph from './data/IrrigationGraph.vue';
+import CropYieldGraph from './data/CropYieldGraph.vue';
+import BaseCropYieldGraph from './data/BaseCropYieldGraph.vue';
+import NFertilizerGraph from './data/NFertilizerGraph.vue';
+import PFertilizerGraph from './data/PFertilizerGraph.vue';
+import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue';
+import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue';
+import EventBus from './../../../../event-bus';
+import IrrigationBaseLineGraph from "./data/IrrigationBaselineGraph";
 
-    export default {
-        name: 'Region',
+export default {
+  name: 'Region',
 
-        components: {
-            IrrigationBaseLineGraph,
-            'irrigationGraph': IrrigationGraph,
-            'cropYieldGraph': CropYieldGraph,
-            'BaseCropYieldGraph': BaseCropYieldGraph,
-            'nFertilizerGraph': NFertilizerGraph,
-            'pFertilizerGraph': PFertilizerGraph,
-            'overviewWaterRightsGraph': OverviewWaterRightsGraph,
-            'OverviewBaseWaterRightsGraph': OverviewBaseWaterRightsGraph,
-        },
+  components: {
+    IrrigationBaseLineGraph,
+    'irrigationGraph': IrrigationGraph,
+    'cropYieldGraph': CropYieldGraph,
+    'BaseCropYieldGraph': BaseCropYieldGraph,
+    'nFertilizerGraph': NFertilizerGraph,
+    'pFertilizerGraph': PFertilizerGraph,
+    'overviewWaterRightsGraph': OverviewWaterRightsGraph,
+    'OverviewBaseWaterRightsGraph': OverviewBaseWaterRightsGraph,
+  },
 
-        data() {
-            return {};
-        },
-        computed: {
-            jsonData() {
-                return JSONData;
-            },
+  data() {
+    return {};
+  },
+  computed: {
+    jsonData() {
+      return JSONData;
+    },
 
-            graphData() {
-                var adaptationPlan = this.planName;
+    graphData() {
+      var adaptationPlan = this.planName;
 
-                return Object.keys(this.jsonData["Adaptation_plans"][adaptationPlan])
-                    .map(key => {
-                        return {
-                            key: key,
-                            value: this.jsonData["Adaptation_plans"][adaptationPlan][key]
-                        };
-                    })
-                    .filter(d => {
-                        if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
+      return Object.keys(this.jsonData["Adaptation_plans"][adaptationPlan])
+        .map(key => {
+          return {
+            key: key,
+            value: this.jsonData["Adaptation_plans"][adaptationPlan][key],
+          };
+        })
+        .filter(d => {
+          if (this.selectedKeyList.findIndex(k => k === d.key) > -1) {
+            return true;
+          } else {
+            return false;
+          }
+        });
 
-            },
-        },
+    },
+  },
 
-        mounted() {
-        },
+  mounted() {
+  },
 
-        methods: {
-            dismiss() {
-                EventBus.$emit('CLOSE');
-            },
-        },
-        //props: ["jsonData"]
+  methods: {
+    dismiss() {
+      EventBus.$emit('CLOSE');
+    },
+  },
+  //props: ["jsonData"]
 
-    }
+};
 </script>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>

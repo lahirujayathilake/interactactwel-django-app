@@ -1,61 +1,84 @@
 <template>
   <div>
-    <component v-bind:is="component='Header'"></component>
-    <b-container fluid class="main">
-      <b-navbar toggleable="sm" type="light" variant="light">
-        <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
+    <component :is="component='Header'" />
+    <b-container
+      fluid
+      class="main"
+    >
+      <b-navbar
+        toggleable="sm"
+        type="light"
+        variant="light"
+      >
+        <b-navbar-toggle target="nav-text-collapse" />
         <b-navbar-brand>
           <h5>
             Umatilla Region Adapts To Changes In Allocation Of Water For irrigation
-            <br/><small class="text-muted">Adaptation Plan {{this.$route.params.planId}}</small>
+            <br><small class="text-muted">Adaptation Plan {{ this.$route.params.planId }}</small>
           </h5>
         </b-navbar-brand>
-        <b-collapse id="nav-text-collapse" is-nav>
+        <b-collapse
+          id="nav-text-collapse"
+          is-nav
+        >
           <b-navbar-nav>
             <b-nav-text>
-              <strong>{{selectedProject.name}}</strong>
+              <strong>{{ selectedProject.name }}</strong>
             </b-nav-text>
           </b-navbar-nav>
         </b-collapse>
-        <b-button class="mr-2 btn-sm" @click="$router.push('../all-plans/1')" variant="outline-secondary"><i class="fa fa-chevron-left"></i> Back to Plans</b-button>
+        <b-button
+          class="mr-2 btn-sm"
+          variant="outline-secondary"
+          @click="$router.push('../all-plans/1')"
+        >
+          <i class="fa fa-chevron-left" /> Back to Plans
+        </b-button>
       </b-navbar>
       <b-row>
         <b-col>
           <div class="planData">
             <b-card no-body>
-              <b-tabs pills card vertical>
+              <b-tabs
+                pills
+                card
+                vertical
+              >
                 <b-tab title="Overview">
                   <b-card-text>
                     Overview
                   </b-card-text>
                 </b-tab>
-                <b-tab title="Actions" active>
+                <b-tab
+                  title="Actions"
+                  active
+                >
                   <b-card-text>
-                    <actions-graph v-bind:adaptation-plan-id="this.$route.params.planId"></actions-graph>
+                    <actions-graph :adaptation-plan-id="this.$route.params.planId" />
                   </b-card-text>
                 </b-tab>
                 <b-tab title="Streams">
                   <b-card-text>
                     Streams
-                    <component v-bind:is="component='ChartStreams'"></component>
+                    <component :is="component='ChartStreams'" />
                   </b-card-text>
                 </b-tab>
                 <b-tab title="Region">
                   <b-card-text>
                     Region
-                    <component v-bind:is="component='ChartRegion'"></component>
+                    <component :is="component='ChartRegion'" />
                   </b-card-text>
                 </b-tab>
                 <b-tab title="Sub Basins">
                   <b-card-text>
                     Sub Basins
-                    <component v-bind:is="component='ChartSubBasins'"></component>
+                    <component :is="component='ChartSubBasins'" />
                   </b-card-text>
                 </b-tab>
                 <b-tab title="Feedback">
                   <b-card-text>
                     Feedback
-                  <component v-bind:is="component='Feedback'"></component>
+                    <component :is="component='Feedback'" />
                   </b-card-text>
                 </b-tab>
               </b-tabs>
@@ -64,116 +87,193 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col class="bg-dark pt-3" lg="2">
+        <b-col
+          class="bg-dark pt-3"
+          lg="2"
+        >
           <div id="legend">
             <div class="list-group panel">
-              <h5 class="text-light pb-2">Legend</h5>
+              <h5 class="text-light pb-2">
+                Legend
+              </h5>
               <div class="text-light">
-                <b-form-group label="" v-slot="{ ariaDescribedby }">
-                  <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="street_map" value="street_map">Street Map</b-form-radio>
-                  <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="satellite" value="satellite">Satellite</b-form-radio>
-                  <b-form-radio v-model="selectedMapType" :aria-describedby="ariaDescribedby" name="terrain_map" value="terrain_map">Terrain Map</b-form-radio>
+                <b-form-group
+                  v-slot="{ ariaDescribedby }"
+                  label=""
+                >
+                  <b-form-radio
+                    v-model="selectedMapType"
+                    :aria-describedby="ariaDescribedby"
+                    name="street_map"
+                    value="street_map"
+                  >
+                    Street Map
+                  </b-form-radio>
+                  <b-form-radio
+                    v-model="selectedMapType"
+                    :aria-describedby="ariaDescribedby"
+                    name="satellite"
+                    value="satellite"
+                  >
+                    Satellite
+                  </b-form-radio>
+                  <b-form-radio
+                    v-model="selectedMapType"
+                    :aria-describedby="ariaDescribedby"
+                    name="terrain_map"
+                    value="terrain_map"
+                  >
+                    Terrain Map
+                  </b-form-radio>
                 </b-form-group>
               </div>
               <div>
-                <a href="#default" class="list-group-item bg-light font-weight-bold text-dark" data-toggle="collapse" data-parent="#legend">Default Layers <i class="fa fa-caret-down"></i></a>
-                <div class="collapse show" id="default">
+                <a
+                  href="#default"
+                  class="list-group-item bg-light font-weight-bold text-dark"
+                  data-toggle="collapse"
+                  data-parent="#legend"
+                >Default Layers <i class="fa fa-caret-down" /></a>
+                <div
+                  id="default"
+                  class="collapse show"
+                >
                   <div class="list-group-item">
                     <b-form-checkbox
-                        id="checkbox-1"
-                        v-model="sub_basins_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
+                      id="checkbox-1"
+                      v-model="sub_basins_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
                     >
-                      <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Sub-basins
+                      <img
+                        src="../../../assets/sub_basin_ico.jpg"
+                        style="width: 20px"
+                      > Sub-basins
                     </b-form-checkbox>
                   </div>
                   <div class="list-group-item">
                     <b-form-checkbox
-                        id="checkbox-2"
-                        v-model="streams_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
+                      id="checkbox-2"
+                      v-model="streams_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
                     >
-                      <img src="../../../assets/stream_ico.png" style="width: 20px"> Streams
-                    </b-form-checkbox>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <a href="#stationData" class="list-group-item bg-light font-weight-bold text-dark" data-toggle="collapse" data-parent="#legend">Station Data <i class="fa fa-caret-down"></i></a>
-                <div class="collapse show" id="stationData">
-                  <div class="list-group-item">
-                    <b-form-checkbox
-                        id="checkbox-3"
-                        v-model="reservoirs_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
-                    >
-                      <img src="../../../assets/sub_basin_ico.jpg" style="width: 20px"> Reservoirs
-                    </b-form-checkbox>
-                  </div>
-                  <div class="list-group-item">
-                    <b-form-checkbox
-                        id="checkbox-4"
-                        v-model="gauging_stations_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
-                    >
-                      <img src="../../../assets/stream_ico.png" style="width: 20px"> Gauging Stations
-                    </b-form-checkbox>
-                  </div>
-                  <div class="list-group-item">
-                    <b-form-checkbox
-                        id="checkbox-5"
-                        v-model="weather_stations_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
-                    >
-                      <img src="../../../assets/stream_ico.png" style="width: 20px"> Weather Stations
+                      <img
+                        src="../../../assets/stream_ico.png"
+                        style="width: 20px"
+                      > Streams
                     </b-form-checkbox>
                   </div>
                 </div>
               </div>
               <div>
-                <a href="#additional" class="list-group-item bg-light font-weight-bold text-dark" data-toggle="collapse" data-parent="#legend">Addional Layers <i class="fa fa-caret-down"></i></a>
-                <div class="collapse" id="additional">
+                <a
+                  href="#stationData"
+                  class="list-group-item bg-light font-weight-bold text-dark"
+                  data-toggle="collapse"
+                  data-parent="#legend"
+                >Station Data <i class="fa fa-caret-down" /></a>
+                <div
+                  id="stationData"
+                  class="collapse show"
+                >
                   <div class="list-group-item">
                     <b-form-checkbox
-                        id="checkbox-6"
-                        v-model="gw_restricted_areas_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
+                      id="checkbox-3"
+                      v-model="reservoirs_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
                     >
-                      <img src="../../../assets/stream_ico.png" style="width: 20px"> GW Restricted Areas
+                      <img
+                        src="../../../assets/sub_basin_ico.jpg"
+                        style="width: 20px"
+                      > Reservoirs
                     </b-form-checkbox>
                   </div>
                   <div class="list-group-item">
                     <b-form-checkbox
-                        id="checkbox-7"
-                        v-model="tribal_lands_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
+                      id="checkbox-4"
+                      v-model="gauging_stations_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
                     >
-                      <img src="../../../assets/stream_ico.png" style="width: 20px"> Tribal Lands
+                      <img
+                        src="../../../assets/stream_ico.png"
+                        style="width: 20px"
+                      > Gauging Stations
                     </b-form-checkbox>
                   </div>
                   <div class="list-group-item">
                     <b-form-checkbox
-                        id="checkbox-8"
-                        v-model="nowa_pumping_limit_layer_show"
-                        name="checkbox-1"
-                        value="checked"
-                        unchecked-value="unchecked"
+                      id="checkbox-5"
+                      v-model="weather_stations_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
                     >
-                      <img src="../../../assets/stream_ico.png" style="width: 20px"> NOWA Pumping Limit
+                      <img
+                        src="../../../assets/stream_ico.png"
+                        style="width: 20px"
+                      > Weather Stations
+                    </b-form-checkbox>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a
+                  href="#additional"
+                  class="list-group-item bg-light font-weight-bold text-dark"
+                  data-toggle="collapse"
+                  data-parent="#legend"
+                >Addional Layers <i class="fa fa-caret-down" /></a>
+                <div
+                  id="additional"
+                  class="collapse"
+                >
+                  <div class="list-group-item">
+                    <b-form-checkbox
+                      id="checkbox-6"
+                      v-model="gw_restricted_areas_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
+                    >
+                      <img
+                        src="../../../assets/stream_ico.png"
+                        style="width: 20px"
+                      > GW Restricted Areas
+                    </b-form-checkbox>
+                  </div>
+                  <div class="list-group-item">
+                    <b-form-checkbox
+                      id="checkbox-7"
+                      v-model="tribal_lands_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
+                    >
+                      <img
+                        src="../../../assets/stream_ico.png"
+                        style="width: 20px"
+                      > Tribal Lands
+                    </b-form-checkbox>
+                  </div>
+                  <div class="list-group-item">
+                    <b-form-checkbox
+                      id="checkbox-8"
+                      v-model="nowa_pumping_limit_layer_show"
+                      name="checkbox-1"
+                      value="checked"
+                      unchecked-value="unchecked"
+                    >
+                      <img
+                        src="../../../assets/stream_ico.png"
+                        style="width: 20px"
+                      > NOWA Pumping Limit
                     </b-form-checkbox>
                   </div>
                 </div>
@@ -183,137 +283,205 @@
         </b-col>
         <b-col lg="10">
           <div class="lg-map-container">
-            <l-map ref="myMap" :zoom="zoom" :center="center" :options="{zoomControl: false}">
-              <l-control-zoom position="topright"></l-control-zoom>
-              <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+            <l-map
+              ref="myMap"
+              :zoom="zoom"
+              :center="center"
+              :options="{zoomControl: false}"
+            >
+              <l-control-zoom position="topright" />
+              <l-tile-layer
+                :url="url"
+                :attribution="attribution"
+              />
 
               <l-tile-layer
-                  v-for="tileProvider in tileProviders"
-                  :key="tileProvider.name"
-                  :name="tileProvider.name"
-                  :visible="tileProvider.visible && tileProvider.mapType == selectedMapType"
-                  :url="tileProvider.url"
-                  :attribution="tileProvider.attribution"
-                  layer-type="base"/>
+                v-for="tileProvider in tileProviders"
+                :key="tileProvider.name"
+                :name="tileProvider.name"
+                :visible="tileProvider.visible && tileProvider.mapType == selectedMapType"
+                :url="tileProvider.url"
+                :attribution="tileProvider.attribution"
+                layer-type="base"
+              />
 
-              <l-layer-group layer-type="overlay"
-                             name="<font size=2 color=#5e6b7e><i><u><strong>Default Layers</strong></u></i></font>"
-                             v-on:change="myFunction($event)"></l-layer-group>
+              <l-layer-group
+                layer-type="overlay"
+                name="<font size=2 color=#5e6b7e><i><u><strong>Default Layers</strong></u></i></font>"
+                @change="myFunction($event)"
+              />
 
-              <l-layer-group v-if="sub_basins_layer_show == 'checked'" layer-type="overlay" :visible="defaultvisibility"
-                             name="<font size=2><strong>Sub-basins</strong></font>">
+              <l-layer-group
+                v-if="sub_basins_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Sub-basins</strong></font>"
+              >
                 <l-geo-json
-                    v-if="show"
-                    :geojson="geoJson_subbasin"
-                    :options="options"
-                    :options-style="styleFunction_subbasin"
+                  v-if="show"
+                  :geojson="geoJson_subbasin"
+                  :options="options"
+                  :options-style="styleFunction_subbasin"
                 />
               </l-layer-group>
 
-              <l-layer-group v-if="streams_layer_show == 'checked'" layer-type="overlay" :visible="defaultvisibility"
-                             name="<font size=2><strong>Streams</strong></font>">
+              <l-layer-group
+                v-if="streams_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Streams</strong></font>"
+              >
                 <l-geo-json
-                    v-if="show"
-                    :geojson="geoJson_reach"
-                    :options="options_noclick"
-                    :options-style="styleFunction_reach"
+                  v-if="show"
+                  :geojson="geoJson_reach"
+                  :options="options_noclick"
+                  :options-style="styleFunction_reach"
                 />
               </l-layer-group>
 
-              <l-layer-group layer-type="overlay"
-                             name="<font size=2 color=#5e6b7e><i><u><strong>Station Data</strong></u></i></font>"></l-layer-group>
+              <l-layer-group
+                layer-type="overlay"
+                name="<font size=2 color=#5e6b7e><i><u><strong>Station Data</strong></u></i></font>"
+              />
 
-              <l-layer-group v-if="reservoirs_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
-                             name="<font size=2><strong>Reservoirs</strong></font>">
+              <l-layer-group
+                v-if="reservoirs_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="stationvisibility"
+                name="<font size=2><strong>Reservoirs</strong></font>"
+              >
                 <l-marker
-                    v-for="reservoirStation in reservoirStationList"
-                    :key="reservoirStation.id"
-                    :lat-lng.sync="reservoirStation.position"
-                    :icon="reservoirIcon"
-                    :visible="true">
+                  v-for="reservoirStation in reservoirStationList"
+                  :key="reservoirStation.id"
+                  :lat-lng.sync="reservoirStation.position"
+                  :icon="reservoirIcon"
+                  :visible="true"
+                >
                   <l-popup>
-                    <popup-content-rs :data="reservoirStation" :pcpdata="ReservoirData"/>
+                    <popup-content-rs
+                      :data="reservoirStation"
+                      :pcpdata="ReservoirData"
+                    />
                   </l-popup>
                 </l-marker>
               </l-layer-group>
 
-              <l-layer-group v-if="gauging_stations_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
-                             name="<font size=2><strong>Gauging stations</strong></font>">
+              <l-layer-group
+                v-if="gauging_stations_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="stationvisibility"
+                name="<font size=2><strong>Gauging stations</strong></font>"
+              >
                 <l-marker
-                    v-for="gaugingStation in gaugingStationList"
-                    :key="gaugingStation.id"
-                    :lat-lng.sync="gaugingStation.position"
-                    :icon="gaugingIcon"
-                    :visible="true">
+                  v-for="gaugingStation in gaugingStationList"
+                  :key="gaugingStation.id"
+                  :lat-lng.sync="gaugingStation.position"
+                  :icon="gaugingIcon"
+                  :visible="true"
+                >
                   <l-popup>
-                    <popup-content-gs :data="gaugingStation" :pcpdata="GaugeData"/>
+                    <popup-content-gs
+                      :data="gaugingStation"
+                      :pcpdata="GaugeData"
+                    />
                   </l-popup>
                 </l-marker>
               </l-layer-group>
 
-              <l-layer-group v-if="weather_stations_layer_show == 'checked'" layer-type="overlay" :visible="stationvisibility"
-                             name="<font size=2><strong>Weather stations</strong></font>">
+              <l-layer-group
+                v-if="weather_stations_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="stationvisibility"
+                name="<font size=2><strong>Weather stations</strong></font>"
+              >
                 <l-marker
-                    v-for="weatherStation in weatherStationList"
-                    :key="weatherStation.id"
-                    :lat-lng.sync="weatherStation.position"
-                    :icon="wstationIcon"
-                    :visible="true">
+                  v-for="weatherStation in weatherStationList"
+                  :key="weatherStation.id"
+                  :lat-lng.sync="weatherStation.position"
+                  :icon="wstationIcon"
+                  :visible="true"
+                >
                   <l-popup>
-                    <popup-content-ws :data="weatherStation" :pcpdata="PrecipData"/>
+                    <popup-content-ws
+                      :data="weatherStation"
+                      :pcpdata="PrecipData"
+                    />
                   </l-popup>
                 </l-marker>
               </l-layer-group>
 
-              <l-layer-group layer-type="overlay"
-                             name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"></l-layer-group>
+              <l-layer-group
+                layer-type="overlay"
+                name="<font size=2 color=#5e6b7e><i><u><strong>Additional Layers</strong></u></i></font>"
+              />
 
-              <l-layer-group v-if="gw_restricted_areas_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
-                             name="<font size=2><strong>GW Restricted Areas</strong></font>">
+              <l-layer-group
+                v-if="gw_restricted_areas_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="otherlayersvisibility"
+                name="<font size=2><strong>GW Restricted Areas</strong></font>"
+              >
                 <l-geo-json
-                    v-if="show"
-                    :geojson="geoJson_gwrestricted"
-                    :options="options_noclick"
-                    :options-style="styleFunction_gwrestricted"
+                  v-if="show"
+                  :geojson="geoJson_gwrestricted"
+                  :options="options_noclick"
+                  :options-style="styleFunction_gwrestricted"
                 />
               </l-layer-group>
 
-              <l-layer-group v-if="tribal_lands_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
-                             name="<font size=2><strong>Tribal Lands</strong></font>">
+              <l-layer-group
+                v-if="tribal_lands_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="otherlayersvisibility"
+                name="<font size=2><strong>Tribal Lands</strong></font>"
+              >
                 <l-geo-json
-                    v-if="show"
-                    :geojson="geoJson_triballand"
-                    :options="options_noclick"
-                    :options-style="styleFunction_triballand"
+                  v-if="show"
+                  :geojson="geoJson_triballand"
+                  :options="options_noclick"
+                  :options-style="styleFunction_triballand"
                 />
               </l-layer-group>
 
-              <l-layer-group v-if="nowa_pumping_limit_layer_show == 'checked'" layer-type="overlay" :visible="otherlayersvisibility"
-                             name="<font size=2><strong>NOWA Pumping Limit</strong></font>">
+              <l-layer-group
+                v-if="nowa_pumping_limit_layer_show == 'checked'"
+                layer-type="overlay"
+                :visible="otherlayersvisibility"
+                name="<font size=2><strong>NOWA Pumping Limit</strong></font>"
+              >
                 <l-geo-json
-                    v-if="show"
-                    :geojson="geoJson_pumping_limit"
-                    :options="options_noclick"
-                    :options-style="styleFunction_pumping_limit"
-
+                  v-if="show"
+                  :geojson="geoJson_pumping_limit"
+                  :options="options_noclick"
+                  :options-style="styleFunction_pumping_limit"
                 />
               </l-layer-group>
 
-
-              <l-control-scale position="bottomright" :maxWidth="200" imperial="imperial"/>
+              <l-control-scale
+                position="bottomright"
+                :max-width="200"
+                imperial="imperial"
+              />
               <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
               <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
 
-              <l-control-layers v-if="ResultsMap" position="topright" ref="layersControl"
-                                :sort-layers="false"></l-control-layers>
-              <l-layer-group ref="RegionalMap" v-if="ResultsMap" layer-type="overlay"
-                             name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>">
+              <l-control-layers
+                v-if="ResultsMap"
+                ref="layersControl"
+                position="topright"
+                :sort-layers="false"
+              />
+              <l-layer-group
+                v-if="ResultsMap"
+                ref="RegionalMap"
+                layer-type="overlay"
+                name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>"
+              >
                 <l-geo-json
-                    v-if="RegionHeatMap"
-                    :geojson="geoJson_subbasin"
-                    :options="options_heatmap"
-                    :options-style="getStyle_HeatMap"
-
+                  v-if="RegionHeatMap"
+                  :geojson="geoJson_subbasin"
+                  :options="options_heatmap"
+                  :options-style="getStyle_HeatMap"
                 />
               </l-layer-group>
 
@@ -344,15 +512,16 @@
 
                   </template>
               </l-choropleth-layer>-->
-
-
             </l-map>
           </div>
         </b-col>
       </b-row>
     </b-container>
-    <component v-bind:is="component='Footer'"></component>
-    <component v-show="!regionalSummaryVisibility" v-bind:is="component='regional-summary'"></component>
+    <component :is="component='Footer'" />
+    <component
+      :is="component='regional-summary'"
+      v-show="!regionalSummaryVisibility"
+    />
   </div>
 </template>
 
@@ -372,7 +541,7 @@ import {
   LControlScale,
   LLayerGroup,
   LPopup,
-  LControlZoom
+  LControlZoom,
 } from 'vue2-leaflet';
 import L from 'leaflet';
 
@@ -392,8 +561,8 @@ import RegionalSummary from '../projects/popup/RegionalSummary.vue';
 
 import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
 
-import paraguayGeojson from '../../../../public/static/BASIN_Irrigation_basins_data.json'
-import {pyDepartmentsData} from '../../../../public/static/py-departments-data'
+import paraguayGeojson from '../../../../public/static/BASIN_Irrigation_basins_data.json';
+import {pyDepartmentsData} from '../../../../public/static/py-departments-data';
 
 export default {
   name: 'Visualize',
@@ -463,14 +632,14 @@ export default {
         iconSize: [27, 27], // size of the icon
         shadowSize: [0, 0], // size of the shadow
         iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-        shadowAnchor: [0, 0]  // the same for the shadow
+        shadowAnchor: [0, 0], // the same for the shadow
       }),
       wstationIcon: L.icon({
         iconUrl: require('../../../../public/static/img/OSU_icon_rain_01.png'),
         iconSize: [27, 27], // size of the icon
         shadowSize: [0, 0], // size of the shadow
         iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-        shadowAnchor: [0, 0]  // the same for the shadow
+        shadowAnchor: [0, 0], // the same for the shadow
       }),
 
       gaugingIcon: L.icon({
@@ -478,7 +647,7 @@ export default {
         iconSize: [27, 27], // size of the icon
         shadowSize: [0, 0], // size of the shadow
         iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-        shadowAnchor: [0, 0]  // the same for the shadow
+        shadowAnchor: [0, 0], // the same for the shadow
       }),
 
       subbasinID: null,
@@ -497,22 +666,22 @@ export default {
           name: "<font size=2><strong>Street Map</strong></font>",
           visible: true,
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         },
         {
           mapType: 'satellite',
           name: "<font size=2><strong>Satellite</strong></font>",
           visible: true,
           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-          url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+          url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
         },
         {
           mapType: 'terrain_map',
           name: "<font size=2><strong>Terrain Map",
           visible: true,
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
-        }
+          url: "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png",
+        },
       ],
 
       customPopup: "<div class=\"region_summary_popup\">" +
@@ -527,23 +696,23 @@ export default {
           'font-size': '15px',
           'maxWidth': '1000px',
           'width': '500px',
-          'className': 'custom'
-        }
+          'className': 'custom',
+        },
       ],
 
       colorScale: ["e7d090", "e9ae7b", "de7062"],
       value: {
         key: "amount_w",
-        metric: "% of SW Reduction"
+        metric: "% of SW Reduction",
       },
       extraValues: [{
         key: "amount_m",
-        metric: "% of GW Reduction"
+        metric: "% of GW Reduction",
       }],
 
       mapOptions: {attributionControl: false},
       currentStrokeColor: '3d3213',
-      selectedProject:{},
+      selectedProject: {},
       selectedMapType: 'terrain_map',
       sub_basins_layer_show: 'checked',
       streams_layer_show: 'checked',
@@ -553,7 +722,7 @@ export default {
       gw_restricted_areas_layer_show: 'checked',
       tribal_lands_layer_show: 'checked',
       nowa_pumping_limit_layer_show: 'checked',
-    }
+    };
   },
 
   computed: {
@@ -562,7 +731,7 @@ export default {
     //},
     options() {
       return {
-        onEachFeature: this.onEachFeatureFunction
+        onEachFeature: this.onEachFeatureFunction,
       };
     },
 
@@ -572,13 +741,13 @@ export default {
 
     options_wrrights() {
       return {
-        onEachFeature: this.GetWRcolor
+        onEachFeature: this.GetWRcolor,
       };
     },
 
     options_heatmap() {
       return {
-        onEachFeature: this.getHeatMapColor_Perct
+        onEachFeature: this.getHeatMapColor_Perct,
       };
     },
 
@@ -590,7 +759,7 @@ export default {
           color: "#3386ff",
           opacity: 1,
           fillColor: fillColor,
-          fillOpacity: 1
+          fillOpacity: 1,
         };
       };
     },
@@ -603,7 +772,7 @@ export default {
           color: "#e773e1",
           opacity: 1,
           fillColor: fillColor,
-          fillOpacity: 1
+          fillOpacity: 1,
         };
       };
     },
@@ -617,7 +786,7 @@ export default {
           fillColor: "#e3dddd",
           dashArray: '5, 5',
           dashOffset: '10',
-          fillOpacity: 0.5
+          fillOpacity: 0.5,
         };
       };
     },
@@ -629,7 +798,7 @@ export default {
           color: "#7c7c7c",
           opacity: 0,
           fillColor: "#3386ff",
-          fillOpacity: 1
+          fillOpacity: 1,
         };
       };
     },
@@ -641,7 +810,7 @@ export default {
           color: "#7c7c7c",
           opacity: 0.4,
           fillColor: "#eb984e",
-          fillOpacity: 0.6
+          fillOpacity: 0.6,
         };
       };
     },
@@ -655,7 +824,7 @@ export default {
           fillColor: "#00cccc",
           dashArray: '5, 5',
           dashOffset: '10',
-          fillOpacity: 0.6
+          fillOpacity: 0.6,
         };
       };
     },
@@ -669,7 +838,7 @@ export default {
           fillColor: "#aff479",
           dashArray: '5, 5',
           dashOffset: '10',
-          fillOpacity: 0.6
+          fillOpacity: 0.6,
         };
       };
     },
@@ -681,7 +850,7 @@ export default {
           color: "#ffffff",
           opacity: 1,
           fillOpacity: 0.7,
-          fillColor: '#8c2d04'
+          fillColor: '#8c2d04',
         };
       };
     },
@@ -706,7 +875,7 @@ export default {
           layer.setStyle({fillColor: '#ffffe5'});
 
         }
-        ;
+
       };
     },
 
@@ -727,7 +896,7 @@ export default {
           layer.setStyle({fillColor: '#ffffe5'});
           layer.setStyle({fillOpacity: "0"});
         }
-        ;
+
       };
     },
 
@@ -744,9 +913,9 @@ export default {
           layer.setStyle({fillOpacity: "0"});
         }
 
-        layer.on('click', function (e) {
+        layer.on('click', function(e) {
         });
-      }
+      };
     },
 
     onEachFeatureFunction() {
@@ -757,10 +926,10 @@ export default {
       }
       return (feature, layer) => {
         layer.bindTooltip(
-            "<div><strong>Click and explore!</strong>",
+          "<div><strong>Click and explore!</strong>",
         );
 
-        layer.on('click', function (e) {
+        layer.on('click', function(e) {
           EventBus.$emit('SELECTED_BASIN', feature.properties.Name);
 
           var layer = e.target;
@@ -772,7 +941,7 @@ export default {
               fillColor: "#e3dddd",
               dashArray: '5, 5',
               dashOffset: '10',
-              fillOpacity: 0.5
+              fillOpacity: 0.5,
             });
           }
           if (prevLayerClicked !== layer) {
@@ -786,12 +955,12 @@ export default {
         });
 
       };
-    }
+    },
   },
 
   mounted() {
     const { utils } = AiravataAPI;
-    this.projectId = this.$route.params.projectId
+    this.projectId = this.$route.params.projectId;
     let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
     if (adaptationPlan) {
       adaptationPlan.projectId = this.projectId;
@@ -801,18 +970,17 @@ export default {
 
     // TODO: call the /interactwel/api/projects/{project_id} to get the specific project
     utils.FetchUtils.get("/interactwel/api/projects/")
-        .then(projects=>{
-          this.selectedProject=projects.find(project=>{
-            return project.project_id==this.projectId
-          });
-        })
-        .catch(error => {
-          alert("Could not get the project. API error! " + error);
+      .then(projects=>{
+        this.selectedProject = projects.find(project=>{
+          return project.project_id == this.projectId;
         });
-
+      })
+      .catch(error => {
+        alert("Could not get the project. API error! " + error);
+      });
 
     let $this = this;
-    EventBus.$on('SELECTED_BASIN', function (selectedBasinID) {
+    EventBus.$on('SELECTED_BASIN', function(selectedBasinID) {
 
       $this.regionalSummaryVisibility = true;
 
@@ -820,23 +988,23 @@ export default {
         $this.regionalSummaryVisibility = true;
       }
       if ($this.prevLayerClicked !== selectedBasinID) {
-        $this.createRegionSummary(selectedBasinID)
+        $this.createRegionSummary(selectedBasinID);
         $this.regionalSummaryVisibility = false;
         $this.prevLayerClicked = selectedBasinID;
       } else {
         $this.regionalSummaryVisibility = true;
         $this.prevLayerClicked = null;
       }
-    }), EventBus.$on('CLOSE', function () {
-      $this.regionalSummaryVisibility = true
-    })
+    }), EventBus.$on('CLOSE', function() {
+      $this.regionalSummaryVisibility = true;
+    });
 
     //const map = this.$refs.myMap.mapObject;
-    EventBus.$on('START_RESULTSMAP', function () {
+    EventBus.$on('START_RESULTSMAP', function() {
       var active = [];
       var default_selected_layers = [];
       var i;
-      active = $('.leaflet-control-layers-selector')
+      active = $('.leaflet-control-layers-selector');
       for (i = 3; i < active.length; i++) {
         //if ($this.unchecked_layers.includes(active[i].labels[0].innerText)==false && active[i].checked==true){
         if (active[i].checked == true && $this.default_selected_layers.includes(active[i].labels[0].innerText) == false) {
@@ -848,39 +1016,39 @@ export default {
       $this.default_selected_layers = default_selected_layers;
     }),
 
-        EventBus.$on('START_REGIONHEATMAP', function () {
-          var active = [];
-          var i;
-          active = $('.leaflet-control-layers-selector')
-          for (i = $this.default_num_layers; i < active.length; i++) {
-            if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
-              $('.leaflet-control-layers-selector')[i].hidden = true;
-            }
-          }
-          $this.RegionHeatMap = true;
-        }),
+    EventBus.$on('START_REGIONHEATMAP', function() {
+      var active = [];
+      var i;
+      active = $('.leaflet-control-layers-selector');
+      for (i = $this.default_num_layers; i < active.length; i++) {
+        if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
+          $('.leaflet-control-layers-selector')[i].hidden = true;
+        }
+      }
+      $this.RegionHeatMap = true;
+    }),
 
-        EventBus.$on('HIDE_RESULTSMAP', function () {
-          var active = [];
-          var i;
-          active = $('.leaflet-control-layers-selector')
-          for (i = 0; i < active.length; i++) {
+    EventBus.$on('HIDE_RESULTSMAP', function() {
+      var active = [];
+      var i;
+      active = $('.leaflet-control-layers-selector');
+      for (i = 0; i < active.length; i++) {
 
-            if ($this.default_selected_layers.includes(active[i].labels[0].innerText) == true) {
-              $('.leaflet-control-layers-selector')[i].click();
-            }
+        if ($this.default_selected_layers.includes(active[i].labels[0].innerText) == true) {
+          $('.leaflet-control-layers-selector')[i].click();
+        }
 
-            if (i >= $this.default_num_layers && active[i].checked == true) {
-              $('.leaflet-control-layers-selector')[i].click();
-            }
+        if (i >= $this.default_num_layers && active[i].checked == true) {
+          $('.leaflet-control-layers-selector')[i].click();
+        }
 
-            if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
-              $('.leaflet-control-layers-selector')[i].hidden = true;
-            }
-          }
-          $this.RegionHeatMap = false;
-          $this.ResultsMap = false;
-        })
+        if ($this.title_layers.includes(active[i].labels[0].innerText) == true) {
+          $('.leaflet-control-layers-selector')[i].hidden = true;
+        }
+      }
+      $this.RegionHeatMap = false;
+      $this.ResultsMap = false;
+    });
   },
 
   beforeDestroy() {
@@ -890,42 +1058,42 @@ export default {
   created() {
     this.loading = true;
     axios.get("/static/subbasins.geojson")
-        .then(response => {
-          this.geoJson_subbasin = response.data;
-          this.loading = true;
-        })
+      .then(response => {
+        this.geoJson_subbasin = response.data;
+        this.loading = true;
+      });
     axios.get("/static/reaches.geojson")
-        .then(response => {
-          this.geoJson_reach = response.data;
-          this.loading = true;
-        })
+      .then(response => {
+        this.geoJson_reach = response.data;
+        this.loading = true;
+      });
     axios.get("/static/NOWA_Pumping_Limit.geojson")
-        .then(response => {
-          this.geoJson_pumping_limit = response.data;
-          this.loading = true;
-        })
+      .then(response => {
+        this.geoJson_pumping_limit = response.data;
+        this.loading = true;
+      });
     axios.get("/static/irrigated_land.geojson")
-        .then(response => {
-          this.geoJson_irrland = response.data;
-          this.loading = true;
-        })
+      .then(response => {
+        this.geoJson_irrland = response.data;
+        this.loading = true;
+      });
     axios.get("/static/Tribal_Lands.geojson")
-        .then(response => {
-          this.geoJson_triballand = response.data;
-          this.loading = true;
-        })
+      .then(response => {
+        this.geoJson_triballand = response.data;
+        this.loading = true;
+      });
 
     axios.get("/static/GW_Restricted_Areas_Umatilla.geojson")
-        .then(response => {
-          this.geoJson_gwrestricted = response.data;
-          this.loading = true;
-        })
+      .then(response => {
+        this.geoJson_gwrestricted = response.data;
+        this.loading = true;
+      });
 
     axios.get("/static/water_rigths.geojson")
-        .then(response => {
-          this.geoJson_WaterRigths = response.data;
-          this.loading = true;
-        });
+      .then(response => {
+        this.geoJson_WaterRigths = response.data;
+        this.loading = true;
+      });
 
     // var active = [];
     // var i;
@@ -995,9 +1163,9 @@ export default {
       this.isStep1Active = false;
       this.istutor2Visible = true;
     },
-  }
+  },
 
-}
+};
 
 </script>
 
