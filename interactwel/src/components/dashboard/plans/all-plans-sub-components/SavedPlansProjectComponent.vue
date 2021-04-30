@@ -39,7 +39,7 @@
 
                 <b-list-group-item class="flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Actors Actions</h5>
+                    <h5 class="mb-1">Actors</h5>
                     <small class="text-muted"> {{plan.actors.length}} Actors Selected</small>
                   </div>
                   <small>
