@@ -60,10 +60,6 @@ export default {
     loadTabContent(planId) {
       this.$router.push('/all-plans/' + planId);
     },
-
-    visualizePlan(planId) {
-      this.$router.push('/adaptation-plans/1/plans/' + planId + '/actions');
-    }
   },
 };
 </script>

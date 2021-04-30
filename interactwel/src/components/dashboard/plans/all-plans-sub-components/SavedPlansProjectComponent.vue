@@ -164,7 +164,7 @@ export default {
     },
 
     visualizePlan(planId) {
-      this.$router.push('/adaptation-plans/1/plans/' + planId + '/actions');
+      this.$router.push('/plans/' + planId);
     },
 
     getGoalName(goalId) {

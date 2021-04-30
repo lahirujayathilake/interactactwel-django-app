@@ -5,7 +5,7 @@ import Router from 'vue-router'
 const Dashboard = () => import('@/components/Dashboard')
 
 const AllPlans = () => import('@/components/dashboard/plans/AllPlans')
-const MyPlans = () => import('@/components/dashboard/MyPlans')
+const Plan = () => import('@/components/dashboard/plans/Plan')
 const NewPlan = () => import('@/components/dashboard/plans/NewPlan')
 const SavedPlans = () => import('@/components/dashboard/plans/SavedPlans')
 const ProjectPlansList = () => import('@/components/dashboard/plans/ProjectPlansList')
@@ -86,10 +86,10 @@ export default new Router({
             component: AllPlans,
         },
         {
-            path: '/plans',
+            path: '/plans/:planId',
             //redirect: '/pages/404',
-            name: 'MyPlans',
-            component: MyPlans,
+            name: 'Plan',
+            component: Plan,
             children: [
                 {
                     path: 'new-plan',

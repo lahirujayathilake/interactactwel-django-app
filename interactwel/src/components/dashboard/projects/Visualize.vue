@@ -379,11 +379,6 @@
 
         data() {
             return {
-                isModalVisible: true,
-                isStep1Active: false,
-                isStep2Active: false,
-                istutor1Visible: false,
-                istutor2Visible: false,
 
                 geoJson_reach: null,
                 geoJson_subbasin: null,
@@ -507,7 +502,7 @@
                 mapOptions: {attributionControl: false},
                 currentStrokeColor: '3d3213',
                 selectedProject:{},
-              selectedMapType: 'street_map',
+              selectedMapType: 'terrain_map',
               sub_basins_layer_show: 'checked',
               streams_layer_show: 'checked',
               reservoirs_layer_show: 'checked',
