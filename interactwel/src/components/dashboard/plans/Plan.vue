@@ -672,6 +672,7 @@ export default {
           mapType: 'satellite',
           name: "<font size=2><strong>Satellite</strong></font>",
           visible: true,
+          // eslint-disable-next-line max-len
           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
           url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
         },
@@ -1128,7 +1129,8 @@ export default {
                   $('.leaflet-control-layers-selector')[i].click();
               }
 
-              //if (this.title_layers.includes(active[i].labels[0].innerText)==true && active[i].labels[0].innerText !== this.title_layers[0]){
+              //if (this.title_layers.includes(active[i].labels[0].innerText)
+              ==true && active[i].labels[0].innerText !== this.title_layers[0]){
               if (this.title_layers.includes(active[i].labels[0].innerText)==true){
                   $('.leaflet-control-layers-selector')[i].hidden=true;
                   //$('.leaflet-control-layers-selector')[i].click();

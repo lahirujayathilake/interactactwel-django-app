@@ -209,7 +209,7 @@ export default {
     },
 
     visualizePlan(planId) {
-      this.$router.push('/plans/' + planId);
+      this.$router.push('/plans/' + this.project.project_id + '/' + planId);
     },
 
     getGoalName(goalId) {

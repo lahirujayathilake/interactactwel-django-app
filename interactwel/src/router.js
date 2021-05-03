@@ -85,7 +85,7 @@ export default new Router({
       component: AllPlans,
     },
     {
-      path: '/plans/:planId',
+      path: '/plans/:projectId/:planId',
       //redirect: '/pages/404',
       name: 'Plan',
       component: Plan,
