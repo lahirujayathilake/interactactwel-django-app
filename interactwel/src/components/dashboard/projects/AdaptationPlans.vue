@@ -11,7 +11,7 @@
           v-show="!isWizardFlowStarted"
           class="btn-sm mr-3"
           variant="outline-light"
-          @click="$router.push('/all-plans')"
+          @click="$router.push('/all-plans/'+ $route.params.projectId)"
         >
           <i class="fa fa-chevron-left" /> Plans
         </b-button>
