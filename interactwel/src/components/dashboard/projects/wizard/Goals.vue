@@ -330,7 +330,7 @@ export default {
       }
       this.$store.commit("setSelectedGoals", this.selectedGoals);
       this.$store.commit("step1", true);
-      this.$router.push('/adaptation-plans/' + this.projectId + '/actors');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/actors/?wizard=true');
       return true;
     },
 
@@ -338,7 +338,7 @@ export default {
       this.selectGoals();
       this.$store.commit("setSelectedGoals", this.selectedGoals);
       this.$store.commit("step1", true);
-      this.$router.push('/adaptation-plans/' + this.projectId + '/actors');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/actors/?wizard=true');
     },
   },
 

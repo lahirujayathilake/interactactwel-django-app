@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
- 
+
 Vue.use(Vuex);
- 
+
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       state.currentAdaptationPlan.selectedActors = payload;
     },
     setSelectedActions(state, payload){
-      state.currentAdaptationPlan.selectedActions = payload;        
+      state.currentAdaptationPlan.selectedActions = payload;
     },
     setFeedbackProvided(state, payload){
       state.feedbackProvided = payload;
@@ -58,9 +58,6 @@ export default new Vuex.Store({
     },
     setStep4(state, payload){
       state.step4 = payload;
-    },
-    setWizardFlowStarted(state, payload){
-      state.wizardFlowStarted = payload;
     },
     resetWizardFlow(state, payload){
       state.feedbackProvided = false;

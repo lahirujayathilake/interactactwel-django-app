@@ -297,11 +297,11 @@ export default {
   methods: {
     next(){
       localStorage.setItem('step4', true);
-      this.$router.push('/adaptation-plans/' + this.projectId + '/share');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/share/?wizard=true');
 
     },
     back(){
-      this.$router.push('/adaptation-plans/' + this.projectId + '/actions');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/actions/?wizard=true');
     },
     onSubmit(evt) {
       evt.preventDefault();

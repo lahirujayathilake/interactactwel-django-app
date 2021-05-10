@@ -738,16 +738,8 @@ export default {
 
   mounted() {
     const { utils } = AiravataAPI;
-    this.isWizardFlowStarted = 'true' == localStorage.getItem('adaptation_wizardStarted');
+    this.isWizardFlowStarted = 'true' === this.$route.query.wizard;
     this.projectId = this.$route.params.projectId;
-    // let adaptationPlan = JSON.parse(localStorage.getItem("adaptationPlan"));
-    // if (adaptationPlan) {
-    //     adaptationPlan.projectId = this.projectId;
-    // } else {
-    //     localStorage.setItem('adaptationPlan', JSON.stringify({'projectId': this.projectId}));
-    // }
-
-    this.$store.commit("setWizardFlowStarted", false);
 
     this.$store.commit("setProjectId", this.projectId);
 
@@ -926,13 +918,12 @@ export default {
       EventBus.$emit('CREATE_REGION_SUMMARY', subbasinID);
     },
     startWizard(projectId){
-      localStorage.setItem('adaptation_wizardStarted', true);
       this.isWizardFlowStarted = true;
       this.$store.commit("setWizardFlowStarted", true);
       this.$store.commit("resetWizardFlow", null);
       this.startBtn = false;
       this.exitBtn = true;
-      this.$router.push('/adaptation-plans/' + this.projectId + '/goals');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/goals/?wizard=true');
     },
 
     exitWizard(projectId){

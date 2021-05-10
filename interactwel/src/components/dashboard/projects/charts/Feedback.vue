@@ -202,7 +202,7 @@ export default {
       localStorage.setItem('step4', true);
     },
     back(){
-      this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/actions');
+      this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/actions?wizard=true');
     },
     async submitFeedback(evt) {
       evt.preventDefault();

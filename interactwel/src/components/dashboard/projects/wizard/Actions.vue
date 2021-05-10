@@ -372,17 +372,17 @@ export default {
 
       this.$store.commit("setSelectedActions", this.selectedActions);
       this.$store.commit("step3", true);
-      this.$router.push('/adaptation-plans/' + this.projectId + '/plans/overview');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/plans/overview/?wizard=true');
     },
 
     back(){
-      this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/actors');
+      this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/actors/?wizard=true');
     },
     onConfirm() {
       this.selectActions();
       this.$store.commit("setSelectedActions", this.selectedActions);
       this.$store.commit("step3", true);
-      this.$router.push('/adaptation-plans/' + this.projectId + '/plans/overview');
+      this.$router.push('/adaptation-plans/' + this.projectId + '/plans/overview/?wizard=true');
     },
 
     CheckActorsActions(){

@@ -239,7 +239,7 @@ export default {
     },
 
     back() {
-      this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/plans/overview');
+      this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/plans/overview/?wizard=true');
     },
 
     async savePlan(planId) {
