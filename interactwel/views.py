@@ -500,6 +500,11 @@ class SelectedPlanViewSet(viewsets.ViewSet):
         plan_id = self.request.query_params.get('plan_id', None)
         if plan_id is not None:
             queryset = queryset.filter(plan_id=plan_id)
+
+        user_id = self.request.query_params.get('user_id', None)
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
+
         return queryset
 
 class PlanActorActionsViewSet(viewsets.ViewSet):
