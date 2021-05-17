@@ -118,7 +118,10 @@
               </b-list-group>
               <div class="d-block flex-column col-md-12 col-lg-6 col-sm-12">
                 <b-card>
-                  <actions-graph :adaptation-plan-id="plan.plan_id" />
+                  <actions-graph
+                    :selected-actors="getActorsList(plan.actors)"
+                    :adaptation-plan-id="plan.plan_id"
+                  />
                 </b-card>
               </div>
               <div class="d-block col-lg-3 col-md-12 col-sm-12">
@@ -239,6 +242,15 @@ export default {
       }
 
       return [];
+    },
+
+    getActorsList(actorIds) {
+      if (actorIds && this.actors) {
+        return this.actors.filter(actor => actorIds.includes(actor.actor_id))
+      }
+
+      return {};
+
     },
   },
 };

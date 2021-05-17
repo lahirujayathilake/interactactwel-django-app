@@ -3,39 +3,64 @@
     <b-button
       variant="secondary"
       size="sm"
+      @click="showActionsGraph()"
     >
-      <i
-        class="fas fa-search-plus"
-        @click="showActionsGraph()"
-      />
+      <i class="fas fa-search-plus" />
     </b-button>
-    <actions-graph-modal
-      v-show="isModalVisible"
-      @close="closeModal"
-    />
     <line-chart
       :chart-data="datacollection"
       :options="options"
       :width="650"
       :height="400"
     />
+    <div
+      v-show="isModalVisible"
+      id="actions-graph-modal"
+      class="modal-backdrop"
+    >
+      <div class="modal modal-lg">
+        <section class="modal-body">
+          <slot name="body">
+            <line-chart
+              :chart-data="datacollection"
+              :options="options"
+              :width="650"
+              :height="400"
+            />
+          </slot>
+        </section>
+        <footer class="modal-footer">
+          <slot name="footer">
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              @click="closeModal"
+            >
+              Close
+            </button>
+          </slot>
+        </footer>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import ActionsGraphModal from './../../intro/ActionsGraphModal.vue';
 import LineChart from "../lib/LineChart";
 
 export default {
   name: 'ActionsGraphSteppedLines',
 
   components: {
-    LineChart, ActionsGraphModal,
+    LineChart,
   },
 
   props: {
     adaptationPlanId: {
       type: Number,
+    },
+    selectedActors: {
+      type: Object,
     },
   },
 
@@ -108,7 +133,7 @@ export default {
     if (!this.planId){
       this.planId = localStorage.getItem('currentPlanId');
     }
-    this.adaptationPlan = this.$store.state.currentAdaptationPlan || {};
+    this.selectedActors = this.selectedActors || this.$store.state.currentAdaptationPlan.selectedActors || {};
     localStorage.setItem('currentPlanId', '');
     this.buildDataCollection();
 
@@ -122,7 +147,7 @@ export default {
     buildDataCollection() {
       const {utils} = AiravataAPI; // eslint-disable-line
       const colors = ['#43AA8B', '#F9C74F', '#F3722C', '#277DA1'];
-      const selectedActorNames = this.adaptationPlan.selectedActors.map(actor => actor.name) || [];
+      const selectedActorNames = this.selectedActors.map(actor => actor.name) || [];
       utils.FetchUtils.get("/interactwel/api/plans/?plan_id=" + this.planId).then(result => {
         this.datacollection = {};
         if (result.length < 1 || !result[0].plan_json) {
@@ -130,9 +155,10 @@ export default {
         }
         const json = JSON.parse(result[0].plan_json);
         this.datacollection.labels = json.Years;
-        this.datacollection.datasets = json.Data.filter(
+        const filteredData = json.Data.filter(
           dataSeries => selectedActorNames.includes(dataSeries.Actor)
-        ).map((dataSeries, index)=>{
+        );
+        this.datacollection.datasets = filteredData.map((dataSeries, index)=>{
           const backgroundColor = colors.length > index ? colors[index] : "#" + ((1 << 24) * Math.random() | 0).toString(16);
           const borderColor = backgroundColor;
           const hoverBackgroundColor = '#000000';
