@@ -107,3 +107,4 @@ POST http://localhost:8000/api/subbasins/
     "detail_json": <JSON COntent>
 }
 ```
+ 
