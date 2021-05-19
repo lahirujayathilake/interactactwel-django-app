@@ -60,7 +60,7 @@ export default {
       type: Number,
     },
     selectedActors: {
-      type: Object,
+      type: Array,
     },
   },
 

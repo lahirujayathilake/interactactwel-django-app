@@ -17,7 +17,7 @@
       </div>
       <div v-if="feedback.rating != null">
         <star-rating
-          :rating="feedback.rating"
+          :rating="parseInt(feedback.rating)"
           read-only
         />
       </div>
