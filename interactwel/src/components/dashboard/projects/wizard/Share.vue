@@ -177,24 +177,32 @@ export default {
           key: 'plan',
           label: 'Adaptation Plan',
           sortable: true,
+          tdClass: 'align-middle',
         },
         {
           key: 'q1',
           label: 'Do you think the actions and time frames presented in this plan are feasible?',
           sortable: false,
+          tdClass: 'align-middle',
         },
         {
           key: 'q2',
           label: 'Please share any additional thoughts about the alternative plans or the plan builder tool',
           sortable: false,
+          tdClass: 'align-middle',
         },
         {
           key: 'rating',
           label: 'Overall rating',
           sortable: true,
+          tdClass: 'align-middle',
         },
         /*{key: 'download', label: ''},*/
-        {key: 'save', label: ''},
+        {
+          key: 'save',
+          label: '',
+          tdClass: 'align-middle',
+        },
       ],
       tableRow: [],
       adaptationPlan: [],
