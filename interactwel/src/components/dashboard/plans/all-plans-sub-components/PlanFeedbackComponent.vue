@@ -69,14 +69,16 @@ export default {
   },
   mounted() {
     const {utils} = AiravataAPI;
-    utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id=" + this.selectedPlan.plan_id).then(result => {
-      if (result.length > 0) {
-        this.feedback = result[0];
+    const planId = this.selectedPlan.plan_id || this.$route.params.planId;
+    utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id=" + planId)
+      .then(result => {
+        if (result.length > 0) {
+          this.feedback = result[0];
+        }
       }
-    }
-    ).catch(error => {
-      alert("Failed to fetch feedbacks " + error);
-    });
+      ).catch(error => {
+        alert("Failed to fetch feedbacks " + error);
+      });
   },
 };
 </script>
