@@ -19,7 +19,7 @@
         View Project Data
       </b-button>
     </div>
-    <b-card v-if="false">
+    <b-card v-if="!plans.length">
       <b-card-body title="You don't have access to any saved plans">
         <b-card-text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.

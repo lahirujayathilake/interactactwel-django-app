@@ -196,3 +196,42 @@ export default {
   },
 };
 </script>
+
+<style>
+
+#actions-graph-modal .modal {
+  background: #FFFFFF;
+  box-shadow: 2px 2px 20px 1px;
+  height: auto;
+  overflow: auto;
+  position: fixed;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+}
+
+#actions-graph-modal .modal-header {
+  border-bottom: 1px solid #eeeeee;
+  color: #4cae4c;
+  justify-content: space-between;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#actions-graph-modal .modal-footer {
+  justify-content: flex-end;
+}
+
+#actions-graph-modal .modal-body {
+  position: relative;
+  padding: 30px 40px;
+  font-size: 16px;
+}
+#actions-graph-modal.modal-backdrop{
+  background-color: rgba(0, 0, 0, 0.42);
+}
+
+</style>

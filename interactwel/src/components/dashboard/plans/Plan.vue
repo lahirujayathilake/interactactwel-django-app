@@ -13,7 +13,7 @@
         <b-navbar-toggle target="nav-text-collapse" />
         <b-navbar-brand>
           <h5>
-            Umatilla Region Adapts To Changes In Allocation Of Water For irrigation
+            {{ selectedProject.name }}
             <br><small class="text-muted">Adaptation Plan {{ this.$route.params.planId }}</small>
           </h5>
         </b-navbar-brand>
@@ -21,11 +21,6 @@
           id="nav-text-collapse"
           is-nav
         >
-          <b-navbar-nav>
-            <b-nav-text>
-              <strong>{{ selectedProject.name }}</strong>
-            </b-nav-text>
-          </b-navbar-nav>
         </b-collapse>
         <b-button
           class="mr-2 btn-sm"
