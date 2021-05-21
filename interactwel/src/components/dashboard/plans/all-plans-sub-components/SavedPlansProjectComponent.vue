@@ -50,72 +50,12 @@
               </b-button>
             </div>
             <div class="d-lg-flex d-sm-block">
-              <b-list-group class="col-lg-3 col-md-12 col-sm-12">
-                <b-list-group-item class="flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">
-                      Goals
-                    </h5>
-                    <small>{{ plan.goals.length }} Goals selected</small>
-                  </div>
-                  <small>
-                    <ul class="no-padding">
-                      <li
-                        v-for="goalId in plan.goals"
-                        :key="goalId"
-                      >{{ getGoalName(goalId).name }}</li>
-                    </ul>
-                  </small>
-                </b-list-group-item>
-
-                <b-list-group-item class="flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">
-                      Actors
-                    </h5>
-                    <small class="text-muted"> {{ plan.actors.length }} Actors Selected</small>
-                  </div>
-                  <small>
-                    <ul class="no-padding">
-                      <li
-                        v-for="actorId in plan.actors"
-                        :key="actorId"
-                      >{{ getActorName(actorId).name }}</li>
-                    </ul>
-                  </small>
-                </b-list-group-item>
-
-                <b-list-group-item class="flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">
-                      Actions
-                    </h5>
-                  </div>
-                  <small>
-                    <ul class="no-padding">
-                      <li
-                        v-for="actorId in plan.actors"
-                        :key="actorId"
-                      >
-                        {{ getActorName(actorId).name }}
-                        <ul>
-                          <li
-                            v-for="action_mapping in getActionMappings(actorId, plan.action_mapping)"
-                            :key="action_mapping.id"
-                          >
-                            {{ getActionName(action_mapping.action_id).name }}
-                          </li>
-                        </ul>
-                      </li>
-                      <li>Farmers: Surface Water (SW)
-                        <ul>
-                          <li>Increase the volume of non-Columbia surface water</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </small>
-                </b-list-group-item>
-              </b-list-group>
+              <plan-overview
+                :plan="plan"
+                :actions="actions"
+                :actors="actors"
+                :goals="goals"
+              />
               <div class="d-block flex-column col-md-12 col-lg-6 col-sm-12">
                 <b-card>
                   <actions-graph
@@ -138,10 +78,12 @@
 <script>
 import PlanFeedbackComponent from '@/components/dashboard/plans/all-plans-sub-components/PlanFeedbackComponent';
 import ActionsGraph from "@/components/dashboard/projects/charts/data/ActionsGraph";
+import PlanOverview from '@/components/dashboard/plans/all-plans-sub-components/PlanOverview';
 
 export default {
   name: "SavedPlansProjectComponent",
   components: {
+    PlanOverview,
     PlanFeedbackComponent,
     ActionsGraph,
   },
@@ -246,10 +188,10 @@ export default {
 
     getActorsList(actorIds) {
       if (actorIds && this.actors) {
-        return this.actors.filter(actor => actorIds.includes(actor.actor_id))
+        return this.actors.filter(actor => actorIds.includes(actor.actor_id));
       }
 
-      return {};
+      return [];
 
     },
   },

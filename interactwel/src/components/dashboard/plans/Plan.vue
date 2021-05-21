@@ -32,53 +32,7 @@
       </b-navbar>
       <b-row>
         <b-col>
-          <div class="planData">
-            <b-card no-body>
-              <b-tabs
-                pills
-                card
-                vertical
-              >
-                <b-tab title="Overview">
-                  <b-card-text>
-                    Overview
-                  </b-card-text>
-                </b-tab>
-                <b-tab
-                  title="Actions"
-                  active
-                >
-                  <b-card-text>
-                    <actions-graph :adaptation-plan-id="this.$route.params.planId" />
-                  </b-card-text>
-                </b-tab>
-                <b-tab title="Streams">
-                  <b-card-text>
-                    Streams
-                    <component :is="component='ChartStreams'" />
-                  </b-card-text>
-                </b-tab>
-                <b-tab title="Region">
-                  <b-card-text>
-                    Region
-                    <component :is="component='ChartRegion'" />
-                  </b-card-text>
-                </b-tab>
-                <b-tab title="Sub Basins">
-                  <b-card-text>
-                    Sub Basins
-                    <component :is="component='ChartSubBasins'" />
-                  </b-card-text>
-                </b-tab>
-                <b-tab title="Feedback">
-                  <b-card-text>
-                    Feedback
-                    <component :is="component='Feedback'" />
-                  </b-card-text>
-                </b-tab>
-              </b-tabs>
-            </b-card>
-          </div>
+          <plan-data-tab-view />
         </b-col>
       </b-row>
       <b-row>
@@ -558,10 +512,14 @@ import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
 
 import paraguayGeojson from '../../../../public/static/BASIN_Irrigation_basins_data.json';
 import {pyDepartmentsData} from '../../../../public/static/py-departments-data';
+import PlanOverview from '@/components/dashboard/plans/all-plans-sub-components/PlanOverview';
+import PlanDataTabView from '@/components/dashboard/plans/PlanDataTabView';
 
 export default {
   name: 'Visualize',
   components: {
+    PlanDataTabView,
+    PlanOverview,
     ActionsGraph,
     Header, Footer, RegionalSummary,
     'l-map': LMap,
