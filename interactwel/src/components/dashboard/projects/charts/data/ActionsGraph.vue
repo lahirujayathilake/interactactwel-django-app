@@ -148,7 +148,6 @@ export default {
       const {utils} = AiravataAPI; // eslint-disable-line
       const colors = ['#43AA8B', '#F9C74F', '#F3722C', '#277DA1'];
       const selectedActorNames = this.selectedActors.map(actor => actor.name) || [];
-      debugger;
       utils.FetchUtils.get("/interactwel/api/plans/?plan_id=" + this.planId).then(result => {
         this.datacollection = {};
         if (result.length < 1 || !result[0].plan_json) {

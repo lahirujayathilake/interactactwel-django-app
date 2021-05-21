@@ -22,7 +22,8 @@
         >
           <b-card-text>
             <actions-graph
-              :selected-actors="getActorsList(plan.actors)"
+              :key="actorList"
+              :selected-actors="actorList"
               :adaptation-plan-id="parseInt(this.$route.params.planId)"
             />
           </b-card-text>
@@ -70,6 +71,7 @@ export default {
       goals: [],
       actors: [],
       actions: [],
+      actorList: [],
     };
   },
   async mounted() {
@@ -89,6 +91,7 @@ export default {
             this.plan.actors.push(mapping.actor_id);
           }
         });
+        this.actorList = this.getActorsList(this.plan.actors);
       })
       .catch(error => {
         alert("Could not get the projects list. API error! " + error);
