@@ -48,7 +48,7 @@
         <b-tab title="Feedback">
           <b-card-text>
             Feedback
-            <component :is="component='Feedback'" />
+            <PlanFeedbackComponent :selected-plan="plan" />
           </b-card-text>
         </b-tab>
       </b-tabs>
@@ -59,10 +59,11 @@
 <script>
 import PlanOverview from '@/components/dashboard/plans/all-plans-sub-components/PlanOverview';
 import ActionsGraph from '@/components/dashboard/projects/charts/data/ActionsGraph';
+import PlanFeedbackComponent from '@/components/dashboard/plans/all-plans-sub-components/PlanFeedbackComponent';
 
 export default {
   name: "PlanDataTabView",
-  components: {PlanOverview, ActionsGraph},
+  components: {PlanOverview, ActionsGraph, PlanFeedbackComponent},
   data() {
     return {
       plan: {},
