@@ -500,6 +500,11 @@ class SelectedPlanViewSet(viewsets.ViewSet):
         plan_id = self.request.query_params.get('plan_id', None)
         if plan_id is not None:
             queryset = queryset.filter(plan_id=plan_id)
+
+        user_id = self.request.query_params.get('user_id', None)
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
+
         return queryset
 
 class PlanActorActionsViewSet(viewsets.ViewSet):
@@ -513,6 +518,20 @@ class PlanActorActionsViewSet(viewsets.ViewSet):
         plans = queryset.filter(plan_id=pk)
         serializer = InteractwelPlanActorActionsSerializer(plans, many=True)
         return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        queryset = InteractwelPlanActorActions.objects.all()
+        plan = queryset.filter(id=pk)
+        if len(plan) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            plan.update(
+                selected_plan_id=request.data["selected_plan_id"],
+                actor_id=request.data["actor_id"],
+                action_id=request.data["action_id"]
+            )
+            serializer = InteractwelPlanActorActionsSerializer(plan[0], many=False)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def create(self, request):
         serializer = InteractwelPlanActorActionsSerializer(data=request.data)
@@ -549,7 +568,7 @@ class FeedbackViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def get_queryset(self):
         queryset = InteractwelFeedback.objects.all()
         user_id = self.request.query_params.get('user_id', None)

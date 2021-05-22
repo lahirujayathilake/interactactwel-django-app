@@ -106,10 +106,11 @@ class InteractwelPlanActorActionsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class InteractwelSelectedPlanSerializer(serializers.ModelSerializer):
-    action_mapping = InteractwelPlanActorActionsSerializer(source='interactwelplanactoractions_set', many=True, required=False)    
+    action_mapping = InteractwelPlanActorActionsSerializer(source='interactwelplanactoractions_set', many=True, required=False)
+    project_id = serializers.ReadOnlyField(source="plan_id.project_id.project_id")
     class Meta:
         model = InteractwelSelectedPlan
-        fields = ("selected_plan_id", "timestamp", "user_id", "goals", "action_mapping", "plan_id")
+        fields = ("selected_plan_id", "timestamp", "user_id", "goals", "action_mapping", "plan_id", "project_id")
         extra_kwargs = {'goals': {'required': False}, 'action_mapping': {'required': False}}
 
 class InteractwelPlanSerializer(serializers.ModelSerializer):
