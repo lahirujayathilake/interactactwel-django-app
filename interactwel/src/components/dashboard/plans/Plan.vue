@@ -1,9 +1,8 @@
 <template>
   <div>
     <component :is="component='Header'" />
-    <b-container
+    <b-container class="main"
       fluid
-      class="main"
     >
       <b-navbar
         toggleable="sm"
@@ -12,10 +11,10 @@
       >
         <b-navbar-toggle target="nav-text-collapse" />
         <b-navbar-brand>
-          <h5>
+          <h6>
             {{ selectedProject.name }}
             <br><small class="text-muted">Adaptation Plan {{ this.$route.params.planId }}</small>
-          </h5>
+          </h6>
         </b-navbar-brand>
         <b-collapse
           id="nav-text-collapse"
@@ -35,20 +34,20 @@
           <plan-data-tab-view />
         </b-col>
       </b-row>
-      <b-row>
+      <b-row class="no-gutters">
         <b-col
-          class="bg-dark pt-3"
-          lg="2"
+          class="bg-dark pt-3" style="width: 240px; flex: inherit"
         >
           <div id="legend">
             <div class="list-group panel">
-              <h5 class="text-light pb-2">
+              <h5 class="text-light pb-2 px-3">
                 Legend
               </h5>
               <div class="text-light">
                 <b-form-group
                   v-slot="{ ariaDescribedby }"
                   label=""
+                  class="px-3"
                 >
                   <b-form-radio
                     v-model="selectedMapType"
@@ -79,7 +78,7 @@
               <div>
                 <a
                   href="#default"
-                  class="list-group-item bg-light font-weight-bold text-dark"
+                  class="list-group-item bg-dark text-light font-weight-bold"
                   data-toggle="collapse"
                   data-parent="#legend"
                 >Default Layers <i class="fa fa-caret-down" /></a>
@@ -87,7 +86,7 @@
                   id="default"
                   class="collapse show"
                 >
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-1"
                       v-model="sub_basins_layer_show"
@@ -101,7 +100,7 @@
                       > Sub-basins
                     </b-form-checkbox>
                   </div>
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-2"
                       v-model="streams_layer_show"
@@ -120,7 +119,7 @@
               <div>
                 <a
                   href="#stationData"
-                  class="list-group-item bg-light font-weight-bold text-dark"
+                  class="list-group-item bg-dark font-weight-bold text-light"
                   data-toggle="collapse"
                   data-parent="#legend"
                 >Station Data <i class="fa fa-caret-down" /></a>
@@ -128,7 +127,7 @@
                   id="stationData"
                   class="collapse show"
                 >
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-3"
                       v-model="reservoirs_layer_show"
@@ -142,7 +141,7 @@
                       > Reservoirs
                     </b-form-checkbox>
                   </div>
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-4"
                       v-model="gauging_stations_layer_show"
@@ -156,7 +155,7 @@
                       > Gauging Stations
                     </b-form-checkbox>
                   </div>
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-5"
                       v-model="weather_stations_layer_show"
@@ -175,7 +174,7 @@
               <div>
                 <a
                   href="#additional"
-                  class="list-group-item bg-light font-weight-bold text-dark"
+                  class="list-group-item bg-dark font-weight-bold text-light"
                   data-toggle="collapse"
                   data-parent="#legend"
                 >Addional Layers <i class="fa fa-caret-down" /></a>
@@ -183,7 +182,7 @@
                   id="additional"
                   class="collapse"
                 >
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-6"
                       v-model="gw_restricted_areas_layer_show"
@@ -197,7 +196,7 @@
                       > GW Restricted Areas
                     </b-form-checkbox>
                   </div>
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-7"
                       v-model="tribal_lands_layer_show"
@@ -211,7 +210,7 @@
                       > Tribal Lands
                     </b-form-checkbox>
                   </div>
-                  <div class="list-group-item">
+                  <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
                       id="checkbox-8"
                       v-model="nowa_pumping_limit_layer_show"
@@ -230,7 +229,7 @@
             </div>
           </div>
         </b-col>
-        <b-col lg="10">
+        <b-col>
           <div class="lg-map-container">
             <l-map
               ref="myMap"
@@ -1232,9 +1231,12 @@ export default {
 
 .planData{
   position: absolute;
-  left: 320px;
-  top: 25px;
+  left: 255px;
+  top: 0;
   z-index: 1000;
+  width:585px;
+  max-height: 490px;
+  overflow: auto;
 }
 
 .planData a{

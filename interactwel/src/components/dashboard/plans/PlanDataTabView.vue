@@ -4,7 +4,6 @@
       <b-tabs
         pills
         card
-        vertical
       >
         <b-tab title="Overview">
           <div class="d-lg-flex d-sm-block">
@@ -48,7 +47,6 @@
         </b-tab>
         <b-tab title="Feedback">
           <b-card-text>
-            Feedback
             <PlanFeedbackComponent :selected-plan="plan" />
           </b-card-text>
         </b-tab>

@@ -5,7 +5,7 @@
       fluid
       class="main"
     >
-      <b-row>
+      <b-row class="pt-3 px-2">
         <b-col lg="1">
           <h3 class="mb-3">
             Plans
@@ -81,7 +81,6 @@ export default {
 <style>
 .main {
   background-color: #efefef;
-  padding: 1rem 2rem;
   min-height: 90vh;
   text-align: left;
 }

@@ -79,7 +79,6 @@ export default {
 <style scoped>
     .main {
         background-color: #efefef;
-        padding: 1rem 2rem;
         min-height: 90vh;
         text-align: left;
     }
