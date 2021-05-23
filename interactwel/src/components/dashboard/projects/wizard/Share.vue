@@ -128,14 +128,19 @@
                 </b-button>
             </template>-->
             <template v-slot:cell(save)="data">
-              <b-button
-                pill
-                size="sm"
-                variant="secondary"
-                @click="savePlan(data.item.planId)"
-              >
-                Save
-              </b-button>
+              <div v-if="isPlanAlreadySaved(data.item.planId)">
+                Already Saved
+              </div>
+              <div v-else>
+                <b-button
+                  pill
+                  size="md"
+                  variant="primary"
+                  @click="savePlan(data.item.planId)"
+                >
+                  Save
+                </b-button>
+              </div>
             </template>
           </b-table>
         </b-card-body>
@@ -208,16 +213,23 @@ export default {
       adaptationPlan: [],
       projectId: null,
       planList: [],
+      selectedPlansList: [],
     };
   },
 
   watch: {},
   async mounted() {
+
+    // eslint-disable-next-line no-undef
     const {utils} = AiravataAPI;
     this.adaptationPlan = this.$store.state.currentAdaptationPlan;
     if (localStorage.getItem('selectedGoals')) this.selectedGoals = JSON.parse(localStorage.getItem('selectedGoals'));
     let user = await this.getLoggedInUser();
     this.planList = this.$store.state.planList;
+    utils.FetchUtils.get('/interactwel/api/selectedplans/?user_id=' + user.id ).then(result => {
+      this.selectedPlansList = result;
+    });
+
     this.planList.forEach(plan => {
       utils.FetchUtils.get("/interactwel/api/feedbacks/?plan_id=" + plan.plan_id + "&user_id=" + user.id).then(result => {
         if (result.length > 0) {
@@ -230,7 +242,6 @@ export default {
           row.rating = feedback.rating;
           this.tableRow.push(row);
         }
-
       }
       ).catch(error => {
         alert("Failed to fetch questions " + error);
@@ -290,6 +301,10 @@ export default {
       ).catch(error => {
         this.$toast.error("API error while saving the selected plan! " + error);
       });
+    },
+
+    isPlanAlreadySaved(planId) {
+      return this.selectedPlansList.map(plan => plan.plan_id).includes(planId);
     },
   },
 };
