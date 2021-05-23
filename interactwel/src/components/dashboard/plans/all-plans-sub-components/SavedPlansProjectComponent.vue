@@ -105,10 +105,12 @@ export default {
   async mounted() {
     const {utils} = AiravataAPI;
 
-    utils.FetchUtils.get("/interactwel/api/selectedplans/").then(
+    if (!this.user) {
+      this.user = await this.getLoggedInUser();
+    }
+    utils.FetchUtils.get("/interactwel/api/selectedplans/?user_id=" + this.user.id).then(
       result => {
-        const userPlans = result.filter(plan => plan.user_id === this.user.id);//todo: do this filtering in backend
-        userPlans.forEach(plan => {
+        result.forEach(plan => {
           const action_mapping = plan.action_mapping;
           plan.actors = [];
           action_mapping.forEach(mapping => {
