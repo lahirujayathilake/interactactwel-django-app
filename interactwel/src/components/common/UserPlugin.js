@@ -197,10 +197,8 @@ export default {
             .catch(error => {
               alert("Could not get the user roles list. API error! " + error);
             });
-          const userRoles = await utils.FetchUtils.get("/interactwel/api/userroles/")
-            .then(userRoles =>
-              userRoles.filter(role=>role.user_id === user.id) //todo - this filtering should happen in backend
-                .map(userRole => roles.find(role => role.role_id === userRole.role_id)))
+          const userRoles = await utils.FetchUtils.get("/interactwel/api/userroles/?user_id=" + user.id)
+            .then(userRoles => userRoles.map(userRole => roles.find(role => role.role_id === userRole.role_id)))
             .catch(error => {
               alert("Could not get the user roles list. API error! " + error);
             });
