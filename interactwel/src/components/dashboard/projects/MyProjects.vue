@@ -49,7 +49,7 @@
                       </b-button>
                       <b-button
                         variant="outline-success"
-                        @click="$router.push('/all-plans/'+ project.project_id)"
+                        @click="$router.push('/all-plans')"
                       >
                         View Plans
                       </b-button>

@@ -38,7 +38,6 @@
           <b-tab
             class="p-3 bg-light border"
             :title="'Plan ' + plan.plan_id"
-            @click="loadTabContent(plan.plan_id)"
           >
             <div class="d-lg-flex d-sm-block pb-3">
               <b-button
@@ -149,10 +148,6 @@ export default {
   },
 
   methods: {
-    loadTabContent(planId) {
-      this.$router.push('/all-plans/' + planId);
-    },
-
     visualizePlan(planId) {
       this.$router.push('/plans/' + this.project.project_id + '/' + planId);
     },

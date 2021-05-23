@@ -79,7 +79,7 @@ export default new Router({
       component: Dashboard,
     },
     {
-      path: '/all-plans/:planId',
+      path: '/all-plans',
       //redirect: '/pages/404',
       name: 'AllPlans',
       component: AllPlans,

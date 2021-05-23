@@ -11,7 +11,7 @@
           v-show="!isWizardFlowStarted"
           class="btn-sm mr-3"
           variant="outline-light"
-          @click="$router.push('/all-plans/'+ $route.params.projectId)"
+          @click="$router.push('/all-plans')"
         >
           <i class="fa fa-chevron-left" /> Plans
         </b-button>
@@ -931,7 +931,7 @@ export default {
       let confirmResponse = confirm("If you exit now all data will be cleared. Do you want to proceed");
       if (confirmResponse){
         this.$store.commit("resetWizardFlow", null);
-        this.$router.push('/all-plans/' + this.projectId);
+        this.$router.push('/all-plans');
         this.isWizardFlowStarted = false;
       }
 

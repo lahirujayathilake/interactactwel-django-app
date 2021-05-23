@@ -99,7 +99,7 @@
                         pill
                         block
                         variant="outline-secondary"
-                        @click="$router.push('all-plans/1')"
+                        @click="$router.push('all-plans')"
                       >
                         Generate New Plans
                       </b-button>
@@ -109,7 +109,7 @@
                         pill
                         block
                         variant="outline-secondary"
-                        @click="$router.push('all-plans/1')"
+                        @click="$router.push('all-plans')"
                       >
                         Review Saved Plans
                       </b-button>

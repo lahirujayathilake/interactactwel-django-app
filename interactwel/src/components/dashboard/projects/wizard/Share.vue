@@ -242,7 +242,7 @@ export default {
 
     exitWizard() {
       this.$toast.success("Thank You for evaluating plans.");
-      this.$router.push('/all-plans/' + this.$route.params.projectId);
+      this.$router.push('/all-plans');
       localStorage.setItem('adaptation_wizardStarted', false);
     },
 

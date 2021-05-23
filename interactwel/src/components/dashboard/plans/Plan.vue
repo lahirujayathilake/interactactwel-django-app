@@ -25,7 +25,7 @@
         <b-button
           class="mr-2 btn-sm"
           variant="outline-secondary"
-          @click="$router.push('../../all-plans/1')"
+          @click="$router.push('../../all-plans')"
         >
           <i class="fa fa-chevron-left" /> Back to Plans
         </b-button>

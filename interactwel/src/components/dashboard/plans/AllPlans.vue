@@ -72,9 +72,7 @@ export default {
   },
 
   methods: {
-    loadTabContent(planId) {
-      this.$router.push('/all-plans/' + planId);
-    },
+
   },
 };
 </script>

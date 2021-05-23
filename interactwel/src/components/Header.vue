@@ -36,7 +36,7 @@
             <b-nav-item href="#">
               <router-link
                 router-link-active="active"
-                to="/all-plans/1"
+                to="/all-plans"
               >
                 Plans
               </router-link>
