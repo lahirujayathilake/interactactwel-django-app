@@ -1234,8 +1234,8 @@ export default {
   left: 255px;
   top: 0;
   z-index: 1000;
-  width:585px;
-  max-height: 490px;
+  width:750px;
+  max-height: 600px;
   overflow: auto;
 }
 

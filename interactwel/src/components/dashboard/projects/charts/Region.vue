@@ -3,9 +3,6 @@
     id="graph"
     class="card"
   >
-    <div class="card-header">
-      <strong>Region</strong>
-    </div>
     <div class="card-body no-padding">
       <b-tabs card>
         <b-tab

@@ -51,6 +51,12 @@
               title="Assign Projects"
               @click="loadTabContent(&quot;/projects/assign-projects&quot;)"
             />
+            <b-tab
+              v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+              :active="$route.path === '/projects/assign-plans'"
+              title="Assign Plans"
+              @click="loadTabContent(&quot;/projects/assign-plans&quot;)"
+            />
           </b-tabs>
         </b-col>
       </b-row>
@@ -117,13 +123,13 @@ export default {
         min-height: 90vh;
         text-align: left;
     }
-    .project-tabs ul li a{
-        color: #2c3e50;
+    .project-tabs ul li a {
+        color: #2c3e50 !important;;
     }
     .project-tabs ul li a:hover{
-        color: #28a745;
+        color: #28a745 !important;;
     }
-    .project-tabs ul li a.active {
+    .project-tabs ul li a:active {
         font-weight: bold;
         border-top:2px solid #28a745 !important;
     }

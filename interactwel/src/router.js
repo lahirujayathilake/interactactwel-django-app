@@ -16,6 +16,7 @@ const SuggestedProjects = () => import('@/components/dashboard/projects/Suggeste
 const ExploreProjects = () => import('@/components/dashboard/projects/ExploreProjects');
 const CreateProject = () => import('@/components/dashboard/projects/CreateProject');
 const AssignProjects = () => import('@/components/dashboard/projects/AssignProjects');
+const AssignPlans = () => import('@/components/dashboard/projects/AssignPlans');
 
 const Visualize = () => import('@/components/dashboard/projects/Visualize');
 const AdaptationPlans = () => import('@/components/dashboard/projects/AdaptationPlans');
@@ -139,6 +140,11 @@ export default new Router({
           path: 'assign-projects',
           name: 'AssignProjects',
           component: AssignProjects,
+        },
+        {
+          path: 'assign-plans',
+          name: 'AssignPlans',
+          component: AssignPlans,
         },
       ],
     },
