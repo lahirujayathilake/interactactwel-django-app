@@ -19,29 +19,24 @@
           title="Actions"
           active
         >
-          <b-card-text>
+          <div class="padded-div">
             <actions-graph
               :key="actorList"
               :selected-actors="actorList"
               :adaptation-plan-id="parseInt(this.$route.params.planId)"
             />
-          </b-card-text>
+          </div>
         </b-tab>
         <b-tab title="Streams">
-          <b-card-text>
-            Streams
             <component :is="component='ChartStreams'" />
-          </b-card-text>
         </b-tab>
         <b-tab title="Region">
           <b-card-text>
-            Region
             <component :is="component='ChartRegion'" />
           </b-card-text>
         </b-tab>
         <b-tab title="Sub Basins">
           <b-card-text>
-            Sub Basins
             <component :is="component='ChartSubBasins'" />
           </b-card-text>
         </b-tab>
@@ -56,13 +51,16 @@
 </template>
 
 <script>
+import ChartStreams from '@/components/dashboard/projects/charts/Streams';
+import ChartRegion from '@/components/dashboard/projects/charts/Region';
+import ChartSubBasins from '@/components/dashboard/projects/charts/SubBasins';
 import PlanOverview from '@/components/dashboard/plans/all-plans-sub-components/PlanOverview';
 import ActionsGraph from '@/components/dashboard/projects/charts/data/ActionsGraph';
 import PlanFeedbackComponent from '@/components/dashboard/plans/all-plans-sub-components/PlanFeedbackComponent';
 
 export default {
   name: "PlanDataTabView",
-  components: {PlanOverview, ActionsGraph, PlanFeedbackComponent},
+  components: {PlanOverview, ActionsGraph, PlanFeedbackComponent, ChartStreams, ChartRegion, ChartSubBasins},
   data() {
     return {
       plan: {},
@@ -134,5 +132,10 @@ export default {
 </script>
 
 <style scoped>
-
+.card-body {
+  padding: 0 !important;
+}
+.padded-div {
+  padding: 1rem;
+}
 </style>
