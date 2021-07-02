@@ -5,13 +5,12 @@
         <h5 class="mb-1">
           Goals
         </h5>
-        <small>{{ plan.goals.length }} Goals selected</small>
+        <small v-if="plan.goals">{{ plan.goals.length }} Goals selected</small>
       </div>
       <small>
         <ul class="no-padding">
           <li
             v-for="goalId in plan.goals"
-            :key="goalId"
           >{{ getGoalName(goalId).name }}</li>
         </ul>
       </small>
@@ -22,13 +21,12 @@
         <h5 class="mb-1">
           Actors
         </h5>
-        <small class="text-muted"> {{ plan.actors.length }} Actors Selected</small>
+        <small v-if="plan.actors" class="text-muted"> {{ plan.actors.length }} Actors Selected</small>
       </div>
       <small>
         <ul class="no-padding">
           <li
             v-for="actorId in plan.actors"
-            :key="actorId"
           >{{ getActorName(actorId).name }}</li>
         </ul>
       </small>
@@ -44,13 +42,11 @@
         <ul class="no-padding">
           <li
             v-for="actorId in plan.actors"
-            :key="actorId"
           >
             {{ getActorName(actorId).name }}
             <ul>
               <li
                 v-for="action_mapping in getActionMappings(actorId, plan.action_mapping)"
-                :key="action_mapping.id"
               >
                 {{ getActionName(action_mapping.action_id).name }}
               </li>
@@ -116,7 +112,7 @@ export default {
 
     getActorsList(actorIds) {
       if (actorIds && this.actors) {
-        return this.actors.filter(actor => actorIds.includes(actor.actor_id))
+        return this.actors.filter(actor => actorIds.includes(actor.actor_id));
       }
 
       return {};

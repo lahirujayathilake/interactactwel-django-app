@@ -21,7 +21,6 @@
         >
           <div class="padded-div">
             <actions-graph
-              :key="actorList"
               :selected-actors="actorList"
               :adaptation-plan-id="parseInt(this.$route.params.planId)"
             />
