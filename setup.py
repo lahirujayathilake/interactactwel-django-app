@@ -31,7 +31,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         'django>=1.11.16',
-        'django-filter>=2.1.0, <2.2',
+        'django-filter>=2.1.0, <3.0',
         'markdown',
         'jsonfield',
     ],
