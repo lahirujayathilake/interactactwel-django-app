@@ -1,27 +1,35 @@
 from rest_framework import viewsets
 
 from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelUserRole, InteractwelInstructionalVideo, \
-InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, InteractwelGroupRoleMapping, \
-InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
-InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, InteractwelGoal, \
-InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
-InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions, InteractwelProjectJoinRequest, \
-InteractwelSelectedPlan
+    InteractwelAdaptationStory, InteractwelDocumentation, InteractwelGroup, InteractwelGroupRoleMapping, \
+    InteractwelGroupMembership, InteractwelEvent, InteractwelEventAttendance, InteractwelInvitation, \
+    InteractwelProject, InteractwelProjectUser, InteractwelProjectData, InteractwelPlan, InteractwelFeedback, \
+    InteractwelGoal, \
+    InteractwelActor, InteractwelAction, InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, \
+    InteractwelProjectAction, InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelPlanActorActions, \
+    InteractwelProjectJoinRequest, \
+    InteractwelSelectedPlan, InteractwelFeedbackAnswer
 
-from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, InteractwelUserRoleSerializer, \
-InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
-InteractwelDocumentationSerializer, InteractwelGroupSerializer, InteractwelGroupRoleMappingSerializer, \
-InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEventAttendanceSerializer, \
-InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, InteractwelProjectDataSerializer, \
-InteractwelPlanSerializer, InteractwelSelectedPlanSerializer, InteractwelFeedbackSerializer, InteractwelGoalSerializer, InteractwelActorSerializer, \
-InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, InteractwelProjectActorSerializer, \
-InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, InteractwelFeedbackAnswerSerializer, \
-InteractwelPlanActorActionsSerializer, InteractwelProjectJoinRequestSerializer
+from .serializers import SubbasinSerializer, InteractwelUserSerializer, InteractwelRoleSerializer, \
+    InteractwelUserRoleSerializer, \
+    InteractwelInstructionalVideoSerializer, InteractwelAdaptationStorySerializer, \
+    InteractwelDocumentationSerializer, InteractwelGroupSerializer, InteractwelGroupRoleMappingSerializer, \
+    InteractwelGroupMembershipSerializer, InteractwelEventSerializer, InteractwelEventAttendanceSerializer, \
+    InteractwelInvitationSerializer, InteractwelProjectSerializer, InteractwelProjectUserSerializer, \
+    InteractwelProjectDataSerializer, \
+    InteractwelPlanSerializer, InteractwelSelectedPlanSerializer, InteractwelFeedbackSerializer, \
+    InteractwelGoalSerializer, InteractwelActorSerializer, \
+    InteractwelActionSerializer, InteractwelQuestionSerializer, InteractwelProjectGoalSerializer, \
+    InteractwelProjectActorSerializer, \
+    InteractwelProjectActionSerializer, InteractwelProjectQuestionSerializer, InteractwelProjectPlanSerializer, \
+    InteractwelFeedbackAnswerSerializer, \
+    InteractwelPlanActorActionsSerializer, InteractwelProjectJoinRequestSerializer
 
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import status
+
 
 class SubbasinViewSet(viewsets.ViewSet):
 
@@ -47,6 +55,7 @@ class SubbasinViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 ################# User Management ##############################################
 ################################################################################
@@ -75,6 +84,7 @@ class UserViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class RoleViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelRole.objects.all()
@@ -98,6 +108,7 @@ class RoleViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserRoleViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -134,6 +145,7 @@ class UserRoleViewSet(viewsets.ViewSet):
             queryset = queryset.filter(role_id=role_id)
         return queryset
 
+
 class GroupViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelGroup.objects.all()
@@ -158,6 +170,7 @@ class GroupViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class GroupRoleMappingViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelGroupRoleMapping.objects.all()
@@ -181,6 +194,7 @@ class GroupRoleMappingViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class GroupMembershipViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -234,6 +248,7 @@ class EventViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class EventAttendanceViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelEventAttendance.objects.all()
@@ -258,6 +273,7 @@ class EventAttendanceViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class InvitationViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelInvitation.objects.all()
@@ -281,6 +297,7 @@ class InvitationViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 ################################################################################
 ################################################################################
@@ -309,6 +326,7 @@ class InstructionalVideoViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class AdaptationStoryViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelAdaptationStory.objects.all()
@@ -333,6 +351,7 @@ class AdaptationStoryViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class DocumentationViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelDocumentation.objects.all()
@@ -356,6 +375,7 @@ class DocumentationViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 ########################### Project ############################################
 ################################################################################
@@ -384,6 +404,7 @@ class ProjectViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProjectUserViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelProjectUser.objects.all()
@@ -408,6 +429,7 @@ class ProjectUserViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProjectDataViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelProjectData.objects.all()
@@ -431,6 +453,7 @@ class ProjectDataViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PlanViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -466,6 +489,7 @@ class PlanViewSet(viewsets.ViewSet):
         if plan_id is not None:
             queryset = queryset.filter(plan_id=plan_id)
         return queryset
+
 
 class SelectedPlanViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -507,6 +531,7 @@ class SelectedPlanViewSet(viewsets.ViewSet):
 
         return queryset
 
+
 class PlanActorActionsViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelPlanActorActions.objects.all()
@@ -544,6 +569,7 @@ class PlanActorActionsViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class FeedbackViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -585,6 +611,7 @@ class FeedbackViewSet(viewsets.ViewSet):
 
         return queryset
 
+
 class FeedbackAnswerViewSet(viewsets.ViewSet):
 
     def create(self, request):
@@ -598,6 +625,19 @@ class FeedbackAnswerViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        feedback_id = self.request.data.get('feedback_id')
+
+        if feedback_id is not None:
+            delete_response = InteractwelFeedbackAnswer.objects.all().filter(feedback_id=feedback_id).delete()
+            count = delete_response[0]
+            if count > 0:
+                return Response(status=status.HTTP_201_CREATED)
+            else:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 ########################### Goals Actors Actions Questions #####################
@@ -627,6 +667,7 @@ class GoalViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ActorViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelActor.objects.all()
@@ -650,6 +691,7 @@ class ActorViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ActionViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -675,6 +717,7 @@ class ActionViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class QuestionViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelQuestion.objects.all()
@@ -698,6 +741,7 @@ class QuestionViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 ########################### Project mapping in Goals Actors Actions Questions ##
 ################################################################################
@@ -726,6 +770,7 @@ class ProjectGoalViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProjectActorViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelProjectActor.objects.all()
@@ -750,6 +795,7 @@ class ProjectActorViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProjectActionViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelProjectAction.objects.all()
@@ -773,6 +819,7 @@ class ProjectActionViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ProjectQuestionViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -809,6 +856,7 @@ class ProjectQuestionViewSet(viewsets.ViewSet):
             queryset = queryset.filter(question_id=question_id)
         return queryset
 
+
 class ProjectPlanViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = InteractwelProjectPlan.objects.all()
@@ -832,6 +880,7 @@ class ProjectPlanViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ProjectJoinRequestViewSet(viewsets.ViewSet):
     def list(self, request):
