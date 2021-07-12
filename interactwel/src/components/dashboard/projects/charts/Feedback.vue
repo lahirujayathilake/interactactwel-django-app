@@ -208,7 +208,7 @@ export default {
     async deleteFeedback() {
       const {utils} = AiravataAPI;
       await utils.FetchUtils.delete(
-        '/interactwel/api/feedbackanswers/',
+        '/interactwel/api/feedbacks/',
         {
           feedback_id: this.oldFeedback.feedback_id,
         });
