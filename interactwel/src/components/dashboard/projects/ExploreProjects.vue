@@ -34,20 +34,20 @@
                 <p>{{ project.description }}</p>
               </b-col>
               <b-col lg="4">
-                  <b-button
-                    size="sm"
-                    variant="success"
-                    @click="postJoinProjectRequest"
-                  >
-                    Join this project
-                  </b-button>
-                  <b-button class="ml-2"
+                  <b-button class="ml-2 float-right"
                     size="sm"
                     variant="outline-success"
                     @click="$router.push('/visualize/'+ project.project_id)"
                   >
                     View Project Data
                   </b-button>
+                <b-button class="float-right"
+                          size="sm"
+                          variant="success"
+                          @click="postJoinProjectRequest"
+                >
+                  Join this project
+                </b-button>
               </b-col>
             </b-row>
 
