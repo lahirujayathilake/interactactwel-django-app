@@ -1,5 +1,5 @@
 <template>
-    <b-card no-body>
+    <b-card no-body class="p-3">
     <table class="table table-responsive">
       <thead>
       <tr>
