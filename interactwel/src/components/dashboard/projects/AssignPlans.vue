@@ -1,5 +1,5 @@
 <template>
-    <b-card no-body>
+    <b-card no-body class="p-3">
     <table class="table table-responsive">
       <thead>
       <tr>
@@ -24,7 +24,7 @@
   <td>"Improve surface water quality“, "Increase recharge to shallow aquifer“, "Increase agriculture productivity“ , "Improve ecological habitat"</td>
   <td>Increase the volume of non-Columbia surface water“, "Decrease the volume of non-Columbia surface water“</td>
   <td>
-    <div class="btn btn-success btn-sm">Deploy</div>
+    <div class="btn btn-success btn-sm">Assign</div>
   </td>
   <td><div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div></td>
 </tr>

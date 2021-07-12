@@ -27,11 +27,30 @@
           :title="project.name"
           @click="mapSelected(project)"
         >
-          <b-card-body :title="project.name">
-            <!--
-                                <b-card-text>User Assigned to this project is: {{loggedInUser.username}}</b-card-text>
-                    -->
-            <b-card-text>{{ project.description }}</b-card-text>
+          <b-card-body>
+            <b-row class="mb-3">
+              <b-col lg="8">
+                <p class="h5">{{ project.description }}</p>
+                <p>{{ project.description }}</p>
+              </b-col>
+              <b-col lg="4">
+                  <b-button class="ml-2 float-right"
+                    size="sm"
+                    variant="outline-success"
+                    @click="$router.push('/visualize/'+ project.project_id)"
+                  >
+                    View Project Data
+                  </b-button>
+                <b-button class="float-right"
+                          size="sm"
+                          variant="success"
+                          @click="postJoinProjectRequest"
+                >
+                  Join this project
+                </b-button>
+              </b-col>
+            </b-row>
+
             <div class="card map-container">
               <l-map
                 ref="myMap"
@@ -113,21 +132,6 @@
                   imperial="imperial"
                 />
               </l-map>
-            </div>
-            <div class="mt-3">
-              <b-button-group>
-                <b-button
-                  class="mr-2 btn-sm"
-                  @click="postJoinProjectRequest"
-                >
-                  Join
-                </b-button>
-                <b-button class="mr-2 btn-sm">
-                  <router-link :to="'/visualize/'+ project.project_id">
-                    Visualize
-                  </router-link>
-                </b-button>
-              </b-button-group>
             </div>
           </b-card-body>
         </b-tab>

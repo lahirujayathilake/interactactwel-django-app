@@ -47,9 +47,21 @@
             />
             <b-tab
               v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+              :active="$route.path === '/projects/project-users'"
+              title="Project Users"
+              @click="loadTabContent(&quot;/projects/project-users&quot;)"
+            />
+            <b-tab
+              v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
               :active="$route.path === '/projects/assign-projects'"
               title="Assign Projects"
               @click="loadTabContent(&quot;/projects/assign-projects&quot;)"
+            />
+            <b-tab
+              v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"
+              :active="$route.path === '/projects/project-requests'"
+              title="Project Requests"
+              @click="loadTabContent(&quot;/projects/project-requests&quot;)"
             />
             <b-tab
               v-if="this.userRoleNames.includes('Global Admin') || this.userRoleNames.includes('Local Admin')"

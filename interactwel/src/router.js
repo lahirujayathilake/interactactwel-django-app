@@ -17,6 +17,8 @@ const ExploreProjects = () => import('@/components/dashboard/projects/ExplorePro
 const CreateProject = () => import('@/components/dashboard/projects/CreateProject');
 const AssignProjects = () => import('@/components/dashboard/projects/AssignProjects');
 const AssignPlans = () => import('@/components/dashboard/projects/AssignPlans');
+const ProjectRequests = () => import('@/components/dashboard/projects/ProjectRequests');
+const ProjectUsers = () => import('@/components/dashboard/projects/ProjectUsers');
 
 const Visualize = () => import('@/components/dashboard/projects/Visualize');
 const AdaptationPlans = () => import('@/components/dashboard/projects/AdaptationPlans');
@@ -145,6 +147,16 @@ export default new Router({
           path: 'assign-plans',
           name: 'AssignPlans',
           component: AssignPlans,
+        },
+        {
+          path: 'project-requests',
+          name: 'ProjectRequests',
+          component: ProjectRequests,
+        },
+        {
+          path: 'project-users',
+          name: 'ProjectUsers',
+          component: ProjectUsers,
         },
       ],
     },

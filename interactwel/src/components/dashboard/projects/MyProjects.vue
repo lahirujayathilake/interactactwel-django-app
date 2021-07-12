@@ -42,6 +42,7 @@
                     <div class="mt-3">
                       <b-button
                         class="mr-2"
+                        size="sm"
                         variant="success"
                         @click="$router.push('/visualize/'+ project.project_id)"
                       >
@@ -49,6 +50,7 @@
                       </b-button>
                       <b-button
                         variant="outline-success"
+                        size="sm"
                         @click="$router.push('/all-plans')"
                       >
                         View Plans
@@ -70,12 +72,6 @@
                           disabled
                         >
                           <i class="fa fa-envelope" />
-                        </b-button>
-                        <b-button
-                          class="mr-2 btn-sm"
-                          disabled
-                        >
-                          Unjoin
                         </b-button>
                         <b-button
                           class="mr-2 btn-sm"
