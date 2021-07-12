@@ -204,11 +204,26 @@ export default {
     back(){
       this.$router.push('/adaptation-plans/' + this.$route.params.projectId + '/actions?wizard=true');
     },
+
+    async deleteFeedback() {
+      const {utils} = AiravataAPI;
+      await utils.FetchUtils.delete(
+        '/interactwel/api/feedbackanswers/',
+        {
+          feedback_id: this.oldFeedback.feedback_id,
+        });
+    },
+
     async submitFeedback(evt) {
       evt.preventDefault();
       let user = await this.getLoggedInUser();
       let planId = this.$route.params.planId;
       let projectId = this.$route.params.projectId;
+
+      if (this.feedbackAlreadyProvided) {
+        await this.deleteFeedback();
+      }
+
       const {utils} = AiravataAPI;
       utils.FetchUtils.post(
         '/interactwel/api/feedbacks/',
