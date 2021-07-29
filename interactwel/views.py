@@ -468,6 +468,19 @@ class ProjectDataViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk=None):
+        project_data = InteractwelProjectData.objects.all().filter(project_id=pk)
+        if len(project_data) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            project_data.update(
+                name=request.data["name"],
+                data_type=request.data["data_type"],
+                data=request.data["data"]
+            )
+            return Response(InteractwelProjectDataSerializer(project_data[0], many=False).data,
+                            status=status.HTTP_201_CREATED)
+
 
 class PlanViewSet(viewsets.ViewSet):
     def list(self, request):
