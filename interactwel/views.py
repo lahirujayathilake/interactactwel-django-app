@@ -430,17 +430,17 @@ class ProjectUserViewSet(viewsets.ViewSet):
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
-        projectuser = InteractwelProjectUser.objects.all().filter(user_id=pk, project_id=request.data["project_id"])
-        if len(projectuser) == 0:
+        project_user = InteractwelProjectUser.objects.all().filter(user_id=pk, project_id=request.data["project_id"])
+        if len(project_user) == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            projectuser.update(
+            project_user.update(
                 status=request.data["status"],
                 role=request.data["role"],
                 sector=request.data["sector"],
                 actor=request.data["actor"]
             )
-            return Response(InteractwelProjectUserSerializer(projectuser[0], many=False).data,
+            return Response(InteractwelProjectUserSerializer(project_user[0], many=False).data,
                             status=status.HTTP_201_CREATED)
 
 
