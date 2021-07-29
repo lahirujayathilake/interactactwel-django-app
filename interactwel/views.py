@@ -551,6 +551,18 @@ class SelectedPlanViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk=None):
+        selected_plan = InteractwelSelectedPlan.objects.all().filter(selected_plan_id=pk)
+        if len(selected_plan) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            selected_plan.update(
+                goals=request.data["goals"],
+                timestamp=request.data["timestamp"]
+            )
+            return Response(InteractwelSelectedPlanSerializer(selected_plan[0], many=False).data,
+                            status=status.HTTP_201_CREATED)
+
     def get_queryset(self):
         queryset = InteractwelSelectedPlan.objects.all()
         project_id = self.request.query_params.get('project_id', None)
