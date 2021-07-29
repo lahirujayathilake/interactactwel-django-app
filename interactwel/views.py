@@ -481,6 +481,15 @@ class PlanViewSet(viewsets.ViewSet):
         serializer = InteractwelPlanSerializer(project)
         return Response(serializer.data)
 
+    def update(self, request, pk=None):
+        plan = InteractwelPlan.objects.all().filter(plan_id=pk, project_id=request.data["project_id"])
+        if len(plan) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            plan.update(plan_json=request.data["plan_json"])
+            serializer = InteractwelPlanSerializer(plan[0], many=False)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     def create(self, request):
         serializer = InteractwelPlanSerializer(data=request.data)
         if serializer.is_valid():
