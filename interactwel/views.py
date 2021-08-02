@@ -643,6 +643,20 @@ class FeedbackViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk=None):
+        feedback = InteractwelFeedback.objects.all().filter(feedback_id=pk)
+        if len(feedback) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            feedback.update(
+                date_created=request.data["date_created"],
+                date_modified=request.data["date_modified"],
+                feasibilty=request.data["feasibilty"],
+                comments=request.data["comments"],
+                rating=request.data["rating"]
+            )
+            return Response(InteractwelFeedbackSerializer(feedback[0], many=False).data, status=status.HTTP_201_CREATED)
+
     def get_queryset(self):
         queryset = InteractwelFeedback.objects.all()
         user_id = self.request.query_params.get('user_id', None)
@@ -953,3 +967,14 @@ class ProjectJoinRequestViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        project_join_request = InteractwelProjectJoinRequest.objects.all().filter(project_id=pk)
+        if len(project_join_request) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            project_join_request.update(
+                status=request.data["status"]
+            )
+            return Response(InteractwelProjectJoinRequestSerializer(project_join_request[0], many=False).data,
+                            status=status.HTTP_201_CREATED)
