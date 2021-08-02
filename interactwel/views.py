@@ -430,17 +430,17 @@ class ProjectUserViewSet(viewsets.ViewSet):
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
-        projectuser = InteractwelProjectUser.objects.all().filter(user_id=pk, project_id=request.data["project_id"])
-        if len(projectuser) == 0:
+        project_user = InteractwelProjectUser.objects.all().filter(user_id=pk, project_id=request.data["project_id"])
+        if len(project_user) == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            projectuser.update(
+            project_user.update(
                 status=request.data["status"],
                 role=request.data["role"],
                 sector=request.data["sector"],
                 actor=request.data["actor"]
             )
-            return Response(InteractwelProjectUserSerializer(projectuser[0], many=False).data,
+            return Response(InteractwelProjectUserSerializer(project_user[0], many=False).data,
                             status=status.HTTP_201_CREATED)
 
 
@@ -468,6 +468,19 @@ class ProjectDataViewSet(viewsets.ViewSet):
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk=None):
+        project_data = InteractwelProjectData.objects.all().filter(project_id=pk)
+        if len(project_data) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            project_data.update(
+                name=request.data["name"],
+                data_type=request.data["data_type"],
+                data=request.data["data"]
+            )
+            return Response(InteractwelProjectDataSerializer(project_data[0], many=False).data,
+                            status=status.HTTP_201_CREATED)
+
 
 class PlanViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -480,6 +493,15 @@ class PlanViewSet(viewsets.ViewSet):
         project = get_object_or_404(queryset, plan_id=pk)
         serializer = InteractwelPlanSerializer(project)
         return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        plan = InteractwelPlan.objects.all().filter(plan_id=pk, project_id=request.data["project_id"])
+        if len(plan) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            plan.update(plan_json=request.data["plan_json"])
+            serializer = InteractwelPlanSerializer(plan[0], many=False)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def create(self, request):
         serializer = InteractwelPlanSerializer(data=request.data)
@@ -528,6 +550,28 @@ class SelectedPlanViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        selected_plan = InteractwelSelectedPlan.objects.all().filter(selected_plan_id=pk)
+        if len(selected_plan) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            if request.data["action_mapping"]:
+                InteractwelPlanActorActions.objects.all().filter(selected_plan_id=pk).delete()
+
+                plan_actor_actions_serializer = InteractwelPlanActorActionsSerializer(
+                    data=request.data["action_mapping"], many=True)
+                if plan_actor_actions_serializer.is_valid():
+                    plan_actor_actions_serializer.save()
+                else:
+                    data = {
+                        "error": True,
+                        "errors": plan_actor_actions_serializer.errors,
+                    }
+                    return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(InteractwelSelectedPlanSerializer(selected_plan[0], many=False).data,
+                            status=status.HTTP_201_CREATED)
 
     def get_queryset(self):
         queryset = InteractwelSelectedPlan.objects.all()
@@ -608,6 +652,18 @@ class FeedbackViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        feedback = InteractwelFeedback.objects.all().filter(feedback_id=pk)
+        if len(feedback) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            feedback.update(
+                feasibilty=request.data["feasibilty"],
+                comments=request.data["comments"],
+                rating=request.data["rating"]
+            )
+            return Response(InteractwelFeedbackSerializer(feedback[0], many=False).data, status=status.HTTP_201_CREATED)
 
     def get_queryset(self):
         queryset = InteractwelFeedback.objects.all()
@@ -919,3 +975,15 @@ class ProjectJoinRequestViewSet(viewsets.ViewSet):
                 "errors": serializer.errors,
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        project_join_request = InteractwelProjectJoinRequest.objects.all().filter(project_id=pk,
+                                                                                  user_id=request.data["user_id"])
+        if len(project_join_request) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            project_join_request.update(
+                status=request.data["status"]
+            )
+            return Response(InteractwelProjectJoinRequestSerializer(project_join_request[0], many=False).data,
+                            status=status.HTTP_201_CREATED)
