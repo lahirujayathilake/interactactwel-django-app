@@ -7,9 +7,7 @@
   />
 </template>
 <script>
-import axios from 'axios';
 import VerticalBarChart from "../lib/VerticalBarChart";
-import EventBus from '../../../../../event-bus';
 
 export default {
   name: 'OverviewWaterRightsGraph',
@@ -19,7 +17,7 @@ export default {
   data() {
     return {
       planId: "1",
-      JSONData: null,
+      JSONData: "{}",
       datacollection: null,
       graphColors: [
         "#3d71ff",
@@ -65,16 +63,21 @@ export default {
     };
   },
   mounted() {
+
+    const {utils} = AiravataAPI;
+
+    utils.FetchUtils.get("/interactwel/api/subbasins/")
+      .then(JSONData => {
+        this.JSONData = JSONData;
+        if (this.JSONData.length > 0) {
+          this.buildDataCollection(JSON.parse(this.JSONData[0].detail_json), this.planId);
+        }
+      })
+      .catch(error => {
+        alert("Could not retrieve requests. API error! " + error);
+      });
+
     this.planId = this.$route.params.planId;
-    this.buildDataCollection(this.JSONData, this.planId);
-
-  },
-
-  created(){
-    axios.get("/static/BASIN_Water_Rights_plans.json").then(response => {
-      this.JSONData = response.data;
-      this.buildDataCollection(this.JSONData, this.planId);
-    });
   },
 
   methods: {
