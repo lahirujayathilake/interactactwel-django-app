@@ -556,10 +556,20 @@ class SelectedPlanViewSet(viewsets.ViewSet):
         if len(selected_plan) == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            selected_plan.update(
-                goals=request.data["goals"],
-                timestamp=request.data["timestamp"]
-            )
+            if request.data["action_mapping"]:
+                InteractwelPlanActorActions.objects.all().filter(selected_plan_id=pk).delete()
+
+                plan_actor_actions_serializer = InteractwelPlanActorActionsSerializer(
+                    data=request.data["action_mapping"], many=True)
+                if plan_actor_actions_serializer.is_valid():
+                    plan_actor_actions_serializer.save()
+                else:
+                    data = {
+                        "error": True,
+                        "errors": plan_actor_actions_serializer.errors,
+                    }
+                    return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
             return Response(InteractwelSelectedPlanSerializer(selected_plan[0], many=False).data,
                             status=status.HTTP_201_CREATED)
 
@@ -649,8 +659,6 @@ class FeedbackViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             feedback.update(
-                date_created=request.data["date_created"],
-                date_modified=request.data["date_modified"],
                 feasibilty=request.data["feasibilty"],
                 comments=request.data["comments"],
                 rating=request.data["rating"]
@@ -969,7 +977,8 @@ class ProjectJoinRequestViewSet(viewsets.ViewSet):
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
-        project_join_request = InteractwelProjectJoinRequest.objects.all().filter(project_id=pk)
+        project_join_request = InteractwelProjectJoinRequest.objects.all().filter(project_id=pk,
+                                                                                  user_id=request.data["user_id"])
         if len(project_join_request) == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
