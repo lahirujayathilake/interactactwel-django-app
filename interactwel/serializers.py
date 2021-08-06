@@ -211,6 +211,8 @@ class InteractwelProjectPlanSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class InteractwelProjectJoinRequestSerializer(serializers.ModelSerializer):
+    project = InteractwelProjectSerializer(source='project_id', many=False, required=True)
+    user = InteractwelUserSerializer(source='user_id', many=False, required=True)
     class Meta:
         model = InteractwelProjectJoinRequest
         fields = '__all__'
