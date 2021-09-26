@@ -4,7 +4,10 @@ from jsonfield import JSONField
 
 class Subbasin(models.Model):
     id = models.BigAutoField(primary_key=True, editable=False)
+    subbasin_type = models.CharField(max_length=64, default="")
+    project_id = models.ForeignKey("InteractwelProject", on_delete=models.CASCADE, default=None)
     detail_json = JSONField()
+    basline_json = JSONField()
 
     class Meta:
         managed = True
