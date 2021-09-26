@@ -14,9 +14,11 @@ InteractwelPlanActorActions, InteractwelProjectJoinRequest, InteractwelSelectedP
 class SubbasinSerializer(serializers.ModelSerializer):
 
     detail_json = serializers.JSONField()
+    basline_json = serializers.JSONField()
+
     class Meta:
         model = Subbasin
-        fields = ("id", "detail_json")
+        fields = ("id", "subbasin_type", "project_id", "detail_json", "basline_json")
 
 ################# User Management ##############################################
 ################################################################################

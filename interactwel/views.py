@@ -35,6 +35,15 @@ class SubbasinViewSet(viewsets.ViewSet):
 
     def list(self, request):
         queryset = Subbasin.objects.all()
+
+        subbasin_type = self.request.query_params.get('subbasin_type', None)
+        if subbasin_type is not None:
+            queryset = queryset.filter(subbasin_type=subbasin_type)
+
+        project_id = self.request.query_params.get('project_id', None)
+        if project_id is not None:
+            queryset = queryset.filter(project_id=project_id)
+
         serializer = SubbasinSerializer(queryset, many=True)
         return Response(serializer.data)
 
