@@ -1010,12 +1010,12 @@ export default {
 
   created() {
     this.loading = true;
-    axios.get("/static/subbasins.geojson")
+    axios.get("/static/subbasins1.geojson")
       .then(response => {
         this.geoJson_subbasin = response.data;
         this.loading = true;
       });
-    axios.get("/static/reaches.geojson")
+    axios.get("/static/reaches1.json")
       .then(response => {
         this.geoJson_reach = response.data;
         this.loading = true;

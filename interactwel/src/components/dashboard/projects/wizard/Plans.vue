@@ -202,11 +202,7 @@
                     >
                       Actions
                     </b-nav-item>
-                    <b-nav-item class="collapse-item">
-                      <router-link :to="{ name: 'ChartStreams', params: { planId: plan.id }}">
-                        Streams
-                      </router-link>
-                    </b-nav-item>
+
                     <b-nav-item class="collapse-item">
                       <router-link :to="{ name: 'ChartRegion', params: { planId: plan.id }}">
                         Region
@@ -215,6 +211,11 @@
                     <b-nav-item class="collapse-item">
                       <router-link :to="{ name: 'ChartSubBasins', params: { planId: plan.id }}">
                         Sub Basins
+                      </router-link>
+                    </b-nav-item>
+                    <b-nav-item class="collapse-item">
+                      <router-link :to="{ name: 'ChartStreams', params: { planId: plan.id }}">
+                        Streams
                       </router-link>
                     </b-nav-item>
                     <b-nav-item class="collapse-item">

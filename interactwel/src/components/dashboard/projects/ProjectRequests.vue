@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="request in projectRequests">
+      <tr v-for="request in projectRequests" v-bind:key="request.id">
         <td>{{ request.id }}</td>
         <td>{{ request.project_id }}</td>
         <td>{{ request.user_id }}</td>

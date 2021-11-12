@@ -119,11 +119,48 @@
             </b-row>
           </div>
         </b-tab>
-        <!--<b-tab title="Groundwater Recharge">
-                    <div class="card-body no-padding">
-                        <img class="img-fluid"  src="../../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>-->
+        <b-tab title="NO3 Percolation">
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col lg="6">
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <no3-perc-graph v-bind:base-graph="false"/>
+              </b-col>
+              <b-col
+                lg="6"
+                class="baseline-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <no3-perc-graph v-bind:base-graph="true"/>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Plant uptake of N">
+          <div class="card-body no-padding">
+            <b-row>
+              <b-col lg="6">
+                <h6 class="baseline-graph-title">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <no3-crop-graph v-bind:base-graph="false"/>
+              </b-col>
+              <b-col
+                lg="6"
+                class="baseline-graph-container"
+              >
+                <h6 class="baseline-graph-title">
+                  Business as Usual
+                </h6>
+                <no3-crop-graph v-bind:base-graph="true"/>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -140,11 +177,17 @@ import OverviewWaterRightsGraph from './data/OverviewWaterRightsGraph.vue';
 import OverviewBaseWaterRightsGraph from './data/OverviewBaseWaterRightsGraph.vue';
 import EventBus from './../../../../event-bus';
 import IrrigationBaseLineGraph from "./data/IrrigationBaselineGraph";
+import GwqGraph from "@/components/dashboard/projects/charts/data/gwqGraph";
+import No3PercGraph from "@/components/dashboard/projects/charts/data/no3PercGraph";
+import No3CropGraph from "@/components/dashboard/projects/charts/data/no3CropGraph";
 
 export default {
   name: 'Region',
 
   components: {
+    No3CropGraph,
+    No3PercGraph,
+    GwqGraph,
     IrrigationBaseLineGraph,
     'irrigationGraph': IrrigationGraph,
     'cropYieldGraph': CropYieldGraph,
