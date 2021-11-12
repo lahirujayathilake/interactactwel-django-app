@@ -14,9 +14,11 @@ InteractwelPlanActorActions, InteractwelProjectJoinRequest, InteractwelSelectedP
 class SubbasinSerializer(serializers.ModelSerializer):
 
     detail_json = serializers.JSONField()
+    basline_json = serializers.JSONField()
+
     class Meta:
         model = Subbasin
-        fields = ("id", "detail_json")
+        fields = ("id", "subbasin_type", "project_id", "detail_json", "basline_json")
 
 ################# User Management ##############################################
 ################################################################################
@@ -211,6 +213,8 @@ class InteractwelProjectPlanSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class InteractwelProjectJoinRequestSerializer(serializers.ModelSerializer):
+    project = InteractwelProjectSerializer(source='project_id', many=False, required=True)
+    user = InteractwelUserSerializer(source='user_id', many=False, required=True)
     class Meta:
         model = InteractwelProjectJoinRequest
         fields = '__all__'
