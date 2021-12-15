@@ -1,7 +1,8 @@
 <template>
   <div>
     <component :is="component='Header'" />
-    <b-container class="main"
+    <b-container
+      class="main"
       fluid
     >
       <b-navbar
@@ -99,9 +100,9 @@
                   </div>
                   <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
-                      id="checkbox-2"
+                      id="checkbox-3"
                       v-model="streams_layer_show"
-                      name="checkbox-1"
+                      name="checkbox-3"
                       value="checked"
                       unchecked-value="unchecked"
                     >
@@ -122,7 +123,7 @@
                 >Station Data <i class="fa fa-caret-down" /></a>
                 <div
                   id="stationData"
-                  class="collapse show"
+                  class="collapse"
                 >
                   <div class="list-group-item bg-secondary text-light">
                     <b-form-checkbox
@@ -220,6 +221,73 @@
                         style="width: 20px"
                       > NOWA Pumping Limit
                     </b-form-checkbox>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a
+                  href="#stresses"
+                  class="list-group-item bg-dark font-weight-bold text-light"
+                  data-toggle="collapse"
+                  data-parent="#legend"
+                >Drought Events <i class="fa fa-caret-down" /></a>
+                <div
+                  id="stresses"
+                  class="collapse"
+                >
+                  <div class="list-group-item bg-secondary text-light">
+                    <b-form-checkbox
+                      id="checkbox-2"
+                      v-model="sub_basins_drought_layer_show"
+                      name="checkbox-2"
+                      value="checked"
+                      unchecked-value="unchecked"
+                    >
+                      <img
+                        src="../../../assets/sub_basin_ico.jpg"
+                        style="width: 20px"
+                      > Sub-basins Drought
+                    </b-form-checkbox>
+                    <b-form-group
+                      label=""
+                      class="px-3"
+                    >
+                      <b-form-radio
+                        v-model="selected_climate_scenario"
+                        name="Total drought events"
+                        value="Total drought events"
+                      >
+                        Total drought events
+                      </b-form-radio>
+                      <b-form-radio
+                        v-model="selected_climate_scenario"
+                        name="Maximum duration"
+                        value="Maximum duration"
+                      >
+                        Maximum duration
+                      </b-form-radio>
+                      <b-form-radio
+                        v-model="selected_climate_scenario"
+                        name="Average duration"
+                        value="Average duration"
+                      >
+                        Average duration
+                      </b-form-radio>
+                      <b-form-radio
+                        v-model="selected_climate_scenario"
+                        name="Maximum severity"
+                        value="Maximum severity"
+                      >
+                        Maximum severity
+                      </b-form-radio>
+                      <b-form-radio
+                        v-model="selected_climate_scenario"
+                        name="Average severity"
+                        value="Average severity"
+                      >
+                        Average severity
+                      </b-form-radio>
+                    </b-form-group>
                   </div>
                 </div>
               </div>
@@ -402,6 +470,76 @@
                 />
               </l-layer-group>
 
+              <l-layer-group
+                v-if="selected_climate_scenario === 'Total drought events'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Sub-basins</strong></font>"
+              >
+                <l-geo-json
+                  :v-if="show"
+                  :geojson="geoJson_subbasin_drought"
+                  :options="options"
+                  :options-style="styleFunctionChoroplethDroughtEvents"
+                />
+              </l-layer-group>
+
+              <l-layer-group
+                v-if="selected_climate_scenario === 'Maximum duration'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Sub-basins</strong></font>"
+              >
+                <l-geo-json
+                  :v-if="show"
+                  :geojson="geoJson_subbasin_drought"
+                  :options="options"
+                  :options-style="styleFunctionChoroplethMaxDuration"
+                />
+              </l-layer-group>
+
+              <l-layer-group
+                v-if="selected_climate_scenario === 'Average duration'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Sub-basins</strong></font>"
+              >
+                <l-geo-json
+                  :v-if="show"
+                  :geojson="geoJson_subbasin_drought"
+                  :options="options"
+                  :options-style="styleFunctionChoroplethAveDuration"
+                />
+              </l-layer-group>
+
+              <l-layer-group
+                v-if="selected_climate_scenario === 'Maximum severity'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Sub-basins</strong></font>"
+              >
+                <l-geo-json
+                  :v-if="show"
+                  :geojson="geoJson_subbasin_drought"
+                  :options="options"
+                  :options-style="styleFunctionChoroplethMaxSeverity"
+                />
+              </l-layer-group>
+
+              <l-layer-group
+                v-if="selected_climate_scenario === 'Average severity'"
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Sub-basins</strong></font>"
+              >
+                <l-geo-json
+                  :v-if="show"
+                  :geojson="geoJson_subbasin_drought"
+                  :options="options"
+                  :options-style="styleFunctionChoroplethAveSeverity"
+                />
+              </l-layer-group>
+
               <l-control-scale
                 position="bottomright"
                 :max-width="200"
@@ -416,20 +554,26 @@
                 position="topright"
                 :sort-layers="false"
               />
-              <l-layer-group
-                v-if="ResultsMap"
-                ref="RegionalMap"
-                layer-type="overlay"
-                name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>"
-              >
-                <l-geo-json
-                  v-if="RegionHeatMap"
-                  :geojson="geoJson_subbasin"
-                  :options="options_heatmap"
-                  :options-style="getStyle_HeatMap"
-                />
-              </l-layer-group>
 
+              <l-control
+                :position="'bottomright'"
+                class="custom-control-watermark"
+              >
+                <div>
+                  <h4>{{ selected_climate_scenario }}</h4>
+                  <ul>
+                    <li
+                      v-for="grade in grades[selected_climate_scenario]"
+                      :key="grade.color"
+                    >
+                      {{ grade.color }}
+                      <span v-html="grade.start !== null ? grade.start : ' < '"></span>
+                      <span>{{grade.start !== null && grade.end !== null ? ' - ' : ''}}</span>
+                      <span v-html="grade.end !== null ? grade.end : ' < '"></span>
+                    </li>
+                  </ul>
+                </div>
+              </l-control>
               <!--<l-choropleth-layer
                               id="regional_layer"
                               v-if="RegionHeatMap"
@@ -504,6 +648,7 @@ import {
   LLayerGroup,
   LPopup,
   LControlZoom,
+  LControl,
 } from 'vue2-leaflet';
 import L from 'leaflet';
 
@@ -546,14 +691,15 @@ export default {
     'l-choropleth-layer': ChoroplethLayer,
     'l-info-control': InfoControl,
     'l-reference-chart': ReferenceChart,
-
+    'l-control': LControl,
   },
 
   data() {
     return {
-
+      geoJson_us_states: null,
       geoJson_reach: null,
       geoJson_subbasin: null,
+      geoJson_subbasin_drought: null,
       geoJson_reservoir: null,
       geoJson_WaterRigths: null,
       geoJson_irrland: null,
@@ -675,7 +821,9 @@ export default {
       currentStrokeColor: '3d3213',
       selectedProject: {},
       selectedMapType: 'terrain_map',
-      sub_basins_layer_show: 'checked',
+      selected_climate_scenario: 'Total drought events',
+      sub_basins_layer_show: null,
+      sub_basins_drought_layer_show: 'checked',
       streams_layer_show: 'checked',
       reservoirs_layer_show: 'checked',
       gauging_stations_layer_show: 'checked',
@@ -683,6 +831,7 @@ export default {
       gw_restricted_areas_layer_show: 'checked',
       tribal_lands_layer_show: 'checked',
       nowa_pumping_limit_layer_show: 'checked',
+      grades: {},
     };
   },
 
@@ -804,6 +953,40 @@ export default {
       };
     },
 
+    styleFunctionChoroplethDroughtEvents() {
+      let $this = this;
+      return function(feature) {
+        return $this.getStylesForClimateScenario(feature, 'Total drought events');
+      };
+    },
+
+    styleFunctionChoroplethMaxDuration() {
+      let $this = this;
+      return function(feature) {
+        return $this.getStylesForClimateScenario(feature, 'Maximum duration');
+      };
+    },
+
+    styleFunctionChoroplethAveDuration() {
+      let $this = this;
+      return function(feature) {
+        return $this.getStylesForClimateScenario(feature, 'Average duration');
+      };
+    },
+
+    styleFunctionChoroplethMaxSeverity() {
+      let $this = this;
+      return function(feature) {
+        return $this.getStylesForClimateScenario(feature, 'Maximum severity');
+      };
+    },
+
+    styleFunctionChoroplethAveSeverity() {
+      let $this = this;
+      return function(feature) {
+        return $this.getStylesForClimateScenario(feature, 'Average severity');
+      };
+    },
     getStyle_HeatMap() {
       return () => {
         return {
@@ -1018,6 +1201,13 @@ export default {
 
   created() {
     this.loading = true;
+
+    axios.get("/static/subbasins_drought.geojson")
+      .then(response => {
+        this.geoJson_subbasin_drought = response.data;
+        this.loading = true;
+      });
+
     axios.get("/static/subbasins1.geojson")
       .then(response => {
         this.geoJson_subbasin = response.data;
@@ -1053,6 +1243,12 @@ export default {
     axios.get("/static/water_rigths.geojson")
       .then(response => {
         this.geoJson_WaterRigths = response.data;
+        this.loading = true;
+      });
+
+    axios.get("/static/grades.json")
+      .then(response => {
+        this.grades = response.data;
         this.loading = true;
       });
 
@@ -1123,6 +1319,37 @@ export default {
       this.istutor1Visible = false;
       this.isStep1Active = false;
       this.istutor2Visible = true;
+    },
+
+    getStylesForClimateScenario(feature, climateScenario) {
+      return {
+        weight: 1.5,
+        color: "#9f1414",
+        opacity: 1,
+        fillColor: this.getColor(feature.properties[climateScenario], climateScenario),
+        dashArray: '5, 5',
+        dashOffset: '10',
+        fillOpacity: 1,
+      };
+    },
+
+    getColor(value, climateScenario) {
+      const climateGrades = this.grades[climateScenario];
+      if (!climateGrades) {
+        return '#FFEDA0';
+      }
+      for (const cGrade of climateGrades) {
+        if (cGrade.start === null && cGrade.end >= value) {
+          return cGrade.color;
+        }
+        if (cGrade.end === null && cGrade.start <= value) {
+          return cGrade.color;
+        }
+        if (cGrade.start <= value && cGrade.end >= value) {
+          return cGrade.color;
+        }
+      }
+      return '#FFEDA0';
     },
   },
 

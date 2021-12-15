@@ -1,0 +1,157 @@
+{
+  "Total drought events": [
+    {
+      "start": null,
+      "end": 20,
+      "color": "#FFEDA0"
+    },
+    {
+      "start": 20,
+      "end": 40,
+      "color": "#FED976"
+    },
+    {
+      "start": 40,
+      "end": 50,
+      "color": "#FEB24C"
+    },
+    {
+      "start": 50,
+      "end": 60,
+      "color": "#FD8D3C"
+    },
+    {
+      "start": 60,
+      "end": 70,
+      "color": "#FC4E2A"
+    },
+    {
+      "start": 70,
+      "end": null,
+      "color": "#E31A1C"
+    }
+  ],
+  "Maximum duration": [
+    {
+      "start": null,
+      "end": 4,
+      "color": "#FFEDA0"
+    },
+    {
+      "start": 4,
+      "end": 5,
+      "color": "#FED976"
+    },
+    {
+      "start": 5,
+      "end": 6,
+      "color": "#FEB24C"
+    },
+    {
+      "start": 6,
+      "end": 7,
+      "color": "#FD8D3C"
+    },
+    {
+      "start": 7,
+      "end": 8,
+      "color": "#FC4E2A"
+    },
+    {
+      "start": 9,
+      "end": null,
+      "color": "#E31A1C"
+    }
+  ],
+  "Average duration": [
+    {
+      "start": null,
+      "end": 2,
+      "color": "#FFEDA0"
+    },
+    {
+      "start": 2.2,
+      "end": 2.4,
+      "color": "#FED976"
+    },
+    {
+      "start": 2.4,
+      "end": 2.6,
+      "color": "#FEB24C"
+    },
+    {
+      "start": 2.6,
+      "end": 2.8,
+      "color": "#FD8D3C"
+    },
+    {
+      "start": 2.8,
+      "end": 3,
+      "color": "#FC4E2A"
+    }
+  ],
+  "Maximum severity": [
+    {
+      "start": null,
+      "end": -10,
+      "color": "#FFEDA0"
+    },
+    {
+      "start": -10,
+      "end": -9.5,
+      "color": "#FED976"
+    },
+    {
+      "start": -9.5,
+      "end": -9.0,
+      "color": "#FEB24C"
+    },
+    {
+      "start": -9.0,
+      "end": -8.5,
+      "color": "#FD8D3C"
+    },
+    {
+      "start": -8.5,
+      "end": -8.0,
+      "color": "#FC4E2A"
+    },
+    {
+      "start": -8.0,
+      "end": null,
+      "color": "#E31A1C"
+    }
+  ],
+  "Average severity": [
+    {
+      "start": null,
+      "end": -2.0,
+      "color": "#FFEDA0"
+    },
+    {
+      "start": -2.0,
+      "end": -1.9,
+      "color": "#FED976"
+    },
+    {
+      "start": -1.9,
+      "end": -1.8,
+      "color": "#FEB24C"
+    },
+    {
+      "start": -1.8,
+      "end": -1.7,
+      "color": "#FD8D3C"
+    },
+    {
+      "start": -1.7,
+      "end": -1.6,
+      "color": "#FC4E2A"
+    },
+    {
+      "start": -1.5,
+      "end": null,
+      "color": "#E31A1C"
+    }
+  ]
+}

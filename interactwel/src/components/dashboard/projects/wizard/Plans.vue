@@ -197,6 +197,12 @@
                     role="tabpanel"
                   >
                     <b-nav-item
+                        class="collapse-item"
+                        @click="$router.push({ name: 'Stresses', params: { planId: plan.id }})"
+                    >
+                      Stresses & Shocks
+                    </b-nav-item>
+                    <b-nav-item
                       class="collapse-item"
                       @click="$router.push({ name: 'ChartActions', params: { planId: plan.id }})"
                     >

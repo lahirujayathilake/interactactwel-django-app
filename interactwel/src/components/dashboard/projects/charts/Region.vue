@@ -5,7 +5,7 @@
   >
     <div class="card-body no-padding">
       <b-tabs card>
-        <b-tab
+<!--        <b-tab
           title="Water Rights"
           active
         >
@@ -31,7 +31,7 @@
               </b-col>
             </b-row>
           </div>
-        </b-tab>
+        </b-tab>-->
         <b-tab title="Crop yield">
           <div class="card-body no-padding">
             <b-row>
@@ -140,7 +140,7 @@
             </b-row>
           </div>
         </b-tab>
-        <b-tab title="Plant uptake of N">
+        <b-tab title="Nitrogen Plant Uptake">
           <div class="card-body no-padding">
             <b-row>
               <b-col lg="6">
@@ -159,6 +159,238 @@
                 <no3-crop-graph v-bind:base-graph="true"/>
               </b-col>
             </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Groundwater to Stream">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+                  class="p-3"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <gwq-graph v-bind:base-graph="false"/>
+              </b-col>
+              <b-col
+                  lg="6"
+                  class="p-3"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <gwq-graph v-bind:base-graph="true"/>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Water Yield">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+                  <water-yield-graph v-bind:base-graph="false"/>
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+                  <water-yield-graph v-bind:base-graph="true"/>
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Sediment Yield">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+                  <sediment-yield-graph v-bind:base-graph="false"/>
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+                  <sediment-yield-graph v-bind:base-graph="true"/>
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Evapotranspiration">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+                  <et-graph v-bind:base-graph="false"/>
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+                  <et-graph v-bind:base-graph="true"/>
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Soil Water">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+                  <sw-graph v-bind:base-graph="false"/>
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+                  <sw-graph v-bind:base-graph="true"/>
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="NO3 - Percolated to Aquifer">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="NO3 - Surface Runoff">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="NO3 - Lateral Flow">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Percolation to Aquifers">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
+                </b-col>
+              </b-row>
+            </div>
           </div>
         </b-tab>
       </b-tabs>
@@ -180,6 +412,10 @@ import IrrigationBaseLineGraph from "./data/IrrigationBaselineGraph";
 import GwqGraph from "@/components/dashboard/projects/charts/data/gwqGraph";
 import No3PercGraph from "@/components/dashboard/projects/charts/data/no3PercGraph";
 import No3CropGraph from "@/components/dashboard/projects/charts/data/no3CropGraph";
+import SwGraph from "@/components/dashboard/projects/charts/data/swGraph";
+import EtGraph from "@/components/dashboard/projects/charts/data/etGraph";
+import SedimentYieldGraph from "@/components/dashboard/projects/charts/data/sedimentYieldGraph";
+import WaterYieldGraph from "@/components/dashboard/projects/charts/data/waterYieldGraph";
 
 export default {
   name: 'Region',
@@ -187,7 +423,7 @@ export default {
   components: {
     No3CropGraph,
     No3PercGraph,
-    GwqGraph,
+    GwqGraph,SwGraph, EtGraph, SedimentYieldGraph, WaterYieldGraph,
     IrrigationBaseLineGraph,
     'irrigationGraph': IrrigationGraph,
     'cropYieldGraph': CropYieldGraph,

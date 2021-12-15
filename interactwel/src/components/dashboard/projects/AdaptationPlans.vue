@@ -99,6 +99,19 @@
             </l-layer-group>
 
             <l-layer-group
+                layer-type="overlay"
+                :visible="defaultvisibility"
+                name="<font size=2><strong>Drought</strong></font>"
+            >
+              <l-geo-json
+                  v-if="show"
+                  :geojson="geoJson_subbasin_drought"
+                  :options="options"
+                  :options-style="styleFunction_subbasin"
+              />
+            </l-layer-group>
+
+            <l-layer-group
               layer-type="overlay"
               :visible="defaultvisibility"
               name="<font size=2><strong>Streams</strong></font>"
@@ -249,24 +262,8 @@
               :max-width="200"
               imperial="imperial"
             />
-            <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
-            <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
 
-            <l-layer-group
-              v-if="ResultsMap"
-              ref="RegionalMap"
-              layer-type="overlay"
-              name="<font size=2 color=#5e6b7e><i><u><strong>Regional Results</strong></u></i></font>"
-            >
-              <l-geo-json
-                v-if="RegionHeatMap"
-                :geojson="geoJson_subbasin"
-                :options="options_heatmap"
-                :options-style="getStyle_HeatMap"
-              />
-            </l-layer-group>
-
-            <!--<l-choropleth-layer
+            <l-choropleth-layer
                               id="regional_layer"
                               v-if="RegionHeatMap"
                               :data="pyDepartmentsData"
@@ -292,7 +289,7 @@
                                     placeholder="Hover over a Sub-basin"/>
 
                                 </template>
-                            </l-choropleth-layer>-->
+                            </l-choropleth-layer>
           </l-map>
         </div>
       </b-col>
@@ -342,9 +339,9 @@ import PopupContent_WaterRights from "./popup/PopupContent_WaterRights";
 import PopupContentWStations from "./popup/PopupContent_WStations";
 import PopupContentGaugeStations from "./popup/PopupContent_GaugeStations.vue";
 import RegionalSummary from './popup/RegionalSummary.vue';
-
 import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
 
+//import paraguayGeojson from './../../../../public/static/subbasins1.geojson';
 import paraguayGeojson from './../../../../public/static/BASIN_Irrigation_basins_data.json';
 import {pyDepartmentsData} from './../../../../public/static/py-departments-data';
 
@@ -382,6 +379,7 @@ export default {
 
       geoJson_reach: null,
       geoJson_subbasin: null,
+      geoJson_subbasin_drought: null,
       geoJson_reservoir: null,
       geoJson_WaterRigths: null,
       geoJson_irrland: null,
@@ -401,13 +399,15 @@ export default {
       show: true,
       update_flag: true,
 
+      sub_basins_drought_layer_show: 'checked',
+
       unchecked_layers: [" Irrigated Land", " NOWA Pumping Limit", " GW Restricted Areas", " Tribal Lands", " Water Rights"],
       title_layers: [" Default Layers", " Station Data", " Additional Layers", " Regional Results"],
       default_num_layers: 0,
       default_selected_layers: [],
       paraguayGeojson,
       pyDepartmentsData,
-      RegionHeatMap: false,
+      RegionHeatMap: true,
       ResultsMap: false,
       HeatMapProp: 'Name',
       defaultvisibility: true,
@@ -837,6 +837,11 @@ export default {
         this.geoJson_subbasin = response.data;
         this.loading = true;
       });
+    axios.get("/static/subbasins_drought.geojson")
+        .then(response => {
+          this.geoJson_subbasin_drought = response.data;
+          this.loading = true;
+        });
     axios.get("/static/reaches1.json")
       .then(response => {
         this.geoJson_reach = response.data;

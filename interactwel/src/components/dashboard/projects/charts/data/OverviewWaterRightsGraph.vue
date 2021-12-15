@@ -8,6 +8,7 @@
 </template>
 <script>
 import VerticalBarChart from "../lib/VerticalBarChart";
+import axios from "axios";
 
 export default {
   name: 'OverviewWaterRightsGraph',
@@ -64,9 +65,9 @@ export default {
   },
   mounted() {
 
-    const {utils} = AiravataAPI;
+    // const {utils} = AiravataAPI;
 
-    utils.FetchUtils.get("/interactwel/api/subbasins/")
+    /*utils.FetchUtils.get("/interactwel/api/subbasins/")
       .then(JSONData => {
         this.JSONData = JSONData;
         if (this.JSONData.length > 0) {
@@ -75,9 +76,16 @@ export default {
       })
       .catch(error => {
         alert("Could not retrieve requests. API error! " + error);
-      });
-
+      });*/
     this.planId = this.$route.params.planId;
+    this.buildDataCollection($this.JSONData, this.planId);
+  },
+
+  created(){
+    axios.get("/static/BASIN_Water_Rights_plans.json").then(response => {
+      this.JSONData = response.data;
+      this.buildDataCollection(this.JSONData, this.planName);
+    });
   },
 
   methods: {

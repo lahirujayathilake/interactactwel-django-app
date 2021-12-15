@@ -24,6 +24,7 @@ const Visualize = () => import('@/components/dashboard/projects/Visualize');
 const AdaptationPlans = () => import('@/components/dashboard/projects/AdaptationPlans');
 const Goals = () => import('@/components/dashboard/projects/wizard/Goals');
 const Actors = () => import('@/components/dashboard/projects/wizard/Actors');
+const Stresses = () => import('@/components/dashboard/projects/wizard/Stresses');
 const Actions = () => import('@/components/dashboard/projects/wizard/Actions');
 const Plans = () => import('@/components/dashboard/projects/wizard/Plans');
 const Share = () => import('@/components/dashboard/projects/wizard/Share');
@@ -201,6 +202,11 @@ export default new Router({
               redirect: ':planId/actions',
               component: Visualization,
               children: [
+                {
+                  path: 'stresses',
+                  name: 'Stresses',
+                  component: Stresses,
+                },
                 {
                   path: 'actions',
                   name: 'ChartActions',

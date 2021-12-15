@@ -5,132 +5,183 @@
   >
     <div class="card-body no-padding">
       <b-tabs card>
-        <b-tab
-          title="Groundwater"
-          active
-        >
-          <div class="card-body">
-            <b-row>
-              <b-col
-                lg="6"
-                class="p-3"
-              >
-                <h6 class="baseline-graph-title text-center">
-                  GWQ_reg_year
-                </h6>
-                <gwq-graph v-bind:base-graph="false"/>
-              </b-col>
-              <b-col
-                lg="6"
-                class="p-3"
-              >
-                <h6 class="baseline-graph-title text-center">
-                  Business as Usual
-                </h6>
-                <gwq-graph v-bind:base-graph="true"/>
-              </b-col>
-            </b-row>
-          </div>
-        </b-tab>
-        <b-tab title="Water Yield">
+        <b-tab title="Average daily streamflow out of reach during time step">
           <div class="card-body">
             <div class="card-body">
               <b-row>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
-                    WATER YIELD_reg_year
+                    Action Plan {{ $route.params.planId }}
                   </h6>
-                  <water-yield-graph v-bind:base-graph="false"/>
+
                 </b-col>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-                  <water-yield-graph v-bind:base-graph="true"/>
+
                 </b-col>
               </b-row>
             </div>
           </div>
         </b-tab>
-        <b-tab title="Sediment Yield">
+        <b-tab title="Sediment transported with water out of reach during time step">
           <div class="card-body">
             <div class="card-body">
               <b-row>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
-                    SED_YIELD_reg_year
+                    Action Plan {{ $route.params.planId }}
                   </h6>
-                  <sediment-yield-graph v-bind:base-graph="false"/>
+
                 </b-col>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-                  <sediment-yield-graph v-bind:base-graph="true"/>
+
                 </b-col>
               </b-row>
             </div>
           </div>
         </b-tab>
-        <b-tab title="Evapotranspiration">
+        <b-tab title="Nitrate transported with water out of reach during time step">
           <div class="card-body">
             <div class="card-body">
               <b-row>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
-                    ET_reg_year
+                    Action Plan {{ $route.params.planId }}
                   </h6>
-                  <et-graph v-bind:base-graph="false"/>
+
                 </b-col>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-                  <et-graph v-bind:base-graph="true"/>
+
                 </b-col>
               </b-row>
             </div>
           </div>
         </b-tab>
-        <b-tab title="Soil Water">
+        <b-tab title="Amount of dissolved oxygen transported with water out of reach during time step">
           <div class="card-body">
             <div class="card-body">
               <b-row>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
-                    SW_reg_year
+                    Action Plan {{ $route.params.planId }}
                   </h6>
-                  <sw-graph v-bind:base-graph="false"/>
+
                 </b-col>
                 <b-col
-                  lg="6"
-                  class="p-3"
+                    lg="6"
+                    class="p-3"
                 >
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-                  <sw-graph v-bind:base-graph="true"/>
+
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Stream temperature in reach">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Total nitrogen in surface runoff">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Total phosphorus in surface runoff">
+          <div class="card-body">
+            <div class="card-body">
+              <b-row>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Action Plan {{ $route.params.planId }}
+                  </h6>
+
+                </b-col>
+                <b-col
+                    lg="6"
+                    class="p-3"
+                >
+                  <h6 class="baseline-graph-title text-center">
+                    Business as Usual
+                  </h6>
+
                 </b-col>
               </b-row>
             </div>
