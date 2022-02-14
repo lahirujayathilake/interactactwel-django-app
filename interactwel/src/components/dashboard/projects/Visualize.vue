@@ -224,176 +224,7 @@
                   </div>
                 </div>
               </div>
-
-              <!-- 1981-2006 Historical -->
-              <div>
-                <a
-                  href="#historical"
-                  class="list-group-item bg-dark font-weight-bold text-light"
-                  data-toggle="collapse"
-                  data-parent="#legend">
-                  1981-2006 Historical<i class="fa fa-caret-down" /></a>
-                <div
-                  id="historical"
-                  class="collapse"
-                >
-                  <div class="list-group-item bg-secondary text-light">
-                    <h6>SPI</h6>
-                    <b-form-group
-                      label=""
-                      class="px-3"
-                    >
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - Total drought events"
-                        value="SPI_NUM_DR_sub"
-                      >
-                        Number of Drought Events
-                      </b-form-radio>
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - Average Duration"
-                        value="SPI_DURAVG_sub"
-                      >
-                        Average Duration
-                      </b-form-radio>
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - No. of Extreme & Exceptional Drought Months"
-                        value="SPI_NUMEX_sub"
-                      >
-                        No. of Extreme & Exceptional Drought Months
-                      </b-form-radio>
-                    </b-form-group>
-                  </div>
-                  <div class="list-group-item bg-secondary text-light">
-                    <h6>SSI</h6>
-                    <b-form-group
-                      label=""
-                      class="px-3"
-                    >
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - Total drought events"
-                        value="SPI_NUM_DR_sub"
-                      >
-                        Number of Drought Events
-                      </b-form-radio>
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - Average Duration"
-                        value="SPI_DURAVG_sub"
-                      >
-                        Average Duration
-                      </b-form-radio>
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - No. of Extreme & Exceptional Drought Months"
-                        value="SPI_NUMEX_sub"
-                      >
-                        No. of Extreme & Exceptional Drought Months
-                      </b-form-radio>
-                    </b-form-group>
-                  </div>
-                  <div class="list-group-item bg-secondary text-light">
-                    <h6>SRI</h6>
-                    <b-form-group
-                      label=""
-                      class="px-3"
-                    >
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - Total drought events"
-                        value="SPI_NUM_DR_sub"
-                      >
-                        Number of Drought Events
-                      </b-form-radio>
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - Average Duration"
-                        value="SPI_DURAVG_sub"
-                      >
-                        Average Duration
-                      </b-form-radio>
-                      <b-form-radio
-                        v-model="selectedClimateScenario"
-                        name="SPI - No. of Extreme & Exceptional Drought Months"
-                        value="SPI_NUMEX_sub"
-                      >
-                        No. of Extreme & Exceptional Drought Months
-                      </b-form-radio>
-                    </b-form-group>
-                  </div>
-                </div>
-              </div>
-              <!-- 2030-2059 RCP 4.5 Ensemble Average -->
-              <div>
-                <a
-                  href="#rcp453059"
-                  class="list-group-item bg-dark font-weight-bold text-light"
-                  data-toggle="collapse"
-                  data-parent="#legend">
-                  2030-2059 RCP 4.5 Ensemble Average<i class="fa fa-caret-down" /></a>
-                <div
-                  id="rcp453059"
-                  class="collapse"
-                >
-                  <div class="list-group-item bg-secondary text-light">
-
-                  </div>
-                </div>
-              </div>
-              <!-- 2030-2059 RCP 8.5 Ensemble Average -->
-              <div>
-                <a
-                  href="#rcp853059"
-                  class="list-group-item bg-dark font-weight-bold text-light"
-                  data-toggle="collapse"
-                  data-parent="#legend">
-                  2030-2059 RCP 8.5 Ensemble Average<i class="fa fa-caret-down" /></a>
-                <div
-                  id="rcp853059"
-                  class="collapse"
-                >
-                  <div class="list-group-item bg-secondary text-light">
-
-                  </div>
-                </div>
-              </div>
-              <!-- 2070 - 2099 RCP 4.5 Ensemble Average -->
-              <div>
-                <a
-                  href="#rcp457099"
-                  class="list-group-item bg-dark font-weight-bold text-light"
-                  data-toggle="collapse"
-                  data-parent="#legend">
-                  2070 - 2099 RCP 4.5 Ensemble Average<i class="fa fa-caret-down" /></a>
-                <div
-                  id="rcp457099"
-                  class="collapse"
-                >
-                  <div class="list-group-item bg-secondary text-light">
-
-                  </div>
-                </div>
-              </div>
-              <!-- 2070 - 2099 RCP 8.5 Ensemble Average -->
-              <div>
-                <a
-                  href="#rcp857099"
-                  class="list-group-item bg-dark font-weight-bold text-light"
-                  data-toggle="collapse"
-                  data-parent="#legend">
-                  2070 - 2099 RCP 8.5 Ensemble Average<i class="fa fa-caret-down" /></a>
-                <div
-                  id="rcp857099"
-                  class="collapse"
-                >
-                  <div class="list-group-item bg-secondary text-light">
-
-                  </div>
-                </div>
-              </div>
+              <climate-scenario-selection />
             </div>
           </div>
         </b-col>
@@ -573,55 +404,13 @@
                 />
               </l-layer-group>
 
-              <l-layer-group
-                v-if="selectedClimateScenario === 'SPI_NUM_DR_sub'"
-                layer-type="overlay"
-                :visible="defaultvisibility"
-                name="<font size=2><strong>Sub-basins</strong></font>"
-              >
-                <l-geo-json
-                  :v-if="show"
-                  :geojson="geoJson_subbasin_drought"
-                  :options="options"
-                  :options-style="styleFunctionChoroplethDroughtEvents"
-                />
-              </l-layer-group>
-
-              <l-layer-group
-                v-if="selectedClimateScenario === 'SPI_DURAVG_sub'"
-                layer-type="overlay"
-                :visible="defaultvisibility"
-                name="<font size=2><strong>Sub-basins</strong></font>"
-              >
-                <l-geo-json
-                  :v-if="show"
-                  :geojson="geoJson_subbasin_drought"
-                  :options="options"
-                  :options-style="styleFunctionChoroplethMaxDuration"
-                />
-              </l-layer-group>
-
-              <l-layer-group
-                v-if="selectedClimateScenario === 'SPI_NUMEX_sub'"
-                layer-type="overlay"
-                :visible="defaultvisibility"
-                name="<font size=2><strong>Sub-basins</strong></font>"
-              >
-                <l-geo-json
-                  :v-if="show"
-                  :geojson="geoJson_subbasin_drought"
-                  :options="options"
-                  :options-style="styleFunctionChoroplethAveDuration"
-                />
-              </l-layer-group>
+              <climate-scenario-map-layer />
 
               <l-control-scale
                 position="bottomright"
                 :max-width="200"
                 imperial="imperial"
               />
-              <!--<img @click="Layerselector" src="../../../assets/water_rights_legend.png" id="WRlegend" class="map-legend">-->
-              <!--<img src="../../../assets/water_rights_legend.png" class="map-legend">-->
 
               <l-control-layers
                 v-if="ResultsMap"
@@ -629,57 +418,6 @@
                 position="topright"
                 :sort-layers="false"
               />
-
-              <l-control
-                :position="'bottomright'"
-                class="custom-control-watermark"
-              >
-                <div style="background-color: #FFFFFF; padding: 1rem;">
-                  <h6>{{ selectedClimateScenario }}</h6>
-                  <p>({{ displayUnit }})</p>
-                  <ul style="list-style-type: none; padding-left: 1rem">
-                    <li
-                      v-for="grade in grades"
-                      :key="grade.color"
-                    >
-                      <span
-                        style="height: 10px; width: 10px; margin-right: 10px; display: inline-block"
-                        :style="{'background-color':grade.color}"
-                      />
-                      <span v-html="grade.start !== null ? grade.start : ' < '" />
-                      <span>{{ grade.start !== null && grade.end !== null ? ' - ' : '' }}</span>
-                      <span v-html="grade.end !== null ? grade.end : ' < '" />
-                    </li>
-                  </ul>
-                </div>
-              </l-control>
-              <!--<l-choropleth-layer
-                              id="regional_layer"
-                              v-if="RegionHeatMap"
-                              :data="pyDepartmentsData"
-                              titleKey="department_name"
-                              idKey="department_id"
-                              :value="value"
-                              :extraValues="extraValues"
-                              geojsonIdKey="Name"
-                              :geojson="paraguayGeojson"
-                              :colorScale="colorScale">
-                                <template slot-scope="props">
-                                <l-reference-chart
-                                    title="% of Change in Water Rights"
-                                    :colorScale="colorScale"
-                                    :min="props.min"
-                                    :max="props.max"
-                                    position="bottomright"/>
-                                  <l-info-control
-                                    :item="props.currentItem"
-                                    :unit="props.unit"
-                                    position="bottomright"
-                                    title="Sub-basins"
-                                    placeholder="Hover over a Sub-basin"/>
-
-                                </template>
-                            </l-choropleth-layer>-->
             </l-map>
           </div>
         </b-col>
@@ -749,10 +487,14 @@ import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
 
 import paraguayGeojson from './../../../../public/static/BASIN_Irrigation_basins_data.json';
 import {pyDepartmentsData} from './../../../../public/static/py-departments-data';
+import ClimateScenarioMapLayer from "@/components/dashboard/projects/visualize-map-sub-components/ClimateScenarioMapLayer";
+import ClimateScenarioSelection from "@/components/dashboard/projects/visualize-map-sub-components/ClimateScenarioSelection";
 
 export default {
   name: 'Visualize',
   components: {
+    ClimateScenarioSelection,
+    ClimateScenarioMapLayer,
     Header, Footer, RegionalSummary, Welcome, TutorStep1, TutorStep2,
     'l-map': LMap,
     'l-tile-layer': LTileLayer,
@@ -778,7 +520,6 @@ export default {
       geoJson_us_states: null,
       geoJson_reach: null,
       geoJson_subbasin: null,
-      geoJson_subbasin_drought: null,
       geoJson_reservoir: null,
       geoJson_WaterRigths: null,
       geoJson_irrland: null,
@@ -891,7 +632,7 @@ export default {
       currentStrokeColor: '3d3213',
       selectedProject: {},
       selectedMapType: 'terrain_map',
-      selectedClimateScenario: 'SPI_NUM_DR_sub',
+      selectedClimateScenario: 'NUM_DR_sub',
       sub_basins_layer_show: null,
       sub_basins_drought_layer_show: 'checked',
       streams_layer_show: 'checked',
@@ -901,19 +642,6 @@ export default {
       gw_restricted_areas_layer_show: 'checked',
       tribal_lands_layer_show: 'checked',
       nowa_pumping_limit_layer_show: 'checked',
-      colors: [
-        "#f8ff71",
-        "#f6e869",
-        "#f4d160",
-        "#f2ba58",
-        "#f0a34f",
-        "#ee8d47",
-        "#eb763e",
-        "#e95f36",
-        "#e7482d",
-        "#e53125",
-        "#e31a1c",
-      ],
     };
   },
 
@@ -1032,27 +760,6 @@ export default {
       };
     },
 
-    styleFunctionChoroplethDroughtEvents() {
-      let $this = this;
-      return function(feature) {
-        return $this.getStylesForClimateScenario(feature, 'SPI_NUM_DR_sub');
-      };
-    },
-
-    styleFunctionChoroplethMaxDuration() {
-      let $this = this;
-      return function(feature) {
-        return $this.getStylesForClimateScenario(feature, 'SPI_DURAVG_sub');
-      };
-    },
-
-    styleFunctionChoroplethAveDuration() {
-      let $this = this;
-      return function(feature) {
-        return $this.getStylesForClimateScenario(feature, 'SPI_NUMEX_sub');
-      };
-    },
-
     getStyle_HeatMap() {
       return () => {
         return {
@@ -1083,9 +790,7 @@ export default {
           layer.setStyle({fillColor: '#fff7bc'});
         } else {
           layer.setStyle({fillColor: '#ffffe5'});
-
         }
-
       };
     },
 
@@ -1165,30 +870,6 @@ export default {
         });
 
       };
-    },
-
-    grades: function() {
-      if (!this.geoJson_subbasin_drought) {
-        return [];
-      }
-      const properties = this.geoJson_subbasin_drought.features[0].properties;
-      const min = properties['MIN_' + this.selectedClimateScenario];
-      const max = properties['MAX_' + this.selectedClimateScenario];
-      const step = (max - min) / 10;
-      return this.colors.map(function(color, index) {
-        return {
-          "start": (min + step * index) .toFixed(3),
-          "end": (min + step * (index + 1)).toFixed(3),
-          "color": color,
-        };
-      });
-    },
-
-    displayUnit: function() {
-      if (!this.geoJson_subbasin_drought) {
-        return '';
-      }
-      return this.geoJson_subbasin_drought.features[0].properties['UNITS_' + this.selectedClimateScenario];
     },
   },
 
@@ -1292,12 +973,6 @@ export default {
   created() {
     this.loading = true;
 
-    axios.get("/static/SPI_rcp85_80s.geojson")
-      .then(response => {
-        this.geoJson_subbasin_drought = response.data;
-        this.loading = true;
-      });
-
     axios.get("/static/subbasins1.geojson")
       .then(response => {
         this.geoJson_subbasin = response.data;
@@ -1335,7 +1010,6 @@ export default {
         this.geoJson_WaterRigths = response.data;
         this.loading = true;
       });
-
   },
 
   methods: {
@@ -1364,32 +1038,6 @@ export default {
       this.istutor2Visible = true;
     },
 
-    getStylesForClimateScenario(feature, climateScenario) {
-      return {
-        weight: 1.5,
-        color: "#9f1414",
-        opacity: 1,
-        fillColor: this.getColor(feature.properties[climateScenario]),
-        dashArray: '5, 5',
-        dashOffset: '10',
-        fillOpacity: 1,
-      };
-    },
-
-    getColor(value) {
-      for (const cGrade of this.grades) {
-        if (cGrade.start === null && cGrade.end >= value) {
-          return cGrade.color;
-        }
-        if (cGrade.end === null && cGrade.start <= value) {
-          return cGrade.color;
-        }
-        if (cGrade.start <= value && cGrade.end >= value) {
-          return cGrade.color;
-        }
-      }
-      return '#FFEDA0';
-    },
   },
 
 };
