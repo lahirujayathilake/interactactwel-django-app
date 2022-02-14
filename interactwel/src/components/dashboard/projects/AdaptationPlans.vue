@@ -262,34 +262,6 @@
               :max-width="200"
               imperial="imperial"
             />
-
-            <l-choropleth-layer
-                              id="regional_layer"
-                              v-if="RegionHeatMap"
-                              :data="pyDepartmentsData"
-                              titleKey="department_name"
-                              idKey="department_id"
-                              :value="value"
-                              :extraValues="extraValues"
-                              geojsonIdKey="Name"
-                              :geojson="paraguayGeojson"
-                              :colorScale="colorScale">
-                                <template slot-scope="props">
-                                <l-reference-chart
-                                    title="% of Change in Water Rights"
-                                    :colorScale="colorScale"
-                                    :min="props.min"
-                                    :max="props.max"
-                                    position="bottomright"/>
-                                  <l-info-control
-                                    :item="props.currentItem"
-                                    :unit="props.unit"
-                                    position="bottomright"
-                                    title="Sub-basins"
-                                    placeholder="Hover over a Sub-basin"/>
-
-                                </template>
-                            </l-choropleth-layer>
           </l-map>
         </div>
       </b-col>

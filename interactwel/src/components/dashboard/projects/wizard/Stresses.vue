@@ -6,7 +6,7 @@
     <div class="card-body">
       <b-tabs card>
         <b-tab
-            title="Historical (1999-2020)"
+            title="Historical (1991-2020)"
             active
         >
           <div class="card-body">
@@ -72,7 +72,7 @@
           </div>
         </b-tab>
         <b-tab
-            title="RCP 4.5(Mid Century)"
+            title="RCP 4.5 (Mid Century)"
         >
           <div class="card-body">
             <b-row>
@@ -84,7 +84,7 @@
           </div>
         </b-tab>
         <b-tab
-            title="RCP 8.5(Mid Century)"
+            title="RCP 8.5 (Mid Century)"
         >
           <div class="card-body">
             <b-row>
@@ -96,7 +96,7 @@
           </div>
         </b-tab>
         <b-tab
-          title="RCP 4.5(Late Century)"
+          title="RCP 4.5 (Late Century)"
         >
           <div class="card-body">
             <b-row>
@@ -108,7 +108,7 @@
           </div>
         </b-tab>
         <b-tab
-          title="RCP 8.5(Late Century)"
+          title="RCP 8.5 (Late Century)"
         >
           <div class="card-body">
             <b-row>
