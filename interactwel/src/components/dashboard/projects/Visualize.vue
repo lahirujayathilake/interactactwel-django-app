@@ -1143,5 +1143,15 @@ export default {
         justify-content: flex-end;
     }
 
+    #legend {
+      font-size: 11px ;
+      height: 80vh;
+      overflow: scroll;
+    }
+
+    #legend .list-group-item {
+      padding: 0.5rem;
+    }
+
 </style>
 

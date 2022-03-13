@@ -5,7 +5,7 @@
       :key="climateScenarioOption.fileNamePrefix"
     >
       <a
-        href="#historical"
+        :href="'#' + climateScenarioOption.fileNamePrefix"
         class="list-group-item bg-dark font-weight-bold text-light"
         data-toggle="collapse"
         data-parent="#legend"
@@ -14,7 +14,7 @@
         <i class="fa fa-caret-down" />
       </a>
       <div
-        id="historical"
+        :id=climateScenarioOption.fileNamePrefix
         class="collapse"
       >
         <!-- SPI -->
@@ -36,7 +36,7 @@
               name="SPI - Average Duration"
               :value="'SPI_' + climateScenarioOption.fileNamePrefix + '-DURAVG_sub'"
             >
-              Average Duration
+              Average Drought Duration
             </b-form-radio>
             <b-form-radio
               v-model="selectedClimateScenario"
@@ -67,7 +67,7 @@
               name="SSI - Average Duration"
               :value="'SSI_' + climateScenarioOption.fileNamePrefix + '-DURAVG_sub'"
             >
-              Average Duration
+              Average Drought Duration
             </b-form-radio>
             <b-form-radio
               v-model="selectedClimateScenario"
@@ -98,7 +98,7 @@
               name="SRI - Average Duration"
               :value="'SRI_' + climateScenarioOption.fileNamePrefix + '-DURAVG_sub'"
             >
-              Average Duration
+              Average Drought Duration
             </b-form-radio>
             <b-form-radio
               v-model="selectedClimateScenario"
