@@ -197,16 +197,16 @@ export default new Router({
               component: Overview,
             },
             {
+              path: 'stresses',
+              name: 'Stresses',
+              component: Stresses,
+            },
+            {
               path: ':planId',
               name: 'Visualization',
               redirect: ':planId/actions',
               component: Visualization,
               children: [
-                {
-                  path: 'stresses',
-                  name: 'Stresses',
-                  component: Stresses,
-                },
                 {
                   path: 'actions',
                   name: 'ChartActions',

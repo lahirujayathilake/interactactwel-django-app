@@ -224,7 +224,7 @@
                   </div>
                 </div>
               </div>
-              <climate-scenario-selection />
+              <climate-scenario-selection-drop-down />
             </div>
           </div>
         </b-col>
@@ -488,12 +488,13 @@ import {InfoControl, ReferenceChart, ChoroplethLayer} from 'vue-choropleth';
 import paraguayGeojson from './../../../../public/static/BASIN_Irrigation_basins_data.json';
 import {pyDepartmentsData} from './../../../../public/static/py-departments-data';
 import ClimateScenarioMapLayer from "@/components/dashboard/projects/visualize-map-sub-components/ClimateScenarioMapLayer";
-import ClimateScenarioSelection from "@/components/dashboard/projects/visualize-map-sub-components/ClimateScenarioSelection";
+import ClimateScenarioSelectionDropDown
+  from "@/components/dashboard/projects/visualize-map-sub-components/ClimateScenarioSelectionDropDown";
 
 export default {
   name: 'Visualize',
   components: {
-    ClimateScenarioSelection,
+    ClimateScenarioSelectionDropDown,
     ClimateScenarioMapLayer,
     Header, Footer, RegionalSummary, Welcome, TutorStep1, TutorStep2,
     'l-map': LMap,

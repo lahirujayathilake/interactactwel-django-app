@@ -169,6 +169,16 @@
                       Overview
                     </router-link>
                   </b-nav-item>
+                  <b-nav-item
+                    v-b-toggle.collapse-0
+                    block
+                    href="#"
+                    variant="info"
+                  >
+                    <router-link :to="{ name: 'Stresses'}">
+                      Stresses & Shocks
+                    </router-link>
+                  </b-nav-item>
                 </b-nav>
 
                 <div
@@ -196,12 +206,7 @@
                     accordion="my-accordion"
                     role="tabpanel"
                   >
-                    <b-nav-item
-                        class="collapse-item"
-                        @click="$router.push({ name: 'Stresses', params: { planId: plan.id }})"
-                    >
-                      Stresses & Shocks
-                    </b-nav-item>
+
                     <b-nav-item
                       class="collapse-item"
                       @click="$router.push({ name: 'ChartActions', params: { planId: plan.id }})"
