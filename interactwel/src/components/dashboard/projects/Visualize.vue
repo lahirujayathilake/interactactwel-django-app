@@ -175,7 +175,7 @@
                   class="list-group-item bg-dark font-weight-bold text-light"
                   data-toggle="collapse"
                   data-parent="#legend"
-                >Addional Layers <i class="fa fa-caret-down" /></a>
+                >Additional Layers <i class="fa fa-caret-down" /></a>
                 <div
                   id="additional"
                   class="collapse"
@@ -224,7 +224,20 @@
                   </div>
                 </div>
               </div>
-              <climate-scenario-selection-drop-down />
+              <div>
+                <a
+                  href="#climate"
+                  class="list-group-item bg-dark font-weight-bold text-light"
+                  data-toggle="collapse"
+                  data-parent="#legend"
+                >Stresses and Shocks <i class="fa fa-caret-down" /></a>
+                <div
+                  id="climate"
+                  class="collapse"
+                >
+                  <climate-scenario-selection-drop-down />
+                </div>
+              </div>
             </div>
           </div>
         </b-col>

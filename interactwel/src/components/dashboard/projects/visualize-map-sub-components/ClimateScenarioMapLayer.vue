@@ -35,7 +35,7 @@
       class="custom-control-watermark"
     >
       <div style="background-color: #FFFFFF; padding: 1rem;">
-        <h6>{{ selectedClimateScenario }}</h6>
+        <h6>{{ selectedClimateScenarioName }}</h6>
         <p>({{ displayUnit }})</p>
         <ul style="list-style-type: none; padding-left: 1rem">
           <li
@@ -74,6 +74,12 @@ export default {
       geoJson: null,
       loading: true,
       selectedOption: '',
+
+      climateScenarios: [
+        {id: 'NUM_DR_sub', name: 'Number of Drought Events'},
+        {id: 'DURAVG_sub', name: 'Average Drought Duration'},
+        {id: 'NUMEX_sub', name: ' No. of Extreme & Exceptional Drought Months '},
+      ],
       colors: [
         "#f8ff71",
         "#f6e869",
@@ -95,6 +101,10 @@ export default {
       return this.selectedOption.substr(this.selectedOption.indexOf('-') + 1) || 'NUM_DR_sub';
     },
 
+    selectedClimateScenarioName() {
+      return this.climateScenarios.find( scenario => scenario.id === this.selectedClimateScenario).name;
+    },
+
     geoJsonName: function() {
       return (this.selectedOption.substr(0, this.selectedOption.indexOf('-')) || 'SPI_historical') + '.geojson';
     },
@@ -109,7 +119,7 @@ export default {
       const step = (max - min) / 10;
       return this.colors.map(function(color, index) {
         return {
-          "start": (min + step * index) .toFixed(3),
+          "start": (min + step * index).toFixed(3),
           "end": (min + step * (index + 1)).toFixed(3),
           "color": color,
         };

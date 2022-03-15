@@ -20,7 +20,7 @@
         <div>
           <!-- SPI -->
           <div class="list-group-item bg-secondary text-light">
-            <h6>SPI</h6>
+            <p>Standardized Precipitation Index (Meteorological Drought)</p>
             <b-form-group
               label=""
               class="px-3"
@@ -51,7 +51,7 @@
 
           <!-- SSI -->
           <div class="list-group-item bg-secondary text-light">
-            <h6>SSI</h6>
+            <p>Standardized Soil-moisture Index (Agricultural Drought)</p>
             <b-form-group
               label=""
               class="px-3"
@@ -82,7 +82,7 @@
 
           <!-- SRI -->
           <div class="list-group-item bg-secondary text-light">
-            <h6>SRI</h6>
+            <p>Standardized Runoff Index (Hydrological Drought)</p>
             <b-form-group
               label=""
               class="px-3"
