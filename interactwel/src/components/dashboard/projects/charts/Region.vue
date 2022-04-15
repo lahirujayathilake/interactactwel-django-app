@@ -326,7 +326,7 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <no3-surq-graph v-bind:base-graph="false"/>
                 </b-col>
                 <b-col
                     lg="6"
@@ -335,59 +335,7 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-tab>
-        <b-tab title="NO3 - Lateral Flow">
-          <div class="card-body">
-            <div class="card-body">
-              <b-row>
-                <b-col
-                    lg="6"
-                    class="p-3"
-                >
-                  <h6 class="baseline-graph-title text-center">
-                    Action Plan {{ $route.params.planId }}
-                  </h6>
-
-                </b-col>
-                <b-col
-                    lg="6"
-                    class="p-3"
-                >
-                  <h6 class="baseline-graph-title text-center">
-                    Business as Usual
-                  </h6>
-
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-tab>
-        <b-tab title="Percolation to Aquifers">
-          <div class="card-body">
-            <div class="card-body">
-              <b-row>
-                <b-col
-                    lg="6"
-                    class="p-3"
-                >
-                  <h6 class="baseline-graph-title text-center">
-                    Action Plan {{ $route.params.planId }}
-                  </h6>
-
-                </b-col>
-                <b-col
-                    lg="6"
-                    class="p-3"
-                >
-                  <h6 class="baseline-graph-title text-center">
-                    Business as Usual
-                  </h6>
-
+                  <no3-surq-graph v-bind:base-graph="true"/>
                 </b-col>
               </b-row>
             </div>
@@ -416,6 +364,7 @@ import SwGraph from "@/components/dashboard/projects/charts/data/swGraph";
 import EtGraph from "@/components/dashboard/projects/charts/data/etGraph";
 import SedimentYieldGraph from "@/components/dashboard/projects/charts/data/sedimentYieldGraph";
 import WaterYieldGraph from "@/components/dashboard/projects/charts/data/waterYieldGraph";
+import no3SurqGraph from "@/components/dashboard/projects/charts/data/no3SurqGraph";
 
 export default {
   name: 'Region',
@@ -423,6 +372,7 @@ export default {
   components: {
     No3CropGraph,
     No3PercGraph,
+    no3SurqGraph,
     GwqGraph,SwGraph, EtGraph, SedimentYieldGraph, WaterYieldGraph,
     IrrigationBaseLineGraph,
     'irrigationGraph': IrrigationGraph,
