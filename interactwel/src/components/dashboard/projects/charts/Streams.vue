@@ -16,7 +16,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -25,7 +28,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
@@ -42,7 +48,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -51,7 +60,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
@@ -68,7 +80,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -77,7 +92,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
@@ -94,7 +112,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -103,7 +124,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
@@ -120,7 +144,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -129,7 +156,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
@@ -146,7 +176,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -155,7 +188,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
@@ -172,7 +208,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
                 <b-col
                     lg="6"
@@ -181,7 +220,10 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-
+                  <img
+                      class="img-fluid"
+                      src="../../../../assets/graph-placeholder.png"
+                  >
                 </b-col>
               </b-row>
             </div>
