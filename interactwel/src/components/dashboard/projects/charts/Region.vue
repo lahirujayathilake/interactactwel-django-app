@@ -289,32 +289,6 @@
             </div>
           </div>
         </b-tab>
-        <b-tab title="NO3 - Percolated to Aquifer">
-          <div class="card-body">
-            <div class="card-body">
-              <b-row>
-                <b-col
-                    lg="6"
-                    class="p-3"
-                >
-                  <h6 class="baseline-graph-title text-center">
-                    Action Plan {{ $route.params.planId }}
-                  </h6>
-
-                </b-col>
-                <b-col
-                    lg="6"
-                    class="p-3"
-                >
-                  <h6 class="baseline-graph-title text-center">
-                    Business as Usual
-                  </h6>
-
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-tab>
         <b-tab title="NO3 - Surface Runoff">
           <div class="card-body">
             <div class="card-body">
