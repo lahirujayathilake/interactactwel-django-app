@@ -191,7 +191,7 @@
                     role="tab"
                   >
                     <b-nav-item
-                      v-b-toggle="plan.id"
+                      v-b-toggle="'collapse-' + plan.id"
                       block
                       href="#"
                       variant="info"
@@ -202,7 +202,7 @@
                   </b-nav>
 
                   <b-collapse
-                    :id="plan.id"
+                    :id="'collapse-' + plan.id"
                     accordion="my-accordion"
                     role="tabpanel"
                   >
