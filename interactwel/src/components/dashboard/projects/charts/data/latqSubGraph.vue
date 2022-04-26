@@ -38,7 +38,7 @@ export default {
         responsive: true,
         title: {
           display: false,
-          text: 'Nitrate loading to stream from sub-basin 2019s lateral flow',
+          text: 'NO3 - Lateral Flow',
         },
         tooltips: {
           mode: 'point',
@@ -62,7 +62,7 @@ export default {
             stacked: false,
             scaleLabel: {
               display: true,
-              labelString: 'Kg',
+              labelString: 'kg N/ha',
             },
           }],
         },

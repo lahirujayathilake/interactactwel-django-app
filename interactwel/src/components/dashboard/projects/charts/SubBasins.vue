@@ -21,7 +21,7 @@
     </div>
     <div class="card-body no-padding">
       <b-tabs card>
-        <b-tab title="Nitrate loading to stream from sub-basin’s lateral flow"
+        <b-tab title="NO3 - Lateral Flow"
                active>
           <div class="card-body">
             <b-row>
@@ -44,18 +44,183 @@
             </b-row>
           </div>
         </b-tab>
-        <b-tab
-          title="Irrigation"
-        >
+        <b-tab title="NO3 - Surface Runoff">
           <div class="card-body">
-            <vertical-bar-chart
-              :chart-data="datacollection"
-              :options="optionsirr"
-              :width="5"
-              :height="3"
-            />
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
           </div>
         </b-tab>
+        <b-tab title="Sediment Yield">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Percolation to Aquifers">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Soil Water">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Evapotranspiration">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Groundwater to Stream">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Water Yield">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Precipitation ">
+        <div class="card-body">
+          <b-row>
+            <b-col
+                lg="6"
+            >
+              <h6 class="baseline-graph-title text-center">
+                Action Plan {{ $route.params.planId }}
+              </h6>
+
+            </b-col>
+            <b-col
+                lg="6"
+            >
+              <h6 class="baseline-graph-title text-center">
+                Business as Usual
+              </h6>
+
+            </b-col>
+          </b-row>
+        </div>
+      </b-tab>
+
       </b-tabs>
     </div>
   </div>
@@ -73,7 +238,6 @@ export default {
 
   components: {
     LatqSubGraph,
-    VerticalBarChart,
   },
 
   data() {
@@ -86,7 +250,18 @@ export default {
         {label: 'Sub-basin: 2', code: '2'},
         {label: 'Sub-basin: 3', code: '3'},
         {label: 'Sub-basin: 4', code: '4'},
-        {label: 'Sub-basin: 5', code: '5'},
+        {label: 'Sub-basin: 6', code: '6'},
+        {label: 'Sub-basin: 7', code: '7'},
+        {label: 'Sub-basin: 8', code: '8'},
+        {label: 'Sub-basin: 9', code: '9'},
+        {label: 'Sub-basin: 10', code: '10'},
+        {label: 'Sub-basin: 11', code: '11'},
+        {label: 'Sub-basin: 100', code: '100'},
+        {label: 'Sub-basin: 101', code: '101'},
+        {label: 'Sub-basin: 102', code: '102'},
+        {label: 'Sub-basin: 103', code: '103'},
+        {label: 'Sub-basin: 104', code: '104'},
+        {label: 'Sub-basin: 105', code: '105'},
       ],
       datacollection: null,
       graphColors: [
