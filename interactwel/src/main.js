@@ -10,9 +10,12 @@ import App from './App.vue';
 import VueFilterDateFormat from 'vue-filter-date-format';
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('star-rating', StarRating);
+Vue.component("v-select", vSelect);
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);

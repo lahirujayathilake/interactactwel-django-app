@@ -10,28 +10,42 @@
         </div>
         <div class="col-4">
           <div class="form-group">
-            <select
-              v-model="selected"
-              class="form-control form-control-sm"
-              @change="changeBasin"
+            <v-select
+              :options="options"
+              v-model="selectedSubBasin"
             >
-              <option
-                v-for="option in options"
-                :key="option.value"
-                :value="option.value"
-              >
-                {{ option.text }}
-              </option>
-            </select>
+            </v-select>
           </div>
         </div>
       </div>
     </div>
     <div class="card-body no-padding">
       <b-tabs card>
+        <b-tab title="Nitrate loading to stream from sub-basin’s lateral flow"
+               active>
+          <div class="card-body">
+            <b-row>
+              <b-col
+                lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+            <latq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></latq-sub-graph>
+              </b-col>
+              <b-col
+                lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <latq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></latq-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
         <b-tab
           title="Irrigation"
-          active
         >
           <div class="card-body">
             <vertical-bar-chart
@@ -40,38 +54,6 @@
               :width="5"
               :height="3"
             />
-          </div>
-        </b-tab>
-        <b-tab title="Water Rights">
-          <div class="card-body">
-            <img
-              class="img-fluid"
-              src="../../../../assets/graph-placeholder.png"
-            >
-          </div>
-        </b-tab>
-        <b-tab title="Crop yield">
-          <div class="card-body">
-            <img
-              class="img-fluid"
-              src="../../../../assets/graph-placeholder.png"
-            >
-          </div>
-        </b-tab>
-        <b-tab title="Groundwater Recharge">
-          <div class="card-body">
-            <img
-              class="img-fluid"
-              src="../../../../assets/graph-placeholder.png"
-            >
-          </div>
-        </b-tab>
-        <b-tab title="N fertilizer">
-          <div class="card-body">
-            <img
-              class="img-fluid"
-              src="../../../../assets/graph-placeholder.png"
-            >
           </div>
         </b-tab>
       </b-tabs>
@@ -84,26 +66,27 @@
 import EventBus from './../../../../event-bus';
 import axios from 'axios';
 import VerticalBarChart from "./lib/VerticalBarChart";
+import LatqSubGraph from "@/components/dashboard/projects/charts/data/latqSubGraph";
 
 export default {
   name: 'SubBasins',
 
   components: {
+    LatqSubGraph,
     VerticalBarChart,
   },
 
   data() {
     return {
-      selected: '1',
-      selectedBasinID: '1',
+      selectedSubBasin: {label: 'Sub-basin: 1', code: '1'},
       planName: 'Adaptation Plan 1',
       JSONData: null,
       options: [
-        {text: 'Sub-basin: 1', value: '1'},
-        {text: 'Sub-basin: 2', value: '2'},
-        {text: 'Sub-basin: 3', value: '3'},
-        {text: 'Sub-basin: 4', value: '4'},
-        {text: 'Sub-basin: 5', value: '5'},
+        {label: 'Sub-basin: 1', code: '1'},
+        {label: 'Sub-basin: 2', code: '2'},
+        {label: 'Sub-basin: 3', code: '3'},
+        {label: 'Sub-basin: 4', code: '4'},
+        {label: 'Sub-basin: 5', code: '5'},
       ],
       datacollection: null,
       graphColors: [
@@ -152,7 +135,7 @@ export default {
     let $this = this;
     EventBus.$on('CLICK_ITEM_SIDEBAR', function(planName) {
       $this.planName = planName;
-      $this.buildDataCollection($this.JSONData, $this.planName, $this.selectedBasinID);
+      $this.buildDataCollection($this.JSONData, $this.planName, $this.selectedSubBasin.code);
     });
 
   },
@@ -160,7 +143,7 @@ export default {
   created() {
     axios.get("/static/BASIN_Irrigation_basins_data.json").then(response => {
       this.JSONData = response.data;
-      this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID);
+      this.buildDataCollection(this.JSONData, this.planName, this.selectedSubBasin.code);
     });
   },
 
@@ -197,10 +180,6 @@ export default {
       return color;
     },
 
-    changeBasin() {
-      this.selectedBasinID = this.selected;
-      this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID);
-    },
   },
   //props: ["jsonData"]
 
